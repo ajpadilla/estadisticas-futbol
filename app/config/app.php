@@ -121,7 +121,17 @@ return array(
 		'Illuminate\Validation\ValidationServiceProvider',
 		'Illuminate\View\ViewServiceProvider',
 		'Illuminate\Workbench\WorkbenchServiceProvider',
-
+		//'Mcamara\LaravelLocalization\LaravelLocalizationServiceProvider',
+		'Zizaco\Confide\ConfideServiceProvider',
+		'Zizaco\Entrust\EntrustServiceProvider',
+		//'Barryvdh\DomPDF\ServiceProvider',
+		'Barryvdh\Debugbar\ServiceProvider',
+		'Way\Generators\GeneratorsServiceProvider',
+		'Laracasts\Validation\ValidationServiceProvider',
+		//'Chumper\Datatable\DatatableServiceProvider',
+		//'Laracasts\Flash\FlashServiceProvider',
+		//'Intervention\Image\ImageServiceProvider',
+		//'Moltin\Cart\CartServiceProvider'
 	),
 
 	/*
@@ -188,7 +198,18 @@ return array(
 		'URL'               => 'Illuminate\Support\Facades\URL',
 		'Validator'         => 'Illuminate\Support\Facades\Validator',
 		'View'              => 'Illuminate\Support\Facades\View',
-
+		//'LaravelLocalization' => 'Mcamara\LaravelLocalization\Facades\LaravelLocalization',
+		'Confide' => 'Zizaco\Confide\ConfideFacade',
+		'User' => 'soccer\User\User',
+		'Entrust' => 'Zizaco\Entrust\EntrustFacade',
+		'Permission' => 'soccer\User\Permission',
+		'Role' => 'soccer\User\Role',
+		//'PDF' => 'Barryvdh\DomPDF\Facade',
+		'Debugbar' => 'Barryvdh\Debugbar\Facade',
+		//'Datatable' => 'Chumper\Datatable\Facades\DatatableFacade',
+		'Flash' => 'Laracasts\Flash\Flash',
+		'Image' => 'Intervention\Image\Facades\Image',
+		'MoltinCart' => 'Moltin\Cart\Facade'
 	),
 
 );
