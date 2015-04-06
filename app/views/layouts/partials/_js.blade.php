@@ -1,23 +1,24 @@
 <!-- JAVASCRIPTS -->
 <!-- Placed at the end of the document so the pages load faster -->
 <!-- JQUERY -->
-<script src="js/jquery/jquery-2.0.3.min.js"></script>
+{{ HTML::script('assets/js/jquery/jquery-2.0.3.min.js') }}"></script>
 <!-- JQUERY UI-->
-<script src="js/jquery-ui-1.10.3.custom/js/jquery-ui-1.10.3.custom.min.js"></script>
+{{ HTML::script('assets/js/jquery-ui-1.10.3.custom/js/jquery-ui-1.10.3.custom.min.js') }}"></script>
 <!-- BOOTSTRAP -->
-<script src="bootstrap-dist/js/bootstrap.min.js"></script>
+{{ HTML::script('assets/bootstrap-dist/js/bootstrap.min.js') }}"></script>
 
 	
 <!-- DATE RANGE PICKER -->
-<script src="js/bootstrap-daterangepicker/moment.min.js"></script>
+{{ HTML::script('assets/js/bootstrap-daterangepicker/moment.min.js') }}"></script>
 
-<script src="js/bootstrap-daterangepicker/daterangepicker.min.js"></script>
+{{ HTML::script('assets/js/bootstrap-daterangepicker/daterangepicker.min.js') }}"></script>
 <!-- SLIMSCROLL -->
-<script type="text/javascript" src="js/jQuery-slimScroll-1.3.0/jquery.slimscroll.min.js"></script><script type="text/javascript" src="js/jQuery-slimScroll-1.3.0/slimScrollHorizontal.min.js"></script>
+{{ HTML::script('assets/js/jQuery-slimScroll-1.3.0/jquery.slimscroll.min.js') }}"></script>
+{{ HTML::script('assets/js/jQuery-slimScroll-1.3.0/slimScrollHorizontal.min.js') }}"></script>
 <!-- COOKIE -->
-<script type="text/javascript" src="js/jQuery-Cookie/jquery.cookie.min.js"></script>
+{{ HTML::script('assets/js/jQuery-Cookie/jquery.cookie.min.js') }}"></script>
 <!-- CUSTOM SCRIPT -->
-<script src="js/script.js"></script>
+{{ HTML::script('assets/js/script.js') }}"></script>
 <script>
 	jQuery(document).ready(function() {		
 		App.setPage("widgets_box");  //Set current page
