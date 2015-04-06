@@ -1,4 +1,4 @@
-<?php namespace s4h\store\Users;
+<?php namespace soccer\Users;
 
 use Zizaco\Confide\ConfideUser;
 use Zizaco\Entrust\HasRole;
