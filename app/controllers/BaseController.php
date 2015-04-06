@@ -13,6 +13,10 @@ class BaseController extends Controller {
 		{
 			$this->layout = View::make($this->layout);
 		}
+
+		$currentRoute = Route::currentRouteName();
+
+		View::share(compact('currentRoute'));
 	}
 
 }
