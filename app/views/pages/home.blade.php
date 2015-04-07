@@ -9,5 +9,9 @@
 @stop
 
 @section("content")
-	<h1>HOME</h1>
+	<div class="col-xs-2"></div>
+	<div class="col-xs-8">
+		@include('jugadores.new')
+	</div>
 @stop
+

@@ -6,5 +6,8 @@
 {{ HTML::style('assets/font-awesome/css/font-awesome.min.css') }}
 <!-- DATE RANGE PICKER -->
 {{ HTML::style('assets/js/bootstrap-daterangepicker/daterangepicker-bs3.css') }}
+<!-- BOOTSTRAP FILEUPLOAD -->
+{{ HTML::style('assets/js/fileinput/fileinput.min.css') }}
+
 <!-- FONTS -->
 <link href="http://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700" rel="stylesheet" type="text/css">

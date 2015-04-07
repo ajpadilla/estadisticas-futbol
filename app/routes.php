@@ -16,3 +16,8 @@ Route::get('/', [
 	'as' => 'pages.home',
 	'uses' => 'PageController@index'
 ]);
+
+Route::get('jugadores', [
+	'as' => 'jugadores.index', 
+	'uses' => 'JugadorController@index'
+]);
