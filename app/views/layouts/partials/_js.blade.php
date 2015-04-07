@@ -14,10 +14,14 @@
 <!-- JQUERY VALIDATE -->
 {{ HTML::script('assets/js/jquery-validate/jquery.validate.min.js') }}
 {{ HTML::script('assets/js/jquery-validate/additional-methods.min.js') }}
+{{ HTML::script('assets/js/jquery-validate/localization/messages_es.min.js') }}
 
 <!-- BOOTBOX -->
 {{ HTML::script('assets/js/bootbox/bootbox.min.js') }}
-	
+
+<!-- FANCYBOX -->
+{{ HTML::script('assets/js/fancybox/source/jquery.fancybox.pack.js') }}
+
 <!-- DATE RANGE PICKER -->
 {{ HTML::script('assets/js/bootstrap-daterangepicker/moment.min.js') }}
 

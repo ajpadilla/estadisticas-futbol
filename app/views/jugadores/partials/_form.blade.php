@@ -1,4 +1,4 @@
-<div id="new-player-form" class="box border primary">
+<div id="player-form-div" class="box border primary">
 	<div class="box-title">
 		<h4><i class="fa fa-plus-square"></i>@yield('title-modal')</h4>
 		<div class="tools">
@@ -16,11 +16,11 @@
 
 				<div class="divide-20"></div>
 				<div class="box-body big">
-					<form class="form-horizontal" role="form">
+					<form id="player-form" class="form-horizontal" role="form">
 						<div class="form-group">
 							<label class="col-sm-3 control-label">Nombre</label>
 							<div class="col-sm-9">
-								<input type="text" class="form-control" placeholder="Text input">
+								<input name="nombre" type="text" class="form-control" placeholder="Text input">
 							</div>
 						</div>
 						<div class="form-group">
@@ -60,8 +60,6 @@
 						<div class="form-group">
 							<input type="file" class="file-upload"></a>
 						</div>
-
-						<button type="submit" class="btn btn-success">Guardar</button>
 					</form>
 				</div>
 			</div>
