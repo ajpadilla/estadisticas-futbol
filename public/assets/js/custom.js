@@ -73,11 +73,13 @@ var CustomApp = function () {
                             label: "Guardar",
                             className: "btn-primary",
                             callback: function () {
+                                // Si quieres usar aquí jqueryForm, es lo mismo, lo agregas y ya. Creo que es buena idea!
+
                                 //ajax para el envío del formulario.
                                 if($('#player-form').valid()) {
                                     var form = $('#player-form-div').serialize();
                                     var response = true; // Esta variable debería recibir los datos por ajax.
-                                    
+
                                     if(response) {
                                         // Aquí decido que hacer con los datos de la respuesta
 
