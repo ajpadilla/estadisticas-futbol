@@ -2,6 +2,6 @@
 	Nuevo Jugador
 @stop
 
-<div id="new-player-form" style="display:none">
+<div style="display:none">
 	@include('jugadores.partials._form')
 </div>

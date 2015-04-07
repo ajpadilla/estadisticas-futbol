@@ -30,11 +30,69 @@ var CustomApp = function () {
             $("#new-player-form").show();
         });
     }
+
+    /*-----------------------------------------------------------------------------------*/
+    /*  Bootbox
+    /*-----------------------------------------------------------------------------------*/
+    var handleBootboxNewPlayer = function () {
+        $('#loginForm').validate({
+                fields: {
+                    username: {
+                        validators: {
+                            notEmpty: {
+                                message: 'The username is required'
+                            }
+                        }
+                    },
+                    password: {
+                        validators: {
+                            notEmpty: {
+                                message: 'The password is required'
+                            }
+                        }
+                    }
+                }
+            });
+
+        $('#new-player').on('click', function() {
+            bootbox
+                .dialog({
+                    title: 'Nuevo Jugador',
+                    message: $('#new-player-form'),
+                    buttons: {
+                        success: {
+                            label: "Guardar",
+                            className: "btn-success",
+                            callback: function () {
+                                alert('algo');
+                                return false;
+                            }
+                        }
+                    },
+                    show: false // We will show it manually later
+                })                
+                .modal('show');
+        });               
+    }
+
+    /*-----------------------------------------------------------------------------------*/
+    /*  Fancybox New Player
+    /*-----------------------------------------------------------------------------------*/
+    /*var handleFancyboxNewPlayer = function () {
+        $("#new-player").on('click', function(){
+            $("#new-player").fancybox({
+                openEffect  : 'elastic',
+                closeEffect : 'elastic',
+                centerOnScroll: true,
+                hideOnOverlayClick: true
+            });          
+        });            
+    }*/  
+
     return {
         init: function() {
             handleBootstrapFileInput();
-            handleShowNewPlayerForm();
+            handleBootboxNewPlayer();
         }
     };
-
 }();

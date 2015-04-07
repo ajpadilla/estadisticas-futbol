@@ -1,4 +1,4 @@
-<div class="box border primary">
+<div id="new-player-form" class="box border primary">
 	<div class="box-title">
 		<h4><i class="fa fa-plus-square"></i>@yield('title-modal')</h4>
 		<div class="tools">

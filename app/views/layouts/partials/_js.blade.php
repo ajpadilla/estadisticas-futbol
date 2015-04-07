@@ -11,6 +11,10 @@
 {{ HTML::script('assets/js/fileinput/fileinput.min.js') }}
 {{ HTML::script('assets/js/fileinput/fileinput_locale_es.js') }}
 
+<!-- JQUERY VALIDATE -->
+{{ HTML::script('assets/js/jquery-validate/jquery.validate.min.js') }}
+{{ HTML::script('assets/js/jquery-validate/additional-methods.min.js') }}
+
 <!-- BOOTBOX -->
 {{ HTML::script('assets/js/bootbox/bootbox.min.js') }}
 	

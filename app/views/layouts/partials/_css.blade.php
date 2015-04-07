@@ -8,6 +8,8 @@
 {{ HTML::style('assets/js/bootstrap-daterangepicker/daterangepicker-bs3.css') }}
 <!-- BOOTSTRAP FILEUPLOAD -->
 {{ HTML::style('assets/js/fileinput/fileinput.min.css') }}
+<!-- FANCYBOX -->
+{{ HTML::style('assets/js/fancybox/source/jquery.fancybox.css?v=2.1.5') }}
 
 <!-- FONTS -->
 <link href="http://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700" rel="stylesheet" type="text/css">
