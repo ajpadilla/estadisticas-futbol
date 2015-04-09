@@ -1,6 +1,7 @@
 <?php namespace soccer\Jugador;
 
 use soccer\Jugador\Jugador;
+use soccer\Base\BaseRepository;
 /**
 * 
 */
