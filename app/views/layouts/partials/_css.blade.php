@@ -11,5 +11,8 @@
 <!-- FANCYBOX -->
 {{ HTML::style('assets/js/fancybox/source/jquery.fancybox.css?v=2.1.5') }}
 
+<!-- Datatable -->
+{{ HTML::style('assets/css/dataTables/dataTables.bootstrap.css'); }}
+
 <!-- FONTS -->
 <link href="http://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700" rel="stylesheet" type="text/css">
