@@ -21,7 +21,7 @@
 					<span class="arrow"></span>
 				</a>
 				<ul class="sub">
-					<li><a class="" href="#"><span class="sub-menu-text">Lista</span></a></li>
+					<li><a class="" href="{{ URL::route('jugadores.index') }}"><span class="sub-menu-text">Lista</span></a></li>
 					<li><a id="new-player" class="" href="#new-player-form"><span class="sub-menu-text">Crear</span></a></li>
 				</ul>
 			</li>
