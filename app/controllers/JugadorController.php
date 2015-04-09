@@ -1,6 +1,14 @@
 <?php
 
+use soccer\Jugador\JugadorRepository;
+
 class JugadorController extends \BaseController {
+
+	protected $jugadorRepository;
+
+	public function __construct(JugadorRepository $jugadorRepository) {
+		$this->jugadorRepository = $jugadorRepository;
+	}
 
 	/**
 	 * Display a listing of the resource.
@@ -9,7 +17,7 @@ class JugadorController extends \BaseController {
 	 */
 	public function index()
 	{
-		//
+		return View::make('jugadores.index');
 	}
 
 
@@ -82,5 +90,39 @@ class JugadorController extends \BaseController {
 		//
 	}
 
+	public function listadoJugadores()
+	{
+		$collection = Datatable::collection($this->jugadorRepository->getAll())
+			->searchColumns('nombre')
+			->orderColumns('nombre');
+
+		$collection->addColumn('País', function($model)
+		{
+			 return $model->pais->nombre;
+		});
+
+		$collection->addColumn('Posición', function($model)
+		{
+			 return $model->posicion->abreviacion;
+		});
+
+		$collection->addColumn('Nombre', function($model)
+		{
+			 return $model->nombre;
+		});
+
+		$collection->addColumn('Edad', function($model)
+		{
+			 return 0;
+		});
+
+		$collection->addColumn('Acciones', function($model)
+		{
+			 return 0;
+		});
+	
+		return $collection->make();
+	
+	}
 
 }
