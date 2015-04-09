@@ -128,7 +128,7 @@ return array(
 		'Barryvdh\Debugbar\ServiceProvider',
 		'Way\Generators\GeneratorsServiceProvider',
 		'Laracasts\Validation\ValidationServiceProvider',
-		//'Chumper\Datatable\DatatableServiceProvider',
+		'Chumper\Datatable\DatatableServiceProvider',
 		//'Laracasts\Flash\FlashServiceProvider',
 		//'Intervention\Image\ImageServiceProvider',
 		//'Moltin\Cart\CartServiceProvider'
@@ -206,7 +206,7 @@ return array(
 		'Role' => 'soccer\User\Role',
 		//'PDF' => 'Barryvdh\DomPDF\Facade',
 		'Debugbar' => 'Barryvdh\Debugbar\Facade',
-		//'Datatable' => 'Chumper\Datatable\Facades\DatatableFacade',
+		'Datatable' => 'Chumper\Datatable\Facades\DatatableFacade',
 		'Flash' => 'Laracasts\Flash\Flash',
 		'Image' => 'Intervention\Image\Facades\Image',
 		'MoltinCart' => 'Moltin\Cart\Facade'
