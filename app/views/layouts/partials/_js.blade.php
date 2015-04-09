@@ -34,6 +34,11 @@
 <!-- CUSTOM SCRIPT -->
 {{ HTML::script('assets/js/script.js') }}
 {{ HTML::script('assets/js/custom.js') }}
+
+<!-- Datatable -->
+{{ HTML::script('assets/js/dataTables/jquery.dataTables.js'); }}
+{{ HTML::script('assets/js/dataTables/dataTables.bootstrap.js'); }}
+
 <script>
 	jQuery(document).ready(function() {		
 		App.setPage("widgets_box");  //Set current page
@@ -43,4 +48,7 @@
     	CustomApp.init();
 	});
 </script>
+
+@yield('scripts')
+
 <!-- /JAVASCRIPTS -->
