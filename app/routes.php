@@ -21,3 +21,10 @@ Route::get('jugadores', [
 	'as' => 'jugadores.index', 
 	'uses' => 'JugadorController@index'
 ]);
+
+Route::get('algo',function()
+{
+	return soccer\Jugador\Jugador::all();
+});
+
+Route::get('api/jugadores', array('as'=>'api.jugadores', 'uses'=>'JugadorController@listadoJugadores'));
