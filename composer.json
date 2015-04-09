@@ -22,7 +22,8 @@
         "moltin/cart": "dev-master",
         "moltin/laravel-cart": "dev-master",
 		"barryvdh/laravel-dompdf": "0.4.*",
-		"bkwld/croppa": "~3.0"
+		"bkwld/croppa": "~3.0",
+		"fzaninotto/faker" : "dev-master"
 	},
 	"require-dev": {
 		"codeception/codeception": "2.0.*",
