@@ -13,7 +13,7 @@
 	<div class="box border green">
 		<div class="box-title">
 			<h4><i class="fa fa-table"></i>Listado De Jugadores</h4>
-			<div class="tools hidden-xs">
+			<!--<div class="tools hidden-xs">
 				<a href="#box-config" data-toggle="modal" class="config">
 					<i class="fa fa-cog"></i>
 				</a>
@@ -26,7 +26,7 @@
 				<a href="javascript:;" class="remove">
 					<i class="fa fa-times"></i>
 				</a>
-			</div>
+			</div>-->
 		</div>
 		<div class="box-body">
 			<?php
@@ -46,6 +46,7 @@
 			{{ $table->render() }}
 		</div>
 	</div>
+	@include('jugadores.new')
 </div>
 @stop
 
