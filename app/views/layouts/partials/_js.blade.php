@@ -45,6 +45,8 @@
 <!-- Date picker -->
 {{ HTML::script('assets/js/datapicker/bootstrap-datepicker.js'); }}
 
+{{ HTML::script('assets/js/jQueryForm/jquery.form.min.js'); }}
+
 <script>
 	jQuery(document).ready(function() {		
 		App.setPage("widgets_box");  //Set current page
