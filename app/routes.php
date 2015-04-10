@@ -33,3 +33,9 @@ Route::post('modificar-jugador',  ['as' => 'jugadores.update','uses' => 'Jugador
 
 
 Route::get('api/jugadores', array('as'=>'api.jugadores', 'uses'=>'JugadorController@listadoJugadores'));
+
+/*Rutas para paises*/
+Route::get('lista-paises',  ['as' => 'paises.lista','uses' => 'PaisController@getAllValue' ] );
+
+/*Rutas para posiciones*/
+Route::get('lista-posiciones',  ['as' => 'posiciones.lista','uses' => 'PosicionController@getAllValue' ] );
