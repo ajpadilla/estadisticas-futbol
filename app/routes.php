@@ -17,14 +17,19 @@ Route::get('/', [
 	'uses' => 'PageController@index'
 ]);
 
+/* Ruta para jugadores*/
+
 Route::get('jugadores', [
 	'as' => 'jugadores.index', 
 	'uses' => 'JugadorController@index'
 ]);
 
-Route::get('algo',function()
-{
-	return soccer\Jugador\Jugador::all();
-});
+Route::get('crear-jugador', ['as' => 'jugadores.create', 'uses' => 'JugadorController@create'] );
+Route::post('agregar-jugador', ['as' => 'jugadores.store', 'uses' => 'JugadorController@store' ] );
+Route::get('ver-jugador', ['as' => 'jugadores.show', 'uses' => 'JugadorController@show' ] );
+Route::get('editar-jugador',  ['as' => 'jugadores.edit','uses' => 'JugadorController@edit' ] );
+Route::get('eliminar-jugador',  ['as' => 'jugadores.delete-ajax','uses' => 'JugadorController@deleteAjax' ] );
+Route::post('modificar-jugador',  ['as' => 'jugadores.update','uses' => 'JugadorController@update' ] );
+
 
 Route::get('api/jugadores', array('as'=>'api.jugadores', 'uses'=>'JugadorController@listadoJugadores'));
