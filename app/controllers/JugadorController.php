@@ -1,13 +1,20 @@
 <?php
 
 use soccer\Jugador\JugadorRepository;
+use soccer\Forms\RegistrarJugadorForm;
+use Laracasts\Validation\FormValidationException;
 
 class JugadorController extends \BaseController {
 
 	protected $jugadorRepository;
+	protected $registrarJugadorForm;
 
-	public function __construct(JugadorRepository $jugadorRepository) {
+
+	public function __construct(JugadorRepository $jugadorRepository,
+			RegistrarJugadorForm $registrarJugadorForm ){
+
 		$this->jugadorRepository = $jugadorRepository;
+		$this->registrarJugadorForm = $registrarJugadorForm;
 	}
 
 	/**
@@ -39,7 +46,20 @@ class JugadorController extends \BaseController {
 	 */
 	public function store()
 	{
-		//
+		if(Request::ajax())
+		{
+			$input = Input::all();
+			try
+			{
+				$this->registrarJugadorForm->validate($input);
+				$jugador = $this->jugadorRepository->create($input);
+				return Response::json(['success' => true, 'jugador' => $jugador->toArray()]);
+			}
+			catch (FormValidationException $e)
+			{
+				return Response::json($e->getErrors()->all());
+			}
+		}
 	}
 
 
