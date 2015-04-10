@@ -323,8 +323,8 @@ var CustomApp = function () {
             dataType: "JSON",
             success: function(response) {
                 if (response.success == true) {
-                    console.log(response)
-                    console.log(response.jugador)
+                    console.log(response);
+                    console.log(response.jugador);
                     $('#jugador_id').val(response.jugador.id);
                     $('#nombre').val(response.jugador.nombre);
                     $('#fecha_nacimiento').val(response.jugador.fecha_nacimiento);
@@ -458,6 +458,70 @@ var CustomApp = function () {
             .modal('show');
     }
 
+    //Metodo para ver ficha del jugador
+    var viewDataPlayer = function(idPlayer) {
+
+         bootbox.dialog({
+                    message: $('#player-form-view-div'),
+                    buttons: {
+                        /*success: {
+                            label: "Actualizar",
+                            className: "btn-primary",
+                            callback: function (){
+                            }
+                        }*/
+                    },
+                    show: false // We will show it manually later
+                })
+                .on('shown.bs.modal', function() {
+                    $('#player-form-view-div')
+                        .show();                             // Show the form
+            })
+            .on('hide.bs.modal', function(e) {
+                // Bootbox will remove the modal (including the body which contains the form)
+                // after hiding the modal
+                // Therefor, we need to backup the form
+                $('#player-form-view-div').hide().appendTo('#new-player-form-view');
+            })
+            .modal('show');
+
+          $.ajax({
+            type: 'GET',
+            url: $('#datos-jugador').attr('href'),    
+            data: {'jugadorId': idPlayer},
+            dataType: "JSON",
+            success: function(response) {
+                if (response.success == true) {
+                    console.log(response);
+                    console.log(response.jugador);
+                    $('#imgen_vista').attr('src', response.urlImg);;
+                    $('#nombre_vista').val(response.jugador.nombre);
+                    $('#fecha_vista').val(response.jugador.fecha_nacimiento);
+                    $('#altura_vista').val(response.jugador.altura);
+                    $('#abreviacion_vista').val(response.jugador.abreviacion);
+                    $('#posicion_vista').val(response.posicion.nombre);
+                    $('#pais_vista').val(response.pais.nombre);
+
+                   /* var form = $('#new-player-form-view');*/
+
+                    /*var template = $('#player-form-view-div-tpl').html();
+                    var jugador = {
+                        title:'Ver Datos Jugador',
+                        url: '',
+                        name: response.jugador.nombre,
+                        height: response.jugador.altura,
+                        abbreviation: response.jugador.abreviacion,
+                        position: response.jugador.posicion_id,
+                        country: response.jugador.pais_id
+                    };
+                    var html = Mustache.to_html(template, jugador);
+                    form.html(html);*/
+
+                }
+            }
+        });
+    }
+
     // Metodo para saber cual opcion(ver, editar, borrar) fue seleccionada
     var loadDataPlayer = function() 
     {
@@ -472,9 +536,12 @@ var CustomApp = function () {
                 var type = id ? id.split('_')[0] : '';
                 var numberId = id ? id.split('_')[1] : '';
 
-                if (type == "editar") 
-                {
+                if (type == "editar") {
                     editPlayer(numberId);
+                }else if(type == "ver"){
+                    viewDataPlayer(numberId);
+                }else if(type == "eliminar"){
+                    //
                 }
             }           
         });
