@@ -2,19 +2,22 @@
 
 use soccer\Jugador\JugadorRepository;
 use soccer\Forms\RegistrarJugadorForm;
+use soccer\Forms\EditarJugadorForm;
 use Laracasts\Validation\FormValidationException;
 
 class JugadorController extends \BaseController {
 
 	protected $jugadorRepository;
 	protected $registrarJugadorForm;
-
+	protected $editarJugadorForm;
 
 	public function __construct(JugadorRepository $jugadorRepository,
-			RegistrarJugadorForm $registrarJugadorForm ){
+			RegistrarJugadorForm $registrarJugadorForm,
+			EditarJugadorForm $editarJugadorForm){
 
 		$this->jugadorRepository = $jugadorRepository;
 		$this->registrarJugadorForm = $registrarJugadorForm;
+		$this->editarJugadorForm = $editarJugadorForm;
 	}
 
 	/**
@@ -93,9 +96,22 @@ class JugadorController extends \BaseController {
 	 * @param  int  $id
 	 * @return Response
 	 */
-	public function update($id)
+	public function update()
 	{
-		//
+		if(Request::ajax())
+		{
+			$input = Input::all();
+			try
+			{
+				$this->editarJugadorForm->validate($input);
+				$this->jugadorRepository->update($input);
+				return Response::json(['success' => true]);
+			}
+			catch (FormValidationException $e)
+			{
+				return Response::json($e->getErrors()->all());
+			}
+		}
 	}
 
 
@@ -138,11 +154,31 @@ class JugadorController extends \BaseController {
 
 		$collection->addColumn('Acciones', function($model)
 		{
-			return 0;
+			$links = "<a class='ver-jugador' href='#' id='ver_".$model->id."'>Ver</a>
+					<br />";
+			$links .= "<a  class='editar-jugador' href='#new-player-form' id='editar_".$model->id."'>Editar</a>
+					<br />
+					<a class='eliminar-jugador' href='#' id='eliminar_".$model->id."'>Eliminar</a>";
+
+			return $links;
 		});
 	
 		return $collection->make();
 	
+	}
+
+	public function getData()
+	{
+		if (Request::ajax())
+		{
+			if (Input::has('jugadorId'))
+			{
+				$jugador = $this->jugadorRepository->getById(Input::get('jugadorId'));
+				return Response::json(['success' => true, 'jugador' => $jugador->toArray()]);
+			}else{
+				return Response::json(['success' => false]);
+			}
+		}
 	}
 
 }
