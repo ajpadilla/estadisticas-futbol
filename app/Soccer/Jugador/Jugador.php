@@ -3,13 +3,13 @@
 use Eloquent;
 use Codesleeve\Stapler\ORM\StaplerableInterface;
 use Codesleeve\Stapler\ORM\EloquentTrait;
-
+use Carbon\Carbon;
 /**
 * 
 */
 class Jugador extends Eloquent implements StaplerableInterface{
 	use EloquentTrait;
-	
+
 	protected $table = 'jugadores';
 
 	protected $fillable = ['nombre', 'fecha_nacimiento','foto','altura', 'abreviacion','posicion_id','pais_id'];
@@ -33,5 +33,12 @@ class Jugador extends Eloquent implements StaplerableInterface{
 	public function posicion()
 	{
 		return $this->belongsTo('soccer\Posicion\Posicion');
+	}
+
+	public function getAge()
+	{
+		//return Carbon::createFromFormat('Y-m-d H:i:s', $date)->format('d-m-Y');
+		$fecha = explode("-", $this->fecha_nacimiento);
+		return Carbon::createFromDate($fecha[0], $fecha[1], $fecha[2])->age;
 	}
 }
