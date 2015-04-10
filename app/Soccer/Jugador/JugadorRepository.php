@@ -17,4 +17,14 @@ class JugadorRepository extends BaseRepository
 		$jugador = Jugador::create($data); 
 		return $jugador;
 	}
+
+	public function update($data = array())
+	{
+		$jugador = $this->getById($data['jugador_id']); 
+		$jugador->update($data);
+	}
+	public function getById($jugadorId)
+	{
+		return Jugador::findOrFail($jugadorId);
+	}
 }
