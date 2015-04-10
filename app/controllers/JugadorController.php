@@ -174,7 +174,11 @@ class JugadorController extends \BaseController {
 			if (Input::has('jugadorId'))
 			{
 				$jugador = $this->jugadorRepository->getById(Input::get('jugadorId'));
-				return Response::json(['success' => true, 'jugador' => $jugador->toArray()]);
+				return Response::json(['success' => true, 'jugador' => $jugador->toArray(),
+					'urlImg' => $jugador->foto->url(),
+					'posicion' => $jugador->posicion->toArray(),
+					'pais' => $jugador->pais->toArray()
+					]);
 			}else{
 				return Response::json(['success' => false]);
 			}
