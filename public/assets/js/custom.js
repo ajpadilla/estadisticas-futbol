@@ -147,13 +147,10 @@ var CustomApp = function () {
                                             processData: false,
                                             dataType: "JSON",
                                             success: function(responseServer) {
-                                                response = true;
-                                                dataServer = responseServer;
-                                                console.log(dataServer);
-                                                if(response) 
+                                                if(responseServer.success == true) 
                                                 {
-                                                    // Aquí decido que hacer con los datos de la respuesta
-                                                    console.log(response);
+                                                    dataServer = responseServer;
+                                                    console.log(dataServer);
                                                     // Muestro otro dialog con información de éxito
                                                     bootbox.dialog({
                                                         message: $('#nombre').val() + " ha sido agregado correctamente!",
@@ -173,10 +170,46 @@ var CustomApp = function () {
                                                     $("#player-form")[0].reset();
                                                     $('.chosen-select').html("");
                                                     $('.chosen-select').trigger("chosen:updated");
+                                                }else{
+                                                     bootbox.dialog({
+                                                        message:" ¡Error al agregar datos!",
+                                                        title: "Error",
+                                                        buttons: {
+                                                            danger: {
+                                                                label: "Danger!",
+                                                                className: "btn-danger"
+                                                            }
+                                                        }
+                                                    });
+                                                    // Limpio cada elemento de las clases añadidas por el validator
+                                                    $('#player-form div').each(function(){
+                                                        cleanValidatorClasses(this);
+                                                    });
+                                                    //Reinicio el formulario
+                                                    $("#player-form")[0].reset();
+                                                    $('.chosen-select').html("");
+                                                    $('.chosen-select').trigger("chosen:updated");
                                                 }
                                             },
                                             error: function(jqXHR, textStatus, errorThrown) {
-                                               console.log('Error al enviar datos')
+                                               bootbox.dialog({
+                                                        message:" ¡Error al enviar datos al servidor!",
+                                                        title: "Error",
+                                                        buttons: {
+                                                            danger: {
+                                                                label: "Danger!",
+                                                                className: "btn-danger"
+                                                            }
+                                                        }
+                                                    });
+                                                    // Limpio cada elemento de las clases añadidas por el validator
+                                                    $('#player-form div').each(function(){
+                                                        cleanValidatorClasses(this);
+                                                    });
+                                                    //Reinicio el formulario
+                                                    $("#player-form")[0].reset();
+                                                    $('.chosen-select').html("");
+                                                    $('.chosen-select').trigger("chosen:updated");
                                             }
                                         });
                                         e.preventDefault(); //Prevent Default action. 
