@@ -11,4 +11,10 @@ class JugadorRepository extends BaseRepository
 	{
 		return Jugador::all();
 	}	
+
+	public function create($data = array())
+	{
+		$jugador = Jugador::create($data); 
+		return $jugador;
+	}
 }
