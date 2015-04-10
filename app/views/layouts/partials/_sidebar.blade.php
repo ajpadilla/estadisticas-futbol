@@ -29,6 +29,7 @@
 		<!-- /SIDEBAR MENU -->
 		<a id="lista-paises" href="{{ URL::route('paises.lista') }}"></a>
 		<a id="lista-posiciones" href="{{ URL::route('posiciones.lista') }}"></a>
+		<a id="agregar-jugador" href="{{ URL::route('jugadores.store') }}"></a>
 	</div>
 </div>
 <!-- /SIDEBAR -->
