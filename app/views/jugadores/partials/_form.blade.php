@@ -49,16 +49,16 @@
 						</div>
 
 						<div class="form-group">
-							{{ Form::label('posicion','Posición',['class'=>'col-sm-2 control-label']) }}
+							{{ Form::label('posicion_id','Posición',['class'=>'col-sm-2 control-label']) }}
 							<div class="col-sm-6">
-								{{ Form::select('posicion',array(),null,['class' => 'form-control chosen-select','data-placeholder' => 'Escoge Posición...','id'=> 'posicion_id']) }}
+								{{ Form::select('posicion_id',array(),null,['class' => 'form-control chosen-select','data-placeholder' => 'Escoge Posición...','id'=> 'posicion_id']) }}
 							</div>
 						</div>
 
 						<div class="form-group">
-							{{ Form::label('pais','País',['class'=>'col-sm-2 control-label']) }}
+							{{ Form::label('pais_id','País',['class'=>'col-sm-2 control-label']) }}
 							<div class="col-sm-6">
-								{{ Form::select('pais',array(),null,['class' => 'form-control chosen-select','data-placeholder' => 'Escoge País...','id'=>'pais_id']) }}
+								{{ Form::select('pais_id',array(),null,['class' => 'form-control chosen-select','data-placeholder' => 'Escoge País...','id'=>'pais_id']) }}
 							</div>
 						</div>
 
