@@ -47,6 +47,8 @@
 		</div>
 	</div>
 	@include('jugadores.new')
+	@include('jugadores.view')
+	@include('jugadores.partials._form_view-template')
 </div>
 @stop
 
