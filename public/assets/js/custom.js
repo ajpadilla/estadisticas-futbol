@@ -42,15 +42,69 @@ var CustomApp = function () {
     }
 
     var handleBootboxNewPlayer = function () {
+
         $.validator.addMethod('onlyLettersNumbersAndSpaces', function(value, element) {
                     return this.optional(element) || /^[a-zA-Z0-9ñÑ\s]+$/i.test(value);
-            }, 'only letters, numbers and spaces.');
+            }, 'sólo letras, números y espacios.');
+
+        $.validator.addMethod('customDateValidator', function(value, element) {
+            try{
+                jQuery.datepicker.parseDate('dd/mm/yy', value);return true;}
+            catch(e){return false;}
+        },'Por favor, Ingrese una fecha valida.');
+
+        jQuery.validator.addMethod('decimalNumbers', function(value, element) {
+            return this.optional(element) || /^\d{0,10}(\.\d{0,2})?$/i.test(value);
+        }, 'Por favor ingrese maximo'+[10]+'digitos enteros'+'y maximo'+[2]+'digitos decimales');
+
+        $.validator.addMethod('onlyLettersNumbersAndDash', function(value, element) {
+              return this.optional(element) || /^[a-zA-Z0-9ñÑ\-]+$/i.test(value);
+        }, 'sólo letras, números y guiones.');
+
         $('#player-form').validate({
             rules:{
                 nombre:{
                     required:true,
                     rangelength: [2, 64],
                     onlyLettersNumbersAndSpaces: true
+                },
+                fecha_nacimiento:{
+                    required:true,
+                    //customDateValidator: true
+                },
+                altura:{
+                    required:true,
+                    decimalNumbers:true
+                },
+                abreviacion:{
+                    required:true,
+                    onlyLettersNumbersAndDash:true
+                },
+                posicion:{
+                    required:true,
+                },
+                pais:{
+                    required:true,
+                }
+            },
+            messages:{
+                nombre:{
+                    required:'Este campo es obligatorio.',
+                },
+                fecha_nacimiento:{
+                    required:'Este campo es obligatorio.',
+                },
+                altura:{
+                   required:'Este campo es obligatorio.',
+                },
+                abreviacion:{
+                  required:'Este campo es obligatorio.',
+                },
+                posicion:{
+                    required:'Este campo es obligatorio.',
+                },
+                pais:{
+                    required:'Este campo es obligatorio.',
                 }
             },
             highlight:function(element){
@@ -142,26 +196,61 @@ var CustomApp = function () {
         //});            
     }
 
-    var initPlugins = function() {
-       // Iniciar select chosen
+    var initChosen = function(argument) {
+        // Iniciar select chosen
         $('.chosen-select').chosen({width: "100%"});
+    }
 
+    var initDataPicker = function() {
          // Iniciar datepicker
-        $('#fecha_nacimiento').datepicker({
-            showButtonPanel: true,
-            changeMonth: true,
-            changeYear: true,
-            yearRange: '2014:2030',
-            dateFormat: 'yy-mm-dd',
-        });
+         jQuery(function($){
+            $.datepicker.regional['es'] = {
+                showOn: "both",
+                buttonImageOnly: true,
+                buttonImage: "calendar.gif",
+                buttonText: "Calendar",
+                closeText: 'Cerrar',
+                showButtonPanel: true,
+                changeMonth: true,
+                changeYear: true,
+                yearRange: '2014:2030',
+                dateFormat: 'dd/mm/yy',
+            };
+            $.datepicker.setDefaults($.datepicker.regional['es']);
+        });    
+        $('#fecha_nacimiento').datepicker();
+    }
 
+    var loadFieldSelect = function(url,idField) {
+        $.ajax({
+            type: 'GET',
+            url: url,
+            dataType:'json',
+            success: function(response) {
+                console.log(response);
+                if (response.success == true) {
+                    jQuery(idField).html('');
+                    jQuery(idField).append('<option value=\"\"></option>');
+                    $.each(response.data,function (k,v){
+                        jQuery(idField).append('<option value=\"'+k+'\">'+v+'</option>');
+                        $('.chosen-select').trigger("chosen:updated");
+                    });
+                }else{
+                    jQuery(idField).html('');
+                    jQuery(idField).append('<option value=\"\"></option>');
+                }
+            }
+        });
     }
 
     return {
         init: function() {
+            initChosen();
+            initDataPicker();
             handleBootstrapFileInput();
             handleBootboxNewPlayer();
-            initPlugins();
+            loadFieldSelect($('#lista-paises').attr('href'),'#pais');
+            loadFieldSelect($('#lista-posiciones').attr('href'),'#posicion');
         }
     };
 }();
