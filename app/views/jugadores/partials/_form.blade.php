@@ -18,6 +18,13 @@
 				<div class="box-body big">
 					{{ Form::open(['route' => 'jugadores.store','class'=>'form-horizontal','role'=>'form',
 					'method' => 'POST','files' => true,'id'=> 'player-form']) }}
+						
+						<div class="form-group" style="display: none;">
+							{{ Form::label('jugador_id','Id',['class'=>'col-sm-2 control-label']) }}
+							<div class="col-sm-6">
+								{{ Form::text('jugador_id',null, ['class' => 'form-control','id' => 'jugador_id']) }}
+							</div>
+						</div>
 
 						<div class="form-group">
 							{{ Form::label('nombre','Nombre',['class'=>'col-sm-2 control-label']) }}
