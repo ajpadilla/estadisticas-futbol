@@ -131,31 +131,57 @@ var CustomApp = function () {
 
                                 //ajax para el envío del formulario.
                                 if($('#player-form').valid()) {
-                                    var form = $('#player-form-div').serialize();
-                                    var response = true; // Esta variable debería recibir los datos por ajax.
 
-                                    if(response) {
-                                        // Aquí decido que hacer con los datos de la respuesta
+                                    var response = false; // Esta variable debería recibir los datos por ajax.
+                                    var dataServer = null;
 
-                                        // Muestro otro dialog con información de éxito
-                                        bootbox.dialog({
-                                          message: $('#nombre').val() + " ha sido agregado correctamente!",
-                                          title: "Éxito",
-                                          buttons: {
-                                            success: {
-                                              label: "Success!",
-                                              className: "btn-success"
+                                    $("#player-form").submit(function(e){
+                                        var formData = new FormData(this);
+                                        //var form = $('#player-form').serializeArray();
+
+                                        $.ajax({
+                                            type: 'POST',
+                                            url: $('#agregar-jugador').attr('href'), 
+                                            data: formData,
+                                            contentType: false,
+                                            processData: false,
+                                            dataType: "JSON",
+                                            success: function(responseServer) {
+                                                response = true;
+                                                dataServer = responseServer;
+                                                console.log(dataServer);
+                                                if(response) 
+                                                {
+                                                    // Aquí decido que hacer con los datos de la respuesta
+                                                    console.log(response);
+                                                    // Muestro otro dialog con información de éxito
+                                                    bootbox.dialog({
+                                                        message: $('#nombre').val() + " ha sido agregado correctamente!",
+                                                        title: "Éxito",
+                                                        buttons: {
+                                                            success: {
+                                                                label: "Success!",
+                                                                className: "btn-success"
+                                                            }
+                                                        }
+                                                    });
+                                                    // Limpio cada elemento de las clases añadidas por el validator
+                                                    $('#player-form div').each(function(){
+                                                        cleanValidatorClasses(this);
+                                                    });
+                                                    //Reinicio el formulario
+                                                    $("#player-form")[0].reset();
+                                                    $('.chosen-select').html("");
+                                                    $('.chosen-select').trigger("chosen:updated");
+                                                }
+                                            },
+                                            error: function(jqXHR, textStatus, errorThrown) {
+                                               console.log('Error al enviar datos')
                                             }
-                                          }
                                         });
-                                        // Limpio cada elemento de las clases añadidas por el validator
-                                        $('#player-form div').each(function(){
-                                            cleanValidatorClasses(this);
-                                        });
-                                        //Reinicio el formulario
-                                        $("#player-form")[0].reset();
-                                    }
-
+                                        e.preventDefault(); //Prevent Default action. 
+                                    }); 
+                                    $("#player-form").submit();
                                 } else {
                                     return false;
                                 }
@@ -249,8 +275,8 @@ var CustomApp = function () {
             initDataPicker();
             handleBootstrapFileInput();
             handleBootboxNewPlayer();
-            loadFieldSelect($('#lista-paises').attr('href'),'#pais');
-            loadFieldSelect($('#lista-posiciones').attr('href'),'#posicion');
+            loadFieldSelect($('#lista-paises').attr('href'),'#pais_id');
+            loadFieldSelect($('#lista-posiciones').attr('href'),'#posicion_id');
         }
     };
 }();
