@@ -45,7 +45,11 @@
 <!-- Date picker -->
 {{ HTML::script('assets/js/datapicker/bootstrap-datepicker.js'); }}
 
+<!-- Jquery Form -->
 {{ HTML::script('assets/js/jQueryForm/jquery.form.min.js'); }}
+
+<!-- Mustache -->
+{{ HTML::script('assets/js/mustache.min.js'); }}
 
 <script>
 	jQuery(document).ready(function() {		
