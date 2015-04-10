@@ -142,10 +142,26 @@ var CustomApp = function () {
         //});            
     }
 
+    var initPlugins = function() {
+       // Iniciar select chosen
+        $('.chosen-select').chosen({width: "100%"});
+
+         // Iniciar datepicker
+        $('#fecha_nacimiento').datepicker({
+            showButtonPanel: true,
+            changeMonth: true,
+            changeYear: true,
+            yearRange: '2014:2030',
+            dateFormat: 'yy-mm-dd',
+        });
+
+    }
+
     return {
         init: function() {
             handleBootstrapFileInput();
             handleBootboxNewPlayer();
+            initPlugins();
         }
     };
 }();
