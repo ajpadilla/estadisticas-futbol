@@ -133,12 +133,12 @@ class JugadorController extends \BaseController {
 
 		$collection->addColumn('Edad', function($model)
 		{
-			 return 0;
+			 return $model->getAge();
 		});
 
 		$collection->addColumn('Acciones', function($model)
 		{
-			 return 0;
+			return 0;
 		});
 	
 		return $collection->make();
