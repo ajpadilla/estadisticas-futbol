@@ -39,6 +39,12 @@
 {{ HTML::script('assets/js/dataTables/jquery.dataTables.js'); }}
 {{ HTML::script('assets/js/dataTables/dataTables.bootstrap.js'); }}
 
+<!-- Chosen -->
+{{ HTML::script('assets/js/chosen/chosen.jquery.js')}}
+
+<!-- Date picker -->
+{{ HTML::script('assets/js/datapicker/bootstrap-datepicker.js'); }}
+
 <script>
 	jQuery(document).ready(function() {		
 		App.setPage("widgets_box");  //Set current page
