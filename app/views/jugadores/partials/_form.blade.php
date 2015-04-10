@@ -16,7 +16,8 @@
 
 				<div class="divide-20"></div>
 				<div class="box-body big">
-					{{ Form::open(['route' => 'jugadores.store','class'=>'form-horizontal','role'=>'form','method' => 'POST','id'=> 'player-form']) }}
+					{{ Form::open(['route' => 'jugadores.store','class'=>'form-horizontal','role'=>'form',
+					'method' => 'POST','files' => true,'id'=> 'player-form']) }}
 
 						<div class="form-group">
 							{{ Form::label('nombre','Nombre',['class'=>'col-sm-2 control-label']) }}
@@ -50,14 +51,14 @@
 						<div class="form-group">
 							{{ Form::label('posicion','Posición',['class'=>'col-sm-2 control-label']) }}
 							<div class="col-sm-6">
-								{{ Form::select('posicion',array(),null,['class' => 'form-control chosen-select','data-placeholder' => 'Escoge Posición...','id'=> 'posicion']) }}
+								{{ Form::select('posicion',array(),null,['class' => 'form-control chosen-select','data-placeholder' => 'Escoge Posición...','id'=> 'posicion_id']) }}
 							</div>
 						</div>
 
 						<div class="form-group">
 							{{ Form::label('pais','País',['class'=>'col-sm-2 control-label']) }}
 							<div class="col-sm-6">
-								{{ Form::select('pais',array(),null,['class' => 'form-control chosen-select','data-placeholder' => 'Escoge País...','id'=>'pais']) }}
+								{{ Form::select('pais',array(),null,['class' => 'form-control chosen-select','data-placeholder' => 'Escoge País...','id'=>'pais_id']) }}
 							</div>
 						</div>
 
