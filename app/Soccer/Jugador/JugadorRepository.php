@@ -23,7 +23,9 @@ class JugadorRepository extends BaseRepository
 
 	public function update($data = array())
 	{
-		$jugador = $this->getById($data['jugador_id']); 
+		$fecha = $data['fecha_nacimiento'];
+		$data['fecha_nacimiento'] = Carbon::createFromFormat('d-m-Y', $fecha)->format('Y-m-d');
+		$jugador = $this->getById($data['jugador_id']);
 		$jugador->update($data);
 	}
 
