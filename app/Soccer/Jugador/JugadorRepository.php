@@ -2,6 +2,7 @@
 
 use soccer\Jugador\Jugador;
 use soccer\Base\BaseRepository;
+use Carbon\Carbon;
 /**
 * 
 */
@@ -14,6 +15,8 @@ class JugadorRepository extends BaseRepository
 
 	public function create($data = array())
 	{
+		$fecha = $data['fecha_nacimiento'];
+		$data['fecha_nacimiento'] = Carbon::createFromFormat('d-m-Y', $fecha)->format('Y-m-d');
 		$jugador = Jugador::create($data); 
 		return $jugador;
 	}
