@@ -49,9 +49,9 @@ var CustomApp = function () {
 
         $.validator.addMethod('customDateValidator', function(value, element) {
             try{
-                jQuery.datepicker.parseDate('dd/mm/yy', value);return true;}
+                jQuery.datepicker.parseDate('dd-mm-yy', value);return true;}
             catch(e){return false;}
-        },'Por favor, Ingrese una fecha valida.');
+        },'Por favor, Ingrese una fecha valida con el dormato dd-mm-yy.');
 
         jQuery.validator.addMethod('decimalNumbers', function(value, element) {
             return this.optional(element) || /^\d{0,10}(\.\d{0,2})?$/i.test(value);
@@ -70,7 +70,7 @@ var CustomApp = function () {
                 },
                 fecha_nacimiento:{
                     required:true,
-                    //customDateValidator: true
+                    customDateValidator: true
                 },
                 altura:{
                     required:true,
@@ -247,7 +247,7 @@ var CustomApp = function () {
 
         $.validator.addMethod('customDateValidator', function(value, element) {
             try{
-                jQuery.datepicker.parseDate('dd/mm/yy', value);return true;}
+                jQuery.datepicker.parseDate('dd-mm-yy', value);return true;}
             catch(e){return false;}
         },'Por favor, Ingrese una fecha valida.');
 
@@ -604,6 +604,7 @@ var CustomApp = function () {
          // Iniciar datepicker
          jQuery(function($){
             $.datepicker.regional['es'] = {
+                autoclose: true,
                 showOn: "both",
                 buttonImageOnly: true,
                 buttonImage: "calendar.gif",
@@ -617,7 +618,19 @@ var CustomApp = function () {
             };
             $.datepicker.setDefaults($.datepicker.regional['es']);
         });    
-        $('#fecha_nacimiento').datepicker();
+        $('#fecha_nacimiento').datepicker({
+             autoclose: true,
+                showOn: "both",
+                buttonImageOnly: true,
+                buttonImage: "calendar.gif",
+                buttonText: "Calendar",
+                closeText: 'Cerrar',
+                showButtonPanel: true,
+                changeMonth: true,
+                changeYear: true,
+                yearRange: '2014:2030',
+                dateFormat: 'dd/mm/yy',
+        });
     }
 
     var loadFieldSelect = function(url,idField) {
@@ -645,7 +658,7 @@ var CustomApp = function () {
     return {
         init: function() {
             initChosen();
-            initDataPicker();
+            //initDataPicker();
             handleBootstrapFileInput();
             handleBootboxNewPlayer();
             loadFieldSelect($('#lista-paises').attr('href'),'#pais_id');
