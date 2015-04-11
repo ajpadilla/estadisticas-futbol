@@ -21,12 +21,18 @@
 					<span class="arrow"></span>
 				</a>
 				<ul class="sub">
-					<li><a class="" href="#"><span class="sub-menu-text">Lista</span></a></li>
+					<li><a class="" href="{{ URL::route('jugadores.index') }}"><span class="sub-menu-text">Lista</span></a></li>
 					<li><a id="new-player" class="" href="#new-player-form"><span class="sub-menu-text">Crear</span></a></li>
 				</ul>
 			</li>
 		</ul>
 		<!-- /SIDEBAR MENU -->
+		<a id="lista-paises" href="{{ URL::route('paises.lista') }}"></a>
+		<a id="lista-posiciones" href="{{ URL::route('posiciones.lista') }}"></a>
+		<a id="agregar-jugador" href="{{ URL::route('jugadores.store') }}"></a>
+		<a id="datos-jugador" href="{{ URL::route('jugadores.data') }}"></a>
+		<a id="editar-jugador" href="{{ URL::route('jugadores.update') }}"></a>
+		<a id="eliminar-jugador" href="{{ URL::route('jugadores.delete-ajax') }}"></a>
 	</div>
 </div>
 <!-- /SIDEBAR -->

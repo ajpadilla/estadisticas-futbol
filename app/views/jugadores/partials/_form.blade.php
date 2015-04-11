@@ -16,53 +16,67 @@
 
 				<div class="divide-20"></div>
 				<div class="box-body big">
-					<form id="player-form" class="form-horizontal" role="form">
-						<div class="form-group">
-							<label class="col-sm-3 control-label">Nombre</label>
-							<div class="col-sm-9">
-								<input name="nombre" type="text" class="form-control" placeholder="Text input">
-							</div>
-						</div>
-						<div class="form-group">
-							<label class="col-sm-3 control-label">Textarea</label>
-							<div class="col-sm-9">
-								<textarea class="form-control" rows="3"></textarea>
-							</div>
-						</div>
-						<div class="form-group">
-							<label class="col-sm-3 control-label">Inline checkboxes</label>
-							<div class="col-sm-9">
-								<label class="checkbox-inline">
-									<input type="checkbox" id="inlineCheckbox1" value="option1"> 1
-								</label>
-								<label class="checkbox-inline">
-									<input type="checkbox" id="inlineCheckbox2" value="option2"> 2
-								</label>
-								<label class="checkbox-inline">
-									<input type="checkbox" id="inlineCheckbox3" value="option3"> 3
-								</label>
-							</div>
-						</div>
-						<div class="divide-20"></div>
-						<div class="form-group">
-							<label class="col-sm-3 control-label">País</label>
-							<div class="col-sm-9">
-								<select class="form-control">
-									<option>1</option>
-									<option>2</option>
-									<option>3</option>
-									<option>4</option>
-									<option>5</option>
-								</select>
+					{{ Form::open(['route' => 'jugadores.store','class'=>'form-horizontal','role'=>'form',
+					'method' => 'POST','files' => true,'id'=> 'player-form']) }}
+						
+						<div class="form-group" style="display: none;">
+							{{ Form::label('jugador_id','Id',['class'=>'col-sm-2 control-label']) }}
+							<div class="col-sm-6">
+								{{ Form::text('jugador_id',null, ['class' => 'form-control','id' => 'jugador_id']) }}
 							</div>
 						</div>
 
 						<div class="form-group">
-							<input type="file" class="file-upload"></a>
+							{{ Form::label('nombre','Nombre',['class'=>'col-sm-2 control-label']) }}
+							<div class="col-sm-6">
+								{{ Form::text('nombre',null, ['class' => 'form-control','id' => 'nombre']) }}
+							</div>
 						</div>
-					</form>
+
+						<div class="form-group">
+							{{ Form::label('fecha_nacimiento','Fecha de nacimiento',['class'=>'col-sm-2 control-label']) }}
+							<div class="col-sm-6">
+								{{ Form::text('fecha_nacimiento',null, ['class' => 'form-control','id' => 'fecha_nacimiento']) }}
+							</div>
+						</div>
+						
+						
+						<div class="form-group">
+							{{ Form::label('altura','Altura',['class'=>'col-sm-2 control-label']) }}
+							<div class="col-sm-6">
+								{{ Form::text('altura',null, ['class' => 'form-control','id' => 'altura']) }}
+							</div>
+						</div>
+
+						<div class="form-group">
+							{{ Form::label('abreviacion','Abreviacion',['class'=>'col-sm-2 control-label']) }}
+							<div class="col-sm-6">
+								{{ Form::text('abreviacion',null, ['class' => 'form-control','id' => 'abreviacion']) }}
+							</div>
+						</div>
+
+						<div class="form-group">
+							{{ Form::label('posicion_id','Posición',['class'=>'col-sm-2 control-label']) }}
+							<div class="col-sm-6">
+								{{ Form::select('posicion_id',array(),null,['class' => 'form-control chosen-select','data-placeholder' => 'Escoge Posición...','id'=> 'posicion_id']) }}
+							</div>
+						</div>
+
+						<div class="form-group">
+							{{ Form::label('pais_id','País',['class'=>'col-sm-2 control-label']) }}
+							<div class="col-sm-6">
+								{{ Form::select('pais_id',array(),null,['class' => 'form-control chosen-select','data-placeholder' => 'Escoge País...','id'=>'pais_id']) }}
+							</div>
+						</div>
+
+						<div class="form-group">
+							{{ Form::file('foto', ['class' => 'file-upload']) }}
+						</div>
+
+					{{ Form::close() }}
 				</div>
 			</div>
 		</div>
 	</div>
 </div>
+

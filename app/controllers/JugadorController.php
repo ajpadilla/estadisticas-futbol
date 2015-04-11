@@ -1,6 +1,24 @@
 <?php
 
+use soccer\Jugador\JugadorRepository;
+use soccer\Forms\RegistrarJugadorForm;
+use soccer\Forms\EditarJugadorForm;
+use Laracasts\Validation\FormValidationException;
+
 class JugadorController extends \BaseController {
+
+	protected $jugadorRepository;
+	protected $registrarJugadorForm;
+	protected $editarJugadorForm;
+
+	public function __construct(JugadorRepository $jugadorRepository,
+			RegistrarJugadorForm $registrarJugadorForm,
+			EditarJugadorForm $editarJugadorForm){
+
+		$this->jugadorRepository = $jugadorRepository;
+		$this->registrarJugadorForm = $registrarJugadorForm;
+		$this->editarJugadorForm = $editarJugadorForm;
+	}
 
 	/**
 	 * Display a listing of the resource.
@@ -9,7 +27,7 @@ class JugadorController extends \BaseController {
 	 */
 	public function index()
 	{
-		//
+		return View::make('jugadores.index');
 	}
 
 
@@ -31,7 +49,20 @@ class JugadorController extends \BaseController {
 	 */
 	public function store()
 	{
-		//
+		if(Request::ajax())
+		{
+			$input = Input::all();
+			try
+			{
+				$this->registrarJugadorForm->validate($input);
+				$jugador = $this->jugadorRepository->create($input);
+				return Response::json(['success' => true, 'jugador' => $jugador->toArray()]);
+			}
+			catch (FormValidationException $e)
+			{
+				return Response::json($e->getErrors()->all());
+			}
+		}
 	}
 
 
@@ -65,9 +96,22 @@ class JugadorController extends \BaseController {
 	 * @param  int  $id
 	 * @return Response
 	 */
-	public function update($id)
+	public function update()
 	{
-		//
+		if(Request::ajax())
+		{
+			$input = Input::all();
+			try
+			{
+				$this->editarJugadorForm->validate($input);
+				$this->jugadorRepository->update($input);
+				return Response::json(['success' => true]);
+			}
+			catch (FormValidationException $e)
+			{
+				return Response::json($e->getErrors()->all());
+			}
+		}
 	}
 
 
@@ -77,10 +121,78 @@ class JugadorController extends \BaseController {
 	 * @param  int  $id
 	 * @return Response
 	 */
-	public function destroy($id)
+	public function destroy()
 	{
-		//
+		if (Request::ajax())
+		{
+			if (Input::has('jugadorId'))
+			{
+				$jugador = $this->jugadorRepository->delete(Input::get('jugadorId'));
+				return Response::json(['success' => true]);
+			}else{
+				return Response::json(['success' => false]);
+			}
+		}
+
 	}
 
+	public function listadoJugadores()
+	{
+		$collection = Datatable::collection($this->jugadorRepository->getAll())
+			->searchColumns('nombre')
+			->orderColumns('nombre');
+
+		$collection->addColumn('País', function($model)
+		{
+			 return $model->pais->nombre;
+		});
+
+		$collection->addColumn('Posición', function($model)
+		{
+			 return $model->posicion->abreviacion;
+		});
+
+		$collection->addColumn('Nombre', function($model)
+		{
+			 return $model->nombre;
+		});
+
+		$collection->addColumn('Edad', function($model)
+		{
+			 return $model->getAge();
+		});
+
+		$collection->addColumn('Acciones', function($model)
+		{
+			$links = "<a class='ver-jugador' href='#' id='ver_".$model->id."'>Ver</a>
+					<br />";
+			$links .= "<a  class='editar-jugador' href='#new-player-form' id='editar_".$model->id."'>Editar</a>
+					<br />
+					<a class='eliminar-jugador' href='#' id='eliminar_".$model->id."'>Eliminar</a>";
+
+			return $links;
+		});
+	
+		return $collection->make();
+	
+	}
+
+	public function getData()
+	{
+		if (Request::ajax())
+		{
+			if (Input::has('jugadorId'))
+			{
+				$jugador = $this->jugadorRepository->getById(Input::get('jugadorId'));
+				return Response::json(['success' => true, 'jugador' => $jugador->toArray(),
+					'urlImg' => $jugador->foto->url(),
+					'posicion' => $jugador->posicion->toArray(),
+					'pais' => $jugador->pais->toArray()
+					]);
+			}else{
+				return Response::json(['success' => false]);
+			}
+		}
+	}
 
 }

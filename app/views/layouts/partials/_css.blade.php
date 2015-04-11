@@ -11,5 +11,14 @@
 <!-- FANCYBOX -->
 {{ HTML::style('assets/js/fancybox/source/jquery.fancybox.css?v=2.1.5') }}
 
+<!-- Datatable -->
+{{ HTML::style('assets/css/dataTables/dataTables.bootstrap.css'); }}
+
+<!-- Chosen -->
+{{ HTML::style('assets/css/chosen/chosen.css'); }}
+
+<!-- Date picker -->
+{{ HTML::style('assets/css/datapicker/datepicker3.css'); }}
+
 <!-- FONTS -->
 <link href="http://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700" rel="stylesheet" type="text/css">

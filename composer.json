@@ -23,7 +23,8 @@
         "moltin/laravel-cart": "dev-master",
 		"barryvdh/laravel-dompdf": "0.4.*",
 		"bkwld/croppa": "~3.0",
-		"fzaninotto/faker" : "dev-master"
+		"fzaninotto/faker" : "dev-master",
+		"nesbot/carbon": "~1.14"
 	},
 	"require-dev": {
 		"codeception/codeception": "2.0.*",

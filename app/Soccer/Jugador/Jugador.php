@@ -1,12 +1,44 @@
 <?php namespace soccer\Jugador;
 
 use Eloquent;
-
+use Codesleeve\Stapler\ORM\StaplerableInterface;
+use Codesleeve\Stapler\ORM\EloquentTrait;
+use Carbon\Carbon;
 /**
 * 
 */
-class Jugador extends Eloquent{
+class Jugador extends Eloquent implements StaplerableInterface{
+	use EloquentTrait;
 
 	protected $table = 'jugadores';
 
+	protected $fillable = ['nombre', 'fecha_nacimiento','foto','altura', 'abreviacion','posicion_id','pais_id'];
+
+	 public function __construct(array $attributes = array()) {
+        $this->hasAttachedFile('foto', [
+            'styles' => [
+                'medium' => '300x300',
+                'thumb' => '100x100'
+            ]
+        ]);
+
+        parent::__construct($attributes);
+    }
+
+	public function pais()
+	{
+		return $this->belongsTo('soccer\Pais\Pais');
+	}
+
+	public function posicion()
+	{
+		return $this->belongsTo('soccer\Posicion\Posicion');
+	}
+
+	public function getAge()
+	{
+		//return Carbon::createFromFormat('Y-m-d H:i:s', $date)->format('d-m-Y');
+		$fecha = explode("-", $this->fecha_nacimiento);
+		return Carbon::createFromDate($fecha[0], $fecha[1], $fecha[2])->age;
+	}
 }

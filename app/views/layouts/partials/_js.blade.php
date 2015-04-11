@@ -34,6 +34,23 @@
 <!-- CUSTOM SCRIPT -->
 {{ HTML::script('assets/js/script.js') }}
 {{ HTML::script('assets/js/custom.js') }}
+
+<!-- Datatable -->
+{{ HTML::script('assets/js/dataTables/jquery.dataTables.js'); }}
+{{ HTML::script('assets/js/dataTables/dataTables.bootstrap.js'); }}
+
+<!-- Chosen -->
+{{ HTML::script('assets/js/chosen/chosen.jquery.js')}}
+
+<!-- Date picker -->
+{{ HTML::script('assets/js/datapicker/bootstrap-datepicker.js'); }}
+
+<!-- Jquery Form -->
+{{ HTML::script('assets/js/jQueryForm/jquery.form.min.js'); }}
+
+<!-- Mustache -->
+{{ HTML::script('assets/js/mustache.min.js'); }}
+
 <script>
 	jQuery(document).ready(function() {		
 		App.setPage("widgets_box");  //Set current page
@@ -43,4 +60,7 @@
     	CustomApp.init();
 	});
 </script>
+
+@yield('scripts')
+
 <!-- /JAVASCRIPTS -->
