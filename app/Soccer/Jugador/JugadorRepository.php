@@ -23,6 +23,13 @@ class JugadorRepository extends BaseRepository
 		$jugador = $this->getById($data['jugador_id']); 
 		$jugador->update($data);
 	}
+
+	public function delete($jugadorId)
+	{
+		$jugador = $this->getById($jugadorId); 
+		$jugador->delete();
+	}
+
 	public function getById($jugadorId)
 	{
 		return Jugador::findOrFail($jugadorId);
