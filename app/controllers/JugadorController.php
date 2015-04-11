@@ -121,9 +121,19 @@ class JugadorController extends \BaseController {
 	 * @param  int  $id
 	 * @return Response
 	 */
-	public function destroy($id)
+	public function destroy()
 	{
-		//
+		if (Request::ajax())
+		{
+			if (Input::has('jugadorId'))
+			{
+				$jugador = $this->jugadorRepository->delete(Input::get('jugadorId'));
+				return Response::json(['success' => true]);
+			}else{
+				return Response::json(['success' => false]);
+			}
+		}
+
 	}
 
 	public function listadoJugadores()
