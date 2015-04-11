@@ -327,7 +327,8 @@ var CustomApp = function () {
                     console.log(response.jugador);
                     $('#jugador_id').val(response.jugador.id);
                     $('#nombre').val(response.jugador.nombre);
-                    $('#fecha_nacimiento').val(response.jugador.fecha_nacimiento);
+                    $('#fecha_nacimiento').val($.datepicker.formatDate('dd-mm-yy', new Date(
+                        response.jugador.fecha_nacimiento)));
                     $('#altura').val(response.jugador.altura);
                     $('#abreviacion').val(response.jugador.abreviacion);
                     $('#posicion_id').val(response.jugador.posicion_id);
