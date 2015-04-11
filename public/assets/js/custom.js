@@ -522,6 +522,37 @@ var CustomApp = function () {
         });
     }
 
+    //Metodo para eliminar jugador de l BD.
+    var deletePlayer = function (idPlayer) {
+        bootbox.confirm("¿Esta seguro de eliminar al jugador?", function(result) {
+            console.log("Confirm result: "+result);
+            if (result == true){
+               $.ajax({
+                type: 'GET',
+                url: $('#eliminar-jugador').attr('href'),
+                data: {'jugadorId': idPlayer},
+                dataType: "JSON",
+                success: function(response) {
+                    if (response.success == true) {
+                        $('#eliminar_'+idPlayer).parent().parent().remove();
+                        bootbox.dialog({
+                            message:" ¡Jugador Eliminado!",
+                            title: "Éxito",
+                            buttons: {
+                                success: {
+                                    label: "Success!",
+                                    className: "btn-success"
+                                }
+                            }
+                        });
+                    };
+                }
+            });
+           };
+       });
+
+    }
+
     // Metodo para saber cual opcion(ver, editar, borrar) fue seleccionada
     var loadDataPlayer = function() 
     {
@@ -541,7 +572,7 @@ var CustomApp = function () {
                 }else if(type == "ver"){
                     viewDataPlayer(numberId);
                 }else if(type == "eliminar"){
-                    //
+                    deletePlayer(numberId);
                 }
             }           
         });
