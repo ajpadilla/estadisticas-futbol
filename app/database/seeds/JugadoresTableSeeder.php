@@ -17,6 +17,24 @@ class JugadoresTableSeeder extends DatabaseSeeder{
 	{
 		$faker = $this->getFaker();
 
+
+       /* $jugador = Jugador::create([
+            'nombre' => 'Sergio Romero',
+            'fecha_nacimiento' => $faker->date($format = 'Y-m-d', $max = 'now'),
+            'foto' => null,
+            'altura' => $faker->randomFloat(2, 6, 100),
+            'abreviacion' => $faker->word, 
+            'posicion_id' => 1,
+            'pais_id' => 3   
+        ]);
+
+        //$jugador->foto = 'http://lorempixel.com/640/480/';
+
+        $jugador->foto = public_path() + '\system\soccer\Jugador\Jugador\fotos\000\000\001\thumb\102px-Sergio_Romero_2011.jpg';
+
+
+        $jugador->save();*/
+
         /*$posiciones = Posicion::all()->toArray();
 
         $paises = Pais::all()->toArray();
