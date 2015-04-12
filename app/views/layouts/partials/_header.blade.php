@@ -29,9 +29,9 @@
 			<!-- /NAVBAR LEFT -->
 			<!-- BEGIN TOP NAVIGATION MENU -->					
 			<ul class="nav navbar-nav pull-right">
-				@include('layouts.partials.header._notification-dropdown')				
+				{{-- @include('layouts.partials.header._notification-dropdown')				
 				@include('layouts.partials.header._inbox-dropdown')				
-				@include('layouts.partials.header._todo-dropdown')				
+				@include('layouts.partials.header._todo-dropdown') --}}				
 				@include('layouts.partials.header._user-login-dropdown')				
 			</ul>
 			<!-- END TOP NAVIGATION MENU -->

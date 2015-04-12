@@ -46,11 +46,8 @@
 								  <a href="#" class="list-group-item"><i class="fa fa-user fa-fw"></i> Profile</a>
 								  <a href="#" class="list-group-item">
 									<span class="badge badge-red">9</span>
-									<i class="fa fa-calendar fa-fw"></i> Events
+									<i class="fa fa-calendar fa-fw"></i> Partidos
 								  </a>
-								  <a href="#" class="list-group-item"><i class="fa fa-comment-o fa-fw"></i> Messages</a>
-								  <a href="#" class="list-group-item"><i class="fa fa-picture-o fa-fw"></i> Photos</a>
-								  <a href="#" class="list-group-item"><i class="fa fa-cog fa-fw"></i> Settings</a>
 								</div>														
 							</div>
 							<!-- /PROFILE PIC -->
