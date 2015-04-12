@@ -160,7 +160,7 @@ class JugadorController extends \BaseController {
 
 		$collection->addColumn('Edad', function($model)
 		{
-			 return $model->getAge();
+			 return $model->getAgeAttribute();
 		});
 
 		$collection->addColumn('Acciones', function($model)
@@ -186,9 +186,10 @@ class JugadorController extends \BaseController {
 			{
 				$jugador = $this->jugadorRepository->getById(Input::get('jugadorId'));
 				return Response::json(['success' => true, 'jugador' => $jugador->toArray(),
-					'urlImg' => $jugador->foto->url(),
+					'urlImg' => $jugador->foto->url('thumb'),
 					'posicion' => $jugador->posicion->toArray(),
-					'pais' => $jugador->pais->toArray()
+					'pais' => $jugador->pais->toArray(),
+					'public' => public_path()
 					]);
 			}else{
 				return Response::json(['success' => false]);
