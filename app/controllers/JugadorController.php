@@ -189,7 +189,8 @@ class JugadorController extends \BaseController {
 					'urlImg' => $jugador->foto->url('thumb'),
 					'posicion' => $jugador->posicion->toArray(),
 					'pais' => $jugador->pais->toArray(),
-					'public' => public_path()
+					'public' => public_path(),
+					'base' => base_path()
 					]);
 			}else{
 				return Response::json(['success' => false]);
