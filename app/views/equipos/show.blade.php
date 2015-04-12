@@ -18,16 +18,37 @@
 			<div class="box-body">
 				<div class="tabbable header-tabs user-profile">
 					<ul class="nav nav-tabs">
-					   <li><a href="#pro_help" data-toggle="tab"><i class="fa fa-question"></i> <span class="hidden-inline-mobile"> Help</span></a></li>
-					   <li><a href="#pro_edit" data-toggle="tab"><i class="fa fa-edit"></i> <span class="hidden-inline-mobile"> Editar Cuenta</span></a></li>
-					   <li class="active"><a href="#pro_overview" data-toggle="tab"><i class="fa fa-dot-circle-o"></i> <span class="hidden-inline-mobile">Overview</span></a></li>
+						<li>
+							<a href="#pro_help" data-toggle="tab">
+								<i class="fa fa-question"></i> 
+								<span class="hidden-inline-mobile"> Jugadores</span>
+							</a>
+						</li>
+						<li>
+							<a href="#pro_help" data-toggle="tab">
+								<i class="fa fa-question"></i> 
+								<span class="hidden-inline-mobile"> Partidos</span>
+							</a>
+						</li>
+						<li>
+							<a href="#pro_edit" data-toggle="tab">
+								<i class="fa fa-edit"></i> 
+								<span class="hidden-inline-mobile"> Editar Cuenta</span>
+							</a>
+						</li>
+						<li class="active">
+							<a href="#pro_overview" data-toggle="tab">
+								<i class="fa fa-dot-circle-o"></i> 
+								<span class="hidden-inline-mobile">Detalles</span>
+							</a>
+						</li>
 					</ul>
 					<div class="tab-content">
 					   <!-- OVERVIEW -->
 					   <div class="tab-pane fade in active" id="pro_overview">
 						  <div class="row">
 							<!-- PROFILE PIC -->
-							<div class="col-md-3">
+							<div class="col-md-8">
 								<div class="list-group">
 								  <li class="list-group-item zero-padding">
 									<img alt="" class="img-responsive" src="img/profile/avatar.jpg">
@@ -39,280 +60,216 @@
 										<ul class="list-inline">
 										   <li><i class="fa fa-facebook fa-2x"></i></li>
 										   <li><i class="fa fa-twitter fa-2x"></i></li>
-										   <li><i class="fa fa-dribbble fa-2x"></i></li>
-										   <li><i class="fa fa-bitbucket fa-2x"></i></li>
 										</ul>
 								 </div>
-								  <a href="#" class="list-group-item"><i class="fa fa-user fa-fw"></i> Profile</a>
-								  <a href="#" class="list-group-item">
-									<span class="badge badge-red">9</span>
-									<i class="fa fa-calendar fa-fw"></i> Partidos
-								  </a>
 								</div>														
 							</div>
+							<div class="col-md-4">
+								<!-- BOX -->
+								<div class="box border inverse">
+									<div class="box-title">
+										<h4><i class="fa fa-bars"></i>Estadísticas</h4>
+										{{--<div class="tools">
+											<a href="#box-config" data-toggle="modal" class="config">
+												<i class="fa fa-cog"></i>
+											</a>
+											<a href="javascript:;" class="reload">
+												<i class="fa fa-refresh"></i>
+											</a>
+											<a href="javascript:;" class="collapse">
+												<i class="fa fa-chevron-up"></i>
+											</a>
+											<a href="javascript:;" class="remove">
+												<i class="fa fa-times"></i>
+											</a>
+										</div>--}}
+									</div>
+									<div class="box-body big sparkline-stats">
+										<div class="sparkline-row">
+											<span class="title">Diferencia de Goles</span>
+											<span class="value">7453</span>
+											{{-- <div class="linechart linechart-lg">1:3,2.8:4,3:3,4:3.4,5:7.5,6:2.3,7:5.4</div> --}}
+										</div>
+										<div class="sparkline-row">
+											<span class="title">Partidos Ganados</span>
+											<span class="value"><i class="fa fa-usd"></i> 45,732</span>
+											{{-- <span class="sparkline big" data-color="blue">16,6,23,14,12,10,15,4,19,18,4,24</span> --}}
+										</div>
+										<div class="sparkline-row">
+											<span class="title">Partidos Perdidos</span>
+											<span class="value"><i class="fa fa-usd"></i> 25,674</span>
+											{{-- <span class="sparklinepie big">16,6,23</span> --}}
+										</div>
+									</div>
+								</div>
+								<!-- /BOX -->
+								<!-- /SAMPLE -->
+							</div>							
 							<!-- /PROFILE PIC -->
 							<!-- PROFILE DETAILS -->
-							<div class="col-md-9">
-								<!-- ROW 1 -->
-								<div class="row">
-									<div class="col-md-7 profile-details">																
-										<h3>My Skills</h3>
-										<div class="row">
-											<div class="col-md-4 text-center">
-												<div id="pie_1" class="piechart" data-percent="76">
-													<span class="percent"></span>
-												</div>
-												<div class="skill-name">Graphic Design</div>
-											</div>
-											<div class="col-md-4 text-center">
-												<div id="pie_2" class="piechart" data-percent="82">
-													<span class="percent"></span>
-												</div>
-												<div class="skill-name">Web Design</div>
-											</div>
-											<div class="col-md-4 text-center">
-												<div id="pie_3" class="piechart" data-percent="66">
-													<span class="percent"></span>
-												</div>
-												<div class="skill-name">Javascript</div>
-											</div>
+							<div class="row">								
+								<div class="col-md-8 col-md-offset-2">
+									<!-- ROW 2 -->
+									<div class="row">
+										<div class="col-md-12">
+										<div class="box border blue">
+										<div class="box-title">
+											<h4><i class="fa fa-columns"></i> <span class="hidden-inline-mobile">Profile Summary</span></h4>																
 										</div>
-										<div class="divide-20"></div>
-										<!-- BUTTONS -->
-										<div class="row">
-											<div class="col-md-3">
-												<a class="btn btn-danger btn-icon input-block-level" href="javascript:void(0);">
-													<i class="fa fa-google-plus-square fa-2x"></i>
-													<div>Google Plus</div>
-													<span class="label label-right label-warning">4</span>
-												</a>
-											</div>
-											<div class="col-md-3">
-												<a class="btn btn-primary btn-icon input-block-level" href="javascript:void(0);">
-													<i class="fa fa-facebook-square fa-2x"></i>
-													<div>Facebook</div>
-													<span class="label label-right label-danger">7+</span>
-												</a>
-											</div>
-											<div class="col-md-3">
-												<a class="btn btn-pink btn-icon input-block-level" href="javascript:void(0);">
-													<i class="fa fa-dribbble fa-2x"></i>
-													<div>Dribbble</div>
-													<span class="label label-right label-info">1</span>
-												</a>
-											</div>
-											<div class="col-md-3">
-												<a class="btn btn-success btn-icon input-block-level" href="javascript:void(0);">
-													<i class="fa fa-github fa-2x"></i>
-													<div>Github</div>
-												</a>
-											</div>
+										<div class="box-body">
+											<div class="tabbable">
+												<ul class="nav nav-tabs">
+												   <li class="active"><a href="#sales" data-toggle="tab"><i class="fa fa-signal"></i> <span class="hidden-inline-mobile">Sales Table</span></a></li>
+												   <li><a href="#feed" data-toggle="tab"><i class="fa fa-rss"></i> <span class="hidden-inline-mobile">Recent Activities</span></a></li>
+												</ul>
+												<div class="tab-content">
+												   <div class="tab-pane active" id="sales">
+													  <table class="table table-striped table-bordered table-hover">
+														 <thead>
+															<tr>
+															   <th><i class="fa fa-user"></i> Client</th>
+															   <th class="hidden-xs"><i class="fa fa-quote-left"></i> Sales Item</th>
+															   <th><i class="fa fa-dollar"></i> Amount</th>
+															   <th><i class="fa fa-bars"></i> Status</th>
+															</tr>
+														 </thead>
+														 <tbody>
+															<tr>
+															   <td><a href="#">Fortune 500</a></td>
+															   <td class="hidden-xs">Gold Level Virtual Server</td>
+															   <td>$ 2310.23</td>
+															   <td><span class="label label-success label-sm">Paid</span></td>
+															</tr>
+															<tr>
+															   <td><a href="#">Cisco Inc.</a></td>
+															   <td class="hidden-xs">Platinum Level Virtual Server</td>
+															   <td>$ 5502.67</td>
+															   <td><span class="label label-warning label-sm">Pending</span></td>
+															</tr>
+															<tr>
+															   <td><a href="#">VMWare Ltd.</a></td>
+															   <td class="hidden-xs">Hardware Switch</td>
+															   <td>$ 3472.54</td>
+															   <td><span class="label label-success label-sm">Paid</span></td>
+															</tr>
+															<tr>
+															   <td><a href="#">Wall-Mart Stores</a></td>
+															   <td class="hidden-xs">Branding & Marketing</td>
+															   <td>$ 6653.25</td>
+															   <td><span class="label label-success label-sm">Paid</span></td>
+															</tr>
+															<tr>
+															   <td><a href="#">Exxon Mobil</a></td>
+															   <td class="hidden-xs">UX and UI Services</td>
+															   <td>$ 45645.45</td>
+															   <td><span class="label label-danger label-sm">Overdue</span></td>
+															</tr>
+															<tr>
+															   <td><a href="#">General Electric</a></td>
+															   <td class="hidden-xs">Web Designing</td>
+															   <td>$ 3432.11</td>
+															   <td><span class="label label-warning label-sm">Pending</span></td>
+															</tr>
+														 </tbody>
+													  </table>
+												   </div>
+												   <div class="tab-pane" id="feed">
+													  <div class="scroller" data-height="250px" data-always-visible="1" data-rail-visible="1">
+														  <div class="feed-activity clearfix">
+															<div>
+																<i class="pull-left roundicon fa fa-check btn btn-info"></i>
+																<a class="user" href="#"> John Doe </a>
+																accepted your connection request.
+																<br>
+																<a href="#">View profile</a>
+																
+															</div>
+															<div class="time">
+																<i class="fa fa-clock-o"></i>
+																5 hours ago
+															</div>
+														  </div>
+														  <div class="feed-activity clearfix">
+															<div>
+																<i class="pull-left roundicon fa fa-picture-o btn btn-danger"></i>
+																<a class="user" href="#"> Jack Doe </a>
+																uploaded a new photo.
+																<br>
+																<a href="#">Take a look</a>
+																
+															</div>
+															<div class="time">
+																<i class="fa fa-clock-o"></i>
+																5 hours ago
+															</div>
+														  </div>
+														  <div class="feed-activity clearfix">
+															<div>
+																<i class="pull-left roundicon fa fa-edit btn btn-pink"></i>
+																<a class="user" href="#"> Jess Doe </a>
+																edited their skills.
+																<br>
+																<a href="#">Endorse them</a>
+																
+															</div>
+															<div class="time">
+																<i class="fa fa-clock-o"></i>
+																5 hours ago
+															</div>
+														  </div>
+														  <div class="feed-activity clearfix">
+															<div>
+																<i class="pull-left roundicon fa fa-bitcoin btn btn-yellow"></i>
+																<a class="user" href="#"> Divine Doe </a>
+																made a bitcoin payment.
+																<br>
+																<a href="#">Check your financials</a>
+																
+															</div>
+															<div class="time">
+																<i class="fa fa-clock-o"></i>
+																6 hours ago
+															</div>
+														  </div>
+														  <div class="feed-activity clearfix">
+															<div>
+																<i class="pull-left roundicon fa fa-dropbox btn btn-primary"></i>
+																<a class="user" href="#"> Lisbon Doe </a>
+																saved a new document to Dropbox.
+																<br>
+																<a href="#">Download</a>
+																
+															</div>
+															<div class="time">
+																<i class="fa fa-clock-o"></i>
+																1 day ago
+															</div>
+														  </div>
+														  <div class="feed-activity clearfix">
+															<div>
+																<i class="pull-left roundicon fa fa-pinterest btn btn-inverse"></i>
+																<a class="user" href="#"> Bob Doe </a>
+																pinned a new photo to Pinterest.
+																<br>
+																<a href="#">Take a look</a>
+																
+															</div>
+															<div class="time">
+																<i class="fa fa-clock-o"></i>
+																2 days ago
+															</div>
+														  </div>
+													  </div>
+												   </div>
+												</div>
+											 </div>
 										</div>
-										<!-- /BUTTONS -->
+										</div>
+										</div>
 									</div>
-									<div class="col-md-5">
-										<!-- BOX -->
-										<div class="box border inverse">
-											<div class="box-title">
-												<h4><i class="fa fa-bars"></i>Statistics</h4>
-												<div class="tools">
-													<a href="#box-config" data-toggle="modal" class="config">
-														<i class="fa fa-cog"></i>
-													</a>
-													<a href="javascript:;" class="reload">
-														<i class="fa fa-refresh"></i>
-													</a>
-													<a href="javascript:;" class="collapse">
-														<i class="fa fa-chevron-up"></i>
-													</a>
-													<a href="javascript:;" class="remove">
-														<i class="fa fa-times"></i>
-													</a>
-												</div>
-											</div>
-											<div class="box-body big sparkline-stats">
-												<div class="sparkline-row">
-													<span class="title">Profile Visits</span>
-													<span class="value">7453</span>
-													<div class="linechart linechart-lg">1:3,2.8:4,3:3,4:3.4,5:7.5,6:2.3,7:5.4</div>
-												</div>
-												<div class="sparkline-row">
-													<span class="title">Account balance</span>
-													<span class="value"><i class="fa fa-usd"></i> 45,732</span>
-													<span class="sparkline big" data-color="blue">16,6,23,14,12,10,15,4,19,18,4,24</span>
-												</div>
-												<div class="sparkline-row">
-													<span class="title">Revenue distribution</span>
-													<span class="value"><i class="fa fa-usd"></i> 25,674</span>
-													<span class="sparklinepie big">16,6,23</span>
-												</div>
-											</div>
-										</div>
-										<!-- /BOX -->
-										<!-- /SAMPLE -->
-									</div>
+									<!-- /ROW 2 -->
 								</div>
-								<!-- /ROW 1 -->
-								<div class="divide-40"></div>
-								<!-- ROW 2 -->
-								<div class="row">
-									<div class="col-md-12">
-									<div class="box border blue">
-									<div class="box-title">
-										<h4><i class="fa fa-columns"></i> <span class="hidden-inline-mobile">Profile Summary</span></h4>																
-									</div>
-									<div class="box-body">
-										<div class="tabbable">
-											<ul class="nav nav-tabs">
-											   <li class="active"><a href="#sales" data-toggle="tab"><i class="fa fa-signal"></i> <span class="hidden-inline-mobile">Sales Table</span></a></li>
-											   <li><a href="#feed" data-toggle="tab"><i class="fa fa-rss"></i> <span class="hidden-inline-mobile">Recent Activities</span></a></li>
-											</ul>
-											<div class="tab-content">
-											   <div class="tab-pane active" id="sales">
-												  <table class="table table-striped table-bordered table-hover">
-													 <thead>
-														<tr>
-														   <th><i class="fa fa-user"></i> Client</th>
-														   <th class="hidden-xs"><i class="fa fa-quote-left"></i> Sales Item</th>
-														   <th><i class="fa fa-dollar"></i> Amount</th>
-														   <th><i class="fa fa-bars"></i> Status</th>
-														</tr>
-													 </thead>
-													 <tbody>
-														<tr>
-														   <td><a href="#">Fortune 500</a></td>
-														   <td class="hidden-xs">Gold Level Virtual Server</td>
-														   <td>$ 2310.23</td>
-														   <td><span class="label label-success label-sm">Paid</span></td>
-														</tr>
-														<tr>
-														   <td><a href="#">Cisco Inc.</a></td>
-														   <td class="hidden-xs">Platinum Level Virtual Server</td>
-														   <td>$ 5502.67</td>
-														   <td><span class="label label-warning label-sm">Pending</span></td>
-														</tr>
-														<tr>
-														   <td><a href="#">VMWare Ltd.</a></td>
-														   <td class="hidden-xs">Hardware Switch</td>
-														   <td>$ 3472.54</td>
-														   <td><span class="label label-success label-sm">Paid</span></td>
-														</tr>
-														<tr>
-														   <td><a href="#">Wall-Mart Stores</a></td>
-														   <td class="hidden-xs">Branding & Marketing</td>
-														   <td>$ 6653.25</td>
-														   <td><span class="label label-success label-sm">Paid</span></td>
-														</tr>
-														<tr>
-														   <td><a href="#">Exxon Mobil</a></td>
-														   <td class="hidden-xs">UX and UI Services</td>
-														   <td>$ 45645.45</td>
-														   <td><span class="label label-danger label-sm">Overdue</span></td>
-														</tr>
-														<tr>
-														   <td><a href="#">General Electric</a></td>
-														   <td class="hidden-xs">Web Designing</td>
-														   <td>$ 3432.11</td>
-														   <td><span class="label label-warning label-sm">Pending</span></td>
-														</tr>
-													 </tbody>
-												  </table>
-											   </div>
-											   <div class="tab-pane" id="feed">
-												  <div class="scroller" data-height="250px" data-always-visible="1" data-rail-visible="1">
-													  <div class="feed-activity clearfix">
-														<div>
-															<i class="pull-left roundicon fa fa-check btn btn-info"></i>
-															<a class="user" href="#"> John Doe </a>
-															accepted your connection request.
-															<br>
-															<a href="#">View profile</a>
-															
-														</div>
-														<div class="time">
-															<i class="fa fa-clock-o"></i>
-															5 hours ago
-														</div>
-													  </div>
-													  <div class="feed-activity clearfix">
-														<div>
-															<i class="pull-left roundicon fa fa-picture-o btn btn-danger"></i>
-															<a class="user" href="#"> Jack Doe </a>
-															uploaded a new photo.
-															<br>
-															<a href="#">Take a look</a>
-															
-														</div>
-														<div class="time">
-															<i class="fa fa-clock-o"></i>
-															5 hours ago
-														</div>
-													  </div>
-													  <div class="feed-activity clearfix">
-														<div>
-															<i class="pull-left roundicon fa fa-edit btn btn-pink"></i>
-															<a class="user" href="#"> Jess Doe </a>
-															edited their skills.
-															<br>
-															<a href="#">Endorse them</a>
-															
-														</div>
-														<div class="time">
-															<i class="fa fa-clock-o"></i>
-															5 hours ago
-														</div>
-													  </div>
-													  <div class="feed-activity clearfix">
-														<div>
-															<i class="pull-left roundicon fa fa-bitcoin btn btn-yellow"></i>
-															<a class="user" href="#"> Divine Doe </a>
-															made a bitcoin payment.
-															<br>
-															<a href="#">Check your financials</a>
-															
-														</div>
-														<div class="time">
-															<i class="fa fa-clock-o"></i>
-															6 hours ago
-														</div>
-													  </div>
-													  <div class="feed-activity clearfix">
-														<div>
-															<i class="pull-left roundicon fa fa-dropbox btn btn-primary"></i>
-															<a class="user" href="#"> Lisbon Doe </a>
-															saved a new document to Dropbox.
-															<br>
-															<a href="#">Download</a>
-															
-														</div>
-														<div class="time">
-															<i class="fa fa-clock-o"></i>
-															1 day ago
-														</div>
-													  </div>
-													  <div class="feed-activity clearfix">
-														<div>
-															<i class="pull-left roundicon fa fa-pinterest btn btn-inverse"></i>
-															<a class="user" href="#"> Bob Doe </a>
-															pinned a new photo to Pinterest.
-															<br>
-															<a href="#">Take a look</a>
-															
-														</div>
-														<div class="time">
-															<i class="fa fa-clock-o"></i>
-															2 days ago
-														</div>
-													  </div>
-												  </div>
-											   </div>
-											</div>
-										 </div>
-									</div>
-									</div>
-									</div>
-								</div>
-								<!-- /ROW 2 -->
+								
 							</div>
 							<!-- /PROFILE DETAILS -->
 						  </div>
