@@ -168,13 +168,6 @@ class PosicionesTableSeeder extends DatabaseSeeder{
             'updated_at' => $date->format('Y-m-d h:m:s')              
         );
 
-        $posiciones[] = array(
-            'nombre' => 'Puntero',
-            'abreviacion' => 'PP',
-            'created_at' => $date->format('Y-m-d h:m:s'),
-            'updated_at' => $date->format('Y-m-d h:m:s')              
-        );
-
         DB::table('posiciones')->insert($posiciones);
 	}
 
