@@ -31,25 +31,27 @@
 {{ HTML::script('assets/js/jQuery-slimScroll-1.3.0/slimScrollHorizontal.min.js') }}
 <!-- COOKIE -->
 {{ HTML::script('assets/js/jQuery-Cookie/jquery.cookie.min.js') }}
-<!-- CUSTOM SCRIPT -->
-{{ HTML::script('assets/js/script.js') }}
-{{ HTML::script('assets/js/custom.js') }}
-
 <!-- Datatable -->
 {{ HTML::script('assets/js/dataTables/jquery.dataTables.js'); }}
 {{ HTML::script('assets/js/dataTables/dataTables.bootstrap.js'); }}
-
 <!-- Chosen -->
 {{ HTML::script('assets/js/chosen/chosen.jquery.js')}}
-
 <!-- Date picker -->
 {{ HTML::script('assets/js/datapicker/bootstrap-datepicker.js'); }}
-
+<!-- EASY PIE CHART -->
+{{ HTML::script('assets/js/jquery-easing/jquery.easing.min.js') }}
+{{ HTML::script('assets/js/easypiechart/jquery.easypiechart.min.js') }}
+<!-- SPARKLINES -->
+{{ HTML::script('assets/js/sparklines/jquery.sparkline.min.js') }}
 <!-- Jquery Form -->
 {{ HTML::script('assets/js/jQueryForm/jquery.form.min.js'); }}
 
 <!-- Mustache -->
 {{ HTML::script('assets/js/mustache.min.js'); }}
+<!-- CUSTOM SCRIPT -->
+{{ HTML::script('assets/js/script.js') }}
+{{ HTML::script('assets/js/custom.js') }}
+
 
 <script>
 	jQuery(document).ready(function() {		

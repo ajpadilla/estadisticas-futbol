@@ -5,6 +5,7 @@ use soccer\Forms\RegistrarJugadorForm;
 use soccer\Forms\EditarJugadorForm;
 use Laracasts\Validation\FormValidationException;
 
+
 class JugadorController extends \BaseController {
 
 	protected $jugadorRepository;

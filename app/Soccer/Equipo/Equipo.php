@@ -1,4 +1,4 @@
-<?php namespace soccer\Jugador;
+<?php namespace soccer\Equipo;
 
 use Eloquent;
 use Codesleeve\Stapler\ORM\StaplerableInterface;
@@ -7,12 +7,10 @@ use Carbon\Carbon;
 /**
 * 
 */
-class Jugador extends Eloquent implements StaplerableInterface{
+class Equipo extends Eloquent implements StaplerableInterface{
 	use EloquentTrait;
 
-	protected $table = 'jugadores';
-
-	protected $fillable = ['nombre', 'fecha_nacimiento','foto','altura', 'abreviacion','posicion_id','pais_id'];
+	//protected $fillable = ['nombre', 'fecha_nacimiento','foto','altura', 'abreviacion','posicion_id','pais_id'];
 
 	 public function __construct(array $attributes = array()) {
         $this->hasAttachedFile('foto', [
@@ -25,27 +23,45 @@ class Jugador extends Eloquent implements StaplerableInterface{
         parent::__construct($attributes);
     }
 
+    /*
+	********************* Relations ***********************
+    */
+
 	public function pais()
 	{
 		return $this->belongsTo('soccer\Pais\Pais');
 	}
 
-	public function posicion()
+	public function jugadores()
 	{
-		return $this->belongsTo('soccer\Posicion\Posicion');
-	}
-
-	public function equipos()
-	{
-		return $this->belongsToMany('soccer\Equipo\Equipo', 'equipo_jugador')
+		return $this->belongsToMany('soccer\Jugador\Jugador', 'equipo_jugador')
 					->withPivot('numero', 'fecha_inicio', 'fecha_fin')
 					->withTimestamps();
 	}
 
+	/*
+	***************** CUSTOM SETTINGS FOR ATTRIBUTES *************************
+	*/
+
 	public function getAgeAttribute()
 	{
 		//return Carbon::createFromFormat('Y-m-d H:i:s', $date)->format('d-m-Y');
-		$fecha = explode("-", $this->fecha_nacimiento);
+		$fecha = explode("-", $this->fecha_fundacion);
 		return Carbon::createFromDate($fecha[0], $fecha[1], $fecha[2])->age;
+	}
+
+	public function getNombreAttribute($value)
+	{
+		return ucfirst(strtolower($value));
+	}
+
+	public function getApodoAttribute($value)
+	{
+		return ucfirst(strtolower($value));
+	}
+
+	public function getTipoAttribute($value)
+	{
+		return ucfirst(strtolower($value));
 	}
 }

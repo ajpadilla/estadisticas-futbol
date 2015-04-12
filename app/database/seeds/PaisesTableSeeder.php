@@ -15,15 +15,22 @@ class PaisesTableSeeder extends DatabaseSeeder{
 		$date = new DateTime;
 
         $paises[] = array(
-            'nombre' => 'Venezuela',
-            'bandera' => 'VEN',
+            'nombre' => 'Mexico',
+            'bandera' => null,
             'created_at' => $date->format('Y-m-d h:m:s'),
             'updated_at' => $date->format('Y-m-d h:m:s')            
         );  
 
         $paises[] = array(
-            'nombre' => 'Estados Unidos',
-            'bandera' => 'USA',
+            'nombre' => 'Brasil',
+            'bandera' => null,
+            'created_at' => $date->format('Y-m-d h:m:s'),
+            'updated_at' => $date->format('Y-m-d h:m:s')              
+        );
+
+        $paises[] = array(
+            'nombre' => 'Argentina',
+            'bandera' => null,
             'created_at' => $date->format('Y-m-d h:m:s'),
             'updated_at' => $date->format('Y-m-d h:m:s')              
         );

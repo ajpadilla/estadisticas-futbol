@@ -3135,7 +3135,6 @@ var App = function () {
 		
             if (App.isPage("index")) {
 				handleDateTimePickers(); //Function to display Date Timepicker
-				handleSparkline();		//Function to display Sparkline charts
 				handleDashFlotCharts(); //Function to display flot charts in dashboard
 				handleChat('chat-window'); //Function to handle chat
 				handleCalendar();	//Function to display calendar
@@ -3158,6 +3157,8 @@ var App = function () {
 			handleGoToTop(); 	//Funtion to handle goto top buttons
 			handleNavbarFixedTop();		//Function to check & handle if navbar is fixed top
 			handleThemeSkins();		//Function to handle theme skins
+            handleSparkline();      //Function to display Sparkline charts
+            handleProfileSkillPie();
         },
 
         //Set page

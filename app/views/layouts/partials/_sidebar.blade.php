@@ -25,6 +25,16 @@
 					<li><a id="new-player" class="" href="#new-player-form"><span class="sub-menu-text">Crear</span></a></li>
 				</ul>
 			</li>
+			<li class="has-sub">
+				<a href="javascript:;" class="">
+					<i class="fa fa-bookmark-o fa-fw"></i> <span class="menu-text">Equipos</span>
+					<span class="arrow"></span>
+				</a>
+				<ul class="sub">
+					<li><a class="" href="{{ URL::route('equipos.index') }}"><span class="sub-menu-text">Lista</span></a></li>
+					<li><a id="new-team" class="" href="#new-team-form"><span class="sub-menu-text">Crear</span></a></li>
+				</ul>
+			</li>			
 		</ul>
 		<!-- /SIDEBAR MENU -->
 		<a id="lista-paises" href="{{ URL::route('paises.lista') }}"></a>

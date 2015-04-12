@@ -35,6 +35,22 @@ Route::get('datos-jugador',  ['as' => 'jugadores.data','uses' => 'JugadorControl
 
 Route::get('api/jugadores', array('as'=>'api.jugadores', 'uses'=>'JugadorController@listadoJugadores'));
 
+/*
+********************************* RUTAS PARA EQUIPOS ********************************
+*/
+
+Route::get('equipos', ['as' => 'equipos.index', 'uses' => 'EquipoController@index']);
+Route::get('equipos/nuevo', ['as' => 'equipos.create', 'uses' => 'EquipoController@create'] );
+Route::post('equipos/guardar', ['as' => 'equipos.store', 'uses' => 'EquipoController@store' ] );
+Route::get('equipos/ver/{id}', ['as' => 'equipos.show', 'uses' => 'EquipoController@show' ] );
+Route::get('equipos/editar/{id}',  ['as' => 'equipos.edit','uses' => 'EquipoController@edit' ] );
+Route::post('equipos/actualizar',  ['as' => 'equipos.update','uses' => 'EquipoController@update' ] );
+Route::get('equipos/eliminar/{id}',  ['as' => 'equipos.delete','uses' => 'EquipoController@destroy' ] );
+
+Route::get('equipos/api-ver/{id}',  ['as' => 'equipos.api.show','uses' => 'EquipoController@showApi' ] );
+Route::get('equipos/api-lista', array('as'=>'equipos.api.lista', 'uses'=>'EquipoController@listaApi'));
+
+
 /*Rutas para paises*/
 Route::get('lista-paises',  ['as' => 'paises.lista','uses' => 'PaisController@getAllValue' ] );
 
