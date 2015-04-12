@@ -18,7 +18,7 @@ class JugadoresTableSeeder extends DatabaseSeeder{
 		$faker = $this->getFaker();
 
 
-       /* $jugador = Jugador::create([
+        $jugador = Jugador::create([
             'nombre' => 'Sergio Romero',
             'fecha_nacimiento' => $faker->date($format = 'Y-m-d', $max = 'now'),
             'foto' => null,
@@ -27,280 +27,117 @@ class JugadoresTableSeeder extends DatabaseSeeder{
             'posicion_id' => 1,
             'pais_id' => 3   
         ]);
-
-        //$jugador->foto = 'http://lorempixel.com/640/480/';
-
-        $jugador->foto = public_path() + '\system\soccer\Jugador\Jugador\fotos\000\000\001\thumb\102px-Sergio_Romero_2011.jpg';
+        $jugador->foto = 'public/system/soccer/Jugador/Jugador/fotos/000/000/001/original/102px-Sergio_Romero_2011.jpg';
+        $jugador->save();
 
 
-        $jugador->save();*/
-
-        /*$posiciones = Posicion::all()->toArray();
-
-        $paises = Pais::all()->toArray();
-
-        for ($i=0; $i < 100; $i++) { 
-            $posicion = $faker->randomElement($posiciones);
-            $pais = $faker->randomElement($paises);
-
-            Jugador::create([
-                'nombre' => $faker->name,
-                'fecha_nacimiento' => $faker->date($format = 'Y-m-d', $max = 'now'),
-                'foto' => null,
-                'altura' => $faker->randomFloat(2, 6, 100),
-                'abreviacion' => $faker->word, 
-                'posicion_id' => $posicion['id'],
-                'pais_id' => $pais['id']
-            ]);
-        }*/
-
-        $date = new DateTime;
-
-        //Porteros
-        $jugadores[] = array(
-            'nombre' => 'Sergio Romero',
-            'fecha_nacimiento' => $faker->date($format = 'Y-m-d', $max = 'now'),
-            'foto' => null,
-            'altura' => $faker->randomFloat(2, 6, 100),
-            'abreviacion' => $faker->word, 
-            'posicion_id' => 1,
-            'pais_id' => 3         
-        );
-
-        $jugadores[] = array(
+        $jugador = Jugador::create([
             'nombre' => 'Gerónimo Rulli',
             'fecha_nacimiento' => $faker->date($format = 'Y-m-d', $max = 'now'),
             'foto' => null,
             'altura' => $faker->randomFloat(2, 6, 100),
             'abreviacion' => $faker->word, 
             'posicion_id' => 1,
-            'pais_id' => 3         
-        );
+            'pais_id' => 3      
+        ]);
+        $jugador->foto = 'public/system/soccer/Jugador/Jugador/fotos/000/000/002/original/Krasnodar-Real_Sosiedad_(17).jpg';
+        $jugador->save();
 
-        $jugadores[] = array(
+        $jugador = Jugador::create([
             'nombre' => 'Nahuel Guzmán',
             'fecha_nacimiento' => $faker->date($format = 'Y-m-d', $max = 'now'),
             'foto' => null,
             'altura' => $faker->randomFloat(2, 6, 100),
             'abreviacion' => $faker->word, 
             'posicion_id' => 1,
-            'pais_id' => 3         
-        );
+            'pais_id' => 3    
+        ]);
+        $jugador->foto = 'public/system/soccer/Jugador/Jugador/fotos/000/000/003/original/Nahuel_Guzman.jpg';
+        $jugador->save();
 
-        // Defensas
-        $jugadores[] = array(
+        $jugador = Jugador::create([
             'nombre' => 'Ezequiel Garay',
             'fecha_nacimiento' => $faker->date($format = 'Y-m-d', $max = 'now'),
             'foto' => null,
             'altura' => $faker->randomFloat(2, 6, 100),
             'abreviacion' => $faker->word, 
             'posicion_id' => 2,
-            'pais_id' => 3         
-        );
+            'pais_id' => 3   
+        ]);
+        $jugador->foto = 'public/system/soccer/Jugador/Jugador/fotos/000/000/004/original/Ezequiel_Garay_Benfica.jpg';
+        $jugador->save();
 
-        $jugadores[] = array(
+        $jugador = Jugador::create([
             'nombre' => 'Nicolás Otamendi',
             'fecha_nacimiento' => $faker->date($format = 'Y-m-d', $max = 'now'),
             'foto' => null,
             'altura' => $faker->randomFloat(2, 6, 100),
             'abreviacion' => $faker->word, 
             'posicion_id' => 2,
-            'pais_id' => 3         
-        );
+            'pais_id' => 3       
+        ]);
+        $jugador->foto = 'public/system/soccer/Jugador/Jugador/fotos/000/000/005/original/Nicolas_Otamendi_6315.jpg';
+        $jugador->save();
 
-        $jugadores[] = array(
+        $jugador = Jugador::create([
             'nombre' => 'Pablo Zabaleta',
             'fecha_nacimiento' => $faker->date($format = 'Y-m-d', $max = 'now'),
             'foto' => null,
             'altura' => $faker->randomFloat(2, 6, 100),
             'abreviacion' => $faker->word, 
             'posicion_id' => 2,
-            'pais_id' => 3         
-        );
+            'pais_id' => 3     
+        ]);
+        $jugador->foto = 'public/system/soccer/Jugador/Jugador/fotos/000/000/006/original/Zabaleta_Capitan.PNG';
+        $jugador->save();
 
-        $jugadores[] = array(
+        $jugador = Jugador::create([
             'nombre' => 'Lucas Orbán',
             'fecha_nacimiento' => $faker->date($format = 'Y-m-d', $max = 'now'),
             'foto' => null,
             'altura' => $faker->randomFloat(2, 6, 100),
             'abreviacion' => $faker->word, 
             'posicion_id' => 2,
-            'pais_id' => 3         
-        );
+            'pais_id' => 3    
+        ]);
+        $jugador->foto = 'public/system/soccer/Jugador/Jugador/fotos/000/000/007/original/Lucas_Orban.jpg';
+        $jugador->save();
 
-        $jugadores[] = array(
+        $jugador = Jugador::create([
             'nombre' => 'Marcos Rojo',
             'fecha_nacimiento' => $faker->date($format = 'Y-m-d', $max = 'now'),
             'foto' => null,
             'altura' => $faker->randomFloat(2, 6, 100),
             'abreviacion' => $faker->word, 
             'posicion_id' => 2,
-            'pais_id' => 3         
-        );
+            'pais_id' => 3   
+        ]);
+        $jugador->foto = 'public/system/soccer/Jugador/Jugador/fotos/000/000/008/original/Marcos_Rojo.jpg';
+        $jugador->save();
 
-        $jugadores[] = array(
+        $jugador = Jugador::create([
             'nombre' => 'Mateo Musacchio',
             'fecha_nacimiento' => $faker->date($format = 'Y-m-d', $max = 'now'),
             'foto' => null,
             'altura' => $faker->randomFloat(2, 6, 100),
             'abreviacion' => $faker->word, 
             'posicion_id' => 2,
-            'pais_id' => 3         
-        );
+            'pais_id' => 3  
+        ]);
+        $jugador->foto = 'public/system/soccer/Jugador/Jugador/fotos/000/000/009/original/Musacchio.jpg';
+        $jugador->save();
 
-        $jugadores[] = array(
+        $jugador = Jugador::create([
             'nombre' => 'Ramiro Funes Mori',
             'fecha_nacimiento' => $faker->date($format = 'Y-m-d', $max = 'now'),
             'foto' => null,
             'altura' => $faker->randomFloat(2, 6, 100),
             'abreviacion' => $faker->word, 
             'posicion_id' => 2,
-            'pais_id' => 3         
-        );
-
-        // Defensas
-        $jugadores[] = array(
-            'nombre' => 'Federico Mancuello',
-            'fecha_nacimiento' => $faker->date($format = 'Y-m-d', $max = 'now'),
-            'foto' => null,
-            'altura' => $faker->randomFloat(2, 6, 100),
-            'abreviacion' => $faker->word, 
-            'posicion_id' => 8,
-            'pais_id' => 3         
-        );
-
-         $jugadores[] = array(
-            'nombre' => 'Lucas Biglia',
-            'fecha_nacimiento' => $faker->date($format = 'Y-m-d', $max = 'now'),
-            'foto' => null,
-            'altura' => $faker->randomFloat(2, 6, 100),
-            'abreviacion' => $faker->word, 
-            'posicion_id' => 8,
-            'pais_id' => 3         
-        );
-
-        $jugadores[] = array(
-            'nombre' => 'Ángel Di María',
-            'fecha_nacimiento' => $faker->date($format = 'Y-m-d', $max = 'now'),
-            'foto' => null,
-            'altura' => $faker->randomFloat(2, 6, 100),
-            'abreviacion' => $faker->word, 
-            'posicion_id' => 8,
-            'pais_id' => 3         
-        );
-
-        $jugadores[] = array(
-            'nombre' => 'Javier Mascherano',
-            'fecha_nacimiento' => $faker->date($format = 'Y-m-d', $max = 'now'),
-            'foto' => null,
-            'altura' => $faker->randomFloat(2, 6, 100),
-            'abreviacion' => $faker->word, 
-            'posicion_id' => 8,
-            'pais_id' => 3         
-        );
-
-         $jugadores[] = array(
-            'nombre' => 'Javier Pastore',
-            'fecha_nacimiento' => $faker->date($format = 'Y-m-d', $max = 'now'),
-            'foto' => null,
-            'altura' => $faker->randomFloat(2, 6, 100),
-            'abreviacion' => $faker->word, 
-            'posicion_id' => 8,
-            'pais_id' => 3         
-        );
-
-        $jugadores[] = array(
-            'nombre' => 'Éver Banega',
-            'fecha_nacimiento' => $faker->date($format = 'Y-m-d', $max = 'now'),
-            'foto' => null,
-            'altura' => $faker->randomFloat(2, 6, 100),
-            'abreviacion' => $faker->word, 
-            'posicion_id' => 8,
-            'pais_id' => 3         
-        );
-
-        $jugadores[] = array(
-            'nombre' => 'Maximiliano Rodríguez',
-            'fecha_nacimiento' => $faker->date($format = 'Y-m-d', $max = 'now'),
-            'foto' => null,
-            'altura' => $faker->randomFloat(2, 6, 100),
-            'abreviacion' => $faker->word, 
-            'posicion_id' => 8,
-            'pais_id' => 3         
-        );
-
-        $jugadores[] = array(
-            'nombre' => 'Maximiliano Rodríguez',
-            'fecha_nacimiento' => $faker->date($format = 'Y-m-d', $max = 'now'),
-            'foto' => null,
-            'altura' => $faker->randomFloat(2, 6, 100),
-            'abreviacion' => $faker->word, 
-            'posicion_id' => 8,
-            'pais_id' => 3         
-        );
-
-        $jugadores[] = array(
-            'nombre' => 'Roberto Pereyra',
-            'fecha_nacimiento' => $faker->date($format = 'Y-m-d', $max = 'now'),
-            'foto' => null,
-            'altura' => $faker->randomFloat(2, 6, 100),
-            'abreviacion' => $faker->word, 
-            'posicion_id' => 8,
-            'pais_id' => 3         
-        );
-
-        //Delantero
-        $jugadores[] = array(
-            'nombre' => 'Gonzalo Higuaín',
-            'fecha_nacimiento' => $faker->date($format = 'Y-m-d', $max = 'now'),
-            'foto' => null,
-            'altura' => $faker->randomFloat(2, 6, 100),
-            'abreviacion' => $faker->word, 
-            'posicion_id' => 25,
-            'pais_id' => 3         
-        );
-
-        $jugadores[] = array(
-            'nombre' => 'Lionel Messi',
-            'fecha_nacimiento' => $faker->date($format = 'Y-m-d', $max = 'now'),
-            'foto' => null,
-            'altura' => $faker->randomFloat(2, 6, 100),
-            'abreviacion' => $faker->word, 
-            'posicion_id' => 25,
-            'pais_id' => 3         
-        );
-
-        $jugadores[] = array(
-            'nombre' => 'Sergio Agüero',
-            'fecha_nacimiento' => $faker->date($format = 'Y-m-d', $max = 'now'),
-            'foto' => null,
-            'altura' => $faker->randomFloat(2, 6, 100),
-            'abreviacion' => $faker->word, 
-            'posicion_id' => 25,
-            'pais_id' => 3         
-        );
-
-        $jugadores[] = array(
-            'nombre' => 'Ezequiel Lavezzi',
-            'fecha_nacimiento' => $faker->date($format = 'Y-m-d', $max = 'now'),
-            'foto' => null,
-            'altura' => $faker->randomFloat(2, 6, 100),
-            'abreviacion' => $faker->word, 
-            'posicion_id' => 25,
-            'pais_id' => 3         
-        );
-
-         $jugadores[] = array(
-            'nombre' => 'Carlos Tevez',
-            'fecha_nacimiento' => $faker->date($format = 'Y-m-d', $max = 'now'),
-            'foto' => null,
-            'altura' => $faker->randomFloat(2, 6, 100),
-            'abreviacion' => $faker->word, 
-            'posicion_id' => 25,
-            'pais_id' => 3         
-        );
-
-        DB::table('jugadores')->insert($jugadores);
+            'pais_id' => 3   
+        ]);
+        $jugador->foto = 'public/system/soccer/Jugador/Jugador/fotos/000/000/010/original/Ramiro.jpg';
+        $jugador->save();
 	}
 
 }
