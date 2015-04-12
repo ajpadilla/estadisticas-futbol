@@ -8,7 +8,7 @@ class RegistrarJugadorForm extends FormValidator{
           'fecha_nacimiento' => 'required|date_format:d-m-Y', 
           'altura' => 'required|numeric',
           'abreviacion' => 'required|max:20',
-          'posicion_id' => 'required|integer',
-          'pais_id' => 'required|integer'
+          'posicion_id' => 'required|exists:posiciones,id',
+          'pais_id' => 'required|exists:paises,id'
      ];
 }

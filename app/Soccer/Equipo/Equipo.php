@@ -34,15 +34,34 @@ class Equipo extends Eloquent implements StaplerableInterface{
 
 	public function jugadores()
 	{
-		return $this->belongsToMany('soccer\Jugador\Jugador', 'equipo_jugador', 'equipo_id', 'jugador_id')
+		return $this->belongsToMany('soccer\Jugador\Jugador', 'equipo_jugador')
 					->withPivot('numero', 'fecha_inicio', 'fecha_fin')
 					->withTimestamps();
 	}
+
+	/*
+	***************** CUSTOM SETTINGS FOR ATTRIBUTES *************************
+	*/
 
 	public function getAgeAttribute()
 	{
 		//return Carbon::createFromFormat('Y-m-d H:i:s', $date)->format('d-m-Y');
 		$fecha = explode("-", $this->fecha_fundacion);
 		return Carbon::createFromDate($fecha[0], $fecha[1], $fecha[2])->age;
+	}
+
+	public function getNombreAttribute($value)
+	{
+		return ucfirst(strtolower($value));
+	}
+
+	public function getApodoAttribute($value)
+	{
+		return ucfirst(strtolower($value));
+	}
+
+	public function getTipoAttribute($value)
+	{
+		return ucfirst(strtolower($value));
 	}
 }

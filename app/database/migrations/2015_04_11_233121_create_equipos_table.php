@@ -20,8 +20,10 @@ class CreateEquiposTable extends Migration {
 			$table->string('bandera', 128)->nullable();
 			$table->enum('tipo', array('club', 'selección'));
 			$table->date('fecha_fundacion');
-			$table->string('apodo', 128)->nullable();
+			$table->string('apodo', 128)->nullable();			
 			$table->text('ubicacion')->nullable();
+			$table->text('historia')->nullable();
+			$table->string('info_url', 128)->nullable();
 			$table->integer('pais_id')->unsigned();
 			$table->timestamps();
 			$table->foreign('pais_id')->references('id')->on('paises')->onDelete('cascade');
