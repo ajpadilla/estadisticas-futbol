@@ -15,7 +15,7 @@ class CreateTablePaises extends Migration {
 		Schema::create('paises', function($table){
 			$table->increments('id');
 			$table->string('nombre', 128);
-			$table->string('bandera', 128);
+			$table->string('bandera', 128)->nullable();
 			$table->timestamps();
 		});
 	}

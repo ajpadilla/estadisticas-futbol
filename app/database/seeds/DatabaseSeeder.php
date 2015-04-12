@@ -28,7 +28,8 @@ class DatabaseSeeder extends Seeder {
 		$this->call('PosicionesTableSeeder');
 		$this->call('PaisesTableSeeder');
 		$this->call('JugadoresTableSeeder');
-		// $this->call('UserTableSeeder');
+		$this->call('EquiposTableSeeder');
+		//$this->call('UserTableSeeder');
 	}
 
 }
