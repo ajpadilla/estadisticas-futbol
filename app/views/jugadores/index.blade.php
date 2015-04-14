@@ -29,29 +29,9 @@
 			</div>-->
 		</div>
 		<div class="box-body">
-			<?php
-			$columns = [
-				'País',
-				'Posición',
-				'Nombre',
-				'Edad',
-				'Acciones'
-			];
-			$table = Datatable::table()
-			->addColumn($columns)
-			->setUrl(route('api.jugadores'))
-			->noScript();
-			?>
 			<div class="row"><br/></div>
-			{{ $table->render() }}
+			@include('jugadores.partials._jugadores-table')
 		</div>
 	</div>
-	@include('jugadores.new')
-	@include('jugadores.view')
-	@include('jugadores.partials._form_view-template')
 </div>
-@stop
-
-@section('scripts')
-	{{ $table->script() }}
 @stop

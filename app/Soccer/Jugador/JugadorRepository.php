@@ -3,6 +3,7 @@
 use soccer\Jugador\Jugador;
 use soccer\Base\BaseRepository;
 use Carbon\Carbon;
+use Datatable;
 /**
 * 
 */
@@ -38,5 +39,20 @@ class JugadorRepository extends BaseRepository
 	public function getById($jugadorId)
 	{
 		return Jugador::findOrFail($jugadorId);
+	}
+
+	public function getTable()
+	{
+		$columns = [
+			'País',
+			'Posición',
+			'Nombre',
+			'Edad',
+			'Acciones'
+		];
+		return Datatable::table()
+		->addColumn($columns)
+		->setUrl(route('api.jugadores'))
+		->noScript();	
 	}
 }

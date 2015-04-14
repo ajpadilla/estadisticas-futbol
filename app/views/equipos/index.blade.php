@@ -12,7 +12,7 @@
 <div class="col-md-12">
 	<div class="box border green">
 		<div class="box-title">
-			<h4><i class="fa fa-table"></i>Listado De Equipos</h4>
+			<h4><i class="fa fa-table"></i>Lista de Equipos</h4>
 			<!--<div class="tools hidden-xs">
 				<a href="#box-config" data-toggle="modal" class="config">
 					<i class="fa fa-cog"></i>

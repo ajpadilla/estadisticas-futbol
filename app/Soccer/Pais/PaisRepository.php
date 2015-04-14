@@ -10,6 +10,11 @@ class PaisRepository extends BaseRepository
 	public function getAll()
 	{
 		return Pais::all();
+	}
+
+	public function getAllForSelect()
+	{
+		return $this->getAll()->lists('nombre', 'id');
 	}	
 
 	public function listAll()

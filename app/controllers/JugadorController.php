@@ -28,7 +28,8 @@ class JugadorController extends \BaseController {
 	 */
 	public function index()
 	{
-		return View::make('jugadores.index');
+		$jugadoresTable = $this->jugadorRepository->getTable();
+		return View::make('jugadores.index', compact('jugadoresTable'));
 	}
 
 
@@ -160,7 +161,7 @@ class JugadorController extends \BaseController {
 
 		$collection->addColumn('Edad', function($model)
 		{
-			 return $model->getAge();
+			 return $model->age;
 		});
 
 		$collection->addColumn('Acciones', function($model)

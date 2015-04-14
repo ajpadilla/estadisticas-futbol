@@ -3,6 +3,7 @@
 use soccer\Equipo\Equipo;
 use soccer\Base\BaseRepository;
 use Carbon\Carbon;
+use Datatable;
 /**
 * 
 */
@@ -38,5 +39,23 @@ class EquipoRepository extends BaseRepository
 	public function get($id)
 	{
 		return Equipo::findOrFail($id);
+	}
+
+	public function getTable()
+	{
+		$columns = [
+			'País',
+			'Nombre',
+			'Tipo',
+			'Fecha Fundación',
+			'Apodo',
+			'Acciones'
+		];
+
+		return Datatable::table()
+		->addColumn($columns)
+		->setUrl(route('equipos.api.lista'))
+		->noScript();
+
 	}
 }

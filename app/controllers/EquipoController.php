@@ -1,6 +1,8 @@
 <?php
 
 use soccer\Equipo\EquipoRepository;
+use soccer\Pais\PaisRepository;
+use soccer\Jugador\JugadorRepository;
 use soccer\Forms\EquipoForm;
 use Laracasts\Validation\FormValidationException;
 //use Datatable;
@@ -8,10 +10,17 @@ use Laracasts\Validation\FormValidationException;
 class EquipoController extends \BaseController {
 
 	protected $equipoRepository;
+	protected $paisRepository;
+	protected $jugadorRepository;
 	protected $equipoForm;
 
-	public function __construct(EquipoRepository $equipoRepository, EquipoForm $equipoForm){
+	public function __construct(EquipoRepository $equipoRepository, 
+								PaisRepository $paisRepository, 
+								JugadorRepository $jugadorRepository, 
+								EquipoForm $equipoForm){
 		$this->equipoRepository = $equipoRepository;
+		$this->paisRepository = $paisRepository;
+		$this->jugadorRepository = $jugadorRepository;
 		$this->equipoForm = $equipoForm;
 	}	
 
@@ -22,21 +31,7 @@ class EquipoController extends \BaseController {
 	 */
 	public function index()
 	{
-
-		$columns = [
-			'País',
-			'Nombre',
-			'Tipo',
-			'Fecha Fundación',
-			'Apodo',
-			'Acciones'
-		];
-
-		$table = Datatable::table()
-		->addColumn($columns)
-		->setUrl(route('equipos.api.lista'))
-		->noScript();
-
+		$table = $this->equipoRepository->getTable();
 		return View::make('equipos.index', compact('table'));
 	}	
 
@@ -84,8 +79,10 @@ class EquipoController extends \BaseController {
 	 */
 	public function show($id)
 	{	
+		$paises = $this->paisRepository->getAllForSelect();
 		$equipo = $this->equipoRepository->get($id);
-		return View::make('equipos.show', compact('equipo'));
+		$jugadoresTable = $this->jugadorRepository->getTable();
+		return View::make('equipos.show', compact('equipo', 'paises', 'jugadoresTable'));
 	}
 
 
