@@ -6,5 +6,5 @@
 */
 abstract class BaseRepository 
 {
-	
+	protected $columns;	
 }

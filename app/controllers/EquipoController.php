@@ -30,8 +30,8 @@ class EquipoController extends \BaseController {
 	 * @return Response
 	 */
 	public function index()
-	{
-		$table = $this->equipoRepository->getTable();
+	{		
+		$table = $this->equipoRepository->getAllTable();
 		return View::make('equipos.index', compact('table'));
 	}	
 
@@ -81,7 +81,7 @@ class EquipoController extends \BaseController {
 	{	
 		$paises = $this->paisRepository->getAllForSelect();
 		$equipo = $this->equipoRepository->get($id);
-		$jugadoresTable = $this->jugadorRepository->getTable();
+		$jugadoresTable = $this->equipoRepository->getJugadoresTable($id);
 		return View::make('equipos.show', compact('equipo', 'paises', 'jugadoresTable'));
 	}
 
@@ -126,47 +126,14 @@ class EquipoController extends \BaseController {
 	*/
 	public function listaApi()
 	{
-		$collection = Datatable::collection($this->equipoRepository->getAll())
-			->searchColumns('País', 'Nombre', 'Tipo', 'Fecha Fundación', 'Apodo')
-			->orderColumns('País', 'Nombre', 'Tipo', 'Fecha Fundación', 'Apodo');
+		$collection = $this->equipoRepository->getAll();
+		return $this->equipoRepository->getTableCollection($collection);
+	}
 
-		$collection->addColumn('País', function($model)
-		{
-			 return $model->pais->nombre;
-		});
-
-		$collection->addColumn('Nombre', function($model)
-		{
-			 return $model->nombre;
-		});
-
-		$collection->addColumn('Tipo', function($model)
-		{
-			 return $model->tipo;
-		});
-
-		$collection->addColumn('Fecha Fundación', function($model)
-		{
-			 return $model->fecha_fundacion;
-		});
-
-		$collection->addColumn('Apodo', function($model)
-		{
-			 return $model->apodo;
-		});
-
-		$collection->addColumn('Acciones', function($model)
-		{
-			$links = "<a class='ver-jugador' href='" . route('equipos.show', $model->id) . "'>Ver</a>
-					<br />";
-			$links .= "<a  class='editar-jugador' href='#new-player-form' id='editar_".$model->id."'>Editar</a>
-					<br />
-					<a class='eliminar-jugador' href='#' id='eliminar_".$model->id."'>Eliminar</a>";
-
-			return $links;
-		});
-	
-		return $collection->make();	
+	public function jugadoresApi($id)
+	{
+		$collection = $this->equipoRepository->getJugadores($id);
+		return $this->jugadorRepository->getTableCollection($collection);	
 	}
 
 }

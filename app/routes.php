@@ -33,7 +33,7 @@ Route::post('modificar-jugador',  ['as' => 'jugadores.update','uses' => 'Jugador
 Route::get('datos-jugador',  ['as' => 'jugadores.data','uses' => 'JugadorController@getData' ] );
 
 
-Route::get('api/jugadores', array('as'=>'api.jugadores', 'uses'=>'JugadorController@listadoJugadores'));
+Route::get('jugadores/api-lista', array('as'=>'jugadores.api.lista', 'uses'=>'JugadorController@listadoJugadores'));
 
 /*
 ********************************* RUTAS PARA EQUIPOS ********************************
@@ -49,6 +49,7 @@ Route::get('equipos/eliminar/{id}',  ['as' => 'equipos.delete','uses' => 'Equipo
 
 Route::get('equipos/api-ver/{id}',  ['as' => 'equipos.api.show','uses' => 'EquipoController@showApi' ] );
 Route::get('equipos/api-lista', array('as'=>'equipos.api.lista', 'uses'=>'EquipoController@listaApi'));
+Route::get('equipos/api-jugadores/{id}', array('as'=>'equipos.api.jugadores', 'uses'=>'EquipoController@jugadoresApi'));
 
 
 /*Rutas para paises*/

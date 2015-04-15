@@ -28,7 +28,7 @@ class JugadorController extends \BaseController {
 	 */
 	public function index()
 	{
-		$jugadoresTable = $this->jugadorRepository->getTable();
+		$jugadoresTable = $this->jugadorRepository->getAllTable();
 		return View::make('jugadores.index', compact('jugadoresTable'));
 	}
 
@@ -140,43 +140,8 @@ class JugadorController extends \BaseController {
 
 	public function listadoJugadores()
 	{
-		$collection = Datatable::collection($this->jugadorRepository->getAll())
-			->searchColumns('nombre')
-			->orderColumns('nombre');
-
-		$collection->addColumn('País', function($model)
-		{
-			 return $model->pais->nombre;
-		});
-
-		$collection->addColumn('Posición', function($model)
-		{
-			 return $model->posicion->abreviacion;
-		});
-
-		$collection->addColumn('Nombre', function($model)
-		{
-			 return $model->nombre;
-		});
-
-		$collection->addColumn('Edad', function($model)
-		{
-			 return $model->age;
-		});
-
-		$collection->addColumn('Acciones', function($model)
-		{
-			$links = "<a class='ver-jugador' href='#' id='ver_".$model->id."'>Ver</a>
-					<br />";
-			$links .= "<a  class='editar-jugador' href='#new-player-form' id='editar_".$model->id."'>Editar</a>
-					<br />
-					<a class='eliminar-jugador' href='#' id='eliminar_".$model->id."'>Eliminar</a>";
-
-			return $links;
-		});
-	
-		return $collection->make();
-	
+		$collection = $this->jugadorRepository->getAll();
+		return $this->jugadorRepository->getTableCollection($collection);
 	}
 
 	public function getData()
