@@ -9,6 +9,8 @@ class Pais extends Eloquent{
 
 	protected $table = 'paises';
 
+	protected $fillable = ['nombre', 'bandera']
+
 	public function equipos()
 	{
 		return $this->hasMany('soccer\Equipo\Equipo');
