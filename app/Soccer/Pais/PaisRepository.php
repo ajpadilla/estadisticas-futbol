@@ -27,4 +27,10 @@ class PaisRepository extends BaseRepository
 		$pais = Pais::create($data); 
 		return $pais;
 	}
+
+	public function update($data = array())
+	{
+		$pais = $this->getById($data['pais_id']);
+		$pais->update($data);
+	}
 }
