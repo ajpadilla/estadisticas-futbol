@@ -118,9 +118,18 @@ class PaisController extends \BaseController {
 	 * @param  int  $id
 	 * @return Response
 	 */
-	public function destroy($id)
+	public function destroy()
 	{
-		//
+		if (Request::ajax())
+		{
+			if (Input::has('countryId'))
+			{
+				$this->paisRepository->delete(Input::get('countryId'));
+				return Response::json(['success' => true]);
+			}else{
+				return Response::json(['success' => false]);
+			}
+		}
 	}
 
 	public function getAllValue(){
