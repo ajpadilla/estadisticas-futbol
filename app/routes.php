@@ -17,7 +17,9 @@ Route::get('/', [
 	'uses' => 'PageController@index'
 ]);
 
-/* Ruta para jugadores*/
+/*
+********************************* RUTAS PARA JUGADORES ********************************
+*/
 
 Route::get('jugadores', [
 	'as' => 'jugadores.index', 
@@ -51,8 +53,22 @@ Route::get('equipos/api-ver/{id}',  ['as' => 'equipos.api.show','uses' => 'Equip
 Route::get('equipos/api-lista', array('as'=>'equipos.api.lista', 'uses'=>'EquipoController@listaApi'));
 
 
-/*Rutas para paises*/
+/*
+********************************* RUTAS PARA PAISES ********************************
+*/
 Route::get('lista-paises',  ['as' => 'paises.lista','uses' => 'PaisController@getAllValue' ] );
+Route::get('paises', ['as' => 'paises.index', 'uses' => 'PaisController@index']);
+Route::get('paises/nuevo', ['as' => 'paises.create', 'uses' => 'PaisController@create'] );
+Route::post('paises/guardar', ['as' => 'paises.store', 'uses' => 'PaisController@store' ] );
+Route::get('paises/ver/{id}', ['as' => 'paises.show', 'uses' => 'PaisController@show' ] );
+Route::get('paises/editar/{id}',  ['as' => 'paises.edit','uses' => 'PaisController@edit' ] );
+Route::post('paises/actualizar',  ['as' => 'paises.update','uses' => 'PaisController@update' ] );
+Route::get('paises/eliminar',  ['as' => 'paises.delete-ajax','uses' => 'PaisController@destroy' ] );
+Route::get('datos-pais',  ['as' => 'paises.data','uses' => 'PaisController@getData' ] );
 
-/*Rutas para posiciones*/
+Route::get('paises/api-ver/{id}',  ['as' => 'paises.api.show','uses' => 'PaisController@showApi' ] );
+Route::get('paises/api-lista', array('as'=>'paises.api.lista', 'uses'=>'PaisController@listaApi'));
+/*
+********************************* RUTAS PARA POSICIONES ********************************
+*/
 Route::get('lista-posiciones',  ['as' => 'posiciones.lista','uses' => 'PosicionController@getAllValue' ] );

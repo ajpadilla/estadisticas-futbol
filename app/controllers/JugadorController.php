@@ -165,11 +165,11 @@ class JugadorController extends \BaseController {
 
 		$collection->addColumn('Acciones', function($model)
 		{
-			$links = "<a class='ver-jugador' href='#' id='ver_".$model->id."'>Ver</a>
+			$links = "<a class='ver-jugador' href='#' id='ver_jugador_".$model->id."'>Ver</a>
 					<br />";
-			$links .= "<a  class='editar-jugador' href='#new-player-form' id='editar_".$model->id."'>Editar</a>
+			$links .= "<a  class='editar-jugador' href='#new-player-form' id='editar_jugador_".$model->id."'>Editar</a>
 					<br />
-					<a class='eliminar-jugador' href='#' id='eliminar_".$model->id."'>Eliminar</a>";
+					<a class='eliminar-jugador' href='#' id='eliminar_jugador_".$model->id."'>Eliminar</a>";
 
 			return $links;
 		});
