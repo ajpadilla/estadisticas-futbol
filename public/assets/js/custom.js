@@ -552,7 +552,6 @@ var CustomApp = function () {
             });
            };
        });
-
     }
 
     // Metodo para saber cual opcion(ver, editar, borrar) fue seleccionada de la lista de Jugadores
@@ -1051,6 +1050,37 @@ var CustomApp = function () {
             .modal('show');
     }
 
+     //Metodo para eliminar país de la BD.
+    var deleteCountry = function (idCountry) {
+        bootbox.confirm("¿Esta seguro de eliminar el País?", function(result) {
+            console.log("Confirm result: "+result);
+            if (result == true){
+               $.ajax({
+                type: 'GET',
+                url: $('#eliminar-pais').attr('href'),
+                data: {'countryId': idCountry},
+                dataType: "JSON",
+                success: function(response) {
+                    if (response.success == true) {
+                        $('#eliminar_pais_'+idCountry).parent().parent().remove();
+                        bootbox.dialog({
+                            message:" ¡País Eliminado!",
+                            title: "Éxito",
+                            buttons: {
+                                success: {
+                                    label: "Success!",
+                                    className: "btn-success"
+                                }
+                            }
+                        });
+                    };
+                }
+            });
+           };
+       });
+    }
+
+
     // Metodo para saber cual opcion(ver, editar, borrar) fue seleccionada de la lista de Paises
     var loadDataCountry = function() 
     {
@@ -1073,7 +1103,7 @@ var CustomApp = function () {
                     }else if(type == "ver"){
                         viewDataCountry(numberId);
                     }else if(type == "eliminar"){
-                        //deletePlayer(numberId);
+                        deleteCountry(numberId);
                     }
                 }
             }           
