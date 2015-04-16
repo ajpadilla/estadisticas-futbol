@@ -33,4 +33,10 @@ class PaisRepository extends BaseRepository
 		$pais = $this->getById($data['pais_id']);
 		$pais->update($data);
 	}
+
+	public function delete($paisId)
+	{
+		$pais = $this->getById($paisId); 
+		$pais->delete();
+	}
 }
