@@ -1,6 +1,8 @@
 <?php
 use soccer\Pais\PaisRepository;
-use soccer\Form\RegistrarPaisForm;
+use soccer\Forms\RegistrarPaisForm;
+use Laracasts\Validation\FormValidationException;
+
 
 class PaisController extends \BaseController {
 
