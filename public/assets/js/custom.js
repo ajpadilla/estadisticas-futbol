@@ -567,15 +567,20 @@ var CustomApp = function () {
 
                 var id = $(target).attr('id');
                 var type = id ? id.split('_')[0] : '';
-                var numberId = id ? id.split('_')[1] : '';
+                var view = id ? id.split('_')[1] : '';
+                var numberId = id ? id.split('_')[2] : '';
 
-                if (type == "editar") {
-                    editPlayer(numberId);
-                }else if(type == "ver"){
-                    viewDataPlayer(numberId);
-                }else if(type == "eliminar"){
-                    deletePlayer(numberId);
+                if (view == "jugador") 
+                {
+                    if (type == "editar") {
+                        editPlayer(numberId);
+                    }else if(type == "ver"){
+                        viewDataPlayer(numberId);
+                    }else if(type == "eliminar"){
+                        deletePlayer(numberId);
+                    }
                 }
+                
             }           
         });
     }
@@ -809,6 +814,91 @@ var CustomApp = function () {
     }
 
         
+      //Metodo para ver datos por País
+    var viewDataCountry = function(idCountry) {
+
+         bootbox.dialog({
+                    message: $('#country-form-view-div'),
+                    buttons: {
+                        /*success: {
+                            label: "Actualizar",
+                            className: "btn-primary",
+                            callback: function (){
+                            }
+                        }*/
+                    },
+                    show: false // We will show it manually later
+                })
+                .on('shown.bs.modal', function() {
+                    $('#country-form-view-div')
+                        .show();                             // Show the form
+            })
+            .on('hide.bs.modal', function(e) {
+                // Bootbox will remove the modal (including the body which contains the form)
+                // after hiding the modal
+                // Therefor, we need to backup the form
+                $('#country-form-view-div').hide().appendTo('#new-country-form-view');
+            })
+            .modal('show');
+
+          $.ajax({
+            type: 'GET',
+            url: $('#datos-pais').attr('href'),    
+            data: {'countryId': idCountry},
+            dataType: "JSON",
+            success: function(response) {
+                if (response.success == true) {
+                    console.log(response);
+                    console.log(response.pais);
+                    $('#nombre_pais').val(response.pais.nombre);
+                    $('#bandera_pais').val(response.pais.bandera);
+                   /* var form = $('#new-country-form-view');*/
+
+                    /*var template = $('#country-form-view-div-tpl').html();
+                    var jugador = {
+                        title:'Ver Datos Jugador',
+                        url: '',
+                        name: response.jugador.nombre,
+                        height: response.jugador.altura,
+                        abbreviation: response.jugador.abreviacion,
+                        position: response.jugador.posicion_id,
+                        country: response.jugador.pais_id
+                    };
+                    var html = Mustache.to_html(template, jugador);
+                    form.html(html);*/
+                }
+            }
+        });
+    }
+
+    // Metodo para saber cual opcion(ver, editar, borrar) fue seleccionada de la lista de Paises
+    var loadDataCountry = function() 
+    {
+        $('.table').click(function(event)
+        {
+            var target = $( event.target );
+            if (target.is('a')) 
+            {
+                console.log($(target).attr('id'));
+
+                var id = $(target).attr('id');
+                var type = id ? id.split('_')[0] : '';
+                var view = id ? id.split('_')[1] : '';
+                var numberId = id ? id.split('_')[2] : '';
+
+                if (view == "pais") 
+                {
+                    if (type == "editar") {
+                        //editPlayer(numberId);
+                    }else if(type == "ver"){
+                        viewDataCountry(numberId);
+                    }else if(type == "eliminar"){
+                        //deletePlayer(numberId);
+                    }
+                }
+            }           
+        });
+    }
 
     var loadFieldSelect = function(url,idField) {
         $.ajax({
@@ -842,6 +932,7 @@ var CustomApp = function () {
             loadFieldSelect($('#lista-paises').attr('href'),'#pais_id');
             loadFieldSelect($('#lista-posiciones').attr('href'),'#posicion_id');
             loadDataPlayer();
+            loadDataCountry();
         }
     };
 }();
