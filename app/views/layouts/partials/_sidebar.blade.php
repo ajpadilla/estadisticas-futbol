@@ -47,9 +47,12 @@
 			</li>		
 		</ul>
 		<!-- /SIDEBAR MENU -->
-		<!--Routes-->
+		<!--Routes Paises-->
 		<a id="lista-paises" href="{{ URL::route('paises.lista') }}"></a>
+		<a id="agregar-pais" href="{{ URL::route('paises.store') }}"></a>
+		<!--Routes Posiciones-->
 		<a id="lista-posiciones" href="{{ URL::route('posiciones.lista') }}"></a>
+		<!--Routes Jugadores-->
 		<a id="agregar-jugador" href="{{ URL::route('jugadores.store') }}"></a>
 		<a id="datos-jugador" href="{{ URL::route('jugadores.data') }}"></a>
 		<a id="editar-jugador" href="{{ URL::route('jugadores.update') }}"></a>
