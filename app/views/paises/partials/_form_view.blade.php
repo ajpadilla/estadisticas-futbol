@@ -17,18 +17,18 @@
 				<div class="divide-20"></div>
 				<div class="box-body big">
 					<form id="country-form-view" class="form-horizontal" role="form">
-						<a href="#"><img src="" alt="" id="imgen_vista">
-						</a>
+						<!--<a href="#"><img src="" alt="" id="imgen_vista">
+						</a>-->
 						<div class="form-group">
 							<label class="col-sm-3 control-label">Nombre</label>
 							<div class="col-sm-9">
-								<input id="nombre_vista" name="nombre" type="text" class="form-control" placeholder="Text input">
+								<input id="nombre_pais" name="nombre" type="text" class="form-control" placeholder="Text input">
 							</div>
 						</div>
 						<div class="form-group">
 							<label class="col-sm-3 control-label">Bandera</label>
 							<div class="col-sm-9">
-								<input id="bandera_vista" name="bandera" type="text" class="form-control" placeholder="Text input">
+								<input id="bandera_pais" name="bandera" type="text" class="form-control" placeholder="Text input">
 							</div>
 						</div>
 					</form>
