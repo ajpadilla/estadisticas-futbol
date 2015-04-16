@@ -51,6 +51,7 @@
 		<a id="lista-paises" href="{{ URL::route('paises.lista') }}"></a>
 		<a id="agregar-pais" href="{{ URL::route('paises.store') }}"></a>
 		<a id="datos-pais" href="{{ URL::route('paises.data') }}"></a>
+		<a id="editar-pais" href="{{ URL::route('paises.update') }}"></a>
 		<!--Routes Posiciones-->
 		<a id="lista-posiciones" href="{{ URL::route('posiciones.lista') }}"></a>
 		<!--Routes Jugadores-->
