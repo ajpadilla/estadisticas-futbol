@@ -23,7 +23,7 @@ class PaisController extends \BaseController {
 	 */
 	public function index()
 	{
-		//
+		return View::make('paises.index');
 	}
 
 
