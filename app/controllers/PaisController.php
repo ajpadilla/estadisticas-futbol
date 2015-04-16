@@ -122,4 +122,34 @@ class PaisController extends \BaseController {
 		}
 	}
 
+	public function listaApi()
+	{
+		$collection = Datatable::collection($this->paisRepository->getAll())
+			->searchColumns('nombre','bandera')
+			->orderColumns('nombre','bandera');
+
+		$collection->addColumn('nombre', function($model)
+		{
+			 return $model->nombre;
+		});
+
+		$collection->addColumn('bandera', function($model)
+		{
+			 return $model->bandera;
+		});
+
+		$collection->addColumn('Acciones', function($model)
+		{
+			$links = "<a class='ver-pais' href='#' id='ver_".$model->id."'>Ver</a>
+					<br />";
+			$links .= "<a  class='editar-pais' href='#new-country-form' id='editar_".$model->id."'>Editar</a>
+					<br />
+					<a class='eliminar-pais' href='#' id='eliminar_".$model->id."'>Eliminar</a>";
+
+			return $links;
+		});
+	
+		return $collection->make();
+	}
+
 }
