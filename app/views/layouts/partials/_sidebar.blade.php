@@ -42,7 +42,6 @@
 		<a id="agregar-jugador" href="{{ URL::route('jugadores.store') }}"></a>
 		<a id="datos-jugador" href="{{ URL::route('jugadores.data') }}"></a>
 		<a id="editar-jugador" href="{{ URL::route('jugadores.update') }}"></a>
-		<a id="eliminar-jugador" href="{{ URL::route('jugadores.delete-ajax') }}"></a>
 	</div>
 </div>
 <!-- /SIDEBAR -->

@@ -140,8 +140,7 @@ class JugadorController extends \BaseController {
 
 	public function listadoJugadores()
 	{
-		$collection = $this->jugadorRepository->getAll();
-		return $this->jugadorRepository->getTableCollection($collection);
+		return $this->jugadorRepository->getDefaultTableForAllPlayers();
 	}
 
 	public function getData()
@@ -160,6 +159,11 @@ class JugadorController extends \BaseController {
 				return Response::json(['success' => false]);
 			}
 		}
+	}
+
+	public function cambiarEquipoApi($id)
+	{
+		# code...
 	}
 
 }

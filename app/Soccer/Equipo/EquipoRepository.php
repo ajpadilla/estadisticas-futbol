@@ -64,50 +64,47 @@ class EquipoRepository extends BaseRepository
 		return Equipo::findOrFail($id)->jugadores;
 	}
 
-	public function getTableCollection(Collection $equipos)
-	{
-		$collection = Datatable::collection($equipos)
-			->searchColumns('País', 'Nombre', 'Tipo', 'Fecha Fundación', 'Apodo')
-			->orderColumns('País', 'Nombre', 'Tipo', 'Fecha Fundación', 'Apodo');
+	public function setDefaultActionColumn() {
+		$this->addColumnToCollection('Acciones', function($model)
+		{
+			$this->cleanActionColumn();
+			$this->addActionColumn("<a class='ver-jugador' href='" . route('equipos.show', $model->id) . "'>Ver</a><br />");
+			$this->addActionColumn("<a  class='editar-jugador' href='#new-player-form' id='editar_".$model->id."'>Editar</a><br />");
+			$this->addActionColumn("<a class='eliminar-jugador' href='#' id='eliminar_".$model->id."'>Eliminar</a>");
+			return implode(" ", $this->getActionColumn());
+		});
+	}
 
-		$collection->addColumn('País', function($model)
+	public function setBodyTableSettings()
+	{
+		$this->collection->searchColumns('País', 'Nombre', 'Tipo', 'Fecha Fundación', 'Apodo');
+		$this->collection->orderColumns('País', 'Nombre', 'Tipo', 'Fecha Fundación', 'Apodo');
+
+		$this->collection->addColumn('País', function($model)
 		{
 			 return $model->pais->nombre;
 		});
 
-		$collection->addColumn('Nombre', function($model)
+		$this->collection->addColumn('Nombre', function($model)
 		{
 			 return $model->nombre;
 		});
 
-		$collection->addColumn('Tipo', function($model)
+		$this->collection->addColumn('Tipo', function($model)
 		{
 			 return $model->tipo;
 		});
 
-		$collection->addColumn('Fecha Fundación', function($model)
+		$this->collection->addColumn('Fecha Fundación', function($model)
 		{
 			 return $model->fecha_fundacion;
 		});
 
-		$collection->addColumn('Apodo', function($model)
+		$this->collection->addColumn('Apodo', function($model)
 		{
 			 return $model->apodo;
 		});
-
-		$collection->addColumn('Acciones', function($model)
-		{
-			$links = "<a class='ver-jugador' href='" . route('equipos.show', $model->id) . "'>Ver</a>
-					<br />";
-			$links .= "<a  class='editar-jugador' href='#new-player-form' id='editar_".$model->id."'>Editar</a>
-					<br />
-					<a class='eliminar-jugador' href='#' id='eliminar_".$model->id."'>Eliminar</a>";
-
-			return $links;
-		});
-	
-		return $collection->make();	
-	}
+	}	
 
 	public function getAllTable()
 	{	
@@ -119,7 +116,24 @@ class EquipoRepository extends BaseRepository
 
 	public function getJugadoresTable($id)
 	{		
-		return $this->jugadorRepository->getTable('equipos.api.jugadores', [$id]);
+		return $this->jugadorRepository->getAllTable('equipos.api.jugadores', [$id]);
 	}
+
+	public function getTableForPlayers($id)
+	{
+		$jugadores = $this->getJugadores($id);
+		$this->jugadorRepository->setDatatableCollection($jugadores);
+		$this->jugadorRepository->setBodyTableSettings();
+		$this->jugadorRepository->addColumnToCollection('Acciones', function($model)
+		{
+			$this->jugadorRepository->cleanActionColumn();
+			$this->jugadorRepository->addActionColumn("<a class='ver-jugador' href='#' id='ver_".$model->id."'>Ver</a><br />");
+			$this->jugadorRepository->addActionColumn("<a  class='editar-jugador' href='#new-player-form' id='editar_".$model->id."'>Editar</a><br />");
+			$this->jugadorRepository->addActionColumn("<a class='eliminar-jugador' href='" . route('jugadores.api.eliminar', $model->id) . "' id='eliminar-jugador'>Eliminar</a><br />");
+			$this->jugadorRepository->addActionColumn("<a class='cambiar-equipo' href='" . route('jugadores.api.cambiar-equipo', $model->id) . "' id='eliminar-jugador'>Cambiar</a>");
+			return implode(" ", $this->jugadorRepository->getActionColumn());
+		});
+		return $this->jugadorRepository->getTableCollectionForRender();
+	}	
 
 }

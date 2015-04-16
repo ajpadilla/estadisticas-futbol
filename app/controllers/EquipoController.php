@@ -2,7 +2,6 @@
 
 use soccer\Equipo\EquipoRepository;
 use soccer\Pais\PaisRepository;
-use soccer\Jugador\JugadorRepository;
 use soccer\Forms\EquipoForm;
 use Laracasts\Validation\FormValidationException;
 //use Datatable;
@@ -11,16 +10,13 @@ class EquipoController extends \BaseController {
 
 	protected $equipoRepository;
 	protected $paisRepository;
-	protected $jugadorRepository;
 	protected $equipoForm;
 
 	public function __construct(EquipoRepository $equipoRepository, 
 								PaisRepository $paisRepository, 
-								JugadorRepository $jugadorRepository, 
 								EquipoForm $equipoForm){
 		$this->equipoRepository = $equipoRepository;
 		$this->paisRepository = $paisRepository;
-		$this->jugadorRepository = $jugadorRepository;
 		$this->equipoForm = $equipoForm;
 	}	
 
@@ -126,14 +122,11 @@ class EquipoController extends \BaseController {
 	*/
 	public function listaApi()
 	{
-		$collection = $this->equipoRepository->getAll();
-		return $this->equipoRepository->getTableCollection($collection);
+		return $this->equipoRepository->getDefaultTableForAll();
 	}
 
 	public function jugadoresApi($id)
 	{
-		$collection = $this->equipoRepository->getJugadores($id);
-		return $this->jugadorRepository->getTableCollection($collection);	
+		return $this->equipoRepository->getTableForPlayers($id);
 	}
-
 }

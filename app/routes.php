@@ -28,12 +28,13 @@ Route::get('crear-jugador', ['as' => 'jugadores.create', 'uses' => 'JugadorContr
 Route::post('agregar-jugador', ['as' => 'jugadores.store', 'uses' => 'JugadorController@store' ] );
 Route::get('ver-jugador', ['as' => 'jugadores.show', 'uses' => 'JugadorController@show' ] );
 Route::get('editar-jugador',  ['as' => 'jugadores.edit','uses' => 'JugadorController@edit' ] );
-Route::get('eliminar-jugador',  ['as' => 'jugadores.delete-ajax','uses' => 'JugadorController@destroy' ] );
 Route::post('modificar-jugador',  ['as' => 'jugadores.update','uses' => 'JugadorController@update' ] );
 Route::get('datos-jugador',  ['as' => 'jugadores.data','uses' => 'JugadorController@getData' ] );
 
 
+Route::get('jugadores/api-eliminar/{id}',  ['as' => 'jugadores.api.eliminar','uses' => 'JugadorController@destroy' ] );
 Route::get('jugadores/api-lista', array('as'=>'jugadores.api.lista', 'uses'=>'JugadorController@listadoJugadores'));
+Route::get('jugadores/api-cambiar-equipo/{id}', array('as'=>'jugadores.api.cambiar-equipo', 'uses'=>'JugadorController@cambiarEquipoApi'));
 
 /*
 ********************************* RUTAS PARA EQUIPOS ********************************

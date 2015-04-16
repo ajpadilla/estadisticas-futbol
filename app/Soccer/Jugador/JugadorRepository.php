@@ -4,7 +4,6 @@ use soccer\Jugador\Jugador;
 use soccer\Base\BaseRepository;
 use Carbon\Carbon;
 use Datatable;
-use Illuminate\Database\Eloquent\Collection;
 /**
 * 
 */
@@ -12,9 +11,10 @@ class JugadorRepository extends BaseRepository
 {		
 	function __construct() {
 		$this->columns = [
-			'País',
-			'Posición',
 			'Nombre',
+			'País',
+			'Equipo',
+			'Posición',
 			'Edad',
 			'Acciones'
 		];
@@ -52,44 +52,46 @@ class JugadorRepository extends BaseRepository
 		return Jugador::findOrFail($jugadorId);
 	}
 
-	public function getTableCollection(Collection $jugadores)
+	public function setDefaultActionColumn() {
+		$this->addColumnToCollection('Acciones', function($model)
+		{
+			$this->cleanActionColumn();
+			$this->addActionColumn("<a class='ver-jugador' href='#' id='ver_".$model->id."'>Ver</a><br />");
+			$this->addActionColumn("<a  class='editar-jugador' href='#new-player-form' id='editar_".$model->id."'>Editar</a><br />");
+			$this->addActionColumn("<a class='eliminar-jugador' href='" . route('jugadores.api.eliminar', $model->id) . "' id='eliminar-jugador'>Eliminar</a>");
+			return implode(" ", $this->getActionColumn());
+		});
+	}
+
+	public function setBodyTableSettings()
 	{
-		$collection = Datatable::collection($jugadores)
-			->searchColumns('nombre')
-			->orderColumns('nombre');
+		$this->collection->searchColumns('Nombre', 'País', 'Posición', 'Equipo');
+		$this->collection->orderColumns('Nombre', 'País', 'Posición', 'Equipo', 'Edad');
 
-		$collection->addColumn('País', function($model)
-		{
-			 return $model->pais->nombre;
-		});
-
-		$collection->addColumn('Posición', function($model)
-		{
-			 return $model->posicion->abreviacion;
-		});
-
-		$collection->addColumn('Nombre', function($model)
+		$this->collection->addColumn('Nombre', function($model)
 		{
 			 return $model->nombre;
 		});
 
-		$collection->addColumn('Edad', function($model)
+		$this->collection->addColumn('País', function($model)
+		{
+			 return $model->pais->nombre;
+		});
+
+		$this->collection->addColumn('Equipo', function($model)
+		{
+			 return $model->equipo->nombre;
+		});		
+
+		$this->collection->addColumn('Posición', function($model)
+		{
+			 return $model->posicion->abreviacion;
+		});
+
+		$this->collection->addColumn('Edad', function($model)
 		{
 			 return $model->age;
 		});
-
-		$collection->addColumn('Acciones', function($model)
-		{
-			$links = "<a class='ver-jugador' href='#' id='ver_".$model->id."'>Ver</a>
-					<br />";
-			$links .= "<a  class='editar-jugador' href='#new-player-form' id='editar_".$model->id."'>Editar</a>
-					<br />
-					<a class='eliminar-jugador' href='#' id='eliminar_".$model->id."'>Eliminar</a>";
-
-			return $links;
-		});
-	
-		return $collection->make();	
 	}
 
 	public function getAllTable($route = 'jugadores.api.lista', $params = array())

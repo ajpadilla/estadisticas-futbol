@@ -48,4 +48,9 @@ class Jugador extends Eloquent implements StaplerableInterface{
 		$fecha = explode("-", $this->fecha_nacimiento);
 		return Carbon::createFromDate($fecha[0], $fecha[1], $fecha[2])->age;
 	}
+
+	public function getEquipoAttribute()
+	{
+		return $this->equipos()->whereFechaFin(null)->first();
+	}
 }
