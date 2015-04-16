@@ -20,9 +20,9 @@
 					'method' => 'POST','files' => true,'id'=> 'country-form']) }}
 						
 						<div class="form-group" style="display: none;">
-							{{ Form::label('jugador_id','Id',['class'=>'col-sm-2 control-label']) }}
+							{{ Form::label('pais_id','Id',['class'=>'col-sm-2 control-label']) }}
 							<div class="col-sm-6">
-								{{ Form::text('jugador_id',null, ['class' => 'form-control','id' => 'jugador_id']) }}
+								{{ Form::text('pais_id',null, ['class' => 'form-control','id' => 'pais_id']) }}
 							</div>
 						</div>
 
@@ -34,9 +34,9 @@
 						</div>
 
 						<div class="form-group">
-							{{ Form::label('nombre','Nombre',['class'=>'col-sm-2 control-label']) }}
+							{{ Form::label('bandera','Bandera',['class'=>'col-sm-2 control-label']) }}
 							<div class="col-sm-6">
-								{{ Form::text('nombre',null, ['class' => 'form-control','id' => 'nombre']) }}
+								{{ Form::text('bandera',null, ['class' => 'form-control','id' => 'bandera']) }}
 							</div>
 						</div>
 
