@@ -63,7 +63,7 @@ Route::post('paises/guardar', ['as' => 'paises.store', 'uses' => 'PaisController
 Route::get('paises/ver/{id}', ['as' => 'paises.show', 'uses' => 'PaisController@show' ] );
 Route::get('paises/editar/{id}',  ['as' => 'paises.edit','uses' => 'PaisController@edit' ] );
 Route::post('paises/actualizar',  ['as' => 'paises.update','uses' => 'PaisController@update' ] );
-Route::get('paises/eliminar/{id}',  ['as' => 'paises.delete','uses' => 'PaisController@destroy' ] );
+Route::get('paises/eliminar',  ['as' => 'paises.delete-ajax','uses' => 'PaisController@destroy' ] );
 Route::get('datos-pais',  ['as' => 'paises.data','uses' => 'PaisController@getData' ] );
 
 Route::get('paises/api-ver/{id}',  ['as' => 'paises.api.show','uses' => 'PaisController@showApi' ] );
