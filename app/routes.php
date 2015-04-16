@@ -17,7 +17,9 @@ Route::get('/', [
 	'uses' => 'PageController@index'
 ]);
 
-/* Ruta para jugadores*/
+/*
+********************************* RUTAS PARA JUGADORES ********************************
+*/
 
 Route::get('jugadores', [
 	'as' => 'jugadores.index', 
@@ -51,8 +53,11 @@ Route::get('equipos/api-ver/{id}',  ['as' => 'equipos.api.show','uses' => 'Equip
 Route::get('equipos/api-lista', array('as'=>'equipos.api.lista', 'uses'=>'EquipoController@listaApi'));
 
 
-/*Rutas para paises*/
+/*
+********************************* RUTAS PARA PAISES ********************************
+*/
 Route::get('lista-paises',  ['as' => 'paises.lista','uses' => 'PaisController@getAllValue' ] );
-
-/*Rutas para posiciones*/
+/*
+********************************* RUTAS PARA POSICIONES ********************************
+*/
 Route::get('lista-posiciones',  ['as' => 'posiciones.lista','uses' => 'PosicionController@getAllValue' ] );
