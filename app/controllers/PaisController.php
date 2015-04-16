@@ -1,12 +1,17 @@
 <?php
 use soccer\Pais\PaisRepository;
+use soccer\Form\RegistrarPaisForm;
 
 class PaisController extends \BaseController {
 
 	protected $paisRepository;
+	protected $registrarPaisForm;
 
-	public function __construct(PaisRepository $paisRepository) {
+	public function __construct(PaisRepository $paisRepository,
+		RegistrarPaisForm $registrarPaisForm
+		) {
 		$this->paisRepository = $paisRepository;
+		$this->registrarPaisForm = $registrarPaisForm;
 	}
 
 	/**
@@ -38,7 +43,20 @@ class PaisController extends \BaseController {
 	 */
 	public function store()
 	{
-		//
+		if(Request::ajax())
+		{
+			$input = Input::all();
+			try
+			{
+				$this->registrarPaisForm->validate($input);
+				$pais = $this->paisRepository->create($input);
+				return Response::json(['success' => true, 'pais' => $pais->toArray()]);
+			}
+			catch (FormValidationException $e)
+			{
+				return Response::json($e->getErrors()->all());
+			}
+		}
 	}
 
 
