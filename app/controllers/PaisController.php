@@ -1,6 +1,7 @@
 <?php
 use soccer\Pais\PaisRepository;
 use soccer\Forms\RegistrarPaisForm;
+use soccer\Forms\EditarPaisForm;
 use Laracasts\Validation\FormValidationException;
 
 
@@ -8,12 +9,15 @@ class PaisController extends \BaseController {
 
 	protected $paisRepository;
 	protected $registrarPaisForm;
+	protected $editarPaisForm;
 
 	public function __construct(PaisRepository $paisRepository,
-		RegistrarPaisForm $registrarPaisForm
+		RegistrarPaisForm $registrarPaisForm,
+		EditarPaisForm $editarPaisForm
 		) {
 		$this->paisRepository = $paisRepository;
 		$this->registrarPaisForm = $registrarPaisForm;
+		$this->editarPaisForm = $editarPaisForm;
 	}
 
 	/**
@@ -92,9 +96,19 @@ class PaisController extends \BaseController {
 	 * @param  int  $id
 	 * @return Response
 	 */
-	public function update($id)
+	public function update()
 	{
-		//
+		$input = Input::all();
+		try
+		{
+			$this->editarPaisForm->validate($input);
+			$this->paisRepository->update($input);
+			return Response::json(['success' => true]);
+		}
+		catch (FormValidationException $e)
+		{
+			return Response::json($e->getErrors()->all());
+		}
 	}
 
 
