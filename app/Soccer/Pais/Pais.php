@@ -9,7 +9,7 @@ class Pais extends Eloquent{
 
 	protected $table = 'paises';
 
-	protected $fillable = ['nombre', 'bandera']
+	protected $fillable = ['nombre', 'bandera'];
 
 	public function equipos()
 	{
