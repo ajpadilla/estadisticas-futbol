@@ -45,8 +45,8 @@
 		</div>
 	</div>
 	@include('paises.new')
-	@include('jugadores.view')
-	@include('jugadores.partials._form_view-template')
+	@include('paises.view')
+	{{--@include('jugadores.partials._form_view-template')--}}
 </div>
 @stop
 
