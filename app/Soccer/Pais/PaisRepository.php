@@ -17,6 +17,11 @@ class PaisRepository extends BaseRepository
 		return Pais::select()->lists('nombre', 'id');
 	}
 
+	public function getById($paisId)
+	{
+		return Pais::findOrFail($paisId);
+	}
+
 	public function create($data = array())
 	{
 		$pais = Pais::create($data); 
