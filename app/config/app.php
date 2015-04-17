@@ -132,6 +132,8 @@ return array(
 		//'Laracasts\Flash\FlashServiceProvider',
 		//'Intervention\Image\ImageServiceProvider',
 		//'Moltin\Cart\CartServiceProvider'
+	    'Codesleeve\LaravelStapler\LaravelStaplerServiceProvider'
+
 	),
 
 	/*
