@@ -121,7 +121,7 @@ class EquipoController extends \BaseController {
 	public function destroyApi($id)
 	{		
 		if(Request::ajax())
-			$this->setSuccess($this->repository->delete($id)]);
+			$this->setSuccess($this->repository->delete($id));
 		return $this->getResponseArrayJson();
 	}
 
