@@ -42,6 +42,15 @@ class Jugador extends Eloquent implements StaplerableInterface{
 					->withTimestamps();
 	}
 
+	public function getNameCurrentTeams()
+	{
+		$teamsNames = [];
+		foreach ($this->equipos as $equipo) {
+			$teamsNames[] = $equipo->nombre;
+		}
+		return $teamsNames;
+	}
+
 	public function getAgeAttribute()
 	{
 		//return Carbon::createFromFormat('Y-m-d H:i:s', $date)->format('d-m-Y');
