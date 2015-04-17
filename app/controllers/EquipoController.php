@@ -134,4 +134,23 @@ class EquipoController extends \BaseController {
 	{
 		return $this->repository->getTableForPlayers($id);
 	}
+
+	public function getAllValue()
+	{
+		if(Request::ajax())
+		{
+			$equipos = $this->repository->getAllForSelect();
+			if (count($equipos) > 0) {
+				$this->setSuccess(true);
+				$this->addToResponseArray('data', $equipos);
+				return $this->getResponseArrayJson();
+			}else{
+				$this->setSuccess(false);
+				return $this->getResponseArrayJson();
+			}
+		}else{
+			$this->setSuccess(false);
+			return $this->getResponseArrayJson();
+		}
+	}
 }
