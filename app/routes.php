@@ -55,6 +55,8 @@ Route::get('equipos/api-eliminar/{id}',  ['as' => 'equipos.api.eliminar','uses' 
 Route::get('equipos/api-lista', array('as'=>'equipos.api.lista', 'uses'=>'EquipoController@listaApi'));
 Route::post('equipos/api-actualizar',  ['as' => 'equipos.api.update','uses' => 'EquipoController@updateApi' ] );
 Route::get('equipos/api-jugadores/{id}', array('as'=>'equipos.api.jugadores', 'uses'=>'EquipoController@jugadoresApi'));
+Route::get('equipos/api-ver/{id}',  ['as' => 'equipos.data','uses' => 'EquipoController@showApi' ] );
+Route::get('equipos/api-seleccionar',  ['as' => 'equipos.seleccionar','uses' => 'EquipoController@getAllValue' ] );
 
 
 /*
