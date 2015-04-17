@@ -59,6 +59,9 @@
 		<a id="agregar-jugador" href="{{ URL::route('jugadores.store') }}"></a>
 		<a id="datos-jugador" href="{{ URL::route('jugadores.data') }}"></a>
 		<a id="editar-jugador" href="{{ URL::route('jugadores.update') }}"></a>
+		<!--Routes Equipos-->
+		<a id="lista-equipos" href="{{ URL::route('equipos.seleccionar') }}"></a>
+			
 	</div>
 </div>
 <!-- /SIDEBAR -->
