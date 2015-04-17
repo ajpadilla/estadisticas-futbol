@@ -1142,6 +1142,7 @@ var CustomApp = function () {
             handleBootboxNewCountry();
             loadFieldSelect($('#lista-paises').attr('href'),'#pais_id');
             loadFieldSelect($('#lista-posiciones').attr('href'),'#posicion_id');
+            loadFieldSelect($('#lista-equipos').attr('href'),'#equipo_id');
             loadDataPlayer();
             deletePlayer();
             loadDataCountry();
