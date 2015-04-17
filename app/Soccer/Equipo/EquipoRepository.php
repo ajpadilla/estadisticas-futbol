@@ -28,6 +28,12 @@ class EquipoRepository extends BaseRepository
 		$this->setModel(new Equipo);
 	}
 
+	public function getAllForSelect()
+	{
+		return $this->getAll()->lists('nombre', 'id');
+	}	
+
+
 	public function create($data = array())
 	{
 		$fecha = $data['fecha_nacimiento'];
