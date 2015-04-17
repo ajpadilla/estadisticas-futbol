@@ -149,7 +149,7 @@ class JugadorController extends \BaseController {
 		{
 			if (Input::has('jugadorId'))
 			{
-				$jugador = $this->jugadorRepository->getById(Input::get('jugadorId'));
+				$jugador = $this->jugadorRepository->get(Input::get('jugadorId'));
 				return Response::json(['success' => true, 'jugador' => $jugador->toArray(),
 					'urlImg' => $jugador->foto->url(),
 					'posicion' => $jugador->posicion->toArray(),

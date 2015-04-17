@@ -18,12 +18,8 @@ class JugadorRepository extends BaseRepository
 			'Edad',
 			'Acciones'
 		];
+		$this->setModel(new Jugador);
 	}
-
-	public function getAll()
-	{
-		return Jugador::all();
-	}	
 
 	public function create($data = array())
 	{
@@ -37,19 +33,8 @@ class JugadorRepository extends BaseRepository
 	{
 		$fecha = $data['fecha_nacimiento'];
 		$data['fecha_nacimiento'] = Carbon::createFromFormat('d-m-Y', $fecha)->format('Y-m-d');
-		$jugador = $this->getById($data['jugador_id']);
+		$jugador = $this->get($data['jugador_id']);
 		$jugador->update($data);
-	}
-
-	public function delete($jugadorId)
-	{
-		$jugador = $this->getById($jugadorId); 
-		$jugador->delete();
-	}
-
-	public function getById($jugadorId)
-	{
-		return Jugador::findOrFail($jugadorId);
 	}
 
 	public function setDefaultActionColumn() {

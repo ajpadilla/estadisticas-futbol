@@ -25,12 +25,8 @@ class EquipoRepository extends BaseRepository
 		];
 
 		$this->jugadorRepository = $jugadorRepository;
+		$this->setModel(new Equipo);
 	}
-
-	public function getAll()
-	{
-		return Equipo::all();
-	}	
 
 	public function create($data = array())
 	{
@@ -48,20 +44,9 @@ class EquipoRepository extends BaseRepository
 		$jugador->update($data);
 	}
 
-	public function delete($jugadorId)
-	{
-		$jugador = $this->getById($jugadorId); 
-		$jugador->delete();
-	}
-
-	public function get($id)
-	{
-		return Equipo::findOrFail($id);
-	}
-
 	public function getJugadores($id)
 	{
-		return Equipo::findOrFail($id)->jugadores;
+		return $this->getModel()->findOrFail($id)->jugadores;
 	}
 
 	public function setDefaultActionColumn() {

@@ -5,14 +5,46 @@ use Illuminate\Database\Eloquent\Collection;
 
 class BaseRepository 
 {
+	protected $model;
 	protected $columns;	
 	protected $actionColums = array();
 	protected $collection;
 
+	public function setModel($model)
+	{
+		$this->model = $model;
+	}
+
+	public function getModel()
+	{
+		return $this->model;
+	}
+
+	public function getAll()
+	{
+		return $this->model->all();
+	}	
+
+	public function delete($id)
+	{
+		$model = $this->get($id); 
+		$model->delete();
+	}
+
+	public function get($id)
+	{
+		return $this->model->findOrFail($id);
+	}	
+
+
+	/*
+	************************** DATATABLE COLLECTION METHODS *********************************
+	*/
+
 	public function setCollection($collection)
 	{
 		$this->collection = $collection;
-	}
+	}	
 
 	public function setDatatableCollection(Collection $collection)
 	{
