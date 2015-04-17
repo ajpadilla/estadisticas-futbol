@@ -1,6 +1,7 @@
 <?php namespace soccer\Jugador;
 
 use soccer\Jugador\Jugador;
+use soccer\Equipo\Equipo;
 use soccer\Base\BaseRepository;
 use Carbon\Carbon;
 use Datatable;
@@ -26,6 +27,14 @@ class JugadorRepository extends BaseRepository
 		$fecha = $data['fecha_nacimiento'];
 		$data['fecha_nacimiento'] = Carbon::createFromFormat('d-m-Y', $fecha)->format('Y-m-d');
 		$jugador = Jugador::create($data); 
+		$equipo = Equipo::find($data['equipo_id']);
+		$jugador->equipos()->save($equipo,
+			[
+				'numero' => $data['numero'],
+				'fecha_inicio' => $data['fecha_inicio'],
+				'fecha_fin' => $data['fecha_fin']
+			]
+		);
 		return $jugador;
 	}
 
@@ -65,7 +74,13 @@ class JugadorRepository extends BaseRepository
 
 		$this->collection->addColumn('Equipo', function($model)
 		{
-			 return $model->equipo->nombre;
+			$names = $model->getNameCurrentTeams();
+			$links = '<select class="form-control m-b">';
+			foreach ($names as $equipo) {
+				$links .= '<option>'.$equipo.'</option>';
+			}
+			$links .='</select>';
+			return $links;
 		});		
 
 		$this->collection->addColumn('Posición', function($model)
