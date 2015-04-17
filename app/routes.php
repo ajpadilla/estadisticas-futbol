@@ -29,12 +29,12 @@ Route::post('agregar-jugador', ['as' => 'jugadores.store', 'uses' => 'JugadorCon
 Route::get('ver-jugador', ['as' => 'jugadores.show', 'uses' => 'JugadorController@show' ] );
 Route::get('editar-jugador',  ['as' => 'jugadores.edit','uses' => 'JugadorController@edit' ] );
 Route::post('modificar-jugador',  ['as' => 'jugadores.update','uses' => 'JugadorController@update' ] );
-Route::get('datos-jugador',  ['as' => 'jugadores.data','uses' => 'JugadorController@getData' ] );
 
 
-Route::get('jugadores/api-eliminar/{id}',  ['as' => 'jugadores.api.eliminar','uses' => 'JugadorController@destroy' ] );
-Route::get('jugadores/api-lista', array('as'=>'jugadores.api.lista', 'uses'=>'JugadorController@listadoJugadores'));
+Route::get('jugadores/api-eliminar/{id}',  ['as' => 'jugadores.api.eliminar','uses' => 'JugadorController@destroyApi' ] );
+Route::get('jugadores/api-lista', array('as'=>'jugadores.api.lista', 'uses'=>'JugadorController@listaApi'));
 Route::get('jugadores/api-cambiar-equipo/{id}', array('as'=>'jugadores.api.cambiar-equipo', 'uses'=>'JugadorController@cambiarEquipoApi'));
+Route::get('jugadores/api-ver/{id}',  ['as' => 'jugadores.data','uses' => 'JugadorController@showApi' ] );
 
 /*
 ********************************* RUTAS PARA EQUIPOS ********************************
@@ -48,13 +48,19 @@ Route::get('equipos/editar/{id}',  ['as' => 'equipos.edit','uses' => 'EquipoCont
 Route::post('equipos/actualizar',  ['as' => 'equipos.update','uses' => 'EquipoController@update' ] );
 Route::get('equipos/eliminar/{id}',  ['as' => 'equipos.delete','uses' => 'EquipoController@destroy' ] );
 
-Route::get('equipos/api-ver/{id}',  ['as' => 'equipos.api.show','uses' => 'EquipoController@showApi' ] );
+Route::get('equipos/api-eliminar/{id}',  ['as' => 'equipos.api.eliminar','uses' => 'EquipoController@destroyApi' ] );
 Route::get('equipos/api-lista', array('as'=>'equipos.api.lista', 'uses'=>'EquipoController@listaApi'));
 Route::get('equipos/api-jugadores/{id}', array('as'=>'equipos.api.jugadores', 'uses'=>'EquipoController@jugadoresApi'));
 
 
-/*Rutas para paises*/
+/*
+********************************* RUTAS PARA PAISES ********************************
+*/
+
 Route::get('lista-paises',  ['as' => 'paises.lista','uses' => 'PaisController@getAllValue' ] );
 
-/*Rutas para posiciones*/
+/*
+********************************* RUTAS PARA POSICIONES ********************************
+*/
+
 Route::get('lista-posiciones',  ['as' => 'posiciones.lista','uses' => 'PosicionController@getAllValue' ] );

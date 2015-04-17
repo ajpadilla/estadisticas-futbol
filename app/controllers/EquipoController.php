@@ -93,7 +93,6 @@ class EquipoController extends \BaseController {
 		//
 	}
 
-
 	/**
 	 * Update the specified resource in storage.
 	 *
@@ -106,20 +105,21 @@ class EquipoController extends \BaseController {
 	}
 
 
+	/*
+	************************** API METHODS *****************************
+	*/
+	
 	/**
 	 * Remove the specified resource from storage.
 	 *
 	 * @param  int  $id
 	 * @return Response
 	 */
-	public function destroy($id)
+	public function destroyApi($id)
 	{
 		//
 	}
 
-	/*
-	************************** API METHODS *****************************
-	*/
 	public function listaApi()
 	{
 		return $this->equipoRepository->getDefaultTableForAll();

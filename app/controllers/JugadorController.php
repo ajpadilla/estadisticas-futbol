@@ -117,33 +117,33 @@ class JugadorController extends \BaseController {
 	}
 
 
+
+	/*
+	************************** API METHODS *****************************
+	*/
+
 	/**
 	 * Remove the specified resource from storage.
 	 *
 	 * @param  int  $id
 	 * @return Response
 	 */
-	public function destroy()
+	public function destroyApi($id)
 	{
 		if (Request::ajax())
 		{
-			if (Input::has('jugadorId'))
-			{
-				$jugador = $this->jugadorRepository->delete(Input::get('jugadorId'));
-				return Response::json(['success' => true]);
-			}else{
-				return Response::json(['success' => false]);
-			}
+			return Response::json(['success' => $this->jugadorRepository->delete($id)]);
 		}
+		return Response::json(['success' => false]);
 
 	}
 
-	public function listadoJugadores()
+	public function listaApi()
 	{
 		return $this->jugadorRepository->getDefaultTableForAllPlayers();
 	}
 
-	public function getData()
+	public function showApi()
 	{
 		if (Request::ajax())
 		{
@@ -163,7 +163,7 @@ class JugadorController extends \BaseController {
 
 	public function cambiarEquipoApi($id)
 	{
-		# code...
+		
 	}
 
 }
