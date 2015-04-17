@@ -128,10 +128,10 @@ class JugadorController extends \BaseController {
 	 * @param  int  $id
 	 * @return Response
 	 */
-	public function destroyApi($id)
+	public function destroyApi()
 	{
 		if(Request::ajax())
-			$this->setSuccess($this->jugadorRepository->delete($id));
+			$this->setSuccess($this->jugadorRepository->delete(Input::get('idPlayer')));
 		return $this->getResponseArrayJson();
 	}
 
@@ -147,15 +147,17 @@ class JugadorController extends \BaseController {
 			if (Input::has('jugadorId'))
 			{
 				$jugador = $this->jugadorRepository->get(Input::get('jugadorId'));
-				return Response::json(['success' => true, 'jugador' => $jugador->toArray(),
-					'urlImg' => $jugador->foto->url('thumb'),
-					'posicion' => $jugador->posicion->toArray(),
-					'pais' => $jugador->pais->toArray(),
-					'public' => public_path(),
-					'base' => base_path()
-					]);
+				$this->setSuccess(true);
+				$this->addToResponseArray('jugador', $jugador->toArray());
+				$this->addToResponseArray('urlImg',  $jugador->foto->url('thumb'));
+				$this->addToResponseArray('posicion',  $jugador->posicion->toArray());
+				$this->addToResponseArray('pais',   $jugador->pais->toArray());
+				$this->addToResponseArray('public',  public_path());
+				$this->addToResponseArray('base',  base_path());
+				return $this->getResponseArrayJson();
 			}else{
-				return Response::json(['success' => false]);
+				$this->setSuccess(false);
+				return $this->getResponseArrayJson();
 			}
 		}
 	}
