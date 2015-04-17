@@ -26,11 +26,12 @@ Route::get('jugadores', [
 	'uses' => 'JugadorController@index'
 ]);
 
-Route::get('crear-jugador', ['as' => 'jugadores.create', 'uses' => 'JugadorController@create'] );
-Route::post('agregar-jugador', ['as' => 'jugadores.store', 'uses' => 'JugadorController@store' ] );
-Route::get('ver-jugador', ['as' => 'jugadores.show', 'uses' => 'JugadorController@show' ] );
-Route::get('editar-jugador',  ['as' => 'jugadores.edit','uses' => 'JugadorController@edit' ] );
-Route::post('modificar-jugador',  ['as' => 'jugadores.update','uses' => 'JugadorController@update' ] );
+Route::get('jugadores/nuevo', ['as' => 'jugadores.create', 'uses' => 'JugadorController@create'] );
+Route::post('jugadores/guardar', ['as' => 'jugadores.store', 'uses' => 'JugadorController@store' ] );
+Route::get('jugadores/ver/{id}', ['as' => 'jugadores.show', 'uses' => 'JugadorController@show' ] );
+Route::get('jugadores/editar/{id}',  ['as' => 'jugadores.edit','uses' => 'JugadorController@edit' ] );
+Route::post('jugadores/actualizar',  ['as' => 'jugadores.update','uses' => 'JugadorController@update' ] );
+Route::get('jugadores/eliminar/{id}',  ['as' => 'jugadores.destroy','uses' => 'JugadorController@destroy' ] );
 
 
 Route::get('jugadores/api-eliminar/{id}',  ['as' => 'jugadores.api.eliminar','uses' => 'JugadorController@destroyApi' ] );
