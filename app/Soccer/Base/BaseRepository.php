@@ -28,7 +28,7 @@ class BaseRepository
 	public function delete($id)
 	{
 		$model = $this->get($id); 
-		$model->delete();
+		return $model->delete();
 	}
 
 	public function get($id)

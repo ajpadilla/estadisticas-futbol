@@ -8,14 +8,14 @@ use Laracasts\Validation\FormValidationException;
 
 class EquipoController extends \BaseController {
 
-	protected $equipoRepository;
+	protected $repository;
 	protected $paisRepository;
 	protected $equipoForm;
 
-	public function __construct(EquipoRepository $equipoRepository, 
+	public function __construct(EquipoRepository $repository, 
 								PaisRepository $paisRepository, 
 								EquipoForm $equipoForm){
-		$this->equipoRepository = $equipoRepository;
+		$this->repository = $repository;
 		$this->paisRepository = $paisRepository;
 		$this->equipoForm = $equipoForm;
 	}	
@@ -27,7 +27,7 @@ class EquipoController extends \BaseController {
 	 */
 	public function index()
 	{		
-		$table = $this->equipoRepository->getAllTable();
+		$table = $this->repository->getAllTable();
 		return View::make('equipos.index', compact('table'));
 	}	
 
@@ -56,12 +56,15 @@ class EquipoController extends \BaseController {
 			try
 			{
 				$this->equipoForm->validate($input);
-				$equipo = $this->equipoRepository->create($input);
-				return Response::json(['success' => true, 'equipo' => $equipo->toArray()]);
+				$equipo = $this->repository->create($input);
+				$this->setSuccess(true);
+				$this->addToResponseArray('equipo', $equipo->toArray());
+				return $this->getResponseArrayJson();
 			}
 			catch (FormValidationException $e)
 			{
-				return Response::json($e->getErrors()->all());
+				$this->addToResponseArray('errors', $e->getErrors()->all());
+				return $this->getResponseArrayJson();				
 			}
 		}
 	}
@@ -76,8 +79,8 @@ class EquipoController extends \BaseController {
 	public function show($id)
 	{	
 		$paises = $this->paisRepository->getAllForSelect();
-		$equipo = $this->equipoRepository->get($id);
-		$jugadoresTable = $this->equipoRepository->getJugadoresTable($id);
+		$equipo = $this->repository->get($id);
+		$jugadoresTable = $this->repository->getJugadoresTable($id);
 		return View::make('equipos.show', compact('equipo', 'paises', 'jugadoresTable'));
 	}
 
@@ -116,17 +119,19 @@ class EquipoController extends \BaseController {
 	 * @return Response
 	 */
 	public function destroyApi($id)
-	{
-		//
+	{		
+		if(Request::ajax())
+			$this->setSuccess($this->repository->delete($id)]);
+		return $this->getResponseArrayJson();
 	}
 
 	public function listaApi()
 	{
-		return $this->equipoRepository->getDefaultTableForAll();
+		return $this->repository->getDefaultTableForAll();
 	}
 
 	public function jugadoresApi($id)
 	{
-		return $this->equipoRepository->getTableForPlayers($id);
+		return $this->repository->getTableForPlayers($id);
 	}
 }

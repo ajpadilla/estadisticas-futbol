@@ -130,12 +130,9 @@ class JugadorController extends \BaseController {
 	 */
 	public function destroyApi($id)
 	{
-		if (Request::ajax())
-		{
-			return Response::json(['success' => $this->jugadorRepository->delete($id)]);
-		}
-		return Response::json(['success' => false]);
-
+		if(Request::ajax())
+			$this->setSuccess($this->jugadorRepository->delete($id));
+		return $this->getResponseArrayJson();
 	}
 
 	public function listaApi()
