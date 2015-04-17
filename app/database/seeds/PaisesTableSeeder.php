@@ -35,6 +35,27 @@ class PaisesTableSeeder extends DatabaseSeeder{
             'updated_at' => $date->format('Y-m-d h:m:s')              
         );
 
+        $paises[] = array(
+            'nombre' => 'Venezuela',
+            'bandera' => null,
+            'created_at' => $date->format('Y-m-d h:m:s'),
+            'updated_at' => $date->format('Y-m-d h:m:s')              
+        );
+
+        $paises[] = array(
+            'nombre' => 'España',
+            'bandera' => null,
+            'created_at' => $date->format('Y-m-d h:m:s'),
+            'updated_at' => $date->format('Y-m-d h:m:s')              
+        );
+
+        $paises[] = array(
+            'nombre' => 'Colombia',
+            'bandera' => null,
+            'created_at' => $date->format('Y-m-d h:m:s'),
+            'updated_at' => $date->format('Y-m-d h:m:s')              
+        );
+
         DB::table('paises')->insert($paises);
 	}
 
