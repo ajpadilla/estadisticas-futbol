@@ -522,37 +522,35 @@ var CustomApp = function () {
         });
     }
 
-    //Metodo para eliminar jugador de l BD.
-    var deletePlayer = function () {
-        $('.eliminar-jugador').on('click', function(event) {
-            event.preventDefault();
-            alert('test');
-            bootbox.confirm("¿Esta seguro de eliminar al jugador?", function(result) {
-                if (result){
-                   $.ajax({
-                    type: 'GET',
-                    url: $(this).attr('href'),
-                    dataType: "JSON",
-                    success: function(response) {
-                        if (response.success) {
-                            $(this).parent().parent().remove();
-                            bootbox.dialog({
-                                message:" ¡Jugador Eliminado!",
-                                title: "Éxito",
-                                buttons: {
-                                    success: {
-                                        label: "Success!",
-                                        className: "btn-success"
-                                    }
+    //Metodo para eliminar jugador de la BD.
+    var deletePlayer = function (idPlayer) {
+        
+        bootbox.confirm("¿Esta seguro de eliminar al Jugador?", function(result) {
+            console.log("Confirm result: "+result);
+            if (result == true){
+               $.ajax({
+                type: 'GET',
+                url: $('#eliminar-jugador').attr('href'),
+                data: {'idPlayer': idPlayer},
+                dataType: "JSON",
+                success: function(response) {
+                    if (response.success == true) {
+                        $('#eliminar_jugador_'+idPlayer).parent().parent().remove();
+                        bootbox.dialog({
+                            message:" ¡Jugador Eliminado!",
+                            title: "Éxito",
+                            buttons: {
+                                success: {
+                                    label: "Success!",
+                                    className: "btn-success"
                                 }
-
-                            });
-                        }
-                    }
-                });
-               }
-           });
-        });
+                            }
+                        });
+                    };
+                }
+            });
+           };
+       });
     }
 
     // Metodo para saber cual opcion(ver, editar, borrar) fue seleccionada de la lista de Jugadores
@@ -1144,7 +1142,6 @@ var CustomApp = function () {
             loadFieldSelect($('#lista-posiciones').attr('href'),'#posicion_id');
             loadFieldSelect($('#lista-equipos').attr('href'),'#equipo_id');
             loadDataPlayer();
-            deletePlayer();
             loadDataCountry();
         }
     }
