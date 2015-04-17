@@ -8,7 +8,7 @@ class PageController extends \BaseController {
 	 * @return Response
 	 */
 	public function index()
-	{
+	{		
 		return View::make('pages.home');
 	}
 

@@ -28,7 +28,8 @@ class JugadorController extends \BaseController {
 	 */
 	public function index()
 	{
-		return View::make('jugadores.index');
+		$jugadoresTable = $this->jugadorRepository->getAllTable();
+		return View::make('jugadores.index', compact('jugadoresTable'));
 	}
 
 
@@ -116,75 +117,36 @@ class JugadorController extends \BaseController {
 	}
 
 
+
+	/*
+	************************** API METHODS *****************************
+	*/
+
 	/**
 	 * Remove the specified resource from storage.
 	 *
 	 * @param  int  $id
 	 * @return Response
 	 */
-	public function destroy()
+	public function destroyApi($id)
+	{
+		if(Request::ajax())
+			$this->setSuccess($this->jugadorRepository->delete($id));
+		return $this->getResponseArrayJson();
+	}
+
+	public function listaApi()
+	{
+		return $this->jugadorRepository->getDefaultTableForAllPlayers();
+	}
+
+	public function showApi()
 	{
 		if (Request::ajax())
 		{
 			if (Input::has('jugadorId'))
 			{
-				$jugador = $this->jugadorRepository->delete(Input::get('jugadorId'));
-				return Response::json(['success' => true]);
-			}else{
-				return Response::json(['success' => false]);
-			}
-		}
-
-	}
-
-	public function listadoJugadores()
-	{
-		$collection = Datatable::collection($this->jugadorRepository->getAll())
-			->searchColumns('nombre')
-			->orderColumns('nombre');
-
-		$collection->addColumn('País', function($model)
-		{
-			 return $model->pais->nombre;
-		});
-
-		$collection->addColumn('Posición', function($model)
-		{
-			 return $model->posicion->abreviacion;
-		});
-
-		$collection->addColumn('Nombre', function($model)
-		{
-			 return $model->nombre;
-		});
-
-		$collection->addColumn('Edad', function($model)
-		{
-			 return $model->getAge();
-		});
-
-		$collection->addColumn('Acciones', function($model)
-		{
-			$links = "<a class='ver-jugador' href='#' id='ver_".$model->id."'>Ver</a>
-					<br />";
-			$links .= "<a  class='editar-jugador' href='#new-player-form' id='editar_".$model->id."'>Editar</a>
-					<br />
-					<a class='eliminar-jugador' href='#' id='eliminar_".$model->id."'>Eliminar</a>";
-
-			return $links;
-		});
-	
-		return $collection->make();
-	
-	}
-
-	public function getData()
-	{
-		if (Request::ajax())
-		{
-			if (Input::has('jugadorId'))
-			{
-				$jugador = $this->jugadorRepository->getById(Input::get('jugadorId'));
+				$jugador = $this->jugadorRepository->get(Input::get('jugadorId'));
 				return Response::json(['success' => true, 'jugador' => $jugador->toArray(),
 					'urlImg' => $jugador->foto->url(),
 					'posicion' => $jugador->posicion->toArray(),
@@ -194,6 +156,11 @@ class JugadorController extends \BaseController {
 				return Response::json(['success' => false]);
 			}
 		}
+	}
+
+	public function cambiarEquipoApi($id)
+	{
+		
 	}
 
 }

@@ -322,9 +322,7 @@ var CustomApp = function () {
             data: {'jugadorId': idPlayer},
             dataType: "JSON",
             success: function(response) {
-                if (response.success == true) {
-                    console.log(response);
-                    console.log(response.jugador);
+                if (response.success) {
                     $('#jugador_id').val(response.jugador.id);
                     $('#nombre').val(response.jugador.nombre);
                     $('#fecha_nacimiento').val($.datepicker.formatDate('dd-mm-yy', new Date(
@@ -524,34 +522,35 @@ var CustomApp = function () {
     }
 
     //Metodo para eliminar jugador de l BD.
-    var deletePlayer = function (idPlayer) {
-        bootbox.confirm("¿Esta seguro de eliminar al jugador?", function(result) {
-            console.log("Confirm result: "+result);
-            if (result == true){
-               $.ajax({
-                type: 'GET',
-                url: $('#eliminar-jugador').attr('href'),
-                data: {'jugadorId': idPlayer},
-                dataType: "JSON",
-                success: function(response) {
-                    if (response.success == true) {
-                        $('#eliminar_'+idPlayer).parent().parent().remove();
-                        bootbox.dialog({
-                            message:" ¡Jugador Eliminado!",
-                            title: "Éxito",
-                            buttons: {
-                                success: {
-                                    label: "Success!",
-                                    className: "btn-success"
+    var deletePlayer = function () {
+        $('.eliminar-jugador').on('click', function(event) {
+            event.preventDefault();
+            alert('test');
+            bootbox.confirm("¿Esta seguro de eliminar al jugador?", function(result) {
+                if (result){
+                   $.ajax({
+                    type: 'GET',
+                    url: $(this).attr('href'),
+                    dataType: "JSON",
+                    success: function(response) {
+                        if (response.success) {
+                            $(this).parent().parent().remove();
+                            bootbox.dialog({
+                                message:" ¡Jugador Eliminado!",
+                                title: "Éxito",
+                                buttons: {
+                                    success: {
+                                        label: "Success!",
+                                        className: "btn-success"
+                                    }
                                 }
-                            }
-                        });
-                    };
-                }
-            });
-           };
-       });
-
+                            });
+                        };
+                    }
+                });
+               };
+           });
+        });
     }
 
     // Metodo para saber cual opcion(ver, editar, borrar) fue seleccionada
@@ -665,6 +664,7 @@ var CustomApp = function () {
             loadFieldSelect($('#lista-paises').attr('href'),'#pais_id');
             loadFieldSelect($('#lista-posiciones').attr('href'),'#posicion_id');
             loadDataPlayer();
+            deletePlayer();
         }
     };
 }();

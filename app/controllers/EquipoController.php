@@ -1,17 +1,22 @@
 <?php
 
 use soccer\Equipo\EquipoRepository;
+use soccer\Pais\PaisRepository;
 use soccer\Forms\EquipoForm;
 use Laracasts\Validation\FormValidationException;
 //use Datatable;
 
 class EquipoController extends \BaseController {
 
-	protected $equipoRepository;
+	protected $repository;
+	protected $paisRepository;
 	protected $equipoForm;
 
-	public function __construct(EquipoRepository $equipoRepository, EquipoForm $equipoForm){
-		$this->equipoRepository = $equipoRepository;
+	public function __construct(EquipoRepository $repository, 
+								PaisRepository $paisRepository, 
+								EquipoForm $equipoForm){
+		$this->repository = $repository;
+		$this->paisRepository = $paisRepository;
 		$this->equipoForm = $equipoForm;
 	}	
 
@@ -21,22 +26,8 @@ class EquipoController extends \BaseController {
 	 * @return Response
 	 */
 	public function index()
-	{
-
-		$columns = [
-			'País',
-			'Nombre',
-			'Tipo',
-			'Fecha Fundación',
-			'Apodo',
-			'Acciones'
-		];
-
-		$table = Datatable::table()
-		->addColumn($columns)
-		->setUrl(route('equipos.api.lista'))
-		->noScript();
-
+	{		
+		$table = $this->repository->getAllTable();
 		return View::make('equipos.index', compact('table'));
 	}	
 
@@ -65,12 +56,15 @@ class EquipoController extends \BaseController {
 			try
 			{
 				$this->equipoForm->validate($input);
-				$equipo = $this->equipoRepository->create($input);
-				return Response::json(['success' => true, 'equipo' => $equipo->toArray()]);
+				$equipo = $this->repository->create($input);
+				$this->setSuccess(true);
+				$this->addToResponseArray('equipo', $equipo->toArray());
+				return $this->getResponseArrayJson();
 			}
 			catch (FormValidationException $e)
 			{
-				return Response::json($e->getErrors()->all());
+				$this->addToResponseArray('errors', $e->getErrors()->all());
+				return $this->getResponseArrayJson();				
 			}
 		}
 	}
@@ -84,8 +78,10 @@ class EquipoController extends \BaseController {
 	 */
 	public function show($id)
 	{	
-		$equipo = $this->equipoRepository->get($id);
-		return View::make('equipos.show', compact('equipo'));
+		$paises = $this->paisRepository->getAllForSelect();
+		$equipo = $this->repository->get($id);
+		$jugadoresTable = $this->repository->getJugadoresTable($id);
+		return View::make('equipos.show', compact('equipo', 'paises', 'jugadoresTable'));
 	}
 
 
@@ -100,7 +96,6 @@ class EquipoController extends \BaseController {
 		//
 	}
 
-
 	/**
 	 * Update the specified resource in storage.
 	 *
@@ -113,63 +108,30 @@ class EquipoController extends \BaseController {
 	}
 
 
+	/*
+	************************** API METHODS *****************************
+	*/
+	
 	/**
 	 * Remove the specified resource from storage.
 	 *
 	 * @param  int  $id
 	 * @return Response
 	 */
-	public function destroy($id)
-	{
-		//
+	public function destroyApi($id)
+	{		
+		if(Request::ajax())
+			$this->setSuccess($this->repository->delete($id));
+		return $this->getResponseArrayJson();
 	}
 
-	/*
-	************************** API METHODS *****************************
-	*/
 	public function listaApi()
 	{
-		$collection = Datatable::collection($this->equipoRepository->getAll())
-			->searchColumns('País', 'Nombre', 'Tipo', 'Fecha Fundación', 'Apodo')
-			->orderColumns('País', 'Nombre', 'Tipo', 'Fecha Fundación', 'Apodo');
-
-		$collection->addColumn('País', function($model)
-		{
-			 return $model->pais->nombre;
-		});
-
-		$collection->addColumn('Nombre', function($model)
-		{
-			 return $model->nombre;
-		});
-
-		$collection->addColumn('Tipo', function($model)
-		{
-			 return $model->tipo;
-		});
-
-		$collection->addColumn('Fecha Fundación', function($model)
-		{
-			 return $model->fecha_fundacion;
-		});
-
-		$collection->addColumn('Apodo', function($model)
-		{
-			 return $model->apodo;
-		});
-
-		$collection->addColumn('Acciones', function($model)
-		{
-			$links = "<a class='ver-jugador' href='" . route('equipos.show', $model->id) . "'>Ver</a>
-					<br />";
-			$links .= "<a  class='editar-jugador' href='#new-player-form' id='editar_".$model->id."'>Editar</a>
-					<br />
-					<a class='eliminar-jugador' href='#' id='eliminar_".$model->id."'>Eliminar</a>";
-
-			return $links;
-		});
-	
-		return $collection->make();	
+		return $this->repository->getDefaultTableForAll();
 	}
 
+	public function jugadoresApi($id)
+	{
+		return $this->repository->getTableForPlayers($id);
+	}
 }
