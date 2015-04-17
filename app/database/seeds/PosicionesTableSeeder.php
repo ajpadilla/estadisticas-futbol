@@ -14,12 +14,19 @@ class PosicionesTableSeeder extends DatabaseSeeder{
 	{
 		$date = new DateTime;
 
-         $posiciones[] = array(
+        $posiciones[] = array(
             'nombre' => 'Portero',
             'abreviacion' => 'PO',
             'created_at' => $date->format('Y-m-d h:m:s'),
             'updated_at' => $date->format('Y-m-d h:m:s')            
         ); 
+
+        $posiciones[] = array(
+            'nombre' => 'Defensa',
+            'abreviacion' => 'DEF',
+            'created_at' => $date->format('Y-m-d h:m:s'),
+            'updated_at' => $date->format('Y-m-d h:m:s')            
+        );  
 
         $posiciones[] = array(
             'nombre' => 'Defensor central',
@@ -52,6 +59,13 @@ class PosicionesTableSeeder extends DatabaseSeeder{
         $posiciones[] = array(
             'nombre' => 'Defensor de medio campo',
             'abreviacion' => 'DM',
+            'created_at' => $date->format('Y-m-d h:m:s'),
+            'updated_at' => $date->format('Y-m-d h:m:s')              
+        );
+
+        $posiciones[] = array(
+            'nombre' => 'Mediocampista',
+            'abreviacion' => 'MED',
             'created_at' => $date->format('Y-m-d h:m:s'),
             'updated_at' => $date->format('Y-m-d h:m:s')              
         );
@@ -164,6 +178,13 @@ class PosicionesTableSeeder extends DatabaseSeeder{
         $posiciones[] = array(
             'nombre' => 'Puntero',
             'abreviacion' => 'PP',
+            'created_at' => $date->format('Y-m-d h:m:s'),
+            'updated_at' => $date->format('Y-m-d h:m:s')              
+        );
+
+        $posiciones[] = array(
+            'nombre' => 'Delantero',
+            'abreviacion' => 'DEL',
             'created_at' => $date->format('Y-m-d h:m:s'),
             'updated_at' => $date->format('Y-m-d h:m:s')              
         );

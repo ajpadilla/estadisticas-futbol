@@ -137,7 +137,7 @@ class JugadorController extends \BaseController {
 
 	public function listaApi()
 	{
-		return $this->jugadorRepository->getDefaultTableForAllPlayers();
+		return $this->jugadorRepository->getDefaultTableForAll();
 	}
 
 	public function showApi()
@@ -148,9 +148,11 @@ class JugadorController extends \BaseController {
 			{
 				$jugador = $this->jugadorRepository->get(Input::get('jugadorId'));
 				return Response::json(['success' => true, 'jugador' => $jugador->toArray(),
-					'urlImg' => $jugador->foto->url(),
+					'urlImg' => $jugador->foto->url('thumb'),
 					'posicion' => $jugador->posicion->toArray(),
-					'pais' => $jugador->pais->toArray()
+					'pais' => $jugador->pais->toArray(),
+					'public' => public_path(),
+					'base' => base_path()
 					]);
 			}else{
 				return Response::json(['success' => false]);

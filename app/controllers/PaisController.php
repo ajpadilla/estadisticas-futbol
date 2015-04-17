@@ -1,12 +1,23 @@
 <?php
 use soccer\Pais\PaisRepository;
+use soccer\Forms\RegistrarPaisForm;
+use soccer\Forms\EditarPaisForm;
+use Laracasts\Validation\FormValidationException;
+
 
 class PaisController extends \BaseController {
 
 	protected $paisRepository;
+	protected $registrarPaisForm;
+	protected $editarPaisForm;
 
-	public function __construct(PaisRepository $paisRepository) {
+	public function __construct(PaisRepository $paisRepository,
+		RegistrarPaisForm $registrarPaisForm,
+		EditarPaisForm $editarPaisForm
+		) {
 		$this->paisRepository = $paisRepository;
+		$this->registrarPaisForm = $registrarPaisForm;
+		$this->editarPaisForm = $editarPaisForm;
 	}
 
 	/**
@@ -16,7 +27,7 @@ class PaisController extends \BaseController {
 	 */
 	public function index()
 	{
-		//
+		return View::make('paises.index');
 	}
 
 
@@ -38,7 +49,20 @@ class PaisController extends \BaseController {
 	 */
 	public function store()
 	{
-		//
+		if(Request::ajax())
+		{
+			$input = Input::all();
+			try
+			{
+				$this->registrarPaisForm->validate($input);
+				$pais = $this->paisRepository->create($input);
+				return Response::json(['success' => true, 'pais' => $pais->toArray()]);
+			}
+			catch (FormValidationException $e)
+			{
+				return Response::json($e->getErrors()->all());
+			}
+		}
 	}
 
 
@@ -72,9 +96,19 @@ class PaisController extends \BaseController {
 	 * @param  int  $id
 	 * @return Response
 	 */
-	public function update($id)
+	public function update()
 	{
-		//
+		$input = Input::all();
+		try
+		{
+			$this->editarPaisForm->validate($input);
+			$this->paisRepository->update($input);
+			return Response::json(['success' => true]);
+		}
+		catch (FormValidationException $e)
+		{
+			return Response::json($e->getErrors()->all());
+		}
 	}
 
 
@@ -84,9 +118,18 @@ class PaisController extends \BaseController {
 	 * @param  int  $id
 	 * @return Response
 	 */
-	public function destroy($id)
+	public function destroy()
 	{
-		//
+		if (Request::ajax())
+		{
+			if (Input::has('countryId'))
+			{
+				$this->paisRepository->delete(Input::get('countryId'));
+				return Response::json(['success' => true]);
+			}else{
+				return Response::json(['success' => false]);
+			}
+		}
 	}
 
 	public function getAllValue(){
@@ -101,5 +144,50 @@ class PaisController extends \BaseController {
 			return Response::json(['success' => false]);
 		}
 	}
+
+	public function listaApi()
+	{
+		$collection = Datatable::collection($this->paisRepository->getAll())
+			->searchColumns('nombre','bandera')
+			->orderColumns('nombre','bandera');
+
+		$collection->addColumn('nombre', function($model)
+		{
+			 return $model->nombre;
+		});
+
+		$collection->addColumn('bandera', function($model)
+		{
+			 return $model->bandera;
+		});
+
+		$collection->addColumn('Acciones', function($model)
+		{
+			$links = "<a class='ver-pais' href='#' id='ver_pais_".$model->id."'>Ver</a>
+					<br />";
+			$links .= "<a  class='editar-pais' href='#new-country-form' id='editar_pais_".$model->id."'>Editar</a>
+					<br />
+					<a class='eliminar-pais' href='#' id='eliminar_pais_".$model->id."'>Eliminar</a>";
+
+			return $links;
+		});
+	
+		return $collection->make();
+	}
+
+	public function getData()
+	{
+		if (Request::ajax())
+		{
+			if (Input::has('countryId'))
+			{
+				$pais = $this->paisRepository->getById(Input::get('countryId'));
+				return Response::json(['success' => true, 'pais' => $pais->toArray()]);
+			}else{
+				return Response::json(['success' => false]);
+			}
+		}
+	}
+
 
 }

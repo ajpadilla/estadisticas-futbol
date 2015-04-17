@@ -34,7 +34,7 @@ class CreateEquipoJugadorTable extends Migration {
 	 */
 	public function down()
 	{
-		Schema::drop('equipo_jugador');
+		Schema::dropIfExists('equipo_jugador');
 	}
 
 }
