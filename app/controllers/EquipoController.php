@@ -63,6 +63,7 @@ class EquipoController extends \BaseController {
 			}
 			catch (FormValidationException $e)
 			{
+				$this->setSuccess(false);
 				$this->addToResponseArray('errors', $e->getErrors()->all());
 				return $this->getResponseArrayJson();				
 			}
