@@ -866,8 +866,9 @@ var CustomApp = function () {
                     console.log(response);
                     $('#pais_equipo').val(response.equipo.pais_id);
                     $('#jugadores').val(response.jugadores);
-                    $('#pais_equipo').trigger("chosen:updated");
-                    $('#jugadores').trigger("chosen:updated");
+                   // $('#pais_equipo').trigger("chosen:updated");
+                    //$('#jugadores').trigger("chosen:updated");
+                    $('.chosen-select').trigger("chosen:updated");
                 }
             }
         });
