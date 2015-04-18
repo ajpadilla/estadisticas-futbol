@@ -5,8 +5,8 @@
 			<h4><i class="fa fa-user"></i><span class="hidden-inline-mobile">@yield('title-modal')</span></h4>
 		</div>
 		<div class="box-body">
-			{{ Form::open(['route' => 'jugadores.store','class'=>'form-horizontal','role'=>'form',
-			'method' => 'POST','files' => true,'id'=> 'player-form']) }}
+			{{ Form::open(['route' => 'equipos.store','class'=>'form-horizontal','role'=>'form',
+			'method' => 'POST','files' => true,'id'=> 'team-form']) }}
 			<div class="row">
 				<div class="col-md-12">
 					<div class="box border green">

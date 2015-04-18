@@ -63,6 +63,7 @@
 		<a id="lista-jugadores" href="{{ URL::route('jugadores.seleccionar') }}"></a>
 		<!--Routes Equipos-->
 		<a id="lista-equipos" href="{{ URL::route('equipos.seleccionar') }}"></a>
+		<a id="agregar-equipo" href="{{ URL::route('equipos.store') }}"></a>
 			
 	</div>
 </div>
