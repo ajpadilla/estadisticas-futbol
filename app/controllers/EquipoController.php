@@ -120,6 +120,26 @@ class EquipoController extends \BaseController {
 		}
 	}
 
+	public function updateApi()
+	{
+		if(Request::ajax())
+		{
+			$input = Input::all();
+			try
+			{
+				$this->equipoForm->validate($input);
+				$equipo = $this->repository->update($input);
+				$this->setSuccess(true);
+				$this->addToResponseArray('equipo', $equipo);
+				return $this->getResponseArrayJson();
+			}
+			catch (FormValidationException $e)
+			{
+				return Response::json($e->getErrors()->all());
+			}
+		}
+	}
+
 
 	/*
 	************************** API METHODS *****************************
