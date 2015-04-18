@@ -269,7 +269,7 @@ var CustomApp = function () {
               return this.optional(element) || /^[a-zA-Z0-9ñÑ\-]+$/i.test(value);
         }, 'sólo letras, números y guiones.');
 
-        $('#player-form').validate({
+        $('#team-form').validate({
             rules:{
                 nombre:{
                     required:true,
@@ -277,39 +277,38 @@ var CustomApp = function () {
                 apodo:{
                     required:true,
                 },
-                altura:{
+                fecha_fundacion:{
                     required:true,
-                    decimalNumbers:true
+                    customDateValidator: true
                 },
-                abreviacion:{
+                tipo:{
                     required:true,
-                    onlyLettersNumbersAndDash:true
                 },
                 posicion:{
                     required:true,
                 },
-                pais:{
-                    required:true,
+                ubucacion:{
+                    required:true
                 }
             },
             messages:{
-                nombre:{
-                    required:'Este campo es obligatorio.',
+                 nombre:{
+                    required: 'Este campo es obligatorio',
                 },
-                fecha_nacimiento:{
-                    required:'Este campo es obligatorio.',
+                apodo:{
+                    required: 'Este campo es obligatorio',
                 },
-                altura:{
-                   required:'Este campo es obligatorio.',
+                fecha_fundacion:{
+                    required:'Este campo es obligatorio',
                 },
-                abreviacion:{
-                  required:'Este campo es obligatorio.',
+                tipo:{
+                    required:'Este campo es obligatorio',
                 },
                 posicion:{
-                    required:'Este campo es obligatorio.',
+                    required:'Este campo es obligatorio',
                 },
-                pais:{
-                    required:'Este campo es obligatorio.',
+                ubucacion:{
+                    required:'Este campo es obligatorio'
                 }
             },
             highlight:function(element){
@@ -336,23 +335,24 @@ var CustomApp = function () {
                                 // Si quieres usar aquí jqueryForm, es lo mismo, lo agregas y ya. Creo que es buena idea!
 
                                 //ajax para el envío del formulario.
-                                if($('#player-form').valid()) {
+                                if($('#team-form').valid()) {
 
                                     var response = false; // Esta variable debería recibir los datos por ajax.
                                     var dataServer = null;
 
-                                    $("#player-form").submit(function(e){
+                                    $("#team-form").submit(function(e){
                                         var formData = new FormData(this);
-                                        //var form = $('#player-form').serializeArray();
+                                        //var form = $('#team-form').serializeArray();
 
                                         $.ajax({
                                             type: 'POST',
-                                            url: $('#agregar-jugador').attr('href'), 
+                                            url: $('#agregar-equipo').attr('href'), 
                                             data: formData,
                                             contentType: false,
                                             processData: false,
                                             dataType: "JSON",
                                             success: function(responseServer) {
+                                                console.log(responseServer);
                                                 if(responseServer.success == true) 
                                                 {
                                                     dataServer = responseServer;
@@ -369,14 +369,16 @@ var CustomApp = function () {
                                                         }
                                                     });
                                                     // Limpio cada elemento de las clases añadidas por el validator
-                                                    $('#player-form div').each(function(){
+                                                    $('#team-form div').each(function(){
                                                         cleanValidatorClasses(this);
                                                     });
                                                     //Reinicio el formulario
-                                                    $("#player-form")[0].reset();
-                                                    $('.chosen-select').html("");
+                                                    $("#team-form")[0].reset();
+                                                    loadFieldSelect($('#lista-paises').attr('href'),'#pais_equipo');
+                                                    loadFieldSelect($('#lista-jugadores').attr('href'),'#jugadores');
                                                     $('.chosen-select').trigger("chosen:updated");
                                                 }else{
+                                                    console.log(dataServer);
                                                      bootbox.dialog({
                                                         message:" ¡Error al agregar datos!",
                                                         title: "Error",
@@ -388,16 +390,18 @@ var CustomApp = function () {
                                                         }
                                                     });
                                                     // Limpio cada elemento de las clases añadidas por el validator
-                                                    $('#player-form div').each(function(){
+                                                    $('#team-form div').each(function(){
                                                         cleanValidatorClasses(this);
                                                     });
                                                     //Reinicio el formulario
-                                                    $("#player-form")[0].reset();
-                                                    $('.chosen-select').html("");
+                                                    $("#team-form")[0].reset();
+                                                    loadFieldSelect($('#lista-paises').attr('href'),'#pais_equipo');
+                                                    loadFieldSelect($('#lista-jugadores').attr('href'),'#jugadores');
                                                     $('.chosen-select').trigger("chosen:updated");
                                                 }
                                             },
                                             error: function(jqXHR, textStatus, errorThrown) {
+                                               console.log(errorThrown);
                                                bootbox.dialog({
                                                         message:" ¡Error al enviar datos al servidor!",
                                                         title: "Error",
@@ -409,18 +413,19 @@ var CustomApp = function () {
                                                         }
                                                     });
                                                     // Limpio cada elemento de las clases añadidas por el validator
-                                                    $('#player-form div').each(function(){
+                                                    $('#team-form div').each(function(){
                                                         cleanValidatorClasses(this);
                                                     });
                                                     //Reinicio el formulario
-                                                    $("#player-form")[0].reset();
-                                                    $('.chosen-select').html("");
+                                                    $("#team-form")[0].reset();
+                                                    loadFieldSelect($('#lista-paises').attr('href'),'#pais_equipo');
+                                                    loadFieldSelect($('#lista-jugadores').attr('href'),'#jugadores');
                                                     $('.chosen-select').trigger("chosen:updated");
                                             }
                                         });
                                         e.preventDefault(); //Prevent Default action. 
                                     }); 
-                                    $("#player-form").submit();
+                                    $("#team-form").submit();
                                 } else {
                                     return false;
                                 }
