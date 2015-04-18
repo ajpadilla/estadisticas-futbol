@@ -94,7 +94,22 @@ class EquipoController extends \BaseController {
 	 */
 	public function edit($id)
 	{
-		//
+		$input = Input::all();
+			try
+			{
+				$this->equipoForm->validate($input);
+				$equipo = $this->repository->create($input);
+				$this->setSuccess(true);
+				$this->addToResponseArray('equipo', $equipo->toArray());
+				return $this->getResponseArrayJson();
+			}
+			catch (FormValidationException $e)
+			{
+				$this->setSuccess(false);
+				$this->addToResponseArray('errors', $e->getErrors()->all());
+				return $this->getResponseArrayJson();				
+			}
+
 	}
 
 	/**
