@@ -64,7 +64,9 @@
 		<!--Routes Equipos-->
 		<a id="lista-equipos" href="{{ URL::route('equipos.seleccionar') }}"></a>
 		<a id="agregar-equipo" href="{{ URL::route('equipos.store') }}"></a>
-			
+		<a id="ver-equipo" href="{{ URL::route('equipos.data') }}"></a>	
+		<a id="editar-equipo" href="{{ URL::route('equipos.api.update') }}"></a>
+		<a id="eliminar-equipo" href="{{ URL::route('equipos.api.eliminar') }}"></a>
 	</div>
 </div>
 <!-- /SIDEBAR -->

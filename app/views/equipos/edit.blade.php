@@ -1,5 +1,6 @@
-{{ Form::model($equipo, ['route' => ['equipos.update', $equipo->id], 'class' => 'form-horizontal']) }}
+{{ Form::model($equipo, ['route' => ['equipos.update', $equipo->id], 'class' => 'form-horizontal','files' => true]) }}
 	<div class="row">
+	 @include('layouts.partials._error')
 		<div class="col-md-6">
 			<div class="box border green">
 				<div class="box-title">
@@ -29,7 +30,8 @@
 			</div>	
 		</div>		
 	</div>
+	<div class="form-actions clearfix"> 
+		<input type="submit" value="Actualizar Cuenta" class="btn btn-primary pull-right"> 
+	</div>
 {{ Form::close() }}						
-<div class="form-actions clearfix"> 
-	<input type="submit" value="Actualizar Cuenta" class="btn btn-primary pull-right"> 
-</div>
+

@@ -94,7 +94,8 @@ class EquipoController extends \BaseController {
 	 */
 	public function edit($id)
 	{
-		//
+
+
 	}
 
 	/**
@@ -105,7 +106,38 @@ class EquipoController extends \BaseController {
 	 */
 	public function update($id)
 	{
-		//
+		$input = Input::all();
+		$inpunt['equipo_id'] = $id;
+		try
+		{
+			$this->equipoForm->validate($input);
+			$equipo = $this->repository->update($input);
+			return Redirect::route('equipos.show', $id);
+		}
+		catch (FormValidationException $e)
+		{
+			return Redirect::back()->withInput()->withErrors($e->getErrors());			
+		}
+	}
+
+	public function updateApi()
+	{
+		if(Request::ajax())
+		{
+			$input = Input::all();
+			try
+			{
+				$this->equipoForm->validate($input);
+				$equipo = $this->repository->update($input);
+				$this->setSuccess(true);
+				$this->addToResponseArray('equipo', $equipo);
+				return $this->getResponseArrayJson();
+			}
+			catch (FormValidationException $e)
+			{
+				return Response::json($e->getErrors()->all());
+			}
+		}
 	}
 
 
@@ -119,11 +151,13 @@ class EquipoController extends \BaseController {
 	 * @param  int  $id
 	 * @return Response
 	 */
-	public function destroyApi($id)
+	public function destroyApi()
 	{		
 		if(Request::ajax())
-			$this->setSuccess($this->repository->delete($id));
-		return $this->getResponseArrayJson();
+			$equipo = $this->repository->delete(Input::get('idTeam'));
+			$this->setSuccess(true);
+			$this->addToResponseArray('equipo', $equipo);
+			return $this->getResponseArrayJson();
 	}
 
 	public function listaApi()
@@ -152,6 +186,24 @@ class EquipoController extends \BaseController {
 		}else{
 			$this->setSuccess(false);
 			return $this->getResponseArrayJson();
+		}
+	}
+
+	public function showApi()
+	{
+		if (Request::ajax())
+		{
+			if (Input::has('equipoId'))
+			{
+				$equipo = $this->repository->get(Input::get('equipoId'));
+				$this->setSuccess(true);
+				$this->addToResponseArray('equipo', $equipo->toArray());
+				$this->addToResponseArray('jugadores', $equipo->getJugadoresActuales());
+				return $this->getResponseArrayJson();
+			}else{
+				$this->setSuccess(false);
+				return $this->getResponseArrayJson();
+			}
 		}
 	}
 }

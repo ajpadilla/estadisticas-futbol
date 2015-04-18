@@ -78,4 +78,9 @@ class Equipo extends Eloquent implements StaplerableInterface{
 	{
 		return ucfirst(strtolower($value));
 	}
+
+	public function getJugadoresActuales()
+	{
+		return $this->jugadores()->whereFechaFin(null)->lists('equipo_jugador.jugador_id');
+	}
 }
