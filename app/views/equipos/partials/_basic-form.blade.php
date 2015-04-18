@@ -1,4 +1,17 @@
 <h4>Información Básica</h4>
+@if (!empty($equipo))
+<div class="form-group" style="display:none">
+	{{ Form::label('equipo_id', 'Id', ['class' => 'col-md-4 control-label']) }}	
+	<div class="col-md-8">{{ Form::text('equipo_id', $equipo->id, ['class' => 'form-control','id' => 'equipo_id']) }}
+	</div>
+</div>
+@else 
+<div class="form-group" style="display:none">
+	{{ Form::label('equipo_id', 'Id', ['class' => 'col-md-4 control-label']) }}	
+	<div class="col-md-8">{{ Form::text('equipo_id',null, ['class' => 'form-control','id' => 'equipo_id']) }}
+	</div>
+</div>
+@endif
 <div class="form-group">
 	{{ Form::label('nombre', 'Nombre', ['class' => 'col-md-4 control-label']) }}	
 	<div class="col-md-8">{{ Form::text('nombre', null, ['class' => 'form-control']) }}</div>
