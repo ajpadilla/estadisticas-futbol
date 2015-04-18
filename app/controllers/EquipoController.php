@@ -94,21 +94,7 @@ class EquipoController extends \BaseController {
 	 */
 	public function edit($id)
 	{
-		$input = Input::all();
-			try
-			{
-				$this->equipoForm->validate($input);
-				$equipo = $this->repository->create($input);
-				$this->setSuccess(true);
-				$this->addToResponseArray('equipo', $equipo->toArray());
-				return $this->getResponseArrayJson();
-			}
-			catch (FormValidationException $e)
-			{
-				$this->setSuccess(false);
-				$this->addToResponseArray('errors', $e->getErrors()->all());
-				return $this->getResponseArrayJson();				
-			}
+
 
 	}
 
@@ -120,7 +106,17 @@ class EquipoController extends \BaseController {
 	 */
 	public function update($id)
 	{
-		//
+		$input = Input::all();
+		$inpunt['equipo_id'] = $id;
+		try
+		{
+			$this->equipoForm->validate($input);
+			$equipo = $this->repository->create($input);
+		}
+		catch (FormValidationException $e)
+		{
+			return Redirect::back()->withInput()->withErrors($e->getErrors());			
+		}
 	}
 
 
@@ -167,6 +163,23 @@ class EquipoController extends \BaseController {
 		}else{
 			$this->setSuccess(false);
 			return $this->getResponseArrayJson();
+		}
+	}
+
+	public function showApi()
+	{
+		if (Request::ajax())
+		{
+			if (Input::has('equipoId'))
+			{
+				$equipo = $this->repository->get(Input::get('equipoId'));
+				$this->setSuccess(true);
+				$this->addToResponseArray('equipo', $equipo->toArray());
+				return $this->getResponseArrayJson();
+			}else{
+				$this->setSuccess(false);
+				return $this->getResponseArrayJson();
+			}
 		}
 	}
 }
