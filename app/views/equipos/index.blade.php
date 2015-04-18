@@ -37,6 +37,7 @@
 	@include('equipos.partials._form_view-template')--}}
 </div>
 @include('equipos.new')
+@include('jugadores.new')
 @stop
 
 @section('scripts')
