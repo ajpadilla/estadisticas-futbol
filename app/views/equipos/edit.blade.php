@@ -1,4 +1,4 @@
-{{ Form::model($equipo, ['route' => ['equipos.edit', $equipo->id], 'class' => 'form-horizontal']) }}
+{{ Form::model($equipo, ['route' => ['equipos.update', $equipo->id], 'class' => 'form-horizontal']) }}
 	<div class="row">
 		<div class="col-md-6">
 			<div class="box border green">
