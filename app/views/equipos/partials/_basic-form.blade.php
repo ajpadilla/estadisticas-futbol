@@ -27,3 +27,7 @@
 	{{ Form::label('escudo','Escudo',['class'=>'col-md-4 control-label']) }}
 	<div class="col-md-8">{{ Form::file('escudo', ['class' => 'file-upload']) }}</div>
 </div>
+<div class="form-group">
+	{{ Form::label('foto','Foto',['class'=>'col-md-4 control-label']) }}
+	<div class="col-md-8">{{ Form::file('foto', ['class' => 'file-upload']) }}</div>
+</div>

@@ -32,6 +32,16 @@ var CustomApp = function () {
     }
 
     /*-----------------------------------------------------------------------------------*/
+    /*  Show and Hide Form New Team
+    /*-----------------------------------------------------------------------------------*/
+    var handleShowNewTeamForm = function() {
+        $("#new-team").on('click', function(){
+            $("#team-form-div").show();
+        });
+    }
+
+
+    /*-----------------------------------------------------------------------------------*/
     /*  Bootbox
     /*-----------------------------------------------------------------------------------*/
     var cleanValidatorClasses = function(element) {
@@ -238,6 +248,207 @@ var CustomApp = function () {
             .modal('show');
         });               
     }
+
+    var handleBootboxNewTeam = function () {
+
+        $.validator.addMethod('onlyLettersNumbersAndSpaces', function(value, element) {
+                    return this.optional(element) || /^[a-zA-Z0-9ñÑ\s]+$/i.test(value);
+            }, 'sólo letras, números y espacios.');
+
+        $.validator.addMethod('customDateValidator', function(value, element) {
+            try{
+                jQuery.datepicker.parseDate('dd-mm-yy', value);return true;}
+            catch(e){return false;}
+        },'Por favor, Ingrese una fecha valida con el dormato dd-mm-yy.');
+
+        jQuery.validator.addMethod('decimalNumbers', function(value, element) {
+            return this.optional(element) || /^\d{0,10}(\.\d{0,2})?$/i.test(value);
+        }, 'Por favor ingrese maximo'+[10]+'digitos enteros'+'y maximo'+[2]+'digitos decimales');
+
+        $.validator.addMethod('onlyLettersNumbersAndDash', function(value, element) {
+              return this.optional(element) || /^[a-zA-Z0-9ñÑ\-]+$/i.test(value);
+        }, 'sólo letras, números y guiones.');
+
+        $('#team-form').validate({
+            rules:{
+                nombre:{
+                    required:true,
+                },
+                apodo:{
+                    required:true,
+                },
+                fecha_fundacion:{
+                    required:true,
+                    customDateValidator: true
+                },
+                tipo:{
+                    required:true,
+                },
+                posicion:{
+                    required:true,
+                },
+                ubucacion:{
+                    required:true
+                }
+            },
+            messages:{
+                 nombre:{
+                    required: 'Este campo es obligatorio',
+                },
+                apodo:{
+                    required: 'Este campo es obligatorio',
+                },
+                fecha_fundacion:{
+                    required:'Este campo es obligatorio',
+                },
+                tipo:{
+                    required:'Este campo es obligatorio',
+                },
+                posicion:{
+                    required:'Este campo es obligatorio',
+                },
+                ubucacion:{
+                    required:'Este campo es obligatorio'
+                }
+            },
+            highlight:function(element){
+                $(element).closest('.form-group').removeClass('has-success').addClass('has-error');
+            },
+            unhighlight:function(element){
+                $(element).closest('.form-group').removeClass('has-error');
+            },
+            success:function(element){
+                element.addClass('valid').closest('.form-group').removeClass('has-error').addClass('has-success');
+            }
+        });
+
+        // Mostrar formulario para agregar nuevo jugador
+        $('#new-team').on('click', function() {
+            bootbox
+                .dialog({
+                    message: $('#team-form-div'),
+                    buttons: {
+                        success: {
+                            label: "Guardar",
+                            className: "btn-primary",
+                            callback: function () {
+                                // Si quieres usar aquí jqueryForm, es lo mismo, lo agregas y ya. Creo que es buena idea!
+
+                                //ajax para el envío del formulario.
+                                if($('#team-form').valid()) {
+
+                                    var response = false; // Esta variable debería recibir los datos por ajax.
+                                    var dataServer = null;
+
+                                    $("#team-form").submit(function(e){
+                                        var formData = new FormData(this);
+                                        //var form = $('#team-form').serializeArray();
+
+                                        $.ajax({
+                                            type: 'POST',
+                                            url: $('#agregar-equipo').attr('href'), 
+                                            data: formData,
+                                            contentType: false,
+                                            processData: false,
+                                            dataType: "JSON",
+                                            success: function(responseServer) {
+                                                console.log(responseServer);
+                                                if(responseServer.success == true) 
+                                                {
+                                                    dataServer = responseServer;
+                                                    console.log(dataServer);
+                                                    // Muestro otro dialog con información de éxito
+                                                    bootbox.dialog({
+                                                        message: $('#nombre').val() + " ha sido agregado correctamente!",
+                                                        title: "Éxito",
+                                                        buttons: {
+                                                            success: {
+                                                                label: "Success!",
+                                                                className: "btn-success"
+                                                            }
+                                                        }
+                                                    });
+                                                    // Limpio cada elemento de las clases añadidas por el validator
+                                                    $('#team-form div').each(function(){
+                                                        cleanValidatorClasses(this);
+                                                    });
+                                                    //Reinicio el formulario
+                                                    $("#team-form")[0].reset();
+                                                    loadFieldSelect($('#lista-paises').attr('href'),'#pais_equipo');
+                                                    loadFieldSelect($('#lista-jugadores').attr('href'),'#jugadores');
+                                                    $('.chosen-select').trigger("chosen:updated");
+                                                }else{
+                                                    console.log(dataServer);
+                                                     bootbox.dialog({
+                                                        message:" ¡Error al agregar datos!",
+                                                        title: "Error",
+                                                        buttons: {
+                                                            danger: {
+                                                                label: "Danger!",
+                                                                className: "btn-danger"
+                                                            }
+                                                        }
+                                                    });
+                                                    // Limpio cada elemento de las clases añadidas por el validator
+                                                    $('#team-form div').each(function(){
+                                                        cleanValidatorClasses(this);
+                                                    });
+                                                    //Reinicio el formulario
+                                                    $("#team-form")[0].reset();
+                                                    loadFieldSelect($('#lista-paises').attr('href'),'#pais_equipo');
+                                                    loadFieldSelect($('#lista-jugadores').attr('href'),'#jugadores');
+                                                    $('.chosen-select').trigger("chosen:updated");
+                                                }
+                                            },
+                                            error: function(jqXHR, textStatus, errorThrown) {
+                                               console.log(errorThrown);
+                                               bootbox.dialog({
+                                                        message:" ¡Error al enviar datos al servidor!",
+                                                        title: "Error",
+                                                        buttons: {
+                                                            danger: {
+                                                                label: "Danger!",
+                                                                className: "btn-danger"
+                                                            }
+                                                        }
+                                                    });
+                                                    // Limpio cada elemento de las clases añadidas por el validator
+                                                    $('#team-form div').each(function(){
+                                                        cleanValidatorClasses(this);
+                                                    });
+                                                    //Reinicio el formulario
+                                                    $("#team-form")[0].reset();
+                                                    loadFieldSelect($('#lista-paises').attr('href'),'#pais_equipo');
+                                                    loadFieldSelect($('#lista-jugadores').attr('href'),'#jugadores');
+                                                    $('.chosen-select').trigger("chosen:updated");
+                                            }
+                                        });
+                                        e.preventDefault(); //Prevent Default action. 
+                                    }); 
+                                    $("#team-form").submit();
+                                } else {
+                                    return false;
+                                }
+
+                            }
+                        }
+                    },
+                    show: false // We will show it manually later
+                })
+                .on('shown.bs.modal', function() {
+                    $('#team-form-div')
+                        .show();                             // Show the form
+            })
+            .on('hide.bs.modal', function(e) {
+                // Bootbox will remove the modal (including the body which contains the form)
+                // after hiding the modal
+                // Therefor, we need to backup the form
+                $('#team-form-div').hide().appendTo('#new-team-form');
+            })
+            .modal('show');
+        });               
+    }
+
 
     // Metodo para editar datos del jugador
     var editPlayer = function(idPlayer) {
@@ -522,37 +733,35 @@ var CustomApp = function () {
         });
     }
 
-    //Metodo para eliminar jugador de l BD.
-    var deletePlayer = function () {
-        $('.eliminar-jugador').on('click', function(event) {
-            event.preventDefault();
-            alert('test');
-            bootbox.confirm("¿Esta seguro de eliminar al jugador?", function(result) {
-                if (result){
-                   $.ajax({
-                    type: 'GET',
-                    url: $(this).attr('href'),
-                    dataType: "JSON",
-                    success: function(response) {
-                        if (response.success) {
-                            $(this).parent().parent().remove();
-                            bootbox.dialog({
-                                message:" ¡Jugador Eliminado!",
-                                title: "Éxito",
-                                buttons: {
-                                    success: {
-                                        label: "Success!",
-                                        className: "btn-success"
-                                    }
+    //Metodo para eliminar jugador de la BD.
+    var deletePlayer = function (idPlayer) {
+        
+        bootbox.confirm("¿Esta seguro de eliminar al Jugador?", function(result) {
+            console.log("Confirm result: "+result);
+            if (result == true){
+               $.ajax({
+                type: 'GET',
+                url: $('#eliminar-jugador').attr('href'),
+                data: {'idPlayer': idPlayer},
+                dataType: "JSON",
+                success: function(response) {
+                    if (response.success == true) {
+                        $('#eliminar_jugador_'+idPlayer).parent().parent().remove();
+                        bootbox.dialog({
+                            message:" ¡Jugador Eliminado!",
+                            title: "Éxito",
+                            buttons: {
+                                success: {
+                                    label: "Success!",
+                                    className: "btn-success"
                                 }
-
-                            });
-                        }
-                    }
-                });
-               }
-           });
-        });
+                            }
+                        });
+                    };
+                }
+            });
+           };
+       });
     }
 
     // Metodo para saber cual opcion(ver, editar, borrar) fue seleccionada de la lista de Jugadores
@@ -1133,18 +1342,45 @@ var CustomApp = function () {
         });
     }
 
+    var loadDataChosen = function() 
+    {
+
+        $(".chzn-select").chosen();
+        $(".chzn-select-deselect").chosen({allow_single_deselect:true});
+
+        $('.chosen-search input').autocomplete({
+            minLength: 3,
+            source: function( request, response ) {
+                $.ajax({
+                    url: $('#lista-jugadores').attr('href'),
+                    data: {'nombre': request.term},
+                    dataType: "json",
+                    beforeSend: function(){ $('ul.chosen-results').empty(); $("#jugadores").empty(); }
+                }).done(function(data) {
+                response($.map(data, function(item) {
+                    $('#jugadores').append('<option value="blah">' + item.nombre + '</option>');
+                }));
+                $("#jugadores").trigger("chosen:updated");
+            });
+        }
+        });
+    }
+
     return {
         init: function() {
             initChosen();
+            loadDataChosen();
             //initDataPicker();
             handleBootstrapFileInput();
             handleBootboxNewPlayer();
+            handleBootboxNewTeam();
             handleBootboxNewCountry();
             loadFieldSelect($('#lista-paises').attr('href'),'#pais_id');
             loadFieldSelect($('#lista-posiciones').attr('href'),'#posicion_id');
             loadFieldSelect($('#lista-equipos').attr('href'),'#equipo_id');
+            loadFieldSelect($('#lista-paises').attr('href'),'#pais_equipo');
+            loadFieldSelect($('#lista-jugadores').attr('href'),'#jugadores');
             loadDataPlayer();
-            deletePlayer();
             loadDataCountry();
         }
     }

@@ -22,6 +22,16 @@ class JugadorRepository extends BaseRepository
 		$this->setModel(new Jugador);
 	}
 
+	public function filterList($nombre ='')
+	{
+		$this->model->where('nombre', 'LIKE', '%' . $nombre . '%')->lists('nombre', 'id');
+	}
+
+	public function getAllForSelect()
+	{
+		return $this->getAll()->lists('nombre', 'id');
+	}	
+
 	public function create($data = array())
 	{
 		$fecha = $data['fecha_nacimiento'];
@@ -52,7 +62,7 @@ class JugadorRepository extends BaseRepository
 			$this->cleanActionColumn();
 			$this->addActionColumn("<a class='ver-jugador' href='#' id='ver_jugador_".$model->id."'>Ver</a><br />");
 			$this->addActionColumn("<a  class='editar-jugador' href='#new-player-form' id='editar_jugador_".$model->id."'>Editar</a><br />");
-			$this->addActionColumn("<a class='eliminar-jugador' href='" . route('jugadores.api.eliminar', $model->id) . "' id='eliminar-jugador'>Eliminar</a>");
+			$this->addActionColumn("<a class='eliminar-jugador' href='#' id='eliminar_jugador_".$model->id."'>Eliminar</a>");
 			return implode(" ", $this->getActionColumn());
 		});
 	}
