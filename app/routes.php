@@ -50,7 +50,7 @@ Route::get('equipos/nuevo', ['as' => 'equipos.create', 'uses' => 'EquipoControll
 Route::post('equipos/guardar', ['as' => 'equipos.store', 'uses' => 'EquipoController@store' ] );
 Route::get('equipos/ver/{id}', ['as' => 'equipos.show', 'uses' => 'EquipoController@show' ] );
 Route::get('equipos/editar/{id}',  ['as' => 'equipos.edit','uses' => 'EquipoController@edit' ] );
-Route::post('equipos/actualizar',  ['as' => 'equipos.update','uses' => 'EquipoController@update' ] );
+Route::post('equipos/actualizar/{id}',  ['as' => 'equipos.update','uses' => 'EquipoController@update' ] );
 Route::get('equipos/eliminar/{id}',  ['as' => 'equipos.delete','uses' => 'EquipoController@destroy' ] );
 
 Route::get('equipos/api-eliminar/{id}',  ['as' => 'equipos.api.eliminar','uses' => 'EquipoController@destroyApi' ] );
