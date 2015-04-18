@@ -1,4 +1,4 @@
-{{ Form::model($equipo, ['route' => ['equipos.update', $equipo->id], 'class' => 'form-horizontal']) }}
+{{ Form::model($equipo, ['route' => ['equipos.update', $equipo->id], 'class' => 'form-horizontal','files' => true]) }}
 	<div class="row">
 	 @include('layouts.partials._error')
 		<div class="col-md-6">
