@@ -336,6 +336,7 @@ var CustomApp = function () {
             dataType: "JSON",
             success: function(response) {
                 if (response.success) {
+                    console.log(response);
                     $('#jugador_id').val(response.jugador.id);
                     $('#nombre').val(response.jugador.nombre);
                     $('#fecha_nacimiento').val($.datepicker.formatDate('dd-mm-yy', new Date(
@@ -344,6 +345,20 @@ var CustomApp = function () {
                     $('#abreviacion').val(response.jugador.abreviacion);
                     $('#posicion_id').val(response.jugador.posicion_id);
                     $('#pais_id').val(response.jugador.pais_id);
+                    $('#numero').val(response.equipo.pivot.numero);
+                    if(response.equipo.pivot.fecha_inicio){
+                    $('#fecha_inicio').val($.datepicker.formatDate('dd-mm-yy', new Date(
+                        response.equipo.pivot.fecha_inicio)));
+                    }else{
+                        $('#fecha_inicio').val();
+                    }
+                    if(response.equipo.pivot.fecha_fin){
+                        $('#fecha_fin').val($.datepicker.formatDate('dd-mm-yy', new Date(
+                        response.equipo.pivot.fecha_fin)));
+                    }else{
+                        $('#fecha_fin').val();
+                    }
+                    $('#equipo_id').val(response.equipo.id);
                     $('.chosen-select').trigger("chosen:updated");
                 }
             }
