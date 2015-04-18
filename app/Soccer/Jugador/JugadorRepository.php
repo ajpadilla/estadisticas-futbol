@@ -36,7 +36,7 @@ class JugadorRepository extends BaseRepository
 	{
 		$fecha = $data['fecha_nacimiento'];
 		$data['fecha_nacimiento'] = Carbon::createFromFormat('d-m-Y', $fecha)->format('Y-m-d');
-		$jugador = Jugador::create($data); 
+		$jugador = $this->model->create($data); 
 		$equipo = Equipo::find($data['equipo_id']);
 		$jugador->equipos()->save($equipo,
 			[
@@ -54,6 +54,14 @@ class JugadorRepository extends BaseRepository
 		$data['fecha_nacimiento'] = Carbon::createFromFormat('d-m-Y', $fecha)->format('Y-m-d');
 		$jugador = $this->get($data['jugador_id']);
 		$jugador->update($data);
+		$equipo = Equipo::find($data['equipo_id']);
+		$jugador->equipos()->save($equipo,
+			[
+				'numero' => $data['numero'],
+				'fecha_inicio' => $data['fecha_inicio'],
+				'fecha_fin' => $data['fecha_fin']
+			]
+		);
 	}
 
 	public function setDefaultActionColumn() {
