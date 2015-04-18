@@ -80,7 +80,7 @@ class EquipoRepository extends BaseRepository
 		$this->addColumnToCollection('Acciones', function($model)
 		{
 			$this->cleanActionColumn();
-			$this->addActionColumn("<a class='ver-jugador' href='" . route('equipos.show', $model->id) . "'>Ver</a><br />");
+			$this->addActionColumn("<a class='ver-jugador' href='" . route('equipos.show', $model->id) . "' id='ver_equipo_".$model->id."'>Ver</a><br />");
 			$this->addActionColumn("<a  class='editar-jugador' href='#new-player-form' id='editar_".$model->id."'>Editar</a><br />");
 			$this->addActionColumn("<a class='eliminar-jugador' href='#' id='eliminar_".$model->id."'>Eliminar</a>");
 			return implode(" ", $this->getActionColumn());
