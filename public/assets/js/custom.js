@@ -1093,6 +1093,37 @@ var CustomApp = function () {
         });
     }
 
+        //Metodo para eliminar país de la BD.
+    var deleteTeam = function (idTeam) {
+        bootbox.confirm("¿Esta seguro de eliminar el Equipo?", function(result) {
+            console.log("Confirm result: "+result);
+            if (result == true){
+               $.ajax({
+                type: 'GET',
+                url: $('#eliminar-equipo').attr('href'),
+                data: {'idTeam': idTeam},
+                dataType: "JSON",
+                success: function(response) {
+                    if (response.success == true) {
+                        $('#eliminar_equipo_'+idTeam).parent().parent().remove();
+                        bootbox.dialog({
+                            message:" ¡Equipo Eliminado!",
+                            title: "Éxito",
+                            buttons: {
+                                success: {
+                                    label: "Success!",
+                                    className: "btn-success"
+                                }
+                            }
+                        });
+                    };
+                }
+            });
+           };
+       });
+    }
+
+
     //Metodo para cargar vista seleccionada en lista de equipos
     var loadDataTeam = function() 
     {
@@ -1112,6 +1143,8 @@ var CustomApp = function () {
                 {
                     if (type == "editar") {
                         editTeam(numberId);
+                    }else{
+                        deleteTeam(numberId);
                     }
                 }
             }           
