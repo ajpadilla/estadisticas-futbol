@@ -38,6 +38,8 @@ Route::get('jugadores/api-eliminar',  ['as' => 'jugadores.api.eliminar','uses' =
 Route::get('jugadores/api-lista', array('as'=>'jugadores.api.lista', 'uses'=>'JugadorController@listaApi'));
 Route::get('jugadores/api-cambiar-equipo/{id}', array('as'=>'jugadores.api.cambiar-equipo', 'uses'=>'JugadorController@cambiarEquipoApi'));
 Route::get('jugadores/api-ver/{id}',  ['as' => 'jugadores.data','uses' => 'JugadorController@showApi' ] );
+Route::get('jugadores/api-seleccionar',  ['as' => 'jugadores.seleccionar','uses' => 'JugadorController@getAllValue' ] );
+
 
 /*
 ********************************* RUTAS PARA EQUIPOS ********************************
