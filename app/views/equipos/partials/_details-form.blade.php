@@ -13,15 +13,15 @@
 	<div class="col-md-8">{{ Form::textarea('historia', null, ['class' => 'form-control', 'rows' => 16, 'cols' => 32]) }}</div>
 </div>
 <div class="form-group">
-	{{ Form::label('pais','País',['class'=>'col-md-4 control-label']) }}
+	{{ Form::label('pais_id','País',['class'=>'col-md-4 control-label']) }}
 	<div class="col-md-8">
 		{{ Form::select('pais_id', array(), null, ['class' => 'form-control chosen-select','data-placeholder' => 'Selecciona el pais','id' =>'pais_equipo']) }}
 	</div>
 </div>
 <div class="form-group">
-	{{ Form::label('jugadores[]','Jugadores',['class'=>'col-md-4 control-label']) }}
+	{{ Form::label('jugadores','Jugadores',['class'=>'col-md-4 control-label']) }}
 	<div class="col-md-8">
-		{{ Form::select('jugadores_id', array(), null, ['class' => 'form-control chosen-select','data-placeholder' => 'Selecciona jugadores','multiple' => 'multiple','id' => 'jugadores']) }}
+		{{ Form::select('jugadores[]', array(), null, ['class' => 'form-control chosen-select','data-placeholder' => 'Selecciona jugadores','multiple' => 'multiple','id' => 'jugadores']) }}
 	</div>
 </div>
 <div class="form-group">
