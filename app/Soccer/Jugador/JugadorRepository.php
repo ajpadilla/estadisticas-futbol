@@ -22,6 +22,16 @@ class JugadorRepository extends BaseRepository
 		$this->setModel(new Jugador);
 	}
 
+	public function filterList($nombre ='')
+	{
+		$this->model->where('nombre', 'LIKE', '%' . $nombre . '%')->lists('nombre', 'id');
+	}
+
+	public function getAllForSelect()
+	{
+		return $this->getAll()->lists('nombre', 'id');
+	}	
+
 	public function create($data = array())
 	{
 		$fecha = $data['fecha_nacimiento'];
