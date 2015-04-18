@@ -167,4 +167,23 @@ class JugadorController extends \BaseController {
 		
 	}
 
+	public function getAllValue()
+	{
+		if(Request::ajax())
+		{
+			$jugadores = $this->jugadorRepository->getAllForSelect();
+			if (count($jugadores) > 0) {
+				$this->setSuccess(true);
+				$this->addToResponseArray('data', $jugadores);
+				return $this->getResponseArrayJson();
+			}else{
+				$this->setSuccess(false);
+				return $this->getResponseArrayJson();
+			}
+		}else{
+			$this->setSuccess(false);
+			return $this->getResponseArrayJson();
+		}
+	}
+
 }
