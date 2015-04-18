@@ -175,6 +175,7 @@ class EquipoController extends \BaseController {
 				$equipo = $this->repository->get(Input::get('equipoId'));
 				$this->setSuccess(true);
 				$this->addToResponseArray('equipo', $equipo->toArray());
+				$this->addToResponseArray('jugadores', $equipo->getJugadoresActuales());
 				return $this->getResponseArrayJson();
 			}else{
 				$this->setSuccess(false);
