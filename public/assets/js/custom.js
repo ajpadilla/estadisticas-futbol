@@ -1093,7 +1093,7 @@ var CustomApp = function () {
         });
     }
 
-        //Metodo para eliminar país de la BD.
+        //Metodo para eliminar equipo de la BD.
     var deleteTeam = function (idTeam) {
         bootbox.confirm("¿Esta seguro de eliminar el Equipo?", function(result) {
             console.log("Confirm result: "+result);
