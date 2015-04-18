@@ -151,11 +151,13 @@ class EquipoController extends \BaseController {
 	 * @param  int  $id
 	 * @return Response
 	 */
-	public function destroyApi($id)
+	public function destroyApi()
 	{		
 		if(Request::ajax())
-			$this->setSuccess($this->repository->delete($id));
-		return $this->getResponseArrayJson();
+			$equipo = $this->repository->delete(Input::get('idTeam'));
+			$this->setSuccess(true);
+			$this->addToResponseArray('equipo', $equipo);
+			return $this->getResponseArrayJson();
 	}
 
 	public function listaApi()
