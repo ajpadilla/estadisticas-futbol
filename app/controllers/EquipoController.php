@@ -111,7 +111,8 @@ class EquipoController extends \BaseController {
 		try
 		{
 			$this->equipoForm->validate($input);
-			$equipo = $this->repository->create($input);
+			$equipo = $this->repository->update($input);
+			return Redirect::route('equipos.show', $id);
 		}
 		catch (FormValidationException $e)
 		{
