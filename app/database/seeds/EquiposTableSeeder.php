@@ -137,19 +137,6 @@ class EquiposTableSeeder extends DatabaseSeeder {
             'fecha_fundacion' => 'México',
             'apodo' => 'Los Rojos del Ávila',
             'ubicacion' => 'Venezuela',
-            'historia' => 'El Caracas Fútbol Club es un club de fútbol profesional con sede en la ciudad de Caracas, capital de Venezuela. Fundado el 12 de diciembre de 1967, por iniciativa de un grupo de aficionados, con la idea de tener un club de fútbol en el cual pudiesen distraerse en sus ratos libres. Posteriormente el conjunto fue registrado en la Asociación de Fútbol del estado Miranda como un equipo amateur, participando en la Primera División de Venezuela desde 1985. El color que identifica al club es el rojo. Disputa sus partidos como local en el Estadio Olímpico de la Universidad Central de Venezuela, que cuenta con una capacidad para 24.900 espectadores',
-            'info_url' => 'http://es.wikipedia.org/wiki/Caracas_F%C3%BAtbol_Club',
-            'pais_id' => 4         
-        );  
-
-        $equipos[] = array(
-            'nombre' => 'Caracas Fútbol Club',
-            'escudo' => null,
-            'bandera' => null,
-            'tipo' => 'club',
-            'fecha_fundacion' => 'México',
-            'apodo' => 'Los Rojos del Ávila',
-            'ubicacion' => 'Venezuela',
             'historia' => 'El Caraas Fútbol Club es un club de fútbol profesional con sede en la ciudad de Caracas, capital de Venezuela. Fundado el 12 de diciembre de 1967, por iniciativa de un grupo de aficionados, con la idea de tener un club de fútbol en el cual pudiesen distraerse en sus ratos libres. Posteriormente el conjunto fue registrado en la Asociación de Fútbol del estado Miranda como un equipo amateur, participando en la Primera División de Venezuela desde 1985. El color que identifica al club es el rojo. Disputa sus partidos como local en el Estadio Olímpico de la Universidad Central de Venezuela, que cuenta con una capacidad para 24.900 espectadores',
             'info_url' => 'http://es.wikipedia.org/wiki/Caracas_F%C3%BAtbol_Club',
             'pais_id' => 4         
