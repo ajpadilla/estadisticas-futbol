@@ -18,7 +18,7 @@ class CreateTableJugadores extends Migration {
 			$table->date('fecha_nacimiento');
 			$table->string('foto', 128)->nullable(true)->default(null);
 			$table->decimal('altura', 10, 2)->nullable(true)->default(null);
-			$table->string('abreviacion', 20);
+			$table->string('abreviacion', 128);
 			$table->timestamps();
 		});
 
