@@ -174,7 +174,7 @@ class EquipoController extends \BaseController {
 	{
 		if(Request::ajax())
 		{
-			$equipos = $this->repository->getAllForSelect();
+			$equipos = $this->repository->listForType();
 			if (count($equipos) > 0) {
 				$this->setSuccess(true);
 				$this->addToResponseArray('data', $equipos);
