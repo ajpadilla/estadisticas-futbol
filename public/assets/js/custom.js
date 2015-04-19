@@ -953,8 +953,12 @@ var CustomApp = function () {
                     console.log(response);
                     $('#equipo_id').val(response.equipo.id);
                     $('#nombre').val(response.equipo.nombre);
-                    $('#fecha_fundacion').val($.datepicker.formatDate('dd-mm-yy', new Date(
+                    if(response.equipo.fecha_fundacion != "0000-00-00") {
+                        $('#fecha_fundacion').val($.datepicker.formatDate('dd-mm-yy', new Date(
                         response.equipo.fecha_fundacion)));
+                    }else{
+                        $('#fecha_fundacion').val();
+                    }
                     $('#apodo').val(response.equipo.apodo);
                     $("select#tipo option").each(function() { this.selected = (this.text == response.equipo.tipo); });
                     $('#info_url').val(response.equipo.info_url);
@@ -1163,6 +1167,23 @@ var CustomApp = function () {
                     }
                 }
             }           
+        });
+    }
+
+    var validateSelectPlayers = function  () {
+        //console.log($('select#tipo').val());
+        if($('select#tipo').val() == 0){
+            $('#jugadores').attr('disabled', true); 
+            $('#jugadores').trigger("chosen:updated");
+        }
+        $('select#tipo').change(function() {
+            if($(this).val() != 0){
+                $('#jugadores').attr('disabled', false); 
+                $('#jugadores').trigger("chosen:updated"); 
+            }else{
+                $('#jugadores').attr('disabled', true); 
+                $('#jugadores').trigger("chosen:updated"); 
+            }
         });
     }
 
@@ -1702,6 +1723,7 @@ var CustomApp = function () {
             loadDataTeam();
             loadSelectForTeam();
             loadSelectForTeam();
+            validateSelectPlayers();
         }
     }
 }();
