@@ -33,6 +33,11 @@ class EquipoRepository extends BaseRepository
 		return $this->getAll()->lists('nombre', 'id');
 	}	
 
+	public function listForType($type='club')
+	{
+		return $this->model->select()->whereTipo($type)->lists('nombre', 'id');
+	}
+
 
 	public function create($data = array())
 	{
