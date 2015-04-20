@@ -80,15 +80,15 @@ var CustomApp = function () {
                 },
                 fecha_nacimiento:{
                     required:true,
-                    customDateValidator: true
+                    //customDateValidator: true
                 },
                 altura:{
                     required:true,
-                    decimalNumbers:true
+                   // decimalNumbers:true
                 },
-                abreviacion:{
+                apodo:{
                     required:true,
-                    onlyLettersNumbersAndDash:true
+                    //onlyLettersNumbersAndDash:true
                 },
                 posicion:{
                     required:true,
@@ -107,7 +107,7 @@ var CustomApp = function () {
                 altura:{
                    required:'Este campo es obligatorio.',
                 },
-                abreviacion:{
+                apodo:{
                   required:'Este campo es obligatorio.',
                 },
                 posicion:{
@@ -158,13 +158,12 @@ var CustomApp = function () {
                                             processData: false,
                                             dataType: "JSON",
                                             success: function(responseServer) {
+                                                console.log(responseServer);
                                                 if(responseServer.success == true) 
                                                 {
-                                                    dataServer = responseServer;
-                                                    console.log(dataServer);
                                                     // Muestro otro dialog con información de éxito
                                                     bootbox.dialog({
-                                                        message: $('#nombre').val() + " ha sido agregado correctamente!",
+                                                        message: responseServer.jugador.nombre + " ha sido agregado correctamente!",
                                                         title: "Éxito",
                                                         buttons: {
                                                             success: {
@@ -180,14 +179,17 @@ var CustomApp = function () {
                                                     //Reinicio el formulario
                                                     $("#player-form")[0].reset();
                                                     $('.chosen-select').html("");
+                                                    loadFieldSelect($('#lista-paises').attr('href'),'#pais_id');
+                                                    loadFieldSelect($('#lista-posiciones').attr('href'),'#posicion_id');
+                                                    loadFieldSelect($('#lista-equipos').attr('href'),'#equipo_id_jugador');
                                                     $('.chosen-select').trigger("chosen:updated");
                                                 }else{
                                                      bootbox.dialog({
-                                                        message:" ¡Error al agregar datos!",
+                                                        message: responseServer,
                                                         title: "Error",
                                                         buttons: {
                                                             danger: {
-                                                                label: "Danger!",
+                                                                label: "Ok!",
                                                                 className: "btn-danger"
                                                             }
                                                         }
@@ -199,6 +201,9 @@ var CustomApp = function () {
                                                     //Reinicio el formulario
                                                     $("#player-form")[0].reset();
                                                     $('.chosen-select').html("");
+                                                    loadFieldSelect($('#lista-paises').attr('href'),'#pais_id');
+                                                    loadFieldSelect($('#lista-posiciones').attr('href'),'#posicion_id');
+                                                    loadFieldSelect($('#lista-equipos').attr('href'),'#equipo_id_jugador');
                                                     $('.chosen-select').trigger("chosen:updated");
                                                 }
                                             },
@@ -220,6 +225,9 @@ var CustomApp = function () {
                                                     //Reinicio el formulario
                                                     $("#player-form")[0].reset();
                                                     $('.chosen-select').html("");
+                                                    loadFieldSelect($('#lista-paises').attr('href'),'#pais_id');
+                                                    loadFieldSelect($('#lista-posiciones').attr('href'),'#posicion_id');
+                                                    loadFieldSelect($('#lista-equipos').attr('href'),'#equipo_id_jugador');
                                                     $('.chosen-select').trigger("chosen:updated");
                                             }
                                         });
@@ -287,7 +295,7 @@ var CustomApp = function () {
                     required:true,
                     decimalNumbers:true
                 },
-                abreviacion:{
+                apodo:{
                     required:true,
                     onlyLettersNumbersAndDash:true
                 },
@@ -308,7 +316,7 @@ var CustomApp = function () {
                 altura:{
                    required:'Este campo es obligatorio.',
                 },
-                abreviacion:{
+                apodo:{
                   required:'Este campo es obligatorio.',
                 },
                 posicion:{
@@ -342,7 +350,7 @@ var CustomApp = function () {
                     $('#fecha_nacimiento').val($.datepicker.formatDate('dd-mm-yy', new Date(
                         response.jugador.fecha_nacimiento)));
                     $('#altura').val(response.jugador.altura);
-                    $('#abreviacion').val(response.jugador.abreviacion);
+                    $('#apodo').val(response.jugador.apodo);
                     $('#posicion_id').val(response.jugador.posicion_id);
                     $('#pais_id').val(response.jugador.pais_id);
                     $('#numero').val(response.equipo.pivot.numero);
@@ -525,7 +533,7 @@ var CustomApp = function () {
                     $('#nombre_vista').val(response.jugador.nombre);
                     $('#fecha_vista').val(response.jugador.fecha_nacimiento);
                     $('#altura_vista').val(response.jugador.altura);
-                    $('#abreviacion_vista').val(response.jugador.abreviacion);
+                    $('#apodo_vista').val(response.jugador.abreviacion);
                     $('#posicion_vista').val(response.posicion.nombre);
                     $('#pais_vista').val(response.pais.nombre);
 
@@ -1716,6 +1724,7 @@ var CustomApp = function () {
             loadFieldSelect($('#lista-paises').attr('href'),'#pais_id');
             loadFieldSelect($('#lista-posiciones').attr('href'),'#posicion_id');
             loadFieldSelect($('#lista-equipos').attr('href'),'#equipo_id');
+            loadFieldSelect($('#lista-equipos').attr('href'),'#equipo_id_jugador');
             loadFieldSelect($('#lista-paises').attr('href'),'#pais_equipo');
             loadFieldSelect($('#lista-jugadores').attr('href'),'#jugadores');
             loadDataPlayer();
