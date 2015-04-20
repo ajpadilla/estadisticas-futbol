@@ -64,8 +64,8 @@ class EquipoRepository extends BaseRepository
 		$equipo->jugadores()->attach($data['jugadores'],
 			[
 				'numero' => 0,
-				'fecha_inicio' => '',
-				'fecha_fin' => ''
+				'fecha_inicio' => null,
+				'fecha_fin' => null
 			]
 		);
 
