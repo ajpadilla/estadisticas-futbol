@@ -64,7 +64,9 @@ class JugadorController extends \BaseController {
 			}
 			catch (FormValidationException $e)
 			{
-				return Response::json($e->getErrors()->all());
+				$this->setSuccess(true);
+				$this->addToResponseArray('errores', $e->getErrors()->all());
+				return $this->getResponseArrayJson();
 			}
 		}
 	}
@@ -108,12 +110,17 @@ class JugadorController extends \BaseController {
 			try
 			{
 				$this->editarJugadorForm->validate($input);
-				$this->jugadorRepository->update($input);
-				return Response::json(['success' => true]);
+				$jugador = $this->jugadorRepository->update($input);
+				$this->setSuccess(true);
+				$this->addToResponseArray('jugador', $jugador);
+				$this->addToResponseArray('equipo', $jugador->getEquipoAttribute()->toArray());
+				return $this->getResponseArrayJson();
 			}
 			catch (FormValidationException $e)
 			{
-				return Response::json($e->getErrors()->all());
+				$this->setSuccess(true);
+				$this->addToResponseArray('errores', $e->getErrors()->all());
+				return $this->getResponseArrayJson();
 			}
 		}
 	}
@@ -155,8 +162,9 @@ class JugadorController extends \BaseController {
 				$this->addToResponseArray('equipo', $jugador->getEquipoAttribute()->toArray());
 				$this->addToResponseArray('posicion',  $jugador->posicion->toArray());
 				$this->addToResponseArray('pais',   $jugador->pais->toArray());
-				$this->addToResponseArray('public',  public_path());
-				$this->addToResponseArray('base',  base_path());
+				$this->addToResponseArray('fechaNacimiento', date("d-m-Y",strtotime($jugador->fecha_nacimiento)));
+				$this->addToResponseArray('fechaInicio', date("d-m-Y",strtotime( $jugador->getEquipoAttribute()->pivot->fecha_inicio)));
+				$this->addToResponseArray('fechaFin', date("d-m-Y",strtotime($jugador->getEquipoAttribute()->pivot->fecha_fin)));
 				return $this->getResponseArrayJson();
 			}else{
 				$this->setSuccess(false);
