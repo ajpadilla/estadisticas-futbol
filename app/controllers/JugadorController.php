@@ -58,7 +58,9 @@ class JugadorController extends \BaseController {
 			{
 				$this->registrarJugadorForm->validate($input);
 				$jugador = $this->jugadorRepository->create($input);
-				return Response::json(['success' => true, 'jugador' => $jugador->toArray()]);
+				$this->setSuccess(true);
+				$this->addToResponseArray('jugador', $jugador);
+				return $this->getResponseArrayJson();
 			}
 			catch (FormValidationException $e)
 			{
