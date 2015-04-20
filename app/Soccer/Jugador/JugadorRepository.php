@@ -34,15 +34,22 @@ class JugadorRepository extends BaseRepository
 
 	public function create($data = array())
 	{
-		$fecha = $data['fecha_nacimiento'];
-		$data['fecha_nacimiento'] = Carbon::createFromFormat('d-m-Y', $fecha)->format('Y-m-d');
+		$fechaNacimiento = $data['fecha_nacimiento'];
+		$data['fecha_nacimiento'] = Carbon::createFromFormat('d-m-Y', $fechaNacimiento)->format('Y-m-d');
+		$fechaInicio = Carbon::createFromFormat('d-m-Y', $data['fecha_inicio'])->format('Y-m-d');
+		if(!empty($data['fecha_fin'])){
+			$fechaFin = Carbon::createFromFormat('d-m-Y',  $data['fecha_fin'])->format('Y-m-d');
+		}else{
+			$fechaFin = null;
+		}
+
 		$jugador = $this->model->create($data); 
 		$equipo = Equipo::find($data['equipo_id']);
-		$jugador->equipos()->save($equipo,
+		$jugador->equipos()->attach($data['equipo_id'],
 			[
 				'numero' => $data['numero'],
-				'fecha_inicio' => $data['fecha_inicio'],
-				'fecha_fin' => $data['fecha_fin']
+				'fecha_inicio' => $fechaInicio,
+				'fecha_fin' => $fechaFin
 			]
 		);
 		return $jugador;
@@ -50,18 +57,29 @@ class JugadorRepository extends BaseRepository
 
 	public function update($data = array())
 	{
-		$fecha = $data['fecha_nacimiento'];
-		$data['fecha_nacimiento'] = Carbon::createFromFormat('d-m-Y', $fecha)->format('Y-m-d');
+		$fechaNacimiento = $data['fecha_nacimiento'];
+		$data['fecha_nacimiento'] = Carbon::createFromFormat('d-m-Y', $fechaNacimiento)->format('Y-m-d');
+		$fechaInicio = Carbon::createFromFormat('d-m-Y', $data['fecha_inicio'])->format('Y-m-d');
+		if(!empty($data['fecha_fin'])){
+			$fechaFin = Carbon::createFromFormat('d-m-Y',  $data['fecha_fin'])->format('Y-m-d');
+		}else{
+			$fechaFin = null;
+		}
+
 		$jugador = $this->get($data['jugador_id']);
 		$jugador->update($data);
 		$equipo = Equipo::find($data['equipo_id']);
-		$jugador->equipos()->save($equipo,
-			[
-				'numero' => $data['numero'],
-				'fecha_inicio' => $data['fecha_inicio'],
-				'fecha_fin' => $data['fecha_fin']
-			]
-		);
+
+		if($jugador->equipos->contains($equipo->id))
+			$jugador->equipos()->attach($data['equipo_id'],
+				[
+					'numero' => $data['numero'],
+					'fecha_inicio' => $fechaInicio,
+					'fecha_fin' => $fechaFin
+				]
+			);
+
+		return $jugador;
 	}
 
 	public function setDefaultActionColumn() {

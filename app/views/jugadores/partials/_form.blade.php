@@ -47,11 +47,18 @@
 								{{ Form::text('altura',null, ['class' => 'form-control','id' => 'altura']) }}
 							</div>
 						</div>
+	
+						<div class="form-group">
+							{{ Form::label('peso','Peso',['class'=>'col-sm-2 control-label']) }}
+							<div class="col-sm-6">
+								{{ Form::text('peso',null, ['class' => 'form-control','id' => 'peso_jugador']) }}
+							</div>
+						</div>
 
 						<div class="form-group">
-							{{ Form::label('abreviacion','Abreviacion',['class'=>'col-sm-2 control-label']) }}
+							{{ Form::label('apodo','Apodo',['class'=>'col-sm-2 control-label']) }}
 							<div class="col-sm-6">
-								{{ Form::text('abreviacion',null, ['class' => 'form-control','id' => 'abreviacion']) }}
+								{{ Form::text('apodo',null, ['class' => 'form-control','id' => 'apodo_jugador']) }}
 							</div>
 						</div>
 
@@ -93,7 +100,7 @@
 						<div class="form-group">
 							{{ Form::label('equipo_id','Equipo',['class'=>'col-sm-2 control-label']) }}
 							<div class="col-sm-6">
-								{{ Form::select('equipo_id',array(),null,['class' => 'form-control chosen-select','data-placeholder' => 'Escoge Equipo...','id'=> 'equipo_id']) }}
+								{{ Form::select('equipo_id',array(),null,['class' => 'form-control chosen-select','data-placeholder' => 'Escoge Equipo...','id'=> 'equipo_id_jugador']) }}
 							</div>
 						</div>
 
