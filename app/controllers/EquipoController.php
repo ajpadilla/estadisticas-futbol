@@ -107,7 +107,7 @@ class EquipoController extends \BaseController {
 	public function update($id)
 	{
 		$input = Input::all();
-		$inpunt['equipo_id'] = $id;
+		$input['equipo_id'] = $id;
 		try
 		{
 			$this->equipoForm->validate($input);
