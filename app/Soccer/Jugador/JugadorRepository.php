@@ -64,7 +64,7 @@ class JugadorRepository extends BaseRepository
 		$this->addColumnToCollection('Acciones', function($model)
 		{
 			$this->cleanActionColumn();
-			$this->addActionColumn("<a class='ver-jugador' href='#' id='ver_jugador_".$model->id."'>Ver</a><br />");
+			$this->addActionColumn("<a class='ver-jugador' href='" . route('jugadores.show', $model->id) . "' id='ver_jugador'>Ver</a><br />");
 			$this->addActionColumn("<a  class='editar-jugador' href='#new-player-form' id='editar_jugador_".$model->id."'>Editar</a><br />");
 			$this->addActionColumn("<a class='eliminar-jugador' href='#' id='eliminar_jugador_".$model->id."'>Eliminar</a>");
 			return implode(" ", $this->getActionColumn());
