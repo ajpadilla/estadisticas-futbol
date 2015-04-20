@@ -854,11 +854,9 @@ var CustomApp = function () {
                                                 console.log(responseServer);
                                                 if(responseServer.success == true) 
                                                 {
-                                                    dataServer = responseServer;
-                                                    console.log(dataServer);
                                                     // Muestro otro dialog con información de éxito
                                                     bootbox.dialog({
-                                                        message: $('#nombre').val() + " ha sido agregado correctamente!",
+                                                        message: responseServer.equipo.nombre + " ha sido agregado correctamente!",
                                                         title: "Éxito",
                                                         buttons: {
                                                             success: {
@@ -877,9 +875,9 @@ var CustomApp = function () {
                                                     loadFieldSelect($('#lista-jugadores').attr('href'),'#jugadores');
                                                     $('.chosen-select').trigger("chosen:updated");
                                                 }else{
-                                                    console.log(dataServer);
+                                                    console.log(responseServer);
                                                      bootbox.dialog({
-                                                        message:" ¡Error al agregar datos!",
+                                                        message:responseServer.errores,
                                                         title: "Error",
                                                         buttons: {
                                                             danger: {
@@ -1079,13 +1077,12 @@ var CustomApp = function () {
                                             processData: false,
                                             dataType: "JSON",
                                             success: function(responseServer) {
+                                                console.log(responseServer);
                                                 if(responseServer.success == true) 
                                                 {
-                                                    dataServer = responseServer;
-                                                    console.log(dataServer);
                                                     // Muestro otro dialog con información de éxito
                                                     bootbox.dialog({
-                                                        message: $('#nombre').val() + " ha sido Actualizado correctamente!",
+                                                        message: responseServer.equipo.nombre + " ha sido Actualizado correctamente!",
                                                         title: "Éxito",
                                                         buttons: {
                                                             success: {
@@ -1105,7 +1102,7 @@ var CustomApp = function () {
                                                     $('.chosen-select').trigger("chosen:updated");
                                                 }else{
                                                      bootbox.dialog({
-                                                        message:" ¡Error al agregar datos!",
+                                                        message: responseServer.errores,
                                                         title: "Error",
                                                         buttons: {
                                                             danger: {
@@ -1259,6 +1256,16 @@ var CustomApp = function () {
             $('#jugadores').attr('disabled', false);
             $('#jugadores').trigger("chosen:updated");
         }
+        $('#tipo_equipo').change(function() {
+           console.log($(this).val());
+            if($(this).val() == 0){
+                $('#jugadores').attr('disabled', true);
+                $('#jugadores').trigger("chosen:updated");
+            }else{
+                $('#jugadores').attr('disabled', false);
+                $('#jugadores').trigger("chosen:updated");
+            }
+        });
     }
 
     var dataForTeam = function(idTeam) {
@@ -1285,9 +1292,9 @@ var CustomApp = function () {
                     $('#ubicacion').val(response.equipo.ubicacion);
                     $('#jugadores').val(response.jugadores);
                     $('#pais_equipo').val(response.equipo.pais_id);
+                    
                     $('#pais_equipo').trigger("chosen:updated");
                     $('#jugadores').trigger("chosen:updated");
-                    $('.chosen-select').trigger("chosen:updated");
                     validateSelectPlayers(response.equipo.tipo);
                 }
             }
@@ -1771,13 +1778,13 @@ var CustomApp = function () {
             url: url,
             dataType:'json',
             success: function(response) {
-                console.log(response);
+                console.log(response.data);
                 if (response.success == true) {
                     jQuery(idField).html('');
                     jQuery(idField).append('<option value=\"\"></option>');
                     $.each(response.data,function (k,v){
                         jQuery(idField).append('<option value=\"'+k+'\">'+v+'</option>');
-                        $('.chosen-select').trigger("chosen:updated");
+                        $(idField).trigger("chosen:updated");
                     });
                 }else{
                     jQuery(idField).html('');
@@ -1831,7 +1838,7 @@ var CustomApp = function () {
             loadDataTeam();
             loadSelectForTeam();
             dataForTeam($('#equipo_id').val());
-            validateSelectPlayers($( "#tipo_equipo option:selected" ).text());
+            validateSelectPlayers($("#tipo_equipo option:selected" ).text());
         }
     }
 }();
