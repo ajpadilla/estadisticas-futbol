@@ -81,8 +81,8 @@ class EquipoController extends \BaseController {
 	{	
 		$paises = $this->paisRepository->getAllForSelect();
 		$equipo = $this->repository->get($id);
-		$jugadoresTable = $this->repository->getJugadoresTable($id);
-		return View::make('equipos.show', compact('equipo', 'paises', 'jugadoresTable'));
+		$table = $this->repository->getJugadoresTable($id);
+		return View::make('equipos.show', compact('equipo', 'paises', 'table'));
 	}
 
 
@@ -107,7 +107,7 @@ class EquipoController extends \BaseController {
 	public function update($id)
 	{
 		$input = Input::all();
-		$inpunt['equipo_id'] = $id;
+		$input['equipo_id'] = $id;
 		try
 		{
 			$this->equipoForm->validate($input);

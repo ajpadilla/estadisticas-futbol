@@ -7,15 +7,15 @@ use Laracasts\Validation\FormValidationException;
 
 class PaisController extends \BaseController {
 
-	protected $paisRepository;
+	protected $repository;
 	protected $registrarPaisForm;
 	protected $editarPaisForm;
 
-	public function __construct(PaisRepository $paisRepository,
+	public function __construct(PaisRepository $repository,
 		RegistrarPaisForm $registrarPaisForm,
 		EditarPaisForm $editarPaisForm
 		) {
-		$this->paisRepository = $paisRepository;
+		$this->repository = $repository;
 		$this->registrarPaisForm = $registrarPaisForm;
 		$this->editarPaisForm = $editarPaisForm;
 	}
@@ -27,7 +27,8 @@ class PaisController extends \BaseController {
 	 */
 	public function index()
 	{
-		return View::make('paises.index');
+		$table = $this->repository->getAllTable();
+		return View::make('paises.index', compact('table'));
 	}
 
 
@@ -55,7 +56,7 @@ class PaisController extends \BaseController {
 			try
 			{
 				$this->registrarPaisForm->validate($input);
-				$pais = $this->paisRepository->create($input);
+				$pais = $this->repository->create($input);
 				return Response::json(['success' => true, 'pais' => $pais->toArray()]);
 			}
 			catch (FormValidationException $e)
@@ -102,7 +103,7 @@ class PaisController extends \BaseController {
 		try
 		{
 			$this->editarPaisForm->validate($input);
-			$this->paisRepository->update($input);
+			$this->repository->update($input);
 			return Response::json(['success' => true]);
 		}
 		catch (FormValidationException $e)
@@ -124,7 +125,7 @@ class PaisController extends \BaseController {
 		{
 			if (Input::has('countryId'))
 			{
-				$this->paisRepository->delete(Input::get('countryId'));
+				$this->repository->delete(Input::get('countryId'));
 				return Response::json(['success' => true]);
 			}else{
 				return Response::json(['success' => false]);
@@ -134,7 +135,7 @@ class PaisController extends \BaseController {
 
 	public function getAllValue(){
 		if(Request::ajax()){
-			$paises = $this->paisRepository->listAll();
+			$paises = $this->repository->getAllForSelect();
 			if (count($paises) > 0) {
 				return Response::json(['success' => true, 'data' => $paises]);
 			}else{
@@ -147,32 +148,7 @@ class PaisController extends \BaseController {
 
 	public function listaApi()
 	{
-		$collection = Datatable::collection($this->paisRepository->getAll())
-			->searchColumns('nombre','bandera')
-			->orderColumns('nombre','bandera');
-
-		$collection->addColumn('nombre', function($model)
-		{
-			 return $model->nombre;
-		});
-
-		$collection->addColumn('bandera', function($model)
-		{
-			 return $model->bandera;
-		});
-
-		$collection->addColumn('Acciones', function($model)
-		{
-			$links = "<a class='ver-pais' href='#' id='ver_pais_".$model->id."'>Ver</a>
-					<br />";
-			$links .= "<a  class='editar-pais' href='#new-country-form' id='editar_pais_".$model->id."'>Editar</a>
-					<br />
-					<a class='eliminar-pais' href='#' id='eliminar_pais_".$model->id."'>Eliminar</a>";
-
-			return $links;
-		});
-	
-		return $collection->make();
+		return $this->repository->getDefaultTableForAll();
 	}
 
 	public function getData()
@@ -181,7 +157,7 @@ class PaisController extends \BaseController {
 		{
 			if (Input::has('countryId'))
 			{
-				$pais = $this->paisRepository->getById(Input::get('countryId'));
+				$pais = $this->repository->get(Input::get('countryId'));
 				return Response::json(['success' => true, 'pais' => $pais->toArray()]);
 			}else{
 				return Response::json(['success' => false]);

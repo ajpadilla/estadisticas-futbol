@@ -29,4 +29,9 @@ class Pais extends Eloquent{
 		return ucfirst(strtolower($value));
 	}	
 
+	public function getCodeAttribute($value)
+	{
+		return strtolower($value);
+	}
+
 }

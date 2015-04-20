@@ -1,8 +1,8 @@
-{{ $jugadoresTable->render() }}
+{{ $table->render() }}
 @include('jugadores.new')
 @include('jugadores.view')
-@include('jugadores.partials._form_view-template')
+@include('jugadores.partials._form_view-template')	
 
 @section('scripts')
-	{{ $jugadoresTable->script() }}
+	{{ $table->script() }}
 @stop

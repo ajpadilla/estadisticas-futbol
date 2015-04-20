@@ -20,5 +20,8 @@
 <!-- Date picker -->
 {{ HTML::style('assets/css/datapicker/datepicker3.css'); }}
 
+<!-- FLAGS -->
+{{ HTML::style('assets/css/flag-icon.min.css'); }}
+
 <!-- FONTS -->
 <link href="http://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700" rel="stylesheet" type="text/css">

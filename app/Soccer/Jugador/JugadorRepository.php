@@ -20,17 +20,13 @@ class JugadorRepository extends BaseRepository
 			'Acciones'
 		];
 		$this->setModel(new Jugador);
+		$this->setListAllRoute('jugadores.api.lista');
 	}
 
 	public function filterList($nombre ='')
 	{
 		$this->model->where('nombre', 'LIKE', '%' . $nombre . '%')->lists('nombre', 'id');
 	}
-
-	public function getAllForSelect()
-	{
-		return $this->getAll()->lists('nombre', 'id');
-	}	
 
 	public function create($data = array())
 	{
@@ -86,7 +82,7 @@ class JugadorRepository extends BaseRepository
 		$this->addColumnToCollection('Acciones', function($model)
 		{
 			$this->cleanActionColumn();
-			$this->addActionColumn("<a class='ver-jugador' href='#' id='ver_jugador_".$model->id."'>Ver</a><br />");
+			$this->addActionColumn("<a class='ver-jugador' href='" . route('jugadores.show', $model->id) . "' id='ver_jugador'>Ver</a><br />");
 			$this->addActionColumn("<a  class='editar-jugador' href='#new-player-form' id='editar_jugador_".$model->id."'>Editar</a><br />");
 			$this->addActionColumn("<a class='eliminar-jugador' href='#' id='eliminar_jugador_".$model->id."'>Eliminar</a>");
 			return implode(" ", $this->getActionColumn());
@@ -128,13 +124,5 @@ class JugadorRepository extends BaseRepository
 		{
 			 return $model->age;
 		});
-	}
-
-	public function getAllTable($route = 'jugadores.api.lista', $params = array())
-	{
-		return Datatable::table()
-		->addColumn($this->columns)
-		->setUrl(route($route, $params))
-		->noScript();	
 	}
 }
