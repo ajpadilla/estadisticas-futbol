@@ -3,6 +3,7 @@
 use soccer\Equipo\EquipoRepository;
 use soccer\Pais\PaisRepository;
 use soccer\Forms\EquipoForm;
+use soccer\Forms\EditarEquipoForm;
 use Laracasts\Validation\FormValidationException;
 //use Datatable;
 
@@ -11,13 +12,16 @@ class EquipoController extends \BaseController {
 	protected $repository;
 	protected $paisRepository;
 	protected $equipoForm;
+	protected $editarEquipoForm;
 
 	public function __construct(EquipoRepository $repository, 
 								PaisRepository $paisRepository, 
-								EquipoForm $equipoForm){
+								EquipoForm $equipoForm,
+								EditarEquipoForm $editarEquipoForm){
 		$this->repository = $repository;
 		$this->paisRepository = $paisRepository;
 		$this->equipoForm = $equipoForm;
+		$this->editarEquipoForm = $editarEquipoForm;
 	}	
 
 	/**
@@ -110,7 +114,7 @@ class EquipoController extends \BaseController {
 		$input['equipo_id'] = $id;
 		try
 		{
-			$this->equipoForm->validate($input);
+			$this->editarEquipoForm->validate($input);
 			$equipo = $this->repository->update($input);
 			return Redirect::route('equipos.show', $id);
 		}
@@ -135,7 +139,9 @@ class EquipoController extends \BaseController {
 			}
 			catch (FormValidationException $e)
 			{
-				return Response::json($e->getErrors()->all());
+				$this->setSuccess(true);
+				$this->addToResponseArray('errores', $e->getErrors()->all());
+				return $this->getResponseArrayJson();
 			}
 		}
 	}
