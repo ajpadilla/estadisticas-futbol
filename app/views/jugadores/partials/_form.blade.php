@@ -51,14 +51,14 @@
 						<div class="form-group">
 							{{ Form::label('peso','Peso',['class'=>'col-sm-2 control-label']) }}
 							<div class="col-sm-6">
-								{{ Form::text('peso',null, ['class' => 'form-control','id' => 'peso']) }}
+								{{ Form::text('peso',null, ['class' => 'form-control','id' => 'peso_jugador']) }}
 							</div>
 						</div>
 
 						<div class="form-group">
 							{{ Form::label('apodo','Apodo',['class'=>'col-sm-2 control-label']) }}
 							<div class="col-sm-6">
-								{{ Form::text('apodo',null, ['class' => 'form-control','id' => 'apodo']) }}
+								{{ Form::text('apodo',null, ['class' => 'form-control','id' => 'apodo_jugador']) }}
 							</div>
 						</div>
 
