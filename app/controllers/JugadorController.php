@@ -29,7 +29,7 @@ class JugadorController extends \BaseController {
 	public function index()
 	{
 		$table = $this->repository->getAllTable();
-		return View::make('jugadores.index', compact('jugadoresTable'));
+		return View::make('jugadores.index', compact('jugadoresTable','table'));
 	}
 
 
