@@ -8,15 +8,15 @@ use Laracasts\Validation\FormValidationException;
 
 class JugadorController extends \BaseController {
 
-	protected $jugadorRepository;
+	protected $repository;
 	protected $registrarJugadorForm;
 	protected $editarJugadorForm;
 
-	public function __construct(JugadorRepository $jugadorRepository,
+	public function __construct(JugadorRepository $repository,
 			RegistrarJugadorForm $registrarJugadorForm,
 			EditarJugadorForm $editarJugadorForm){
 
-		$this->jugadorRepository = $jugadorRepository;
+		$this->repository = $repository;
 		$this->registrarJugadorForm = $registrarJugadorForm;
 		$this->editarJugadorForm = $editarJugadorForm;
 	}
@@ -28,7 +28,7 @@ class JugadorController extends \BaseController {
 	 */
 	public function index()
 	{
-		$jugadoresTable = $this->jugadorRepository->getAllTable();
+		$table = $this->repository->getAllTable();
 		return View::make('jugadores.index', compact('jugadoresTable'));
 	}
 
@@ -57,7 +57,7 @@ class JugadorController extends \BaseController {
 			try
 			{
 				$this->registrarJugadorForm->validate($input);
-				$jugador = $this->jugadorRepository->create($input);
+				$jugador = $this->repository->create($input);
 				return Response::json(['success' => true, 'jugador' => $jugador->toArray()]);
 			}
 			catch (FormValidationException $e)
@@ -76,7 +76,8 @@ class JugadorController extends \BaseController {
 	 */
 	public function show($id)
 	{
-		//
+		$jugador = $this->repository->get($id);
+		return View::make('jugadores.show', compact('jugador'));
 	}
 
 
@@ -106,7 +107,7 @@ class JugadorController extends \BaseController {
 			try
 			{
 				$this->editarJugadorForm->validate($input);
-				$this->jugadorRepository->update($input);
+				$this->repository->update($input);
 				return Response::json(['success' => true]);
 			}
 			catch (FormValidationException $e)
@@ -131,13 +132,13 @@ class JugadorController extends \BaseController {
 	public function destroyApi()
 	{
 		if(Request::ajax())
-			$this->setSuccess($this->jugadorRepository->delete(Input::get('idPlayer')));
+			$this->setSuccess($this->repository->delete(Input::get('idPlayer')));
 		return $this->getResponseArrayJson();
 	}
 
 	public function listaApi()
 	{
-		return $this->jugadorRepository->getDefaultTableForAll();
+		return $this->repository->getDefaultTableForAll();
 	}
 
 	public function showApi()
@@ -146,7 +147,7 @@ class JugadorController extends \BaseController {
 		{
 			if (Input::has('jugadorId'))
 			{
-				$jugador = $this->jugadorRepository->get(Input::get('jugadorId'));
+				$jugador = $this->repository->get(Input::get('jugadorId'));
 				$this->setSuccess(true);
 				$this->addToResponseArray('jugador', $jugador->toArray());
 				$this->addToResponseArray('urlImg',  $jugador->foto->url('thumb'));
@@ -172,7 +173,7 @@ class JugadorController extends \BaseController {
 	{
 		if(Request::ajax())
 		{
-			$jugadores = $this->jugadorRepository->getAllForSelect();
+			$jugadores = $this->repository->getAllForSelect();
 			if (count($jugadores) > 0) {
 				$this->setSuccess(true);
 				$this->addToResponseArray('data', $jugadores);

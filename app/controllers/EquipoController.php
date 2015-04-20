@@ -81,8 +81,8 @@ class EquipoController extends \BaseController {
 	{	
 		$paises = $this->paisRepository->getAllForSelect();
 		$equipo = $this->repository->get($id);
-		$jugadoresTable = $this->repository->getJugadoresTable($id);
-		return View::make('equipos.show', compact('equipo', 'paises', 'jugadoresTable'));
+		$table = $this->repository->getJugadoresTable($id);
+		return View::make('equipos.show', compact('equipo', 'paises', 'table'));
 	}
 
 
