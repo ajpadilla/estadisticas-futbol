@@ -14,7 +14,7 @@
 @endif
 <div class="form-group">
 	{{ Form::label('nombre', 'Nombre', ['class' => 'col-md-4 control-label']) }}	
-	<div class="col-md-8">{{ Form::text('nombre', null, ['class' => 'form-control','id' =>'nombre' ]) }}</div>
+	<div class="col-md-8">{{ Form::text('nombre', null, ['class' => 'form-control','id' =>'nombre_equipo' ]) }}</div>
 </div>
 <div class="form-group">
 	{{ Form::label('apodo', 'Apodo', ['class' => 'col-md-4 control-label']) }}	
@@ -27,7 +27,7 @@
 <div class="form-group">
 	{{ Form::label('tipo','Tipo',['class'=>'col-md-4 control-label']) }}
 	<div class="col-md-8">
-		{{ Form::select('tipo', ['Selección', 'Club'], null, ['class' => 'form-control chosen-select','data-placeholder' => 'Selecciona el tipo','id'=> 'tipo']) }}
+		{{ Form::select('tipo', ['Selección', 'Club'], null, ['class' => 'form-control chosen-select','data-placeholder' => 'Selecciona el tipo','id'=> 'tipo_equipo']) }}
 	</div>
 </div>
 
