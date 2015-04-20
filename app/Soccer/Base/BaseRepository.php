@@ -9,6 +9,17 @@ class BaseRepository
 	protected $columns;	
 	protected $actionColums = array();
 	protected $collection;
+	protected $listAllRoute;
+
+	public function setListAllRoute($listAllRoute)
+	{
+		$this->listAllRoute = $listAllRoute;
+	}
+
+	public function getListAllRoute()
+	{
+		return $this->listAllRoute;
+	}
 
 	public function setModel($model)
 	{
@@ -25,6 +36,11 @@ class BaseRepository
 		return $this->model->all();
 	}	
 
+	public function getAllForSelect()
+	{
+		return $this->getAll()->lists('nombre', 'id');
+	}	
+
 	public function delete($id)
 	{
 		$model = $this->get($id); 
@@ -36,10 +52,22 @@ class BaseRepository
 		return $this->model->findOrFail($id);
 	}	
 
+	public function update($data = array()){}
 
 	/*
 	************************** DATATABLE COLLECTION METHODS *********************************
 	*/
+
+	public function getAllTable($route = null, $params = array())
+	{
+		if(!$route)
+			$route = $this->listAllRoute;
+		
+		return Datatable::table()
+		->addColumn($this->columns)
+		->setUrl(route($route, $params))
+		->noScript();	
+	}	
 
 	public function setCollection($collection)
 	{
@@ -92,5 +120,4 @@ class BaseRepository
 
 	public function setDefaultActionColumn(){}
 	public function setBodyTableSettings(){}
-	public function update($data = array()){}
 }

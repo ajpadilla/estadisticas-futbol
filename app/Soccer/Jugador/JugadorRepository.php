@@ -20,17 +20,13 @@ class JugadorRepository extends BaseRepository
 			'Acciones'
 		];
 		$this->setModel(new Jugador);
+		$this->setListAllRoute('jugadores.api.lista');
 	}
 
 	public function filterList($nombre ='')
 	{
 		$this->model->where('nombre', 'LIKE', '%' . $nombre . '%')->lists('nombre', 'id');
 	}
-
-	public function getAllForSelect()
-	{
-		return $this->getAll()->lists('nombre', 'id');
-	}	
 
 	public function create($data = array())
 	{
@@ -110,13 +106,5 @@ class JugadorRepository extends BaseRepository
 		{
 			 return $model->age;
 		});
-	}
-
-	public function getAllTable($route = 'jugadores.api.lista', $params = array())
-	{
-		return Datatable::table()
-		->addColumn($this->columns)
-		->setUrl(route($route, $params))
-		->noScript();	
 	}
 }

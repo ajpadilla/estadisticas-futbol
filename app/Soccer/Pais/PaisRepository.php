@@ -6,25 +6,16 @@ use soccer\Base\BaseRepository;
 * 
 */
 class PaisRepository extends BaseRepository
-{		
-	public function getAll()
-	{
-		return Pais::all();
-	}
+{	
+	function __construct() {
+		$this->columns = [
+			'Nombre',
+			'Bandera',
+			'Acciones'
+		];	
 
-	public function getAllForSelect()
-	{
-		return $this->getAll()->lists('nombre', 'id');
-	}	
-
-	public function listAll()
-	{
-		return Pais::select()->lists('nombre', 'id');
-	}
-
-	public function getById($paisId)
-	{
-		return Pais::findOrFail($paisId);
+		$this->setModel(new Pais);
+		$this->setListAllRoute('paises.api.lista');
 	}
 
 	public function create($data = array())
@@ -35,13 +26,34 @@ class PaisRepository extends BaseRepository
 
 	public function update($data = array())
 	{
-		$pais = $this->getById($data['pais_id']);
-		$pais->update($data);
+		$pais = $this->get($data['pais_id']);
+		return $pais->update($data);
 	}
 
-	public function delete($paisId)
-	{
-		$pais = $this->getById($paisId); 
-		$pais->delete();
+	public function setDefaultActionColumn() {
+		$this->addColumnToCollection('Acciones', function($model)
+		{
+			$this->cleanActionColumn();
+			$this->addActionColumn("<a class='ver-pais' href='#' id='ver_pais_".$model->id."'>Ver</a><br />");
+			$this->addActionColumn("<a  class='editar-pais' href='#new-country-form' id='editar_pais_".$model->id."'>Editar</a><br />");
+			$this->addActionColumn("<a class='eliminar-pais' href='#' id='eliminar_pais_".$model->id."'>Eliminar</a>");
+			return implode(" ", $this->getActionColumn());
+		});
 	}
+
+	public function setBodyTableSettings()
+	{
+		$this->collection->searchColumns('Nombre');
+		$this->collection->orderColumns('Nombre');
+
+		$this->collection->addColumn('nombre', function($model)
+		{
+			 return $model->nombre;
+		});
+
+		$this->collection->addColumn('bandera', function($model)
+		{		
+			return "<h2 class='text-center'><span class='label label-default'><span class='flag-icon flag-icon-" . $model->code . "'></span> " .  strtoupper($model->code) . "</span></h2>";
+		});
+	}	
 }

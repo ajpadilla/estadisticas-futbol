@@ -26,11 +26,7 @@ class EquipoRepository extends BaseRepository
 
 		$this->jugadorRepository = $jugadorRepository;
 		$this->setModel(new Equipo);
-	}
-
-	public function getAllForSelect()
-	{
-		return $this->getAll()->lists('nombre', 'id');
+		$this->setListAllRoute('equipos.api.lista');
 	}	
 
 	public function listForType($type='club')
@@ -122,14 +118,6 @@ class EquipoRepository extends BaseRepository
 			 return $model->apodo;
 		});
 	}	
-
-	public function getAllTable()
-	{	
-		return Datatable::table()
-		->addColumn($this->columns)
-		->setUrl(route('equipos.api.lista'))
-		->noScript();
-	}
 
 	public function getJugadoresTable($id)
 	{		

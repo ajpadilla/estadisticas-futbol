@@ -15,16 +15,17 @@ class CreateTableJugadores extends Migration {
 		Schema::create('jugadores', function($table){
 			$table->increments('id');
 			$table->string('nombre', 128);
+			$table->string('apodo', 128)->nullable(true);
 			$table->date('fecha_nacimiento');
 			$table->string('foto', 128)->nullable(true)->default(null);
-			$table->decimal('altura', 10, 2)->nullable(true)->default(null);
-			$table->string('abreviacion', 20);
+			$table->decimal('altura', 3, 2)->nullable(true)->default(null);
+			$table->decimal('peso', 3, 2)->nullable(true)->default(null);
 			$table->timestamps();
 		});
 
 		Schema::table('jugadores', function(Blueprint $table)
 		{
-				$table->integer('posicion_id')->unsigned()->after('abreviacion');	
+				$table->integer('posicion_id')->unsigned()->after('peso');	
 				$table->foreign('posicion_id')
 						->references('id')	
 						->on('posiciones')

@@ -29,19 +29,8 @@
 			</div>-->
 		</div>
 		<div class="box-body">
-			<?php
-			$columns = [
-				'Nombre',
-				'Bandera',
-				'Acciones'
-			];
-			$table = Datatable::table()
-			->addColumn($columns)
-			->setUrl(route('paises.api.lista'))
-			->noScript();
-			?>
 			<div class="row"><br/></div>
-			{{ $table->render() }}
+				{{ $table->render() }}
 		</div>
 	</div>
 	@include('paises.new')

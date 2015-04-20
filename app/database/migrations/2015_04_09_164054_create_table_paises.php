@@ -16,6 +16,7 @@ class CreateTablePaises extends Migration {
 			$table->increments('id');
 			$table->string('nombre', 128);
 			$table->string('bandera', 128)->nullable();
+			$table->string('code', 3);
 			$table->timestamps();
 		});
 	}
