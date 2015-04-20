@@ -63,9 +63,13 @@ var CustomApp = function () {
             catch(e){return false;}
         },'Por favor, Ingrese una fecha valida con el dormato dd-mm-yy.');
 
-        jQuery.validator.addMethod('decimalNumbers', function(value, element) {
+        jQuery.validator.addMethod('alturaDecimal', function(value, element) {
             return this.optional(element) || /^\d{0,10}(\.\d{0,2})?$/i.test(value);
-        }, 'Por favor ingrese maximo'+[10]+'digitos enteros'+'y maximo'+[2]+'digitos decimales');
+        }, 'Por favor ingrese maximo'+ [10] +'digitos enteros'+' y maximo'+[2]+'digitos decimales');
+
+        jQuery.validator.addMethod('pesoDecimal', function(value, element) {
+            return this.optional(element) || /^\d{0,3}(\.\d{0,2})?$/i.test(value);
+        }, 'Por favor ingrese maximo'+[3]+'digitos enteros'+'y maximo'+[2]+'digitos decimales');
 
         $.validator.addMethod('onlyLettersNumbersAndDash', function(value, element) {
               return this.optional(element) || /^[a-zA-Z0-9ñÑ\-]+$/i.test(value);
@@ -75,46 +79,81 @@ var CustomApp = function () {
             rules:{
                 nombre:{
                     required:true,
-                    rangelength: [2, 64],
+                    rangelength: [2, 128],
                     onlyLettersNumbersAndSpaces: true
                 },
                 fecha_nacimiento:{
                     required:true,
-                    //customDateValidator: true
+                    customDateValidator: true
                 },
                 altura:{
                     required:true,
-                   // decimalNumbers:true
+                    alturaDecimal:true
+                },
+                peso:{
+                    required:true,
+                    pesoDecimal:true
                 },
                 apodo:{
                     required:true,
-                    //onlyLettersNumbersAndDash:true
+                    rangelength: [2, 128],
+                    onlyLettersNumbersAndSpaces: true
                 },
-                posicion:{
+                posicion_id:{
                     required:true,
                 },
-                pais:{
+                pais_id:{
                     required:true,
+                },
+                numero:{
+                    required:true,
+                    number:true
+                },
+                fecha_inicio:{
+                    required:true,
+                    customDateValidator:true
+                },
+                fecha_fin:{
+                    customDateValidator:true
+                },
+                equipo_id:{
+                    required:true
                 }
             },
             messages:{
                 nombre:{
                     required:'Este campo es obligatorio.',
+                    rangelength: 'Por favor ingrese entre [2, 128] caracteres',
+                    onlyLettersNumbersAndSpaces: true
                 },
                 fecha_nacimiento:{
                     required:'Este campo es obligatorio.',
                 },
                 altura:{
-                   required:'Este campo es obligatorio.',
+                    required:'Este campo es obligatorio.',
+                },
+                peso:{
+                    required:'Este campo es obligatorio.',
                 },
                 apodo:{
-                  required:'Este campo es obligatorio.',
+                    required:'Este campo es obligatorio.',
+                    rangelength: 'Por favor ingrese entre [2, 128] caracteres',
                 },
-                posicion:{
+                posicion_id:{
                     required:'Este campo es obligatorio.',
                 },
-                pais:{
+                pais_id:{
                     required:'Este campo es obligatorio.',
+                },
+                numero:{
+                    required:'Este campo es obligatorio.',
+                    number:'Por favor ingrese un valor numerico.'
+                },
+                fecha_inicio:{
+                    required:'Este campo es obligatorio.',
+                },
+                equipo_id:{
+                   required:'Este campo es obligatorio.',
                 }
             },
             highlight:function(element){
