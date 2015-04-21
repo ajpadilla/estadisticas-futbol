@@ -351,7 +351,23 @@ var CustomApp = function () {
                 },
                 numero:{
                     required:true,
-                    number:true
+                    number:true,
+                    remote: 
+                    {
+                        type: 'POST',
+                        url: $('#verificar-jugador-equipo').attr('href'),
+                        data: {
+                            numero: function(){
+                                return $('#numero').val();
+                            }
+                        },
+                        dataType:'json',
+                        dataFilter: function (data)
+                        {
+                            console.log(data);
+                            //return data;
+                        }
+                    }
                 },
                 fecha_inicio:{
                     required:true,
