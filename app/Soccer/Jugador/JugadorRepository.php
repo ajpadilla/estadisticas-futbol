@@ -66,14 +66,13 @@ class JugadorRepository extends BaseRepository
 		$jugador->update($data);
 		$equipo = Equipo::find($data['equipo_id']);
 
-		if($jugador->equipos->contains($equipo->id))
-			$jugador->equipos()->attach($data['equipo_id'],
-				[
-					'numero' => $data['numero'],
-					'fecha_inicio' => $fechaInicio,
-					'fecha_fin' => $fechaFin
-				]
-			);
+		$jugador->equipos()->sync([$data['equipo_id'] => 
+			[
+			'numero' => $data['numero'],
+			'fecha_inicio' => $fechaInicio,
+			'fecha_fin' => $fechaFin
+			]
+		]);
 
 		return $jugador;
 	}
