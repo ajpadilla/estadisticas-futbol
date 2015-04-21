@@ -1292,8 +1292,9 @@ var CustomApp = function () {
                     $('#ubicacion').val(response.equipo.ubicacion);
                     $('#jugadores').val(response.jugadores);
                     $('#pais_equipo').val(response.equipo.pais_id);
-                    
+
                     $('#pais_equipo').trigger("chosen:updated");
+                    $('#jugadores').trigger("chosen:updated");
                     $('#jugadores').trigger("chosen:updated");
                     validateSelectPlayers(response.equipo.tipo);
                 }
