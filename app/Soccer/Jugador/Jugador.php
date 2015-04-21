@@ -63,4 +63,6 @@ class Jugador extends Eloquent implements StaplerableInterface{
 		$fechaActual = $this->equipos()->max('fecha_inicio');
 		return $this->equipos()->whereFechaInicio($fechaActual)->first();
 	}
+
+	
 }
