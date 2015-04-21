@@ -23,7 +23,7 @@ class CreateEquipoJugadorTable extends Migration {
 			$table->integer('jugador_id')->unsigned()->index();
 			$table->foreign('jugador_id')->references('id')->on('jugadores')->onDelete('cascade');
 			$table->unique(array('equipo_id', 'jugador_id','fecha_inicio'), 'equipo_jugador_fecha_inicio_unique');
-			$table->unique(array('equipo_id', 'jugador_id','numero'), 'equipo_jugador_numero_unique');
+			$table->unique(array('equipo_id','numero'), 'equipo_numero_unique');
 			$table->timestamps();
 		});
 	}
