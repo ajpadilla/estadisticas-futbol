@@ -67,6 +67,7 @@
 		<a id="ver-equipo" href="{{ URL::route('equipos.data') }}"></a>	
 		<a id="editar-equipo" href="{{ URL::route('equipos.api.update') }}"></a>
 		<a id="eliminar-equipo" href="{{ URL::route('equipos.api.eliminar') }}"></a>
+		<a id="#verificar-jugador-equipo" href="{{ URL::route('equipos.api.verificar-jugador') }}"></a>
 	</div>
 </div>
 <!-- /SIDEBAR -->

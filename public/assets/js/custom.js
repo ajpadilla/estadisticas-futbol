@@ -351,7 +351,23 @@ var CustomApp = function () {
                 },
                 numero:{
                     required:true,
-                    number:true
+                    number:true,
+                    remote: 
+                    {
+                        type: 'POST',
+                        url: $('#verificar-jugador-equipo').attr('href'),
+                        data: {
+                            numero: function(){
+                                return $('#numero').val();
+                            }
+                        },
+                        dataType:'json',
+                        dataFilter: function (data)
+                        {
+                            console.log(data);
+                            //return data;
+                        }
+                    }
                 },
                 fecha_inicio:{
                     required:true,
@@ -421,7 +437,8 @@ var CustomApp = function () {
                     console.log(response);
                     $('#jugador_id').val(response.jugador.id);
                     $('#nombre').val(response.jugador.nombre);
-                    $('#fecha_nacimiento').val(response.fechaNacimiento);
+                    $('#fecha_nacimiento').val($.datepicker.formatDate('dd-mm-yy', new Date(
+                        response.jugador.fecha_nacimiento)));
                     $('#altura').val(response.jugador.altura);
                     $('#peso_jugador').val(response.jugador.peso);
                     $('#apodo_jugador').val(response.jugador.apodo);
@@ -435,7 +452,7 @@ var CustomApp = function () {
                     }else{
                         $('#fecha_fin').val()
                     }
-                    $('#equipo_id_jugador').val(response.equipo.id);
+                    $('#equipo_id_jugador').val(response.equipo.pivot.equipo_id);
                     $('.chosen-select').trigger("chosen:updated");
                 }
             }

@@ -159,7 +159,9 @@ class EquipoController extends \BaseController {
 	 */
 	public function destroyApi()
 	{		
-		if(Request::ajax())
+		if(Request::ajax()){
+
+		}
 			$equipo = $this->repository->delete(Input::get('idTeam'));
 			$this->setSuccess(true);
 			$this->addToResponseArray('equipo', $equipo);
@@ -212,4 +214,20 @@ class EquipoController extends \BaseController {
 			}
 		}
 	}
+
+
+	public function confirmExistsPlayerTeam()
+	{
+		if (Request::ajax()) 
+		{
+			$input = Input::all();
+			//$this->repository->existsPlayerTeam($input);
+			$this->addToResponseArray($input);
+			return $this->getResponseArrayJson();
+		}else{
+			$this->setSuccess(false);
+			return $this->getResponseArrayJson();
+		}
+	}
+
 }

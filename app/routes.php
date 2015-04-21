@@ -59,7 +59,7 @@ Route::post('equipos/api-actualizar',  ['as' => 'equipos.api.update','uses' => '
 Route::get('equipos/api-jugadores/{id}', array('as'=>'equipos.api.jugadores', 'uses'=>'EquipoController@jugadoresApi'));
 Route::get('equipos/api-ver',  ['as' => 'equipos.data','uses' => 'EquipoController@showApi' ] );
 Route::get('equipos/api-seleccionar',  ['as' => 'equipos.seleccionar','uses' => 'EquipoController@getAllValue' ] );
-
+Route::get('equipos/api-verificar-jugador',  ['as' => 'equipos.api.verificar-jugador','uses' => 'EquipoController@confirmExistsPlayerTeam' ] );
 
 /*
 ********************************* RUTAS PARA PAISES ********************************

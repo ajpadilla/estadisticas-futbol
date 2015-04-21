@@ -64,15 +64,25 @@ class JugadorRepository extends BaseRepository
 
 		$jugador = $this->get($data['jugador_id']);
 		$jugador->update($data);
-		$equipo = Equipo::find($data['equipo_id']);
 
-		$jugador->equipos()->sync([$data['equipo_id'] => 
-			[
+		if(count($jugador->equipos()->whereEquipoId($data['equipo_id'])->whereFechaInicio($fechaInicio)->first()) > 0)
+		{
+			$jugador->equipos()->sync([$data['equipo_id'] => 
+				[
+					'numero' => $data['numero'],
+					'fecha_inicio' => $fechaInicio,
+					'fecha_fin' => $fechaFin
+				]
+			]);
+		}else{
+			$jugador->equipos()->attach($data['equipo_id'],
+				[
 				'numero' => $data['numero'],
 				'fecha_inicio' => $fechaInicio,
 				'fecha_fin' => $fechaFin
-			]
-		]);
+				]
+			);
+		}
 
 		return $jugador;
 	}

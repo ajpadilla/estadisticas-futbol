@@ -61,14 +61,7 @@ class EquipoRepository extends BaseRepository
 		$equipo->update($data);
 
 		if (!is_null($data['jugadores']))
-		$equipo->jugadores()->attach($data['jugadores'],
-			[
-				'numero' => 0,
-				'fecha_inicio' => null,
-				'fecha_fin' => null
-			]
-		);
-
+		$equipo->jugadores()->sync([$data['jugadores']]);
 		return $equipo;
 	}
 
@@ -140,5 +133,37 @@ class EquipoRepository extends BaseRepository
 		});
 		return $this->jugadorRepository->getTableCollectionForRender();
 	}	
+
+	public function existsPlayerTeam($data = array())
+	{
+		if ($this->existsPlayer($data) == 0){
+			return FALSE;
+		}else{
+			if ($this->exitNumberPlayer($data)) {
+				return FALSE;
+			}else{
+				return TRUE;
+			}
+		}
+
+	}
+
+	public function existsPlayer($data = array())
+	{
+		$equipo = $this->get($data['equipo_id']);
+		return $equipo->whereHas('jugadores', function($q) use ($data){
+    		$q->where('jugador_id', '=', $data['jugador_id']);
+		})->count();
+	}
+
+	public function exitNumberPlayer($data = array())
+	{
+		$equipo = $this->get($data['equipo_id']);
+		return $equipo->whereHas('jugadores', function($q) use ($data)
+		{
+    		$q->where('jugador_id', '!=', $data['jugador_id'])
+    			->where('numero', '=', $data['numero']);
+		})->count();
+	}
 
 }

@@ -114,7 +114,8 @@ class JugadorController extends \BaseController {
 				$jugador = $this->repository->update($input);
 				$this->setSuccess(true);
 				$this->addToResponseArray('jugador', $jugador);
-				//$this->addToResponseArray('equipo', $jugador->getEquipoAttribute()->toArray());
+				$this->addToResponseArray('equipo', $jugador->getEquipoAttribute()->toArray());
+				$this->addToResponseArray('datos', $input);
 				return $this->getResponseArrayJson();					
 			}
 			catch (FormValidationException $e)
@@ -160,7 +161,7 @@ class JugadorController extends \BaseController {
 				$this->setSuccess(true);
 				$this->addToResponseArray('jugador', $jugador->toArray());
 				$this->addToResponseArray('urlImg',  $jugador->foto->url('thumb'));
-				$this->addToResponseArray('equipo', $jugador->getEquipoAttribute()->toArray());
+				$this->addToResponseArray('equipo', $jugador->getEquipoAttribute());
 				$this->addToResponseArray('posicion',  $jugador->posicion->toArray());
 				$this->addToResponseArray('pais',   $jugador->pais->toArray());
 				$this->addToResponseArray('fechaNacimiento', date("d-m-Y",strtotime($jugador->fecha_nacimiento)));
