@@ -111,10 +111,10 @@ class JugadorController extends \BaseController {
 			try
 			{
 				$this->editarJugadorForm->validate($input);
-				$this->repository->update($input);
+				$jugador = $this->repository->update($input);
 				$this->setSuccess(true);
 				$this->addToResponseArray('jugador', $jugador);
-				$this->addToResponseArray('equipo', $jugador->getEquipoAttribute()->toArray());
+				//$this->addToResponseArray('equipo', $jugador->getEquipoAttribute()->toArray());
 				return $this->getResponseArrayJson();					
 			}
 			catch (FormValidationException $e)
