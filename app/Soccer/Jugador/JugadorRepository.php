@@ -68,9 +68,9 @@ class JugadorRepository extends BaseRepository
 
 		$jugador->equipos()->sync([$data['equipo_id'] => 
 			[
-			'numero' => $data['numero'],
-			'fecha_inicio' => $fechaInicio,
-			'fecha_fin' => $fechaFin
+				'numero' => $data['numero'],
+				'fecha_inicio' => $fechaInicio,
+				'fecha_fin' => $fechaFin
 			]
 		]);
 
