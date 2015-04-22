@@ -222,8 +222,9 @@ class EquipoController extends \BaseController {
 		{
 			$input = Input::all();
 			//$this->repository->existsPlayerTeam($input);
-			$this->addToResponseArray($input);
-			return $this->getResponseArrayJson();
+			/*$this->addToResponseArray(true);
+			return $this->getResponseArrayJson();*/
+			return Response::json(false);
 		}else{
 			$this->setSuccess(false);
 			return $this->getResponseArrayJson();

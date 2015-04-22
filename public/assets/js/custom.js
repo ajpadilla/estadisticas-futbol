@@ -354,18 +354,16 @@ var CustomApp = function () {
                     number:true,
                     remote: 
                     {
-                        type: 'POST',
                         url: $('#verificar-jugador-equipo').attr('href'),
+                        type: 'POST',
                         data: {
                             numero: function(){
                                 return $('#numero').val();
                             }
                         },
-                        dataType:'json',
-                        dataFilter: function (data)
-                        {
-                            console.log(data);
-                            //return data;
+                        dataFilter: function (data){
+                             console.log(data);
+                             return data
                         }
                     }
                 },
@@ -1265,7 +1263,7 @@ var CustomApp = function () {
 
     var validateSelectPlayers = function(typeOfTeam) 
     {
-        console.log(typeOfTeam);
+        //console.log(typeOfTeam);
         if(typeOfTeam == 'Selección'){
             $('#jugadores').attr('disabled', true);
             $('#jugadores').trigger("chosen:updated");
