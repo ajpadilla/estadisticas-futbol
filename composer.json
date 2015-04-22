@@ -28,7 +28,6 @@
 	},
 	"require-dev": {
 		"codeception/codeception": "2.0.*",
-		"barryvdh/laravel-debugbar": "1.x",
 		"fzaninotto/faker": "1.5.x-dev",
 		"way/generators": "~2.0",
 		"laracasts/testdummy": "~1.0"
