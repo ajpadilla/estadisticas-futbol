@@ -61,7 +61,8 @@ class EquipoRepository extends BaseRepository
 		$equipo->update($data);
 
 		if (!is_null($data['jugadores']))
-		$equipo->jugadores()->sync([$data['jugadores']]);
+			$equipo->jugadores()->sync($data['jugadores']);
+
 		return $equipo;
 	}
 
