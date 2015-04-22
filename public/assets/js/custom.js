@@ -942,7 +942,7 @@ var CustomApp = function () {
                     $('#jugadores').val(response.jugadores);
                     $('#jugadores').trigger("chosen:updated");
                     $('#pais_equipo').val(response.equipo.pais_id);
-                    $('#pais_equipo').trigger("chosen:updated");
+                    $('#pais_equipo').trigger("liszt:updated");
                     $('.chosen-select').trigger("chosen:updated");
                     validateSelectPlayers(response.equipo.tipo);
                 }
@@ -1120,6 +1120,24 @@ var CustomApp = function () {
             .modal('show');
     }
 
+    var loadSelectForTeam = function() {
+        $.ajax({
+            type: 'GET',
+            url: $('#ver-equipo').attr('href'),    
+            data: {'equipoId': $('#equipo_id').val()},
+            dataType: "JSON",
+            success: function(response) {
+                if (response.success == true) {
+                    console.log(response);
+                    $('#pais_equipo').val(response.equipo.pais_id);
+                    $('#jugadores').val(response.jugadores);
+                    $('#pais_equipo').trigger("chosen:updated");
+                    $('#jugadores').trigger("liszt:updated");
+                    $('.chosen-select').trigger("chosen:updated");
+                }
+            }
+        });
+    }
 
         //Metodo para eliminar equipo de la BD.
     var deleteTeam = function (idTeam) {
@@ -1738,6 +1756,8 @@ var CustomApp = function () {
             loadDataCountry();
             loadDataTeam();
             loadDataForEditTeam($('#equipo_id').val());
+            loadSelectForTeam();
+            dataForFormTeam();
             validateSelectPlayers($("#tipo_equipo option:selected" ).text());
         }
     }
