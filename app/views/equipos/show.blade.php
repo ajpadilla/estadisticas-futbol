@@ -31,7 +31,7 @@
 							</a>
 						</li>
 						<li>
-							<a href="#pro_edit" data-toggle="tab">
+							<a href="#pro_edit" data-toggle="tab" id="editar-equipo">
 								<i class="fa fa-edit"></i> 
 								<span class="hidden-inline-mobile"> Editar Cuenta</span>
 							</a>

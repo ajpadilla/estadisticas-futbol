@@ -131,7 +131,7 @@ class EquipoController extends \BaseController {
 			$input = Input::all();
 			try
 			{
-				$this->equipoForm->validate($input);
+				$this->editarEquipoForm->validate($input);
 				$equipo = $this->repository->update($input);
 				$this->setSuccess(true);
 				$this->addToResponseArray('equipo', $equipo);
@@ -139,7 +139,7 @@ class EquipoController extends \BaseController {
 			}
 			catch (FormValidationException $e)
 			{
-				$this->setSuccess(true);
+				$this->setSuccess(false);
 				$this->addToResponseArray('errores', $e->getErrors()->all());
 				return $this->getResponseArrayJson();
 			}
