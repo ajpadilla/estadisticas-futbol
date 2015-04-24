@@ -179,7 +179,7 @@ class JugadorRepository extends BaseRepository
 
 		$equipoRepository->collection->addColumn('Fecha Fin', function($model)
 		{
-			 return $model->pivot->fecha_inicio;
+			 return $model->pivot->fecha_fin;
 		});		
 
 		$equipoRepository->collection->addColumn('Número', function($model)
