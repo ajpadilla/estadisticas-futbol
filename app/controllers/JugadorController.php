@@ -81,8 +81,8 @@ class JugadorController extends \BaseController {
 	public function show($id)
 	{
 		$jugador = $this->repository->get($id);
-		$table = $this->repository->getJugadoresTable($id);
-		return View::make('jugadores.show', compact('jugador'));
+		$table = $this->repository->getEquiposTable($id);
+		return View::make('jugadores.show', compact('jugador', 'table'));
 	}
 
 
@@ -151,6 +151,11 @@ class JugadorController extends \BaseController {
 	{
 		return $this->repository->getDefaultTableForAll();
 	}
+
+	public function equiposApi($id)
+	{
+		return $this->repository->getTableForTeams($id);
+	}	
 
 	public function showApi()
 	{

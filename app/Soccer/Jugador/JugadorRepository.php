@@ -3,6 +3,7 @@
 use soccer\Jugador\Jugador;
 use soccer\Equipo\Equipo;
 use soccer\Base\BaseRepository;
+use soccer\Equipo\EquipoRepository;
 use Carbon\Carbon;
 use Datatable;
 /**
@@ -10,6 +11,7 @@ use Datatable;
 */
 class JugadorRepository extends BaseRepository
 {		
+
 	function __construct() {
 		$this->columns = [
 			'Nombre',
@@ -87,6 +89,11 @@ class JugadorRepository extends BaseRepository
 		return $jugador;
 	}
 
+	public function getEquipos($id)
+	{
+		return $this->getModel()->findOrFail($id)->equipos;
+	}	
+
 	public function setDefaultActionColumn() {
 		$this->addColumnToCollection('Acciones', function($model)
 		{
@@ -135,8 +142,27 @@ class JugadorRepository extends BaseRepository
 		});
 	}
 
-	/*public function getJugadoresTable($id)
-	{		
-		return $this->jugadorRepository->getAllTable('equipos.api.jugadores', [$id]);
-	}*/	
+	public function getEquiposTable($id)
+	{
+		$equipoRepository = new EquipoRepository;		
+		return $equipoRepository->getAllTable('jugadores.api.equipos', [$id]);
+	}
+
+	public function getTableForTeams($id)
+	{
+		$equipos = $this->getEquipos($id);
+		$equipoRepository = new EquipoRepository;
+		$equipoRepository->setDatatableCollection($equipos);
+		$equipoRepository->setBodyTableSettings();
+		$equipoRepository->addColumnToCollection('Acciones', function($model)
+		{
+			$equipoRepository->cleanActionColumn();
+			$equipoRepository->addActionColumn("<a class='ver-jugador' href='" . route('equipos.show', $model->id) . "' id='ver_jugador'>Ver</a><br />");
+			$equipoRepository->addActionColumn("<a  class='editar-jugador' href='#new-player-form' id='editar_".$model->id."'>Editar</a><br />");
+			$equipoRepository->addActionColumn("<a class='eliminar-jugador' href='" . route('equipos.api.eliminar', $model->id) . "' id='eliminar-jugador'>Eliminar</a><br />");
+			$equipoRepository->addActionColumn("<a class='cambiar-equipo' href='" . route('equipos.api.cambiar-equipo', $model->id) . "' id='eliminar-jugador'>Cambiar</a>");
+			return implode(" ", $equipoRepository->getActionColumn());
+		});
+		return $equipoRepository->getTableCollectionForRender();
+	}		
 }
