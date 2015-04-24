@@ -1757,7 +1757,6 @@ var CustomApp = function () {
             loadDataTeam();
             loadDataForEditTeam($('#equipo_id').val());
             loadSelectForTeam();
-            dataForFormTeam();
             validateSelectPlayers($("#tipo_equipo option:selected" ).text());
         }
     }

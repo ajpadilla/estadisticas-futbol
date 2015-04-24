@@ -91,7 +91,7 @@ class JugadorRepository extends BaseRepository
 
 	public function getEquipos($id)
 	{
-		return $this->getModel()->findOrFail($id)->equipos;
+		return $this->get($id)->equipos;
 	}	
 
 	public function setDefaultActionColumn() {
@@ -154,13 +154,13 @@ class JugadorRepository extends BaseRepository
 		$equipoRepository = new EquipoRepository;
 		$equipoRepository->setDatatableCollection($equipos);
 		$equipoRepository->setBodyTableSettings();
-		$equipoRepository->addColumnToCollection('Acciones', function($model)
+		$equipoRepository->addColumnToCollection('Acciones', function($model) use ($equipoRepository)
 		{
 			$equipoRepository->cleanActionColumn();
 			$equipoRepository->addActionColumn("<a class='ver-jugador' href='" . route('equipos.show', $model->id) . "' id='ver_jugador'>Ver</a><br />");
 			$equipoRepository->addActionColumn("<a  class='editar-jugador' href='#new-player-form' id='editar_".$model->id."'>Editar</a><br />");
-			$equipoRepository->addActionColumn("<a class='eliminar-jugador' href='" . route('equipos.api.eliminar', $model->id) . "' id='eliminar-jugador'>Eliminar</a><br />");
-			$equipoRepository->addActionColumn("<a class='cambiar-equipo' href='" . route('equipos.api.cambiar-equipo', $model->id) . "' id='eliminar-jugador'>Cambiar</a>");
+			//$equipoRepository->addActionColumn("<a class='eliminar-jugador' href='" . route('equipos.api.eliminar', $model->id) . "' id='eliminar-jugador'>Eliminar</a><br />");
+			//$equipoRepository->addActionColumn("<a class='cambiar-equipo' href='" . route('equipos.api.cambiar-equipo', $model->id) . "' id='eliminar-jugador'>Cambiar</a>");
 			return implode(" ", $equipoRepository->getActionColumn());
 		});
 		return $equipoRepository->getTableCollectionForRender();

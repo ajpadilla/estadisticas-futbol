@@ -67,7 +67,7 @@ class EquipoRepository extends BaseRepository
 
 	public function getJugadores($id)
 	{
-		return $this->getModel()->findOrFail($id)->jugadores;
+		return $this->get($id)->jugadores;
 	}
 
 	public function setDefaultActionColumn() {
@@ -124,7 +124,7 @@ class EquipoRepository extends BaseRepository
 		$jugadorRepository = new JugadorRepository;
 		$jugadorRepository->setDatatableCollection($jugadores);
 		$jugadorRepository->setBodyTableSettings();
-		$jugadorRepository->addColumnToCollection('Acciones', function($model)
+		$jugadorRepository->addColumnToCollection('Acciones', function($model) use ($jugadorRepository)
 		{
 			$jugadorRepository->cleanActionColumn();
 			$jugadorRepository->addActionColumn("<a class='ver-jugador' href='" . route('jugadores.show', $model->id) . "' id='ver_jugador'>Ver</a><br />");
