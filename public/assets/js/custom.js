@@ -335,6 +335,8 @@ var CustomApp = function () {
         addValidationRulesForms();
 
         $('#player-form').validate({
+            onkeyup: true,  
+            onfocusout: false,
             rules:{
                 nombre:{
                     required:true,
@@ -376,9 +378,9 @@ var CustomApp = function () {
                                 return $('#numero').val();
                             }
                         },
-                        dataFilter: function (data){
+                        success: function (data){
                              console.log(data);
-                             return data
+                             return data;
                         }
                     }
                 },
@@ -420,7 +422,8 @@ var CustomApp = function () {
                 },
                 numero:{
                     required:'Este campo es obligatorio.',
-                    number:'Por favor ingrese un valor numerico.'
+                    number:'Por favor ingrese un valor numerico.',
+                    remote: jQuery.validator.format('Error')
                 },
                 fecha_inicio:{
                     required:'Este campo es obligatorio.',
@@ -1757,8 +1760,8 @@ var CustomApp = function () {
             loadDataTeam();
             loadDataForEditTeam($('#equipo_id').val());
             loadSelectForTeam();
-            dataForFormTeam();
             validateSelectPlayers($("#tipo_equipo option:selected" ).text());
+            console.log($('#verificar-jugador-equipo').attr('href'));
         }
     }
 }();
