@@ -81,6 +81,7 @@ class JugadorController extends \BaseController {
 	public function show($id)
 	{
 		$jugador = $this->repository->get($id);
+		$table = $this->repository->getJugadoresTable($id);
 		return View::make('jugadores.show', compact('jugador'));
 	}
 

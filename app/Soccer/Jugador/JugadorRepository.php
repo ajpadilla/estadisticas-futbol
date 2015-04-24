@@ -134,4 +134,9 @@ class JugadorRepository extends BaseRepository
 			 return $model->age;
 		});
 	}
+
+	/*public function getJugadoresTable($id)
+	{		
+		return $this->jugadorRepository->getAllTable('equipos.api.jugadores', [$id]);
+	}*/	
 }

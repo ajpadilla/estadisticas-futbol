@@ -1,4 +1,4 @@
-@<?php namespace soccer\Jugador;
+<?php namespace soccer\Jugador;
 
 use Eloquent;
 use Codesleeve\Stapler\ORM\StaplerableInterface;
