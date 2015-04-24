@@ -30,16 +30,11 @@
 		</div>
 		<div class="box-body">
 			<div class="row"><br/></div>
-			{{ $table->render() }}
+			@include('equipos.partials._equipos-table')
 		</div>
 	</div>
 	{{--@include('equipos.new')
 	@include('equipos.partials._form_view-template')--}}
 </div>
-@include('equipos.new')
-@include('jugadores.new')
-@stop
 
-@section('scripts')
-	{{ $table->script() }}
 @stop

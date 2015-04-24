@@ -1,4 +1,4 @@
-<?php namespace soccer\Jugador;
+@<?php namespace soccer\Jugador;
 
 use Eloquent;
 use Codesleeve\Stapler\ORM\StaplerableInterface;
@@ -62,6 +62,14 @@ class Jugador extends Eloquent implements StaplerableInterface{
 	{
 		$fechaActual = $this->equipos()->max('fecha_inicio');
 		return $this->equipos()->whereFechaInicio($fechaActual)->first();
+	}
+
+	public function getEquipoActualAttribute()
+	{
+		return $this->equipos()
+			->whereFechaFin(null)
+			->max('fecha_inicio')
+			->first();
 	}
 
 	
