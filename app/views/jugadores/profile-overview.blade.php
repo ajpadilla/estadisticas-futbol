@@ -17,7 +17,11 @@
 									<tbody>
 										<tr>
 											<td>Club Actual</td>
-											<td id="card-name"><a href="{{ route('equipos.show', $jugador->equipoActual->id) }}"><strong>{{ $jugador->equipoActual->nombre }}</strong></a></td>
+											@if($jugador->equipoActual)
+												<td id="card-name"><a href="{{ route('equipos.show', $jugador->equipoActual->id) }}"><strong>{{ $jugador->equipoActual->nombre }}</strong></a></td>
+											@else
+												<td id="card-name">Sin Club</td>
+											@endif
 										</tr>									
 										<tr>
 											<td>Edad</td>
