@@ -4,6 +4,7 @@ use Eloquent;
 use Codesleeve\Stapler\ORM\StaplerableInterface;
 use Codesleeve\Stapler\ORM\EloquentTrait;
 use Carbon\Carbon;
+use DB;
 /**
 * 
 */
@@ -17,8 +18,9 @@ class Jugador extends Eloquent implements StaplerableInterface{
 	 public function __construct(array $attributes = array()) {
         $this->hasAttachedFile('foto', [
             'styles' => [
-                'medium' => '300x300',
-                'thumb' => '100x100'
+                'medium' => '150x250',
+                'small' => '50x100',
+                'thumb' => '50x30'
             ]
         ]);
 
@@ -42,15 +44,6 @@ class Jugador extends Eloquent implements StaplerableInterface{
 					->withTimestamps();
 	}
 
-	public function getNameCurrentTeams()
-	{
-		$teamsNames = [];
-		foreach ($this->equipos as $equipo) {
-			$teamsNames[] = $equipo->nombre;
-		}
-		return $teamsNames;
-	}
-
 	public function getAgeAttribute()
 	{
 		//return Carbon::createFromFormat('Y-m-d H:i:s', $date)->format('d-m-Y');
@@ -58,19 +51,44 @@ class Jugador extends Eloquent implements StaplerableInterface{
 		return Carbon::createFromDate($fecha[0], $fecha[1], $fecha[2])->age;
 	}
 
-	public function getEquipoAttribute()
+	public function getUltimoEquipoAttribute()
 	{
-		$fechaActual = $this->equipos()->max('fecha_inicio');
-		return $this->equipos()->whereFechaInicio($fechaActual)->first();
+		$fecha = $this->equipos()->max('fecha_inicio');
+		return $this->equipos()->clubes()->whereFechaInicio($fecha)->first();
 	}
 
 	public function getEquipoActualAttribute()
 	{
-		return $this->equipos()
-			->whereFechaFin(null)
-			->max('fecha_inicio')
-			->first();
+		/*
+		SELECT j.* FROM jugadores j JOIN equipo_jugador ej on (j.id=ej.jugador_id) 
+		WHERE fecha_fin is null AND fecha_inicio = (SELECT MAX(fecha_inicio) 
+		FROM equipo_jugador WHERE fecha_fin is null)
+		*/
+		$fecha = $this->equipos()->max('fecha_inicio');
+		/*return $this->with(['equipos' => function($query) use ($fecha) {
+			$query->whereFechaFin(null)->whereFechaInicio($fecha);
+		}])->first();*/
+		return $this->equipos()->clubes()->whereFechaFin(null)->whereFechaInicio($fecha)->first();
 	}
 
+	public function getAlturaAttribute($value)
+	{
+		return $value . ' cm';
+	}
+
+	public function getPesoAttribute($value)
+	{
+		return $value . ' kg';
+	}
+
+	public function getGolesAttribute()
+	{
+		return 0;
+	}
+
+	public function getGolesEquipoActualAttribute()
+	{
+		return 0;
+	}
 	
 }

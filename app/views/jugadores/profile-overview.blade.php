@@ -1,21 +1,79 @@
 <div class="row">
-	<!-- PROFILE PIC -->
 	<div class="col-md-8">
-		<div class="list-group">
-			<li class="list-group-item zero-padding">
-				{{-- <img alt="" class="img-responsive" src="{{ $jugador->foto }}"> --}}
-			</li>
-			<div class="list-group-item profile-details">
-				{{-- <h2>Jennifer Doe</h2> --}}
-				<p>{{ $jugador->historia }}</p>
-				<p><a href="{{ $jugador->info_url }}">En Wikipedia.</a></p>
-				<ul class="list-inline">
-					<li><i class="fa fa-facebook fa-2x"></i></li>
-					<li><i class="fa fa-twitter fa-2x"></i></li>
-				</ul>
+		<div class="row">
+			<!-- PROFILE DETAILS -->
+			<div class="col-md-12">
+				<div id="contact-card" class="panel panel-default">
+					<div class="panel-heading">
+						<h2 class="panel-title">{{ $jugador->apodo }}</h2>
+					</div>				
+					<div class="panel-body">
+						<div id="card" class="row">
+							<div class="col-md-4 headshot">
+								<img src="{{ $jugador->foto->url('small') }}">
+							</div>
+							<div class="col-md-8">
+								<table class="table table-hover">
+									<tbody>
+										<tr>
+											<td>Club Actual</td>
+											<td id="card-name"><a href="{{ route('equipos.show', $jugador->equipoActual->id) }}"><strong>{{ $jugador->equipoActual->nombre }}</strong></a></td>
+										</tr>									
+										<tr>
+											<td>Edad</td>
+											<td id="card-name"><strong>{{ $jugador->age }}</strong></td>
+										</tr>
+										<tr>
+											<td>Fecha de Nacimienco</td>
+											<td id="card-name"><strong>{{ $jugador->fecha_nacimiento }}</strong></td>
+										</tr>
+										<tr>
+											<td>Lugar de Nacimienco</td>
+											<td id="card-name"><strong>{{ $jugador->lugar_nacimiento }}</strong></td>
+										</tr>										
+										<tr>
+											<td>Altura</td>
+											<td id="card-name"><strong>{{ $jugador->altura }}</strong></td>
+										</tr>
+										<tr>
+											<td>Peso</td>
+											<td id="card-name"><strong>{{ $jugador->peso }}</strong></td>
+										</tr>
+										<tr>
+											<td>Posicion</td>
+											<td id="card-name"><strong>{{ $jugador->posicion->abreviacion }}</strong></td>
+									</tbody>
+								</table>
+							</div>
+						</div>
+					</div>
+				</div>
 			</div>
+			<!-- /PROFILE DETAILS -->	
+		</div>
+		<div class="row">
+			<!-- PROFILE PIC -->
+			<div class="col-md-12">
+				<div class="list-group">
+					<li class="list-group-item zero-padding">
+						{{-- <img alt="" class="img-responsive" src="{{ $jugador->foto }}"> --}}
+					</li>
+					<div class="list-group-item profile-details">
+						{{-- <h2>Jennifer Doe</h2> --}}
+						<p>{{ $jugador->historia }}</p>
+						<p><a href="{{ $jugador->info_url }}">En Wikipedia.</a></p>
+						<ul class="list-inline">
+							<li><i class="fa fa-facebook fa-2x"></i></li>
+							<li><i class="fa fa-twitter fa-2x"></i></li>
+						</ul>
+					</div>
+				</div>
+			</div>
+			<!-- /PROFILE PIC -->
 		</div>
 	</div>
+
+	<!-- PROFILE STATICS -->
 	<div class="col-md-4">
 		<!-- BOX -->
 		<div class="box border inverse">
@@ -57,7 +115,8 @@
 		<!-- /BOX -->
 		<!-- /SAMPLE -->
 	</div>
-	<!-- /PROFILE PIC -->
+	<!-- /PROFILE STATICS -->
+
 	<!-- PROFILE DETAILS -->
 	<div class="row">
 		<div class="col-md-8 col-md-offset-2">
