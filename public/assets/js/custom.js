@@ -182,16 +182,21 @@ var CustomApp = function () {
         });
 
         // Mostrar formulario para agregar nuevo jugador
-        $('#new-player').on('click', function() {
+        $('#new-player').on('click', function() 
+        {
             updatePlayerForm();
             bootbox
-                .dialog({
+                .dialog(
+                {
                     message: $('#player-form-div'),
-                    buttons: {
-                        success: {
+                    buttons: 
+                    {
+                        success: 
+                        {
                             label: "Guardar",
                             className: "btn-primary",
-                            callback: function () {
+                            callback: function () 
+                            {
                                 // Si quieres usar aquí jqueryForm, es lo mismo, lo agregas y ya. Creo que es buena idea!
 
                                 //ajax para el envío del formulario.
@@ -211,7 +216,8 @@ var CustomApp = function () {
                                             processData: false,
                                             dataType: "JSON",
                                             success: function(responseServer) {
-                                                //console.log(responseServer);
+                                                console.log(responseServer);
+                                                dataServer 
                                                 if(responseServer.success == true) 
                                                 {
                                                     // Muestro otro dialog con información de éxito
@@ -247,7 +253,7 @@ var CustomApp = function () {
                                                         cleanValidatorClasses(this);
                                                     });
                                                     //Reinicio el formulario
-                                                    updatePlayerForm();
+                                                    //updatePlayerForm();
                                                 }
                                             },
                                             error: function(jqXHR, textStatus, errorThrown) {
@@ -266,7 +272,7 @@ var CustomApp = function () {
                                                         cleanValidatorClasses(this);
                                                     });
                                                     //Reinicio el formulario
-                                                    updatePlayerForm();
+                                                    //updatePlayerForm();
                                             }
                                         });
                                         e.preventDefault(); //Prevent Default action. 
@@ -275,7 +281,7 @@ var CustomApp = function () {
                                 } else {
                                     return false;
                                 }
-
+                                return false;
                             }
                         }
                     },
@@ -284,12 +290,12 @@ var CustomApp = function () {
                 .on('shown.bs.modal', function() {
                     $('#player-form-div')
                         .show();                             // Show the form
-            })
+                })
             .on('hide.bs.modal', function(e) {
                 // Bootbox will remove the modal (including the body which contains the form)
                 // after hiding the modal
                 // Therefor, we need to backup the form
-                $('#player-form-div').hide().appendTo('#new-player-form');
+                //$('#player-form-div').hide().appendTo('#new-player-form');
             })
             .modal('show');
         });               
@@ -307,14 +313,13 @@ var CustomApp = function () {
                     console.log(response);
                     $('#jugador_id').val(response.jugador.id);
                     $('#nombre').val(response.jugador.nombre);
-                    $('#fecha_nacimiento').val($.datepicker.formatDate('dd-mm-yy', new Date(
-                        response.jugador.fecha_nacimiento)));
+                    $('#fecha_nacimiento').val(response.fechaNacimiento);
                     $('#altura').val(response.jugador.altura);
                     $('#peso_jugador').val(response.jugador.peso);
                     $('#apodo_jugador').val(response.jugador.apodo);
                     $('#posicion_id').val(response.jugador.posicion_id);
                     $('#pais_id').val(response.jugador.pais_id);
-                    $('#numero').val(response.equipo.pivot.numero);
+                    /*$('#numero').val(response.equipo.pivot.numero);
                     $('#fecha_inicio').val(response.fechaInicio);
                     if(response.equipo.pivot.fecha_fin != null){
                        $('#fecha_fin').val($.datepicker.formatDate('dd-mm-yy', new Date(
@@ -322,7 +327,7 @@ var CustomApp = function () {
                     }else{
                     $('#fecha_fin').val()
                     }
-                    $('#equipo_id_jugador').val(response.equipo.pivot.equipo_id);
+                    $('#equipo_id_jugador').val(response.equipo.pivot.equipo_id);*/
                     $('.chosen-select').trigger("chosen:updated");
                 }
             }
@@ -451,11 +456,13 @@ var CustomApp = function () {
                         success: {
                             label: "Actualizar",
                             className: "btn-primary",
-                            callback: function () {
+                            callback: function () 
+                            {
                                 // Si quieres usar aquí jqueryForm, es lo mismo, lo agregas y ya. Creo que es buena idea!
 
                                 //ajax para el envío del formulario.
-                                if($('#player-form').valid()) {
+                                if($('#player-form').valid()) 
+                                {
 
                                     var response = false; // Esta variable debería recibir los datos por ajax.
                                     var dataServer = null;
@@ -475,6 +482,7 @@ var CustomApp = function () {
                                                 console.log(responseServer);
                                                 if(responseServer.success == true) 
                                                 {
+                                                    $('#player-form-div').show();
                                                     // Muestro otro dialog con información de éxito
                                                     bootbox.dialog({
                                                         message:  responseServer.jugador.nombre + " ha sido Actualizado correctamente!",
@@ -491,8 +499,9 @@ var CustomApp = function () {
                                                         cleanValidatorClasses(this);
                                                     });
                                                     //Reinicio el formulario
-                                                    updatePlayerForm();
+                                                    //updatePlayerForm();
                                                 }else{
+                                                    $('#player-form-div').show();
                                                      bootbox.dialog({
                                                         message:responseServer.errores,
                                                         title: "Error",
@@ -508,7 +517,7 @@ var CustomApp = function () {
                                                         cleanValidatorClasses(this);
                                                     });
                                                     //Reinicio el formulario
-                                                    updatePlayerForm();
+                                                    //updatePlayerForm();
                                                 }
                                             },
                                             error: function(jqXHR, textStatus, errorThrown) {
@@ -527,7 +536,7 @@ var CustomApp = function () {
                                                         cleanValidatorClasses(this);
                                                     });
                                                     //Reinicio el formulario
-                                                   updatePlayerForm();
+                                                   //updatePlayerForm();
                                             }
                                         });
                                         e.preventDefault(); //Prevent Default action. 
@@ -536,7 +545,7 @@ var CustomApp = function () {
                                 } else {
                                     return false;
                                 }
-
+                                return false;
                             }
                         }
                     },

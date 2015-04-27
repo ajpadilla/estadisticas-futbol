@@ -76,37 +76,37 @@
 							</div>
 						</div>
 	
-						<div class="form-group">
+						{{-- <div class="form-group">
 							{{ Form::label('numero','Numero',['class'=>'col-sm-2 control-label']) }}
 							<div class="col-sm-6">
 								{{ Form::text('numero',null, ['class' => 'form-control','placeholder'=>'','id' =>'numero']) }}
 							</div>
-						</div>
+						</div> --}}
 
-						<div class="form-group">
+						 {{--<div class="form-group">
 							{{ Form::label('fecha_inicio','Fecha de inicio',['class'=>'col-sm-2 control-label']) }}
 							<div class="col-sm-6">
 								{{ Form::text('fecha_inicio',null, ['class' => 'form-control','placeholder'=>'dd-mm-yy','id' =>'fecha_inicio']) }}
 							</div>
-						</div>
+						</div> --}}
 						
-						<div class="form-group">
+						{{--<div class="form-group">
 							{{ Form::label('fecha_fin','Fecha de fin',['class'=>'col-sm-2 control-label']) }}
 							<div class="col-sm-6">
 								{{ Form::text('fecha_fin',null, ['class' => 'form-control','placeholder'=>'dd-mm-yy','id' =>'fecha_fin']) }}
 							</div>
-						</div>
+						</div>--}}
 					
-						<div class="form-group">
+						{{--<div class="form-group">
 							{{ Form::label('equipo_id','Equipo',['class'=>'col-sm-2 control-label']) }}
 							<div class="col-sm-6">
 								{{ Form::select('equipo_id',array(),null,['class' => 'form-control chosen-select','data-placeholder' => 'Escoge Equipo...','id'=> 'equipo_id_jugador']) }}
 							</div>
-						</div>
+						</div>--}}
 
 						<div class="form-group">
 							{{ Form::file('foto', ['class' => 'file-upload']) }}
-						</div>
+						</div> 
 
 					{{ Form::close() }}
 				</div>

@@ -38,7 +38,7 @@ Route::get('jugadores/api-eliminar',  ['as' => 'jugadores.api.eliminar','uses' =
 Route::get('jugadores/api-lista', array('as'=>'jugadores.api.lista', 'uses'=>'JugadorController@listaApi'));
 Route::get('jugadores/api-equipos/{id}', array('as'=>'jugadores.api.equipos', 'uses'=>'JugadorController@equiposApi'));
 Route::get('jugadores/api-cambiar-equipo/{id}', array('as'=>'jugadores.api.cambiar-equipo', 'uses'=>'JugadorController@cambiarEquipoApi'));
-Route::get('jugadores/api-ver/{id}',  ['as' => 'jugadores.data','uses' => 'JugadorController@showApi' ] );
+Route::get('jugadores/api-ver',  ['as' => 'jugadores.data','uses' => 'JugadorController@showApi' ] );
 Route::get('jugadores/api-seleccionar',  ['as' => 'jugadores.seleccionar','uses' => 'JugadorController@getAllValue' ] );
 
 
