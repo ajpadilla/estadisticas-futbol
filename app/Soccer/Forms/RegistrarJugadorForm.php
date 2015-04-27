@@ -11,10 +11,10 @@ class RegistrarJugadorForm extends FormValidator{
           'apodo' => 'required|max:128',
           'posicion_id' => 'required|exists:posiciones,id',
           'pais_id' => 'required|exists:paises,id',
-          'numero' =>'required|numeric',
+          /*'numero' =>'required|numeric',
           'fecha_inicio' => 'required|date_format:d-m-Y',
           'fecha_fin' => 'date_format:d-m-Y',
-          'equipo_id' => 'required|exists:equipos,id',
+          'equipo_id' => 'required|exists:equipos,id',*/
           'foto' =>'image'
      ];
 }
