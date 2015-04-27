@@ -132,8 +132,8 @@ return array(
 		//'Laracasts\Flash\FlashServiceProvider',
 		//'Intervention\Image\ImageServiceProvider',
 		//'Moltin\Cart\CartServiceProvider'
-	    'Codesleeve\LaravelStapler\LaravelStaplerServiceProvider'
-
+	    'Codesleeve\LaravelStapler\LaravelStaplerServiceProvider',
+        'Creitive\Breadcrumbs\BreadcrumbsServiceProvider'
 	),
 
 	/*
@@ -211,7 +211,8 @@ return array(
 		'Datatable' => 'Chumper\Datatable\Facades\DatatableFacade',
 		'Flash' => 'Laracasts\Flash\Flash',
 		'Image' => 'Intervention\Image\Facades\Image',
-		'MoltinCart' => 'Moltin\Cart\Facade'
+		'MoltinCart' => 'Moltin\Cart\Facade',
+		'Breadcrumbs' => 'Creitive\Breadcrumbs\Facades\Breadcrumbs'
 	),
 
 );

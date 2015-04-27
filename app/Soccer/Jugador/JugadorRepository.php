@@ -96,6 +96,11 @@ class JugadorRepository extends BaseRepository
 		return $this->get($id)->equipos;
 	}	
 
+	public function getClubes($id)
+	{
+		return $this->get($id)->equipos()->clubes()->get();
+	}		
+
 	public function setDefaultActionColumn() {
 		$this->addColumnToCollection('Acciones', function($model)
 		{
@@ -124,13 +129,11 @@ class JugadorRepository extends BaseRepository
 
 		$this->collection->addColumn('Equipo', function($model)
 		{
-			$names = $model->getNameCurrentTeams();
-			$links = '<select class="form-control m-b">';
-			foreach ($names as $equipo) {
-				$links .= '<option>'.$equipo.'</option>';
-			}
-			$links .='</select>';
-			return $links;
+			$equipo = $model->equipoActual;	
+			if($equipo)				
+				return "<a href='" . route('equipos.show', $equipo->id) . "''>" . $equipo->nombre . "</a>";
+			return '<p>Sin Club</p>';
+
 		});		
 
 		$this->collection->addColumn('Posición', function($model)
@@ -181,7 +184,7 @@ class JugadorRepository extends BaseRepository
 
 		$equipoRepository->collection->addColumn('Fecha Fin', function($model)
 		{
-			 return $model->pivot->fecha_inicio;
+			 return $model->fechaFin;
 		});		
 
 		$equipoRepository->collection->addColumn('Número', function($model)
@@ -192,7 +195,7 @@ class JugadorRepository extends BaseRepository
 
 	public function getTableForTeams($id)
 	{
-		$equipos = $this->getEquipos($id);
+		$equipos = $this->getClubes($id);
 		$equipoRepository = new EquipoRepository;
 		$equipoRepository->setDatatableCollection($equipos);
 		$this->setTableTeamContent($equipoRepository);

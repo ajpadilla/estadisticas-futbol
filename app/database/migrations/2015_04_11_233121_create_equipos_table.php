@@ -25,6 +25,8 @@ class CreateEquiposTable extends Migration {
 			$table->text('ubicacion')->nullable();
 			$table->text('historia')->nullable();
 			$table->string('info_url', 128)->nullable();
+			$table->string('facebook_url', 128)->nullable();
+			$table->string('twitter_url', 128)->nullable();			
 			$table->integer('pais_id')->unsigned();
 			$table->timestamps();
 			$table->foreign('pais_id')->references('id')->on('paises')->onDelete('cascade');

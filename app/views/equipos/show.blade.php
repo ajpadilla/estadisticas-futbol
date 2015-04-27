@@ -46,7 +46,7 @@
 					<div class="tab-content">
 					   <!-- OVERVIEW -->
 					   <div class="tab-pane fade in active" id="pro_details">
-					   		@include('equipos.details')
+					   		@include('equipos.profile-overview')
 					   </div>
 					   <!-- /OVERVIEW -->
 					   

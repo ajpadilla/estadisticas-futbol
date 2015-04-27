@@ -4,6 +4,7 @@ class BaseController extends Controller {
 
 
 	protected $responseArray = array('success' => false);
+	public $breadcrumbs;
 	/**
 	 * Setup the layout used by the controller.
 	 *
@@ -14,11 +15,19 @@ class BaseController extends Controller {
 		if ( ! is_null($this->layout))
 		{
 			$this->layout = View::make($this->layout);
-		}
+		}		
+
+		$this->breadcrumbs = new \Creitive\Breadcrumbs\Breadcrumbs;
+
+		$this->breadcrumbs->addCrumb('Home', route('pages.home'));
+		$this->breadcrumbs->addCssClasses('breadcrumb');
+		$this->breadcrumbs->setDivider('');
+		$this->breadcrumbs->setListElement('ul');
 
 		$currentRoute = Route::currentRouteName();
-
-		View::share(compact('currentRoute'));
+		$urlSegments = Request::segments();
+		$breadcrumbs = $this->breadcrumbs;
+		View::share(compact('currentRoute', 'urlSegments', 'breadcrumbs'));
 	}
 
 	public function setSuccess($success = false)

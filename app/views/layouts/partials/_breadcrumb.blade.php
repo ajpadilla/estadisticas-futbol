@@ -1,30 +1,15 @@
 <!-- BREADCRUMBS -->
-<ul class="breadcrumb">
+{{--<ul class="breadcrumb">
 	<li>
 		<i class="fa fa-home"></i>
-		<a href="index.html">Home</a>
+		<a href="{{ route('pages.home') }}">Inicio</a>
 	</li>
+	@foreach($urlSegments as $segment)
 	<li>
-		<a href="#">Other Pages</a>
+		<a href="">{{ ucfirst($segment) }}</a>
 	</li>
-	<li>Blank Page</li>
-</ul>
-<!-- /BREADCRUMBS -->
+	@endforeach
+</ul>--}}
 
-{{-- 
-<ul class="page-breadcrumb">
-<li>
-  <i class="fa fa-home"></i>
-  <a href="{{route('home')}}">Home</a>
-  <i class="fa fa-angle-right"></i>
-</li>
-@for($i = 0; $i <= count(Request::segments()); $i++)
-<li>
-  <a href="">{{Request::segment($i)}}</a>
-  @if($i < count(Request::segments()) & $i > 0)
-    {!!'<i class="fa fa-angle-right"></i>'!!}
-  @endif
-</li>
-@endfor
-</ul>
---}}
+{{ $breadcrumbs }}
+<!-- /BREADCRUMBS -->

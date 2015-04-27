@@ -15,22 +15,25 @@ class Equipo extends Eloquent implements StaplerableInterface{
 	 public function __construct(array $attributes = array()) {
         $this->hasAttachedFile('foto', [
             'styles' => [
-                'medium' => '300x300',
-                'thumb' => '100x100'
+                'medium' => '150x250',
+                'small' => '50x100',
+                'thumb' => '50x30'
             ]
         ]);
 
         $this->hasAttachedFile('escudo', [
             'styles' => [
-                'medium' => '300x300',
-                'thumb' => '100x100'
+                'medium' => '150x250',
+                'small' => '50x100',
+                'thumb' => '50x30'
             ]
         ]);
 
         $this->hasAttachedFile('bandera', [
             'styles' => [
-                'medium' => '300x300',
-                'thumb' => '100x100'
+                'medium' => '150x250',
+                'small' => '50x100',
+                'thumb' => '50x30'
             ]
         ]);
 
@@ -81,6 +84,38 @@ class Equipo extends Eloquent implements StaplerableInterface{
 
 	public function getJugadoresActuales()
 	{
-		return $this->jugadores()->whereFechaFin(null)->lists('equipo_jugador.jugador_id');
+		return $this->jugadoresActuales()->lists('equipo_jugador.jugador_id');
 	}
+
+	public function getEdadPromedioAttribute()
+	{
+		$tEdad = 0;
+		foreach ($this->jugadoresActuales()->get() as $jugador) {
+			$tEdad += $jugador->age;
+		}
+		return $tEdad / $this->jugadoresActuales()->count();
+	}
+
+	public function getFechaFinAttribute()
+	{
+		$fecha = $this->pivot->fecha_fin;
+		if(!$fecha)
+			return 'Presente';
+		return $fecha;
+	}
+
+ 	public function scopeJugadoresActuales($query)
+    {
+        return $query->jugadores()->whereFechaFin(null);
+    }	
+
+	public function scopeClubes($query)
+	{
+		return $query->whereTipo('club');
+	}    
+
+	public function scopeSelecciones($query)
+	{
+		return $query->whereTipo('selección');
+	}    	
 }
