@@ -206,7 +206,8 @@ class EquipoController extends \BaseController {
 				$equipo = $this->repository->get(Input::get('equipoId'));
 				$this->setSuccess(true);
 				$this->addToResponseArray('equipo', $equipo->toArray());
-				$this->addToResponseArray('jugadores', $equipo->getJugadoresActuales());
+				$this->addToResponseArray('jugadores', $equipo->jugadoresActuales());
+				$this->addToResponseArray('urlImg',  $equipo->foto->url('thumb'));
 				return $this->getResponseArrayJson();
 			}else{
 				$this->setSuccess(false);
