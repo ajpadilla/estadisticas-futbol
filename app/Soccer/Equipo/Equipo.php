@@ -82,9 +82,9 @@ class Equipo extends Eloquent implements StaplerableInterface{
 		return ucfirst(strtolower($value));
 	}
 
-	public function getJugadoresActuales()
+	public function jugadoresActuales()
 	{
-		return $this->jugadoresActuales()->lists('equipo_jugador.jugador_id');
+		return $this->jugadores()->lists('equipo_jugador.jugador_id');
 	}
 
 	public function getEdadPromedioAttribute()
