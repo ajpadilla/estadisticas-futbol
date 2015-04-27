@@ -373,20 +373,6 @@ var CustomApp = function () {
                 numero:{
                     required:true,
                     number:true,
-                    remote: 
-                    {
-                        url: $('#verificar-jugador-equipo').attr('href'),
-                        type: 'POST',
-                        data: {
-                            numero: function(){
-                                return $('#numero').val();
-                            }
-                        },
-                        success: function (data){
-                             console.log(data);
-                             return data;
-                        }
-                    }
                 },
                 fecha_inicio:{
                     required:true,
@@ -447,7 +433,7 @@ var CustomApp = function () {
             }
         });
     
-       loadDataForEditPlayer(idPlayer);
+        loadDataForEditPlayer(idPlayer);
 
         bootbox.dialog({
                     message: $('#player-form-div'),
