@@ -34,8 +34,6 @@ class JugadorRepository extends BaseRepository
 	{
 		$fechaNacimiento = $data['fecha_nacimiento'];
 		$data['fecha_nacimiento'] = Carbon::createFromFormat('d-m-Y', $fechaNacimiento)->format('Y-m-d');
-		$peso = number_format($data['peso'], 2, ".", " ");
-		$data['peso'] = $peso;
 		/*$fechaInicio = Carbon::createFromFormat('d-m-Y', $data['fecha_inicio'])->format('Y-m-d');
 		if(!empty($data['fecha_fin'])){
 			$fechaFin = Carbon::createFromFormat('d-m-Y',  $data['fecha_fin'])->format('Y-m-d');
@@ -60,8 +58,7 @@ class JugadorRepository extends BaseRepository
 	{
 		$fechaNacimiento = $data['fecha_nacimiento'];
 		$data['fecha_nacimiento'] = Carbon::createFromFormat('d-m-Y', $fechaNacimiento)->format('Y-m-d');
-		$peso = number_format($data['peso'], 2, ".", " ");
-		$data['peso'] = $peso;
+
 		/*$fechaInicio = Carbon::createFromFormat('d-m-Y', $data['fecha_inicio'])->format('Y-m-d');
 		if(!empty($data['fecha_fin'])){
 			$fechaFin = Carbon::createFromFormat('d-m-Y',  $data['fecha_fin'])->format('Y-m-d');
@@ -70,7 +67,6 @@ class JugadorRepository extends BaseRepository
 		}*/
 
 		$jugador = $this->get($data['jugador_id']);
-		$jugador->peso = $data['peso'];
 		$jugador->update($data);
 
 		/*if(count($jugador->equipos()->whereEquipoId($data['equipo_id'])->whereFechaInicio($fechaInicio)->first()) > 0)
