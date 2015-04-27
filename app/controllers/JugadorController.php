@@ -15,7 +15,6 @@ class JugadorController extends \BaseController {
 	public function __construct(JugadorRepository $repository,
 			RegistrarJugadorForm $registrarJugadorForm,
 			EditarJugadorForm $editarJugadorForm){
-
 		$this->repository = $repository;
 		$this->registrarJugadorForm = $registrarJugadorForm;
 		$this->editarJugadorForm = $editarJugadorForm;
@@ -27,7 +26,8 @@ class JugadorController extends \BaseController {
 	 * @return Response
 	 */
 	public function index()
-	{
+	{		
+		$this->breadcrumbs->addCrumb('Jugadores', route('jugadores.index'));
 		$table = $this->repository->getAllTable();
 		return View::make('jugadores.index', compact('jugadoresTable','table'));
 	}
@@ -81,6 +81,7 @@ class JugadorController extends \BaseController {
 	public function show($id)
 	{
 		$jugador = $this->repository->get($id);
+		$this->breadcrumbs->addCrumb($jugador->nombre, route('jugadores.show', $jugador->id));
 		$table = $this->repository->getEquiposTable($id);
 		return View::make('jugadores.show', compact('jugador', 'table'));
 	}
