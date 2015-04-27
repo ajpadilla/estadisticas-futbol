@@ -15,22 +15,25 @@ class Equipo extends Eloquent implements StaplerableInterface{
 	 public function __construct(array $attributes = array()) {
         $this->hasAttachedFile('foto', [
             'styles' => [
-                'medium' => '300x300',
-                'thumb' => '100x100'
+                'medium' => '150x250',
+                'small' => '50x100',
+                'thumb' => '50x30'
             ]
         ]);
 
         $this->hasAttachedFile('escudo', [
             'styles' => [
-                'medium' => '300x300',
-                'thumb' => '100x100'
+                'medium' => '150x250',
+                'small' => '50x100',
+                'thumb' => '50x30'
             ]
         ]);
 
         $this->hasAttachedFile('bandera', [
             'styles' => [
-                'medium' => '300x300',
-                'thumb' => '100x100'
+                'medium' => '150x250',
+                'small' => '50x100',
+                'thumb' => '50x30'
             ]
         ]);
 

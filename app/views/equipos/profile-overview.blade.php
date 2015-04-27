@@ -5,48 +5,33 @@
 			<div class="col-md-12">
 				<div id="contact-card" class="panel panel-default">
 					<div class="panel-heading">
-						<h2 class="panel-title">{{ $jugador->apodo }}</h2>
+						<h2 class="panel-title">{{ $equipo->apodo }}</h2>						
 					</div>				
 					<div class="panel-body">
 						<div id="card" class="row">
 							<div class="col-md-4 headshot">
-								<img src="{{ $jugador->foto->url('medium') }}">
+								<img src="{{ $equipo->foto->url('medium') }}">
 							</div>
 							<div class="col-md-8">
 								<table class="table table-hover">
 									<tbody>
+											
 										<tr>
-											<td>Club Actual</td>
-											@if($jugador->equipoActual)
-												<td id="card-name"><a href="{{ route('equipos.show', $jugador->equipoActual->id) }}"><strong>{{ $jugador->equipoActual->nombre }}</strong></a></td>
-											@else
-												<td id="card-name">Sin Club</td>
-											@endif
-										</tr>									
+											<td>Fecha de Fundación</td>
+											<td id="card-name"><strong>{{ $equipo->fecha_fundacion }}</strong></td>
+										</tr>
 										<tr>
 											<td>Edad</td>
-											<td id="card-name"><strong>{{ $jugador->age }}</strong></td>
+											<td id="card-name"><strong>{{ $equipo->age }}</strong></td>
 										</tr>
 										<tr>
-											<td>Fecha de Nacimienco</td>
-											<td id="card-name"><strong>{{ $jugador->fecha_nacimiento }}</strong></td>
-										</tr>
-										<tr>
-											<td>Lugar de Nacimienco</td>
-											<td id="card-name"><strong>{{ $jugador->lugar_nacimiento }}</strong></td>
+											<td>País</td>
+											<td id="card-name"><strong>{{ $equipo->pais->nombre }}</strong></td>
 										</tr>										
 										<tr>
-											<td>Altura</td>
-											<td id="card-name"><strong>{{ $jugador->altura }}</strong></td>
-										</tr>
-										<tr>
-											<td>Peso</td>
-											<td id="card-name"><strong>{{ $jugador->peso }}</strong></td>
-										</tr>
-										<tr>
-											<td>Posicion</td>
-											<td id="card-name"><strong>{{ $jugador->posicion->abreviacion }}</strong></td>
-										</tr>
+											<td>Ubicación</td>
+											<td id="card-name"><strong>{{ $equipo->ubicacion }}</strong></td>
+										</tr>										
 									</tbody>
 								</table>
 							</div>
@@ -56,26 +41,29 @@
 			</div>
 			<!-- /PROFILE DETAILS -->	
 		</div>
-		@if($jugador->historia OR $jugador->facebook_url OR $jugador->twitter_url)
+		@if($equipo->historia OR $equipo->facebook_url OR $equipo->twitter_url)
 			<div class="row">
 				<!-- PROFILE PIC -->
 				<div class="col-md-12">
 					<div class="list-group">
-							<div class="list-group-item profile-details">
-								{{-- <h2>Jennifer Doe</h2> --}}
-								@if($jugador->historia)
-									<p>{{ $jugador->historia }}</p>
-									<p><a href="{{ $jugador->info_url }}">En Wikipedia.</a></p>
+						<li class="list-group-item zero-padding">
+							<img alt="" class="img-responsive" src="{{ $equipo->bandera->url('medium') }}">
+						</li>
+						<div class="list-group-item profile-details">
+							{{-- <h2>Jennifer Doe</h2> --}}
+							@if($equipo->historia)
+								<p>{{ $equipo->historia }}</p>
+								<p><a href="{{ $equipo->info_url }}">En Wikipedia.</a></p>
+							@endif
+							<ul class="list-inline">
+								@if($equipo->facebook_url)
+									<li><a href="{{ $equipo->facebook_url }}"><i class="fa fa-facebook fa-2x"></i></a></li>
 								@endif
-								<ul class="list-inline">
-									@if($jugador->facebook_url)
-										<li><a href="{{ $jugador->facebook_url }}"><i class="fa fa-facebook fa-2x"></i></a></li>
-									@endif
-									@if($jugador->twitter_url)
-										<li><a href="{{ $jugador->twitter_url }}"><i class="fa fa-twitter fa-2x"></i></a></li>
-									@endif
-								</ul>
-							</div>
+								@if($equipo->twitter_url)
+									<li><a href="{{ $equipo->twitter_url }}"><i class="fa fa-twitter fa-2x"></i></a></li>
+								@endif
+							</ul>
+						</div>
 					</div>
 				</div>
 				<!-- /PROFILE PIC -->
