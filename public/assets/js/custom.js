@@ -1177,6 +1177,7 @@ var CustomApp = function () {
             success: function(response) {
                 console.log(response);
                 if (response.success) {
+                    $('#fecha_nacimiento').val(response.fechaNacimiento);
                     $('#posicion_id').val(response.jugador.posicion_id);
                     $('#pais_id').val(response.pais.id);
                     $('.chosen-select').trigger("chosen:updated");
