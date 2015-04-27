@@ -40,14 +40,15 @@ class EquipoRepository extends BaseRepository
 		$data['fecha_fundacion'] = Carbon::createFromFormat('d-m-Y', $fecha)->format('Y-m-d');
 		$equipo = $this->model->create($data); 
 
-		if (!is_null($data['jugadores']))
-		$equipo->jugadores()->attach($data['jugadores'],
-			[
-				'numero' => 0,
-				'fecha_inicio' => '',
-				'fecha_fin' => ''
-			]
-		);
+		if (!is_null($data['jugadores'])) {
+			$equipo->jugadores()->attach($data['jugadores'],
+				[
+					'numero' => 0,
+					'fecha_inicio' => '',
+					'fecha_fin' => ''
+				]
+			);
+		}
 
 		return $equipo;
 	}

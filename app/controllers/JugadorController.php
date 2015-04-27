@@ -164,15 +164,22 @@ class JugadorController extends \BaseController {
 			if (Input::has('jugadorId'))
 			{
 				$jugador = $this->repository->get(Input::get('jugadorId'));
+
+				if($jugador->equipoActual)
+					$equipo = $jugador->equipoActual;
+				else
+					$equipo = $jugador->ultimoEquipo;
+
 				$this->setSuccess(true);
 				$this->addToResponseArray('jugador', $jugador->toArray());
 				$this->addToResponseArray('urlImg',  $jugador->foto->url('thumb'));
-				$this->addToResponseArray('equipo', $jugador->getEquipoAttribute());
+				$this->addToResponseArray('equipo', $jugador->equipo->nombre);
 				$this->addToResponseArray('posicion',  $jugador->posicion->toArray());
 				$this->addToResponseArray('pais',   $jugador->pais->toArray());
 				$this->addToResponseArray('fechaNacimiento', date("d-m-Y",strtotime($jugador->fecha_nacimiento)));
-				$this->addToResponseArray('fechaInicio', date("d-m-Y",strtotime( $jugador->getEquipoAttribute()->pivot->fecha_inicio)));
-				$this->addToResponseArray('fechaFin', date("d-m-Y",strtotime($jugador->getEquipoAttribute()->pivot->fecha_fin)));
+
+				$this->addToResponseArray('fechaInicio', date("d-m-Y",strtotime($equipo->pivot->fecha_inicio)));
+				$this->addToResponseArray('fechaFin', date("d-m-Y",strtotime($equipo->pivot->fecha_fin)));
 				return $this->getResponseArrayJson();
 			}else{
 				$this->setSuccess(false);
