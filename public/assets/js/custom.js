@@ -945,7 +945,7 @@ var CustomApp = function () {
             success: function(response) 
             {
                 if (response.success == true) {
-                    //console.log(response);
+                    console.log(response);
                     $('#equipo_id').val(response.equipo.id);
                     $('#nombre_equipo').val(response.equipo.nombre);
                     if(response.equipo.fecha_fundacion != "0000-00-00") {
@@ -1035,7 +1035,7 @@ var CustomApp = function () {
                 element.addClass('valid').closest('.form-group').removeClass('has-error').addClass('has-success');
             }
         });
-    
+        updateTeamForm();
         loadDataForEditTeam(idTeam);
 
         bootbox.dialog({
@@ -1751,6 +1751,7 @@ var CustomApp = function () {
                     $.each(response.data,function (k,v){
                         jQuery(idField).append('<option value=\"'+k+'\">'+v+'</option>');
                         $(idField).trigger("chosen:updated");
+                        $('.chosen-select').trigger("chosen:updated");
                     });
                 }else{
                     jQuery(idField).html('');
