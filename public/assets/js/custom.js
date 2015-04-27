@@ -216,8 +216,7 @@ var CustomApp = function () {
                                             processData: false,
                                             dataType: "JSON",
                                             success: function(responseServer) {
-                                                console.log(responseServer);
-                                                dataServer 
+                                                //console.log(responseServer);
                                                 if(responseServer.success == true) 
                                                 {
                                                     // Muestro otro dialog con información de éxito
@@ -310,7 +309,7 @@ var CustomApp = function () {
             dataType: "JSON",
             success: function(response) {
                 if (response.success) {
-                    console.log(response);
+                    //console.log(response);
                     $('#jugador_id').val(response.jugador.id);
                     $('#nombre').val(response.jugador.nombre);
                     $('#fecha_nacimiento').val(response.fechaNacimiento);
@@ -479,7 +478,7 @@ var CustomApp = function () {
                                             processData: false,
                                             dataType: "JSON",
                                             success: function(responseServer) {
-                                                console.log(responseServer);
+                                                //console.log(responseServer);
                                                 if(responseServer.success == true) 
                                                 {
                                                     $('#player-form-div').show();
@@ -632,7 +631,7 @@ var CustomApp = function () {
     var deletePlayer = function (idPlayer) {
         
         bootbox.confirm("¿Esta seguro de eliminar al Jugador?", function(result) {
-            console.log("Confirm result: "+result);
+            //console.log("Confirm result: "+result);
             if (result == true){
                $.ajax({
                 type: 'GET',
@@ -756,10 +755,11 @@ var CustomApp = function () {
 
       var handleBootboxNewTeam = function () {
 
+
        addValidationRulesForms();
 
         $('#team-form').validate({
-            rules:{
+              rules:{
                 nombre:{
                     required:true,
                 },
@@ -773,11 +773,13 @@ var CustomApp = function () {
                 tipo:{
                     required:true,
                 },
-                posicion:{
+                historia:{
                     required:true,
+                    rangelength: [2,512]
                 },
-                ubucacion:{
-                    required:true
+                ubicacion:{
+                    required:true,
+                    rangelength: [2,512]
                 }
             },
             messages:{
@@ -796,8 +798,13 @@ var CustomApp = function () {
                 posicion:{
                     required:'Este campo es obligatorio',
                 },
-                ubucacion:{
-                    required:'Este campo es obligatorio'
+                historia:{
+                    required:'Este campo es obligatorio',
+                    rangelength: 'Debe ingresar minimo 2 y maximo 512 caracteres'
+                },
+                ubicacion:{
+                    required:'Este campo es obligatorio',
+                    rangelength: 'Debe ingresar minimo 2 y maximo 512 caracteres'
                 }
             },
             highlight:function(element){
@@ -821,7 +828,8 @@ var CustomApp = function () {
                         success: {
                             label: "Guardar",
                             className: "btn-primary",
-                            callback: function () {
+                            callback: function () 
+                            {
                                 // Si quieres usar aquí jqueryForm, es lo mismo, lo agregas y ya. Creo que es buena idea!
 
                                 //ajax para el envío del formulario.
@@ -842,7 +850,7 @@ var CustomApp = function () {
                                             processData: false,
                                             dataType: "JSON",
                                             success: function(responseServer) {
-                                                console.log(responseServer);
+                                                //console.log(responseServer);
                                                 if(responseServer.success == true) 
                                                 {
                                                     // Muestro otro dialog con información de éxito
@@ -879,7 +887,7 @@ var CustomApp = function () {
                                                         cleanValidatorClasses(this);
                                                     });
                                                     //Reinicio el formulario
-                                                    updateTeamForm();
+                                                   // updateTeamForm();
                                                 }
                                             },
                                             error: function(jqXHR, textStatus, errorThrown) {
@@ -899,7 +907,7 @@ var CustomApp = function () {
                                                         cleanValidatorClasses(this);
                                                     });
                                                     //Reinicio el formulario
-                                                     updateTeamForm();
+                                                    // updateTeamForm();
                                             }
                                         });
                                         e.preventDefault(); //Prevent Default action. 
@@ -908,7 +916,7 @@ var CustomApp = function () {
                                 } else {
                                     return false;
                                 }
-
+                                return false;
                             }
                         }
                     },
@@ -937,7 +945,7 @@ var CustomApp = function () {
             success: function(response) 
             {
                 if (response.success == true) {
-                    console.log(response);
+                    //console.log(response);
                     $('#equipo_id').val(response.equipo.id);
                     $('#nombre_equipo').val(response.equipo.nombre);
                     if(response.equipo.fecha_fundacion != "0000-00-00") {
@@ -968,6 +976,7 @@ var CustomApp = function () {
         addValidationRulesForms();
 
         $('#team-form').validate({
+            
             rules:{
                 nombre:{
                     required:true,
@@ -982,11 +991,13 @@ var CustomApp = function () {
                 tipo:{
                     required:true,
                 },
-                posicion:{
+                historia:{
                     required:true,
+                    rangelength: [2,512]
                 },
-                ubucacion:{
-                    required:true
+                ubicacion:{
+                    required:true,
+                    rangelength: [2,512]
                 }
             },
             messages:{
@@ -1005,8 +1016,13 @@ var CustomApp = function () {
                 posicion:{
                     required:'Este campo es obligatorio',
                 },
-                ubucacion:{
-                    required:'Este campo es obligatorio'
+                historia:{
+                    required:'Este campo es obligatorio',
+                    rangelength: 'Debe ingresar minimo 2 y maximo 512 caracteres'
+                },
+                ubicacion:{
+                    required:'Este campo es obligatorio',
+                    rangelength: 'Debe ingresar minimo 2 y maximo 512 caracteres'
                 }
             },
             highlight:function(element){
@@ -1032,7 +1048,8 @@ var CustomApp = function () {
                                 // Si quieres usar aquí jqueryForm, es lo mismo, lo agregas y ya. Creo que es buena idea!
 
                                 //ajax para el envío del formulario.
-                                if($('#team-form').valid()) {
+                                if($('#team-form').valid()) 
+                                {
 
                                     var response = false; // Esta variable debería recibir los datos por ajax.
                                     var dataServer = null;
@@ -1049,7 +1066,7 @@ var CustomApp = function () {
                                             processData: false,
                                             dataType: "JSON",
                                             success: function(responseServer) {
-                                                console.log(responseServer);
+                                                //console.log(responseServer);
                                                 if(responseServer.success == true) 
                                                 {
                                                     // Muestro otro dialog con información de éxito
@@ -1068,7 +1085,7 @@ var CustomApp = function () {
                                                         cleanValidatorClasses(this);
                                                     });
                                                     //Reinicio el formulario
-                                                    updateTeamForm();
+                                                    //updateTeamForm();
                                                 }else{
                                                      bootbox.dialog({
                                                         message: responseServer.errores,
@@ -1085,7 +1102,7 @@ var CustomApp = function () {
                                                         cleanValidatorClasses(this);
                                                     });
                                                     //Reinicio el formulario
-                                                   updateTeamForm();
+                                                   //updateTeamForm();
                                                 }
                                             },
                                             error: function(jqXHR, textStatus, errorThrown) {
@@ -1104,7 +1121,7 @@ var CustomApp = function () {
                                                         cleanValidatorClasses(this);
                                                     });
                                                     //Reinicio el formulario
-                                                    updateTeamForm();
+                                                    //updateTeamForm();
                                             }
                                         });
                                         e.preventDefault(); //Prevent Default action. 
@@ -1113,7 +1130,7 @@ var CustomApp = function () {
                                 } else {
                                     return false;
                                 }
-
+                                return false;
                             }
                         }
                     },
@@ -1140,7 +1157,7 @@ var CustomApp = function () {
             dataType: "JSON",
             success: function(response) {
                 if (response.success == true) {
-                    console.log(response);
+                    //console.log(response);
                     $('#pais_equipo').val(response.equipo.pais_id);
                     $('#jugadores').val(response.jugadores);
                     $('#pais_equipo').trigger("chosen:updated");
@@ -1323,7 +1340,7 @@ var CustomApp = function () {
                                                 if(responseServer.success == true) 
                                                 {
                                                     dataServer = responseServer;
-                                                    console.log(dataServer);
+                                                    //console.log(dataServer);
                                                     // Muestro otro dialog con información de éxito
                                                     bootbox.dialog({
                                                         message: $('#nombre').val() + " ha sido agregado correctamente!",
@@ -1440,8 +1457,8 @@ var CustomApp = function () {
             dataType: "JSON",
             success: function(response) {
                 if (response.success == true) {
-                    console.log(response);
-                    console.log(response.pais);
+                    /*console.log(response);
+                    console.log(response.pais);*/
                     $('#nombre_pais').val(response.pais.nombre);
                     $('#bandera_pais').val(response.pais.bandera);
                    /* var form = $('#new-country-form-view');*/
@@ -1523,8 +1540,8 @@ var CustomApp = function () {
             dataType: "JSON",
             success: function(response) {
                 if (response.success == true) {
-                    console.log(response);
-                    console.log(response.pais);
+                    /*console.log(response);
+                    console.log(response.pais);*/
                     $('#pais_id').val(response.pais.id);
                     $('#nombre').val(response.pais.nombre);
                     $('#bandera').val(response.pais.bandera);
@@ -1562,7 +1579,7 @@ var CustomApp = function () {
                                                 if(responseServer.success == true) 
                                                 {
                                                     dataServer = responseServer;
-                                                    console.log(dataServer);
+                                                    //console.log(dataServer);
                                                     // Muestro otro dialog con información de éxito
                                                     bootbox.dialog({
                                                         message: $('#nombre').val() + " ha sido Actualizado correctamente!",
@@ -1646,7 +1663,7 @@ var CustomApp = function () {
      //Metodo para eliminar país de la BD.
     var deleteCountry = function (idCountry) {
         bootbox.confirm("¿Esta seguro de eliminar el País?", function(result) {
-            console.log("Confirm result: "+result);
+            //console.log("Confirm result: "+result);
             if (result == true){
                $.ajax({
                 type: 'GET',
@@ -1709,7 +1726,7 @@ var CustomApp = function () {
             url: url,
             dataType:'json',
             success: function(response) {
-                console.log(response.data);
+                //console.log(response.data);
                 if (response.success == true) {
                     jQuery(idField).html('');
                     jQuery(idField).append('<option value=\"\"></option>');
