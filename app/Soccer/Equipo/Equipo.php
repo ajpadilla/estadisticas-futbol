@@ -29,14 +29,6 @@ class Equipo extends Eloquent implements StaplerableInterface{
             ]
         ]);
 
-        $this->hasAttachedFile('bandera', [
-            'styles' => [
-                'medium' => '150x250',
-                'small' => '50x100',
-                'thumb' => '50x30'
-            ]
-        ]);
-
         parent::__construct($attributes);
     }
 
