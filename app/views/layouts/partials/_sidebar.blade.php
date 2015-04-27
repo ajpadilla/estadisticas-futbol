@@ -58,7 +58,7 @@
 		<!--Routes Jugadores-->
 		<a id="agregar-jugador" href="{{ URL::route('jugadores.store') }}"></a>
 		<a id="datos-jugador" href="{{ URL::route('jugadores.data') }}"></a>
-		<a id="editar-jugador" href="{{ URL::route('jugadores.update') }}"></a>
+		<a id="editar-jugador" href="{{ URL::route('jugadores.api.update') }}"></a>
 		<a id="eliminar-jugador" href="{{ URL::route('jugadores.api.eliminar') }}"></a>
 		<a id="lista-jugadores" href="{{ URL::route('jugadores.seleccionar') }}"></a>
 		<!--Routes Equipos-->
