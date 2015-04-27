@@ -30,7 +30,7 @@ Route::get('jugadores/nuevo', ['as' => 'jugadores.create', 'uses' => 'JugadorCon
 Route::post('jugadores/guardar', ['as' => 'jugadores.store', 'uses' => 'JugadorController@store' ] );
 Route::get('jugadores/ver/{id}', ['as' => 'jugadores.show', 'uses' => 'JugadorController@show' ] );
 Route::get('jugadores/editar/{id}',  ['as' => 'jugadores.edit','uses' => 'JugadorController@edit' ] );
-Route::post('jugadores/actualizar',  ['as' => 'jugadores.update','uses' => 'JugadorController@update' ] );
+Route::post('jugadores/actualizar/{id}',  ['as' => 'jugadores.update','uses' => 'JugadorController@update' ] );
 Route::get('jugadores/eliminar/{id}',  ['as' => 'jugadores.destroy','uses' => 'JugadorController@destroy' ] );
 
 
@@ -40,6 +40,7 @@ Route::get('jugadores/api-equipos/{id}', array('as'=>'jugadores.api.equipos', 'u
 Route::get('jugadores/api-cambiar-equipo/{id}', array('as'=>'jugadores.api.cambiar-equipo', 'uses'=>'JugadorController@cambiarEquipoApi'));
 Route::get('jugadores/api-ver',  ['as' => 'jugadores.data','uses' => 'JugadorController@showApi' ] );
 Route::get('jugadores/api-seleccionar',  ['as' => 'jugadores.seleccionar','uses' => 'JugadorController@getAllValue' ] );
+Route::post('jugadores/api-actualizar',  ['as' => 'jugadores.api.update','uses' => 'JugadorController@updateApi' ] );
 
 
 /*
