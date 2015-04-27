@@ -6,8 +6,8 @@ class RegistrarJugadorForm extends FormValidator{
         protected $rules = [
           'nombre' => 'required|max:128',
           'fecha_nacimiento' => 'required|date_format:d-m-Y', 
-          'altura' => 'required',
-          'peso' =>'required',
+          'altura' => 'required|numeric',
+          'peso' =>'required|numeric',
           'apodo' => 'required|max:128',
           'posicion_id' => 'required|exists:posiciones,id',
           'pais_id' => 'required|exists:paises,id',
