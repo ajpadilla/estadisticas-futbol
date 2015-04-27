@@ -46,9 +46,9 @@
 				<!-- PROFILE PIC -->
 				<div class="col-md-12">
 					<div class="list-group">
-						<li class="list-group-item zero-padding">
+						{{--<li class="list-group-item zero-padding">
 							<img alt="" class="img-responsive" src="{{ $equipo->bandera->url('medium') }}">
-						</li>
+						</li>--}}
 						<div class="list-group-item profile-details">
 							{{-- <h2>Jennifer Doe</h2> --}}
 							@if($equipo->historia)
