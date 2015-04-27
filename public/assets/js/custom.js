@@ -1168,6 +1168,24 @@ var CustomApp = function () {
         });
     }
 
+    var loadSelectForPlayer = function() {
+        $.ajax({
+            type: 'GET',
+            url: $('#datos-jugador').attr('href'),    
+            data: {'jugadorId': $('#jugador_id').val()},
+            dataType: "JSON",
+            success: function(response) {
+                console.log(response);
+                if (response.success) {
+                    $('#fecha_nacimiento').val(response.fechaNacimiento);
+                    $('#posicion_id').val(response.jugador.posicion_id);
+                    $('#pais_id').val(response.pais.id);
+                    $('.chosen-select').trigger("chosen:updated");
+                }
+            }
+        });
+    }
+
         //Metodo para eliminar equipo de la BD.
     var deleteTeam = function (idTeam) {
         bootbox.confirm("¿Esta seguro de eliminar el Equipo?", function(result) {
@@ -1786,6 +1804,7 @@ var CustomApp = function () {
             loadDataTeam();
             loadDataForEditTeam($('#equipo_id').val());
             loadSelectForTeam();
+            loadSelectForPlayer();
             validateSelectPlayers($("#tipo_equipo option:selected" ).text());
             console.log($('#verificar-jugador-equipo').attr('href'));
         }

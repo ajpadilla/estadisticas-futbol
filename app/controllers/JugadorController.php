@@ -98,14 +98,30 @@ class JugadorController extends \BaseController {
 		//
 	}
 
-
 	/**
 	 * Update the specified resource in storage.
 	 *
 	 * @param  int  $id
 	 * @return Response
 	 */
-	public function update()
+	public function update($id)
+	{
+		$input = Input::all();
+		$input['jugador_id'] = $id;
+		try
+		{
+			$this->editarJugadorForm->validate($input);
+			$jugador = $this->repository->update($input);
+			return Redirect::route('jugadores.show', $id);
+		}
+		catch (FormValidationException $e)
+		{
+			return Redirect::back()->withInput()->withErrors($e->getErrors());			
+		}
+	}
+
+
+	public function updateApi()
 	{
 		if(Request::ajax())
 		{
