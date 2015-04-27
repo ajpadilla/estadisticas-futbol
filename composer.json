@@ -25,7 +25,8 @@
 		"bkwld/croppa": "~3.0",
 		"fzaninotto/faker" : "dev-master",
 		"nesbot/carbon": "~1.14",
-		"creitive/laravel4-breadcrumbs": "~1.0"
+		"creitive/laravel4-breadcrumbs": "~1.0",
+		"barryvdh/laravel-debugbar": "~1.8"
 	},
 	"require-dev": {
 		"codeception/codeception": "2.0.*",
