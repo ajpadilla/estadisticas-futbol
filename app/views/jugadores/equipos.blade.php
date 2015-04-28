@@ -7,7 +7,7 @@
 			<div class="box-body big">
 				<div class="row">
 					<div class="col-md-12">
-						@include('equipos.partials._equipos-table')
+						@include('partials._index-table')
 					</div>
 				</div>
 			</div>

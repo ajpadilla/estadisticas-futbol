@@ -30,15 +30,8 @@
 		</div>
 		<div class="box-body">
 			<div class="row"><br/></div>
-				{{ $table->render() }}
+			@include('partials._index-table')
 		</div>
 	</div>
-	@include('paises.new')
-	@include('paises.view')
-	{{--@include('jugadores.partials._form_view-template')--}}
 </div>
-@stop
-
-@section('scripts')
-	{{ $table->script() }}
 @stop

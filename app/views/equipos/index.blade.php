@@ -30,7 +30,7 @@
 		</div>
 		<div class="box-body">
 			<div class="row"><br/></div>
-			@include('equipos.partials._equipos-table')
+			@include('partials._index-table')
 		</div>
 	</div>
 	{{--@include('equipos.new')

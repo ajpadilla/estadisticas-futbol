@@ -30,7 +30,7 @@
 		</div>
 		<div class="box-body">
 			<div class="row"><br/></div>
-			@include('tipo-competencias.partials._tipo-competencias-table')
+			@include('partials._index-table')
 		</div>
 	</div>
 	{{--@include('Tipos de Competencia.new')
