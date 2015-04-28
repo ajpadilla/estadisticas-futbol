@@ -20,7 +20,11 @@ class CompetenciaRepository extends BaseRepository
 		$this->setModel(new Competencia);
 		$this->setListAllRoute('competencias.api.lista');
 	}
+    /*
+	********************* Methods ***********************
+    */
     
+
     /*
 	********************* Datatable Methods ***********************
     */

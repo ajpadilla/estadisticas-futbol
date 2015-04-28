@@ -32,4 +32,8 @@ class Competencia extends Eloquent implements StaplerableInterface{
     {
     	return $this->belongsTo('soccer\TipoCompetencia\TipoCompetencia');
     }
+
+    /*
+    ********************* Custom Methods ***********************
+    */       
 }
