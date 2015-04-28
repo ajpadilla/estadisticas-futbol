@@ -2022,6 +2022,37 @@ var CustomApp = function () {
             .modal('show');
     }
 
+       //Metodo para eliminar país de la BD.
+    var deletePosition = function (idPosition) {
+        bootbox.confirm("¿Esta seguro de eliminar la Posición?", function(result) {
+            //console.log("Confirm result: "+result);
+            if (result == true){
+               $.ajax({
+                type: 'GET',
+                url: $('#eliminar-posicion').attr('href'),
+                data: {'positionId': idPosition},
+                dataType: "JSON",
+                success: function(response) {
+                    if (response.success == true) {
+                        $('#eliminar_posicion_'+idPosition).parent().parent().remove();
+                        bootbox.dialog({
+                            message:" ¡Posición Eliminada!",
+                            title: "Éxito",
+                            buttons: {
+                                success: {
+                                    label: "Success!",
+                                    className: "btn-success"
+                                }
+                            }
+                        });
+                    };
+                }
+            });
+           };
+       });
+    }
+
+
 
     // Metodo para saber cual opcion(ver, editar, borrar) fue seleccionada de la lista de Paises
     var loadDataPosition = function() 
