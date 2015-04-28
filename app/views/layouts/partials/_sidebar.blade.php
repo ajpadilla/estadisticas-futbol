@@ -64,7 +64,19 @@
 					<li><a class="" href="{{ URL::route('paises.index') }}"><span class="sub-menu-text">Lista</span></a></li>
 					<li><a id="new-country" class="" href="#new-country-form"><span class="sub-menu-text">Crear</span></a></li>
 				</ul>
-			</li>		
+			</li>	
+			
+			<li class="has-sub">
+				<a href="javascript:;" class="">
+					<i class="fa fa-bookmark-o fa-fw"></i> <span class="menu-text">Posiciones</span>
+					<span class="arrow"></span>
+				</a>
+				<ul class="sub">
+					<li><a class="" href="{{ URL::route('posiciones.index') }}"><span class="sub-menu-text">Lista</span></a></li>
+					<li><a id="new-country" class="" href="#new-country-form"><span class="sub-menu-text">Crear</span></a></li>
+				</ul>
+			</li>
+
 		</ul>
 		<!-- /SIDEBAR MENU -->
 		<!--Routes Paises-->
@@ -74,7 +86,7 @@
 		<a id="editar-pais" href="{{ URL::route('paises.update') }}"></a>
 		<a id="eliminar-pais" href="{{ URL::route('paises.delete-ajax') }}"></a>
 		<!--Routes Posiciones-->
-		<a id="lista-posiciones" href="{{ URL::route('posiciones.lista') }}"></a>
+		<a id="lista-posiciones" href="{{ URL::route('posiciones.api.lista') }}"></a>
 		<!--Routes Jugadores-->
 		<a id="agregar-jugador" href="{{ URL::route('jugadores.store') }}"></a>
 		<a id="datos-jugador" href="{{ URL::route('jugadores.data') }}"></a>
