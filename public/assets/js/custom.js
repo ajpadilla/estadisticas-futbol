@@ -78,7 +78,7 @@ var CustomApp = function () {
 
     var updatePlayerForm = function() {
         $("#player-form")[0].reset();
-        $('.chosen-select').html("");
+       // $('.chosen-select').html("");
         loadFieldSelect($('#lista-paises').attr('href'),'#pais_id');
         loadFieldSelect($('#lista-posiciones').attr('href'),'#posicion_id');
         loadFieldSelect($('#lista-equipos').attr('href'),'#equipo_id_jugador');
@@ -373,20 +373,6 @@ var CustomApp = function () {
                 numero:{
                     required:true,
                     number:true,
-                    remote: 
-                    {
-                        url: $('#verificar-jugador-equipo').attr('href'),
-                        type: 'POST',
-                        data: {
-                            numero: function(){
-                                return $('#numero').val();
-                            }
-                        },
-                        success: function (data){
-                             console.log(data);
-                             return data;
-                        }
-                    }
                 },
                 fecha_inicio:{
                     required:true,
@@ -447,7 +433,7 @@ var CustomApp = function () {
             }
         });
     
-       loadDataForEditPlayer(idPlayer);
+        loadDataForEditPlayer(idPlayer);
 
         bootbox.dialog({
                     message: $('#player-form-div'),
@@ -704,42 +690,9 @@ var CustomApp = function () {
         //});            
     }
 
-    var initChosen = function(argument) {
+    var initChosen = function() {
         // Iniciar select chosen
         $('.chosen-select').chosen({width: "100%"});
-    }
-
-    var initDataPicker = function() {
-         // Iniciar datepicker
-         jQuery(function($){
-            $.datepicker.regional['es'] = {
-                autoclose: true,
-                showOn: "both",
-                buttonImageOnly: true,
-                buttonImage: "calendar.gif",
-                buttonText: "Calendar",
-                closeText: 'Cerrar',
-                showButtonPanel: true,
-                changeMonth: true,
-                changeYear: true,
-                yearRange: '2014:2030',
-                dateFormat: 'dd/mm/yy',
-            };
-            $.datepicker.setDefaults($.datepicker.regional['es']);
-        });    
-        $('#fecha_nacimiento').datepicker({
-             autoclose: true,
-                showOn: "both",
-                buttonImageOnly: true,
-                buttonImage: "calendar.gif",
-                buttonText: "Calendar",
-                closeText: 'Cerrar',
-                showButtonPanel: true,
-                changeMonth: true,
-                changeYear: true,
-                yearRange: '2014:2030',
-                dateFormat: 'dd/mm/yy',
-        });
     }
 
     /*
@@ -945,7 +898,7 @@ var CustomApp = function () {
             success: function(response) 
             {
                 if (response.success == true) {
-                    //console.log(response);
+                    console.log(response);
                     $('#equipo_id').val(response.equipo.id);
                     $('#nombre_equipo').val(response.equipo.nombre);
                     if(response.equipo.fecha_fundacion != "0000-00-00") {
@@ -1035,7 +988,7 @@ var CustomApp = function () {
                 element.addClass('valid').closest('.form-group').removeClass('has-error').addClass('has-success');
             }
         });
-    
+        updateTeamForm();
         loadDataForEditTeam(idTeam);
 
         bootbox.dialog({
@@ -1166,6 +1119,26 @@ var CustomApp = function () {
                 }
             }
         });
+        $('.chosen-select').trigger("chosen:updated");
+    }
+
+    var loadSelectForPlayer = function() {
+        $.ajax({
+            type: 'GET',
+            url: $('#datos-jugador').attr('href'),    
+            data: {'jugadorId': $('#jugador_id').val()},
+            dataType: "JSON",
+            success: function(response) {
+                console.log(response);
+                if (response.success) {
+                    $('#fecha_nacimiento').val(response.fechaNacimiento);
+                    $('#posicion_id').val(response.jugador.posicion_id);
+                    $('#pais_id').val(response.pais.id);
+                    $('.chosen-select').trigger("chosen:updated");
+                }
+            }
+        });
+        $('.chosen-select').trigger("chosen:updated");
     }
 
         //Metodo para eliminar equipo de la BD.
@@ -1245,7 +1218,9 @@ var CustomApp = function () {
                 $('#jugadores').attr('disabled', false);
                 $('#jugadores').trigger("chosen:updated");
             }
+            $('.chosen-select').trigger("chosen:updated");
         });
+        $('.chosen-select').trigger("chosen:updated");
     }
 
 
@@ -1726,13 +1701,14 @@ var CustomApp = function () {
             url: url,
             dataType:'json',
             success: function(response) {
-                //console.log(response.data);
+                console.log(response.data);
                 if (response.success == true) {
                     jQuery(idField).html('');
                     jQuery(idField).append('<option value=\"\"></option>');
                     $.each(response.data,function (k,v){
                         jQuery(idField).append('<option value=\"'+k+'\">'+v+'</option>');
                         $(idField).trigger("chosen:updated");
+                        $('.chosen-select').trigger("chosen:updated");
                     });
                 }else{
                     jQuery(idField).html('');
@@ -1742,50 +1718,27 @@ var CustomApp = function () {
         });
     }
 
-    var loadDataChosen = function() 
-    {
-
-        $(".chzn-select").chosen();
-        $(".chzn-select-deselect").chosen({allow_single_deselect:true});
-
-        $('.chosen-search input').autocomplete({
-            minLength: 3,
-            source: function( request, response ) {
-                $.ajax({
-                    url: $('#lista-jugadores').attr('href'),
-                    data: {'nombre': request.term},
-                    dataType: "json",
-                    beforeSend: function(){ $('ul.chosen-results').empty(); $("#jugadores").empty(); }
-                }).done(function(data) {
-                response($.map(data, function(item) {
-                    $('#jugadores').append('<option value="blah">' + item.nombre + '</option>');
-                }));
-                $("#jugadores").trigger("chosen:updated");
-            });
-        }
-        });
-    }
-
     return {
         init: function() {
             initChosen();
-            loadDataChosen();
+            loadFieldSelect($('#lista-posiciones').attr('href'),'#posicion_id');
+            loadFieldSelect($('#lista-paises').attr('href'),'#pais_id');
+            loadFieldSelect($('#lista-equipos').attr('href'),'#equipo_id');
+            loadFieldSelect($('#lista-equipos').attr('href'),'#equipo_id_jugador');
+            loadFieldSelect($('#lista-paises').attr('href'),'#pais_equipo');
+            loadFieldSelect($('#lista-jugadores').attr('href'),'#jugadores');
             //initDataPicker();
             handleBootstrapFileInput();
             handleBootboxNewPlayer();
             handleBootboxNewTeam();
             handleBootboxNewCountry();
-            loadFieldSelect($('#lista-paises').attr('href'),'#pais_id');
-            loadFieldSelect($('#lista-posiciones').attr('href'),'#posicion_id');
-            loadFieldSelect($('#lista-equipos').attr('href'),'#equipo_id');
-            loadFieldSelect($('#lista-equipos').attr('href'),'#equipo_id_jugador');
-            loadFieldSelect($('#lista-paises').attr('href'),'#pais_equipo');
-            loadFieldSelect($('#lista-jugadores').attr('href'),'#jugadores');
+
             loadDataPlayer();
             loadDataCountry();
             loadDataTeam();
             loadDataForEditTeam($('#equipo_id').val());
             loadSelectForTeam();
+            loadSelectForPlayer();
             validateSelectPlayers($("#tipo_equipo option:selected" ).text());
             console.log($('#verificar-jugador-equipo').attr('href'));
         }

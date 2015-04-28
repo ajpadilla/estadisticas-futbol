@@ -29,14 +29,6 @@ class Equipo extends Eloquent implements StaplerableInterface{
             ]
         ]);
 
-        $this->hasAttachedFile('bandera', [
-            'styles' => [
-                'medium' => '150x250',
-                'small' => '50x100',
-                'thumb' => '50x30'
-            ]
-        ]);
-
         parent::__construct($attributes);
     }
 
@@ -82,9 +74,9 @@ class Equipo extends Eloquent implements StaplerableInterface{
 		return ucfirst(strtolower($value));
 	}
 
-	public function getJugadoresActuales()
+	public function jugadoresActuales()
 	{
-		return $this->jugadoresActuales()->lists('equipo_jugador.jugador_id');
+		return $this->jugadores()->lists('equipo_jugador.jugador_id');
 	}
 
 	public function getEdadPromedioAttribute()
