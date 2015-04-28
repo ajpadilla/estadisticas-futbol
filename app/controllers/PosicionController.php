@@ -131,4 +131,21 @@ class PosicionController extends \BaseController {
 		return $this->repository->getDefaultTableForAll();
 	}
 
+	public function showApi()
+	{
+		if (Request::ajax())
+		{
+			if (Input::has('positionId'))
+			{
+				$posicion = $this->repository->get(Input::get('positionId'));
+				$this->setSuccess(true);
+				$this->addToResponseArray('posicion', $posicion->toArray());
+				return $this->getResponseArrayJson();
+			}else{
+				$this->setSuccess(false);
+				return $this->getResponseArrayJson();
+			}
+		}
+	}
+
 }
