@@ -1,17 +1,22 @@
 <?php
 use soccer\Posicion\PosicionRepository;
 use soccer\Forms\RegistrarPosicionForm;
+use soccer\Forms\EditarPosicionForm;
 
 
 class PosicionController extends \BaseController {
 
 	protected $repository;
 	protected $registrarPosicionForm;
+	protected $editarPosicionForm;
 
 	public function __construct(PosicionRepository $repository,
-		RegistrarPosicionForm $registrarPosicionForm) {
+		RegistrarPosicionForm $registrarPosicionForm,
+		EditarPosicionForm $editarPosicionForm) {
 		$this->repository = $repository;
 		$this->registrarPosicionForm = $registrarPosicionForm;
+		$this->editarPosicionForm = $editarPosicionForm;
+
 	}
 
 	/**
@@ -98,6 +103,30 @@ class PosicionController extends \BaseController {
 	public function update($id)
 	{
 		//
+	}
+
+
+	public function updateApi()
+	{
+		if(Request::ajax())
+		{
+			$input = Input::all();
+			try
+			{
+				$this->editarPosicionForm ->validate($input);
+				$posicion = $this->repository->update($input);
+				$this->setSuccess(true);
+				$this->addToResponseArray('posicion', $posicion->toArray());
+				$this->addToResponseArray('datos', $input);
+				return $this->getResponseArrayJson();					
+			}
+			catch (FormValidationException $e)
+			{
+				$this->setSuccess(false);
+				$this->addToResponseArray('errores', $e->getErrors()->all());
+				return $this->getResponseArrayJson();
+			}
+		}
 	}
 
 
