@@ -19,7 +19,10 @@ class CreateCompetenciasTable extends Migration {
 			$table->string('imagen', 128)->nullable();
 			$table->date('desde');
 			$table->date('hasta');
-			$table->integer('tipo_competencia_id');
+			$table->integer('tipo_competencia_id')->unsigned();
+			$table->foreign('tipo_competencia_id')
+				->references('id')->on('tipo_competencias')
+				->onUpdate('cascade')->onDelete('cascade');
 			$table->timestamps();
 		});
 	}
