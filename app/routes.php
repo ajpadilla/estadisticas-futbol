@@ -85,8 +85,9 @@ Route::get('paises/api-lista', array('as'=>'paises.api.lista', 'uses'=>'PaisCont
 */
 
 Route::get('posiciones', ['as' => 'posiciones.index', 'uses' => 'PosicionController@index']);
+Route::post('posiciones/guardar', ['as' => 'posiciones.store', 'uses' => 'PosicionController@store' ] );
 
-
+Route::get('posiciones/api-seleccionar',  ['as' => 'posiciones.seleccionar','uses' => 'PosicionController@getAllValue' ] );
 Route::get('posiciones/api-lista',  ['as' => 'posiciones.api.lista','uses' => 'PosicionController@listaApi' ] );
 
 /*
