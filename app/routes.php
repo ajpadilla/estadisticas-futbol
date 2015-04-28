@@ -88,6 +88,7 @@ Route::get('posiciones', ['as' => 'posiciones.index', 'uses' => 'PosicionControl
 Route::post('posiciones/guardar', ['as' => 'posiciones.store', 'uses' => 'PosicionController@store' ] );
 
 Route::get('posiciones/api-ver',  ['as' => 'posiciones.data','uses' => 'PosicionController@showApi' ] );
+Route::post('posiciones/api-actualizar',  ['as' => 'posiciones.api.update','uses' => 'PosicionController@updateApi' ] );
 Route::get('posiciones/api-seleccionar',  ['as' => 'posiciones.seleccionar','uses' => 'PosicionController@getAllValue' ] );
 Route::get('posiciones/api-lista',  ['as' => 'posiciones.api.lista','uses' => 'PosicionController@listaApi' ] );
 
