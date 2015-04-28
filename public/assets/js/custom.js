@@ -1739,7 +1739,7 @@ var CustomApp = function () {
 
         // Mostrar formulario para agregar nueva Posición
         $('#new-position').on('click', function() {
-            $("#position-form")[0].reset();
+            $("#position-form").trigger("reset");;
             bootbox
                 .dialog({
                     message: $('#position-form-div'),
@@ -1750,6 +1750,12 @@ var CustomApp = function () {
                             callback: function () 
                             {
                                 // Si quieres usar aquí jqueryForm, es lo mismo, lo agregas y ya. Creo que es buena idea!
+                                /*$('.table').dataTable({
+                                    bDestroy : true,  
+                                    sPaginationType: "full_numbers"
+                                });*/
+
+                                //$('.table').DataTable().ajax.reload();
 
                                 //ajax para el envío del formulario.
                                 if($('#position-form').valid()) {
@@ -1768,7 +1774,7 @@ var CustomApp = function () {
                                             processData: false,
                                             dataType: "JSON",
                                             success: function(responseServer) {
-                                                //console.log(responseServer);
+                                                console.log(responseServer);
                                                 if(responseServer.success == true) 
                                                 {
                                                     // Muestro otro dialog con información de éxito
@@ -1778,7 +1784,10 @@ var CustomApp = function () {
                                                         buttons: {
                                                             success: {
                                                                 label: "Success!",
-                                                                className: "btn-success"
+                                                                className: "btn-success",
+                                                                callback: function () {
+                                                                    $('.table').DataTable().ajax.reload();
+                                                                }
                                                             }
                                                         }
                                                     });
@@ -1788,6 +1797,9 @@ var CustomApp = function () {
                                                     });
                                                     //Reinicio el formulario
                                                     $("#position-form")[0].reset();
+
+                                                 
+
                                                 }else{
                                                     console.log(responseServer);
                                                      bootbox.dialog({
@@ -1951,7 +1963,10 @@ var CustomApp = function () {
                                                         buttons: {
                                                             success: {
                                                                 label: "Success!",
-                                                                className: "btn-success"
+                                                                className: "btn-success",
+                                                                 callback: function () {
+                                                                    $('.table').DataTable().ajax.reload();
+                                                                }
                                                             }
                                                         }
                                                     });
