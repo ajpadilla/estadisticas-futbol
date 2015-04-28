@@ -86,6 +86,7 @@
 		<a id="editar-pais" href="{{ URL::route('paises.update') }}"></a>
 		<a id="eliminar-pais" href="{{ URL::route('paises.delete-ajax') }}"></a>
 		<!--Routes Posiciones-->
+		<a id="agregar-posicion" href="{{ URL::route('posiciones.store') }}"></a>
 		<a id="lista-posiciones" href="{{ URL::route('posiciones.seleccionar') }}"></a>
 		<!--Routes Jugadores-->
 		<a id="agregar-jugador" href="{{ URL::route('jugadores.store') }}"></a>
