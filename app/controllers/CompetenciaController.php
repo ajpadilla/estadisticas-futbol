@@ -1,31 +1,31 @@
 <?php
 
-use soccer\TipoCompetencia\TipoCompetenciaRepository;
+use soccer\Competencia\CompetenciaRepository;
 
 
-class TipoCompetenciaController extends \BaseController {
+class CompetenciaController extends \BaseController {
 
 	protected $repository;
 
-	public function __construct(TipoCompetenciaRepository $repository){
+	public function __construct(CompetenciaRepository $repository){
 		$this->repository = $repository;
 	}
 
 	/**
 	 * Display a listing of the resource.
-	 * GET /tipocompetencia
+	 * GET /Competencia
 	 *
 	 * @return Response
 	 */
 	public function index()
 	{
 		$table = $this->repository->getAllTable();
-		return View::make('tipos-competencia.index', compact('table'));
+		return View::make('competencias.index', compact('table'));
 	}
 
 	/**
 	 * Show the form for creating a new resource.
-	 * GET /tipocompetencia/create
+	 * GET /Competencia/create
 	 *
 	 * @return Response
 	 */
@@ -36,7 +36,7 @@ class TipoCompetenciaController extends \BaseController {
 
 	/**
 	 * Store a newly created resource in storage.
-	 * POST /tipocompetencia
+	 * POST /Competencia
 	 *
 	 * @return Response
 	 */
@@ -47,7 +47,7 @@ class TipoCompetenciaController extends \BaseController {
 
 	/**
 	 * Display the specified resource.
-	 * GET /tipocompetencia/{id}
+	 * GET /Competencia/{id}
 	 *
 	 * @param  int  $id
 	 * @return Response
@@ -59,7 +59,7 @@ class TipoCompetenciaController extends \BaseController {
 
 	/**
 	 * Show the form for editing the specified resource.
-	 * GET /tipocompetencia/{id}/edit
+	 * GET /Competencia/{id}/edit
 	 *
 	 * @param  int  $id
 	 * @return Response
@@ -71,7 +71,7 @@ class TipoCompetenciaController extends \BaseController {
 
 	/**
 	 * Update the specified resource in storage.
-	 * PUT /tipocompetencia/{id}
+	 * PUT /Competencia/{id}
 	 *
 	 * @param  int  $id
 	 * @return Response
@@ -83,7 +83,7 @@ class TipoCompetenciaController extends \BaseController {
 
 	/**
 	 * Remove the specified resource from storage.
-	 * DELETE /tipocompetencia/{id}
+	 * DELETE /Competencia/{id}
 	 *
 	 * @param  int  $id
 	 * @return Response

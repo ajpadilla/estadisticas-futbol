@@ -33,7 +33,7 @@ class TipoCompetenciaRepository extends BaseRepository
 		$this->addColumnToCollection('Acciones', function($model)
 		{
 			$this->cleanActionColumn();
-			//$this->addActionColumn("<a class='ver-tipo-competencia' href='" . route('tipo-competencias.show', $model->id) . "'>Ver</a><br />");
+			$this->addActionColumn("<a class='ver-competencias' href='#new-team-form' id='editar_tipo-competencia_" . $model->id. "'>Competencias</a><br />");
 			$this->addActionColumn("<a  class='editar-tipo-competencia' href='#new-team-form' id='editar_tipo-competencia_".$model->id."'>Editar</a><br />");
 			$this->addActionColumn("<a class='eliminar-tipo-competencia' href='#' id='eliminar_tipo-competencia_".$model->id."'>Eliminar</a>");
 			return implode(" ", $this->getActionColumn());

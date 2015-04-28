@@ -101,3 +101,20 @@ Route::get('tipos-competencia/api-lista', array('as'=>'tipos-competencia.api.lis
 Route::post('tipos-competencia/api-actualizar',  ['as' => 'tipos-competencia.api.update','uses' => 'TipoCompetenciaController@updateApi' ] );
 //Route::get('tipos-competencia/api-jugadores/{id}', array('as'=>'tipos-competencia.api.jugadores', 'uses'=>'TipoCompetenciaController@jugadoresApi'));
 //Route::get('tipos-competencia/api-ver',  ['as' => 'tipos-competencia.data','uses' => 'TipoCompetenciaController@showApi' ] );
+
+/*
+********************************* RUTAS PARA COMPETENCIAS ********************************
+*/
+Route::get('competencias', ['as' => 'competencias.index', 'uses' => 'CompetenciaController@index']);
+Route::get('competencias/nuevo', ['as' => 'competencias.create', 'uses' => 'CompetenciaController@create'] );
+Route::post('competencias/guardar', ['as' => 'competencias.store', 'uses' => 'CompetenciaController@store' ] );
+//Route::get('competencias/ver/{id}', ['as' => 'competencias.show', 'uses' => 'CompetenciaController@show' ] );
+Route::get('competencias/editar/{id}',  ['as' => 'competencias.edit','uses' => 'CompetenciaController@edit' ] );
+Route::post('competencias/actualizar/{id}',  ['as' => 'competencias.update','uses' => 'CompetenciaController@update' ] );
+Route::get('competencias/eliminar/{id}',  ['as' => 'competencias.delete','uses' => 'CompetenciaController@destroy' ] );
+
+Route::get('competencias/api-eliminar',  ['as' => 'competencias.api.eliminar','uses' => 'CompetenciaController@destroyApi' ] );
+Route::get('competencias/api-lista', array('as'=>'competencias.api.lista', 'uses'=>'CompetenciaController@listaApi'));
+Route::post('competencias/api-actualizar',  ['as' => 'competencias.api.update','uses' => 'CompetenciaController@updateApi' ] );
+//Route::get('competencias/api-jugadores/{id}', array('as'=>'competencias.api.jugadores', 'uses'=>'CompetenciaController@jugadoresApi'));
+//Route::get('competencias/api-ver',  ['as' => 'competencias.data','uses' => 'CompetenciaController@showApi' ] );
