@@ -35,6 +35,14 @@ class PosicionRepository extends BaseRepository
 		return $posicion;
 	}
 
+	public function update($data = array())
+	{
+		$posicion = $this->get($data['position_id']); 
+		$posicion->update($data);
+		return $posicion;
+	}
+
+
 
 	public function setDefaultActionColumn() {
 		$this->addColumnToCollection('Acciones', function($model)
