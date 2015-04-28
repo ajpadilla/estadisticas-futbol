@@ -29,6 +29,12 @@ class PosicionRepository extends BaseRepository
 		return Posicion::select()->lists('nombre', 'id');
 	}
 
+	public function create($data = array())
+	{
+		$posicion = $this->model->create($data); 
+		return $posicion;
+	}
+
 
 	public function setDefaultActionColumn() {
 		$this->addColumnToCollection('Acciones', function($model)
