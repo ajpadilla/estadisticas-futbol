@@ -3,10 +3,10 @@ use soccer\Posicion\PosicionRepository;
 
 class PosicionController extends \BaseController {
 
-	protected $posicionRepository;
+	protected $repository;
 
-	public function __construct(PosicionRepository $posicionRepository) {
-		$this->posicionRepository = $posicionRepository;
+	public function __construct(PosicionRepository $repository) {
+		$this->repository = $repository;
 	}
 
 	/**
@@ -16,7 +16,8 @@ class PosicionController extends \BaseController {
 	 */
 	public function index()
 	{
-		//
+		$table = $this->repository->getAllTable();
+		return View::make('posiciones.index', compact('table'));
 	}
 
 
@@ -89,9 +90,10 @@ class PosicionController extends \BaseController {
 		//
 	}
 
-	public function getAllValue(){
+	public function getAllValue()
+	{
 		if(Request::ajax()){
-			$posiciones = $this->posicionRepository->listAll();
+			$posiciones = $this->repository->listAll();
 			if (count($posiciones) > 0) {
 				return Response::json(['success' => true, 'data' => $posiciones]);
 			}else{
@@ -100,6 +102,11 @@ class PosicionController extends \BaseController {
 		}else{
 			return Response::json(['success' => false]);
 		}
+	}
+
+	public function listaApi()
+	{
+		return $this->repository->getDefaultTableForAll();
 	}
 
 }
