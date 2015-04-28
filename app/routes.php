@@ -83,7 +83,11 @@ Route::get('paises/api-lista', array('as'=>'paises.api.lista', 'uses'=>'PaisCont
 /*
 ********************************* RUTAS PARA POSICIONES ********************************
 */
-Route::get('lista-posiciones',  ['as' => 'posiciones.lista','uses' => 'PosicionController@getAllValue' ] );
+
+Route::get('posiciones', ['as' => 'posiciones.index', 'uses' => 'PosicionController@index']);
+
+
+Route::get('posiciones/api-lista',  ['as' => 'posiciones.api.lista','uses' => 'PosicionController@listaApi' ] );
 
 /*
 ********************************* RUTAS PARA TIPOS DE COMPETENCIAS ********************************
