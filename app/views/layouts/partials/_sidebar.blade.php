@@ -37,6 +37,26 @@
 			</li>	
 			<li class="has-sub">
 				<a href="javascript:;" class="">
+					<i class="fa fa-bookmark-o fa-fw"></i> <span class="menu-text">Tipos de Competencia</span>
+					<span class="arrow"></span>
+				</a>
+				<ul class="sub">
+					<li><a class="" href="{{ URL::route('tipos-competencia.index') }}"><span class="sub-menu-text">Lista</span></a></li>
+					<li><a id="new-tipo-competencia" class="" href="#new-tipo-competencia-form"><span class="sub-menu-text">Crear</span></a></li>
+				</ul>
+			</li>	
+			<li class="has-sub">
+				<a href="javascript:;" class="">
+					<i class="fa fa-bookmark-o fa-fw"></i> <span class="menu-text">Competencias</span>
+					<span class="arrow"></span>
+				</a>
+				<ul class="sub">
+					<li><a class="" href="{{ URL::route('competencias.index') }}"><span class="sub-menu-text">Lista</span></a></li>
+					<li><a id="new-competencia" class="" href="#new-competencia-form"><span class="sub-menu-text">Crear</span></a></li>
+				</ul>
+			</li>					
+			<li class="has-sub">
+				<a href="javascript:;" class="">
 					<i class="fa fa-bookmark-o fa-fw"></i> <span class="menu-text">Paises</span>
 					<span class="arrow"></span>
 				</a>

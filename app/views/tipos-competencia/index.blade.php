@@ -1,18 +1,18 @@
 @extends("layouts.main")
 
 @section("page-title")
-	Lista de Jugadores
+	Lista de Tipos de Competencia
 @stop
 
 @section("page-description")
-	Jugadores
+	Tipos de Competencia
 @stop
 
 @section("content")
 <div class="col-md-12">
 	<div class="box border green">
 		<div class="box-title">
-			<h4><i class="fa fa-table"></i>Listado De Jugadores</h4>
+			<h4><i class="fa fa-table"></i>Lista de Tipos de Competencia</h4>
 			<!--<div class="tools hidden-xs">
 				<a href="#box-config" data-toggle="modal" class="config">
 					<i class="fa fa-cog"></i>
@@ -33,5 +33,8 @@
 			@include('partials._index-table')
 		</div>
 	</div>
+	{{--@include('Tipos de Competencia.new')
+	@include('Tipos de Competencia.partials._form_view-template')--}}
 </div>
+
 @stop
