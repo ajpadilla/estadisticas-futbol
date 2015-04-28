@@ -1695,13 +1695,175 @@ var CustomApp = function () {
         });
     }
 
+
+    /**
+     * Metodos para CRUD POSICIONES 
+    */
+
+    var handleBootboxNewPosition = function () {
+
+
+       addValidationRulesForms();
+
+        $('#position-form').validate({
+              rules:{
+                nombre:{
+                    required:true,
+                    rangelength : [2,128]
+                },
+                abreviacion:{
+                    required:true,
+                    rangelength : [2,20]
+                },
+            },
+            messages:{
+                nombre:{
+                    required: 'Este campo es obligatorio',
+                    rangelength: 'Por favor ingrese entre [2, 128] caracteres',
+                },
+                abreviacion:{
+                    required: 'Este campo es obligatorio',
+                    rangelength: 'Por favor ingrese entre [2, 20] caracteres',
+                },
+            },
+            highlight:function(element){
+                $(element).closest('.form-group').removeClass('has-success').addClass('has-error');
+            },
+            unhighlight:function(element){
+                $(element).closest('.form-group').removeClass('has-error');
+            },
+            success:function(element){
+                element.addClass('valid').closest('.form-group').removeClass('has-error').addClass('has-success');
+            }
+        });
+
+        // Mostrar formulario para agregar nueva Posición
+        $('#new-position').on('click', function() {
+            $("#position-form")[0].reset();
+            bootbox
+                .dialog({
+                    message: $('#position-form-div'),
+                    buttons: {
+                        success: {
+                            label: "Guardar",
+                            className: "btn-primary",
+                            callback: function () 
+                            {
+                                // Si quieres usar aquí jqueryForm, es lo mismo, lo agregas y ya. Creo que es buena idea!
+
+                                //ajax para el envío del formulario.
+                                if($('#position-form').valid()) {
+
+                                    var response = false; // Esta variable debería recibir los datos por ajax.
+                                    var dataServer = null;
+
+                                    $("#position-form").submit(function(e){
+                                        var formData = new FormData(this);
+
+                                        $.ajax({
+                                            type: 'POST',
+                                            url: $('#agregar-posicion').attr('href'), 
+                                            data: formData,
+                                            contentType: false,
+                                            processData: false,
+                                            dataType: "JSON",
+                                            success: function(responseServer) {
+                                                //console.log(responseServer);
+                                                if(responseServer.success == true) 
+                                                {
+                                                    // Muestro otro dialog con información de éxito
+                                                    bootbox.dialog({
+                                                        message: responseServer.posicion.nombre + " ha sido agregado correctamente!",
+                                                        title: "Éxito",
+                                                        buttons: {
+                                                            success: {
+                                                                label: "Success!",
+                                                                className: "btn-success"
+                                                            }
+                                                        }
+                                                    });
+                                                    // Limpio cada elemento de las clases añadidas por el validator
+                                                    $('#position-form div').each(function(){
+                                                        cleanValidatorClasses(this);
+                                                    });
+                                                    //Reinicio el formulario
+                                                    $("#position-form")[0].reset();
+                                                }else{
+                                                    console.log(responseServer);
+                                                     bootbox.dialog({
+                                                        message:responseServer.errores,
+                                                        title: "Error",
+                                                        buttons: {
+                                                            danger: {
+                                                                label: "Danger!",
+                                                                className: "btn-danger"
+                                                            }
+                                                        }
+                                                    });
+                                                    // Limpio cada elemento de las clases añadidas por el validator
+                                                    $('#position-form div').each(function(){
+                                                        cleanValidatorClasses(this);
+                                                    });
+                                                    //Reinicio el formulario
+                                                }
+                                            },
+                                            error: function(jqXHR, textStatus, errorThrown) {
+                                               console.log(errorThrown);
+                                               bootbox.dialog({
+                                                        message:" ¡Error al enviar datos al servidor!",
+                                                        title: "Error",
+                                                        buttons: {
+                                                            danger: {
+                                                                label: "Danger!",
+                                                                className: "btn-danger"
+                                                            }
+                                                        }
+                                                    });
+                                                    // Limpio cada elemento de las clases añadidas por el validator
+                                                    $('#position-form div').each(function(){
+                                                        cleanValidatorClasses(this);
+                                                    });
+                                                    //Reinicio el formulario
+                                            }
+                                        });
+                                        e.preventDefault(); //Prevent Default action. 
+                                    }); 
+                                    $("#position-form").submit();
+                                } else {
+                                    return false;
+                                }
+                                return false;
+                            }
+                        }
+                    },
+                    show: false // We will show it manually later
+                })
+                .on('shown.bs.modal', function() {
+                    $('#position-form-div')
+                        .show();                             // Show the form
+            })
+            .on('hide.bs.modal', function(e) {
+                // Bootbox will remove the modal (including the body which contains the form)
+                // after hiding the modal
+                // Therefor, we need to backup the form
+                $('#position-form-div').hide().appendTo('#new-position-form');
+            })
+            .modal('show');
+        });               
+    }
+
+
+    /**
+     * 
+    */
+
     var loadFieldSelect = function(url,idField) {
         $.ajax({
             type: 'GET',
             url: url,
             dataType:'json',
             success: function(response) {
-                console.log(response.data);
+                //console.log(response.data);
                 if (response.success == true) {
                     jQuery(idField).html('');
                     jQuery(idField).append('<option value=\"\"></option>');
@@ -1732,6 +1894,7 @@ var CustomApp = function () {
             handleBootboxNewPlayer();
             handleBootboxNewTeam();
             handleBootboxNewCountry();
+            handleBootboxNewPosition();
 
             loadDataPlayer();
             loadDataCountry();
