@@ -141,6 +141,13 @@ class PosicionController extends \BaseController {
 		//
 	}
 
+	public function destroyApi()
+	{
+		if(Request::ajax())
+			$this->setSuccess($this->repository->delete(Input::get('positionId')));
+		return $this->getResponseArrayJson();
+	}
+
 	public function getAllValue()
 	{
 		if(Request::ajax()){
