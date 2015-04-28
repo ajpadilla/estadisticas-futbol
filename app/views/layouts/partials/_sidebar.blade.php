@@ -88,7 +88,8 @@
 		<!--Routes Posiciones-->
 		<a id="agregar-posicion" href="{{ URL::route('posiciones.store') }}"></a>
 		<a id="lista-posiciones" href="{{ URL::route('posiciones.seleccionar') }}"></a>
-		<a id="ver-posicion" href="{{ URL::route('posiciones.data') }}"></a>	
+		<a id="ver-posicion" href="{{ URL::route('posiciones.data') }}"></a>
+		<a id="editar-posicion" href="{{ URL::route('posiciones.api.update') }}"></a>	
 		<!--Routes Jugadores-->
 		<a id="agregar-jugador" href="{{ URL::route('jugadores.store') }}"></a>
 		<a id="datos-jugador" href="{{ URL::route('jugadores.data') }}"></a>
