@@ -83,8 +83,15 @@ Route::get('paises/api-lista', array('as'=>'paises.api.lista', 'uses'=>'PaisCont
 /*
 ********************************* RUTAS PARA POSICIONES ********************************
 */
-Route::get('lista-posiciones',  ['as' => 'posiciones.lista','uses' => 'PosicionController@getAllValue' ] );
 
+Route::get('posiciones', ['as' => 'posiciones.index', 'uses' => 'PosicionController@index']);
+Route::post('posiciones/guardar', ['as' => 'posiciones.store', 'uses' => 'PosicionController@store' ] );
+
+Route::get('posiciones/api-ver',  ['as' => 'posiciones.data','uses' => 'PosicionController@showApi' ] );
+Route::post('posiciones/api-actualizar',  ['as' => 'posiciones.api.update','uses' => 'PosicionController@updateApi' ] );
+Route::get('posiciones/api-seleccionar',  ['as' => 'posiciones.seleccionar','uses' => 'PosicionController@getAllValue' ] );
+Route::get('posiciones/api-lista',  ['as' => 'posiciones.api.lista','uses' => 'PosicionController@listaApi' ] );
+Route::get('posiciones/api-eliminar',  ['as' => 'posiciones.api.eliminar','uses' => 'PosicionController@destroyApi' ] );
 /*
 ********************************* RUTAS PARA TIPOS DE COMPETENCIAS ********************************
 */
