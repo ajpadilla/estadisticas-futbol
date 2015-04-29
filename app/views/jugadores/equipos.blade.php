@@ -6,8 +6,11 @@
 			</div>
 			<div class="box-body big">
 				<div class="row">
-					<button class="btn-primary" id="add-equipo" href="{{ route('jugadores.api.add.equipo') }}">Agregar equipo</button>
+					<div class="col-md-2 col-md-offset-10">
+						<button class="pull-right btn btn-lg btn-primary" id="add-equipo" href="{{ route('jugadores.api.add.equipo') }}">Agregar equipo</button>
+					</div>
 				</div>
+				<br>
 				<div class="row">
 					<div class="col-md-12">
 						@include('partials._index-table')
