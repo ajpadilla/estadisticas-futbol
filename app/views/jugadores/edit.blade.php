@@ -31,7 +31,7 @@
 		</div>		
 	</div>
 	<div class="form-actions clearfix"> 
-		<input type="submit" value="Actualizar Cuenta" class="btn btn-primary pull-right"> 
+		<input type="submit" value="Guardar" class="btn btn-primary pull-right"> 
 	</div>
 {{ Form::close() }}						
 

@@ -388,7 +388,7 @@ var CustomApp = function () {
                     message: $('#player-form-div'),
                     buttons: {
                         success: {
-                            label: "Actualizar",
+                            label: "Guardar",
                             className: "btn-primary",
                             callback: function () 
                             {
@@ -882,7 +882,7 @@ var CustomApp = function () {
                     message: $('#team-form-div'),
                     buttons: {
                         success: {
-                            label: "Actualizar",
+                            label: "Guardar",
                             className: "btn-primary",
                             callback: function () {
                                 // Si quieres usar aquí jqueryForm, es lo mismo, lo agregas y ya. Creo que es buena idea!
@@ -1292,7 +1292,7 @@ var CustomApp = function () {
                     message: $('#country-form-view-div'),
                     buttons: {
                         /*success: {
-                            label: "Actualizar",
+                            label: "Guardar",
                             className: "btn-primary",
                             callback: function (){
                             }
@@ -1415,7 +1415,7 @@ var CustomApp = function () {
                     message: $('#country-form-div'),
                     buttons: {
                         success: {
-                            label: "Actualizar",
+                            label: "Guardar",
                             className: "btn-primary",
                             callback: function () {
                                 // Si quieres usar aquí jqueryForm, es lo mismo, lo agregas y ya. Creo que es buena idea!
@@ -1817,7 +1817,7 @@ var CustomApp = function () {
                     message: $('#position-form-div'),
                     buttons: {
                         success: {
-                            label: "Actualizar",
+                            label: "Guardar",
                             className: "btn-primary",
                             callback: function () {
                                 // Si quieres usar aquí jqueryForm, es lo mismo, lo agregas y ya. Creo que es buena idea!
