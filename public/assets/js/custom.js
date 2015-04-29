@@ -2195,7 +2195,8 @@ var handleBootboxAddEquipoToJugador = function () {
             timepicker: false,
             format: 'Y-m-d',
             todayButton: true,
-            mask: true
+            mask: true,
+            closeOnDateSelect: true
         });
     }
 
