@@ -29,7 +29,13 @@ class TipoCompetenciaRepository extends BaseRepository
     public function create($data = array())
 	{
 		$tipoCompetencia = $this->model->create($data); 
+		return $tipoCompetencia;
+	}
 
+	public function update($data = array())
+	{
+		$tipoCompetencia = $this->get($data['tipo_competencia_id']);
+		$tipoCompetencia->update($data);
 		return $tipoCompetencia;
 	}
 
@@ -40,8 +46,8 @@ class TipoCompetenciaRepository extends BaseRepository
 		$this->addColumnToCollection('Acciones', function($model)
 		{
 			$this->cleanActionColumn();
-			$this->addActionColumn("<a class='ver-competencias' href='#new-team-form' id='editar_tipo-competencia_" . $model->id. "'>Competencias</a><br />");
-			$this->addActionColumn("<a  class='editar-tipo-competencia' href='#new-team-form' id='editar_tipo-competencia_".$model->id."'>Editar</a><br />");
+			$this->addActionColumn("<a class='ver-competencias' href='#' id=''>Competencias</a><br />");
+			$this->addActionColumn("<a  class='editar-tipo-competencia' href='#new-type-of-competition-form' id='editar_tipo-competencia_".$model->id."'>Editar</a><br />");
 			$this->addActionColumn("<a class='eliminar-tipo-competencia' href='#' id='eliminar_tipo-competencia_".$model->id."'>Eliminar</a>");
 			return implode(" ", $this->getActionColumn());
 		});
