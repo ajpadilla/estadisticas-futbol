@@ -19,6 +19,12 @@
 					{{ Form::open(['route' => 'tipos-competencia.store','class'=>'form-horizontal','role'=>'form',
 					'method' => 'POST','files' => true,'id'=> 'type-of-competition-form']) }}
 						<div class="row">
+							<div class="form-group" style="display: none;">
+								{{ Form::label('tipo_competencia_id','Id',['class'=>'col-sm-2 control-label']) }}
+								<div class="col-sm-6">
+									{{ Form::text('tipo_competencia_id',null, ['class' => 'form-control','id' => 'tipo_competencia_id']) }}
+								</div>
+							</div>
 							<div class="form-group">
 								{{ Form::label('nombre','Nombre',['class'=>'col-sm-2 control-label']) }}
 								<div class="col-sm-6">
@@ -38,7 +44,7 @@
 								</div>
 							</div>
 							<div class="form-group">
-							{{ Form::label('ida_vuelta', 'Ida Vuelta',['class'=>'col-sm-2 control-label']) }}
+								{{ Form::label('ida_vuelta', 'Ida Vuelta',['class'=>'col-sm-2 control-label']) }}
 								<div class="col-sm-6">
 									<div class="radio">
 										<label> 
@@ -55,7 +61,7 @@
 								</div>
 							</div>
 							<div class="form-group">
-							{{ Form::label('pre_clasificacion', 'Pre Clasificacion',['class'=>'col-sm-2 control-label']) }}
+								{{ Form::label('pre_clasificacion', 'Pre Clasificacion',['class'=>'col-sm-2 control-label']) }}
 								<div class="col-sm-6">
 									<div class="radio">
 										<label> 
