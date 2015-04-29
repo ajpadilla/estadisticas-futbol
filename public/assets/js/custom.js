@@ -59,13 +59,13 @@ var CustomApp = function () {
 
         $.validator.addMethod('customDateValidator', function(value, element) {
             try{
-                jQuery.datepicker.parseDate('dd-mm-yy', value);return true;}
+                jQuery.datepicker.parseDate('dd-mm-yyyy', value);return true;}
             catch(e){return false;}
-        },'Por favor, Ingrese una fecha valida con el dormato dd-mm-yy.');
+        },'Por favor, Ingrese una fecha válida con el dormato dd-mm-yyyy.');
 
         jQuery.validator.addMethod('alturaDecimal', function(value, element) {
             return this.optional(element) || /^\d{0,10}(\.\d{0,2})?$/i.test(value);
-        }, 'Por favor ingrese maximo'+ [10] +'digitos enteros'+' y maximo'+[2]+'digitos decimales');
+        }, 'Por favor ingrese máximo'+ [10] +'digitos enteros'+' y maximo'+[2]+'digitos decimales');
 
         jQuery.validator.addMethod('pesoDecimal', function(value, element) {
             return this.optional(element) || /^\d{0,3}(\.\d{0,2})?$/i.test(value);
@@ -1014,7 +1014,7 @@ var CustomApp = function () {
             data: {'jugadorId': $('#jugador_id').val()},
             dataType: "JSON",
             success: function(response) {
-                console.log(response);
+                //console.log(response);
                 if (response.success) {
                     $('#fecha_nacimiento').val(response.fechaNacimiento);
                     $('#posicion_id').val(response.jugador.posicion_id);
@@ -1983,6 +1983,180 @@ var CustomApp = function () {
      * 
     */
 
+var handleBootboxAddEquipoToJugador = function () {
+
+        //addValidationRulesForms();
+
+        $('#jugador-add-equipo-form').validate({
+            rules:{              
+                numero:{
+                    required:true,
+                    number:true,
+                    range: [1, 99],
+                    remote: {
+                        url: "/equipos/api-existe-numero",
+                        type: "post",
+                        data: {
+                            id: function() {
+                                return $( "#equipo_id" ).val();
+                            },
+                            numero: function() {
+                                return $( "#numero" ).val();
+                            }
+                        }
+                    }                    
+                },
+                equipo_id:{
+                    required:true,
+                    remote: {
+                        url: "/equipos/api-existe",
+                        type: "post",
+                        data: {
+                            equipo_id: function() {
+                                return $( "#equipo_id" ).val();
+                            }
+                        }
+                    }                    
+                }
+            },
+            messages:{          
+                numero:{                    
+                    remote: 'Este numero '
+                },
+                equipo_id:{
+                   remote: 'Este equipo ya esta registrado para este jugador, para la fecha seleccionada!'
+                }
+            },
+            highlight:function(element){
+                $(element).closest('.form-group').removeClass('has-success').addClass('has-error');
+            },
+            unhighlight:function(element){
+                $(element).closest('.form-group').removeClass('has-error');
+            },
+            success:function(element){
+                element.addClass('valid').closest('.form-group').removeClass('has-error').addClass('has-success');
+            }
+        });
+
+        // Mostrar formulario para agregar nuevo jugador
+        $('#add-equipo').on('click', function() 
+        {
+            bootbox
+                .dialog(
+                {
+                    message: $('#jugador-add-equipo-div-box'),
+                    buttons: 
+                    {
+                        success: 
+                        {
+                            label: "Guardar",
+                            className: "btn-primary",
+                            callback: function () 
+                            {
+                                // Si quieres usar aquí jqueryForm, es lo mismo, lo agregas y ya. Creo que es buena idea!
+
+                                //ajax para el envío del formulario.
+                                if($('#jugador-add-equipo-form').valid()) {
+
+                                    var response = false; // Esta variable debería recibir los datos por ajax.
+                                    var dataServer = null;
+
+                                    $("#jugador-add-equipo-form").submit(function(e){
+                                        var formData = new FormData(this);
+
+                                        $.ajax({
+                                            type: 'POST',
+                                            url: $('#add-equipo').attr('href'), 
+                                            data: formData,
+                                            contentType: false,
+                                            processData: false,
+                                            dataType: "JSON",
+                                            success: function(response) {
+                                                //console.log(responseServer);
+                                                if(response.success) 
+                                                {
+                                                    // Muestro otro dialog con información de éxito
+                                                    bootbox.dialog({
+                                                        message: " ha sido agregado correctamente!",
+                                                        title: "Éxito",
+                                                        buttons: {
+                                                            success: {
+                                                                label: "Correcto!",
+                                                                className: "btn-success"
+                                                            }
+                                                        }
+                                                    });
+                                                    // Limpio cada elemento de las clases añadidas por el validator
+                                                    $('#jugador-add-equipo-form div').each(function(){
+                                                        cleanValidatorClasses(this);
+                                                    });
+                                                    //Reinicio el formulario
+                                                    //updatePlayerForm();
+                                                }else{
+                                                     bootbox.dialog({
+                                                        message: response.errores,
+                                                        title: "Error",
+                                                        buttons: {
+                                                            danger: {
+                                                                label: "Ok!",
+                                                                className: "btn-danger"
+                                                            }
+                                                        }
+                                                    });
+                                                    // Limpio cada elemento de las clases añadidas por el validator
+                                                    $('#jugador-add-equipo-form div').each(function(){
+                                                        cleanValidatorClasses(this);
+                                                    });
+                                                    //Reinicio el formulario
+                                                    //updatePlayerForm();
+                                                }
+                                            },
+                                            error: function(jqXHR, textStatus, errorThrown) {
+                                               bootbox.dialog({
+                                                        message:" ¡Error al enviar datos al servidor!",
+                                                        title: "Error",
+                                                        buttons: {
+                                                            danger: {
+                                                                label: "Mal!",
+                                                                className: "btn-danger"
+                                                            }
+                                                        }
+                                                    });
+                                                    // Limpio cada elemento de las clases añadidas por el validator
+                                                    $('#jugador-add-equipo-form div').each(function(){
+                                                        cleanValidatorClasses(this);
+                                                    });
+                                                    //Reinicio el formulario
+                                                    //updatePlayerForm();
+                                            }
+                                        });
+                                        e.preventDefault(); //Prevent Default action. 
+                                    }); 
+                                    $("#jugador-add-equipo-form").submit();
+                                } else {
+                                    return false;
+                                }
+                                return false;
+                            }
+                        }
+                    },
+                    show: false // We will show it manually later
+                })
+                .on('shown.bs.modal', function() {
+                    $('#jugador-add-equipo-div-box')
+                        .show();                             // Show the form
+                })
+            .on('hide.bs.modal', function(e) {
+                // Bootbox will remove the modal (including the body which contains the form)
+                // after hiding the modal
+                // Therefor, we need to backup the form
+                $('#jugador-add-equipo-div-box').hide().appendTo('#jugador-add-equipo-div');
+            })
+            .modal('show');
+        });               
+    }
+
+
 
     /**
      * Funciones para CRUD TIPO DE COMPETENCIA
@@ -2500,6 +2674,56 @@ var CustomApp = function () {
         });
     }
 
+    /*
+    ********************* PLUGINS ***********************************
+    */
+    /*-----------------------------------------------------------------------------------*/
+    /*  Date Range Picker
+    /*-----------------------------------------------------------------------------------*/
+    var handleDatePicker = function () {
+        $(".datepicker").datetimepicker({
+            lang: 'es',
+            timepicker: false,
+            format: 'Y-m-d',
+            todayButton: true,
+            mask: true,
+            closeOnDateSelect: true
+        });
+    }
+
+    var handleFechaDateTimePicker = function () {
+
+        /*$('#fecha').daterangepicker();
+        {
+               ranges: {
+                  'Ayer': [moment().subtract('days', 1), moment().subtract('days', 1)],
+                  'Últimos 30 días': [moment().subtract('days', 29), moment()],
+                  'Este mes': [moment().startOf('month'), moment().endOf('month')]
+               },
+               buttonClasses: ['btn btn-default'],
+               applyClass: 'btn-small btn-primary',
+               cancelClass: 'btn-small',
+               format: 'YYYY-MM-DD',
+               separator: '<->',
+               locale: {
+                   applyLabel: 'Seleccionar',
+                   fromLabel: 'Desde',
+                   toLabel: 'Hasta',
+                   customRangeLabel: 'Personalizado',
+                   daysOfWeek: ['Domingo', 'Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes','Sábado'],
+                   monthNames: ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'],
+                   firstDay: 1
+               }
+            },
+            function(start, end) {
+             //console.log("Callback has been called!");
+             $('#fecha span').html(start.format('MMMM D, YYYY') + ' - ' + end.format('MMMM D, YYYY'));
+            }
+         );
+         //Set the initial state of the picker label
+         $('#fecha span').html('Custom');*/
+    }    
+
     return {
         init: function() {
             initChosen();
@@ -2517,6 +2741,11 @@ var CustomApp = function () {
             handleBootboxNewCountry();
             handleBootboxNewPosition();
             handleBootboxNewTypeOfCompetition();
+            handleBootboxAddEquipoToJugador();
+
+            //Plugins init
+            //handleFechaDateTimePicker();
+            handleDatePicker();
 
             loadDataPlayer();
             loadDataCountry();
@@ -2528,7 +2757,9 @@ var CustomApp = function () {
             loadSelectForTeam();
             loadSelectForPlayer();
             validateSelectPlayers($("#tipo_equipo option:selected" ).text());
-            console.log($('#verificar-jugador-equipo').attr('href'));
+
+
+            //console.log($('#verificar-jugador-equipo').attr('href'));
         }
     }
 }();

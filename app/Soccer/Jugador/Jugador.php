@@ -74,14 +74,14 @@ class Jugador extends Eloquent implements StaplerableInterface{
 		return $this->equipos()->clubes()->whereFechaFin(null)->whereFechaInicio($fecha)->first();
 	}
 
-	public function getAlturaAttribute($value)
+	public function getAlturaShowAttribute()
 	{
-		return $value . ' cm';
+		return $this->altura . ' cm';
 	}
 
-	public function getPesoAttribute($value)
+	public function getPesoShowAttribute()
 	{
-		return $value . ' kg';
+		return $this->peso . ' kg';
 	}
 
 	public function getGolesAttribute()

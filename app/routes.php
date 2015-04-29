@@ -41,6 +41,7 @@ Route::get('jugadores/api-cambiar-equipo/{id}', array('as'=>'jugadores.api.cambi
 Route::get('jugadores/api-ver',  ['as' => 'jugadores.data','uses' => 'JugadorController@showApi' ] );
 Route::get('jugadores/api-seleccionar',  ['as' => 'jugadores.seleccionar','uses' => 'JugadorController@getAllValue' ] );
 Route::post('jugadores/api-actualizar',  ['as' => 'jugadores.api.update','uses' => 'JugadorController@updateApi' ] );
+Route::post('jugadores/api-add-equipo',  ['as' => 'jugadores.api.add.equipo','uses' => 'JugadorController@addEquipoApi' ] );
 
 
 /*
@@ -62,6 +63,9 @@ Route::get('equipos/api-jugadores/{id}', array('as'=>'equipos.api.jugadores', 'u
 Route::get('equipos/api-ver',  ['as' => 'equipos.data','uses' => 'EquipoController@showApi' ] );
 Route::get('equipos/api-seleccionar',  ['as' => 'equipos.seleccionar','uses' => 'EquipoController@getAllValue' ] );
 Route::get('equipos/api-verificar-jugador',  ['as' => 'equipos.api.verificar-jugador','uses' => 'EquipoController@confirmExistsPlayerTeam' ] );
+Route::post('equipos/api-existe-numero',  ['as' => 'equipos.api.existe.numero','uses' => 'EquipoController@existeNumeroApi' ] );
+Route::post('equipos/api-existe',  ['as' => 'equipos.api.existe','uses' => 'EquipoController@existeApi'] );
+
 
 /*
 ********************************* RUTAS PARA PAISES ********************************
