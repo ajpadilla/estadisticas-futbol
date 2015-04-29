@@ -16,7 +16,7 @@ class CreateTableJugadores extends Migration {
 			$table->increments('id');
 			$table->string('nombre', 128);
 			$table->string('apodo', 128)->nullable(true);
-			$table->date('fecha_nacimiento');
+			$table->date('fecha_nacimiento')->nullable(true);
 			$table->text('lugar_nacimiento')->nullable();
 			$table->string('foto', 128)->nullable(true)->default(null);
 			$table->decimal('altura', 3, 2)->nullable(true)->default(null);
