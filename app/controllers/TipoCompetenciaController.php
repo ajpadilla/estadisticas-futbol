@@ -1,14 +1,19 @@
 <?php
 
 use soccer\TipoCompetencia\TipoCompetenciaRepository;
-
+use soccer\Forms\RegistrarTipoCompetenciaForm;
+use Laracasts\Validation\FormValidationException;
 
 class TipoCompetenciaController extends \BaseController {
 
 	protected $repository;
+	protected $registrarTipoCompetenciaForm;
 
-	public function __construct(TipoCompetenciaRepository $repository){
+	public function __construct(TipoCompetenciaRepository $repository,
+		RegistrarTipoCompetenciaForm $registrarTipoCompetenciaForm
+		){
 		$this->repository = $repository;
+		$this->registrarTipoCompetenciaForm = $registrarTipoCompetenciaForm;
 	}
 
 	/**
@@ -42,7 +47,24 @@ class TipoCompetenciaController extends \BaseController {
 	 */
 	public function store()
 	{
-		//
+		if(Request::ajax())
+		{
+			$input = Input::all();
+			try
+			{
+				$this->registrarTipoCompetenciaForm->validate($input);
+				$tipoCompetencia = $this->repository->create($input);
+				$this->setSuccess(true);
+				$this->addToResponseArray('tipoCompetencia', $tipoCompetencia->toArray());
+				return $this->getResponseArrayJson();				
+			}
+			catch (FormValidationException $e)
+			{
+				$this->setSuccess(false);
+				$this->addToResponseArray('errores', $e->getErrors()->all());
+				return $this->getResponseArrayJson();
+			}
+		}
 	}
 
 	/**
