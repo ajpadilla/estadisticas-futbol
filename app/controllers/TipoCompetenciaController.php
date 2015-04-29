@@ -2,18 +2,22 @@
 
 use soccer\TipoCompetencia\TipoCompetenciaRepository;
 use soccer\Forms\RegistrarTipoCompetenciaForm;
+use soccer\Forms\EditarTipoCompetenciaForm;
 use Laracasts\Validation\FormValidationException;
 
 class TipoCompetenciaController extends \BaseController {
 
 	protected $repository;
 	protected $registrarTipoCompetenciaForm;
+	protected $editarTipoCompetenciaForm;
 
 	public function __construct(TipoCompetenciaRepository $repository,
-		RegistrarTipoCompetenciaForm $registrarTipoCompetenciaForm
+		RegistrarTipoCompetenciaForm $registrarTipoCompetenciaForm,
+		EditarTipoCompetenciaForm $editarTipoCompetenciaForm
 		){
 		$this->repository = $repository;
 		$this->registrarTipoCompetenciaForm = $registrarTipoCompetenciaForm;
+		$this->editarTipoCompetenciaForm = $editarTipoCompetenciaForm;
 	}
 
 	/**
@@ -118,9 +122,27 @@ class TipoCompetenciaController extends \BaseController {
 	/*
 	************************** API METHODS *****************************
 	*/
-	public function updateApi($id)
+	public function updateApi()
 	{
-		# code...
+		if(Request::ajax())
+		{
+			$input = Input::all();
+			try
+			{
+				$this->editarTipoCompetenciaForm->validate($input);
+				$tipoCompetencia = $this->repository->update($input);
+				$this->setSuccess(true);
+				$this->addToResponseArray('tipoCompetencia', $tipoCompetencia);
+				$this->addToResponseArray('datos', $input);
+				return $this->getResponseArrayJson();					
+			}
+			catch (FormValidationException $e)
+			{
+				$this->setSuccess(false);
+				$this->addToResponseArray('errores', $e->getErrors()->all());
+				return $this->getResponseArrayJson();
+			}
+		}
 	}
 
 	public function destroyApi($id)
@@ -132,5 +154,23 @@ class TipoCompetenciaController extends \BaseController {
 	{
 		return $this->repository->getDefaultTableForAll();
 	}
+
+	public function showApi()
+	{
+		if (Request::ajax())
+		{
+			if (Input::has('typeCompetitionId'))
+			{
+				$tipoCompetencia = $this->repository->get(Input::get('typeCompetitionId'));
+				$this->setSuccess(true);
+				$this->addToResponseArray('tipoCompetencia', $tipoCompetencia->toArray());
+				return $this->getResponseArrayJson();
+			}else{
+				$this->setSuccess(false);
+				return $this->getResponseArrayJson();
+			}
+		}
+	}
+
 
 }
