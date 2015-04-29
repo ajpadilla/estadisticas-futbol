@@ -41,11 +41,11 @@
 										</tr>										
 										<tr>
 											<td>Altura</td>
-											<td id="card-name"><strong>{{ $jugador->altura }}</strong></td>
+											<td id="card-name"><strong>{{ $jugador->altura_show }}</strong></td>
 										</tr>
 										<tr>
 											<td>Peso</td>
-											<td id="card-name"><strong>{{ $jugador->peso }}</strong></td>
+											<td id="card-name"><strong>{{ $jugador->peso_show }}</strong></td>
 										</tr>
 										<tr>
 											<td>Posicion</td>
