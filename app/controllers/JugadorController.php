@@ -213,7 +213,8 @@ class JugadorController extends \BaseController {
 
 	public function addEquipoApi()
 	{
-		
+		$this->addToResponseArray('datos', Input::all());
+		return $this->getResponseArrayJson();
 	}
 
 	public function getAllValue()

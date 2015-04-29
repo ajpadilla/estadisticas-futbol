@@ -23,11 +23,6 @@
 <!-- FLAGS -->
 {{ HTML::style('assets/css/flag-icon.min.css'); }}
 
-<!-- DATEPICKER -->
-{{ HTML::style('assets/js/datepicker/themes/default.min.css'); }}
-{{ HTML::style('assets/js/datepicker/themes/default.time.min.css'); }}
-{{ HTML::style('assets/js/datepicker/themes/default.date.min.css'); }}
-
 <!-- JQUERY DATETIMEPICKER -->
 {{ HTML::style('assets/js/jquery-datetimepicker/jquery.datetimepicker.css'); }}
 

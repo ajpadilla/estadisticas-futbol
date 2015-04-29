@@ -36,14 +36,10 @@
 {{ HTML::script('assets/js/dataTables/dataTables.bootstrap.js'); }}
 <!-- Chosen -->
 {{ HTML::script('assets/js/chosen/chosen.jquery.js')}}
-<!-- Date picker -->
-{{ HTML::script('assets/js/datepicker/picker.js'); }}
-{{ HTML::script('assets/js/datepicker/picker.date.js'); }}
-{{ HTML::script('assets/js/datepicker/picker.time.js'); }}
-{{ HTML::script('assets/js/datepicker/lang/es.js'); }}
 
 <!-- JQUERY DATETIMEPICKER -->
 {{ HTML::script('assets/js/jquery-datetimepicker/jquery.datetimepicker.js'); }}
+{{-- http://xdsoft.net/jqplugins/datetimepicker/ --}}
 
 
 <!-- EASY PIE CHART -->

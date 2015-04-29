@@ -2098,7 +2098,7 @@ var CustomApp = function () {
 
 var handleBootboxAddEquipoToJugador = function () {
 
-        addValidationRulesForms();
+        //addValidationRulesForms();
 
         $('#jugador-add-equipo-form').validate({
             rules:{              
@@ -2132,18 +2132,11 @@ var handleBootboxAddEquipoToJugador = function () {
                     }                    
                 }
             },
-            messages:{
-                fecha:{
-                    required:'Este campo es obligatorio.'
-                },              
-                numero:{
-                    required:'Este campo es obligatorio.',
-                    number:'Por favor ingrese un valor numerico.',
-                    remote: 'Este numero ',
-                    range: 'El número debe estar entre 1 y 99!'
+            messages:{          
+                numero:{                    
+                    remote: 'Este numero '
                 },
                 equipo_id:{
-                   required:'Este campo es obligatorio.',
                    remote: 'Este equipo ya esta registrado para este jugador, para la fecha seleccionada!'
                 }
             },
@@ -2191,17 +2184,17 @@ var handleBootboxAddEquipoToJugador = function () {
                                             contentType: false,
                                             processData: false,
                                             dataType: "JSON",
-                                            success: function(responseServer) {
+                                            success: function(response) {
                                                 //console.log(responseServer);
-                                                if(responseServer.success == true) 
+                                                if(response.success) 
                                                 {
                                                     // Muestro otro dialog con información de éxito
                                                     bootbox.dialog({
-                                                        message: responseServer.jugador.nombre + " ha sido agregado correctamente!",
+                                                        message: " ha sido agregado correctamente!",
                                                         title: "Éxito",
                                                         buttons: {
                                                             success: {
-                                                                label: "Success!",
+                                                                label: "Correcto!",
                                                                 className: "btn-success"
                                                             }
                                                         }
@@ -2211,10 +2204,10 @@ var handleBootboxAddEquipoToJugador = function () {
                                                         cleanValidatorClasses(this);
                                                     });
                                                     //Reinicio el formulario
-                                                    updatePlayerForm();
+                                                    //updatePlayerForm();
                                                 }else{
                                                      bootbox.dialog({
-                                                        message: responseServer.errores,
+                                                        message: response.errores,
                                                         title: "Error",
                                                         buttons: {
                                                             danger: {
@@ -2237,7 +2230,7 @@ var handleBootboxAddEquipoToJugador = function () {
                                                         title: "Error",
                                                         buttons: {
                                                             danger: {
-                                                                label: "Danger!",
+                                                                label: "Mal!",
                                                                 className: "btn-danger"
                                                             }
                                                         }
@@ -2270,7 +2263,7 @@ var handleBootboxAddEquipoToJugador = function () {
                 // Bootbox will remove the modal (including the body which contains the form)
                 // after hiding the modal
                 // Therefor, we need to backup the form
-                //$('#player-form-div').hide().appendTo('#new-player-form');
+                $('#jugador-add-equipo-div-box').hide().appendTo('#jugador-add-equipo-div');
             })
             .modal('show');
         });               
@@ -2317,7 +2310,7 @@ var handleBootboxAddEquipoToJugador = function () {
             timepicker: false,
             format: 'Y-m-d',
             todayButton: true,
-            hours12: true
+            mask: true
         });
     }
 
