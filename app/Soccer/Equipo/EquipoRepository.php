@@ -41,13 +41,7 @@ class EquipoRepository extends BaseRepository
 		$equipo = $this->model->create($data); 
 
 		if(!empty($data['jugadores']))
-		$equipo->jugadores()->attach($data['jugadores'],
-			[
-				'numero' => NULL,
-				'fecha_inicio' => NULL,
-				'fecha_fin' => NULL
-			]
-		);
+			$equipo->jugadores()->attach($data['jugadores']);
 
 		return $equipo;
 	}
@@ -60,13 +54,7 @@ class EquipoRepository extends BaseRepository
 		$equipo->update($data);
 
 		if(!empty($data['jugadores']))
-			$equipo->jugadores()->sync($data['jugadores'],
-				[
-					'numero' => NULL,
-					'fecha_inicio' => NULL,
-					'fecha_fin' => NULL
-				]
-			);
+			$equipo->jugadores()->sync($data['jugadores']);
 
 		return $equipo;
 	}

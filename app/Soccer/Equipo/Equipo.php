@@ -10,7 +10,8 @@ use Carbon\Carbon;
 class Equipo extends Eloquent implements StaplerableInterface{
 	use EloquentTrait;
 
-	protected $fillable = ['nombre', 'escudo','bandera','foto', 'tipo','fecha_fundacion','apodo','ubicacion','historia','info_url','pais_id'];
+	protected $fillable = ['nombre', 'escudo','foto', 'tipo','fecha_fundacion','apodo','ubicacion','historia','info_url',
+	'facebook_url','twitter_url','pais_id'];
 
 	 public function __construct(array $attributes = array()) {
         $this->hasAttachedFile('foto', [
