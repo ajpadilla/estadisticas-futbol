@@ -1,6 +1,7 @@
 <?php
 
 use soccer\Jugador\JugadorRepository;
+use soccer\Equipo\EquipoRepository;
 use soccer\Forms\RegistrarJugadorForm;
 use soccer\Forms\EditarJugadorForm;
 use Laracasts\Validation\FormValidationException;
@@ -9,13 +10,16 @@ use Laracasts\Validation\FormValidationException;
 class JugadorController extends \BaseController {
 
 	protected $repository;
+	protected $equipoRepository;
 	protected $registrarJugadorForm;
 	protected $editarJugadorForm;
 
 	public function __construct(JugadorRepository $repository,
+			EquipoRepository $equipoRepository,
 			RegistrarJugadorForm $registrarJugadorForm,
 			EditarJugadorForm $editarJugadorForm){
 		$this->repository = $repository;
+		$this->equipoRepository = $equipoRepository;
 		$this->registrarJugadorForm = $registrarJugadorForm;
 		$this->editarJugadorForm = $editarJugadorForm;
 	}
@@ -81,9 +85,10 @@ class JugadorController extends \BaseController {
 	public function show($id)
 	{
 		$jugador = $this->repository->get($id);
+		$equipos = $this->equipoRepository->getAllForSelect();
 		$this->breadcrumbs->addCrumb($jugador->nombre, route('jugadores.show', $jugador->id));
 		$table = $this->repository->getEquiposTable($id);
-		return View::make('jugadores.show', compact('jugador', 'table'));
+		return View::make('jugadores.show', compact('jugador', 'table', 'equipos'));
 	}
 
 
@@ -202,6 +207,11 @@ class JugadorController extends \BaseController {
 	}
 
 	public function cambiarEquipoApi($id)
+	{
+		
+	}
+
+	public function addEquipoApi()
 	{
 		
 	}

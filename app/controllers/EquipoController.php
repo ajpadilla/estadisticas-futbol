@@ -186,15 +186,9 @@ class EquipoController extends \BaseController {
 			if (count($equipos) > 0) {
 				$this->setSuccess(true);
 				$this->addToResponseArray('data', $equipos);
-				return $this->getResponseArrayJson();
-			}else{
-				$this->setSuccess(false);
-				return $this->getResponseArrayJson();
 			}
-		}else{
-			$this->setSuccess(false);
-			return $this->getResponseArrayJson();
 		}
+		return $this->getResponseArrayJson();
 	}
 
 	public function showApi()
@@ -208,14 +202,17 @@ class EquipoController extends \BaseController {
 				$this->addToResponseArray('equipo', $equipo->toArray());
 				$this->addToResponseArray('jugadores', $equipo->jugadoresActuales());
 				$this->addToResponseArray('urlImg',  $equipo->foto->url('thumb'));
-				return $this->getResponseArrayJson();
-			}else{
-				$this->setSuccess(false);
-				return $this->getResponseArrayJson();
 			}
 		}
+		return $this->getResponseArrayJson();
 	}
 
+	public function existeNumeroApi($id, $numero)
+	{
+		/*if (Request::ajax()) 
+			$this->setSuccess($this->repository->existeNumero($id, $numero));*/
+		return $this->getResponseArrayJson();
+	}
 
 	public function confirmExistsPlayerTeam()
 	{

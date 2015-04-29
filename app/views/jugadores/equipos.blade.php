@@ -6,6 +6,9 @@
 			</div>
 			<div class="box-body big">
 				<div class="row">
+					<button class="btn-primary" id="add-equipo" href="{{ route('jugadores.api.add.equipo') }}">Agregar equipo</button>
+				</div>
+				<div class="row">
 					<div class="col-md-12">
 						@include('partials._index-table')
 					</div>
@@ -14,3 +17,4 @@
 		</div>
 	</div>
 </div>
+@include('jugadores.partials._add-equipo')
