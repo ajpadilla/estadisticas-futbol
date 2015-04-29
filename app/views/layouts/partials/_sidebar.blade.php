@@ -106,6 +106,8 @@
 		<a id="verificar-jugador-equipo" href="{{ URL::route('equipos.api.verificar-jugador') }}"></a>
 		<!--Route Tipo Compentencia-->
 		<a id="agregar-tipo-competencia" href="{{ URL::route('tipos-competencia.store') }}"></a>
+		<a id="editar-tipo-competencia" href="{{ URL::route('tipos-competencia.api.update') }}"></a>
+		<a id="ver-tipo-competencia" href="{{ URL::route('tipos-competencia.data') }}"></a>
 	</div>
 </div>
 <!-- /SIDEBAR -->
