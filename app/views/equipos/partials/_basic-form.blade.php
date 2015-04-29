@@ -32,10 +32,10 @@
 </div>
 
 <h4>Imágenes</h4>
-<div class="form-group">
+{{--<div class="form-group">
 	{{ Form::label('bandera','Bandera',['class'=>'col-md-4 control-label']) }}
 	<div class="col-md-8">{{ Form::file('bandera', ['class' => 'file-upload']) }}</div>
-</div>
+</div>--}}
 <div class="form-group">
 	{{ Form::label('escudo','Escudo',['class'=>'col-md-4 control-label']) }}
 	<div class="col-md-8">{{ Form::file('escudo', ['class' => 'file-upload']) }}</div>

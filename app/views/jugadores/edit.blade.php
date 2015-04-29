@@ -23,7 +23,7 @@
 				<div class="box-body big">
 					<div class="row">
 						<div class="col-md-12">
-								{{--@include('equipos.partials._details-form')--}}
+								@include('jugadores.partials._details-form')
 						</div>
 					</div>
 				</div>
@@ -31,7 +31,7 @@
 		</div>		
 	</div>
 	<div class="form-actions clearfix"> 
-		<input type="submit" value="Actualizar Cuenta" class="btn btn-primary pull-right"> 
+		<input type="submit" value="Guardar" class="btn btn-primary pull-right"> 
 	</div>
 {{ Form::close() }}						
 
