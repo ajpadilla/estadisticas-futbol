@@ -34,23 +34,9 @@ class JugadorRepository extends BaseRepository
 	{
 		$fechaNacimiento = $data['fecha_nacimiento'];
 		$data['fecha_nacimiento'] = Carbon::createFromFormat('d-m-Y', $fechaNacimiento)->format('Y-m-d');
-		/*$fechaInicio = Carbon::createFromFormat('d-m-Y', $data['fecha_inicio'])->format('Y-m-d');
-		if(!empty($data['fecha_fin'])){
-			$fechaFin = Carbon::createFromFormat('d-m-Y',  $data['fecha_fin'])->format('Y-m-d');
-		}else{
-			$fechaFin = null;
-		}*/
 
 		$jugador = $this->model->create($data); 
 
-		/*$equipo = Equipo::find($data['equipo_id']);
-		$jugador->equipos()->attach($data['equipo_id'],
-			[
-				'numero' => $data['numero'],
-				'fecha_inicio' => $fechaInicio,
-				'fecha_fin' => $fechaFin
-			]
-		);*/
 		return $jugador;
 	}
 
