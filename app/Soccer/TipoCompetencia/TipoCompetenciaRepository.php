@@ -26,6 +26,13 @@ class TipoCompetenciaRepository extends BaseRepository
 		$this->setListAllRoute('tipos-competencia.api.lista');
 	}
     
+    public function create($data = array())
+	{
+		$tipoCompetencia = $this->model->create($data); 
+
+		return $tipoCompetencia;
+	}
+
     /*
 	********************* Datatable Methods ***********************
     */
@@ -78,12 +85,12 @@ class TipoCompetenciaRepository extends BaseRepository
 
 		$this->collection->addColumn('# Ascensos', function($model)
 		{
-			 return $model->ascensos;
+			 return $model->ascenso;
 		});	
 
 		$this->collection->addColumn('# Descensos', function($model)
 		{
-			 return $model->descensos;
+			 return $model->descenso;
 		});		
 
 		$this->collection->addColumn('# Clasificados', function($model)
