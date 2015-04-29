@@ -4,7 +4,7 @@
 @include('paises.new')
 @include('paises.view')
 @include('posiciones.new')
-
+@include('tipos-competencia.new')
 @section('scripts')
 	{{ $table->script() }}
 @stop
