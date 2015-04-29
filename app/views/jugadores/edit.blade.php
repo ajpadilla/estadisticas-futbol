@@ -23,7 +23,7 @@
 				<div class="box-body big">
 					<div class="row">
 						<div class="col-md-12">
-								{{--@include('equipos.partials._details-form')--}}
+								@include('jugadores.partials._details-form')
 						</div>
 					</div>
 				</div>

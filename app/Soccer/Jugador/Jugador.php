@@ -13,7 +13,10 @@ class Jugador extends Eloquent implements StaplerableInterface{
 
 	protected $table = 'jugadores';
 
-	protected $fillable = ['nombre', 'fecha_nacimiento','foto','altura','peso','apodo','posicion_id','pais_id'];
+	protected $fillable = [ 'nombre', 'fecha_nacimiento','lugar_nacimiento','foto',
+							'altura','peso','apodo','posicion_id','pais_id','historia',
+							'info_url', 'facebook_url','twitter_url'
+						   ];
 
 	 public function __construct(array $attributes = array()) {
         $this->hasAttachedFile('foto', [
