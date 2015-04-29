@@ -2101,37 +2101,45 @@ var handleBootboxAddEquipoToJugador = function () {
         addValidationRulesForms();
 
         $('#jugador-add-equipo-form').validate({
-            rules:{
-                desde:{
-                    required:true,
-                    customDateValidator: true
-                },
-                hasta:{
-                    required:true,
-                    customDateValidator: true
-                },                
+            rules:{              
                 numero:{
                     required:true,
                     number:true,
                     range: [1, 99],
-                    remote: "/equipos/api-existe-numero"
+                    remote: {
+                        url: "/equipos/api-existe-numero",
+                        type: "post",
+                        data: {
+                            id: function() {
+                                return $( "#equipo_id" ).val();
+                            },
+                            numero: function() {
+                                return $( "#numero" ).val();
+                            }
+                        }
+                    }                    
                 },
                 equipo_id:{
                     required:true,
-                    remote: "/equipos/api-existe"
+                    remote: {
+                        url: "/equipos/api-existe",
+                        type: "post",
+                        data: {
+                            equipo_id: function() {
+                                return $( "#equipo_id" ).val();
+                            }
+                        }
+                    }                    
                 }
             },
             messages:{
-                desde:{
+                fecha:{
                     required:'Este campo es obligatorio.'
-                },
-                hasta:{
-                    required:'Este campo es obligatorio.'
-                },                
+                },              
                 numero:{
                     required:'Este campo es obligatorio.',
                     number:'Por favor ingrese un valor numerico.',
-                    remote: 'Este numero ya esta registrado para el equipo seleccionado, para la fecha seleccionada!',
+                    remote: 'Este numero ',
                     range: 'El número debe estar entre 1 y 99!'
                 },
                 equipo_id:{
@@ -2297,6 +2305,55 @@ var handleBootboxAddEquipoToJugador = function () {
         });
     }
 
+    /*
+    ********************* PLUGINS ***********************************
+    */
+    /*-----------------------------------------------------------------------------------*/
+    /*  Date Range Picker
+    /*-----------------------------------------------------------------------------------*/
+    var handleDatePicker = function () {
+        $(".datepicker").datetimepicker({
+            lang: 'es',
+            timepicker: false,
+            format: 'Y-m-d',
+            todayButton: true,
+            hours12: true
+        });
+    }
+
+    var handleFechaDateTimePicker = function () {
+
+        /*$('#fecha').daterangepicker();
+        {
+               ranges: {
+                  'Ayer': [moment().subtract('days', 1), moment().subtract('days', 1)],
+                  'Últimos 30 días': [moment().subtract('days', 29), moment()],
+                  'Este mes': [moment().startOf('month'), moment().endOf('month')]
+               },
+               buttonClasses: ['btn btn-default'],
+               applyClass: 'btn-small btn-primary',
+               cancelClass: 'btn-small',
+               format: 'YYYY-MM-DD',
+               separator: '<->',
+               locale: {
+                   applyLabel: 'Seleccionar',
+                   fromLabel: 'Desde',
+                   toLabel: 'Hasta',
+                   customRangeLabel: 'Personalizado',
+                   daysOfWeek: ['Domingo', 'Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes','Sábado'],
+                   monthNames: ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'],
+                   firstDay: 1
+               }
+            },
+            function(start, end) {
+             //console.log("Callback has been called!");
+             $('#fecha span').html(start.format('MMMM D, YYYY') + ' - ' + end.format('MMMM D, YYYY'));
+            }
+         );
+         //Set the initial state of the picker label
+         $('#fecha span').html('Custom');*/
+    }    
+
     return {
         init: function() {
             initChosen();
@@ -2313,6 +2370,10 @@ var handleBootboxAddEquipoToJugador = function () {
             handleBootboxNewCountry();
             handleBootboxNewPosition();
             handleBootboxAddEquipoToJugador();
+
+            //Plugins init
+            //handleFechaDateTimePicker();
+            handleDatePicker();
 
 
             loadDataPlayer();

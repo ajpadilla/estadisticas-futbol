@@ -748,18 +748,18 @@ var App = function () {
 	/*-----------------------------------------------------------------------------------*/
 	var handleDateColorpicker = function () {
 		$(".datepicker").datepicker();
-		$(".inlinepicker").datepicker({
+		/*$(".inlinepicker").datepicker({
 			inline: true,
 			showOtherMonths: true
-		});
-		$(".datepicker-fullscreen").pickadate();
-		$(".timepicker-fullscreen").pickatime();
+		});*/
+		//$(".datepicker-fullscreen").pickadate();
+		//$(".timepicker-fullscreen").pickatime();
 		//Color picker
-		$('.colorpicker').colorpicker();
-		var a = $("#color-pickers")[0].style;
-		$("#colorpicker-event").colorpicker().on("changeColor", function (b) {
+		//$('.colorpicker').colorpicker();
+		//var a = $("#color-pickers")[0].style;
+		/*$("#colorpicker-event").colorpicker().on("changeColor", function (b) {
 			a.backgroundColor = b.color.toHex()
-		});
+		});*/
 	}
 	/*-----------------------------------------------------------------------------------*/
 	/*	Raty
@@ -3133,8 +3133,7 @@ var App = function () {
         //Initialise theme pages
         init: function () {
 		
-            if (App.isPage("index")) {
-				handleDateTimePickers(); //Function to display Date Timepicker
+            if (App.isPage("index")) {				
 				handleDashFlotCharts(); //Function to display flot charts in dashboard
 				handleChat('chat-window'); //Function to handle chat
 				handleCalendar();	//Function to display calendar
@@ -3158,7 +3157,9 @@ var App = function () {
 			handleNavbarFixedTop();		//Function to check & handle if navbar is fixed top
 			handleThemeSkins();		//Function to handle theme skins
             handleSparkline();      //Function to display Sparkline charts
+            //handleDateTimePickers(); //Function to display Date Timepicker
             handleProfileSkillPie();
+            //handleDateColorpicker();
         },
 
         //Set page

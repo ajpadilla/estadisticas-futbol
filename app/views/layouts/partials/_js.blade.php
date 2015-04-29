@@ -37,7 +37,15 @@
 <!-- Chosen -->
 {{ HTML::script('assets/js/chosen/chosen.jquery.js')}}
 <!-- Date picker -->
-{{ HTML::script('assets/js/datapicker/bootstrap-datepicker.js'); }}
+{{ HTML::script('assets/js/datepicker/picker.js'); }}
+{{ HTML::script('assets/js/datepicker/picker.date.js'); }}
+{{ HTML::script('assets/js/datepicker/picker.time.js'); }}
+{{ HTML::script('assets/js/datepicker/lang/es.js'); }}
+
+<!-- JQUERY DATETIMEPICKER -->
+{{ HTML::script('assets/js/jquery-datetimepicker/jquery.datetimepicker.js'); }}
+
+
 <!-- EASY PIE CHART -->
 {{ HTML::script('assets/js/jquery-easing/jquery.easing.min.js') }}
 {{ HTML::script('assets/js/easypiechart/jquery.easypiechart.min.js') }}

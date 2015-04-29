@@ -207,7 +207,7 @@ class EquipoController extends \BaseController {
 		return $this->getResponseArrayJson();
 	}
 
-	public function existeNumeroApi($id, $numero)
+	public function existeNumeroApi()
 	{
 		/*if (Request::ajax()) 
 			$this->setSuccess($this->repository->existeNumero($id, $numero));*/
