@@ -801,6 +801,8 @@ var CustomApp = function () {
                     $('#ubicacion').val(response.equipo.ubicacion);
                     $('#jugadores').val(response.jugadores);
                     $('#jugadores').trigger("chosen:updated");
+                    $('#facebook_url_equipo').val(response.equipo.facebook_url);
+                    $('#twitter_url_equipo').val(response.equipo.twitter_url);
                     $('#pais_equipo').val(response.equipo.pais_id);
                     $('#pais_equipo').trigger("liszt:updated");
                     $('.chosen-select').trigger("chosen:updated");
@@ -875,7 +877,7 @@ var CustomApp = function () {
                 element.addClass('valid').closest('.form-group').removeClass('has-error').addClass('has-success');
             }
         });
-        updateTeamForm();
+       
         loadDataForEditTeam(idTeam);
 
         bootbox.dialog({
@@ -896,7 +898,6 @@ var CustomApp = function () {
 
                                     $("#team-form").submit(function(e){
                                         var formData = new FormData(this);
-                                        //var form = $('#team-form').serializeArray();
 
                                         $.ajax({
                                             type: 'POST',
@@ -925,7 +926,6 @@ var CustomApp = function () {
                                                         cleanValidatorClasses(this);
                                                     });
                                                     //Reinicio el formulario
-                                                    //updateTeamForm();
                                                 }else{
                                                      bootbox.dialog({
                                                         message: responseServer.errores,
@@ -942,7 +942,6 @@ var CustomApp = function () {
                                                         cleanValidatorClasses(this);
                                                     });
                                                     //Reinicio el formulario
-                                                   //updateTeamForm();
                                                 }
                                             },
                                             error: function(jqXHR, textStatus, errorThrown) {
@@ -961,7 +960,6 @@ var CustomApp = function () {
                                                         cleanValidatorClasses(this);
                                                     });
                                                     //Reinicio el formulario
-                                                    //updateTeamForm();
                                             }
                                         });
                                         e.preventDefault(); //Prevent Default action. 
