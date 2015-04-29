@@ -1808,7 +1808,6 @@ var CustomApp = function () {
             }
         });
 
-        //$("#position-form")[0].reset();
         loadDataForEditPosition(idPosition);
 
         bootbox.dialog({
@@ -2208,6 +2207,272 @@ var CustomApp = function () {
     }
 
 
+    loadDataForTypeCompetition = function(idTypeCompetition) {
+         $.ajax({
+            type: 'GET',
+            url: $('#ver-tipo-competencia').attr('href'),    
+            data: {'typeCompetitionId': idTypeCompetition},
+            dataType: "JSON",
+            success: function(response) 
+            {
+                if (response.success == true) {
+                    console.log(response);
+                    $('#tipo_competencia_id').val(response.tipoCompetencia.id);
+                    $('#nombre-tipo-competicion').val(response.tipoCompetencia.nombre);
+                    $('#grupos-tipo-competicion').val(response.tipoCompetencia.grupos);
+                    $('#fases-eliminatorias-tipo-competicion').val(response.tipoCompetencia.fases_eliminatorias);
+                    $('input[name="ida_vuelta"]').val([response.tipoCompetencia.ida_vuelta]);
+                    $('input[name="pre_clasificacion"]').val([response.tipoCompetencia.pre_clasificacion]);
+                    $('#equipos-por-grupo-tipo-competicion').val(response.tipoCompetencia.equipos_por_grupo);
+                    $('#ascenso-tipo-competicion').val(response.tipoCompetencia.ascenso);
+                    $('#descenso-tipo-competicion').val(response.tipoCompetencia.descenso);
+                    $('#clasificados-por-grupo-tipo-competicion').val(response.tipoCompetencia.clasificados_por_grupo);
+                }
+            }
+        });
+    }
+
+     // Metodo para editar datos de TIPO DE COMPETENCIA
+       
+    var editTypeOfCompetition = function(idTypeCompetition) {
+
+        addValidationRulesForms();
+
+        $('#type-of-competition-form').validate({
+            
+           rules:{
+                nombre:{
+                    required: true,
+                    rangelength : [2,128]
+                },
+                grupos:{
+                    required: true,
+                    digits: true,
+                    rangelength: [1,6]
+                },
+                fases_eliminatorias:{
+                    required: true,
+                    digits: true,
+                    rangelength: [1,6]
+                },
+                ida_vuelta:{
+                     required: true,
+                },
+                pre_clasificacion:{
+                     required: true,
+                },
+                equipos_por_grupo:{
+                    required: true,
+                    digits: true,
+                    rangelength: [1,6]
+                },
+                ascenso:{
+                    required: true,
+                    digits: true,
+                    rangelength: [1,6]
+                },
+                descenso:{
+                    required: true,
+                    digits: true,
+                    rangelength: [1,6]
+                },
+                clasificados_por_grupo:{
+                    required: true,
+                    digits: true,
+                    rangelength: [1,6]
+                }
+            },
+            messages:{
+                nombre:{
+                    required: 'Este campo es obligatorio',
+                    rangelength: 'Por favor ingrese entre [2, 128] caracteres',
+                },
+                grupos:{
+                    required: 'Este campo es obligatorio',
+                    digits: 'Por vafor ingrese un valor entero',
+                    rangelength: 'Por favor ingrese entre [1, 6] digitos enteros'
+                },
+                fases_eliminatorias:{
+                    required: 'Este campo es obligatorio',
+                    digits: 'Por vafor ingrese un valor entero',
+                    rangelength: 'Por favor ingrese entre [1, 6] digitos enteros'
+                },
+                ida_vuelta:{
+                    required: 'Este campo es obligatorio',
+                },
+                pre_clasificacion:{
+                     required: 'Este campo es obligatorio',
+                },
+                equipos_por_grupo:{
+                    required: 'Este campo es obligatorio',
+                    digits: 'Por vafor ingrese un valor entero',
+                    rangelength: 'Por favor ingrese entre [1, 6] digitos enteros'
+                },
+                ascenso:{
+                    required: 'Este campo es obligatorio',
+                    digits: 'Por vafor ingrese un valor entero',
+                    rangelength: 'Por favor ingrese entre [1, 6] digitos enteros' 
+                },
+                descenso:{
+                    required: 'Este campo es obligatorio',
+                    digits: 'Por vafor ingrese un valor entero',
+                    rangelength: 'Por favor ingrese entre [1, 6] digitos enteros'
+                },
+                clasificados_por_grupo:{
+                    required: 'Este campo es obligatorio',
+                    digits: 'Por vafor ingrese un valor entero',
+                    rangelength: 'Por favor ingrese entre [1, 6] digitos enteros'
+                }
+            },
+            highlight:function(element){
+                $(element).closest('.form-group').removeClass('has-success').addClass('has-error');
+            },
+            unhighlight:function(element){
+                $(element).closest('.form-group').removeClass('has-error');
+            },
+            success:function(element){
+                element.addClass('valid').closest('.form-group').removeClass('has-error').addClass('has-success');
+            }
+        });
+
+        loadDataForTypeCompetition(idTypeCompetition);
+
+        bootbox.dialog({
+                    message: $('#type-of-competition-form-div'),
+                    buttons: {
+                        success: {
+                            label: "Guardar",
+                            className: "btn-primary",
+                            callback: function () {
+                                // Si quieres usar aquí jqueryForm, es lo mismo, lo agregas y ya. Creo que es buena idea!
+
+                                //ajax para el envío del formulario.
+                                if($('#type-of-competition-form').valid()) 
+                                {
+
+                                    var response = false; // Esta variable debería recibir los datos por ajax.
+                                    var dataServer = null;
+
+                                    $("#type-of-competition-form").submit(function(e){
+                                        var formData = new FormData(this);
+
+                                        $.ajax({
+                                            type: 'POST',
+                                            url: $('#editar-tipo-competencia').attr('href'), 
+                                            data: formData,
+                                            contentType: false,
+                                            processData: false,
+                                            dataType: "JSON",
+                                            success: function(responseServer) {
+                                                //console.log(responseServer);
+                                                if(responseServer.success == true) 
+                                                {
+                                                    // Muestro otro dialog con información de éxito
+                                                    bootbox.dialog({
+                                                        message: responseServer.tipoCompetencia.nombre + " ha sido Actualizado correctamente!",
+                                                        title: "Éxito",
+                                                        buttons: {
+                                                            success: {
+                                                                label: "Success!",
+                                                                className: "btn-success",
+                                                                 callback: function () {
+                                                                    $('.table').DataTable().ajax.reload();
+                                                                }
+                                                            }
+                                                        }
+                                                    });
+                                                    // Limpio cada elemento de las clases añadidas por el validator
+                                                    $('#type-of-competition-form div').each(function(){
+                                                        cleanValidatorClasses(this);
+                                                    });
+                                                    //Reinicio el formulario
+                                                }else{
+                                                     bootbox.dialog({
+                                                        message: responseServer.errores,
+                                                        title: "Error",
+                                                        buttons: {
+                                                            danger: {
+                                                                label: "Danger!",
+                                                                className: "btn-danger"
+                                                            }
+                                                        }
+                                                    });
+                                                    // Limpio cada elemento de las clases añadidas por el validator
+                                                    $('#type-of-competition-form div').each(function(){
+                                                        cleanValidatorClasses(this);
+                                                    });
+                                                    //Reinicio el formulario
+                                                }
+                                            },
+                                            error: function(jqXHR, textStatus, errorThrown) {
+                                               bootbox.dialog({
+                                                        message:" ¡Error al enviar datos al servidor!",
+                                                        title: "Error",
+                                                        buttons: {
+                                                            danger: {
+                                                                label: "Danger!",
+                                                                className: "btn-danger"
+                                                            }
+                                                        }
+                                                    });
+                                                    // Limpio cada elemento de las clases añadidas por el validator
+                                                    $('#type-of-competition-form div').each(function(){
+                                                        cleanValidatorClasses(this);
+                                                    });
+                                                    //Reinicio el formulario
+                                            }
+                                        });
+                                        e.preventDefault(); //Prevent Default action. 
+                                    }); 
+                                    $("#type-of-competition-form").submit();
+                                } else {
+                                    return false;
+                                }
+                                return false;
+                            }
+                        }
+                    },
+                    show: false // We will show it manually later
+                })
+                .on('shown.bs.modal', function() {
+                    $('#type-of-competition-form-div')
+                        .show();                             // Show the form
+            })
+            .on('hide.bs.modal', function(e) {
+                // Bootbox will remove the modal (including the body which contains the form)
+                // after hiding the modal
+                // Therefor, we need to backup the form
+                $('#type-of-competition-form-div').hide().appendTo('#new-type-of-competition-form');
+            })
+            .modal('show');
+    }
+
+
+    // Metodo para saber cual opcion(ver, editar, borrar) fue seleccionada de la lista de Paises
+    var loadTypeOfCompetition = function() 
+    {
+        $('.table').click(function(event)
+        {
+            var target = $( event.target );
+            if (target.is('a')) 
+            {
+                console.log($(target).attr('id'));
+
+                var id = $(target).attr('id');
+                var type = id ? id.split('_')[0] : '';
+                var view = id ? id.split('_')[1] : '';
+                var numberId = id ? id.split('_')[2] : '';
+
+                if (view == "tipo-competencia") 
+                {
+                    if (type == "editar") {
+                        editTypeOfCompetition(numberId);
+                    }
+                }
+            }           
+        });
+    }
+
     /**
       * 
     */
@@ -2257,6 +2522,7 @@ var CustomApp = function () {
             loadDataCountry();
             loadDataTeam();
             loadDataPosition();
+            loadTypeOfCompetition();
 
             loadDataForEditTeam($('#equipo_id').val());
             loadSelectForTeam();
