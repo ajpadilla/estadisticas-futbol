@@ -42,7 +42,7 @@
 				</a>
 				<ul class="sub">
 					<li><a class="" href="{{ URL::route('tipos-competencia.index') }}"><span class="sub-menu-text">Lista</span></a></li>
-					<li><a id="new-tipo-competencia" class="" href="#new-tipo-competencia-form"><span class="sub-menu-text">Crear</span></a></li>
+					<li><a id="new-type-of-competition" class="" href="#new-type-of-competition-form"><span class="sub-menu-text">Crear</span></a></li>
 				</ul>
 			</li>	
 			<li class="has-sub">
@@ -104,6 +104,8 @@
 		<a id="editar-equipo" href="{{ URL::route('equipos.api.update') }}"></a>
 		<a id="eliminar-equipo" href="{{ URL::route('equipos.api.eliminar') }}"></a>
 		<a id="verificar-jugador-equipo" href="{{ URL::route('equipos.api.verificar-jugador') }}"></a>
+		<!--Route Tipo Compentencia-->
+		<a id="agregar-tipo-competencia" href="{{ URL::route('tipos-competencia.store') }}"></a>
 	</div>
 </div>
 <!-- /SIDEBAR -->
