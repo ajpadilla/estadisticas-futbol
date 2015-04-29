@@ -32,6 +32,10 @@
 											<td id="card-name"><strong>{{ $jugador->fecha_nacimiento }}</strong></td>
 										</tr>
 										<tr>
+											<td>País</td>
+											<td id="card-name"><strong>{{ $jugador->pais->nombre }}</strong></td>
+										</tr>
+										<tr>
 											<td>Lugar de Nacimienco</td>
 											<td id="card-name"><strong>{{ $jugador->lugar_nacimiento }}</strong></td>
 										</tr>										
