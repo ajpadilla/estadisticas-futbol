@@ -3,7 +3,10 @@
 use Eloquent;
 
 class TipoCompetencia extends Eloquent {
-	protected $fillable = [];
+	protected $fillable = [ 'nombre','grupos','fases_eliminatorias','ida_vuelta',
+                            'pre_clasificacion','equipos_por_grupo','ascenso','descenso',
+                            'clasificados_por_grupo'
+                          ];
 
     /*
 	********************* Relations ***********************
