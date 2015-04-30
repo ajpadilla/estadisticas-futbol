@@ -108,6 +108,7 @@
 		<a id="agregar-tipo-competencia" href="{{ URL::route('tipos-competencia.store') }}"></a>
 		<a id="editar-tipo-competencia" href="{{ URL::route('tipos-competencia.api.update') }}"></a>
 		<a id="ver-tipo-competencia" href="{{ URL::route('tipos-competencia.data') }}"></a>
+		<a id="eliminar-tipo-competencia" href="{{ URL::route('tipos-competencia.api.eliminar') }}"></a>
 	</div>
 </div>
 <!-- /SIDEBAR -->
