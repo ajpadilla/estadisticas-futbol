@@ -75,8 +75,8 @@ var CustomApp = function () {
     var updatePlayerForm = function() {
         /*loadFieldSelect($('#lista-paises').attr('href'),'#pais_id_jugador');
         loadFieldSelect($('#lista-posiciones').attr('href'),'#posicion_id');
-        loadFieldSelect($('#lista-equipos').attr('href'),'#equipo_id_jugador');
-        $('.chosen-select').trigger("chosen:updated");*/
+        loadFieldSelect($('#lista-equipos').attr('href'),'#equipo_id_jugador');*/
+        $('.chosen-select').trigger("chosen:updated");
     }
 
 
