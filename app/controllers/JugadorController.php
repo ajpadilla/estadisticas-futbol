@@ -197,7 +197,6 @@ class JugadorController extends \BaseController {
 				$this->addToResponseArray('urlImg',  $jugador->foto->url('thumb'));
 				$this->addToResponseArray('posicion',  $jugador->posicion->toArray());
 				$this->addToResponseArray('pais',   $jugador->pais->toArray());
-				$this->addToResponseArray('fechaNacimiento', date("d-m-Y",strtotime($jugador->fecha_nacimiento)));
 				return $this->getResponseArrayJson();
 			}else{
 				$this->setSuccess(false);
