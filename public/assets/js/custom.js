@@ -63,13 +63,9 @@ var CustomApp = function () {
             catch(e){return false;}
         },'Por favor, Ingrese una fecha válida con el dormato dd-mm-yyyy.');
 
-        jQuery.validator.addMethod('alturaDecimal', function(value, element) {
+        jQuery.validator.addMethod('decimalNumbers', function(value, element) {
             return this.optional(element) || /^\d{0,10}(\.\d{0,2})?$/i.test(value);
-        }, 'Por favor ingrese máximo'+ [10] +'digitos enteros'+' y maximo'+[2]+'digitos decimales');
-
-        jQuery.validator.addMethod('pesoDecimal', function(value, element) {
-            return this.optional(element) || /^\d{0,3}(\.\d{0,2})?$/i.test(value);
-        }, 'Por favor ingrese maximo'+[3]+'digitos enteros'+'y maximo'+[2]+'digitos decimales');
+        }, 'Por favor ingrese maximo'+[10]+'digitos enteros'+'y maximo'+[2]+'digitos decimales');
 
         $.validator.addMethod('onlyLettersNumbersAndDash', function(value, element) {
               return this.optional(element) || /^[a-zA-Z0-9ñÑ\-]+$/i.test(value);
