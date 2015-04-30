@@ -2170,38 +2170,32 @@ var handleBootboxAddEquipoToJugador = function () {
                     rangelength : [2,128]
                 },
                 grupos:{
-                    required: true,
                     digits: true,
                     rangelength: [1,6]
                 },
                 fases_eliminatorias:{
-                    required: true,
                     digits: true,
                     rangelength: [1,6]
                 },
                 ida_vuelta:{
-                     required: true,
+
                 },
                 pre_clasificacion:{
-                     required: true,
+
                 },
                 equipos_por_grupo:{
-                    required: true,
                     digits: true,
                     rangelength: [1,6]
                 },
                 ascenso:{
-                    required: true,
                     digits: true,
                     rangelength: [1,6]
                 },
                 descenso:{
-                    required: true,
                     digits: true,
                     rangelength: [1,6]
                 },
                 clasificados_por_grupo:{
-                    required: true,
                     digits: true,
                     rangelength: [1,6]
                 }
@@ -2212,38 +2206,30 @@ var handleBootboxAddEquipoToJugador = function () {
                     rangelength: 'Por favor ingrese entre [2, 128] caracteres',
                 },
                 grupos:{
-                    required: 'Este campo es obligatorio',
                     digits: 'Por vafor ingrese un valor entero',
                     rangelength: 'Por favor ingrese entre [1, 6] digitos enteros'
                 },
                 fases_eliminatorias:{
-                    required: 'Este campo es obligatorio',
                     digits: 'Por vafor ingrese un valor entero',
                     rangelength: 'Por favor ingrese entre [1, 6] digitos enteros'
                 },
                 ida_vuelta:{
-                    required: 'Este campo es obligatorio',
                 },
                 pre_clasificacion:{
-                     required: 'Este campo es obligatorio',
                 },
                 equipos_por_grupo:{
-                    required: 'Este campo es obligatorio',
                     digits: 'Por vafor ingrese un valor entero',
                     rangelength: 'Por favor ingrese entre [1, 6] digitos enteros'
                 },
                 ascenso:{
-                    required: 'Este campo es obligatorio',
                     digits: 'Por vafor ingrese un valor entero',
                     rangelength: 'Por favor ingrese entre [1, 6] digitos enteros' 
                 },
                 descenso:{
-                    required: 'Este campo es obligatorio',
                     digits: 'Por vafor ingrese un valor entero',
                     rangelength: 'Por favor ingrese entre [1, 6] digitos enteros'
                 },
                 clasificados_por_grupo:{
-                    required: 'Este campo es obligatorio',
                     digits: 'Por vafor ingrese un valor entero',
                     rangelength: 'Por favor ingrese entre [1, 6] digitos enteros'
                 }
@@ -2391,8 +2377,8 @@ var handleBootboxAddEquipoToJugador = function () {
                     $('#nombre-tipo-competicion').val(response.tipoCompetencia.nombre);
                     $('#grupos-tipo-competicion').val(response.tipoCompetencia.grupos);
                     $('#fases-eliminatorias-tipo-competicion').val(response.tipoCompetencia.fases_eliminatorias);
-                    $('input[name="ida_vuelta"]').val([response.tipoCompetencia.ida_vuelta]);
-                    $('input[name="pre_clasificacion"]').val([response.tipoCompetencia.pre_clasificacion]);
+                    $('input[name="ida_vuelta"]').prop('checked', response.tipoCompetencia.ida_vuelta);
+                    $('input[name="pre_clasificacion"]').prop('checked', response.tipoCompetencia.pre_clasificacion);
                     $('#equipos-por-grupo-tipo-competicion').val(response.tipoCompetencia.equipos_por_grupo);
                     $('#ascenso-tipo-competicion').val(response.tipoCompetencia.ascenso);
                     $('#descenso-tipo-competicion').val(response.tipoCompetencia.descenso);
@@ -2416,38 +2402,30 @@ var handleBootboxAddEquipoToJugador = function () {
                     rangelength : [2,128]
                 },
                 grupos:{
-                    required: true,
                     digits: true,
                     rangelength: [1,6]
                 },
                 fases_eliminatorias:{
-                    required: true,
                     digits: true,
                     rangelength: [1,6]
                 },
                 ida_vuelta:{
-                     required: true,
                 },
                 pre_clasificacion:{
-                     required: true,
                 },
                 equipos_por_grupo:{
-                    required: true,
                     digits: true,
                     rangelength: [1,6]
                 },
                 ascenso:{
-                    required: true,
                     digits: true,
                     rangelength: [1,6]
                 },
                 descenso:{
-                    required: true,
                     digits: true,
                     rangelength: [1,6]
                 },
                 clasificados_por_grupo:{
-                    required: true,
                     digits: true,
                     rangelength: [1,6]
                 }
@@ -2458,38 +2436,31 @@ var handleBootboxAddEquipoToJugador = function () {
                     rangelength: 'Por favor ingrese entre [2, 128] caracteres',
                 },
                 grupos:{
-                    required: 'Este campo es obligatorio',
                     digits: 'Por vafor ingrese un valor entero',
                     rangelength: 'Por favor ingrese entre [1, 6] digitos enteros'
                 },
                 fases_eliminatorias:{
-                    required: 'Este campo es obligatorio',
                     digits: 'Por vafor ingrese un valor entero',
                     rangelength: 'Por favor ingrese entre [1, 6] digitos enteros'
                 },
                 ida_vuelta:{
-                    required: 'Este campo es obligatorio',
                 },
                 pre_clasificacion:{
-                     required: 'Este campo es obligatorio',
+
                 },
                 equipos_por_grupo:{
-                    required: 'Este campo es obligatorio',
                     digits: 'Por vafor ingrese un valor entero',
                     rangelength: 'Por favor ingrese entre [1, 6] digitos enteros'
                 },
                 ascenso:{
-                    required: 'Este campo es obligatorio',
                     digits: 'Por vafor ingrese un valor entero',
                     rangelength: 'Por favor ingrese entre [1, 6] digitos enteros' 
                 },
                 descenso:{
-                    required: 'Este campo es obligatorio',
                     digits: 'Por vafor ingrese un valor entero',
                     rangelength: 'Por favor ingrese entre [1, 6] digitos enteros'
                 },
                 clasificados_por_grupo:{
-                    required: 'Este campo es obligatorio',
                     digits: 'Por vafor ingrese un valor entero',
                     rangelength: 'Por favor ingrese entre [1, 6] digitos enteros'
                 }
@@ -2525,7 +2496,6 @@ var handleBootboxAddEquipoToJugador = function () {
 
                                     $("#type-of-competition-form").submit(function(e){
                                         var formData = new FormData(this);
-
                                         $.ajax({
                                             type: 'POST',
                                             url: $('#editar-tipo-competencia').attr('href'), 

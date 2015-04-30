@@ -34,7 +34,7 @@
 							<div class="form-group">
 								{{ Form::label('grupos','Grupos',['class'=>'col-sm-2 control-label']) }}
 								<div class="col-sm-6">
-									{{ Form::text('grupos',null, ['class' => 'form-control','id' => 'grupos-tipo-competicion']) }}
+									{{ Form::text('grupos',0, ['class' => 'form-control','placeholder' => 0,'id' => 'grupos-tipo-competicion']) }}
 								</div>
 							</div>
 							<div class="form-group">
@@ -44,35 +44,23 @@
 								</div>
 							</div>
 							<div class="form-group">
-								{{ Form::label('ida_vuelta', 'Ida Vuelta',['class'=>'col-sm-2 control-label']) }}
+								{{--{{ Form::label('ida_vuelta', 'Ida Vuelta',['class'=>'col-sm-2 control-label']) }}--}}
 								<div class="col-sm-6">
-									<div class="radio">
+									<div class="checkbox">
 										<label> 
-											{{ Form::radio('ida_vuelta', '1', 1)}}
-											<i></i> SI	
-										</label>
-									</div>
-									<div class="radio">
-										<label> 
-											{{ Form::radio('ida_vuelta', '0', 0)}}
-											<i></i> NO
+											{{ Form::checkbox('ida_vuelta', '1', 0)}}
+											<i></i> Ida Vuelta	
 										</label>
 									</div>
 								</div>
 							</div>
 							<div class="form-group">
-								{{ Form::label('pre_clasificacion', 'Pre Clasificacion',['class'=>'col-sm-2 control-label']) }}
+								{{--{{ Form::label('pre_clasificacion', 'Pre Clasificacion',['class'=>'col-sm-2 control-label']) }}--}}
 								<div class="col-sm-6">
-									<div class="radio">
+									<div class="checkbox">
 										<label> 
-											{{ Form::radio('pre_clasificacion', '1', 1)}}
-											<i></i> SI	
-										</label>
-									</div>
-									<div class="radio">
-										<label> 
-											{{ Form::radio('pre_clasificacion', '0', 0)}}
-											<i></i> NO
+											{{ Form::checkbox('pre_clasificacion', '1', 0)}}
+											<i></i> Pre Clasificación	
 										</label>
 									</div>
 								</div>
@@ -80,25 +68,25 @@
 							<div class="form-group">
 								{{ Form::label('equipos_por_grupo','Equipos Por Grupo',['class'=>'col-sm-2 control-label']) }}
 								<div class="col-sm-6">
-									{{ Form::text('equipos_por_grupo',null, ['class' => 'form-control','id' => 'equipos-por-grupo-tipo-competicion']) }}
+									{{ Form::text('equipos_por_grupo',0, ['class' => 'form-control','placeholder' => 0,'id' => 'equipos-por-grupo-tipo-competicion']) }}
 								</div>
 							</div>
 							<div class="form-group">
 								{{ Form::label('ascenso','Ascenso',['class'=>'col-sm-2 control-label']) }}
 								<div class="col-sm-6">
-									{{ Form::text('ascenso',null, ['class' => 'form-control','id' => 'ascenso-tipo-competicion']) }}
+									{{ Form::text('ascenso',0, ['class' => 'form-control','placeholder' => 0,'id' => 'ascenso-tipo-competicion']) }}
 								</div>
 							</div>
 							<div class="form-group">
 								{{ Form::label('descenso','Descenso',['class'=>'col-sm-2 control-label']) }}
 								<div class="col-sm-6">
-									{{ Form::text('descenso',null, ['class' => 'form-control','id' => 'descenso-tipo-competicion']) }}
+									{{ Form::text('descenso',0, ['class' => 'form-control','placeholder' => 0,'id' => 'descenso-tipo-competicion']) }}
 								</div>
 							</div>
 							<div class="form-group">
 								{{ Form::label('clasificados_por_grupo','Clasificados Por Grupo',['class'=>'col-sm-2 control-label']) }}
 								<div class="col-sm-6">
-									{{ Form::text('clasificados_por_grupo',null, ['class' => 'form-control','id' => 'clasificados-por-grupo-tipo-competicion']) }}
+									{{ Form::text('clasificados_por_grupo',0, ['class' => 'form-control','placeholder' => 0,'id' => 'clasificados-por-grupo-tipo-competicion']) }}
 								</div>
 							</div>
 						</div>
