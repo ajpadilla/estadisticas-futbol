@@ -5,12 +5,17 @@ use Laracasts\Validation\FormValidator;
 class RegistrarJugadorForm extends FormValidator{
         protected $rules = [
           'nombre' => 'required|max:128',
-          'fecha_nacimiento' => 'date_format:d-m-Y', 
+          'apodo' => 'max:128',
+          'fecha_nacimiento' => 'date_format:Y-m-d', 
+          'lugar_nacimiento' =>'max:512',
           'altura' => 'numeric',
           'peso' =>'numeric',
-          'apodo' => 'max:128',
           'posicion_id' => 'required|exists:posiciones,id',
           'pais_id' => 'required|exists:paises,id',
-          'foto' =>'image'
+          'foto' =>'image',
+          'historia' => 'max:512',
+          //'info_url' => 'url' ,
+          //'facebook_url' => 'url',
+          //'twitter_url' =>'url' 
      ];
 }
