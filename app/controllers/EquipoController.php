@@ -209,10 +209,12 @@ class EquipoController extends \BaseController {
 
 	public function existeNumeroApi()
 	{
-		return Response::json(true);
-		/*if (Request::ajax()) 
-			$this->setSuccess($this->repository->existeNumero($id, $numero));*/	
-		return $this->getResponseArrayJson();
+		if (Request::ajax()) {
+			$id = Input::get('id');
+			$numero = Input::get('numero');
+			return Response::json(!$this->repository->existeNumero($id, $numero));	
+		}
+		return false;
 	}
 
 	public function confirmExistsPlayerTeam()

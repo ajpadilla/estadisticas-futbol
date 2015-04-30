@@ -203,4 +203,9 @@ class EquipoRepository extends BaseRepository
 		})->count();
 	}
 
+	public function existeNumero($id, $numero)
+	{
+		return ($this->get($id)->jugadores()->whereNumero($numero)->whereFechaFin(null)->count() ? true : false);
+	}
+
 }

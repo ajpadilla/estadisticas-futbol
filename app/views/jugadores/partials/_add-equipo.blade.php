@@ -25,12 +25,6 @@
 								</div>
 							</div>	
 							<div class="form-group">
-								{{ Form::label('numero','Número',['class'=>'col-sm-2 control-label']) }}
-								<div class="col-sm-6">
-									{{ Form::text('numero',null, ['class' => 'form-control','id' => 'numero']) }}
-								</div>
-							</div>	
-							<div class="form-group">
 								{{ Form::label('desde','Desde',['class'=>'col-sm-2 control-label']) }}
 								<div class="col-sm-6">
 									{{ Form::text('desde',null, ['class' => 'form-control datepicker','id' => 'desde', 'placeholder' => 'dd-mm-yyyy']) }}
@@ -42,6 +36,12 @@
 									{{ Form::text('hasta',null, ['class' => 'form-control datepicker','id' => 'hasta', 'placeholder' => 'dd-mm-yyyy']) }}
 								</div>
 							</div>
+							<div class="form-group">
+								{{ Form::label('numero','Número',['class'=>'col-sm-2 control-label']) }}
+								<div class="col-sm-6">
+									{{ Form::text('numero',null, ['class' => 'form-control','id' => 'numero']) }}
+								</div>
+							</div>								
 						{{ Form::close() }}
 					</div>
 				</div>

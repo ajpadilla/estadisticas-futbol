@@ -1994,7 +1994,7 @@ var handleBootboxAddEquipoToJugador = function () {
                         type: "post",
                         data: {
                             id: function() {
-                                return $( "#equipo_id" ).val();
+                                return $("#jugador-add-equipo-form .chosen-select").val()
                             },
                             numero: function() {
                                 return $( "#numero" ).val();
@@ -2017,7 +2017,7 @@ var handleBootboxAddEquipoToJugador = function () {
             },
             messages:{          
                 numero:{                    
-                    remote: 'Este numero '
+                    remote: 'Este numero ya esta en uso!'
                 },
                 equipo_id:{
                    remote: 'Este equipo ya esta registrado para este jugador, para la fecha seleccionada!'
