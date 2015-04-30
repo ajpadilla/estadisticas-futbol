@@ -26,7 +26,7 @@
 <div class="form-group">
 	{{ Form::label('fecha_nacimiento','Fecha de nacimiento',['class'=>'col-sm-2 control-label']) }}
 	<div class="col-sm-6">
-		{{ Form::text('fecha_nacimiento',null, ['class' => 'form-control','placeholder'=>'dd-mm-yy','id' =>'fecha_nacimiento']) }}
+		{{ Form::text('fecha_nacimiento',null, ['class' => 'form-control datepicker','placeholder'=>'','id' =>'fecha_nacimiento']) }}
 	</div>
 </div>
 
@@ -59,14 +59,14 @@
 <div class="form-group">
 	{{ Form::label('posicion_id','Posición',['class'=>'col-sm-2 control-label']) }}
 	<div class="col-sm-6">
-		{{ Form::select('posicion_id',array(),null,['class' => 'form-control chosen-select','data-placeholder' => 'Escoge Posición...','id'=> 'posicion_id']) }}
+		{{ Form::select('posicion_id',array(),null,['class' => 'form-control chosen-select posicion-jugador','data-placeholder' => 'Escoge Posición...','id'=> 'posicion_id_jugador']) }}
 	</div>
 </div>
 
 <div class="form-group">
 	{{ Form::label('pais_id','País',['class'=>'col-sm-2 control-label']) }}
 	<div class="col-sm-6">
-		{{ Form::select('pais_id',array(),null,['class' => 'form-control chosen-select','data-placeholder' => 'Escoge País...','id'=>'pais_id_jugador']) }}
+		{{ Form::select('pais_id',array(),null,['class' => 'form-control chosen-select pais-jugador','data-placeholder' => 'Escoge País...','id'=>'pais_id_jugador']) }}
 	</div>
 </div>
 
