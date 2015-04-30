@@ -2769,6 +2769,41 @@ var handleBootboxAddEquipoToJugador = function () {
     }
 
 
+    //Metodo para eliminar Tipo de competencía de la BD.
+    var deleteTypeOfCompetition= function (idTypeCompetition) {
+        
+        bootbox.confirm("¿Esta seguro de eliminar el tipo de competencía?", function(result) {
+            //console.log("Confirm result: "+result);
+            if (result == true){
+               $.ajax({
+                type: 'GET',
+                url: $('#eliminar-tipo-competencia').attr('href'),
+                data: {'typeCompetitionId': idTypeCompetition},
+                dataType: "JSON",
+                success: function(response) {
+                    if (response.success == true) {
+                        $('#eliminar_jugador_'+idTypeCompetition).parent().parent().remove();
+                        bootbox.dialog({
+                            message:" ¡Tipo competencía Eliminada!",
+                            title: "Éxito",
+                            buttons: {
+                                success: {
+                                    label: "Success!",
+                                    className: "btn-success",
+                                    callback: function () {
+                                        reloadDatatable();
+                                    }
+                                }
+                            }
+                        });
+                    };
+                }
+            });
+           };
+       });
+    }
+
+
     // Metodo para saber cual opcion(ver, editar, borrar) fue seleccionada de la lista de Paises
     var loadTypeOfCompetition = function() 
     {
@@ -2788,6 +2823,8 @@ var handleBootboxAddEquipoToJugador = function () {
                 {
                     if (type == "editar") {
                         editTypeOfCompetition(numberId);
+                    }else if(type == "eliminar"){
+                        deleteTypeOfCompetition(numberId);
                     }
                 }
             }           
