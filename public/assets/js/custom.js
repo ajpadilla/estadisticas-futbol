@@ -73,10 +73,10 @@ var CustomApp = function () {
     }
 
     var updatePlayerForm = function() {
-        loadFieldSelect($('#lista-paises').attr('href'),'#pais_id_jugador');
+        /*loadFieldSelect($('#lista-paises').attr('href'),'#pais_id_jugador');
         loadFieldSelect($('#lista-posiciones').attr('href'),'#posicion_id');
         loadFieldSelect($('#lista-equipos').attr('href'),'#equipo_id_jugador');
-        $('.chosen-select').trigger("chosen:updated");
+        $('.chosen-select').trigger("chosen:updated");*/
     }
 
 
@@ -91,24 +91,75 @@ var CustomApp = function () {
                     rangelength: [2, 128],
                     onlyLettersNumbersAndSpaces: true
                 },
+                fecha_nacimiento:{
+                    customDateValidator:true
+                },
+                lugar_nacimiento:{
+                    rangelength: [2, 512],
+                },
+                altura:{
+                    number: true
+                },
+                peso:{
+                    number: true
+                },
+                apodo:{
+                    rangelength: [2, 128],
+                },
                 posicion_id:{
                     required:true,
                 },
                 pais_id:{
                     required:true,
                 },
+                info_url:{
+                     //url: true
+                },
+                historia:{
+                    rangelength: [2, 512],
+                },
+                facebook_url:{
+                    // url: true
+                },
+                twitter_url:{
+                    // url: true
+                }
             },
             messages:{
                 nombre:{
                     required:'Este campo es obligatorio.',
                     rangelength: 'Por favor ingrese entre [2, 128] caracteres',
                 },
+                lugar_nacimiento:{
+                    rangelength: 'Por favor ingrese entre [2, 128] caracteres',
+                },
+                altura:{
+                    number: 'Ingrese un valor numerico'
+                },
+                peso:{
+                    number: 'Ingrese un valor numerico'
+                },
+                apodo:{
+                    rangelength: 'Por favor ingrese entre [2, 128] caracteres',
+                },
                 posicion_id:{
                     required:'Este campo es obligatorio.',
                 },
                 pais_id:{
-                    required:'Este campo es obligatorio.',
+                   required:'Este campo es obligatorio.',
                 },
+                info_url:{
+                     url: 'Por favor ingrese una url valida'
+                },
+                historia:{
+                    rangelength: 'Por favor ingrese entre [2, 128] caracteres',
+                },
+                facebook_url:{
+                     url: 'Por favor ingrese una url valida'
+                },
+                twitter_url:{
+                     url: 'Por favor ingrese una url valida'
+                }
             },
             highlight:function(element){
                 $(element).closest('.form-group').removeClass('has-success').addClass('has-error');
@@ -1003,25 +1054,7 @@ var CustomApp = function () {
         $('.chosen-select').trigger("chosen:updated");
     }
 
-    var loadSelectForPlayer = function() {
-        $.ajax({
-            type: 'GET',
-            url: $('#datos-jugador').attr('href'),    
-            data: {'jugadorId': $('#jugador_id').val()},
-            dataType: "JSON",
-            success: function(response) {
-                //console.log(response);
-                if (response.success) {
-                    $('#fecha_nacimiento').val(response.fechaNacimiento);
-                    $('#posicion_id').val(response.jugador.posicion_id);
-                    $('#pais_id_jugador').val(response.pais.id);
-                    $('.chosen-select').trigger("chosen:updated");
-                }
-            }
-        });
-        $('.chosen-select').trigger("chosen:updated");
-    }
-
+    
         //Metodo para eliminar equipo de la BD.
     var deleteTeam = function (idTeam) {
         bootbox.confirm("¿Esta seguro de eliminar el Equipo?", function(result) {
@@ -3095,11 +3128,30 @@ var handleBootboxAddEquipoToJugador = function () {
         }
     }
 
+    var loadSelectForPlayer = function(idPlayer) {
+        $.ajax({
+            type: 'GET',
+            url: $('#datos-jugador').attr('href'),    
+            data: {'jugadorId': idPlayer},
+            dataType: "JSON",
+            success: function(response) {
+                console.log(response);
+                if (response.success) {
+                    $('#fecha_nacimiento').val(response.jugador.fecha_nacimiento);
+                    $('#posicion_id_jugador').val(response.jugador.posicion_id);
+                    $('#pais_id_jugador').val(response.pais.id);
+                    $('.chosen-select').trigger("chosen:updated");
+                }
+            }
+        });
+    }
+
+
     return {
         init: function() {
             initChosen();
-            loadFieldSelect($('#lista-posiciones').attr('href'),'#posicion_id');
-            loadFieldSelect($('#lista-paises').attr('href'),'#pais_id_jugador');
+            loadFieldSelect($('#lista-posiciones').attr('href'),'.posicion-jugador');
+            loadFieldSelect($('#lista-paises').attr('href'),'.pais-jugador');
             loadFieldSelect($('#lista-equipos').attr('href'),'#equipo_id');
             loadFieldSelect($('#lista-equipos').attr('href'),'#equipo_id_jugador');
             loadFieldSelect($('#lista-paises').attr('href'),'#pais_equipo');
@@ -3129,7 +3181,7 @@ var handleBootboxAddEquipoToJugador = function () {
 
             loadDataForEditTeam($('#equipo_id').val());
             loadSelectForTeam();
-            loadSelectForPlayer();
+            loadSelectForPlayer($('#jugador_id').val());
             validateSelectPlayers($("#tipo_equipo option:selected" ).text());
 
 
