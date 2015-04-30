@@ -29,6 +29,7 @@
 		</div>
 	</section>
 	<!--/PAGE -->
+	@include('partials._pop-ups-views')
 	@include("layouts.partials._js")
 </body>
 </html>
