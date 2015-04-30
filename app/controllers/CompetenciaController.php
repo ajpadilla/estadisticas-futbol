@@ -1,14 +1,18 @@
 <?php
 
 use soccer\Competencia\CompetenciaRepository;
-
+use soccer\Forms\RegistrarCompetencia;
 
 class CompetenciaController extends \BaseController {
 
 	protected $repository;
+	protected $registrarCompetencia;
 
-	public function __construct(CompetenciaRepository $repository){
+	public function __construct(CompetenciaRepository $repository,
+			RegistrarCompetencia $registrarCompetencia
+		){
 		$this->repository = $repository;
+		$this->registrarCompetencia = $registrarCompetencia;
 	}
 
 	/**
@@ -42,7 +46,24 @@ class CompetenciaController extends \BaseController {
 	 */
 	public function store()
 	{
-		//
+		if(Request::ajax())
+		{
+			$input = Input::all();
+			try
+			{
+				$this->registrarCompetencia->validate($input);
+				$competencia = $this->repository->create($input);
+				$this->setSuccess(true);
+				$this->addToResponseArray('competencia', $competencia->toArray());
+				return $this->getResponseArrayJson();				
+			}
+			catch (FormValidationException $e)
+			{
+				$this->setSuccess(false);
+				$this->addToResponseArray('errores', $e->getErrors()->all());
+				return $this->getResponseArrayJson();
+			}
+		}
 	}
 
 	/**
@@ -110,5 +131,7 @@ class CompetenciaController extends \BaseController {
 	{
 		return $this->repository->getDefaultTableForAll();
 	}
+
+	
 
 }
