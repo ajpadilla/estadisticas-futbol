@@ -1,0 +1,5 @@
+@include('jugadores.new')
+@include('equipos.new')
+@include('paises.new')
+@include('posiciones.new')
+@include('tipos-competencia.new')
