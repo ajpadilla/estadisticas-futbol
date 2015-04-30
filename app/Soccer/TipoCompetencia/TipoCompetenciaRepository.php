@@ -34,6 +34,14 @@ class TipoCompetenciaRepository extends BaseRepository
 
 	public function update($data = array())
 	{
+		if(empty($data['ida_vuelta'])){
+			$data['ida_vuelta'] = 0;
+		}
+
+		if (empty($data['pre_clasificacion'])) {
+			$data['pre_clasificacion'] = 0;
+		}
+
 		$tipoCompetencia = $this->get($data['tipo_competencia_id']);
 		$tipoCompetencia->update($data);
 		return $tipoCompetencia;
