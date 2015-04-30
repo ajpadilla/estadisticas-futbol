@@ -75,7 +75,7 @@ class Equipo extends Eloquent implements StaplerableInterface{
 		return ucfirst(strtolower($value));
 	}
 
-	public function jugadoresActuales()
+	public function jugadoresActualesList()
 	{
 		return $this->jugadores()->lists('equipo_jugador.jugador_id');
 	}
@@ -99,6 +99,7 @@ class Equipo extends Eloquent implements StaplerableInterface{
 
  	public function scopeJugadoresActuales($query)
     {
+    	//dd($query);
         return $query->jugadores()->whereFechaFin(null);
     }	
 

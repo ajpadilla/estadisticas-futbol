@@ -85,7 +85,25 @@ class JugadorRepository extends BaseRepository
 	public function getClubes($id)
 	{
 		return $this->get($id)->equipos()->clubes()->get();
-	}		
+	}
+
+	public function addEquipo($id, $equipo = array())
+	{
+		try {
+			extract($equipo);
+			$equipoRepository = new EquipoRepository;
+			$equipo = $equipoRepository->get($equipo_id);
+			$jugador = $this->get($id);
+			$jugador->equipos()->attach($equipo->id, ['numero' => $numero, 'fecha_inicio' => $desde, 'fecha_fin' => $hasta]);
+			return true;
+		} catch(Exception $e) {
+			return false;
+		}
+	}
+
+	/*
+	*********************** DATATABLE SETTINGS ******************************
+	*/		
 
 	public function setDefaultActionColumn() {
 		$this->addColumnToCollection('Acciones', function($model)

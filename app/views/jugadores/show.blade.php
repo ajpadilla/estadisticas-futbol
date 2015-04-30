@@ -14,7 +14,7 @@
 		<div class="box border">
 			<div class="box-title">
 				<h4><i class="fa fa-user"></i><span class="hidden-inline-mobile">{{ $jugador->nombre }}</span></h4>
-			</div>
+			</div>			
 			<div class="box-body">
 				<div class="tabbable header-tabs user-profile">
 					<ul class="nav nav-tabs">

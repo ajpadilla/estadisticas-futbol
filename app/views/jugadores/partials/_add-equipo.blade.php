@@ -18,16 +18,11 @@
 					<div class="divide-20"></div>
 					<div class="box-body big">
 						{{ Form::open(['route' => 'jugadores.api.add.equipo','class'=>'form-horizontal','role'=>'form', 'method' => 'POST', 'id'=> 'jugador-add-equipo-form']) }}
+							<input id="id" name="id" type="hidden" value="{{ $jugador->id }}">
 							<div class="form-group">
 								{{ Form::label('equipo_id','Equipos',['class'=>'col-sm-2 control-label']) }}
 								<div class="col-sm-6">
 									{{ Form::select('equipo_id', $equipos, null, ['class' => 'form-control chosen-select', 'data-placeholder' => 'Escoge equipo...', 'id'=> 'equipo_id']) }}
-								</div>
-							</div>	
-							<div class="form-group">
-								{{ Form::label('numero','Número',['class'=>'col-sm-2 control-label']) }}
-								<div class="col-sm-6">
-									{{ Form::text('numero',null, ['class' => 'form-control','id' => 'numero']) }}
 								</div>
 							</div>	
 							<div class="form-group">
@@ -42,6 +37,12 @@
 									{{ Form::text('hasta',null, ['class' => 'form-control datepicker','id' => 'hasta', 'placeholder' => 'dd-mm-yyyy']) }}
 								</div>
 							</div>
+							<div class="form-group">
+								{{ Form::label('numero','Número',['class'=>'col-sm-2 control-label']) }}
+								<div class="col-sm-6">
+									{{ Form::text('numero',null, ['class' => 'form-control','id' => 'numero']) }}
+								</div>
+							</div>								
 						{{ Form::close() }}
 					</div>
 				</div>
