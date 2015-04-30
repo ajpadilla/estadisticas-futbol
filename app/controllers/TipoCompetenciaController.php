@@ -145,9 +145,11 @@ class TipoCompetenciaController extends \BaseController {
 		}
 	}
 
-	public function destroyApi($id)
+	public function destroyApi()
 	{
-		# code...
+		if(Request::ajax())
+			$this->setSuccess($this->repository->delete(Input::get('typeCompetitionId')));
+		return $this->getResponseArrayJson();
 	}
 
 	public function listaApi()
