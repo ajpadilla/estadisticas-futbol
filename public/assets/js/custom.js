@@ -2685,7 +2685,7 @@ var handleBootboxAddEquipoToJugador = function () {
                                             processData: false,
                                             dataType: "JSON",
                                             success: function(responseServer) {
-                                                //console.log(responseServer);
+                                                console.log(responseServer);
                                                 if(responseServer.success == true) 
                                                 {
                                                     // Muestro otro dialog con información de éxito
