@@ -1,6 +1,7 @@
 <?php
 
 use soccer\Equipo\EquipoRepository;
+use soccer\Jugador\JugadorRepository;
 use soccer\Pais\PaisRepository;
 use soccer\Forms\EquipoForm;
 use soccer\Forms\EditarEquipoForm;
@@ -11,14 +12,17 @@ class EquipoController extends \BaseController {
 
 	protected $repository;
 	protected $paisRepository;
+	protected $jugadorRepository;
 	protected $equipoForm;
 	protected $editarEquipoForm;
 
-	public function __construct(EquipoRepository $repository, 
+	public function __construct(EquipoRepository $repository,
+								JugadorRepository $jugadorRepository, 
 								PaisRepository $paisRepository, 
 								EquipoForm $equipoForm,
 								EditarEquipoForm $editarEquipoForm){
 		$this->repository = $repository;
+		$this->jugadorRepository = $jugadorRepository;
 		$this->paisRepository = $paisRepository;
 		$this->equipoForm = $equipoForm;
 		$this->editarEquipoForm = $editarEquipoForm;
@@ -85,8 +89,9 @@ class EquipoController extends \BaseController {
 	{	
 		$paises = $this->paisRepository->getAllForSelect();
 		$equipo = $this->repository->get($id);
+		$jugadores = $this->jugadorRepository->getAllForSelect();
 		$table = $this->repository->getJugadoresTable($id);
-		return View::make('equipos.show', compact('equipo', 'paises', 'table'));
+		return View::make('equipos.show', compact('equipo', 'paises', 'table', 'jugadores'));
 	}
 
 
@@ -215,6 +220,15 @@ class EquipoController extends \BaseController {
 			return Response::json(!$this->repository->existeNumero($id, $numero));	
 		}
 		return false;
+	}
+
+	public function addJugadorApi()
+	{
+		if(Request::ajax()) {
+			$id = Input::get('id');
+			$this->setSuccess($this->repository->addJugador($id, Input::all()));
+		}
+		return $this->getResponseArrayJson();
 	}
 
 	public function confirmExistsPlayerTeam()

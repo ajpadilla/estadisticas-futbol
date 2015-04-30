@@ -64,6 +64,24 @@ class EquipoRepository extends BaseRepository
 		return $this->get($id)->jugadores;
 	}
 
+	public function addJugador($id, $jugador = array())
+	{
+		try {
+			extract($jugador);
+			$jugadorRepository = new JugadorRepository;
+			$jugador = $jugadorRepository->get($jugador_id);
+			$equipo = $this->get($id);
+			$equipo->jugadores()->attach($jugador->id, ['numero' => $numero, 'fecha_inicio' => $desde, 'fecha_fin' => $hasta]);
+			return true;
+		} catch(Exception $e) {
+			return false;
+		}
+	}	
+
+	/*
+	*********************** DATATABLE SETTINGS ******************************
+	*/		
+
 	public function setDefaultActionColumn() {
 		$this->addColumnToCollection('Acciones', function($model)
 		{
