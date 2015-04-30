@@ -23,7 +23,15 @@ class CompetenciaRepository extends BaseRepository
     /*
 	********************* Methods ***********************
     */
-    
+    	
+
+	public function create($data = array())
+	{
+		$competencia = $this->model->create($data); 
+		return $competencia;
+	}
+
+
 
     /*
 	********************* Datatable Methods ***********************

@@ -59,9 +59,9 @@ var CustomApp = function () {
 
         $.validator.addMethod('customDateValidator', function(value, element) {
             try{
-                jQuery.datepicker.parseDate('dd-mm-yyyy', value);return true;}
+                jQuery.datepicker.parseDate('yy-mm-dd', value);return true;}
             catch(e){return false;}
-        },'Por favor, Ingrese una fecha válida con el dormato dd-mm-yyyy.');
+        },'Por favor, Ingrese una fecha válida con el formato yy-mm-dd.');
 
         jQuery.validator.addMethod('decimalNumbers', function(value, element) {
             return this.optional(element) || /^\d{0,10}(\.\d{0,2})?$/i.test(value);
@@ -2834,6 +2834,186 @@ var handleBootboxAddEquipoToJugador = function () {
     /**
       * 
     */
+   
+
+    /**
+     * Funciones para CRUD COMPETENCIAS
+     */
+
+    var handleBootboxNewCompetition= function () {
+
+
+       addValidationRulesForms();
+
+        $('#competition-form').validate({
+              rules:{
+                nombre:{
+                    required: true,
+                    rangelength : [2,128]
+                },
+                desde:{
+                    required:true,
+                    customDateValidator:true,
+                },
+                hasta:{
+                    required:true,
+                    customDateValidator:true,
+                },
+                tipo_competencia_id:{
+                    required:true
+                }
+            },
+            messages:{
+                nombre:{
+                    required: 'Este campo es obligatorio',
+                    rangelength: 'Por favor ingrese entre [2, 128] caracteres',
+                },
+                desde:{
+                    required: 'Este campo es obligatorio',
+                },
+                hasta:{
+                     required: 'Este campo es obligatorio',
+                },
+                tipo_competencia_id:{
+                     required: 'Este campo es obligatorio',
+                }
+            },
+            highlight:function(element){
+                $(element).closest('.form-group').removeClass('has-success').addClass('has-error');
+            },
+            unhighlight:function(element){
+                $(element).closest('.form-group').removeClass('has-error');
+            },
+            success:function(element){
+                element.addClass('valid').closest('.form-group').removeClass('has-error').addClass('has-success');
+            }
+        });
+
+        var updateCompetitionForm = function() {
+            $("#competition-form").trigger("reset");
+            loadFieldSelect($('#lista-tipos-competencias').attr('href'),'#tipos-competencias');
+        }
+
+        // Mostrar formulario para agregar nueva Posición
+        $('#new-competition').on('click', function() {
+            updateCompetitionForm();
+            bootbox
+                .dialog({
+                    message: $('#competition-form-div'),
+                    buttons: {
+                        success: {
+                            label: "Guardar",
+                            className: "btn-primary",
+                            callback: function () 
+                            {
+                                // Si quieres usar aquí jqueryForm, es lo mismo, lo agregas y ya. Creo que es buena idea!
+
+                                //ajax para el envío del formulario.
+                                if($('#competition-form').valid()) {
+
+                                    var response = false; // Esta variable debería recibir los datos por ajax.
+                                    var dataServer = null;
+
+                                    $("#competition-form").submit(function(e){
+                                        var formData = new FormData(this);
+                                        $.ajax({
+                                            type: 'POST',
+                                            url: $('#agregar-competencia').attr('href'), 
+                                            data: formData,
+                                            contentType: false,
+                                            processData: false,
+                                            dataType: "JSON",
+                                            success: function(responseServer) {
+                                                console.log(responseServer);
+                                                if(responseServer.success == true) 
+                                                {
+                                                    // Muestro otro dialog con información de éxito
+                                                    bootbox.dialog({
+                                                        message: responseServer.competencia.nombre + " Ha sido agregado correctamente!",
+                                                        title: "Éxito",
+                                                        buttons: {
+                                                            success: {
+                                                                label: "Success!",
+                                                                className: "btn-success",
+                                                                callback: function () {
+                                                                    reloadDatatable();
+                                                                }
+                                                            }
+                                                        }
+                                                    });
+                                                    // Limpio cada elemento de las clases añadidas por el validator
+                                                    $('#competition-form div').each(function(){
+                                                        cleanValidatorClasses(this);
+                                                    });
+                                                    //Reinicio el formulario
+                                                    $("#competition-form")[0].reset();
+                                                    updateCompetitionForm();
+                                                }else{
+                                                    console.log(responseServer);
+                                                     bootbox.dialog({
+                                                        message:responseServer.errores,
+                                                        title: "Error",
+                                                        buttons: {
+                                                            danger: {
+                                                                label: "Danger!",
+                                                                className: "btn-danger"
+                                                            }
+                                                        }
+                                                    });
+                                                    // Limpio cada elemento de las clases añadidas por el validator
+                                                    $('#competition-form div').each(function(){
+                                                        cleanValidatorClasses(this);
+                                                    });
+                                                    //Reinicio el formulario
+                                                }
+                                            },
+                                            error: function(jqXHR, textStatus, errorThrown) {
+                                               console.log(errorThrown);
+                                               bootbox.dialog({
+                                                        message:" ¡Error al enviar datos al servidor!",
+                                                        title: "Error",
+                                                        buttons: {
+                                                            danger: {
+                                                                label: "Danger!",
+                                                                className: "btn-danger"
+                                                            }
+                                                        }
+                                                    });
+                                                    // Limpio cada elemento de las clases añadidas por el validator
+                                                    $('#competition-form div').each(function(){
+                                                        cleanValidatorClasses(this);
+                                                    });
+                                                    //Reinicio el formulario
+                                            }
+                                        });
+                                        e.preventDefault(); //Prevent Default action. 
+                                    }); 
+                                    $("#competition-form").submit();
+                                } else {
+                                    return false;
+                                }
+                                return false;
+                            }
+                        }
+                    },
+                    show: false // We will show it manually later
+                })
+                .on('shown.bs.modal', function() {
+                    $('#competition-form-div')
+                        .show();                             // Show the form
+            })
+            .on('hide.bs.modal', function(e) {
+                // Bootbox will remove the modal (including the body which contains the form)
+                // after hiding the modal
+                // Therefor, we need to backup the form
+                $('#competition-form-div').hide().appendTo('#new-competition-form');
+            })
+            .modal('show');
+        });               
+    }
+ /**
+  * 
+  */
 
     var loadFieldSelect = function(url,idField) {
         $.ajax({
@@ -2924,6 +3104,7 @@ var handleBootboxAddEquipoToJugador = function () {
             loadFieldSelect($('#lista-equipos').attr('href'),'#equipo_id_jugador');
             loadFieldSelect($('#lista-paises').attr('href'),'#pais_equipo');
             loadFieldSelect($('#lista-jugadores').attr('href'),'#jugadores');
+            loadFieldSelect($('#lista-tipos-competencias').attr('href'),'#tipos-competencias');
             //initDataPicker();
             
             handleBootstrapFileInput();
@@ -2934,6 +3115,7 @@ var handleBootboxAddEquipoToJugador = function () {
             handleBootboxNewTypeOfCompetition();
             handleBootboxAddEquipoToJugador();
             handleBootboxAddJugadorToEquipo();
+            handleBootboxNewCompetition();
 
             //Plugins init
             //handleFechaDateTimePicker();

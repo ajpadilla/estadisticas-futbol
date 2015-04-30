@@ -11,7 +11,9 @@ use Carbon\Carbon;
 class Competencia extends Eloquent implements StaplerableInterface{
 	use EloquentTrait;
 
-	protected $fillable = [];
+    protected $table = 'competencias';
+
+	protected $fillable = ['nombre','imagen','desde','hasta','tipo_competencia_id'];
 
  	public function __construct(array $attributes = array()) {
         $this->hasAttachedFile('imagen', [

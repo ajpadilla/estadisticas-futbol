@@ -52,7 +52,7 @@
 				</a>
 				<ul class="sub">
 					<li><a class="" href="{{ URL::route('competencias.index') }}"><span class="sub-menu-text">Lista</span></a></li>
-					<li><a id="new-competencia" class="" href="#new-competencia-form"><span class="sub-menu-text">Crear</span></a></li>
+					<li><a id="new-competition" class="" href="#new-competition-form"><span class="sub-menu-text">Crear</span></a></li>
 				</ul>
 			</li>					
 			<li class="has-sub">
@@ -109,6 +109,10 @@
 		<a id="editar-tipo-competencia" href="{{ URL::route('tipos-competencia.api.update') }}"></a>
 		<a id="ver-tipo-competencia" href="{{ URL::route('tipos-competencia.data') }}"></a>
 		<a id="eliminar-tipo-competencia" href="{{ URL::route('tipos-competencia.api.eliminar') }}"></a>
+		<a id="lista-tipos-competencias" href="{{ URL::route('tipos-competencia.seleccionar.lista') }}"></a>
+		<!--Route Competencía-->
+		<a id="agregar-competencia" href="{{ URL::route('competencias.store') }}"></a>
+
 	</div>
 </div>
 <!-- /SIDEBAR -->
