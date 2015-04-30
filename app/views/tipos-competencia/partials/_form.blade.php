@@ -40,7 +40,7 @@
 							<div class="form-group">
 								{{ Form::label('fases_eliminatorias','Fases Eliminatorias',['class'=>'col-sm-2 control-label']) }}
 								<div class="col-sm-6">
-									{{ Form::text('fases_eliminatorias',null, ['class' => 'form-control','id' => 'fases-eliminatorias-tipo-competicion']) }}
+									{{ Form::text('fases_eliminatorias',0, ['class' => 'form-control','placeholder' => 0,'id' => 'fases-eliminatorias-tipo-competicion']) }}
 								</div>
 							</div>
 							<div class="form-group">
