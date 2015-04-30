@@ -162,14 +162,14 @@ var CustomApp = function () {
                                                 {
                                                     // Muestro otro dialog con información de éxito
                                                     bootbox.dialog({
-                                                        message: responseServer.jugador.nombre + " ha sido agregado correctamente!",
+                                                        message: responseServer.jugador.nombre + " Ha sido agregado correctamente!",
                                                         title: "Éxito",
                                                         buttons: {
                                                             success: {
                                                                 label: "Success!",
                                                                 className: "btn-success",
                                                                  callback: function () {
-                                                                    $('.table').DataTable().ajax.reload();
+                                                                    reloadDatatable();
                                                                 }
                                                             }
                                                         }
@@ -687,14 +687,14 @@ var CustomApp = function () {
                                                 {
                                                     // Muestro otro dialog con información de éxito
                                                     bootbox.dialog({
-                                                        message: responseServer.equipo.nombre + " ha sido agregado correctamente!",
+                                                        message: responseServer.equipo.nombre + " Ha sido agregado correctamente!",
                                                         title: "Éxito",
                                                         buttons: {
                                                             success: {
                                                                 label: "Success!",
                                                                 className: "btn-success",
                                                                 callback: function () {
-                                                                    $('.table').DataTable().ajax.reload();
+                                                                    reloadDatatable();
                                                                 }
                                                             }
                                                         }
@@ -1199,7 +1199,7 @@ var CustomApp = function () {
                                                     //console.log(dataServer);
                                                     // Muestro otro dialog con información de éxito
                                                     bootbox.dialog({
-                                                        message: $('#nombre').val() + " ha sido agregado correctamente!",
+                                                        message: $('#nombre').val() + " Ha sido agregado correctamente!",
                                                         title: "Éxito",
                                                         buttons: {
                                                             success: {
@@ -1636,7 +1636,7 @@ var CustomApp = function () {
                                     sPaginationType: "full_numbers"
                                 });*/
 
-                                //$('.table').DataTable().ajax.reload();
+                                //reloadDatatable();
 
                                 //ajax para el envío del formulario.
                                 if($('#position-form').valid()) {
@@ -1660,14 +1660,14 @@ var CustomApp = function () {
                                                 {
                                                     // Muestro otro dialog con información de éxito
                                                     bootbox.dialog({
-                                                        message: responseServer.posicion.nombre + " ha sido agregado correctamente!",
+                                                        message: responseServer.posicion.nombre + " Ha sido agregado correctamente!",
                                                         title: "Éxito",
                                                         buttons: {
                                                             success: {
                                                                 label: "Success!",
                                                                 className: "btn-success",
                                                                 callback: function () {
-                                                                    $('.table').DataTable().ajax.reload();
+                                                                    reloadDatatable();
                                                                 }
                                                             }
                                                         }
@@ -1845,7 +1845,7 @@ var CustomApp = function () {
                                                                 label: "Success!",
                                                                 className: "btn-success",
                                                                  callback: function () {
-                                                                    $('.table').DataTable().ajax.reload();
+                                                                    reloadDatatable();
                                                                 }
                                                             }
                                                         }
@@ -2059,7 +2059,6 @@ var handleBootboxAddEquipoToJugador = function () {
 
                                     $("#jugador-add-equipo-form").submit(function(e){
                                         var formData = new FormData(this);
-
                                         $.ajax({
                                             type: 'POST',
                                             url: $('#add-equipo').attr('href'), 
@@ -2073,12 +2072,15 @@ var handleBootboxAddEquipoToJugador = function () {
                                                 {
                                                     // Muestro otro dialog con información de éxito
                                                     bootbox.dialog({
-                                                        message: " ha sido agregado correctamente!",
+                                                        message: " Ha sido agregado correctamente!",
                                                         title: "Éxito",
                                                         buttons: {
                                                             success: {
                                                                 label: "Correcto!",
-                                                                className: "btn-success"
+                                                                className: "btn-success",
+                                                                callback: function () {
+                                                                    reloadDatatable();
+                                                                }
                                                             }
                                                         }
                                                     });
@@ -2294,14 +2296,14 @@ var handleBootboxAddEquipoToJugador = function () {
                                                 {
                                                     // Muestro otro dialog con información de éxito
                                                     bootbox.dialog({
-                                                        message: responseServer.tipoCompetencia.nombre + " ha sido agregado correctamente!",
+                                                        message: responseServer.tipoCompetencia.nombre + " Ha sido agregado correctamente!",
                                                         title: "Éxito",
                                                         buttons: {
                                                             success: {
                                                                 label: "Success!",
                                                                 className: "btn-success",
                                                                 callback: function () {
-                                                                    $('.table').DataTable().ajax.reload();
+                                                                    reloadDatatable();
                                                                 }
                                                             }
                                                         }
@@ -2546,7 +2548,7 @@ var handleBootboxAddEquipoToJugador = function () {
                                                                 label: "Success!",
                                                                 className: "btn-success",
                                                                  callback: function () {
-                                                                    $('.table').DataTable().ajax.reload();
+                                                                    reloadDatatable();
                                                                 }
                                                             }
                                                         }
@@ -2719,6 +2721,13 @@ var handleBootboxAddEquipoToJugador = function () {
          //Set the initial state of the picker label
          $('#fecha span').html('Custom');*/
     }    
+
+    var reloadDatatable = function () {
+        if($('#datatable').length) {
+            var table = $('#datatable').DataTable();
+            table.search('').draw();
+        }
+    }
 
     return {
         init: function() {
