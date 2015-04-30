@@ -19,8 +19,8 @@ class CreateTableJugadores extends Migration {
 			$table->date('fecha_nacimiento')->nullable(true);
 			$table->text('lugar_nacimiento')->nullable();
 			$table->string('foto', 128)->nullable(true)->default(null);
-			$table->decimal('altura', 3, 2)->nullable(true)->default(null);
-			$table->decimal('peso', 3, 2)->nullable(true)->default(null);
+			$table->decimal('altura', 10, 2)->nullable(true)->default(null);
+			$table->decimal('peso', 10, 2)->nullable(true)->default(null);
 			$table->text('historia')->nullable();
 			$table->string('info_url', 128)->nullable();
 			$table->string('facebook_url', 128)->nullable();
