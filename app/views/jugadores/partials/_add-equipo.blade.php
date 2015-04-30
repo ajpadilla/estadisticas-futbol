@@ -18,6 +18,7 @@
 					<div class="divide-20"></div>
 					<div class="box-body big">
 						{{ Form::open(['route' => 'jugadores.api.add.equipo','class'=>'form-horizontal','role'=>'form', 'method' => 'POST', 'id'=> 'jugador-add-equipo-form']) }}
+							<input id="id" name="id" type="hidden" value="{{ $jugador->id }}">
 							<div class="form-group">
 								{{ Form::label('equipo_id','Equipos',['class'=>'col-sm-2 control-label']) }}
 								<div class="col-sm-6">
