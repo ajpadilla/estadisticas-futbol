@@ -28,7 +28,7 @@ class CreateTableJugadores extends Migration {
 			$table->timestamps();
 		});
 		
-		Schema::table('jugadores', function(Blueprint $table)
+		/*Schema::table('jugadores', function(Blueprint $table)
 		{
 				$table->integer('posicion_id')->unsigned()->after('peso');	
 				$table->foreign('posicion_id')
@@ -36,11 +36,11 @@ class CreateTableJugadores extends Migration {
 						->on('posiciones')
 						->onDelete('no action')
 						->onUpdate('cascade');	
-		});
+		});*/
 
 		Schema::table('jugadores', function(Blueprint $table)
 		{
-				$table->integer('pais_id')->unsigned()->after('posicion_id');	
+				$table->integer('pais_id')->unsigned()->after('peso');	
 				$table->foreign('pais_id')
 						->references('id')	
 						->on('paises')
@@ -58,8 +58,8 @@ class CreateTableJugadores extends Migration {
 	{
 		Schema::table('jugadores', function(Blueprint $table)
 		{
-			$table->dropForeign('jugadores_posicion_id_foreign');
-			$table->dropColumn('posicion_id');
+			//$table->dropForeign('jugadores_posicion_id_foreign');
+			//$table->dropColumn('posicion_id');
 			$table->dropForeign('jugadores_pais_id_foreign');
 			$table->dropColumn('pais_id');
 		});
