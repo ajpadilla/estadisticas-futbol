@@ -10,6 +10,7 @@ class RegistrarJugadorForm extends FormValidator{
           'lugar_nacimiento' =>'max:512',
           'altura' => 'numeric',
           'peso' =>'numeric',
+          'posiciones_id' => 'required',
           'posicion_id' => 'required|exists:posiciones,id',
           'pais_id' => 'required|exists:paises,id',
           'foto' =>'image',
