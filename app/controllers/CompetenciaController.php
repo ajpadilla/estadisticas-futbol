@@ -122,16 +122,17 @@ class CompetenciaController extends \BaseController {
 		# code...
 	}
 
-	public function destroyApi($id)
+	public function destroyApi()
 	{
-		# code...
+		if(Request::ajax())
+			$this->setSuccess($this->repository->delete(Input::get('competitionId')));
+		return $this->getResponseArrayJson();
 	}
 
 	public function listaApi()
 	{
 		return $this->repository->getDefaultTableForAll();
 	}
-
 	
 
 }
