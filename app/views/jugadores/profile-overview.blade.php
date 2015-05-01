@@ -49,7 +49,7 @@
 										</tr>
 										<tr>
 											<td>Posicion</td>
-											<td id="card-name"><strong>{{ $jugador->posicion->abreviacion }}</strong></td>
+											<td id="card-name"><strong>{{ $jugador->getPosicionActual()->abreviacion }}</strong></td>
 										</tr>
 									</tbody>
 								</table>
