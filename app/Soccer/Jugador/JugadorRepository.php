@@ -117,7 +117,8 @@ class JugadorRepository extends BaseRepository
 
 		$this->collection->addColumn('Posición', function($model)
 		{
-			 //return $model->posicion->abreviacion;
+			if(count($model->getPosicionActual()) > 0)
+				return $model->getPosicionActual()->abreviacion;
 		});
 
 		$this->collection->addColumn('Edad', function($model)
