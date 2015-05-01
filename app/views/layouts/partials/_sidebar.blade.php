@@ -112,7 +112,8 @@
 		<a id="lista-tipos-competencias" href="{{ URL::route('tipos-competencia.seleccionar.lista') }}"></a>
 		<!--Route Competencía-->
 		<a id="agregar-competencia" href="{{ URL::route('competencias.store') }}"></a>
-
+		<a id="eliminar-competencia" href="{{ URL::route('competencias.api.eliminar') }}"></a>
+		
 	</div>
 </div>
 <!-- /SIDEBAR -->
