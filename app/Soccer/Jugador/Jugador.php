@@ -95,5 +95,9 @@ class Jugador extends Eloquent implements StaplerableInterface{
 	{
 		return 0;
 	}
-	
+
+	public function getPosicionActual()
+	{
+		return $this->posiciones()->wherePrincipal(TRUE)->first();
+	}	
 }
