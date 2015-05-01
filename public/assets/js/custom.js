@@ -3044,6 +3044,67 @@ var handleBootboxAddEquipoToJugador = function () {
             .modal('show');
         });               
     }
+
+     //Metodo para eliminar Tipo de competencía de la BD.
+    var deleteCompetition= function (idCompetition) {
+        
+        bootbox.confirm("¿Esta seguro de eliminar competencía?", function(result) {
+            //console.log("Confirm result: "+result);
+            if (result == true){
+               $.ajax({
+                type: 'GET',
+                url: $('#eliminar-competencia').attr('href'),
+                data: {'competitionId': idCompetition},
+                dataType: "JSON",
+                success: function(response) {
+                    if (response.success == true) {
+                        $('#eliminar_competencia_'+idCompetition).parent().parent().remove();
+                        bootbox.dialog({
+                            message:" ¡Competencía Eliminada!",
+                            title: "Éxito",
+                            buttons: {
+                                success: {
+                                    label: "Success!",
+                                    className: "btn-success",
+                                    callback: function () {
+                                        reloadDatatable();
+                                    }
+                                }
+                            }
+                        });
+                    };
+                }
+            });
+           };
+       });
+    }
+
+
+    // Metodo para saber cual opcion(ver, editar, borrar) fue seleccionada de la lista de Paises
+    var loadDataCompetition = function() 
+    {
+        $('.table').click(function(event)
+        {
+            var target = $( event.target );
+            if (target.is('a')) 
+            {
+                console.log($(target).attr('id'));
+
+                var id = $(target).attr('id');
+                var type = id ? id.split('_')[0] : '';
+                var view = id ? id.split('_')[1] : '';
+                var numberId = id ? id.split('_')[2] : '';
+
+                if (view == "competencia") 
+                {
+                    if(type == "eliminar"){
+                        deleteCompetition(numberId);
+                    }
+                }
+            }           
+        });
+    }
+
  /**
   * 
   */
@@ -3178,6 +3239,7 @@ var handleBootboxAddEquipoToJugador = function () {
             loadDataTeam();
             loadDataPosition();
             loadTypeOfCompetition();
+            loadDataCompetition();
 
             loadDataForEditTeam($('#equipo_id').val());
             loadSelectForTeam();
