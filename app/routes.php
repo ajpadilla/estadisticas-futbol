@@ -123,6 +123,7 @@ Route::post('competencias/guardar', ['as' => 'competencias.store', 'uses' => 'Co
 Route::get('competencias/editar/{id}',  ['as' => 'competencias.edit','uses' => 'CompetenciaController@edit' ] );
 Route::post('competencias/actualizar/{id}',  ['as' => 'competencias.update','uses' => 'CompetenciaController@update' ] );
 Route::get('competencias/eliminar/{id}',  ['as' => 'competencias.delete','uses' => 'CompetenciaController@destroy' ] );
+Route::get('competencias/ver/{id}', ['as' => 'competencias.show', 'uses' => 'CompetenciaController@show' ] );
 
 Route::get('competencias/api-eliminar',  ['as' => 'competencias.api.eliminar','uses' => 'CompetenciaController@destroyApi' ] );
 Route::get('competencias/api-lista', array('as'=>'competencias.api.lista', 'uses'=>'CompetenciaController@listaApi'));
