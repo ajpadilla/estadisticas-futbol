@@ -1,20 +1,10 @@
 <h4>Información Básica</h4>
-@if (!empty($jugador))
 <div class="form-group" style="display: none;">
 	{{ Form::label('jugador_id','Id',['class'=>'col-sm-2 control-label']) }}
 	<div class="col-sm-6">
-		{{ Form::text('jugador_id',$jugador->id, ['class' => 'form-control','id' => 'jugador_id']) }}
+		{{ Form::text('jugador_id',$jugador->id, ['class' => 'form-control','id' => 'jugador_id_edit']) }}
 	</div>
 </div>
-@else 
-<div class="form-group" style="display: none;">
-	{{ Form::label('jugador_id','Id',['class'=>'col-sm-2 control-label']) }}
-	<div class="col-sm-6">
-		{{ Form::text('jugador_id',null, ['class' => 'form-control','id' => 'jugador_id']) }}
-	</div>
-</div>
-@endif
-
 
 <div class="form-group">
 	{{ Form::label('nombre','Nombre',['class'=>'col-sm-2 control-label']) }}
@@ -73,7 +63,7 @@
 <div class="form-group">
 	{{ Form::label('pais_id','País',['class'=>'col-sm-2 control-label']) }}
 	<div class="col-sm-6">
-		{{ Form::select('pais_id',array(),null,['class' => 'form-control chosen-select pais-jugador','data-placeholder' => 'Escoge País...','id'=>'pais_id_jugador_edit']) }}
+		{{ Form::select('pais_id',array(),$jugador->pais_id,['class' => 'form-control chosen-select pais-jugador','data-placeholder' => 'Escoge País...','id'=>'pais_id_jugador_edit']) }}
 	</div>
 </div>
 
