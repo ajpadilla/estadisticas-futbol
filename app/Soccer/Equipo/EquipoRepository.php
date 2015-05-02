@@ -6,6 +6,7 @@ use soccer\Jugador\JugadorRepository;
 use Carbon\Carbon;
 use Datatable;
 use Illuminate\Database\Eloquent\Collection;
+use Illuminate\Support\Facades\File;
 /**
 * 
 */
@@ -214,4 +215,20 @@ class EquipoRepository extends BaseRepository
 		return ($this->get($id)->jugadores()->whereNumero($numero)->whereFechaFin(null)->count() ? true : false);
 	}
 
+	public function deleteImageDirectory($id)
+	{
+		$equipo = $this->get($id);
+		if ($equipo->foto->url()) {
+			$ruta = explode("/", $equipo->foto->url());
+			$directorio = public_path().'/system/soccer/Equipo/Equipo/fotos/000/000/'.$ruta[8];
+			$equipo->foto->delete();
+			File::deleteDirectory($directorio, false);
+		}
+		if ($equipo->escudo->url()) {
+			$ruta = explode("/", $equipo->escudo->url());
+			$directorio = public_path().'/system/soccer/Equipo/Equipo/escudos/000/000/'.$ruta[8];
+			$equipo->escudo->delete();
+			File::deleteDirectory($directorio, false);
+		}
+	}
 }
