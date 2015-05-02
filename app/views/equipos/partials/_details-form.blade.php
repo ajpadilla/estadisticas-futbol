@@ -18,12 +18,12 @@
 		{{ Form::select('pais_id', array(), null, ['class' => 'form-control chosen-select','data-placeholder' => 'Selecciona el pais','id' =>'pais_equipo']) }}
 	</div>
 </div>
-<div class="form-group">
+{{--<div class="form-group">
 	{{ Form::label('jugadores','Jugadores',['class'=>'col-md-4 control-label']) }}
 	<div class="col-md-8">
 		{{ Form::select('jugadores[]', array(), null, ['class' => 'form-control chosen-select','data-placeholder' => 'Selecciona jugadores','multiple' => 'multiple','id' => 'jugadores']) }}
 	</div>
-</div>
+</div>--}}
 <div class="form-group">
 	{{ Form::label('ubicacion', 'Ubicación', ['class' => 'col-md-4 control-label']) }}	
 	<div class="col-md-8">{{ Form::textarea('ubicacion', null, ['class' => 'form-control', 'rows' => 16, 'cols' => 32,'id' => 'ubicacion']) }}</div>

@@ -22,12 +22,12 @@
 </div>
 <div class="form-group">
 	{{ Form::label('fecha_fundacion', 'Fecha de Fundación', ['class' => 'col-md-4 control-label']) }}	
-	<div class="col-md-8">{{ Form::text('fecha_fundacion', null, ['class' => 'form-control','id' => 'fecha_fundacion']) }}</div>
+	<div class="col-md-8">{{ Form::text('fecha_fundacion', null, ['class' => 'form-control datepicker','id' => 'fecha_fundacion']) }}</div>
 </div>
 <div class="form-group">
 	{{ Form::label('tipo','Tipo',['class'=>'col-md-4 control-label']) }}
 	<div class="col-md-8">
-		{{ Form::select('tipo', ['Selección', 'Club'], null, ['class' => 'form-control chosen-select','data-placeholder' => 'Selecciona el tipo','id'=> 'tipo_equipo']) }}
+		{{ Form::select('tipo', ['selección' => 'Selección','club' => 'Club'], null, ['class' => 'form-control chosen-select','data-placeholder' => 'Selecciona el tipo','id'=> 'tipo_equipo']) }}
 	</div>
 </div>
 
