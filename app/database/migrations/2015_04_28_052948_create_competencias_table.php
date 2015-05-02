@@ -19,11 +19,22 @@ class CreateCompetenciasTable extends Migration {
 			$table->string('imagen', 128)->nullable();
 			$table->date('desde');
 			$table->date('hasta');
+			$table->boolean('internacional');
+
 			$table->integer('tipo_competencia_id')->unsigned();
 			$table->foreign('tipo_competencia_id')
 				->references('id')->on('tipo_competencias')
 				->onUpdate('cascade')->onDelete('cascade');
-			$table->timestamps();
+		});
+
+		Schema::table('competencias', function(Blueprint $table)
+		{
+				$table->integer('pais_id')->unsigned()->nullable()->after('tipo_competencia_id');	
+				$table->foreign('pais_id')
+						->references('id')	
+						->on('paises')
+						->onDelete('no action')
+						->onUpdate('cascade');	
 		});
 	}
 
@@ -35,6 +46,11 @@ class CreateCompetenciasTable extends Migration {
 	 */
 	public function down()
 	{
+		Schema::table('competencias', function(Blueprint $table)
+		{
+			$table->dropForeign('competencias_pais_id_foreign');
+			$table->dropColumn('pais_id');
+		});
 		Schema::drop('competencias');
 	}
 
