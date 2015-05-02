@@ -33,6 +33,13 @@ class JugadorRepository extends BaseRepository
 	public function create($data = array())
 	{
 		$jugador = $this->model->create($data); 
+
+		if(!empty($data['posiciones_id']))
+			$jugador->posiciones()->attach($data['posiciones_id']);
+
+		if(!empty($data['posicion_id']))
+			$jugador->posiciones()->sync([$data['posicion_id'] => ['principal' => 1]], false);
+
 		return $jugador;
 	}
 
@@ -41,6 +48,12 @@ class JugadorRepository extends BaseRepository
 
 		$jugador = $this->get($data['jugador_id']);
 		$jugador->update($data);
+
+		if(!empty($data['posiciones_id']))
+			$jugador->posiciones()->sync($data['posiciones_id']);
+
+		if(!empty($data['posicion_id']))
+			$jugador->posiciones()->sync([$data['posicion_id'] => ['principal' => 1]], false);
 
 		return $jugador;
 	}
@@ -110,7 +123,8 @@ class JugadorRepository extends BaseRepository
 
 		$this->collection->addColumn('Posición', function($model)
 		{
-			 return $model->posicion->abreviacion;
+			if(count($model->getPosicionActual()) > 0)
+				return $model->getPosicionActual()->abreviacion;
 		});
 
 		$this->collection->addColumn('Edad', function($model)

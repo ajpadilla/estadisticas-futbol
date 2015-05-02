@@ -14,7 +14,7 @@ class Jugador extends Eloquent implements StaplerableInterface{
 	protected $table = 'jugadores';
 
 	protected $fillable = [ 'nombre', 'fecha_nacimiento','lugar_nacimiento','foto',
-							'altura','peso','apodo','posicion_id','pais_id','historia',
+							'altura','peso','apodo','pais_id','historia',
 							'info_url', 'facebook_url','twitter_url'
 						   ];
 
@@ -35,9 +35,11 @@ class Jugador extends Eloquent implements StaplerableInterface{
 		return $this->belongsTo('soccer\Pais\Pais');
 	}
 
-	public function posicion()
+	public function posiciones()
 	{
-		return $this->belongsTo('soccer\Posicion\Posicion');
+		return $this->belongsToMany('soccer\Posicion\Posicion', 'jugador_posicion')
+					->withPivot('principal')
+					->withTimestamps();
 	}
 
 	public function equipos()
@@ -93,5 +95,9 @@ class Jugador extends Eloquent implements StaplerableInterface{
 	{
 		return 0;
 	}
-	
+
+	public function getPosicionActual()
+	{
+		return $this->posiciones()->wherePrincipal(TRUE)->first();
+	}	
 }

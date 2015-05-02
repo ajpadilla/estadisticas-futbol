@@ -25,7 +25,6 @@ class JugadoresTableSeeder extends DatabaseSeeder{
             'foto' => 'public/system/soccer/Jugador/Jugador/fotos/000/000/001/original/102px-Sergio_Romero_2011.jpg',
             'altura' => $faker->randomFloat(2, 6, 100),
             'peso' => $faker->randomFloat(2, 6, 100),
-            'posicion_id' => 1,
             'pais_id' => 3   
         ]);
 
@@ -37,7 +36,6 @@ class JugadoresTableSeeder extends DatabaseSeeder{
             'altura' => $faker->randomFloat(2, 6, 100),
             'peso' => $faker->randomFloat(2, 6, 100),
             'peso' => $faker->randomFloat(2, 6, 100), 
-            'posicion_id' => 1,
             'pais_id' => 3      
         ]);
 
@@ -49,7 +47,6 @@ class JugadoresTableSeeder extends DatabaseSeeder{
             'altura' => $faker->randomFloat(2, 6, 100),
             'peso' => $faker->randomFloat(2, 6, 100),
             'peso' => $faker->randomFloat(2, 6, 100), 
-            'posicion_id' => 1,
             'pais_id' => 3    
         ]);
 
@@ -61,7 +58,6 @@ class JugadoresTableSeeder extends DatabaseSeeder{
             'altura' => $faker->randomFloat(2, 6, 100),
             'peso' => $faker->randomFloat(2, 6, 100),
             'peso' => $faker->randomFloat(2, 6, 100), 
-            'posicion_id' => 2,
             'pais_id' => 3   
         ]);
 
@@ -73,7 +69,6 @@ class JugadoresTableSeeder extends DatabaseSeeder{
             'altura' => $faker->randomFloat(2, 6, 100),
             'peso' => $faker->randomFloat(2, 6, 100),
             'peso' => $faker->randomFloat(2, 6, 100), 
-            'posicion_id' => 2,
             'pais_id' => 3       
         ]);
 
@@ -85,7 +80,6 @@ class JugadoresTableSeeder extends DatabaseSeeder{
             'altura' => $faker->randomFloat(2, 6, 100),
             'peso' => $faker->randomFloat(2, 6, 100),
             'peso' => $faker->randomFloat(2, 6, 100), 
-            'posicion_id' => 2,
             'pais_id' => 3     
         ]);
 
@@ -97,7 +91,6 @@ class JugadoresTableSeeder extends DatabaseSeeder{
             'altura' => $faker->randomFloat(2, 6, 100),
             'peso' => $faker->randomFloat(2, 6, 100),
             'peso' => $faker->randomFloat(2, 6, 100), 
-            'posicion_id' => 2,
             'pais_id' => 3    
         ]);
 
@@ -109,7 +102,6 @@ class JugadoresTableSeeder extends DatabaseSeeder{
             'altura' => $faker->randomFloat(2, 6, 100),
             'peso' => $faker->randomFloat(2, 6, 100),
             'peso' => $faker->randomFloat(2, 6, 100), 
-            'posicion_id' => 2,
             'pais_id' => 3   
         ]);
 
@@ -121,7 +113,6 @@ class JugadoresTableSeeder extends DatabaseSeeder{
             'altura' => $faker->randomFloat(2, 6, 100),
             'peso' => $faker->randomFloat(2, 6, 100),
             'peso' => $faker->randomFloat(2, 6, 100), 
-            'posicion_id' => 2,
             'pais_id' => 3  
         ]);
 
@@ -133,7 +124,6 @@ class JugadoresTableSeeder extends DatabaseSeeder{
             'altura' => $faker->randomFloat(2, 6, 100),
             'peso' => $faker->randomFloat(2, 6, 100),
             'peso' => $faker->randomFloat(2, 6, 100), 
-            'posicion_id' => 2,
             'pais_id' => 3   
         ]);
 	}

@@ -57,9 +57,16 @@
 </div>
 
 <div class="form-group">
-	{{ Form::label('posicion_id','Posición',['class'=>'col-sm-2 control-label']) }}
+	{{ Form::label('posiciones_id[]','Posiciones',['class'=>'col-sm-2 control-label']) }}
 	<div class="col-sm-6">
-		{{ Form::select('posicion_id',array(),null,['class' => 'form-control chosen-select posicion-jugador','data-placeholder' => 'Escoge Posición...','id'=> 'posicion_id_jugador']) }}
+		{{ Form::select('posiciones_id[]',array(),null,['class' => 'form-control chosen-select posiciones-jugador','data-placeholder' => 'Escoge Posición...','id'=> 'posiciones_id_jugador','multiple'=> true]) }}
+	</div>
+</div>
+
+<div class="form-group">
+	{{ Form::label('posicion_id','Posición Actual',['class'=>'col-sm-2 control-label']) }}
+	<div class="col-sm-6">
+		{{ Form::select('posicion_id',array(),null,['class' => 'form-control chosen-select','data-placeholder' => 'Escoge Posición...','id'=> 'posicion_id_jugador']) }}
 	</div>
 </div>
 

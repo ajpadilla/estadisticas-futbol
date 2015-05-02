@@ -73,9 +73,10 @@ var CustomApp = function () {
     }
 
     var updatePlayerForm = function() {
-        /*loadFieldSelect($('#lista-paises').attr('href'),'#pais_id_jugador');
-        loadFieldSelect($('#lista-posiciones').attr('href'),'#posicion_id');
-        loadFieldSelect($('#lista-equipos').attr('href'),'#equipo_id_jugador');*/
+        /*$('select#posiciones_id_jugador').html('');
+        $('select#posiciones_id_jugador').append('<option value=\"\"></option>');
+        $('select#posicion_id_jugador').html('');
+        $('select#posicion_id_jugador').append('<option value=\"\"></option>');*/
         $('.chosen-select').trigger("chosen:updated");
     }
 
@@ -208,7 +209,7 @@ var CustomApp = function () {
                                             processData: false,
                                             dataType: "JSON",
                                             success: function(responseServer) {
-                                                //console.log(responseServer);
+                                                console.log(responseServer);
                                                 if(responseServer.success == true) 
                                                 {
                                                     // Muestro otro dialog con información de éxito
@@ -304,7 +305,7 @@ var CustomApp = function () {
             dataType: "JSON",
             success: function(response) {
                 if (response.success) {
-                    //console.log(response);
+                    console.log(response);
                     $('#jugador_id').val(response.jugador.id);
                     $('#nombre_jugador').val(response.jugador.nombre);
                     $('#fecha_nacimiento').val(response.fechaNacimiento);
@@ -312,18 +313,16 @@ var CustomApp = function () {
                     $('#altura').val(response.jugador.altura);
                     $('#peso_jugador').val(response.jugador.peso);
                     $('#apodo_jugador').val(response.jugador.apodo);
-                    $('#pais_id_jugador').val(response.jugador.pais_id);
-                    $('#pais_id_jugador').val(response.pais.id);
-                    $('#posicion_id').val(response.jugador.posicion_id);
-                    $('#posicion_id').val(response.posicion.id);
+                    //$('#pais_id_jugador').val(response.jugador.pais_id);
+                    $('.pais-jugador').val(response.pais.id);
+                    /*$('#posicion_id').val(response.jugador.posicion_id);
+                    $('#posicion_id').val(response.posicion.id);*/
                     $('#info_url_jugador').val(response.jugador.info_url);
                     $('#historia_jugador').val(response.jugador.historia);
                     $('#facebook_url_jugador').val(response.jugador.facebook_url);
                     $('#twitter_url_jugador').val(response.jugador.twitter_url);
                     $('#posicion_id').trigger("chosen:updated");
-                    $('#pais_id_jugador').trigger("chosen:updated");
-                    $('#pais_id_jugador').trigger("liszt:updated");
-                    $('.chosen-select').trigger("chosen:updated");
+                    $('.pais-jugador').trigger("chosen:updated");
                 }
             }
         });
@@ -852,7 +851,6 @@ var CustomApp = function () {
                     $('#twitter_url_equipo').val(response.equipo.twitter_url);
                     $('#pais_equipo').val(response.equipo.pais_id);
                     $('#pais_equipo').trigger("liszt:updated");
-                    $('.chosen-select').trigger("chosen:updated");
                     validateSelectPlayers(response.equipo.tipo);
                 }
             }
@@ -1046,12 +1044,10 @@ var CustomApp = function () {
                     $('#pais_equipo').val(response.equipo.pais_id);
                     $('#jugadores').val(response.jugadores);
                     $('#pais_equipo').trigger("chosen:updated");
-                    $('#jugadores').trigger("liszt:updated");
-                    $('.chosen-select').trigger("chosen:updated");
+                    $('#jugadores').trigger("chosen:updated");
                 }
             }
         });
-        $('.chosen-select').trigger("chosen:updated");
     }
 
     
@@ -3197,27 +3193,69 @@ var handleBootboxAddEquipoToJugador = function () {
             dataType: "JSON",
             success: function(response) {
                 console.log(response);
-                if (response.success) {
-                    $('#fecha_nacimiento').val(response.jugador.fecha_nacimiento);
-                    $('#posicion_id_jugador').val(response.jugador.posicion_id);
-                    $('#pais_id_jugador').val(response.pais.id);
-                    $('.chosen-select').trigger("chosen:updated");
+                if (response.success) 
+                {
+                    $('select#posicion_id_jugador_edit').html('');
+                    $('select#posicion_id_jugador_edit').append('<option value=\"\"></option>');
+                    $('#fecha_nacimiento_edit').val(response.jugador.fecha_nacimiento);
+                    $('select#posiciones_id_jugador_edit').val(response.posiciones);
+                    $.each(response.posicionesSelect,function (k,v){
+                        $('select#posicion_id_jugador_edit').append('<option value=\"'+v.id+'\">'+v.nombre+'</option>');
+                        $('select#posicion_id_jugador_edit').trigger("chosen:updated");
+                        /*console.log(v.id);
+                        console.log(v.nombre)*/
+                    });
+                    $('select#posicion_id_jugador_edit').val(response.posicion.id);
+                    $('#pais_id_jugador_edit').val(response.pais.id);
+                    $('select#pais_id_jugador_edit').trigger("chosen:updated");
+                    $('select#posicion_id_jugador_edit').trigger("chosen:updated");
                 }
             }
         });
     }
 
+    var loadPositionSelectPlayerCreate = function() 
+    {
+        $('.posiciones-jugador').change(function() {
+            $('select#posicion_id_jugador').html('');
+            $('select#posicion_id_jugador').append('<option value=\"\"></option>');
+            $("select#posiciones_id_jugador option:selected" ).each(function() {
+                /*console.log($(this).text());
+                console.log($(this).val());*/
+                $('select#posicion_id_jugador').append('<option value=\"'+$(this).val()+'\">'+$(this).text()+'</option>');
+                $('select#posicion_id_jugador').trigger("chosen:updated");
+            });
+        });
+     }
+    
+     var loadPositionSelectPlayerEdit = function() 
+    {
+        $('.posiciones-jugador').change(function() {
+            $('select#posicion_id_jugador_edit').html('');
+            $('select#posicion_id_jugador_edit').append('<option value=\"\"></option>');
+            $("select#posiciones_id_jugador_edit option:selected" ).each(function() {
+                /*console.log($(this).text());
+                console.log($(this).val());*/
+                $('select#posicion_id_jugador_edit').append('<option value=\"'+$(this).val()+'\">'+$(this).text()+'</option>');
+                $('select#posicion_id_jugador_edit').trigger("chosen:updated");
+            });
+        });
+     }
+    
+
+
 
     return {
         init: function() {
             initChosen();
-            loadFieldSelect($('#lista-posiciones').attr('href'),'.posicion-jugador');
+            loadFieldSelect($('#lista-posiciones').attr('href'),'.posiciones-jugador');
             loadFieldSelect($('#lista-paises').attr('href'),'.pais-jugador');
             loadFieldSelect($('#lista-equipos').attr('href'),'#equipo_id');
             loadFieldSelect($('#lista-equipos').attr('href'),'#equipo_id_jugador');
             loadFieldSelect($('#lista-paises').attr('href'),'#pais_equipo');
             loadFieldSelect($('#lista-jugadores').attr('href'),'#jugadores');
             loadFieldSelect($('#lista-tipos-competencias').attr('href'),'#tipos-competencias');
+
             //initDataPicker();
             
             handleBootstrapFileInput();
@@ -3241,13 +3279,15 @@ var handleBootboxAddEquipoToJugador = function () {
             loadTypeOfCompetition();
             loadDataCompetition();
 
+
+            loadSelectForPlayer($('#jugador_id').val());
+
             loadDataForEditTeam($('#equipo_id').val());
             loadSelectForTeam();
-            loadSelectForPlayer($('#jugador_id').val());
             validateSelectPlayers($("#tipo_equipo option:selected" ).text());
+            loadPositionSelectPlayerCreate();
+            loadPositionSelectPlayerEdit();
 
-
-            //console.log($('#verificar-jugador-equipo').attr('href'));
         }
     }
 }();

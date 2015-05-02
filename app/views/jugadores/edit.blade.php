@@ -9,7 +9,7 @@
 				<div class="box-body big">
 					<div class="row">
 						<div class="col-md-12">
-								@include('jugadores.partials._basic-form')
+								@include('jugadores.partials._basic-form-edit')
 						</div>
 					</div>
 				</div>
@@ -23,7 +23,7 @@
 				<div class="box-body big">
 					<div class="row">
 						<div class="col-md-12">
-								@include('jugadores.partials._details-form')
+								@include('jugadores.partials._details-form-edit')
 						</div>
 					</div>
 				</div>
