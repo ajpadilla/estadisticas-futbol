@@ -170,6 +170,7 @@ class EquipoController extends \BaseController {
 		if(Request::ajax()){
 
 		}
+			$this->repository->deleteImageDirectory(Input::get('idTeam'));
 			$equipo = $this->repository->delete(Input::get('idTeam'));
 			$this->setSuccess(true);
 			$this->addToResponseArray('equipo', $equipo);

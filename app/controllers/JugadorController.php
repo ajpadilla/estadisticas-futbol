@@ -177,13 +177,7 @@ class JugadorController extends \BaseController {
 	public function destroyApi()
 	{
 		if(Request::ajax())
-			$jugador = $this->repository->get(Input::get('idPlayer'));
-			if ($jugador->foto->url()) {
-				$ruta = explode("/", $jugador->foto->url());
-				$directorio = public_path().'/system/soccer/Jugador/Jugador/fotos/000/000/'.$ruta[8];
-				$jugador->foto->delete();
-				File::deleteDirectory($directorio, false);
-			}
+			$this->repository->deleteImageDirectory(Input::get('idPlayer'));
 			$this->setSuccess($this->repository->delete(Input::get('idPlayer')));
 		return $this->getResponseArrayJson();
 	}
