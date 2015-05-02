@@ -2,6 +2,7 @@
 
 use soccer\Competencia\CompetenciaRepository;
 use soccer\Forms\RegistrarCompetencia;
+use Laracasts\Validation\FormValidationException;
 
 class CompetenciaController extends \BaseController {
 
@@ -55,6 +56,7 @@ class CompetenciaController extends \BaseController {
 				$competencia = $this->repository->create($input);
 				$this->setSuccess(true);
 				$this->addToResponseArray('competencia', $competencia->toArray());
+				$this->addToResponseArray('data', $input);
 				return $this->getResponseArrayJson();				
 			}
 			catch (FormValidationException $e)
