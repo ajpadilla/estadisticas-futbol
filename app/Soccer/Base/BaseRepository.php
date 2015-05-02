@@ -120,4 +120,5 @@ class BaseRepository
 
 	public function setDefaultActionColumn(){}
 	public function setBodyTableSettings(){}
+	public function deleteImageDirectory($id){}
 }
