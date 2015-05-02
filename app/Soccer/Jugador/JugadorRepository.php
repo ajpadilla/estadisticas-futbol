@@ -6,6 +6,7 @@ use soccer\Base\BaseRepository;
 use soccer\Equipo\EquipoRepository;
 use Carbon\Carbon;
 use Datatable;
+use Illuminate\Support\Facades\File;
 /**
 * 
 */
@@ -197,4 +198,14 @@ class JugadorRepository extends BaseRepository
 		});
 		return $equipoRepository->getTableCollectionForRender();
 	}		
+
+	public function deleteImageDirectory($id){
+		$jugador = $this->get($id);
+		if ($jugador->foto->url()) {
+			$ruta = explode("/", $jugador->foto->url());
+			$directorio = public_path().'/system/soccer/Jugador/Jugador/fotos/000/000/'.$ruta[8];
+			$jugador->foto->delete();
+			File::deleteDirectory($directorio, false);
+		}
+	}
 }
