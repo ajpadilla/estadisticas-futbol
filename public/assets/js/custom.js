@@ -73,6 +73,7 @@ var CustomApp = function () {
     }
 
     var updatePlayerForm = function() {
+        loadFieldSelect($('#lista-paises').attr('href'),'.pais-jugador');
         $('.chosen-select').trigger("chosen:updated");
     }
 
@@ -466,7 +467,10 @@ var CustomApp = function () {
                                                         buttons: {
                                                             success: {
                                                                 label: "Success!",
-                                                                className: "btn-success"
+                                                                className: "btn-success",
+                                                                callback: function () {
+                                                                    reloadDatatable();
+                                                                }
                                                             }
                                                         }
                                                     });
@@ -924,7 +928,7 @@ var CustomApp = function () {
 
                                     $("#team-form").submit(function(e){
                                         var formData = new FormData(this);
-                                        console.log($(this).serialize());
+                                        //console.log($(this).serialize());
                                         $.ajax({
                                             type: 'POST',
                                             url: $('#editar-equipo').attr('href'), 
@@ -943,7 +947,10 @@ var CustomApp = function () {
                                                         buttons: {
                                                             success: {
                                                                 label: "Success!",
-                                                                className: "btn-success"
+                                                                className: "btn-success",
+                                                                callback: function () {
+                                                                    reloadDatatable();
+                                                                }
                                                             }
                                                         }
                                                     });
@@ -1196,7 +1203,10 @@ var CustomApp = function () {
                                                         buttons: {
                                                             success: {
                                                                 label: "Success!",
-                                                                className: "btn-success"
+                                                                className: "btn-success",
+                                                                callback: function () {
+                                                                    reloadDatatable();
+                                                                }
                                                             }
                                                         }
                                                     });
@@ -1435,7 +1445,10 @@ var CustomApp = function () {
                                                         buttons: {
                                                             success: {
                                                                 label: "Success!",
-                                                                className: "btn-success"
+                                                                className: "btn-success",
+                                                                callback: function () {
+                                                                    reloadDatatable();
+                                                                }
                                                             }
                                                         }
                                                     });
@@ -3091,6 +3104,29 @@ var handleBootboxAddEquipoToJugador = function () {
         });
     }
 
+    var loadFieldSelectPaises = function(url,idField) {
+        $.ajax({
+            type: 'GET',
+            url: url,
+            dataType:'json',
+            success: function(response) {
+                console.log(response.data);
+                if (response.success == true) {
+                    jQuery(idField).html('');
+                    jQuery(idField).append('<option value=\"\"></option>');
+                    $.each(response.data,function (k,v){
+                        jQuery(idField).append('<option value=\"'+k+'\">'+v+'</option>');
+                        $(idField).trigger("chosen:updated");
+                        $(idField).trigger("chosen:updated");
+                    });
+                }else{
+                    jQuery(idField).html('');
+                    jQuery(idField).append('<option value=\"\"></option>');
+                }
+            }
+        });
+    }
+
     /*
     ********************* PLUGINS ***********************************
     */
@@ -3232,11 +3268,17 @@ var handleBootboxAddEquipoToJugador = function () {
     return {
         init: function() {
             initChosen();
-            loadFieldSelect($('#lista-paises').attr('href'),'#pais_id_equipo_edit');
-            //$('#pais_id_equipo_edit').trigger("chosen:updated");
+            if($('#equipo_id_edit').val())
+                loadFieldSelect($('#lista-paises').attr('href'),'#pais_id_equipo_edit');
+                loadDataForBladeEditTeam($('#equipo_id_edit').val());
+
+
+            if($('#jugador_id_edit').val())
+                loadFieldSelect($('#lista-paises').attr('href'),'.pais-jugador');
+                loadSelectForPlayer($('#jugador_id_edit').val());
+
 
             loadFieldSelect($('#lista-posiciones').attr('href'),'.posiciones-jugador');
-            loadFieldSelect($('#lista-paises').attr('href'),'.pais-jugador');
 
             loadFieldSelect($('#lista-equipos').attr('href'),'#equipo_id');
             loadFieldSelect($('#lista-equipos').attr('href'),'#equipo_id_jugador');
@@ -3267,11 +3309,6 @@ var handleBootboxAddEquipoToJugador = function () {
             loadDataPosition();
             loadTypeOfCompetition();
             loadDataCompetition();
-
-
-            loadSelectForPlayer($('#jugador_id').val());
-
-            loadDataForBladeEditTeam($('#equipo_id_edit').val());
 
             loadPositionSelectPlayerCreate();
             loadPositionSelectPlayerEdit();
