@@ -36,26 +36,14 @@ class EquipoRepository extends BaseRepository
 
 	public function create($data = array())
 	{
-		$fecha = $data['fecha_fundacion'];
-		$data['fecha_fundacion'] = Carbon::createFromFormat('d-m-Y', $fecha)->format('Y-m-d');
 		$equipo = $this->model->create($data); 
-
-		if(!empty($data['jugadores']))
-			$equipo->jugadores()->attach($data['jugadores']);
-
 		return $equipo;
 	}
 
 	public function update($data = array())
 	{
-		$fecha = $data['fecha_fundacion'];
-		$data['fecha_fundacion'] = Carbon::createFromFormat('d-m-Y', $fecha)->format('Y-m-d');
 		$equipo = $this->get($data['equipo_id']);
 		$equipo->update($data);
-
-		if(!empty($data['jugadores']))
-			$equipo->jugadores()->sync($data['jugadores']);
-
 		return $equipo;
 	}
 
