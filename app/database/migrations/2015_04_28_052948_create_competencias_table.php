@@ -25,6 +25,7 @@ class CreateCompetenciasTable extends Migration {
 			$table->foreign('tipo_competencia_id')
 				->references('id')->on('tipo_competencias')
 				->onUpdate('cascade')->onDelete('cascade');
+			$table->timestamps();
 		});
 
 		Schema::table('competencias', function(Blueprint $table)
