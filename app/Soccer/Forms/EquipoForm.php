@@ -9,7 +9,7 @@ class EquipoForm extends FormValidator{
           'bandera' => 'image',
           'escudo' => 'image',
           'tipo' => 'required',
-          'fecha_fundacion' => 'required|date_format:d-m-Y', 
+          'fecha_fundacion' => 'date_format:Y-m-d', 
           'apodo' => 'min:2|max:128',
           'ubicacion' => 'min:2|max:512',
           'historia' => 'min:2|max:512',
