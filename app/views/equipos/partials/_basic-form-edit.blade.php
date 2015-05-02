@@ -19,7 +19,7 @@
 <div class="form-group">
 	{{ Form::label('tipo','Tipo',['class'=>'col-md-4 control-label']) }}
 	<div class="col-md-8">
-		{{ Form::select('tipo', ['selección' => 'Selección','club' => 'Club'], null, ['class' => 'form-control chosen-select','data-placeholder' => 'Selecciona el tipo','id'=> 'tipo_equipo_edit']) }}
+		{{ Form::select('tipo', ['selección' => 'Selección','club' => 'Club'], $equipo->tipo, ['class' => 'form-control chosen-select','data-placeholder' => 'Selecciona el tipo','id'=> 'tipo_equipo_edit']) }}
 	</div>
 </div>
 
