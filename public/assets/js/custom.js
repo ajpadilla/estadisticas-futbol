@@ -2953,6 +2953,7 @@ var handleBootboxAddEquipoToJugador = function () {
                                                     //Reinicio el formulario
                                                     $("#competition-form")[0].reset();
                                                     updateCompetitionForm();
+                                                    enableCountryToCompetition();
                                                 }else{
                                                     console.log(responseServer);
                                                      bootbox.dialog({
@@ -3242,6 +3243,21 @@ var handleBootboxAddEquipoToJugador = function () {
      }
     
 
+     var enableCountryToCompetition = function () {
+        $("select#pais-competencias").prop('disabled', false);
+        $('select#pais-competencias').trigger("chosen:updated");
+        $('input[name="internacional"]').click(function() {  
+            if($('input[name="internacional"]').is(':checked')) { 
+                console.log('entro');
+                $("select#pais-competencias").prop('disabled', true);  
+                $('select#pais-competencias').trigger("chosen:updated"); 
+            } else {  
+                console.log('salio');
+                $("select#pais-competencias").prop('disabled', false);
+                $('select#pais-competencias').trigger("chosen:updated");   
+            }  
+        }); 
+     }
 
     loadDataForBladeEditTeam = function(idTeam) {
          $.ajax({
@@ -3286,7 +3302,7 @@ var handleBootboxAddEquipoToJugador = function () {
             loadFieldSelect($('#lista-paises').attr('href'),'#pais_equipo');
             loadFieldSelect($('#lista-jugadores').attr('href'),'#jugadores');
             loadFieldSelect($('#lista-tipos-competencias').attr('href'),'#tipos-competencias');
-
+            loadFieldSelect($('#lista-paises').attr('href'),'#pais-competencias');
             //initDataPicker();
             
             handleBootstrapFileInput();
@@ -3312,6 +3328,8 @@ var handleBootboxAddEquipoToJugador = function () {
 
             loadPositionSelectPlayerCreate();
             loadPositionSelectPlayerEdit();
+
+            enableCountryToCompetition();
 
         }
     }
