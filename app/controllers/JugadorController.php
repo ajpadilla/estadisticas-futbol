@@ -197,7 +197,7 @@ class JugadorController extends \BaseController {
 				$this->setSuccess(true);
 				$this->addToResponseArray('jugador', $jugador->toArray());
 				$this->addToResponseArray('urlImg',  $jugador->foto->url('thumb'));
-				$this->addToResponseArray('posicion',  $jugador->posicion->toArray());
+				//$this->addToResponseArray('posicion',  $jugador->posicion->toArray());
 				$this->addToResponseArray('pais',   $jugador->pais->toArray());
 				return $this->getResponseArrayJson();
 			}else{

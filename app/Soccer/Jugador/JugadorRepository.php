@@ -49,6 +49,12 @@ class JugadorRepository extends BaseRepository
 		$jugador = $this->get($data['jugador_id']);
 		$jugador->update($data);
 
+		if(!empty($data['posiciones_id']))
+			$jugador->posiciones()->sync($data['posiciones_id']);
+
+		if(!empty($data['posicion_id']))
+			$jugador->posiciones()->sync([$data['posicion_id'] => ['principal' => 1]], false);
+
 		return $jugador;
 	}
 
