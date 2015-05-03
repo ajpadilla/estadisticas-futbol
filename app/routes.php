@@ -111,7 +111,7 @@ Route::get('tipos-competencia/api-eliminar',  ['as' => 'tipos-competencia.api.el
 Route::get('tipos-competencia/api-lista', array('as'=>'tipos-competencia.api.lista', 'uses'=>'TipoCompetenciaController@listaApi'));
 Route::post('tipos-competencia/api-actualizar',  ['as' => 'tipos-competencia.api.update','uses' => 'TipoCompetenciaController@updateApi' ] );
 //Route::get('tipos-competencia/api-jugadores/{id}', array('as'=>'tipos-competencia.api.jugadores', 'uses'=>'TipoCompetenciaController@jugadoresApi'));
-Route::get('tipos-competencia/api-ver',  ['as' => 'tipos-competencia.data','uses' => 'TipoCompetenciaController@showApi' ] );
+Route::get('tipos-competencia/api-ver',  ['as' => 'tipos-competencia.api.show','uses' => 'TipoCompetenciaController@showApi' ] );
 Route::get('tipos-competencia/seleccionar-lista',  ['as' => 'tipos-competencia.seleccionar.lista','uses' => 'TipoCompetenciaController@getAllValue' ] );
 /*
 ********************************* RUTAS PARA COMPETENCIAS ********************************

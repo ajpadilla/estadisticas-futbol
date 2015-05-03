@@ -19,9 +19,15 @@
 				<div class="tabbable header-tabs user-profile">
 					<ul class="nav nav-tabs">
 						<li>
-							<a href="#pro_players" data-toggle="tab">
+							<a href="#pro_teams" data-toggle="tab">
 								<i class="fa fa-question"></i> 
-								<span class="hidden-inline-mobile"> Jugadores</span>
+								<span class="hidden-inline-mobile"> 
+									@if ($competencia->tipoCompetencia->esTorneo) 
+										Grupos
+									@else
+										Equipos
+									@endif
+								</span>
 							</a>
 						</li>
 						<li>
@@ -57,7 +63,7 @@
 					   <!-- /EDIT ACCOUNT -->
 					   
 					   <!-- EQUIPOS TAB -->
-					   <div class="tab-pane fade" id="pro_players">						  
+					   <div class="tab-pane fade" id="pro_teams">						  
 					   		@include('competencias.equipos')
 					   </div>
 					   <!-- /JUGADORES -->

@@ -107,7 +107,7 @@
 		<!--Route Tipo Compentencia-->
 		<a id="agregar-tipo-competencia" href="{{ URL::route('tipos-competencia.store') }}"></a>
 		<a id="editar-tipo-competencia" href="{{ URL::route('tipos-competencia.api.update') }}"></a>
-		<a id="ver-tipo-competencia" href="{{ URL::route('tipos-competencia.data') }}"></a>
+		<a id="ver-tipo-competencia" href="{{ URL::route('tipos-competencia.api.show') }}"></a>
 		<a id="eliminar-tipo-competencia" href="{{ URL::route('tipos-competencia.api.eliminar') }}"></a>
 		<a id="lista-tipos-competencias" href="{{ URL::route('tipos-competencia.seleccionar.lista') }}"></a>
 		<!--Route Competencía-->

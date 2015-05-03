@@ -78,7 +78,7 @@ class CompetenciaController extends \BaseController {
 	public function show($id)
 	{
 		$competencia = $this->repository->get($id);
-		View::make('competencias.show', compact('competencia'));
+		return View::make('competencias.show', compact('competencia'));
 	}
 
 	/**
