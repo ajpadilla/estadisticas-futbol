@@ -19,7 +19,7 @@ class CreateEquiposTable extends Migration {
 			$table->string('escudo', 128)->nullable();
 			$table->string('foto', 128)->nullable();
 			$table->enum('tipo', array('club', 'selección'));
-			$table->date('fecha_fundacion');
+			$table->date('fecha_fundacion')->nullable();
 			$table->string('apodo', 128)->nullable();			
 			$table->text('ubicacion')->nullable();
 			$table->text('historia')->nullable();

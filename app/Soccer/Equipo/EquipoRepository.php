@@ -6,6 +6,7 @@ use soccer\Jugador\JugadorRepository;
 use Carbon\Carbon;
 use Datatable;
 use Illuminate\Database\Eloquent\Collection;
+use Illuminate\Support\Facades\File;
 /**
 * 
 */
@@ -36,26 +37,14 @@ class EquipoRepository extends BaseRepository
 
 	public function create($data = array())
 	{
-		$fecha = $data['fecha_fundacion'];
-		$data['fecha_fundacion'] = Carbon::createFromFormat('d-m-Y', $fecha)->format('Y-m-d');
 		$equipo = $this->model->create($data); 
-
-		if(!empty($data['jugadores']))
-			$equipo->jugadores()->attach($data['jugadores']);
-
 		return $equipo;
 	}
 
 	public function update($data = array())
 	{
-		$fecha = $data['fecha_fundacion'];
-		$data['fecha_fundacion'] = Carbon::createFromFormat('d-m-Y', $fecha)->format('Y-m-d');
 		$equipo = $this->get($data['equipo_id']);
 		$equipo->update($data);
-
-		if(!empty($data['jugadores']))
-			$equipo->jugadores()->sync($data['jugadores']);
-
 		return $equipo;
 	}
 
@@ -226,4 +215,20 @@ class EquipoRepository extends BaseRepository
 		return ($this->get($id)->jugadores()->whereNumero($numero)->whereFechaFin(null)->count() ? true : false);
 	}
 
+	public function deleteImageDirectory($id)
+	{
+		$equipo = $this->get($id);
+		if ($equipo->foto->url()) {
+			$ruta = explode("/", $equipo->foto->url());
+			$directorio = public_path().'/system/soccer/Equipo/Equipo/fotos/000/000/'.$ruta[8];
+			$equipo->foto->delete();
+			File::deleteDirectory($directorio, false);
+		}
+		if ($equipo->escudo->url()) {
+			$ruta = explode("/", $equipo->escudo->url());
+			$directorio = public_path().'/system/soccer/Equipo/Equipo/escudos/000/000/'.$ruta[8];
+			$equipo->escudo->delete();
+			File::deleteDirectory($directorio, false);
+		}
+	}
 }

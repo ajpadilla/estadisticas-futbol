@@ -73,10 +73,7 @@ var CustomApp = function () {
     }
 
     var updatePlayerForm = function() {
-        /*$('select#posiciones_id_jugador').html('');
-        $('select#posiciones_id_jugador').append('<option value=\"\"></option>');
-        $('select#posicion_id_jugador').html('');
-        $('select#posicion_id_jugador').append('<option value=\"\"></option>');*/
+        loadFieldSelect($('#lista-paises').attr('href'),'.pais-jugador');
         $('.chosen-select').trigger("chosen:updated");
     }
 
@@ -470,7 +467,10 @@ var CustomApp = function () {
                                                         buttons: {
                                                             success: {
                                                                 label: "Success!",
-                                                                className: "btn-success"
+                                                                className: "btn-success",
+                                                                callback: function () {
+                                                                    reloadDatatable();
+                                                                }
                                                             }
                                                         }
                                                     });
@@ -630,8 +630,7 @@ var CustomApp = function () {
 
     updateTeamForm = function() {
         loadFieldSelect($('#lista-paises').attr('href'),'#pais_equipo');
-        loadFieldSelect($('#lista-jugadores').attr('href'),'#jugadores');
-        $('.chosen-select').trigger("chosen:updated");
+       // $('.chosen-select').trigger("chosen:updated");
     }
 
       var handleBootboxNewTeam = function () {
@@ -645,21 +644,17 @@ var CustomApp = function () {
                     required:true,
                 },
                 apodo:{
-                    required:true,
                 },
                 fecha_fundacion:{
-                    required:true,
                     customDateValidator: true
                 },
                 tipo:{
                     required:true,
                 },
                 historia:{
-                    required:true,
                     rangelength: [2,512]
                 },
                 ubicacion:{
-                    required:true,
                     rangelength: [2,512]
                 }
             },
@@ -732,7 +727,7 @@ var CustomApp = function () {
                                             processData: false,
                                             dataType: "JSON",
                                             success: function(responseServer) {
-                                                //console.log(responseServer);
+                                                console.log(responseServer);
                                                 if(responseServer.success == true) 
                                                 {
                                                     // Muestro otro dialog con información de éxito
@@ -834,28 +829,22 @@ var CustomApp = function () {
                     //console.log(response);
                     $('#equipo_id').val(response.equipo.id);
                     $('#nombre_equipo').val(response.equipo.nombre);
-                    if(response.equipo.fecha_fundacion != "0000-00-00") {
-                        $('#fecha_fundacion').val($.datepicker.formatDate('dd-mm-yy', new Date(
-                        response.equipo.fecha_fundacion)));
-                    }else{
-                        $('#fecha_fundacion').val();
-                    }
+                    $('#fecha_fundacion').val(response.equipo.fecha_fundacion)
                     $('#apodo').val(response.equipo.apodo);
                     $("select#tipo_equipo option").each(function() { this.selected = (this.text == response.equipo.tipo); });
                     $('#info_url').val(response.equipo.info_url);
                     $('#historia').val(response.equipo.historia);
                     $('#ubicacion').val(response.equipo.ubicacion);
-                    $('#jugadores').val(response.jugadores);
-                    $('#jugadores').trigger("chosen:updated");
                     $('#facebook_url_equipo').val(response.equipo.facebook_url);
                     $('#twitter_url_equipo').val(response.equipo.twitter_url);
-                    $('#pais_equipo').val(response.equipo.pais_id);
-                    $('#pais_equipo').trigger("liszt:updated");
-                    validateSelectPlayers(response.equipo.tipo);
+                    $('select#pais_equipo').val(response.equipo.pais_id);
+                    $('select#pais_equipo').trigger("chosen:updated");
+                    $('.chosen-select').trigger("chosen:updated");
                 }
             }
         });
     }
+
 
      // Metodo para editar datos del Equipo
     var editTeam = function(idTeam) {
@@ -869,21 +858,17 @@ var CustomApp = function () {
                     required:true,
                 },
                 apodo:{
-                    required:true,
                 },
                 fecha_fundacion:{
-                    required:true,
                     customDateValidator: true
                 },
                 tipo:{
                     required:true,
                 },
                 historia:{
-                    required:true,
                     rangelength: [2,512]
                 },
                 ubicacion:{
-                    required:true,
                     rangelength: [2,512]
                 }
             },
@@ -943,7 +928,7 @@ var CustomApp = function () {
 
                                     $("#team-form").submit(function(e){
                                         var formData = new FormData(this);
-
+                                        //console.log($(this).serialize());
                                         $.ajax({
                                             type: 'POST',
                                             url: $('#editar-equipo').attr('href'), 
@@ -952,7 +937,7 @@ var CustomApp = function () {
                                             processData: false,
                                             dataType: "JSON",
                                             success: function(responseServer) {
-                                                //console.log(responseServer);
+                                                console.log(responseServer);
                                                 if(responseServer.success == true) 
                                                 {
                                                     // Muestro otro dialog con información de éxito
@@ -962,7 +947,10 @@ var CustomApp = function () {
                                                         buttons: {
                                                             success: {
                                                                 label: "Success!",
-                                                                className: "btn-success"
+                                                                className: "btn-success",
+                                                                callback: function () {
+                                                                    reloadDatatable();
+                                                                }
                                                             }
                                                         }
                                                     });
@@ -1030,24 +1018,6 @@ var CustomApp = function () {
                 $('#team-form-div').hide().appendTo('#new-team-form');
             })
             .modal('show');
-    }
-
-    var loadSelectForTeam = function() {
-        $.ajax({
-            type: 'GET',
-            url: $('#ver-equipo').attr('href'),    
-            data: {'equipoId': $('#equipo_id').val()},
-            dataType: "JSON",
-            success: function(response) {
-                if (response.success == true) {
-                    //console.log(response);
-                    $('#pais_equipo').val(response.equipo.pais_id);
-                    $('#jugadores').val(response.jugadores);
-                    $('#pais_equipo').trigger("chosen:updated");
-                    $('#jugadores').trigger("chosen:updated");
-                }
-            }
-        });
     }
 
     
@@ -1233,7 +1203,10 @@ var CustomApp = function () {
                                                         buttons: {
                                                             success: {
                                                                 label: "Success!",
-                                                                className: "btn-success"
+                                                                className: "btn-success",
+                                                                callback: function () {
+                                                                    reloadDatatable();
+                                                                }
                                                             }
                                                         }
                                                     });
@@ -1472,7 +1445,10 @@ var CustomApp = function () {
                                                         buttons: {
                                                             success: {
                                                                 label: "Success!",
-                                                                className: "btn-success"
+                                                                className: "btn-success",
+                                                                callback: function () {
+                                                                    reloadDatatable();
+                                                                }
                                                             }
                                                         }
                                                     });
@@ -2977,6 +2953,7 @@ var handleBootboxAddEquipoToJugador = function () {
                                                     //Reinicio el formulario
                                                     $("#competition-form")[0].reset();
                                                     updateCompetitionForm();
+                                                    enableCountryToCompetition();
                                                 }else{
                                                     console.log(responseServer);
                                                      bootbox.dialog({
@@ -3118,7 +3095,30 @@ var handleBootboxAddEquipoToJugador = function () {
                     $.each(response.data,function (k,v){
                         jQuery(idField).append('<option value=\"'+k+'\">'+v+'</option>');
                         $(idField).trigger("chosen:updated");
-                        $('.chosen-select').trigger("chosen:updated");
+                        $(idField).trigger("chosen:updated");
+                    });
+                }else{
+                    jQuery(idField).html('');
+                    jQuery(idField).append('<option value=\"\"></option>');
+                }
+            }
+        });
+    }
+
+    var loadFieldSelectPaises = function(url,idField) {
+        $.ajax({
+            type: 'GET',
+            url: url,
+            dataType:'json',
+            success: function(response) {
+                console.log(response.data);
+                if (response.success == true) {
+                    jQuery(idField).html('');
+                    jQuery(idField).append('<option value=\"\"></option>');
+                    $.each(response.data,function (k,v){
+                        jQuery(idField).append('<option value=\"'+k+'\">'+v+'</option>');
+                        $(idField).trigger("chosen:updated");
+                        $(idField).trigger("chosen:updated");
                     });
                 }else{
                     jQuery(idField).html('');
@@ -3243,19 +3243,66 @@ var handleBootboxAddEquipoToJugador = function () {
      }
     
 
+     var enableCountryToCompetition = function () {
+        $("select#pais-competencias").prop('disabled', false);
+        $('select#pais-competencias').trigger("chosen:updated");
+        $('input[name="internacional"]').click(function() {  
+            if($('input[name="internacional"]').is(':checked')) { 
+                console.log('entro');
+                $("select#pais-competencias").prop('disabled', true);  
+                $('select#pais-competencias').trigger("chosen:updated"); 
+            } else {  
+                console.log('salio');
+                $("select#pais-competencias").prop('disabled', false);
+                $('select#pais-competencias').trigger("chosen:updated");   
+            }  
+        }); 
+     }
 
+    loadDataForBladeEditTeam = function(idTeam) {
+         $.ajax({
+            type: 'GET',
+            url: $('#ver-equipo').attr('href'),    
+            data: {'equipoId': idTeam},
+            dataType: "JSON",
+            success: function(response) 
+            {
+                
+                if (response.success == true) {
+                    /*console.log(response);
+                    console.log(idTeam);*/
+                    $("select#tipo_equipo_edit option").each(function() { this.selected = (this.text == response.equipo.tipo); });
+                    $('#pais_id_equipo_edit').val(response.equipo.pais_id);
+                    $('#pais_id_equipo_edit').trigger("chosen:updated");
+                    $("#tipo_equipo_edit").trigger("chosen:updated");
+                    $('.chosen-select').trigger("chosen:updated");
+                }
+            }
+        });
+    }
 
     return {
         init: function() {
             initChosen();
+            if($('#equipo_id_edit').val())
+                loadFieldSelect($('#lista-paises').attr('href'),'#pais_id_equipo_edit');
+                loadDataForBladeEditTeam($('#equipo_id_edit').val());
+
+
+            if($('#jugador_id_edit').val())
+                loadFieldSelect($('#lista-paises').attr('href'),'.pais-jugador');
+                loadSelectForPlayer($('#jugador_id_edit').val());
+
+
             loadFieldSelect($('#lista-posiciones').attr('href'),'.posiciones-jugador');
-            loadFieldSelect($('#lista-paises').attr('href'),'.pais-jugador');
+
             loadFieldSelect($('#lista-equipos').attr('href'),'#equipo_id');
             loadFieldSelect($('#lista-equipos').attr('href'),'#equipo_id_jugador');
+
             loadFieldSelect($('#lista-paises').attr('href'),'#pais_equipo');
             loadFieldSelect($('#lista-jugadores').attr('href'),'#jugadores');
             loadFieldSelect($('#lista-tipos-competencias').attr('href'),'#tipos-competencias');
-
+            loadFieldSelect($('#lista-paises').attr('href'),'#pais-competencias');
             //initDataPicker();
             
             handleBootstrapFileInput();
@@ -3279,14 +3326,10 @@ var handleBootboxAddEquipoToJugador = function () {
             loadTypeOfCompetition();
             loadDataCompetition();
 
-
-            loadSelectForPlayer($('#jugador_id').val());
-
-            loadDataForEditTeam($('#equipo_id').val());
-            loadSelectForTeam();
-            validateSelectPlayers($("#tipo_equipo option:selected" ).text());
             loadPositionSelectPlayerCreate();
             loadPositionSelectPlayerEdit();
+
+            enableCountryToCompetition();
 
         }
     }

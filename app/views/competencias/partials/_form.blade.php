@@ -39,6 +39,22 @@
 						</div>
 					</div>
 					<div class="form-group">
+						<div class="col-sm-6">
+							<div class="checkbox">
+								<label> 
+									{{ Form::checkbox('internacional', '1')}}
+									<i></i> Internacional	
+								</label>
+							</div>
+						</div>
+					</div>
+					<div class="form-group">
+						{{ Form::label('pais_id','País',['class'=>'col-sm-2 control-label']) }}
+						<div class="col-sm-6">
+							{{ Form::select('pais_id',array(),null,['class' => 'form-control chosen-select','data-placeholder' => 'Escoge País...','id'=>'pais-competencias']) }}
+						</div>
+					</div>
+					<div class="form-group">
 						{{ Form::file('imagen', ['class' => 'file-upload']) }}
 					</div> 
 					{{ Form::close() }}

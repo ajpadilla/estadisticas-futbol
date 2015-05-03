@@ -7,6 +7,8 @@ class RegistrarCompetencia extends FormValidator{
           'nombre' => 'required|max:128',
           'desde' => 'required|date_format:Y-m-d', 
           'hasta' =>'required|date_format:Y-m-d',
+          'internacional' => 'boolean',
+          'pais_id' =>'numeric' ,
           'tipo_competencia_id' => 'required|exists:tipo_competencias,id',
           'imagen' =>'image'
      ];

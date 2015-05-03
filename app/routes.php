@@ -130,3 +130,6 @@ Route::get('competencias/api-lista', array('as'=>'competencias.api.lista', 'uses
 Route::post('competencias/api-actualizar',  ['as' => 'competencias.api.update','uses' => 'CompetenciaController@updateApi' ] );
 //Route::get('competencias/api-jugadores/{id}', array('as'=>'competencias.api.jugadores', 'uses'=>'CompetenciaController@jugadoresApi'));
 //Route::get('competencias/api-ver',  ['as' => 'competencias.data','uses' => 'CompetenciaController@showApi' ] );
+
+
+Route::get('prueba-ruta/{id}',  ['as' => 'prueba','uses' => 'JugadorController@prueba' ] );

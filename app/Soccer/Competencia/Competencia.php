@@ -13,7 +13,7 @@ class Competencia extends Eloquent implements StaplerableInterface{
 
     protected $table = 'competencias';
 
-	protected $fillable = ['nombre','imagen','desde','hasta','tipo_competencia_id'];
+	protected $fillable = ['nombre','imagen','desde','hasta','internacional','tipo_competencia_id','pais_id'];
 
  	public function __construct(array $attributes = array()) {
         $this->hasAttachedFile('imagen', [

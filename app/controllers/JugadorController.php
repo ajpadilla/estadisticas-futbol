@@ -64,7 +64,7 @@ class JugadorController extends \BaseController {
 				$jugador = $this->repository->create($input);
 				$this->setSuccess(true);
 				$this->addToResponseArray('jugador', $jugador->toArray());
-				//$this->addToResponseArray('jugador', $jugador);
+				$this->addToResponseArray('urlFoto', $jugador->foto->url());
 				$this->addToResponseArray('data', $input);
 				return $this->getResponseArrayJson();				
 			}
@@ -75,6 +75,16 @@ class JugadorController extends \BaseController {
 				return $this->getResponseArrayJson();
 			}
 		}
+	}
+
+	public function prueba($id)
+	{
+		$jugador = $this->repository->get($id);
+		//$ruta = substr($jugador->foto->url(), 0,8);
+		$ruta = explode("/", $jugador->foto->url());
+		$directorio = 'public/system/soccer/Jugador/Jugador/fotos/000/000/'.$ruta[8];
+		var_dump($ruta);
+		echo $directorio;
 	}
 
 
@@ -167,6 +177,7 @@ class JugadorController extends \BaseController {
 	public function destroyApi()
 	{
 		if(Request::ajax())
+			$this->repository->deleteImageDirectory(Input::get('idPlayer'));
 			$this->setSuccess($this->repository->delete(Input::get('idPlayer')));
 		return $this->getResponseArrayJson();
 	}

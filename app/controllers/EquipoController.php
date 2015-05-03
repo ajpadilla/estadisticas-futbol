@@ -67,6 +67,7 @@ class EquipoController extends \BaseController {
 				$equipo = $this->repository->create($input);
 				$this->setSuccess(true);
 				$this->addToResponseArray('equipo', $equipo->toArray());
+				$this->addToResponseArray('data', $input);
 				return $this->getResponseArrayJson();
 			}
 			catch (FormValidationException $e)
@@ -121,6 +122,7 @@ class EquipoController extends \BaseController {
 		{
 			$this->editarEquipoForm->validate($input);
 			$equipo = $this->repository->update($input);
+			$this->addToResponseArray('data', $input);
 			return Redirect::route('equipos.show', $id);
 		}
 		catch (FormValidationException $e)
@@ -140,6 +142,7 @@ class EquipoController extends \BaseController {
 				$equipo = $this->repository->update($input);
 				$this->setSuccess(true);
 				$this->addToResponseArray('equipo', $equipo);
+				$this->addToResponseArray('data', $input);
 				return $this->getResponseArrayJson();
 			}
 			catch (FormValidationException $e)
@@ -167,6 +170,7 @@ class EquipoController extends \BaseController {
 		if(Request::ajax()){
 
 		}
+			$this->repository->deleteImageDirectory(Input::get('idTeam'));
 			$equipo = $this->repository->delete(Input::get('idTeam'));
 			$this->setSuccess(true);
 			$this->addToResponseArray('equipo', $equipo);
@@ -205,7 +209,7 @@ class EquipoController extends \BaseController {
 				$equipo = $this->repository->get(Input::get('equipoId'));
 				$this->setSuccess(true);
 				$this->addToResponseArray('equipo', $equipo->toArray());
-				$this->addToResponseArray('jugadores', $equipo->jugadoresActuales());
+				//$this->addToResponseArray('jugadores', $equipo->jugadoresActuales());
 				$this->addToResponseArray('urlImg',  $equipo->foto->url('thumb'));
 			}
 		}
