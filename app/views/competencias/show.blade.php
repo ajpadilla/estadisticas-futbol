@@ -5,7 +5,7 @@
 @stop
 
 @section("page-description")
-	competencias
+	Competencia
 @stop
 
 @section('content')
@@ -56,9 +56,9 @@
 					   </div>
 					   <!-- /EDIT ACCOUNT -->
 					   
-					   <!-- JUGADORES TAB -->
+					   <!-- EQUIPOS TAB -->
 					   <div class="tab-pane fade" id="pro_players">						  
-					   		@include('competencias.jugadores')
+					   		@include('competencias.equipos')
 					   </div>
 					   <!-- /JUGADORES -->
 
