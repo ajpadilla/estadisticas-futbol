@@ -10,7 +10,7 @@
 					<div class="panel-body">
 						<div id="card" class="row">
 							<div class="col-md-4 headshot">
-								<img src="{{ $equipo->foto->url('medium') }}">
+								<img class="img-responsive" src="{{ $equipo->foto->url('medium') }}">
 							</div>
 							<div class="col-md-8">
 								<table class="table table-hover">
