@@ -119,7 +119,7 @@ Route::get('tipos-competencia/seleccionar-lista',  ['as' => 'tipos-competencia.s
 Route::get('competencias', ['as' => 'competencias.index', 'uses' => 'CompetitionController@index']);
 Route::get('competencias/nuevo', ['as' => 'competencias.create', 'uses' => 'CompetitionController@create'] );
 Route::post('competencias/guardar', ['as' => 'competencias.store', 'uses' => 'CompetitionController@store' ] );
-Route::get('competencias/ver/{id}', ['as' => 'competencias.show', 'uses' => 'CompetitionController@show' ] );
+Route::get('competencias/ver/{id}', ['as' => 'competitions.show', 'uses' => 'CompetitionController@show' ] );
 Route::get('competencias/editar/{id}',  ['as' => 'competencias.edit','uses' => 'CompetitionController@edit' ] );
 Route::post('competencias/actualizar/{id}',  ['as' => 'competencias.update','uses' => 'CompetitionController@update' ] );
 Route::get('competencias/eliminar/{id}',  ['as' => 'competencias.delete','uses' => 'CompetitionController@destroy' ] );

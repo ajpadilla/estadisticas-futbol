@@ -4,6 +4,7 @@
 			<button class="pull-right btn btn-lg btn-primary" id="add-team" href="{{ route('competitions.api.add.team', $competition->id) }}">Agregar equipo</button>
 		</div>
 	</div>
+	<br />
 @endif
 <div class="row">
 	<div class="col-md-12">

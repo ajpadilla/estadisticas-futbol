@@ -62,7 +62,7 @@ class CompetitionRepository extends BaseRepository
 
 		$this->collection->addColumn('Tipo de competencia', function($model)
 		{
-			 return $model->tipoCompetition->nombre;
+			 return $model->tipoCompetencia->nombre;
 		});
 	}		
 
