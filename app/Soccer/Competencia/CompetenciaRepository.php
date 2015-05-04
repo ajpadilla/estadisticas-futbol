@@ -27,6 +27,9 @@ class CompetenciaRepository extends BaseRepository
 
 	public function create($data = array())
 	{
+		if (empty($data['pais_id'])) {
+			$data['pais_id'] = NULL;
+		}
 		$competencia = $this->model->create($data); 
 		return $competencia;
 	}
