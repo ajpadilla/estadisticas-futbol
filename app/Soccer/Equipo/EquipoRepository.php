@@ -121,6 +121,11 @@ class EquipoRepository extends BaseRepository
 	{
 		// Obtengo todos los partidos que ya se han jugado para este equipo en ese grupo 
 		return 0;		
+	}
+
+	public function getPositionForTeamInGroup($id, $groupId)
+	{
+		return 0;
 	}					
 
 	/*

@@ -15,7 +15,7 @@ class GroupRepository extends BaseRepository
 
 	function __construct() {
 		$this->columns = [
-				'#',
+				'Pos',
 				'Equipo',
 				'JJ',
 				'JG',
@@ -101,12 +101,12 @@ class GroupRepository extends BaseRepository
 
 	private function setTableGroupContent($id, EquipoRepository $teamRepository)
 	{
-		$teamRepository->collection->searchColumns('Equipo', 'JJ', 'JG', 'JP', 'JE', 'GF', 'GC', 'DG', 'PTS');
-		$teamRepository->collection->orderColumns('Equipo', 'JJ', 'JG', 'JP', 'JE', 'GF', 'GC', 'DG', 'PTS');
+		$teamRepository->collection->searchColumns('Pos', 'JJ', 'JG', 'JP', 'JE', 'GF', 'GC', 'DG', 'PTS');
+		$teamRepository->collection->orderColumns('Pos', 'JJ', 'JG', 'JP', 'JE', 'GF', 'GC', 'DG', 'PTS');
 
-		$teamRepository->collection->addColumn('#', function($model)
+		$teamRepository->collection->addColumn('Pos', function($model) use ($teamRepository, $id)
 		{
-			return '';
+			return $teamRepository->getPositionForTeamInGroup($model->id, $id);
 		});
 
 		$teamRepository->collection->addColumn('Equipo', function($model)
