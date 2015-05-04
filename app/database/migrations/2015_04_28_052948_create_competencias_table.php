@@ -19,7 +19,7 @@ class CreateCompetenciasTable extends Migration {
 			$table->string('imagen', 128)->nullable();
 			$table->date('desde');
 			$table->date('hasta');
-			$table->boolean('internacional');
+			$table->boolean('internacional')->default(false);
 
 			$table->integer('tipo_competencia_id')->unsigned();
 			$table->foreign('tipo_competencia_id')

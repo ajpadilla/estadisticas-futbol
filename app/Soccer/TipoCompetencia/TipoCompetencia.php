@@ -28,4 +28,39 @@ class TipoCompetencia extends Eloquent {
     {
     	return $this->grupos > 1;
     }
+
+    public function getIdaVueltaAttribute($value)
+    {
+        return ($value ? 'Si' : 'No');
+    }
+
+    public function getPreClasificacionAttribute($value)
+    {
+        return ($value ? 'Si' : 'No');
+    }  
+
+    public function getAscensoAttribute($value)
+    {
+        return ($value ? $value : 'No');
+    }
+
+    public function getDescensoAttribute($value)
+    {
+        return ($value ? $value : 'No');
+    }    
+
+    public function getFasesEliminatoriasAttribute($value)
+    {
+        return ($value ? $value : 'No');
+    }    
+
+    public function getGruposAttribute($value)
+    {
+        return ($value ? $value : 'No');
+    }    
+
+    public function getClasificadosPorGrupoAttribute($value)
+    {
+        return ($value ? $value : 'No');
+    }    
 }
