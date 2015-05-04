@@ -3365,7 +3365,7 @@ var handleBootboxAddEquipoToJugador = function () {
     var loadTypeComptetitionInfo = function () {
 
 
-        $('a#see-type-competition').click(function (event) {
+        $('a#show-competition-type').click(function (event) {
 
             /*console.log('id:'+$(this).attr('href'));
             console.log('idNumber:'+$(this).attr('href').split('?')[1]);*/
