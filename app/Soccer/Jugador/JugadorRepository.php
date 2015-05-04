@@ -26,9 +26,9 @@ class JugadorRepository extends BaseRepository
 		$this->setListAllRoute('jugadores.api.lista');
 	}
 
-	public function filterList($nombre ='')
+	public function filterListName($nombre ='')
 	{
-		$this->model->where('nombre', 'LIKE', '%' . $nombre . '%')->lists('nombre', 'id');
+		return $this->model->where('nombre', 'LIKE', '%' . $nombre . '%')->lists('nombre', 'id');
 	}
 
 	public function create($data = array())
