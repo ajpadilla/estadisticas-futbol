@@ -3362,7 +3362,7 @@ var handleBootboxAddEquipoToJugador = function () {
         .modal('show');
     }   
 
-    var loadTipeComptetitionInfo = function () {
+    var loadTypeComptetitionInfo = function () {
 
 
         $('a#see-type-competition').click(function (event) {
@@ -3430,7 +3430,7 @@ var handleBootboxAddEquipoToJugador = function () {
             enableCountryToCompetition();
 
             loadFiter();
-            loadTipeComptetitionInfo();
+            loadTypeComptetitionInfo();
         }
     }
 }();
