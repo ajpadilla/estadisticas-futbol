@@ -49,6 +49,11 @@ class Equipo extends Eloquent implements StaplerableInterface{
 					->withTimestamps();
 	}
 
+    public function groups()
+    {
+        return $this->belongsToMany('soccer\Group\Group');
+    }	
+
 	/*
 	***************** CUSTOM SETTINGS FOR ATTRIBUTES *************************
 	*/
