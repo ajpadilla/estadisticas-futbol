@@ -21,7 +21,7 @@ class CreateTipoCompetenciasTable extends Migration {
 			$table->boolean('ida_vuelta')->default(false);
 			$table->boolean('pre_clasificacion')->default(false);
 			$table->smallInteger('equipos_por_grupo')->default(0);
-			$table->smallInteger('ascenso')->default(0);
+			$table->smallInteger('ascenso')->default(0);			
 			$table->smallInteger('descenso')->default(0);
 			$table->smallInteger('clasificados_por_grupo')->default(0);
 			$table->timestamps();

@@ -34,7 +34,7 @@
 							<div class="form-group">
 								{{ Form::label('grupos','Grupos',['class'=>'col-sm-2 control-label']) }}
 								<div class="col-sm-6">
-									{{ Form::text('grupos',0, ['class' => 'form-control','placeholder' => 0,'id' => 'grupos-tipo-competicion']) }}
+									{{ Form::text('grupos', 1, ['class' => 'form-control','placeholder' => 'Cantidad de grupos','id' => 'grupos-tipo-competicion']) }}
 								</div>
 							</div>
 							<div class="form-group">
@@ -49,7 +49,7 @@
 									<div class="checkbox">
 										<label> 
 											{{ Form::checkbox('ida_vuelta', '1', 0)}}
-											<i></i> Ida Vuelta	
+											<i></i> Ida y Vuelta	
 										</label>
 									</div>
 								</div>

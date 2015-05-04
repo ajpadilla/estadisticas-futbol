@@ -40,7 +40,22 @@ class Competencia extends Eloquent implements StaplerableInterface{
         return $this->belongsTo('soccer\Pais\Pais');
     }
 
+    public function groups()
+    {
+        return $this->belongsTo('soccer\Grupo\Grupo');
+    }
+
     /*
     ********************* Custom Methods ***********************
-    */       
+    */  
+
+    public function getHasGroupsAttribute()
+    {
+        return $this->tipoCompetencia->groups > 1;
+    }
+
+    public function getIsFullGroupsAttribute()
+    {
+         return ($this->hasGroups && $this->groups()->count() >= $this->tipoCompetencia->grupos);
+    }
 }
