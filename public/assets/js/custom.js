@@ -53,6 +53,8 @@ var CustomApp = function () {
 
     var addValidationRulesForms = function() 
     {
+        $.validator.setDefaults({ ignore: ":hidden:not(.chosen-select)" });
+
         $.validator.addMethod('onlyLettersNumbersAndSpaces', function(value, element) {
                     return this.optional(element) || /^[a-zA-Z0-9ñÑ\s]+$/i.test(value);
         }, 'sólo letras, números y espacios.');
@@ -2878,12 +2880,15 @@ var handleBootboxAddEquipoToJugador = function () {
             },
             highlight:function(element){
                 $(element).closest('.form-group').removeClass('has-success').addClass('has-error');
+                 $(element).closest('.control-group').removeClass('has-success').addClass('has-error');
             },
             unhighlight:function(element){
                 $(element).closest('.form-group').removeClass('has-error');
+                $(element).closest('.control-group').removeClass('has-error');
             },
             success:function(element){
                 element.addClass('valid').closest('.form-group').removeClass('has-error').addClass('has-success');
+                element.addClass('valid').closest('.control-group').removeClass('has-error').addClass('has-success');
             }
         });
 
