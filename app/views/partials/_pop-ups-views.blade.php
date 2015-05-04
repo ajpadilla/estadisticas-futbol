@@ -4,3 +4,4 @@
 @include('posiciones.new')
 @include('tipos-competencia.new')
 @include('competencias.new')
+@include('tipos-competencia.show-pop-up')
