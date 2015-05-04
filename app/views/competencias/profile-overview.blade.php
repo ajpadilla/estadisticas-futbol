@@ -17,7 +17,7 @@
 									<tbody>
 										<tr>
 											<td>Tipo de Competencia</td>
-											<td id="card-name"><strong><a id="ver-tipo-competencia" href="{{ route('tipos-competencia.api.show', $competencia->tipoCompetencia->id) }}">{{ $competencia->tipoCompetencia->nombre }}</a></strong></td>
+											<td id="card-name"><strong><a id="see-type-competition" href="{{ route('tipos-competencia.api.show', $competencia->tipoCompetencia->id) }}">{{ $competencia->tipoCompetencia->nombre }}</a></strong></td>
 										</tr>
 										<tr>
 											<td>Inicia</td>
