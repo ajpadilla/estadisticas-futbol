@@ -93,14 +93,14 @@
 		<a id="eliminar-posicion" href="{{ URL::route('posiciones.api.eliminar') }}"></a>	
 		<!--Routes Jugadores-->
 		<a id="agregar-jugador" href="{{ URL::route('jugadores.store') }}"></a>
-		<a id="datos-jugador" href="{{ URL::route('jugadores.data') }}"></a>
+		<a id="datos-jugador" href="{{ URL::route('jugadores.api.show') }}"></a>
 		<a id="editar-jugador" href="{{ URL::route('jugadores.api.update') }}"></a>
 		<a id="eliminar-jugador" href="{{ URL::route('jugadores.api.eliminar') }}"></a>
 		<a id="lista-jugadores" href="{{ URL::route('jugadores.api.select.list') }}"></a>
 		<!--Routes Equipos-->
 		<a id="lista-equipos" href="{{ URL::route('equipos.api.select.list') }}"></a>
 		<a id="agregar-equipo" href="{{ URL::route('equipos.store') }}"></a>
-		<a id="ver-equipo" href="{{ URL::route('equipos.data') }}"></a>	
+		<a id="ver-equipo" href="{{ URL::route('equipos.api.show') }}"></a>	
 		<a id="editar-equipo" href="{{ URL::route('equipos.api.update') }}"></a>
 		<a id="eliminar-equipo" href="{{ URL::route('equipos.api.eliminar') }}"></a>
 		<a id="verificar-jugador-equipo" href="{{ URL::route('equipos.api.verificar-jugador') }}"></a>

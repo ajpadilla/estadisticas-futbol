@@ -38,7 +38,7 @@ Route::get('jugadores/api-eliminar',  ['as' => 'jugadores.api.eliminar','uses' =
 Route::get('jugadores/api-lista', array('as'=>'jugadores.api.lista', 'uses'=>'JugadorController@listaApi'));
 Route::get('jugadores/api-equipos/{id}', array('as'=>'jugadores.api.equipos', 'uses'=>'JugadorController@equiposApi'));
 Route::get('jugadores/api-cambiar-equipo/{id}', array('as'=>'jugadores.api.cambiar-equipo', 'uses'=>'JugadorController@cambiarEquipoApi'));
-Route::get('jugadores/api-ver',  ['as' => 'jugadores.data','uses' => 'JugadorController@showApi' ] );
+Route::get('jugadores/api-ver',  ['as' => 'jugadores.api.show','uses' => 'JugadorController@showApi' ] );
 Route::get('jugadores/api-seleccionar-lista',  ['as' => 'jugadores.api.select.list','uses' => 'JugadorController@getAllValue' ] );
 Route::post('jugadores/api-actualizar',  ['as' => 'jugadores.api.update','uses' => 'JugadorController@updateApi' ] );
 Route::post('jugadores/api-add-equipo',  ['as' => 'jugadores.api.add.equipo','uses' => 'JugadorController@addEquipoApi' ] );
@@ -60,7 +60,7 @@ Route::get('equipos/api-eliminar',  ['as' => 'equipos.api.eliminar','uses' => 'E
 Route::get('equipos/api-lista', array('as'=>'equipos.api.lista', 'uses'=>'EquipoController@listaApi'));
 Route::post('equipos/api-actualizar',  ['as' => 'equipos.api.update','uses' => 'EquipoController@updateApi' ] );
 Route::get('equipos/api-jugadores/{id}', array('as'=>'equipos.api.jugadores', 'uses'=>'EquipoController@jugadoresApi'));
-Route::get('equipos/api-ver',  ['as' => 'equipos.data','uses' => 'EquipoController@showApi' ] );
+Route::get('equipos/api-ver',  ['as' => 'equipos.api.show','uses' => 'EquipoController@showApi' ] );
 Route::get('equipos/api-seleccionar-lista',  ['as' => 'equipos.api.select.list','uses' => 'EquipoController@getAllValue' ] );
 Route::get('equipos/api-verificar-jugador',  ['as' => 'equipos.api.verificar-jugador','uses' => 'EquipoController@confirmExistsPlayerTeam' ] );
 Route::post('equipos/api-existe-numero',  ['as' => 'equipos.api.existe.numero','uses' => 'EquipoController@existeNumeroApi' ] );
