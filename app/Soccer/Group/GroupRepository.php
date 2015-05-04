@@ -158,6 +158,7 @@ class GroupRepository extends BaseRepository
 	public function getDefaultTableForGroupTeams($id)
 	{
 		$teamRepository = new EquipoRepository;
+		dd('algo');
 		$teams = $teamRepository->getSortByPointsByGroup($id);
 		if($teams) {
 			$teamRepository->setDatatableCollection($teams);

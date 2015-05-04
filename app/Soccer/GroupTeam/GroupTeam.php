@@ -1,4 +1,4 @@
-<?php namespace soccer\Group;
+<?php namespace soccer\GroupTeam;
 
 use Eloquent;
 use Carbon\Carbon;
@@ -6,19 +6,25 @@ use Carbon\Carbon;
 * 
 */
 
-class Group extends Eloquent {
+class GroupTeam extends Eloquent {
+
+    protected $table = 'group_team';
     /*
 	********************* Relations ***********************
     */	
-    public function teams()
+    public function team()
     {
-        return $this->belongsToMany('soccer\Equipo\Equipo', 'group_team', 'group_id', 'team_id');
-        //return $this->hasMany('soccer\GroupTeam\GroupTeam')->with('soccer\Equipo\Equipo');
+        return $this->belongsTo('soccer\Equipo\Equipo', 'team_id');
     }
+
+    public function group()
+    {
+        return $this->belongsTo('soccer\Group\Group');
+    }    
 
     public function games()
     {
-        return $this->hasMany('soccer\GroupTeam\GroupTeam')->games;
+        return $this->hasMany('soccer\Game\Game');
     }
 
     /*

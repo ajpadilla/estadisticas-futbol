@@ -52,7 +52,13 @@ class Equipo extends Eloquent implements StaplerableInterface{
     public function groups()
     {
         return $this->belongsToMany('soccer\Group\Group', 'group_team', 'group_id', 'team_id');
+        //return $this->hasMany('soccer\GroupTeam\GroupTeam')->with('soccer\Group\Group');
     }	
+
+    public function games()
+    {
+        return $this->hasMany('soccer\GroupTeam\GroupTeam')->games;
+    }    
 
 	/*
 	***************** CUSTOM SETTINGS FOR ATTRIBUTES *************************
