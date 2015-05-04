@@ -1,16 +1,12 @@
-<?php namespace soccer\Group;
+<?php namespace soccer\Game;
 
-use soccer\Group\Group;
+use soccer\Game\Game;
 use soccer\Base\BaseRepository;
-use soccer\Equipo\EquipoRepository;
 use Carbon\Carbon;
 use Datatable;
 use Illuminate\Database\Eloquent\Collection;
 
-/**
-* 
-*/
-class GroupRepository extends BaseRepository
+class GameRepository extends BaseRepository
 {		
 
 	function __construct() {
@@ -28,8 +24,8 @@ class GroupRepository extends BaseRepository
 				'Acciones'
 			];
 
-		$this->setModel(new Group);
-		$this->setListAllRoute('groups.api.lista');
+		$this->setModel(new Game);
+		$this->setListAllRoute('games.api.list');
 	}	
 	/*
 	*********************** DATATABLE SETTINGS ******************************
@@ -47,8 +43,7 @@ class GroupRepository extends BaseRepository
 	}
 
 	public function setBodyTableSettings()
-	{
-		/*
+	{		
 		$this->collection->searchColumns('Equipo', 'JJ', 'JG', 'JP', 'JE', 'GF', 'GC', 'DG', 'PTS');
 		$this->collection->orderColumns('Equipo', 'JJ', 'JG', 'JP', 'JE', 'GF', 'GC', 'DG', 'PTS');
 
@@ -95,8 +90,7 @@ class GroupRepository extends BaseRepository
 		$this->collection->addColumn('PTS', function($model)
 		{
 			 return $model->nombre;
-		});
-		*/
+		});		
 	}	
 
 	private function setTableGroupContent($id, EquipoRepository $teamRepository)
@@ -157,7 +151,7 @@ class GroupRepository extends BaseRepository
 
 	public function getDefaultTableForGroupTeams($id)
 	{
-		$teamRepository = new EquipoRepository;
+		/*$teamRepository = new EquipoRepository;
 		$teams = $teamRepository->getSortByPointsByGroup($id);
 		if($teams) {
 			$teamRepository->setDatatableCollection($teams);
@@ -170,6 +164,6 @@ class GroupRepository extends BaseRepository
 			});
 			return $teamRepository->getTableCollectionForRender();
 		}
-		return null;
+		return null;*/
 	}	
 }
