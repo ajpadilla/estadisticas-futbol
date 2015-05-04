@@ -3281,6 +3281,47 @@ var handleBootboxAddEquipoToJugador = function () {
         });
     }
 
+
+    var loadFiter = function () {
+        $( "#select-autocomplete" ).autocomplete({
+            source: function( request, response ) {
+                $.ajax({
+                    url: "filterAjax/"+request.term+"/",
+                    dataType: "json",
+                    //beforeSend: function(){$('ul.chzn-results').empty();},
+                    success: function( data ) {
+                        /*response( $.map( data, function( item ) {
+                            $('ul.chzn-results').append('<li class="active-result">' + item.name + '</li>');
+                        }));*/
+                        console.log(data);
+                    }
+                });
+            },
+            minLength: 2,
+            select: function( event, ui ) {
+                console.log(ui);
+                /*log( ui.item ?
+                "Selected: " + ui.item.value + " aka " + ui.item.id :
+                "Nothing selected, input was " + this.value );*/
+            }
+        });
+    }
+
+    $('.chzn-choices input').autocomplete({
+  source: function( request, response ) {
+    $.ajax({
+      url: "/change/name/autocomplete/"+request.term+"/",
+      dataType: "json",
+      beforeSend: function(){$('ul.chzn-results').empty();},
+      success: function( data ) {
+        response( $.map( data, function( item ) {
+          $('ul.chzn-results').append('<li class="active-result">' + item.name + '</li>');
+        }));
+      }
+    });
+  }
+});
+
     return {
         init: function() {
             initChosen();
@@ -3330,6 +3371,8 @@ var handleBootboxAddEquipoToJugador = function () {
             loadPositionSelectPlayerEdit();
 
             enableCountryToCompetition();
+
+            loadFiter();
 
         }
     }
