@@ -11,6 +11,11 @@ class BaseRepository
 	protected $collection;
 	protected $listAllRoute;
 
+	public function getColumnCount()
+	{
+		return count($this->columns);
+	}
+
 	public function setListAllRoute($listAllRoute)
 	{
 		$this->listAllRoute = $listAllRoute;
@@ -29,6 +34,12 @@ class BaseRepository
 	public function getModel()
 	{
 		return $this->model;
+	}
+
+	public function create($data = array())
+	{
+		$model = $this->model->create($data); 
+		return $model;
 	}
 
 	public function getAll()
@@ -58,15 +69,17 @@ class BaseRepository
 	************************** DATATABLE COLLECTION METHODS *********************************
 	*/
 
-	public function getAllTable($route = null, $params = array())
+	public function getAllTable($route = null, $params = array(), $orderColumn = 1, $type = 'asc', $tableId = 'datatable')
 	{
 		if(!$route)
 			$route = $this->listAllRoute;
 		
-		return Datatable::table()
-		->addColumn($this->columns)
-		->setUrl(route($route, $params))
-		->noScript();	
+		$datatable = Datatable::table();
+		$datatable->addColumn($this->columns);
+		$datatable->setOptions('order', [[$orderColumn , $type]]);
+		$datatable->setUrl(route($route, $params));
+		$datatable->noScript();	
+		return $datatable;
 	}	
 
 	public function setCollection($collection)

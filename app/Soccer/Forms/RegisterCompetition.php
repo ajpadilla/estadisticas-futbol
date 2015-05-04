@@ -2,7 +2,7 @@
 
 use Laracasts\Validation\FormValidator;
 
-class RegistrarCompetencia extends FormValidator{
+class RegisterCompetition extends FormValidator{
         protected $rules = [
           'nombre' => 'required|max:128',
           'desde' => 'required|date_format:Y-m-d', 

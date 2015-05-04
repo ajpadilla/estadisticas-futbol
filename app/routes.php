@@ -116,22 +116,29 @@ Route::get('tipos-competencia/seleccionar-lista',  ['as' => 'tipos-competencia.s
 /*
 ********************************* RUTAS PARA COMPETENCIAS ********************************
 */
-Route::get('competencias', ['as' => 'competencias.index', 'uses' => 'CompetenciaController@index']);
-Route::get('competencias/nuevo', ['as' => 'competencias.create', 'uses' => 'CompetenciaController@create'] );
-Route::post('competencias/guardar', ['as' => 'competencias.store', 'uses' => 'CompetenciaController@store' ] );
-Route::get('competencias/ver/{id}', ['as' => 'competencias.show', 'uses' => 'CompetenciaController@show' ] );
-Route::get('competencias/editar/{id}',  ['as' => 'competencias.edit','uses' => 'CompetenciaController@edit' ] );
-Route::post('competencias/actualizar/{id}',  ['as' => 'competencias.update','uses' => 'CompetenciaController@update' ] );
-Route::get('competencias/eliminar/{id}',  ['as' => 'competencias.delete','uses' => 'CompetenciaController@destroy' ] );
-Route::get('competencias/ver/{id}', ['as' => 'competencias.show', 'uses' => 'CompetenciaController@show' ] );
+Route::get('competencias', ['as' => 'competencias.index', 'uses' => 'CompetitionController@index']);
+Route::get('competencias/nuevo', ['as' => 'competencias.create', 'uses' => 'CompetitionController@create'] );
+Route::post('competencias/guardar', ['as' => 'competencias.store', 'uses' => 'CompetitionController@store' ] );
+Route::get('competencias/ver/{id}', ['as' => 'competitions.show', 'uses' => 'CompetitionController@show' ] );
+Route::get('competencias/editar/{id}',  ['as' => 'competencias.edit','uses' => 'CompetitionController@edit' ] );
+Route::post('competencias/actualizar/{id}',  ['as' => 'competencias.update','uses' => 'CompetitionController@update' ] );
+Route::get('competencias/eliminar/{id}',  ['as' => 'competencias.delete','uses' => 'CompetitionController@destroy' ] );
+Route::get('competencias/ver/{id}', ['as' => 'competencias.show', 'uses' => 'CompetitionController@show' ] );
 
-Route::get('competencias/api-eliminar',  ['as' => 'competencias.api.eliminar','uses' => 'CompetenciaController@destroyApi' ] );
-Route::get('competencias/api-lista', array('as'=>'competencias.api.lista', 'uses'=>'CompetenciaController@listaApi'));
-Route::post('competencias/api-actualizar',  ['as' => 'competencias.api.update','uses' => 'CompetenciaController@updateApi' ] );
-//Route::get('competencias/api-jugadores/{id}', array('as'=>'competencias.api.jugadores', 'uses'=>'CompetenciaController@jugadoresApi'));
-//Route::get('competencias/api-ver',  ['as' => 'competencias.data','uses' => 'CompetenciaController@showApi' ] );
+Route::get('competencias/api-eliminar',  ['as' => 'competencias.api.eliminar','uses' => 'CompetitionController@destroyApi' ] );
+Route::get('competencias/api-lista', array('as'=>'competitions.api.list', 'uses'=>'CompetitionController@listApi'));
+Route::post('competencias/api-actualizar',  ['as' => 'competencias.api.update','uses' => 'CompetitionController@updateApi' ] );
+//Route::get('competencias/api-jugadores/{id}', array('as'=>'competencias.api.jugadores', 'uses'=>'CompetitionController@jugadoresApi'));
+//Route::get('competencias/api-ver',  ['as' => 'competencias.data','uses' => 'CompetitionController@showApi' ] );
+Route::get('competencias/api-agregar-equipo/{id}/{teamId}',  ['as' => 'competitions.api.add.team','uses' => 'CompetitionController@addTeamApi' ] );
 
 
 Route::get('prueba-ruta/{id}',  ['as' => 'prueba','uses' => 'JugadorController@prueba' ] );
 Route::get('selctAjax',  ['as' => 'selctAjax','uses' => 'JugadorController@selctAjax' ] );
 Route::get('filterAjax/{dato}',  ['as' => 'filterAjax.api','uses' => 'JugadorController@filter' ] );
+
+/*
+********************************* RUTAS PARA GRUPOS ********************************
+*/
+Route::get('grupos/agregar-equipo/{id}/{teamId}', ['as' => 'groups.api.add.team', 'uses' => 'GroupController@addTeamApi']);
+Route::get('grupos/api-lista-grupo/{id}', ['as' => 'groups.api.list.group', 'uses' => 'GroupController@listGroupApi']);

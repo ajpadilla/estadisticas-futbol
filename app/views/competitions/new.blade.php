@@ -3,5 +3,5 @@
 @stop
 
 <div id="new-competition-form" style="display:none">
-	@include('competencias.partials._form')
+	@include('competitions.partials._form')
 </div>

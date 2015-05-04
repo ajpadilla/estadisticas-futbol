@@ -3,7 +3,7 @@
 /**
 * 
 */
-class CompetenciasTableSeeder extends DatabaseSeeder{
+class CompetitionsTableSeeder extends DatabaseSeeder{
 	/**
 	 * Run the database seeds.
 	 *
@@ -13,7 +13,7 @@ class CompetenciasTableSeeder extends DatabaseSeeder{
 	{
 		$date = new DateTime;
 
-        $competencias[] = array(
+        $competitions[] = array(
         	'nombre' => 'La Liga',
         	'desde' => '2015-10-20',
         	'hasta' => '2016-05-20',
@@ -25,7 +25,7 @@ class CompetenciasTableSeeder extends DatabaseSeeder{
         ); 
        
 
-        DB::table('competencias')->insert($competencias);
+        DB::table('competitions')->insert($competitions);
 	}
 
 }

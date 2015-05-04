@@ -1,11 +1,12 @@
-<?php namespace soccer\Competencia;
+<?php namespace soccer\Competition;
 
 use soccer\Base\BaseRepository;
-use soccer\Competencia\Competencia;
+use soccer\Group\GroupRepository;
+use soccer\Competition\Competition;
 /**
 * 
 */
-class CompetenciaRepository extends BaseRepository
+class CompetitionRepository extends BaseRepository
 {		
 	
 	function __construct() {
@@ -17,8 +18,8 @@ class CompetenciaRepository extends BaseRepository
 			'Acciones'
 		];
 
-		$this->setModel(new Competencia);
-		$this->setListAllRoute('competencias.api.lista');
+		$this->setModel(new Competition);
+		$this->setListAllRoute('competitions.api.list');
 	}
     /*
 	********************* Methods ***********************
@@ -43,9 +44,8 @@ class CompetenciaRepository extends BaseRepository
 		$this->addColumnToCollection('Acciones', function($model)
 		{
 			$this->cleanActionColumn();
-			$this->addActionColumn("<a class='ver-competencia' href='" . route('competencias.show', $model->id) . "'>Ver</a><br />");
-			$this->addActionColumn("<a  class='editar-competencia' href='#new-team-form' id='editar_competencia_".$model->id."'>Editar</a><br />");
-			$this->addActionColumn("<a class='eliminar-competencia' href='#' id='eliminar_competencia_".$model->id."'>Eliminar</a>");
+			$this->addActionColumn("<a class='show-competition' href='" . route('competitions.show', $model->id) . "'>Ver</a><br />");
+			$this->addActionColumn("<a class='delete-competition' href='#' id='delete_competition_".$model->id."'>Eliminar</a>");
 			return implode(" ", $this->getActionColumn());
 		});
 	}
@@ -75,4 +75,17 @@ class CompetenciaRepository extends BaseRepository
 			 return $model->tipoCompetencia->nombre;
 		});
 	}		
+
+	public function getGroupTables($id)
+	{		
+		$competition = $this->get($id);
+		$tables = array();		
+		if(!$competition->isClean) {
+			$groupRepository = new GroupRepository;			
+			$orderColumn = $groupRepository->getColumnCount() - 1;
+			foreach ($competition->groups as $group) 
+				$tables[] = $groupRepository->getAllTable('groups.api.list.group', [$group->id], $orderColumn, 'desc');			
+		}
+		return $tables;
+	}
 }

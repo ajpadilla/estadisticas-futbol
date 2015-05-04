@@ -3,7 +3,7 @@
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 
-class AddImagenFieldsToCompetenciasTable extends Migration {
+class AddImagenFieldsToCompetitionsTable extends Migration {
 
     /**
      * Make changes to the table.
@@ -12,7 +12,7 @@ class AddImagenFieldsToCompetenciasTable extends Migration {
      */
     public function up()
     {   
-        Schema::table('competencias', function(Blueprint $table) {     
+        Schema::table('competitions', function(Blueprint $table) {     
             
             $table->string('imagen_file_name')->nullable();
             $table->integer('imagen_file_size')->nullable();
@@ -30,7 +30,7 @@ class AddImagenFieldsToCompetenciasTable extends Migration {
      */
     public function down()
     {
-        Schema::table('competencias', function(Blueprint $table) {
+        Schema::table('competitions', function(Blueprint $table) {
 
             $table->dropColumn('imagen_file_name');
             $table->dropColumn('imagen_file_size');

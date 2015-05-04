@@ -3,7 +3,7 @@
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 
-class CreateCompetenciasTable extends Migration {
+class CreateCompetitionsTable extends Migration {
 
 	/**
 	 * Run the migrations.
@@ -12,7 +12,7 @@ class CreateCompetenciasTable extends Migration {
 	 */
 	public function up()
 	{
-		Schema::create('competencias', function(Blueprint $table)
+		Schema::create('competitions', function(Blueprint $table)
 		{
 			$table->increments('id');
 			$table->string('nombre', 128);
@@ -28,7 +28,7 @@ class CreateCompetenciasTable extends Migration {
 			$table->timestamps();
 		});
 
-		Schema::table('competencias', function(Blueprint $table)
+		Schema::table('competitions', function(Blueprint $table)
 		{
 				$table->integer('pais_id')->unsigned()->nullable()->after('tipo_competencia_id');	
 				$table->foreign('pais_id')
@@ -47,12 +47,12 @@ class CreateCompetenciasTable extends Migration {
 	 */
 	public function down()
 	{
-		Schema::table('competencias', function(Blueprint $table)
+		Schema::table('competitions', function(Blueprint $table)
 		{
-			$table->dropForeign('competencias_pais_id_foreign');
-			$table->dropColumn('pais_id');
+			$table->dropForeign('competitions_country_id_foreign');
+			$table->dropColumn('country_id');
 		});
-		Schema::drop('competencias');
+		Schema::drop('competitions');
 	}
 
 }
