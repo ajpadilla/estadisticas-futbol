@@ -77,8 +77,9 @@ class CompetitionController extends \BaseController {
 	 */
 	public function show($id)
 	{
-		$competition = $this->repository->get($id);		
-		return View::make('competitions.show', compact('competition'));
+		$competition = $this->repository->get($id);
+		$tables = $this->repository->getGroupTables($id);
+		return View::make('competitions.show', compact('competition', 'tables'));
 	}
 
 	/**

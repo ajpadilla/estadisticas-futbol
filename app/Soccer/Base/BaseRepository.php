@@ -31,6 +31,12 @@ class BaseRepository
 		return $this->model;
 	}
 
+	public function create($data = array())
+	{
+		$model = $this->model->create($data); 
+		return $model;
+	}
+
 	public function getAll()
 	{
 		return $this->model->all();

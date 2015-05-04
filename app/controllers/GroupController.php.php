@@ -1,6 +1,15 @@
 <?php
 
+use soccer\Group\GroupRepository;
+
 class GroupController.php extends \BaseController {
+
+	protected $repository;
+
+	public function __construct(GroupRepository $repository){
+		$this->repository = $repository;
+	}	
+
 
 	/**
 	 * Display a listing of the resource.
@@ -90,5 +99,10 @@ class GroupController.php extends \BaseController {
 	{
 		
 	}	
+
+	public function listGroupApi($id)
+	{
+		return $this->repository->getDefaultTableForGroupTeams($id);
+	}
 
 }

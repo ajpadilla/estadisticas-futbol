@@ -34,13 +34,6 @@ class EquipoRepository extends BaseRepository
 		return $this->model->select()->whereTipo($type)->lists('nombre', 'id');
 	}
 
-
-	public function create($data = array())
-	{
-		$equipo = $this->model->create($data); 
-		return $equipo;
-	}
-
 	public function update($data = array())
 	{
 		$equipo = $this->get($data['equipo_id']);

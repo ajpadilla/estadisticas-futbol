@@ -25,11 +25,6 @@ class CompetitionRepository extends BaseRepository
     */
     	
 
-	public function create($data = array())
-	{
-		$competition = $this->getModel->create($data); 
-		return $competition;
-	}
 
     /*
 	********************* Datatable Methods ***********************
@@ -69,4 +64,16 @@ class CompetitionRepository extends BaseRepository
 			 return $model->tipoCompetition->nombre;
 		});
 	}		
+
+	public function getGroupTables($id)
+	{		
+		$competition = $this->get($id);
+		$tables = array();		
+		if(!$competition->isClean) {
+			$groupRepository = new GroupRepository;			
+			foreach ($competition->groups as $group) 
+				$tables[] = $groupRepository->getAllTable('groups.api.list.group', [$group->id]);			
+		}
+		return $tables;
+	}
 }

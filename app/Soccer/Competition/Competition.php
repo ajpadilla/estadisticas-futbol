@@ -52,6 +52,16 @@ class Competition extends Eloquent implements StaplerableInterface{
         return $this->tipoCompetencia->groups > 1;
     }
 
+    public function getIsLeagueAttribute()
+    {
+        return $this->tipoCompetencia->groups <= 1;
+    }
+
+    public function getIsClean()
+    {
+        return $this->groups()->count() < 1;
+    }
+
     public function getIsFullGroupsAttribute()
     {
          return ($this->hasGroups && $this->groups()->count() >= $this->tipoCompetencia->grupos);
