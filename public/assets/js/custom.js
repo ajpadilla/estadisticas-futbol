@@ -579,18 +579,17 @@ var CustomApp = function () {
         $('.table').click(function(event)
         {
             var target = $( event.target );
-            if (target.is('a')) 
+            
+            console.log($(target).attr('id'));
+
+            var id = $(target).attr('id');
+            var type = id ? id.split('_')[0] : '';
+            var view = id ? id.split('_')[1] : '';
+            var numberId = id ? id.split('_')[2] : '';
+
+            if (view == "jugador") 
             {
-                console.log($(target).attr('id'));
-
-                var id = $(target).attr('id');
-                var type = id ? id.split('_')[0] : '';
-                var view = id ? id.split('_')[1] : '';
-                var numberId = id ? id.split('_')[2] : '';
-
-                if (view == "jugador") 
-                {
-                    if (type == "editar") {
+                if (type == "editar") {
                         //editPlayer(numberId);
                     }else if(type == "ver"){
                         //viewDataPlayer(numberId);
@@ -598,8 +597,8 @@ var CustomApp = function () {
                         deletePlayer(numberId);
                     }
                 }
-            }           
-        });
+
+            });
     }
 
     /*-----------------------------------------------------------------------------------*/
@@ -1058,24 +1057,22 @@ var CustomApp = function () {
         $('.table').click(function(event)
         {
             var target = $( event.target );
-            if (target.is('a')) 
+            
+            console.log($(target).attr('id'));
+
+            var id = $(target).attr('id');
+            var type = id ? id.split('_')[0] : '';
+            var view = id ? id.split('_')[1] : '';
+            var numberId = id ? id.split('_')[2] : '';
+
+            if (view == "equipo") 
             {
-                console.log($(target).attr('id'));
-
-                var id = $(target).attr('id');
-                var type = id ? id.split('_')[0] : '';
-                var view = id ? id.split('_')[1] : '';
-                var numberId = id ? id.split('_')[2] : '';
-
-                if (view == "equipo") 
-                {
-                    if (type == "editar") {
-                        editTeam(numberId);
-                    }else{
-                        deleteTeam(numberId);
-                    }
+                if (type == "editar") {
+                    editTeam(numberId);
+                }else{
+                    deleteTeam(numberId);
                 }
-            }           
+            }
         });
     }
 
@@ -1558,26 +1555,24 @@ var CustomApp = function () {
         $('.table').click(function(event)
         {
             var target = $( event.target );
-            if (target.is('a')) 
+            
+            console.log($(target).attr('id'));
+
+            var id = $(target).attr('id');
+            var type = id ? id.split('_')[0] : '';
+            var view = id ? id.split('_')[1] : '';
+            var numberId = id ? id.split('_')[2] : '';
+
+            if (view == "pais") 
             {
-                console.log($(target).attr('id'));
-
-                var id = $(target).attr('id');
-                var type = id ? id.split('_')[0] : '';
-                var view = id ? id.split('_')[1] : '';
-                var numberId = id ? id.split('_')[2] : '';
-
-                if (view == "pais") 
-                {
-                    if (type == "editar") {
-                        editCountry(numberId);
-                    }else if(type == "ver"){
-                        viewDataCountry(numberId);
-                    }else if(type == "eliminar"){
-                        deleteCountry(numberId);
-                    }
+                if (type == "editar") {
+                    editCountry(numberId);
+                }else if(type == "ver"){
+                    viewDataCountry(numberId);
+                }else if(type == "eliminar"){
+                    deleteCountry(numberId);
                 }
-            }           
+            }
         });
     }
 
@@ -1960,24 +1955,22 @@ var CustomApp = function () {
         $('.table').click(function(event)
         {
             var target = $( event.target );
-            if (target.is('a')) 
+            
+            console.log($(target).attr('id'));
+
+            var id = $(target).attr('id');
+            var type = id ? id.split('_')[0] : '';
+            var view = id ? id.split('_')[1] : '';
+            var numberId = id ? id.split('_')[2] : '';
+
+            if (view == "posicion") 
             {
-                console.log($(target).attr('id'));
-
-                var id = $(target).attr('id');
-                var type = id ? id.split('_')[0] : '';
-                var view = id ? id.split('_')[1] : '';
-                var numberId = id ? id.split('_')[2] : '';
-
-                if (view == "posicion") 
-                {
-                    if (type == "editar") {
-                        editPosition(numberId);
-                    }else if(type == "eliminar"){
-                        deletePosition(numberId);
-                    }
+                if (type == "editar") {
+                    editPosition(numberId);
+                }else if(type == "eliminar"){
+                    deletePosition(numberId);
                 }
-            }           
+            }
         });
     }
 
@@ -3056,26 +3049,31 @@ var handleBootboxAddEquipoToJugador = function () {
     // Metodo para saber cual opcion(ver, editar, borrar) fue seleccionada de la lista de Paises
     var loadDataCompetition = function() 
     {
-        $('.table').click(function(event)
+        /*$('.table').click(function(event)
         {
             var target = $( event.target );
-            if (target.is('a')) 
+            console.log($(target).attr('id'));
+
+            var id = $(target).attr('id');
+            var type = id ? id.split('_')[0] : '';
+            var view = id ? id.split('_')[1] : '';
+            var numberId = id ? id.split('_')[2] : '';
+
+            if (view == "competencia") 
             {
-                console.log($(target).attr('id'));
-
-                var id = $(target).attr('id');
-                var type = id ? id.split('_')[0] : '';
-                var view = id ? id.split('_')[1] : '';
-                var numberId = id ? id.split('_')[2] : '';
-
-                if (view == "competencia") 
-                {
-                    if(type == "eliminar"){
-                        deleteCompetition(numberId);
-                    }
+                if(type == "eliminar"){
+                    deleteCompetition(numberId);
                 }
-            }           
+            }
+
+        });*/
+
+
+        $(".table").delegate(".editar-competencia", "click", function() {
+            //console.log($(this), 'this');
+             console.log('id:'+$(this).attr('id').split('_')[2]);
         });
+
     }
 
  /**
@@ -3307,20 +3305,22 @@ var handleBootboxAddEquipoToJugador = function () {
         });
     }
 
-    $('.chzn-choices input').autocomplete({
-  source: function( request, response ) {
-    $.ajax({
-      url: "/change/name/autocomplete/"+request.term+"/",
-      dataType: "json",
-      beforeSend: function(){$('ul.chzn-results').empty();},
-      success: function( data ) {
-        response( $.map( data, function( item ) {
-          $('ul.chzn-results').append('<li class="active-result">' + item.name + '</li>');
-        }));
-      }
-    });
-  }
-});
+
+   
+
+    var loadTipeComptetitionInfo = function () {
+
+        /*$('.table').click(function(event)
+        {
+            var target = $( event.target );
+            console.log(target);     
+        });*/
+
+        $('a#ver-tipo-competencia').click(function (event) {
+            console.log($(this).attr('href'));
+            event.preventDefault();
+        });
+    }
 
     return {
         init: function() {
@@ -3373,7 +3373,7 @@ var handleBootboxAddEquipoToJugador = function () {
             enableCountryToCompetition();
 
             loadFiter();
-
+            loadTipeComptetitionInfo();
         }
     }
 }();
