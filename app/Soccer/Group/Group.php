@@ -6,7 +6,7 @@ use Carbon\Carbon;
 * 
 */
 
-class Group extends Eloquent implements {
+class Group extends Eloquent {
     /*
 	********************* Relations ***********************
     */	

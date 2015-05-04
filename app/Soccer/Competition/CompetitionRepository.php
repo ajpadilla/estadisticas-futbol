@@ -1,11 +1,11 @@
-<?php namespace soccer\Competencia;
+<?php namespace soccer\Competition;
 
 use soccer\Base\BaseRepository;
-use soccer\Competencia\Competencia;
+use soccer\Competition\Competition;
 /**
 * 
 */
-class CompetenciaRepository extends BaseRepository
+class CompetitionRepository extends BaseRepository
 {		
 	
 	function __construct() {
@@ -17,8 +17,8 @@ class CompetenciaRepository extends BaseRepository
 			'Acciones'
 		];
 
-		$this->setModel(new Competencia);
-		$this->setListAllRoute('competencias.api.lista');
+		$this->setModel(new Competition);
+		$this->setListAllRoute('competitions.api.list');
 	}
     /*
 	********************* Methods ***********************
@@ -27,11 +27,9 @@ class CompetenciaRepository extends BaseRepository
 
 	public function create($data = array())
 	{
-		$competencia = $this->model->create($data); 
-		return $competencia;
+		$competition = $this->getModel->create($data); 
+		return $competition;
 	}
-
-
 
     /*
 	********************* Datatable Methods ***********************
@@ -40,9 +38,8 @@ class CompetenciaRepository extends BaseRepository
 		$this->addColumnToCollection('Acciones', function($model)
 		{
 			$this->cleanActionColumn();
-			$this->addActionColumn("<a class='ver-competencia' href='" . route('competencias.show', $model->id) . "'>Ver</a><br />");
-			$this->addActionColumn("<a  class='editar-competencia' href='#new-team-form' id='editar_competencia_".$model->id."'>Editar</a><br />");
-			$this->addActionColumn("<a class='eliminar-competencia' href='#' id='eliminar_competencia_".$model->id."'>Eliminar</a>");
+			$this->addActionColumn("<a class='show-competition' href='" . route('competitions.show', $model->id) . "'>Ver</a><br />");
+			$this->addActionColumn("<a class='delete-competition' href='#' id='delete_competition_".$model->id."'>Eliminar</a>");
 			return implode(" ", $this->getActionColumn());
 		});
 	}
@@ -69,7 +66,7 @@ class CompetenciaRepository extends BaseRepository
 
 		$this->collection->addColumn('Tipo de competencia', function($model)
 		{
-			 return $model->tipoCompetencia->nombre;
+			 return $model->tipoCompetition->nombre;
 		});
 	}		
 }

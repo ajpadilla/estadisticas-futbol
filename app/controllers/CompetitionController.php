@@ -1,24 +1,24 @@
 <?php
 
-use soccer\Competencia\CompetenciaRepository;
-use soccer\Forms\RegistrarCompetencia;
+use soccer\Competition\CompetitionRepository;
+use soccer\Forms\RegisterCompetition;
 use Laracasts\Validation\FormValidationException;
 
-class CompetenciaController extends \BaseController {
+class CompetitionController extends \BaseController {
 
 	protected $repository;
-	protected $registrarCompetencia;
+	protected $registerCompetition;
 
-	public function __construct(CompetenciaRepository $repository,
-			RegistrarCompetencia $registrarCompetencia
+	public function __construct(CompetitionRepository $repository,
+			RegisterCompetition $registerCompetition
 		){
 		$this->repository = $repository;
-		$this->registrarCompetencia = $registrarCompetencia;
+		$this->registerCompetition = $registerCompetition;
 	}
 
 	/**
 	 * Display a listing of the resource.
-	 * GET /Competencia
+	 * GET /Competition
 	 *
 	 * @return Response
 	 */
@@ -30,7 +30,7 @@ class CompetenciaController extends \BaseController {
 
 	/**
 	 * Show the form for creating a new resource.
-	 * GET /Competencia/create
+	 * GET /Competition/create
 	 *
 	 * @return Response
 	 */
@@ -41,7 +41,7 @@ class CompetenciaController extends \BaseController {
 
 	/**
 	 * Store a newly created resource in storage.
-	 * POST /Competencia
+	 * POST /Competition
 	 *
 	 * @return Response
 	 */
@@ -52,10 +52,10 @@ class CompetenciaController extends \BaseController {
 			$input = Input::all();
 			try
 			{
-				$this->registrarCompetencia->validate($input);
-				$competencia = $this->repository->create($input);
+				$this->registerCompetition->validate($input);
+				$competition = $this->repository->create($input);
 				$this->setSuccess(true);
-				$this->addToResponseArray('competencia', $competencia->toArray());
+				$this->addToResponseArray('competencia', $competition->toArray());
 				$this->addToResponseArray('data', $input);
 				return $this->getResponseArrayJson();				
 			}
@@ -77,7 +77,7 @@ class CompetenciaController extends \BaseController {
 	 */
 	public function show($id)
 	{
-		$competition = $this->repository->get($id);
+		$competition = $this->repository->get($id);		
 		return View::make('competitions.show', compact('competition'));
 	}
 
@@ -95,7 +95,7 @@ class CompetenciaController extends \BaseController {
 
 	/**
 	 * Update the specified resource in storage.
-	 * PUT /Competencia/{id}
+	 * PUT /Competition/{id}
 	 *
 	 * @param  int  $id
 	 * @return Response
@@ -107,7 +107,7 @@ class CompetenciaController extends \BaseController {
 
 	/**
 	 * Remove the specified resource from storage.
-	 * DELETE /Competencia/{id}
+	 * DELETE /Competition/{id}
 	 *
 	 * @param  int  $id
 	 * @return Response
@@ -132,7 +132,7 @@ class CompetenciaController extends \BaseController {
 		return $this->getResponseArrayJson();
 	}
 
-	public function listaApi()
+	public function listApi()
 	{
 		return $this->repository->getDefaultTableForAll();
 	}

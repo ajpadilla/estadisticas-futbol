@@ -6,22 +6,18 @@
 	</div>
 @endif
 <div class="row">
-	@if ($competition->hasTeams)
-		@foreach ($competition->teams as $team) 
-			<div class="col-md-12">		
-				<div class="box border green">
-					<div class="box-title">
-						<h4><i class="fa fa-bars"></i>Grupo {{ $team->nombre }}</h4>
-					</div>
-					<div class="box-body big">
-						<div class="row">
-							<div class="col-md-12">
-								@include('groups.partials._index-table')
-							</div>
-						</div>
+	<div class="col-md-12">		
+		<div class="box border green">
+			<div class="box-title">
+				<h4><i class="fa fa-bars"></i>Lista de equipos</h4>
+			</div>
+			<div class="box-body big">
+				<div class="row">
+					<div class="col-md-12">
+						@include('groups.partials._index-table')
 					</div>
 				</div>
-			</div>	
-		@endforeach	
-	@endif
+			</div>
+		</div>
+	</div>	
 </div>
