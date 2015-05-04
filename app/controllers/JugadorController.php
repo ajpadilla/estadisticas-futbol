@@ -44,9 +44,21 @@ class JugadorController extends \BaseController {
 	 */
 	public function create()
 	{
-		//
+		
 	}
 
+
+	public function selctAjax()
+	{
+		return View::make('jugadores.autocomplete');
+	}
+
+	public function filter($dato)
+	{
+		$nombres = $this->repository->filterListName($dato);
+		$this->addToResponseArray('nombres', $nombres);
+		return $this->getResponseArrayJson();	
+	}
 
 	/**
 	 * Store a newly created resource in storage.
