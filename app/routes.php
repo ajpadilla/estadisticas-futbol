@@ -133,3 +133,5 @@ Route::post('competencias/api-actualizar',  ['as' => 'competencias.api.update','
 
 
 Route::get('prueba-ruta/{id}',  ['as' => 'prueba','uses' => 'JugadorController@prueba' ] );
+Route::get('selctAjax',  ['as' => 'selctAjax','uses' => 'JugadorController@selctAjax' ] );
+Route::get('filterAjax/{dato}',  ['as' => 'filterAjax.api','uses' => 'JugadorController@filter' ] );
