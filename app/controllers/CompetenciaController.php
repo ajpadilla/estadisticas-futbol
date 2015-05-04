@@ -25,7 +25,7 @@ class CompetenciaController extends \BaseController {
 	public function index()
 	{
 		$table = $this->repository->getAllTable();
-		return View::make('competencias.index', compact('table'));
+		return View::make('competitions.index', compact('table'));
 	}
 
 	/**
@@ -70,20 +70,20 @@ class CompetenciaController extends \BaseController {
 
 	/**
 	 * Display the specified resource.
-	 * GET /Competencia/{id}
+	 * GET /competencia/{id}
 	 *
 	 * @param  int  $id
 	 * @return Response
 	 */
 	public function show($id)
 	{
-		$competencia = $this->repository->get($id);
-		return View::make('competencias.show', compact('competencia'));
+		$competition = $this->repository->get($id);
+		return View::make('competitions.show', compact('competition'));
 	}
 
 	/**
 	 * Show the form for editing the specified resource.
-	 * GET /Competencia/{id}/edit
+	 * GET /competencia/{id}/edit
 	 *
 	 * @param  int  $id
 	 * @return Response

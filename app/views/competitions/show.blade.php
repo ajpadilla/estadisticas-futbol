@@ -1,11 +1,11 @@
 @extends("layouts.main")
 
 @section("page-title")
-	Datos {{ $competencia->nombre }}
+	Datos {{ $competition->nombre }}
 @stop
 
 @section("page-description")
-	Competencia
+	Competición
 @stop
 
 @section('content')
@@ -13,7 +13,7 @@
 		<!-- BOX -->
 		<div class="box border">
 			<div class="box-title">
-				<h4><i class="fa fa-user"></i><span class="hidden-inline-mobile">{{ $competencia->nombre }}</span></h4>
+				<h4><i class="fa fa-user"></i><span class="hidden-inline-mobile">{{ $competition->nombre }}</span></h4>
 			</div>
 			<div class="box-body">
 				<div class="tabbable header-tabs user-profile">
@@ -22,7 +22,7 @@
 							<a href="#pro_teams" data-toggle="tab">
 								<i class="fa fa-question"></i> 
 								<span class="hidden-inline-mobile"> 
-									@if ($competencia->tipoCompetencia->esTorneo) 
+									@if ($competition->tipoCompetencia->isTournament) 
 										Grupos
 									@else
 										Equipos
@@ -52,25 +52,25 @@
 					<div class="tab-content">
 					   <!-- OVERVIEW -->
 					   <div class="tab-pane fade in active" id="pro_details">
-					   		@include('competencias.profile-overview')
+					   		@include('competitions.profile-overview')
 					   </div>
 					   <!-- /OVERVIEW -->
 					   
 					   <!-- EDIT ACCOUNT -->
 					   <div class="tab-pane fade" id="pro_edit">
-							@include('competencias.edit')
+							@include('competitions.edit')
 					   </div>
 					   <!-- /EDIT ACCOUNT -->
 					   
 					   <!-- EQUIPOS TAB -->
 					   <div class="tab-pane fade" id="pro_teams">						  
-					   		@include('competencias.equipos')
+					   		@include('competitions.teams')
 					   </div>
 					   <!-- /JUGADORES -->
 
 					   <!-- PARTIDOS TAB -->
 					   <div class="tab-pane fade" id="pro_games">
-						  @include('competencias.partidos')
+						  @include('competitions.games')
 					   </div>
 					   <!-- /PARTIDOS -->					   
 					</div>

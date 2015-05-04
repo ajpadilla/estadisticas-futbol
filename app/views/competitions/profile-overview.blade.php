@@ -5,36 +5,36 @@
 			<div class="col-md-12">
 				<div id="contact-card" class="panel panel-default">
 					{{-- <div class="panel-heading">
-						<h2 class="panel-title">{{ $competencia->apodo }}</h2>						
+						<h2 class="panel-title">{{ $competition->apodo }}</h2>						
 					</div> --}}				
 					<div class="panel-body">
 						<div id="card" class="row">
 							<div class="col-md-4 headshot">
-								<img class="img-responsive" src="{{ $competencia->imagen->url('medium') }}">
+								<img class="img-responsive" src="{{ $competition->imagen->url('medium') }}">
 							</div>
 							<div class="col-md-8">
 								<table class="table table-hover">
 									<tbody>
 										<tr>
 											<td>Tipo de Competencia</td>
-											<td id="card-name"><strong><a id="ver-tipo-competencia" href="{{ route('tipos-competencia.api.show', $competencia->tipoCompetencia->id) }}">{{ $competencia->tipoCompetencia->nombre }}</a></strong></td>
+											<td id="card-name"><strong><a id="show-competition-type" href="{{ route('tipos-competencia.api.show', $competition->tipoCompetencia->id) }}">{{ $competition->tipoCompetencia->nombre }}</a></strong></td>
 										</tr>
 										<tr>
 											<td>Inicia</td>
-											<td id="card-name"><strong>{{ $competencia->desde }}</strong></td>
+											<td id="card-name"><strong>{{ $competition->desde }}</strong></td>
 										</tr>
 										<tr>
 											<td>Finaliza</td>
-											<td id="card-name"><strong>{{ $competencia->hasta }}</strong></td>
+											<td id="card-name"><strong>{{ $competition->hasta }}</strong></td>
 										</tr>
-										@if($competencia->internacional)
+										@if($competition->internacional)
 											<tr>
 												<td>Competición Internacional</td>
 											</tr>										
 										@else
 											<tr>
 												<td>País</td>
-												<td id="card-name"><strong>{{ $competencia->pais->nombre }}</strong></td>
+												<td id="card-name"><strong>{{ $competition->pais->nombre }}</strong></td>
 											</tr>										
 										@endif										
 									</tbody>

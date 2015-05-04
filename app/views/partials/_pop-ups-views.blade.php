@@ -3,4 +3,4 @@
 @include('paises.new')
 @include('posiciones.new')
 @include('tipos-competencia.new')
-@include('competencias.new')
+@include('competitions.new')
