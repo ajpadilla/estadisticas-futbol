@@ -3311,18 +3311,70 @@ var handleBootboxAddEquipoToJugador = function () {
     }
 
 
-   
+    var showTipeComptetitionInfo = function (url, idTypeCompetition) {
+        $.ajax({
+            type: 'GET',
+            url: url,    
+            data: {'typeCompetitionId': idTypeCompetition},
+            dataType: "JSON",
+            success: function(response) {
+                if (response.success) {
+                    console.log(response);
+                    $('#type-competition-name-show').html('<strong>'+ response.tipoCompetencia.nombre +'</strong>');
+                    $('#type-competition-group-show').html('<strong>'+ response.tipoCompetencia.grupos +'</strong>');
+                    $('#type-competition-phases-show').html('<strong>'+ response.tipoCompetencia.fases_eliminatorias +'</strong>');
+                    $('#type-competition-round-trip-show').html('<strong>'+ response.tipoCompetencia.ida_vuelta +'</strong>');
+                    $('#type-competition-pre-classification-show').html('<strong>'+ response.tipoCompetencia.pre_clasificacion +'</strong>');
+                    $('#type-competition-teams-group-show').html('<strong>'+ response.tipoCompetencia.equipos_por_grupo +'</strong>');
+                    $('#type-competition-ascent-show').html('<strong>'+ response.tipoCompetencia.ascenso +'</strong>');
+                    $('#type-competition-descent-show').html('<strong>'+ response.tipoCompetencia.descenso +'</strong>');
+                    $('#type-competition-classified-group-show').html('<strong>'+ response.tipoCompetencia.clasificados_por_grupo +'</strong>');
+                    showPopUpDataForTypeCompetition();
+                }              
+            }
+        });
+    }
+
+    var showPopUpDataForTypeCompetition = function () {
+        bootbox.dialog({
+            message: $('#show-type-of-competition-form-div'),
+            buttons: {
+                success: {
+                    label: "Ok",
+                    className: "btn-primary",
+                    callback: function () {
+
+                    }
+                }
+            },
+                    show: false // We will show it manually later
+                })
+        .on('shown.bs.modal', function() {
+            $('#show-type-of-competition-form-div')
+                        .show();                             // Show the form
+                    })
+        .on('hide.bs.modal', function(e) {
+                // Bootbox will remove the modal (including the body which contains the form)
+                // after hiding the modal
+                // Therefor, we need to backup the form
+                $('#show-type-of-competition-form-div').hide().appendTo('#view-type-of-competition-form');
+            })
+        .modal('show');
+    }   
 
     var loadTipeComptetitionInfo = function () {
 
-        /*$('.table').click(function(event)
-        {
-            var target = $( event.target );
-            console.log(target);     
-        });*/
 
-        $('a#ver-tipo-competencia').click(function (event) {
-            console.log($(this).attr('href'));
+        $('a#see-type-competition').click(function (event) {
+
+            /*console.log('id:'+$(this).attr('href'));
+            console.log('idNumber:'+$(this).attr('href').split('?')[1]);*/
+
+            var url = $(this).attr('href').split('?')[0];
+            var id = $(this).attr('href').split('?')[1];
+
+            showTipeComptetitionInfo(url, id);
+
             event.preventDefault();
         });
     }
