@@ -69,7 +69,7 @@ class BaseRepository
 	************************** DATATABLE COLLECTION METHODS *********************************
 	*/
 
-	public function getAllTable($route = null, $params = array(), $orderColumn = 1, $type = 'asc')
+	public function getAllTable($route = null, $params = array(), $orderColumn = 1, $type = 'asc', $tableId = 'datatable')
 	{
 		if(!$route)
 			$route = $this->listAllRoute;

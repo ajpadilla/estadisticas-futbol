@@ -15,6 +15,7 @@ class GroupRepository extends BaseRepository
 
 	function __construct() {
 		$this->columns = [
+				'#',
 				'Equipo',
 				'JJ',
 				'JG',
@@ -102,6 +103,11 @@ class GroupRepository extends BaseRepository
 	{
 		$teamRepository->collection->searchColumns('Equipo', 'JJ', 'JG', 'JP', 'JE', 'GF', 'GC', 'DG', 'PTS');
 		$teamRepository->collection->orderColumns('Equipo', 'JJ', 'JG', 'JP', 'JE', 'GF', 'GC', 'DG', 'PTS');
+
+		$teamRepository->collection->addColumn('#', function($model)
+		{
+			return '';
+		});
 
 		$teamRepository->collection->addColumn('Equipo', function($model)
 		{
