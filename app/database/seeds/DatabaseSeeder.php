@@ -25,13 +25,15 @@ class DatabaseSeeder extends Seeder {
 	{
 		Eloquent::unguard();
 
-		$this->call('PosicionesTableSeeder');
+		/*$this->call('PosicionesTableSeeder');
 		$this->call('PaisesTableSeeder');
 		$this->call('JugadoresTableSeeder');
 		$this->call('EquiposTableSeeder');
 		$this->call('PosicionJugadorTableSeeder');
 		$this->call('TiposCompetenciaTableSeeder');
-		$this->call('CompetitionsTableSeeder');
+		$this->call('CompetitionsTableSeeder');*/
+		$this->call('GroupsTableSeeder');
+		$this->call('GroupTeamTableSeeder');
 		//$this->call('UserTableSeeder');
 	}
 

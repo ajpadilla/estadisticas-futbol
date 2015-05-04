@@ -139,4 +139,4 @@ Route::get('prueba-ruta/{id}',  ['as' => 'prueba','uses' => 'JugadorController@p
 ********************************* RUTAS PARA COMPETENCIAS ********************************
 */
 Route::get('grupos/agregar-equipo/{id}/{teamId}', ['as' => 'groups.api.add.team', 'uses' => 'GroupController@addTeamApi']);
-Route::get('grupos/lista-grupo/{id}', ['as' => 'groups.api.list.group', 'uses' => 'GroupController@listGroupApi']);
+Route::get('grupos/api-lista-grupo/{id}', ['as' => 'groups.api.list.group', 'uses' => 'GroupController@listGroupApi']);

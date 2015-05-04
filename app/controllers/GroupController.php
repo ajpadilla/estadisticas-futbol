@@ -2,7 +2,7 @@
 
 use soccer\Group\GroupRepository;
 
-class GroupController.php extends \BaseController {
+class GroupController extends \BaseController {
 
 	protected $repository;
 

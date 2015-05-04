@@ -3,6 +3,7 @@
 use soccer\Equipo\Equipo;
 use soccer\Base\BaseRepository;
 use soccer\Jugador\JugadorRepository;
+use soccer\Group\GroupRepository;
 use Carbon\Carbon;
 use Datatable;
 use Illuminate\Database\Eloquent\Collection;
@@ -12,8 +13,6 @@ use Illuminate\Support\Facades\File;
 */
 class EquipoRepository extends BaseRepository
 {		
-
-	protected  $jugadorRepository;
 
 	function __construct() {
 		$this->columns = [
@@ -59,6 +58,70 @@ class EquipoRepository extends BaseRepository
 			return false;
 		}
 	}	
+
+	/*
+	*********************** METHODS FOR GROUPS ******************************
+	*/		
+	public function getSortByPointsByGroup($groupId, $type = 'DESC')
+	{
+		$groupRepository = new GroupRepository;
+		$group = $groupRepository->get($groupId);
+		$teams = $group->teams;
+		/* Debo obtener los partidos para cada equipo dentro del grupo,
+		 * al tener los partidos, calculo el estatus para ese equipo en ese partido,
+		 * (perdió, ganó, empató), voy sumando los puntos por equipo en un array,
+		 * cuya clave es el id del equipo
+		*/
+		return $teams;
+	}
+
+	public function getPlayedGamesByGroup($id, $groupId)
+	{
+		// Obtengo todos los partidos que ya se han jugado para este equipo en ese grupo 
+		return 0;		
+	}
+
+	public function getWinGamesByGroup($id, $groupId)
+	{
+		// Obtengo todos los partidos que ya se han jugado para este equipo en ese grupo 
+		return 0;		
+	}
+
+	public function getLostGamesByGroup($id, $groupId)
+	{
+		// Obtengo todos los partidos que ya se han jugado para este equipo en ese grupo 
+		return 0;		
+	}
+
+	public function getTieGamesByGroup($id, $groupId)
+	{
+		// Obtengo todos los partidos que ya se han jugado para este equipo en ese grupo 
+		return 0;		
+	}
+
+	public function getScoredGoalsByGroup($id, $groupId)
+	{
+		// Obtengo todos los partidos que ya se han jugado para este equipo en ese grupo 
+		return 0;		
+	}
+
+	public function getAgainstGoalsByGroup($id, $groupId)
+	{
+		// Obtengo todos los partidos que ya se han jugado para este equipo en ese grupo 
+		return 0;		
+	}
+
+	public function getGoalsDifferenceByGroup($id, $groupId)
+	{
+		// Obtengo todos los partidos que ya se han jugado para este equipo en ese grupo 
+		return 0;		
+	}
+
+	public function getPointsByGroup($id, $groupId)
+	{
+		// Obtengo todos los partidos que ya se han jugado para este equipo en ese grupo 
+		return 0;		
+	}					
 
 	/*
 	*********************** DATATABLE SETTINGS ******************************

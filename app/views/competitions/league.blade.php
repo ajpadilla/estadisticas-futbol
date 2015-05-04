@@ -12,13 +12,17 @@
 				<h4><i class="fa fa-bars"></i>Lista de equipos</h4>				
 			</div>
 			<div class="box-body big">
-				@foreach($tables as $table)
-					<div class="row">									
-						<div class="col-md-12">						
-							@include('partials._index-table')
+				@if($tables)
+					@foreach($tables as $table)
+						<div class="row">									
+							<div class="col-md-12">						
+								@include('partials._index-table')
+							</div>
 						</div>
-					</div>
-				@endforeach
+					@endforeach
+				@else
+					<h1>No hay equipos aún!</h1>
+				@endif
 			</div>
 		</div>
 	</div>

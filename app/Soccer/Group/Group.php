@@ -12,7 +12,7 @@ class Group extends Eloquent {
     */	
     public function teams()
     {
-        return $this->belongsToMany('soccer\Equipo\Equipo');
+        return $this->belongsToMany('soccer\Equipo\Equipo', 'group_team', 'group_id', 'team_id');
     }
 
     /*

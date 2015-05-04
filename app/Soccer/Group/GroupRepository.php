@@ -2,6 +2,7 @@
 
 use soccer\Group\Group;
 use soccer\Base\BaseRepository;
+use soccer\Equipo\EquipoRepository;
 use Carbon\Carbon;
 use Datatable;
 use Illuminate\Database\Eloquent\Collection;
@@ -9,10 +10,8 @@ use Illuminate\Database\Eloquent\Collection;
 /**
 * 
 */
-class EquipoRepository extends BaseRepository
+class GroupRepository extends BaseRepository
 {		
-
-	protected  $jugadorRepository;
 
 	function __construct() {
 		$this->columns = [
@@ -99,71 +98,71 @@ class EquipoRepository extends BaseRepository
 		*/
 	}	
 
-	private function setTableGroupContent($id, EquipoRepository $equipoRepository)
+	private function setTableGroupContent($id, EquipoRepository $teamRepository)
 	{
-		$equipoRepository->collection->searchColumns('Equipo', 'JJ', 'JG', 'JP', 'JE', 'GF', 'GC', 'DG', 'PTS');
-		$equipoRepository->collection->orderColumns('Equipo', 'JJ', 'JG', 'JP', 'JE', 'GF', 'GC', 'DG', 'PTS');
+		$teamRepository->collection->searchColumns('Equipo', 'JJ', 'JG', 'JP', 'JE', 'GF', 'GC', 'DG', 'PTS');
+		$teamRepository->collection->orderColumns('Equipo', 'JJ', 'JG', 'JP', 'JE', 'GF', 'GC', 'DG', 'PTS');
 
-		$equipoRepository->collection->addColumn('Equipo', function($model)
+		$teamRepository->collection->addColumn('Equipo', function($model)
 		{
-			 return $model->nombre;
+			return $model->nombre;
 		});
 
-		$equipoRepository->collection->addColumn('JJ', function($model)
+		$teamRepository->collection->addColumn('JJ', function($model) use ($teamRepository, $id)
 		{
-			 return $model->nombre;
+			return $teamRepository->getPlayedGamesByGroup($model->id, $id);
 		});
 
-		$equipoRepository->collection->addColumn('JG', function($model)
+		$teamRepository->collection->addColumn('JG', function($model) use ($teamRepository, $id)
 		{
-			 return $model->nombre;
+			return $teamRepository->getWinGamesByGroup($model->id, $id);
 		});		
 
-		$equipoRepository->collection->addColumn('JP', function($model)
+		$teamRepository->collection->addColumn('JP', function($model) use ($teamRepository, $id)
 		{
-			 return $model->nombre;
+			return $teamRepository->getLostGamesByGroup($model->id, $id);
 		});
 
-		$equipoRepository->collection->addColumn('JE', function($model)
+		$teamRepository->collection->addColumn('JE', function($model) use ($teamRepository, $id)
 		{
-			 return $model->nombre;
+			return $teamRepository->getTieGamesByGroup($model->id, $id);
 		});
 		
-		$equipoRepository->collection->addColumn('GF', function($model)
+		$teamRepository->collection->addColumn('GF', function($model) use ($teamRepository, $id)
 		{
-			 return $model->nombre;
+			return $teamRepository->getScoredGoalsByGroup($model->id, $id);
 		});
 		
-		$equipoRepository->collection->addColumn('GC', function($model)
+		$teamRepository->collection->addColumn('GC', function($model) use ($teamRepository, $id)
 		{
-			 return $model->nombre;
+			return $teamRepository->getAgainstGoalsByGroup($model->id, $id);
 		});
 
-		$equipoRepository->collection->addColumn('DG', function($model)
+		$teamRepository->collection->addColumn('DG', function($model) use ($teamRepository, $id)
 		{
-			 return $model->nombre;
+			return $teamRepository->getGoalsDifferenceByGroup($model->id, $id);
 		});
 
-		$equipoRepository->collection->addColumn('PTS', function($model)
+		$teamRepository->collection->addColumn('PTS', function($model) use ($teamRepository, $id)
 		{
-			 return $model->nombre;
+			return $teamRepository->getPointsByGroup($model->id, $id);
 		});
 	}	
 
 	public function getDefaultTableForGroupTeams($id)
 	{
-		$teams = $this->get($id)->teams;
+		$teamRepository = new EquipoRepository;
+		$teams = $teamRepository->getSortByPointsByGroup($id);
 		if($teams) {
-			$equipoRepository = new EquipoRepository;
-			$equipoRepository->setDatatableCollection($teams);
-			$this->setTableGroupContent($id, $equipoRepository);
-			$equipoRepository->addColumnToCollection('Acciones', function($model) use ($equipoRepository)
+			$teamRepository->setDatatableCollection($teams);
+			$this->setTableGroupContent($id, $teamRepository);
+			$teamRepository->addColumnToCollection('Acciones', function($model) use ($teamRepository)
 			{
-				$equipoRepository->cleanActionColumn();
-				$equipoRepository->addActionColumn("<a class='show-team' href='" . route('equipos.show', $model->id) . "' id='show-team'>Ver</a><br />");
-				return implode(" ", $equipoRepository->getActionColumn());
+				$teamRepository->cleanActionColumn();
+				$teamRepository->addActionColumn("<a class='show-team' href='" . route('equipos.show', $model->id) . "' id='show-team'>Ver</a><br />");
+				return implode(" ", $teamRepository->getActionColumn());
 			});
-			return $equipoRepository->getTableCollectionForRender();
+			return $teamRepository->getTableCollectionForRender();
 		}
 		return null;
 	}	

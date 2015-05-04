@@ -1,6 +1,7 @@
 <?php namespace soccer\Competition;
 
 use soccer\Base\BaseRepository;
+use soccer\Group\GroupRepository;
 use soccer\Competition\Competition;
 /**
 * 
@@ -71,8 +72,9 @@ class CompetitionRepository extends BaseRepository
 		$tables = array();		
 		if(!$competition->isClean) {
 			$groupRepository = new GroupRepository;			
+			$orderColumn = $groupRepository->getColumnCount() - 1;
 			foreach ($competition->groups as $group) 
-				$tables[] = $groupRepository->getAllTable('groups.api.list.group', [$group->id]);			
+				$tables[] = $groupRepository->getAllTable('groups.api.list.group', [$group->id], $orderColumn, 'desc');			
 		}
 		return $tables;
 	}
