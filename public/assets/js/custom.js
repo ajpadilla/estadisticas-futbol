@@ -546,7 +546,6 @@ var CustomApp = function () {
 
     //Metodo para eliminar jugador de la BD.
     var deletePlayer = function (idPlayer) {
-        
         bootbox.confirm("¿Esta seguro de eliminar al Jugador?", function(result) {
             //console.log("Confirm result: "+result);
             if (result == true){
@@ -564,7 +563,10 @@ var CustomApp = function () {
                             buttons: {
                                 success: {
                                     label: "Success!",
-                                    className: "btn-success"
+                                    className: "btn-success",
+                                    callback: function () {
+                                        reloadDatatable();
+                                    }
                                 }
                             }
                         });
@@ -575,32 +577,13 @@ var CustomApp = function () {
        });
     }
 
-    // Metodo para saber cual opcion(ver, editar, borrar) fue seleccionada de la lista de Jugadores
-    var loadDataPlayer = function() 
+    // Metodo para ejecutar opciones(ver, editar, borrar) de la lista de Jugadores
+    var implementActionsToPlayers = function() 
     {
-        $('.table').click(function(event)
-        {
-            var target = $( event.target );
-            
-            console.log($(target).attr('id'));
-
-            var id = $(target).attr('id');
-            var type = id ? id.split('_')[0] : '';
-            var view = id ? id.split('_')[1] : '';
-            var numberId = id ? id.split('_')[2] : '';
-
-            if (view == "jugador") 
-            {
-                if (type == "editar") {
-                        //editPlayer(numberId);
-                    }else if(type == "ver"){
-                        //viewDataPlayer(numberId);
-                    }else if(type == "eliminar"){
-                        deletePlayer(numberId);
-                    }
-                }
-
-            });
+        $(".table").delegate(".delete-player", "click", function() {
+             action = getAttributeIdActionSelect($(this).attr('id'));
+             deletePlayer(action.number);
+        });
     }
 
     /*-----------------------------------------------------------------------------------*/
@@ -3052,33 +3035,21 @@ var handleBootboxAddEquipoToJugador = function () {
 
 
     // Metodo para saber cual opcion(ver, editar, borrar) fue seleccionada de la lista de Paises
-    var loadDataCompetition = function() 
+    var implementActionsToCompetitions = function() 
     {
-        /*$('.table').click(function(event)
-        {
-            var target = $( event.target );
-            console.log($(target).attr('id'));
-
-            var id = $(target).attr('id');
-            var type = id ? id.split('_')[0] : '';
-            var view = id ? id.split('_')[1] : '';
-            var numberId = id ? id.split('_')[2] : '';
-
-            if (view == "competencia") 
-            {
-                if(type == "eliminar"){
-                    deleteCompetition(numberId);
-                }
-            }
-
-        });*/
-
-
-        $(".table").delegate(".editar-competencia", "click", function() {
-            //console.log($(this), 'this');
-             console.log('id:'+$(this).attr('id').split('_')[2]);
+        $(".table").delegate(".delete-competition", "click", function() {
+             action = getAttributeIdActionSelect($(this).attr('id'));
+             deleteCompetition(action.number);
         });
+    }
 
+
+    var getAttributeIdActionSelect = function (id) {
+        var action = new Object(); 
+        action.typeAction = id ? id.split('_')[0] : '';
+        action.view = id ? id.split('_')[1] : '';
+        action.number = id ? id.split('_')[2] : '';
+        return action;
     }
 
  /**
@@ -3420,12 +3391,12 @@ var handleBootboxAddEquipoToJugador = function () {
             //handleFechaDateTimePicker();
             handleDatePicker();
 
-            loadDataPlayer();
+            implementActionsToPlayers();
             loadDataCountry();
             loadDataTeam();
             loadDataPosition();
             loadTypeOfCompetition();
-            loadDataCompetition();
+            implementActionsToCompetitions();
 
             loadPositionSelectPlayerCreate();
             loadPositionSelectPlayerEdit();
