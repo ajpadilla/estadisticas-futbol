@@ -136,9 +136,9 @@ class EquipoRepository extends BaseRepository
 		$this->addColumnToCollection('Acciones', function($model)
 		{
 			$this->cleanActionColumn();
-			$this->addActionColumn("<a class='ver-equipo' href='" . route('equipos.show', $model->id) . "'>Ver</a><br />");
-			$this->addActionColumn("<a  class='editar-equipo' href='#new-team-form' id='editar_equipo_".$model->id."'>Editar</a><br />");
-			$this->addActionColumn("<a class='eliminar-equipo' href='#' id='eliminar_equipo_".$model->id."'>Eliminar</a>");
+			$this->addActionColumn("<a class='show-team' href='" . route('equipos.show', $model->id) . "'>Ver</a><br />");
+			$this->addActionColumn("<a  class='edit-team' href='#new-team-form' id='edit_team_".$model->id."'>Editar</a><br />");
+			$this->addActionColumn("<a class='delete-team' href='#' id='delete_team_".$model->id."'>Eliminar</a>");
 			return implode(" ", $this->getActionColumn());
 		});
 	}
@@ -279,13 +279,13 @@ class EquipoRepository extends BaseRepository
 	public function deleteImageDirectory($id)
 	{
 		$equipo = $this->get($id);
-		if ($equipo->foto->url()) {
+		if (File::exists(public_path().$equipo->foto->url())) {
 			$ruta = explode("/", $equipo->foto->url());
 			$directorio = public_path().'/system/soccer/Equipo/Equipo/fotos/000/000/'.$ruta[8];
 			$equipo->foto->delete();
 			File::deleteDirectory($directorio, false);
 		}
-		if ($equipo->escudo->url()) {
+		if (File::exists(public_path().$equipo->escudo->url())) {
 			$ruta = explode("/", $equipo->escudo->url());
 			$directorio = public_path().'/system/soccer/Equipo/Equipo/escudos/000/000/'.$ruta[8];
 			$equipo->escudo->delete();

@@ -34,9 +34,9 @@ class PaisRepository extends BaseRepository
 		$this->addColumnToCollection('Acciones', function($model)
 		{
 			$this->cleanActionColumn();
-			$this->addActionColumn("<a class='ver-pais' href='#' id='ver_pais_".$model->id."'>Ver</a><br />");
-			$this->addActionColumn("<a  class='editar-pais' href='#new-country-form' id='editar_pais_".$model->id."'>Editar</a><br />");
-			$this->addActionColumn("<a class='eliminar-pais' href='#' id='eliminar_pais_".$model->id."'>Eliminar</a>");
+			$this->addActionColumn("<a class='show-country' href='#' id='show_country_".$model->id."'>Ver</a><br />");
+			$this->addActionColumn("<a  class='edit-country' href='#new-country-form' id='edit_country_".$model->id."'>Editar</a><br />");
+			$this->addActionColumn("<a class='delete-country' href='#' id='delete_country_".$model->id."'>Eliminar</a>");
 			return implode(" ", $this->getActionColumn());
 		});
 	}
