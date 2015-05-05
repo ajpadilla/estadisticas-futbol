@@ -578,7 +578,7 @@ var CustomApp = function () {
     }
 
     // Metodo para ejecutar opciones(ver, editar, borrar) de la lista de Jugadores
-    var implementActionsToPlayers = function() 
+    var implementActionsToPlayer = function() 
     {
         $(".table").delegate(".delete-player", "click", function() {
              action = getAttributeIdActionSelect($(this).attr('id'));
@@ -1024,7 +1024,10 @@ var CustomApp = function () {
                             buttons: {
                                 success: {
                                     label: "Success!",
-                                    className: "btn-success"
+                                    className: "btn-success",
+                                    callback: function () {
+                                        reloadDatatable();
+                                    }
                                 }
                             }
                         });
@@ -1037,27 +1040,16 @@ var CustomApp = function () {
 
 
     //Metodo para cargar vista seleccionada en lista de equipos
-    var loadDataTeam = function() 
+    var implementActionsToTeam = function() 
     {
-        $('.table').click(function(event)
-        {
-            var target = $( event.target );
-            
-            console.log($(target).attr('id'));
+        $(".table").delegate(".edit-team", "click", function() {
+           action = getAttributeIdActionSelect($(this).attr('id'));
+           editTeam(action.number);
+        });
 
-            var id = $(target).attr('id');
-            var type = id ? id.split('_')[0] : '';
-            var view = id ? id.split('_')[1] : '';
-            var numberId = id ? id.split('_')[2] : '';
-
-            if (view == "equipo") 
-            {
-                if (type == "editar") {
-                    editTeam(numberId);
-                }else{
-                    deleteTeam(numberId);
-                }
-            }
+        $(".table").delegate(".delete-team", "click", function() {
+           action = getAttributeIdActionSelect($(this).attr('id'));
+           deleteTeam(action.number);
         });
     }
 
@@ -1145,6 +1137,7 @@ var CustomApp = function () {
 
         // Mostrar formulario para agregar nuevo jugador
         $('#new-country').on('click', function() {
+            $('#country-form').trigger('reset');
             bootbox
                 .dialog({
                     message: $('#country-form-div'),
@@ -1522,7 +1515,10 @@ var CustomApp = function () {
                             buttons: {
                                 success: {
                                     label: "Success!",
-                                    className: "btn-success"
+                                    className: "btn-success",
+                                    callback: function () {
+                                        reloadDatatable();
+                                    }
                                 }
                             }
                         });
@@ -1535,29 +1531,22 @@ var CustomApp = function () {
 
 
     // Metodo para saber cual opcion(ver, editar, borrar) fue seleccionada de la lista de Paises
-    var loadDataCountry = function() 
+    var implementActionsToCountry = function() 
     {
-        $('.table').click(function(event)
-        {
-            var target = $( event.target );
-            
-            console.log($(target).attr('id'));
 
-            var id = $(target).attr('id');
-            var type = id ? id.split('_')[0] : '';
-            var view = id ? id.split('_')[1] : '';
-            var numberId = id ? id.split('_')[2] : '';
+        $(".table").delegate(".show-country", "click", function() {
+           action = getAttributeIdActionSelect($(this).attr('id'));
+           viewDataCountry(action.number);
+        });
 
-            if (view == "pais") 
-            {
-                if (type == "editar") {
-                    editCountry(numberId);
-                }else if(type == "ver"){
-                    viewDataCountry(numberId);
-                }else if(type == "eliminar"){
-                    deleteCountry(numberId);
-                }
-            }
+        $(".table").delegate(".edit-country", "click", function() {
+           action = getAttributeIdActionSelect($(this).attr('id'));
+           editCountry(action.number);
+        });
+
+        $(".table").delegate(".delete-country", "click", function() {
+           action = getAttributeIdActionSelect($(this).attr('id'));
+           deleteCountry(action.number);
         });
     }
 
@@ -1663,9 +1652,6 @@ var CustomApp = function () {
                                                     });
                                                     //Reinicio el formulario
                                                     $("#position-form")[0].reset();
-
-                                                 
-
                                                 }else{
                                                     console.log(responseServer);
                                                      bootbox.dialog({
@@ -1921,7 +1907,10 @@ var CustomApp = function () {
                             buttons: {
                                 success: {
                                     label: "Success!",
-                                    className: "btn-success"
+                                    className: "btn-success",
+                                    callback: function () {
+                                        reloadDatatable();
+                                    }
                                 }
                             }
                         });
@@ -1935,27 +1924,16 @@ var CustomApp = function () {
 
 
     // Metodo para saber cual opcion(ver, editar, borrar) fue seleccionada de la lista de Paises
-    var loadDataPosition = function() 
-    {
-        $('.table').click(function(event)
-        {
-            var target = $( event.target );
-            
-            console.log($(target).attr('id'));
+    var implementActionsToPosition = function() {
+        
+        $(".table").delegate(".edit-position", "click", function() {
+           action = getAttributeIdActionSelect($(this).attr('id'));
+           editPosition(action.number);
+        });
 
-            var id = $(target).attr('id');
-            var type = id ? id.split('_')[0] : '';
-            var view = id ? id.split('_')[1] : '';
-            var numberId = id ? id.split('_')[2] : '';
-
-            if (view == "posicion") 
-            {
-                if (type == "editar") {
-                    editPosition(numberId);
-                }else if(type == "eliminar"){
-                    deletePosition(numberId);
-                }
-            }
+        $(".table").delegate(".delete-position", "click", function() {
+           action = getAttributeIdActionSelect($(this).attr('id'));
+           deletePosition(action.number);
         });
     }
 
@@ -2788,29 +2766,16 @@ var handleBootboxAddEquipoToJugador = function () {
 
 
     // Metodo para saber cual opcion(ver, editar, borrar) fue seleccionada de la lista de Paises
-    var loadTypeOfCompetition = function() 
+    var implementActionsToTypeCompetition = function() 
     {
-        $('.table').click(function(event)
-        {
-            var target = $( event.target );
-            if (target.is('a')) 
-            {
-                console.log($(target).attr('id'));
+        $(".table").delegate(".edit-type-competition", "click", function() {
+            action = getAttributeIdActionSelect($(this).attr('id'));
+            editTypeOfCompetition(action.number);
+        });
 
-                var id = $(target).attr('id');
-                var type = id ? id.split('_')[0] : '';
-                var view = id ? id.split('_')[1] : '';
-                var numberId = id ? id.split('_')[2] : '';
-
-                if (view == "tipo-competencia") 
-                {
-                    if (type == "editar") {
-                        editTypeOfCompetition(numberId);
-                    }else if(type == "eliminar"){
-                        deleteTypeOfCompetition(numberId);
-                    }
-                }
-            }           
+        $(".table").delegate(".delete-type-competition", "click", function() {
+           action = getAttributeIdActionSelect($(this).attr('id'));
+           deleteTypeOfCompetition(action.number);
         });
     }
 
@@ -3391,12 +3356,14 @@ var handleBootboxAddEquipoToJugador = function () {
             //handleFechaDateTimePicker();
             handleDatePicker();
 
-            implementActionsToPlayers();
-            loadDataCountry();
-            loadDataTeam();
-            loadDataPosition();
-            loadTypeOfCompetition();
+            //Methods to perform actions on each model
+            implementActionsToPlayer();
+            implementActionsToTeam();
+            implementActionsToCountry();
+            implementActionsToPosition();
+            implementActionsToTypeCompetition();
             implementActionsToCompetitions();
+            
 
             loadPositionSelectPlayerCreate();
             loadPositionSelectPlayerEdit();
