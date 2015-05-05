@@ -3142,6 +3142,7 @@ var handleBootboxAddEquipoToJugador = function () {
             lang: 'es',
             timepicker: false,
             format: 'Y-m-d',
+            yearStart: '1850',
             todayButton: true,
             mask: true,
             closeOnDateSelect: true
