@@ -75,7 +75,8 @@ var CustomApp = function () {
     }
 
     var updatePlayerForm = function() {
-        loadFieldSelect($('#lista-paises').attr('href'),'.pais-jugador');
+        loadFieldSelect($('#lista-posiciones').attr('href'),'#posiciones_id_jugador');
+        loadFieldSelect($('#lista-paises').attr('href'),'#pais_id_jugador');
         $('.chosen-select').trigger("chosen:updated");
     }
 
@@ -3137,10 +3138,11 @@ var handleBootboxAddEquipoToJugador = function () {
                     $('select#posicion_id_jugador_edit').html('');
                     $('select#posicion_id_jugador_edit').append('<option value=\"\"></option>');
                     $('#fecha_nacimiento_edit').val(response.jugador.fecha_nacimiento);
-                    $('select#posiciones_id_jugador_edit').val(response.posiciones);
+                    $('#posiciones_id_jugador_edit').val(response.posiciones);
                     $.each(response.posicionesSelect,function (k,v){
                         $('select#posicion_id_jugador_edit').append('<option value=\"'+v.id+'\">'+v.nombre+'</option>');
                         $('select#posicion_id_jugador_edit').trigger("chosen:updated");
+                        $('#posiciones_id_jugador_edit').trigger("chosen:updated");
                         console.log(v.id);
                         console.log(v.nombre)
                     });
@@ -3148,7 +3150,6 @@ var handleBootboxAddEquipoToJugador = function () {
                     $('#pais_id_jugador_edit').val(response.pais.id);
                     $('select#pais_id_jugador_edit').trigger("chosen:updated");
                     $('select#posicion_id_jugador_edit').trigger("chosen:updated");
-                    $('select#posiciones_id_jugador_edit').trigger("chosen:updated");
                 }
             }
         });
@@ -3300,18 +3301,12 @@ var handleBootboxAddEquipoToJugador = function () {
     }   
 
     var loadTypeComptetitionInfo = function () {
-
-
         $('a#show-competition-type').click(function (event) {
-
             /*console.log('id:'+$(this).attr('href'));
             console.log('idNumber:'+$(this).attr('href').split('?')[1]);*/
-
             var url = $(this).attr('href').split('?')[0];
             var id = $(this).attr('href').split('?')[1];
-
             showTipeComptetitionInfo(url, id);
-
             event.preventDefault();
         });
     }
@@ -3319,25 +3314,24 @@ var handleBootboxAddEquipoToJugador = function () {
     return {
         init: function() {
             initChosen();
-            if($('#equipo_id_edit').val())
+
+            if($('#equipo_id_edit').val() != null){
                 loadFieldSelect($('#lista-paises').attr('href'),'#pais_id_equipo_edit');
                 loadDataForBladeEditTeam($('#equipo_id_edit').val());
-
-
-            if($('#jugador_id_edit').val()){
-                loadSelectForPlayer($('#jugador_id_edit').val());
-                loadFieldSelect($('#lista-paises').attr('href'),'.pais-jugador');
             }
                 
-
-
-            loadFieldSelect($('#lista-posiciones').attr('href'),'.posiciones-jugador');
-
+            if($('#jugador_id_edit').val() != null){
+                console.log($('#jugador_id_edit').val());
+                loadFieldSelect($('#lista-posiciones').attr('href'),'#posiciones_id_jugador_edit');
+                loadFieldSelect($('#lista-paises').attr('href'),'#pais_id_jugador_edit');
+                loadSelectForPlayer($('#jugador_id_edit').val());
+            }
+                
             loadFieldSelect($('#lista-equipos').attr('href'),'#equipo_id');
             loadFieldSelect($('#lista-equipos').attr('href'),'#equipo_id_jugador');
 
             loadFieldSelect($('#lista-paises').attr('href'),'#pais_equipo');
-            loadFieldSelect($('#lista-jugadores').attr('href'),'#jugadores');
+            //loadFieldSelect($('#lista-jugadores').attr('href'),'#jugadores');
             loadFieldSelect($('#lista-tipos-competencias').attr('href'),'#tipos-competencias');
             loadFieldSelect($('#lista-paises').attr('href'),'#pais-competencias');
             //initDataPicker();
@@ -3363,7 +3357,7 @@ var handleBootboxAddEquipoToJugador = function () {
             implementActionsToPosition();
             implementActionsToTypeCompetition();
             implementActionsToCompetitions();
-            
+
 
             loadPositionSelectPlayerCreate();
             loadPositionSelectPlayerEdit();
