@@ -3205,13 +3205,14 @@ var handleBootboxAddEquipoToJugador = function () {
                     $.each(response.posicionesSelect,function (k,v){
                         $('select#posicion_id_jugador_edit').append('<option value=\"'+v.id+'\">'+v.nombre+'</option>');
                         $('select#posicion_id_jugador_edit').trigger("chosen:updated");
-                        /*console.log(v.id);
-                        console.log(v.nombre)*/
+                        console.log(v.id);
+                        console.log(v.nombre)
                     });
                     $('select#posicion_id_jugador_edit').val(response.posicion.id);
                     $('#pais_id_jugador_edit').val(response.pais.id);
                     $('select#pais_id_jugador_edit').trigger("chosen:updated");
                     $('select#posicion_id_jugador_edit').trigger("chosen:updated");
+                    $('select#posiciones_id_jugador_edit').trigger("chosen:updated");
                 }
             }
         });
@@ -3387,9 +3388,11 @@ var handleBootboxAddEquipoToJugador = function () {
                 loadDataForBladeEditTeam($('#equipo_id_edit').val());
 
 
-            if($('#jugador_id_edit').val())
-                loadFieldSelect($('#lista-paises').attr('href'),'.pais-jugador');
+            if($('#jugador_id_edit').val()){
                 loadSelectForPlayer($('#jugador_id_edit').val());
+                loadFieldSelect($('#lista-paises').attr('href'),'.pais-jugador');
+            }
+                
 
 
             loadFieldSelect($('#lista-posiciones').attr('href'),'.posiciones-jugador');
