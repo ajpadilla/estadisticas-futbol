@@ -49,7 +49,7 @@
 <div class="form-group">
 	{{ Form::label('posiciones_id[]','Posiciones',['class'=>'col-sm-2 control-label']) }}
 	<div class="col-sm-6">
-		{{ Form::select('posiciones_id[]',array(),null,['class' => 'form-control chosen-select posiciones-jugador','data-placeholder' => 'Escoge Posición...','id'=> 'posiciones_id_jugador_edit','multiple'=> true]) }}
+		{{ Form::select('posiciones_id[]',$positions,null,['class' => 'form-control chosen-select posiciones-jugador','data-placeholder' => 'Escoge Posición...','id'=> 'posiciones_id_jugador_edit','multiple'=> true]) }}
 	</div>
 </div>
 
