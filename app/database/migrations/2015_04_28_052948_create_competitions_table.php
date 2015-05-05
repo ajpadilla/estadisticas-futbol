@@ -49,8 +49,8 @@ class CreateCompetitionsTable extends Migration {
 	{
 		Schema::table('competitions', function(Blueprint $table)
 		{
-			$table->dropForeign('competitions_country_id_foreign');
-			$table->dropColumn('country_id');
+			$table->dropForeign('competitions_pais_id_foreign');
+			$table->dropColumn('pais_id');
 		});
 		Schema::drop('competitions');
 	}
