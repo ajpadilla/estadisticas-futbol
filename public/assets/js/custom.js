@@ -53,6 +53,8 @@ var CustomApp = function () {
 
     var addValidationRulesForms = function() 
     {
+        $.validator.setDefaults({ ignore: ":hidden:not(.chosen-select)" });
+
         $.validator.addMethod('onlyLettersNumbersAndSpaces', function(value, element) {
                     return this.optional(element) || /^[a-zA-Z0-9ñÑ\s]+$/i.test(value);
         }, 'sólo letras, números y espacios.');
@@ -579,18 +581,17 @@ var CustomApp = function () {
         $('.table').click(function(event)
         {
             var target = $( event.target );
-            if (target.is('a')) 
+            
+            console.log($(target).attr('id'));
+
+            var id = $(target).attr('id');
+            var type = id ? id.split('_')[0] : '';
+            var view = id ? id.split('_')[1] : '';
+            var numberId = id ? id.split('_')[2] : '';
+
+            if (view == "jugador") 
             {
-                console.log($(target).attr('id'));
-
-                var id = $(target).attr('id');
-                var type = id ? id.split('_')[0] : '';
-                var view = id ? id.split('_')[1] : '';
-                var numberId = id ? id.split('_')[2] : '';
-
-                if (view == "jugador") 
-                {
-                    if (type == "editar") {
+                if (type == "editar") {
                         //editPlayer(numberId);
                     }else if(type == "ver"){
                         //viewDataPlayer(numberId);
@@ -598,8 +599,8 @@ var CustomApp = function () {
                         deletePlayer(numberId);
                     }
                 }
-            }           
-        });
+
+            });
     }
 
     /*-----------------------------------------------------------------------------------*/
@@ -1058,24 +1059,22 @@ var CustomApp = function () {
         $('.table').click(function(event)
         {
             var target = $( event.target );
-            if (target.is('a')) 
+            
+            console.log($(target).attr('id'));
+
+            var id = $(target).attr('id');
+            var type = id ? id.split('_')[0] : '';
+            var view = id ? id.split('_')[1] : '';
+            var numberId = id ? id.split('_')[2] : '';
+
+            if (view == "equipo") 
             {
-                console.log($(target).attr('id'));
-
-                var id = $(target).attr('id');
-                var type = id ? id.split('_')[0] : '';
-                var view = id ? id.split('_')[1] : '';
-                var numberId = id ? id.split('_')[2] : '';
-
-                if (view == "equipo") 
-                {
-                    if (type == "editar") {
-                        editTeam(numberId);
-                    }else{
-                        deleteTeam(numberId);
-                    }
+                if (type == "editar") {
+                    editTeam(numberId);
+                }else{
+                    deleteTeam(numberId);
                 }
-            }           
+            }
         });
     }
 
@@ -1558,26 +1557,24 @@ var CustomApp = function () {
         $('.table').click(function(event)
         {
             var target = $( event.target );
-            if (target.is('a')) 
+            
+            console.log($(target).attr('id'));
+
+            var id = $(target).attr('id');
+            var type = id ? id.split('_')[0] : '';
+            var view = id ? id.split('_')[1] : '';
+            var numberId = id ? id.split('_')[2] : '';
+
+            if (view == "pais") 
             {
-                console.log($(target).attr('id'));
-
-                var id = $(target).attr('id');
-                var type = id ? id.split('_')[0] : '';
-                var view = id ? id.split('_')[1] : '';
-                var numberId = id ? id.split('_')[2] : '';
-
-                if (view == "pais") 
-                {
-                    if (type == "editar") {
-                        editCountry(numberId);
-                    }else if(type == "ver"){
-                        viewDataCountry(numberId);
-                    }else if(type == "eliminar"){
-                        deleteCountry(numberId);
-                    }
+                if (type == "editar") {
+                    editCountry(numberId);
+                }else if(type == "ver"){
+                    viewDataCountry(numberId);
+                }else if(type == "eliminar"){
+                    deleteCountry(numberId);
                 }
-            }           
+            }
         });
     }
 
@@ -1960,24 +1957,22 @@ var CustomApp = function () {
         $('.table').click(function(event)
         {
             var target = $( event.target );
-            if (target.is('a')) 
+            
+            console.log($(target).attr('id'));
+
+            var id = $(target).attr('id');
+            var type = id ? id.split('_')[0] : '';
+            var view = id ? id.split('_')[1] : '';
+            var numberId = id ? id.split('_')[2] : '';
+
+            if (view == "posicion") 
             {
-                console.log($(target).attr('id'));
-
-                var id = $(target).attr('id');
-                var type = id ? id.split('_')[0] : '';
-                var view = id ? id.split('_')[1] : '';
-                var numberId = id ? id.split('_')[2] : '';
-
-                if (view == "posicion") 
-                {
-                    if (type == "editar") {
-                        editPosition(numberId);
-                    }else if(type == "eliminar"){
-                        deletePosition(numberId);
-                    }
+                if (type == "editar") {
+                    editPosition(numberId);
+                }else if(type == "eliminar"){
+                    deletePosition(numberId);
                 }
-            }           
+            }
         });
     }
 
@@ -2885,12 +2880,15 @@ var handleBootboxAddEquipoToJugador = function () {
             },
             highlight:function(element){
                 $(element).closest('.form-group').removeClass('has-success').addClass('has-error');
+                 $(element).closest('.control-group').removeClass('has-success').addClass('has-error');
             },
             unhighlight:function(element){
                 $(element).closest('.form-group').removeClass('has-error');
+                $(element).closest('.control-group').removeClass('has-error');
             },
             success:function(element){
                 element.addClass('valid').closest('.form-group').removeClass('has-error').addClass('has-success');
+                element.addClass('valid').closest('.control-group').removeClass('has-error').addClass('has-success');
             }
         });
 
@@ -3056,26 +3054,31 @@ var handleBootboxAddEquipoToJugador = function () {
     // Metodo para saber cual opcion(ver, editar, borrar) fue seleccionada de la lista de Paises
     var loadDataCompetition = function() 
     {
-        $('.table').click(function(event)
+        /*$('.table').click(function(event)
         {
             var target = $( event.target );
-            if (target.is('a')) 
+            console.log($(target).attr('id'));
+
+            var id = $(target).attr('id');
+            var type = id ? id.split('_')[0] : '';
+            var view = id ? id.split('_')[1] : '';
+            var numberId = id ? id.split('_')[2] : '';
+
+            if (view == "competencia") 
             {
-                console.log($(target).attr('id'));
-
-                var id = $(target).attr('id');
-                var type = id ? id.split('_')[0] : '';
-                var view = id ? id.split('_')[1] : '';
-                var numberId = id ? id.split('_')[2] : '';
-
-                if (view == "competencia") 
-                {
-                    if(type == "eliminar"){
-                        deleteCompetition(numberId);
-                    }
+                if(type == "eliminar"){
+                    deleteCompetition(numberId);
                 }
-            }           
+            }
+
+        });*/
+
+
+        $(".table").delegate(".editar-competencia", "click", function() {
+            //console.log($(this), 'this');
+             console.log('id:'+$(this).attr('id').split('_')[2]);
         });
+
     }
 
  /**
@@ -3281,6 +3284,101 @@ var handleBootboxAddEquipoToJugador = function () {
         });
     }
 
+
+    var loadFiter = function () {
+        $( "#select-autocomplete" ).autocomplete({
+            source: function( request, response ) {
+                $.ajax({
+                    url: "filterAjax/"+request.term+"/",
+                    dataType: "json",
+                    //beforeSend: function(){$('ul.chzn-results').empty();},
+                    success: function( data ) {
+                        /*response( $.map( data, function( item ) {
+                            $('ul.chzn-results').append('<li class="active-result">' + item.name + '</li>');
+                        }));*/
+                        console.log(data);
+                    }
+                });
+            },
+            minLength: 2,
+            select: function( event, ui ) {
+                console.log(ui);
+                /*log( ui.item ?
+                "Selected: " + ui.item.value + " aka " + ui.item.id :
+                "Nothing selected, input was " + this.value );*/
+            }
+        });
+    }
+
+
+    var showTipeComptetitionInfo = function (url, idTypeCompetition) {
+        $.ajax({
+            type: 'GET',
+            url: url,    
+            data: {'typeCompetitionId': idTypeCompetition},
+            dataType: "JSON",
+            success: function(response) {
+                if (response.success) {
+                    console.log(response);
+                    $('#type-competition-name-show').html('<strong>'+ response.tipoCompetencia.nombre +'</strong>');
+                    $('#type-competition-group-show').html('<strong>'+ response.tipoCompetencia.grupos +'</strong>');
+                    $('#type-competition-phases-show').html('<strong>'+ response.tipoCompetencia.fases_eliminatorias +'</strong>');
+                    $('#type-competition-round-trip-show').html('<strong>'+ response.tipoCompetencia.ida_vuelta +'</strong>');
+                    $('#type-competition-pre-classification-show').html('<strong>'+ response.tipoCompetencia.pre_clasificacion +'</strong>');
+                    $('#type-competition-teams-group-show').html('<strong>'+ response.tipoCompetencia.equipos_por_grupo +'</strong>');
+                    $('#type-competition-ascent-show').html('<strong>'+ response.tipoCompetencia.ascenso +'</strong>');
+                    $('#type-competition-descent-show').html('<strong>'+ response.tipoCompetencia.descenso +'</strong>');
+                    $('#type-competition-classified-group-show').html('<strong>'+ response.tipoCompetencia.clasificados_por_grupo +'</strong>');
+                    showPopUpDataForTypeCompetition();
+                }              
+            }
+        });
+    }
+
+    var showPopUpDataForTypeCompetition = function () {
+        bootbox.dialog({
+            message: $('#show-type-of-competition-form-div'),
+            buttons: {
+                success: {
+                    label: "Ok",
+                    className: "btn-primary",
+                    callback: function () {
+
+                    }
+                }
+            },
+                    show: false // We will show it manually later
+                })
+        .on('shown.bs.modal', function() {
+            $('#show-type-of-competition-form-div')
+                        .show();                             // Show the form
+                    })
+        .on('hide.bs.modal', function(e) {
+                // Bootbox will remove the modal (including the body which contains the form)
+                // after hiding the modal
+                // Therefor, we need to backup the form
+                $('#show-type-of-competition-form-div').hide().appendTo('#view-type-of-competition-form');
+            })
+        .modal('show');
+    }   
+
+    var loadTypeComptetitionInfo = function () {
+
+
+        $('a#show-competition-type').click(function (event) {
+
+            /*console.log('id:'+$(this).attr('href'));
+            console.log('idNumber:'+$(this).attr('href').split('?')[1]);*/
+
+            var url = $(this).attr('href').split('?')[0];
+            var id = $(this).attr('href').split('?')[1];
+
+            showTipeComptetitionInfo(url, id);
+
+            event.preventDefault();
+        });
+    }
+
     return {
         init: function() {
             initChosen();
@@ -3331,6 +3429,8 @@ var handleBootboxAddEquipoToJugador = function () {
 
             enableCountryToCompetition();
 
+            loadFiter();
+            loadTypeComptetitionInfo();
         }
     }
 }();

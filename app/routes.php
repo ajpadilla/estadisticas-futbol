@@ -38,8 +38,8 @@ Route::get('jugadores/api-eliminar',  ['as' => 'jugadores.api.eliminar','uses' =
 Route::get('jugadores/api-lista', array('as'=>'jugadores.api.lista', 'uses'=>'JugadorController@listaApi'));
 Route::get('jugadores/api-equipos/{id}', array('as'=>'jugadores.api.equipos', 'uses'=>'JugadorController@equiposApi'));
 Route::get('jugadores/api-cambiar-equipo/{id}', array('as'=>'jugadores.api.cambiar-equipo', 'uses'=>'JugadorController@cambiarEquipoApi'));
-Route::get('jugadores/api-ver',  ['as' => 'jugadores.data','uses' => 'JugadorController@showApi' ] );
-Route::get('jugadores/api-seleccionar',  ['as' => 'jugadores.seleccionar','uses' => 'JugadorController@getAllValue' ] );
+Route::get('jugadores/api-ver',  ['as' => 'jugadores.api.show','uses' => 'JugadorController@showApi' ] );
+Route::get('jugadores/api-seleccionar-lista',  ['as' => 'jugadores.api.select.list','uses' => 'JugadorController@getAllValue' ] );
 Route::post('jugadores/api-actualizar',  ['as' => 'jugadores.api.update','uses' => 'JugadorController@updateApi' ] );
 Route::post('jugadores/api-add-equipo',  ['as' => 'jugadores.api.add.equipo','uses' => 'JugadorController@addEquipoApi' ] );
 Route::post('jugadores/api-existe',  ['as' => 'jugadores.api.existe','uses' => 'JugadorController@existeApi'] );
@@ -60,8 +60,8 @@ Route::get('equipos/api-eliminar',  ['as' => 'equipos.api.eliminar','uses' => 'E
 Route::get('equipos/api-lista', array('as'=>'equipos.api.lista', 'uses'=>'EquipoController@listaApi'));
 Route::post('equipos/api-actualizar',  ['as' => 'equipos.api.update','uses' => 'EquipoController@updateApi' ] );
 Route::get('equipos/api-jugadores/{id}', array('as'=>'equipos.api.jugadores', 'uses'=>'EquipoController@jugadoresApi'));
-Route::get('equipos/api-ver',  ['as' => 'equipos.data','uses' => 'EquipoController@showApi' ] );
-Route::get('equipos/api-seleccionar',  ['as' => 'equipos.seleccionar','uses' => 'EquipoController@getAllValue' ] );
+Route::get('equipos/api-ver',  ['as' => 'equipos.api.show','uses' => 'EquipoController@showApi' ] );
+Route::get('equipos/api-seleccionar-lista',  ['as' => 'equipos.api.select.list','uses' => 'EquipoController@getAllValue' ] );
 Route::get('equipos/api-verificar-jugador',  ['as' => 'equipos.api.verificar-jugador','uses' => 'EquipoController@confirmExistsPlayerTeam' ] );
 Route::post('equipos/api-existe-numero',  ['as' => 'equipos.api.existe.numero','uses' => 'EquipoController@existeNumeroApi' ] );
 Route::post('equipos/api-existe',  ['as' => 'equipos.api.existe','uses' => 'EquipoController@existeApi'] );
@@ -71,7 +71,7 @@ Route::post('equipos/api-add-jugador',  ['as' => 'equipos.api.add.jugador','uses
 ********************************* RUTAS PARA PAISES ********************************
 */
 
-Route::get('lista-paises',  ['as' => 'paises.lista','uses' => 'PaisController@getAllValue' ] );
+Route::get('paises/api-seleccionar-lista',  ['as' => 'paises.api.select.list','uses' => 'PaisController@getAllValue' ] );
 Route::get('paises', ['as' => 'paises.index', 'uses' => 'PaisController@index']);
 Route::get('paises/nuevo', ['as' => 'paises.create', 'uses' => 'PaisController@create'] );
 Route::post('paises/guardar', ['as' => 'paises.store', 'uses' => 'PaisController@store' ] );
@@ -79,9 +79,8 @@ Route::get('paises/ver/{id}', ['as' => 'paises.show', 'uses' => 'PaisController@
 Route::get('paises/editar/{id}',  ['as' => 'paises.edit','uses' => 'PaisController@edit' ] );
 Route::post('paises/actualizar',  ['as' => 'paises.update','uses' => 'PaisController@update' ] );
 Route::get('paises/eliminar',  ['as' => 'paises.delete-ajax','uses' => 'PaisController@destroy' ] );
-Route::get('datos-pais',  ['as' => 'paises.data','uses' => 'PaisController@getData' ] );
 
-Route::get('paises/api-ver/{id}',  ['as' => 'paises.api.show','uses' => 'PaisController@showApi' ] );
+Route::get('paises/api-ver',  ['as' => 'paises.api.show','uses' => 'PaisController@showApi' ] );
 Route::get('paises/api-lista', array('as'=>'paises.api.lista', 'uses'=>'PaisController@listaApi'));
 
 /*
@@ -91,9 +90,9 @@ Route::get('paises/api-lista', array('as'=>'paises.api.lista', 'uses'=>'PaisCont
 Route::get('posiciones', ['as' => 'posiciones.index', 'uses' => 'PosicionController@index']);
 Route::post('posiciones/guardar', ['as' => 'posiciones.store', 'uses' => 'PosicionController@store' ] );
 
-Route::get('posiciones/api-ver',  ['as' => 'posiciones.data','uses' => 'PosicionController@showApi' ] );
+Route::get('posiciones/api-ver',  ['as' => 'posiciones.api.show','uses' => 'PosicionController@showApi' ] );
 Route::post('posiciones/api-actualizar',  ['as' => 'posiciones.api.update','uses' => 'PosicionController@updateApi' ] );
-Route::get('posiciones/api-seleccionar',  ['as' => 'posiciones.seleccionar','uses' => 'PosicionController@getAllValue' ] );
+Route::get('posiciones/api-seleccionar-lista',  ['as' => 'posiciones.api.select.list','uses' => 'PosicionController@getAllValue' ] );
 Route::get('posiciones/api-lista',  ['as' => 'posiciones.api.lista','uses' => 'PosicionController@listaApi' ] );
 Route::get('posiciones/api-eliminar',  ['as' => 'posiciones.api.eliminar','uses' => 'PosicionController@destroyApi' ] );
 /*
@@ -112,7 +111,7 @@ Route::get('tipos-competencia/api-lista', array('as'=>'tipos-competencia.api.lis
 Route::post('tipos-competencia/api-actualizar',  ['as' => 'tipos-competencia.api.update','uses' => 'TipoCompetenciaController@updateApi' ] );
 //Route::get('tipos-competencia/api-jugadores/{id}', array('as'=>'tipos-competencia.api.jugadores', 'uses'=>'TipoCompetenciaController@jugadoresApi'));
 Route::get('tipos-competencia/api-ver',  ['as' => 'tipos-competencia.api.show','uses' => 'TipoCompetenciaController@showApi' ] );
-Route::get('tipos-competencia/seleccionar-lista',  ['as' => 'tipos-competencia.seleccionar.lista','uses' => 'TipoCompetenciaController@getAllValue' ] );
+Route::get('tipos-competencia/api-seleccionar-lista',  ['as' => 'tipos-competencia.api.select.list','uses' => 'TipoCompetenciaController@getAllValue' ] );
 /*
 ********************************* RUTAS PARA COMPETENCIAS ********************************
 */
@@ -134,9 +133,11 @@ Route::get('competencias/api-agregar-equipo/{id}/{teamId}',  ['as' => 'competiti
 
 
 Route::get('prueba-ruta/{id}',  ['as' => 'prueba','uses' => 'JugadorController@prueba' ] );
+Route::get('selctAjax',  ['as' => 'selctAjax','uses' => 'JugadorController@selctAjax' ] );
+Route::get('filterAjax/{dato}',  ['as' => 'filterAjax.api','uses' => 'JugadorController@filter' ] );
 
 /*
-********************************* RUTAS PARA COMPETENCIAS ********************************
+********************************* RUTAS PARA GRUPOS ********************************
 */
 Route::get('grupos/agregar-equipo/{id}/{teamId}', ['as' => 'groups.api.add.team', 'uses' => 'GroupController@addTeamApi']);
 Route::get('grupos/api-lista-grupo/{id}', ['as' => 'groups.api.list.group', 'uses' => 'GroupController@listGroupApi']);

@@ -151,16 +151,19 @@ class PaisController extends \BaseController {
 		return $this->repository->getDefaultTableForAll();
 	}
 
-	public function getData()
+	public function showApi()
 	{
 		if (Request::ajax())
 		{
 			if (Input::has('countryId'))
 			{
 				$pais = $this->repository->get(Input::get('countryId'));
-				return Response::json(['success' => true, 'pais' => $pais->toArray()]);
+				$this->setSuccess(true);
+				$this->addToResponseArray('pais', $pais->toArray());
+				return $this->getResponseArrayJson();
 			}else{
-				return Response::json(['success' => false]);
+				$this->setSuccess(false);
+				return $this->getResponseArrayJson();
 			}
 		}
 	}
