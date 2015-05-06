@@ -54,9 +54,9 @@ class TipoCompetenciaRepository extends BaseRepository
 		$this->addColumnToCollection('Acciones', function($model)
 		{
 			$this->cleanActionColumn();
-			$this->addActionColumn("<a class='ver-competencias' href='#' id=''>Competencias</a><br />");
-			$this->addActionColumn("<a  class='editar-tipo-competencia' href='#new-type-of-competition-form' id='editar_tipo-competencia_".$model->id."'>Editar</a><br />");
-			$this->addActionColumn("<a class='eliminar-tipo-competencia' href='#' id='eliminar_tipo-competencia_".$model->id."'>Eliminar</a>");
+			$this->addActionColumn("<a class='show-type-competition' href='#' id=''>Competencias</a><br />");
+			$this->addActionColumn("<a  class='edit-type-competition' href='#new-type-of-competition-form' id='edit_type-competition_".$model->id."'>Editar</a><br />");
+			$this->addActionColumn("<a class='delete-type-competition' href='#' id='delete_type-competition_".$model->id."'>Eliminar</a>");
 			return implode(" ", $this->getActionColumn());
 		});
 	}

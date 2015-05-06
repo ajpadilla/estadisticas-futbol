@@ -34,7 +34,7 @@ class CreateGamesTable extends Migration {
 	 */
 	public function down()
 	{
-		Schema::drop('games');
+		Schema::dropIfExists('games');
 	}
 
 }

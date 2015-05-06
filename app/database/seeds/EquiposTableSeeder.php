@@ -14,7 +14,7 @@ class EquiposTableSeeder extends DatabaseSeeder {
         
         $equipos[] = array(
         	'nombre' => 'México',
-        	'escudo' => null,
+        	'escudo' => 'public/system/soccer/Equipo/Equipo/escudos/000/000/001/original/mexico.png',
             'foto' => 'public/system/soccer/Equipo/Equipo/fotos/000/000/001/original/mexico.jpg', 
         	'tipo' => 'selección',
         	'fecha_fundacion' => $faker->date($format = 'Y-m-d', $max = 'now'),
@@ -27,7 +27,7 @@ class EquiposTableSeeder extends DatabaseSeeder {
 
         $equipos[] = array(
         	'nombre' => 'Brasil',
-        	'escudo' => null,
+        	'escudo' => 'public/system/soccer/Equipo/Equipo/escudos/000/000/002/original/brasil.jpg',
             'foto' => 'public/system/soccer/Equipo/Equipo/fotos/000/000/002/original/brazil.jpg',
         	'tipo' => 'selección',
         	'fecha_fundacion' => $faker->date($format = 'Y-m-d', $max = 'now'),
@@ -40,7 +40,7 @@ class EquiposTableSeeder extends DatabaseSeeder {
 
         $equipos[] = array(
         	'nombre' => 'Argentina',
-        	'escudo' => null,
+        	'escudo' => 'public/system/soccer/Equipo/Equipo/escudos/000/000/003/original/argentina.png',
             'foto' => 'public/system/soccer/Equipo/Equipo/fotos/000/000/003/original/argentina.jpg', 
         	'tipo' => 'selección',
         	'fecha_fundacion' => $faker->date($format = 'Y-m-d', $max = 'now'),
@@ -53,7 +53,7 @@ class EquiposTableSeeder extends DatabaseSeeder {
 
         $equipos[] = array(
             'nombre' => 'Venezuela',
-            'escudo' => null,
+            'escudo' => 'public/system/soccer/Equipo/Equipo/escudos/000/000/004/original/venezuela.jpg',
             'foto' => 'public/system/soccer/Equipo/Equipo/fotos/000/000/004/original/venezuela.jpg', 
             'tipo' => 'selección',
             'fecha_fundacion' => $faker->date($format = 'Y-m-d', $max = 'now'),
@@ -66,7 +66,7 @@ class EquiposTableSeeder extends DatabaseSeeder {
 
         $equipos[] = array(
             'nombre' => 'España',
-            'escudo' => null,
+            'escudo' => 'public/system/soccer/Equipo/Equipo/escudos/000/000/005/original/espana.jpg',
             'foto' => 'public/system/soccer/Equipo/Equipo/fotos/000/000/005/original/espana.jpg', 
             'tipo' => 'selección',
             'fecha_fundacion' => $faker->date($format = 'Y-m-d', $max = 'now'),
@@ -79,7 +79,7 @@ class EquiposTableSeeder extends DatabaseSeeder {
     
          $equipos[] = array(
             'nombre' => 'Colombia',
-            'escudo' => null,
+            'escudo' => 'public/system/soccer/Equipo/Equipo/escudos/000/000/006/original/colombia.jpg',
             'foto' => 'public/system/soccer/Equipo/Equipo/fotos/000/000/006/original/colombia.jpg', 
             'tipo' => 'selección',
             'fecha_fundacion' => $faker->date($format = 'Y-m-d', $max = 'now'),
@@ -92,7 +92,7 @@ class EquiposTableSeeder extends DatabaseSeeder {
 
          $equipos[] = array(
             'nombre' => 'Aragua Fútbol Club',
-            'escudo' => null,
+            'escudo' => 'public/system/soccer/Equipo/Equipo/escudos/000/000/007/original/aragua.jpg',
             'foto' => 'public/system/soccer/Equipo/Equipo/fotos/000/000/007/original/aragua.jpg', 
             'tipo' => 'club',
             'fecha_fundacion' => $faker->date($format = 'Y-m-d', $max = 'now'),
@@ -105,7 +105,7 @@ class EquiposTableSeeder extends DatabaseSeeder {
 
         $equipos[] = array(
             'nombre' => 'Atlético Venezuela Club de Fútbol',
-            'escudo' => null,
+            'escudo' => 'public/system/soccer/Equipo/Equipo/escudos/000/000/008/original/atletico_venezuela.png',
             'foto' => 'public/system/soccer/Equipo/Equipo/fotos/000/000/008/original/atletico.jpg', 
             'tipo' => 'club',
             'fecha_fundacion' => $faker->date($format = 'Y-m-d', $max = 'now'),
@@ -118,7 +118,7 @@ class EquiposTableSeeder extends DatabaseSeeder {
 
         $equipos[] = array(
             'nombre' => 'Carabobo Fútbol Club',
-            'escudo' => null,
+            'escudo' => 'public/system/soccer/Equipo/Equipo/escudos/000/000/009/original/carabobo.jpg',
             'foto' => 'public/system/soccer/Equipo/Equipo/fotos/000/000/009/original/carabobo.jpg', 
             'tipo' => 'club',
             'fecha_fundacion' => $faker->date($format = 'Y-m-d', $max = 'now'),
@@ -131,7 +131,7 @@ class EquiposTableSeeder extends DatabaseSeeder {
 
         $equipos[] = array(
             'nombre' => 'Caracas Fútbol Club',
-            'escudo' => null,
+            'escudo' => 'public/system/soccer/Equipo/Equipo/escudos/000/000/010/original/caracas.jpg',
             'foto' => 'public/system/soccer/Equipo/Equipo/fotos/000/000/010/original/caracas.jpg', 
             'tipo' => 'club',
             'fecha_fundacion' => $faker->date($format = 'Y-m-d', $max = 'now'),
@@ -144,7 +144,7 @@ class EquiposTableSeeder extends DatabaseSeeder {
         
         $equipos[] = array(
             'nombre' => 'Deportivo Anzoátegui Sport Club',
-            'escudo' => null,
+            'escudo' => 'public/system/soccer/Equipo/Equipo/escudos/000/000/011/original/anzoategui.jpg',
             'foto' => 'public/system/soccer/Equipo/Equipo/fotos/000/000/011/original/anzoategui.jpg', 
             'tipo' => 'club',
             'fecha_fundacion' => $faker->date($format = 'Y-m-d', $max = 'now'),
@@ -157,7 +157,7 @@ class EquiposTableSeeder extends DatabaseSeeder {
 
         $equipos[] = array(
             'nombre' => 'Club Deportivo Lara',
-            'escudo' => null,
+            'escudo' => 'public/system/soccer/Equipo/Equipo/escudos/000/000/012/original/lara.jpg',
             'foto' => 'public/system/soccer/Equipo/Equipo/fotos/000/000/012/original/lara.jpg', 
             'tipo' => 'club',
             'fecha_fundacion' => $faker->date($format = 'Y-m-d', $max = 'now'),
@@ -170,7 +170,7 @@ class EquiposTableSeeder extends DatabaseSeeder {
         
          $equipos[] = array(
             'nombre' => 'Deportivo La Guaira',
-            'escudo' => null,
+            'escudo' => 'public/system/soccer/Equipo/Equipo/escudos/000/000/013/original/la_guaira.jpg',
             'foto' => 'public/system/soccer/Equipo/Equipo/fotos/000/000/013/original/guaira.jpg', 
             'tipo' => 'club',
             'fecha_fundacion' => $faker->date($format = 'Y-m-d', $max = 'now'),
@@ -183,7 +183,7 @@ class EquiposTableSeeder extends DatabaseSeeder {
 
         $equipos[] = array(
             'nombre' => 'Deportivo Petare Fútbol Club',
-            'escudo' => null,
+            'escudo' => 'public/system/soccer/Equipo/Equipo/escudos/000/000/014/original/petare.png',
             'foto' => 'public/system/soccer/Equipo/Equipo/fotos/000/000/014/original/petare.jpg', 
             'tipo' => 'club',
             'fecha_fundacion' => $faker->date($format = 'Y-m-d', $max = 'now'),
@@ -196,7 +196,7 @@ class EquiposTableSeeder extends DatabaseSeeder {
 
          $equipos[] = array(
             'nombre' => 'Deportivo Táchira Fútbol Club',
-            'escudo' => null,
+            'escudo' => 'public/system/soccer/Equipo/Equipo/escudos/000/000/015/original/tachira.jpg',
             'foto' => 'public/system/soccer/Equipo/Equipo/fotos/000/000/015/original/tachira.jpg', 
             'tipo' => 'club',
             'fecha_fundacion' => $faker->date($format = 'Y-m-d', $max = 'now'),
@@ -209,7 +209,7 @@ class EquiposTableSeeder extends DatabaseSeeder {
 
         $equipos[] = array(
             'nombre' => 'Estudiantes de Mérida Fútbol Club',
-            'escudo' => null,
+            'escudo' => 'public/system/soccer/Equipo/Equipo/escudos/000/000/016/original/merida.jpg',
             'foto' => 'public/system/soccer/Equipo/Equipo/fotos/000/000/016/original/merida.jpg', 
             'tipo' => 'club',
             'fecha_fundacion' => $faker->date($format = 'Y-m-d', $max = 'now'),
