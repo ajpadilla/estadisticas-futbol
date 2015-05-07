@@ -58,7 +58,7 @@
 					   
 					   <!-- players TAB -->
 					   <div class="tab-pane fade" id="pro_teams">						  
-					   		@include('players.equipos')
+					   		@include('players.teams')
 					   </div>
 					   <!-- /JUGADORES -->
 
