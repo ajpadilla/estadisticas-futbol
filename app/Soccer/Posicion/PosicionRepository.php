@@ -48,7 +48,7 @@ class PosicionRepository extends BaseRepository
 		$this->addColumnToCollection('Acciones', function($model)
 		{
 			$this->cleanActionColumn();
-			//$this->addActionColumn("<a class='ver-jugador' href='" . route('jugadores.show', $model->id) . "' id='ver_jugador'>Ver</a><br />");
+			//$this->addActionColumn("<a class='ver-jugador' href='" . route('players.show', $model->id) . "' id='ver_jugador'>Ver</a><br />");
 			$this->addActionColumn("<a  class='edit-position' href='#new-position-form' id='edit_position_".$model->id."'>Editar</a><br />");
 			$this->addActionColumn("<a class='delete-position' href='#' id='delete_position_".$model->id."'>Eliminar</a>");
 			return implode(" ", $this->getActionColumn());

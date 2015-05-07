@@ -31,9 +31,9 @@ class JugadorController extends \BaseController {
 	 */
 	public function index()
 	{		
-		$this->breadcrumbs->addCrumb('Jugadores', route('jugadores.index'));
+		$this->breadcrumbs->addCrumb('Jugadores', route('players.index'));
 		$table = $this->repository->getAllTable();
-		return View::make('jugadores.index', compact('jugadoresTable','table'));
+		return View::make('players.index', compact('jugadoresTable','table'));
 	}
 
 
@@ -56,6 +56,7 @@ class JugadorController extends \BaseController {
 	public function filter($dato)
 	{
 		$nombres = $this->repository->filterListName($dato);
+		$this->setSuccess(true);
 		$this->addToResponseArray('nombres', $nombres);
 		return $this->getResponseArrayJson();	
 	}
@@ -110,7 +111,7 @@ class JugadorController extends \BaseController {
 	{
 		$jugador = $this->repository->get($id);
 		$equipos = $this->equipoRepository->getAllForSelect();
-		$this->breadcrumbs->addCrumb($jugador->nombre, route('jugadores.show', $jugador->id));
+		$this->breadcrumbs->addCrumb($jugador->nombre, route('players.show', $jugador->id));
 		$table = $this->repository->getEquiposTable($id);
 		$positionsSelect = $jugador->posiciones()->lists('jugador_posicion.posicion_id');
 		$positions = $jugador->posiciones()->get(['jugador_posicion.id','posiciones.nombre']);

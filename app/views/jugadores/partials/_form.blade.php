@@ -16,7 +16,7 @@
 
 				<div class="divide-20"></div>
 				<div class="box-body big">
-					{{ Form::open(['route' => 'jugadores.store','class'=>'form-horizontal','role'=>'form',
+					{{ Form::open(['route' => 'players.store','class'=>'form-horizontal','role'=>'form',
 					'method' => 'POST','files' => true,'id'=> 'player-form']) }}
 						<div class="row">
 							<div class="col-md-12">

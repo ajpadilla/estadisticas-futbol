@@ -23,7 +23,7 @@ class JugadorRepository extends BaseRepository
 			'Acciones'
 		];
 		$this->setModel(new Jugador);
-		$this->setListAllRoute('jugadores.api.lista');
+		$this->setListAllRoute('players.api.list');
 	}
 
 	public function filterListName($nombre ='')
@@ -91,7 +91,7 @@ class JugadorRepository extends BaseRepository
 		$this->addColumnToCollection('Acciones', function($model)
 		{
 			$this->cleanActionColumn();
-			$this->addActionColumn("<a class='show-player' href='" . route('jugadores.show', $model->id) . "' id='ver_jugador'>Ver</a><br />");
+			$this->addActionColumn("<a class='show-player' href='" . route('players.show', $model->id) . "' id='ver_jugador'>Ver</a><br />");
 			$this->addActionColumn("<a  class='edit-player' href='#new-player-form' id='edit_player_".$model->id."'>Editar</a><br />");
 			$this->addActionColumn("<a class='delete-player' href='#' id='delete_player_".$model->id."'>Eliminar</a>");
 			return implode(" ", $this->getActionColumn());
@@ -146,7 +146,7 @@ class JugadorRepository extends BaseRepository
 			'Acciones'
 		];
 
-		return $equipoRepository->getAllTable('jugadores.api.equipos', [$id]);
+		return $equipoRepository->getAllTable('players.api.teams', [$id]);
 	}
 
 	private function setTableTeamContent(EquipoRepository $equipoRepository)

@@ -31,7 +31,7 @@
 							</a>
 						</li>
 						<li>
-							<a href="#pro_edit" data-toggle="tab">
+							<a href="#pro_edit" id="edit-player" data-toggle="tab">
 								<i class="fa fa-edit"></i> 
 								<span class="hidden-inline-mobile"> Editar</span>
 							</a>
