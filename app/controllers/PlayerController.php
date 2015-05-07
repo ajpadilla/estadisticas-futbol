@@ -2,8 +2,8 @@
 
 use soccer\Jugador\JugadorRepository;
 use soccer\Equipo\EquipoRepository;
-use soccer\Forms\RegistrarJugadorForm;
-use soccer\Forms\EditarJugadorForm;
+use soccer\Forms\RegisterPlayerForm;
+use soccer\Forms\EditPlayerForm;
 use Laracasts\Validation\FormValidationException;
 
 class PlayerController extends \BaseController {
@@ -15,8 +15,8 @@ class PlayerController extends \BaseController {
 
 	public function __construct(JugadorRepository $repository,
 			EquipoRepository $teamRepository,
-			RegistrarJugadorForm $registerPlayerForm,
-			EditarJugadorForm $editPlayerForm){
+			RegisterPlayerForm $registerPlayerForm,
+			EditPlayerForm $editPlayerForm){
 		$this->repository = $repository;
 		$this->teamRepository = $teamRepository;
 		$this->registerPlayerForm = $registerPlayerForm;
