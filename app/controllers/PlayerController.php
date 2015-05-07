@@ -32,7 +32,7 @@ class PlayerController extends \BaseController {
 	{		
 		$this->breadcrumbs->addCrumb('Jugadores', route('players.index'));
 		$table = $this->repository->getAllTable();
-		return View::make('jugadores.index', compact('jugadoresTable','table'));
+		return View::make('players.index', compact('jugadoresTable','table'));
 	}
 
 
@@ -49,7 +49,7 @@ class PlayerController extends \BaseController {
 
 	public function selctAjax()
 	{
-		return View::make('jugadores.autocomplete');
+		return View::make('players.autocomplete');
 	}
 
 	public function filter($dato)
@@ -114,7 +114,7 @@ class PlayerController extends \BaseController {
 		$table = $this->repository->getEquiposTable($id);
 		$positionsSelect = $jugador->posiciones()->lists('jugador_posicion.posicion_id');
 		$positions = $jugador->posiciones()->get(['jugador_posicion.id','posiciones.nombre']);
-		return View::make('jugadores.show', compact('jugador', 'table', 'equipos', 'positions','positionsSelect'));
+		return View::make('players.show', compact('jugador', 'table', 'equipos', 'positions','positionsSelect'));
 	}
 
 
