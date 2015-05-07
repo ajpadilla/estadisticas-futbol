@@ -18,7 +18,7 @@ class Pais extends Eloquent{
 
 	public function jugadores()
 	{
-		return $this->hasMany('soccer\Jugador\Jugador');
+		return $this->hasMany('soccer\Player\Player');
 	}	
 
 	/*
