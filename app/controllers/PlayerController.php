@@ -143,7 +143,7 @@ class PlayerController extends \BaseController {
 		{
 			$this->editJugadorForm->validate($input);
 			$jugador = $this->repository->update($input);
-			return Redirect::route('jugadores.show', $id);
+			return Redirect::route('players.show', $id);
 		}
 		catch (FormValidationException $e)
 		{
