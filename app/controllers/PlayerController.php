@@ -9,18 +9,18 @@ use Laracasts\Validation\FormValidationException;
 class PlayerController extends \BaseController {
 
 	protected $repository;
-	protected $equipoRepository;
-	protected $registrarJugadorForm;
-	protected $editarJugadorForm;
+	protected $teamRepository;
+	protected $registerPlayerForm;
+	protected $editJugadorForm;
 
 	public function __construct(JugadorRepository $repository,
-			EquipoRepository $equipoRepository,
-			RegistrarJugadorForm $registrarJugadorForm,
-			EditarJugadorForm $editarJugadorForm){
+			EquipoRepository $teamRepository,
+			RegistrarJugadorForm $registerPlayerForm,
+			EditarJugadorForm $editJugadorForm){
 		$this->repository = $repository;
-		$this->equipoRepository = $equipoRepository;
-		$this->registrarJugadorForm = $registrarJugadorForm;
-		$this->editarJugadorForm = $editarJugadorForm;
+		$this->teamRepository = $teamRepository;
+		$this->registerPlayerForm = $registerPlayerForm;
+		$this->editJugadorForm = $editJugadorForm;
 	}
 
 	/**
@@ -72,7 +72,7 @@ class PlayerController extends \BaseController {
 			$input = Input::all();
 			try
 			{
-				$this->registrarJugadorForm->validate($input);
+				$this->registerPlayerForm->validate($input);
 				$jugador = $this->repository->create($input);
 				$this->setSuccess(true);
 				$this->addToResponseArray('jugador', $jugador->toArray());
@@ -141,7 +141,7 @@ class PlayerController extends \BaseController {
 		$input['jugador_id'] = $id;
 		try
 		{
-			$this->editarJugadorForm->validate($input);
+			$this->editJugadorForm->validate($input);
 			$jugador = $this->repository->update($input);
 			return Redirect::route('jugadores.show', $id);
 		}
@@ -159,7 +159,7 @@ class PlayerController extends \BaseController {
 			$input = Input::all();
 			try
 			{
-				$this->editarJugadorForm->validate($input);
+				$this->editJugadorForm->validate($input);
 				$jugador = $this->repository->update($input);
 				$this->setSuccess(true);
 				$this->addToResponseArray('jugador', $jugador);
