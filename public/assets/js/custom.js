@@ -3119,9 +3119,10 @@ var handleBootboxAddEquipoToJugador = function () {
          $('#fecha span').html('Custom');*/
     }    
 
-    var reloadDatatable = function () {
-        if($('#datatable').length) {
-            var table = $('#datatable').DataTable();
+    var reloadDatatable = function (table) {
+        var table = typeof table !== 'undefined' ? tabñe : 'datatable';
+        if($(table).length) {
+            var table = $(table).DataTable();
             table.search('').draw();
         }
     }

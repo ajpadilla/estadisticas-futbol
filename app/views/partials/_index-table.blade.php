@@ -1,6 +1,6 @@
 {{ $table->render() }}
 
-@if(!$scriptTableTemplate)
+@if(!isset($scriptTableTemplate))
 	@section('scripts')	
 		{{ $table->script() }}
 	@stop

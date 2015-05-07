@@ -78,7 +78,8 @@ class BaseRepository
 		$datatable->addColumn($this->columns);
 		$datatable->setOptions('order', [[$orderColumn , $type]]);
 		//$datatable->setCustomValues('table-id', 'datatable-' . $tableId);
-		$datatable->setId('datatable-' . $tableId);
+		if($tableId != 'datatable')
+			$datatable->setId('datatable-' . $tableId);
 		$datatable->setUrl(route($route, $params));
 		$datatable->noScript();	
 		return $datatable;
