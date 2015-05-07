@@ -1,6 +1,6 @@
 <?php
 
-use soccer\Jugador\JugadorRepository;
+use soccer\Player\PlayerRepository;
 use soccer\Equipo\EquipoRepository;
 use soccer\Forms\RegisterPlayerForm;
 use soccer\Forms\EditPlayerForm;
@@ -13,7 +13,7 @@ class PlayerController extends \BaseController {
 	protected $registerPlayerForm;
 	protected $editPlayerForm;
 
-	public function __construct(JugadorRepository $repository,
+	public function __construct(PlayerRepository $repository,
 			EquipoRepository $teamRepository,
 			RegisterPlayerForm $registerPlayerForm,
 			EditPlayerForm $editPlayerForm){
