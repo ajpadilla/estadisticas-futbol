@@ -196,12 +196,12 @@ class PlayerController extends \BaseController {
 		return $this->getResponseArrayJson();
 	}
 
-	public function listaApi()
+	public function listApi()
 	{
 		return $this->repository->getDefaultTableForAll();
 	}
 
-	public function equiposApi($id)
+	public function teamsApi($id)
 	{
 		return $this->repository->getTableForTeams($id);
 	}	
@@ -234,12 +234,12 @@ class PlayerController extends \BaseController {
 		}
 	}
 
-	public function cambiarEquipoApi($id)
+	public function changeTeamApi($id)
 	{
 		
 	}
 
-	public function addEquipoApi()
+	public function addTeamApi()
 	{
 		if(Request::ajax()) {
 			$id = Input::get('id');
