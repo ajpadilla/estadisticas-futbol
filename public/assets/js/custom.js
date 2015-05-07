@@ -203,7 +203,7 @@ var CustomApp = function () {
 
                                         $.ajax({
                                             type: 'POST',
-                                            url: $('#agregar-jugador').attr('href'), 
+                                            url: $('#add-player').attr('href'), 
                                             data: formData,
                                             contentType: false,
                                             processData: false,
@@ -300,7 +300,7 @@ var CustomApp = function () {
     var loadDataForEditPlayer = function(idPlayer) {
         $.ajax({
             type: 'GET',
-            url: $('#datos-jugador').attr('href'),    
+            url: $('#data-player').attr('href'),    
             data: {'jugadorId': idPlayer},
             dataType: "JSON",
             success: function(response) {
@@ -453,7 +453,7 @@ var CustomApp = function () {
 
                                         $.ajax({
                                             type: 'POST',
-                                            url: $('#editar-jugador').attr('href'), 
+                                            url: $('#update-player').attr('href'), 
                                             data: formData,
                                             contentType: false,
                                             processData: false,
@@ -552,7 +552,7 @@ var CustomApp = function () {
             if (result == true){
                $.ajax({
                 type: 'GET',
-                url: $('#eliminar-jugador').attr('href'),
+                url: $('#delete-player').attr('href'),
                 data: {'idPlayer': idPlayer},
                 dataType: "JSON",
                 success: function(response) {
@@ -3130,7 +3130,7 @@ var handleBootboxAddEquipoToJugador = function () {
     var loadSelectForPlayer = function(idPlayer) {
         $.ajax({
             type: 'GET',
-            url: $('#datos-jugador').attr('href'),    
+            url: $('#data-player').attr('href'),    
             data: {'jugadorId': idPlayer},
             dataType: "JSON",
             success: function(response) {
@@ -3226,16 +3226,46 @@ var handleBootboxAddEquipoToJugador = function () {
 
 
     var loadFiter = function () {
+        $(".chosen-select").chosen();
+        $(".chosen-select-deselect").chosen({
+            allow_single_deselect: true,
+        });
+        $(".chosen-search input" ).autocomplete({
+            minLength: 1,
+            source: function( request, response ) {
+                $.ajax({
+                    url: "filterAjax/"+request.term+"/",
+                    dataType: "json",
+                    //beforeSend: function(){$("#autocomplete-select").empty();},
+                    success: function(data) {
+                        $.each(data.nombres,function (k,v){
+                            console.log(k);
+                            console.log(v);
+                            $('ul.chosen-results').append('<li class="active-result" data-option-array-index=\"'+k+'\">' + v + '</li>');
+                        });
+                        $("ul.chosen-results").trigger("liszt:updated");
+                        $("ul.chosen-results").trigger("chosen:updated");
+                    }
+                });
+            },
+            select: function( event, ui ) {
+                console.log('algo');
+                /*log( ui.item ?
+                "Selected: " + ui.item.value + " aka " + ui.item.id :
+                "Nothing selected, input was " + this.value );*/
+            }
+        });
+
         $( "#select-autocomplete" ).autocomplete({
             source: function( request, response ) {
                 $.ajax({
                     url: "filterAjax/"+request.term+"/",
                     dataType: "json",
-                    //beforeSend: function(){$('ul.chzn-results').empty();},
+                    beforeSend: function(){$('ul.chzn-results').empty();},
                     success: function( data ) {
-                        /*response( $.map( data, function( item ) {
+                        response( $.map( data, function( item ) {
                             $('ul.chzn-results').append('<li class="active-result">' + item.name + '</li>');
-                        }));*/
+                        }));
                         console.log(data);
                     }
                 });
@@ -3243,9 +3273,9 @@ var handleBootboxAddEquipoToJugador = function () {
             minLength: 2,
             select: function( event, ui ) {
                 console.log(ui);
-                /*log( ui.item ?
+                log( ui.item ?
                 "Selected: " + ui.item.value + " aka " + ui.item.id :
-                "Nothing selected, input was " + this.value );*/
+                "Nothing selected, input was " + this.value );
             }
         });
     }
@@ -3317,23 +3347,26 @@ var handleBootboxAddEquipoToJugador = function () {
         init: function() {
             initChosen();
 
+            loadFieldSelect($('#lista-posiciones').attr('href'),'#posiciones_id_jugador_edit');
+            loadFieldSelect($('#lista-paises').attr('href'),'#pais_id_jugador_edit');
+            
+            $('a#edit-player').click(function () {
+                console.log('edit-player');
+                loadSelectForPlayer($('#jugador_id_edit').val());
+            });
+
             if($('#equipo_id_edit').val() != null){
                 loadFieldSelect($('#lista-paises').attr('href'),'#pais_id_equipo_edit');
                 loadDataForBladeEditTeam($('#equipo_id_edit').val());
             }
                 
-            if($('#jugador_id_edit').val() != null){
-                console.log($('#jugador_id_edit').val());
-                loadFieldSelect($('#lista-posiciones').attr('href'),'#posiciones_id_jugador_edit');
-                loadFieldSelect($('#lista-paises').attr('href'),'#pais_id_jugador_edit');
-                loadSelectForPlayer($('#jugador_id_edit').val());
-            }
+            
                 
             loadFieldSelect($('#lista-equipos').attr('href'),'#equipo_id');
             loadFieldSelect($('#lista-equipos').attr('href'),'#equipo_id_jugador');
 
             loadFieldSelect($('#lista-paises').attr('href'),'#pais_equipo');
-            //loadFieldSelect($('#lista-jugadores').attr('href'),'#jugadores');
+            //loadFieldSelect($('#list-players').attr('href'),'#jugadores');
             loadFieldSelect($('#lista-tipos-competencias').attr('href'),'#tipos-competencias');
             loadFieldSelect($('#lista-paises').attr('href'),'#pais-competencias');
             //initDataPicker();

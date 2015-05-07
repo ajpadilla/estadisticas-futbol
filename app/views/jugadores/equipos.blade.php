@@ -7,7 +7,7 @@
 			<div class="box-body big">
 				<div class="row">
 					<div class="col-md-2 col-md-offset-10">
-						<button class="pull-right btn btn-lg btn-primary" id="add-equipo" href="{{ route('jugadores.api.add.equipo') }}">Agregar equipo</button>
+						<button class="pull-right btn btn-lg btn-primary" id="add-equipo" href="{{ route('players.api.add.team') }}">Agregar equipo</button>
 					</div>
 				</div>
 				<br>
