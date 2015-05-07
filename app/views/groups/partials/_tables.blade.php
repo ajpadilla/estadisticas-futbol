@@ -6,7 +6,7 @@
 	@endif
 		<div class="box border green">
 			<div class="box-title">
-				<h4><i class="fa fa-bars"></i>Grupo {{ $group->name }}</h4>
+				<h4><i class="fa fa-bars"></i>{{ $group->name }}</h4>
 			</div>
 			<div class="box-body big">
 				@if (!$group->isFullTeams)

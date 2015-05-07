@@ -52,8 +52,32 @@ return array(
 
             "sPaginationType" => "full_numbers",
 
-            "bProcessing" => false
+            "bProcessing" => false,
 
+            'language' => array(
+                'processing'=>     'Procesando...',
+                'lengthMenu'=>     'Mostrar: _MENU_',
+                'zeroRecords'=>    'No se encontraron resultados',
+                'emptyTable'=>     'Ningún dato disponible en esta tabla',
+                'info'=>           'Del _START_ al _END_ de _TOTAL_ registros',
+                'infoEmpty'=>      'Del 0 al 0 de un total de 0 registros',
+                'infoFiltered'=>   '(filtrado de un total de _MAX_ registros)',
+                'infoPostFix'=>    '',
+                'search'=>         'Buscar: ',
+                'url'=>            '',
+                'infoThousands'=>  ',',
+                'loadingRecords'=> 'Cargando...',
+                'paginate'=> array(
+                    'first'=>    '<<',
+                    'last'=>     '>>',
+                    'next'=>     '>',
+                    'previous'=> '<'
+                ),
+                'aria'=> array(
+                    'sortAscending' =>  'Ordenar la columna de manera ascendente',
+                    'sortDescending' => 'Ordenar la columna de manera descendente'
+                ),
+            ),            
         ),
 
         /*
