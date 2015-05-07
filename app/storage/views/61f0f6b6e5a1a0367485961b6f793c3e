@@ -1,0 +1,103 @@
+<h4>Información Básica</h4>
+<?php if(!empty($player)): ?>
+<div class="form-group" style="display: none;">
+	<?php echo Form::label('jugador_id','Id',['class'=>'col-sm-2 control-label']); ?>
+
+	<div class="col-sm-6">
+		<?php echo Form::text('jugador_id',$player->id, ['class' => 'form-control','id' => 'jugador_id']); ?>
+
+	</div>
+</div>
+<?php else: ?> 
+<div class="form-group" style="display: none;">
+	<?php echo Form::label('jugador_id','Id',['class'=>'col-sm-2 control-label']); ?>
+
+	<div class="col-sm-6">
+		<?php echo Form::text('jugador_id',null, ['class' => 'form-control','id' => 'jugador_id']); ?>
+
+	</div>
+</div>
+<?php endif; ?>
+
+
+<div class="form-group">
+	<?php echo Form::label('nombre','Nombre',['class'=>'col-sm-2 control-label']); ?>
+
+	<div class="col-sm-6">
+		<?php echo Form::text('nombre',null, ['class' => 'form-control','id' => 'nombre_jugador']); ?>
+
+	</div>
+</div>
+
+<div class="form-group">
+	<?php echo Form::label('fecha_nacimiento','Fecha de nacimiento',['class'=>'col-sm-2 control-label']); ?>
+
+	<div class="col-sm-6">
+		<?php echo Form::text('fecha_nacimiento',null, ['class' => 'form-control datepicker','placeholder'=>'','id' =>'fecha_nacimiento']); ?>
+
+	</div>
+</div>
+
+<div class="form-group">
+	<?php echo Form::label('lugar_nacimiento', 'Lugar de nacimiento', ['class' => 'col-md-2 control-label']); ?>	
+	<div class="col-md-8"><?php echo Form::textarea('lugar_nacimiento', null, ['class' => 'form-control', 'rows' => 8, 'cols' => 32,'id'=>'lugar_nacimiento_jugador']); ?></div>
+</div>
+
+<div class="form-group">
+	<?php echo Form::label('altura','Altura',['class'=>'col-sm-2 control-label']); ?>
+
+	<div class="col-sm-6">
+		<?php echo Form::text('altura',null, ['class' => 'form-control','id' => 'altura']); ?>
+
+	</div>
+</div>
+
+<div class="form-group">
+	<?php echo Form::label('peso','Peso',['class'=>'col-sm-2 control-label']); ?>
+
+	<div class="col-sm-6">
+		<?php echo Form::text('peso',null, ['class' => 'form-control','id' => 'peso_jugador']); ?>
+
+	</div>
+</div>
+
+<div class="form-group">
+	<?php echo Form::label('apodo','Apodo',['class'=>'col-sm-2 control-label']); ?>
+
+	<div class="col-sm-6">
+		<?php echo Form::text('apodo',null, ['class' => 'form-control','id' => 'apodo_jugador']); ?>
+
+	</div>
+</div>
+
+<div class="form-group">
+	<?php echo Form::label('posiciones_id[]','Posiciones',['class'=>'col-sm-2 control-label']); ?>
+
+	<div class="col-sm-6">
+		<?php echo Form::select('posiciones_id[]',array(),null,['class' => 'form-control chosen-select posiciones-jugador','data-placeholder' => 'Escoge Posición...','id'=> 'posiciones_id_jugador','multiple'=> true]); ?>
+
+	</div>
+</div>
+
+<div class="form-group">
+	<?php echo Form::label('posicion_id','Posición Actual',['class'=>'col-sm-2 control-label']); ?>
+
+	<div class="col-sm-6">
+		<?php echo Form::select('posicion_id',array(),null,['class' => 'form-control chosen-select','data-placeholder' => 'Escoge Posición...','id'=> 'posicion_id_jugador']); ?>
+
+	</div>
+</div>
+
+<div class="form-group">
+	<?php echo Form::label('pais_id','País',['class'=>'col-sm-2 control-label']); ?>
+
+	<div class="col-sm-6">
+		<?php echo Form::select('pais_id',array(),null,['class' => 'form-control chosen-select pais-jugador','data-placeholder' => 'Escoge País...','id'=>'pais_id_jugador']); ?>
+
+	</div>
+</div>
+
+<div class="form-group">
+	<?php echo Form::file('foto', ['class' => 'file-upload']); ?>
+
+</div> 

@@ -1,0 +1,16 @@
+<!-- PAGE HEADER-->
+<div class="row">
+	<div class="col-sm-12">
+		<div class="page-header">
+			<!-- STYLER -->
+			
+			<!-- /STYLER -->
+			<?php echo $__env->make("layouts.partials._breadcrumb", array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
+			<div class="clearfix">
+				<h3 class="content-title pull-left"><?php echo $__env->yieldContent('page-title'); ?></h3>
+			</div>
+			<div class="description"><?php echo $__env->yieldContent('page-description'); ?></div>
+		</div>
+	</div>
+</div>
+<!-- /PAGE HEADER -->
