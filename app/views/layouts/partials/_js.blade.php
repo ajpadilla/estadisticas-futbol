@@ -23,9 +23,9 @@
 {{ HTML::script('assets/js/fancybox/source/jquery.fancybox.pack.js') }}
 
 <!-- DATE RANGE PICKER -->
-{{ HTML::script('assets/js/bootstrap-daterangepicker/moment.min.js') }}
+{{-- HTML::script('assets/js/bootstrap-daterangepicker/moment.min.js') --}}
+{{-- HTML::script('assets/js/bootstrap-daterangepicker/daterangepicker.min.js') --}}
 
-{{ HTML::script('assets/js/bootstrap-daterangepicker/daterangepicker.min.js') }}
 <!-- SLIMSCROLL -->
 {{ HTML::script('assets/js/jQuery-slimScroll-1.3.0/jquery.slimscroll.min.js') }}
 {{ HTML::script('assets/js/jQuery-slimScroll-1.3.0/slimScrollHorizontal.min.js') }}

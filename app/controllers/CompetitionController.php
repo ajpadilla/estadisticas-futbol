@@ -79,7 +79,9 @@ class CompetitionController extends \BaseController {
 	{
 		$competition = $this->repository->get($id);
 		$tables = $this->repository->getGroupTables($id);
-		return View::make('competitions.show', compact('competition', 'tables'));
+		//$tableTemplate = 'groups.partials._table-template';
+		$scriptTableTemplate = 'groups.partials._script-table-template';
+		return View::make('competitions.show', compact('competition', 'tables', 'tableTemplate', 'scriptTableTemplate'));
 	}
 
 	/**

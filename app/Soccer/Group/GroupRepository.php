@@ -101,8 +101,8 @@ class GroupRepository extends BaseRepository
 
 	private function setTableGroupContent($id, EquipoRepository $teamRepository)
 	{
-		$teamRepository->collection->searchColumns('Pos', 'JJ', 'JG', 'JP', 'JE', 'GF', 'GC', 'DG', 'PTS');
-		$teamRepository->collection->orderColumns('Pos', 'JJ', 'JG', 'JP', 'JE', 'GF', 'GC', 'DG', 'PTS');
+		$teamRepository->collection->searchColumns('Pos', 'Equipo', 'JJ', 'JG', 'JP', 'JE', 'GF', 'GC', 'DG', 'PTS');
+		$teamRepository->collection->orderColumns('Pos', 'Equipo', 'JJ', 'JG', 'JP', 'JE', 'GF', 'GC', 'DG', 'PTS');
 
 		$teamRepository->collection->addColumn('Pos', function($model) use ($teamRepository, $id)
 		{

@@ -19,12 +19,12 @@ class TipoCompetencia extends Eloquent {
     /*
 	********************* Custom Methods ***********************
     */	    
-    public function getEsLigaAttribute()
+    public function getIsLeagueAttribute()
     {
     	return $this->grupos == 1;
     }
 
-    public function getEsTorneoAttribute()
+    public function getIsTournamentAttribute()
     {
     	return $this->grupos > 1;
     }

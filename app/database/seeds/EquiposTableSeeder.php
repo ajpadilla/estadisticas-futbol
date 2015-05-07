@@ -41,7 +41,7 @@ class EquiposTableSeeder extends DatabaseSeeder {
         $equipos[] = array(
         	'nombre' => 'Argentina',
         	'escudo' => 'public/system/soccer/Equipo/Equipo/escudos/000/000/003/original/argentina.png',
-            'foto' => 'public/system/soccer/Equipo/Equipo/fotos/000/000/003/original/argentina.jpg', 
+            //'foto' => 'public/system/soccer/Equipo/Equipo/fotos/000/000/003/original/argentina.jpg', 
         	'tipo' => 'selección',
         	'fecha_fundacion' => $faker->date($format = 'Y-m-d', $max = 'now'),
         	'apodo' => 'La Albiceleste',

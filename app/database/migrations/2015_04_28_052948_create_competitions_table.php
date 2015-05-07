@@ -20,7 +20,6 @@ class CreateCompetitionsTable extends Migration {
 			$table->date('desde');
 			$table->date('hasta');
 			$table->boolean('internacional')->default(false);
-
 			$table->integer('tipo_competencia_id')->unsigned();
 			$table->foreign('tipo_competencia_id')
 				->references('id')->on('tipo_competencias')

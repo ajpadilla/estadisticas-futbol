@@ -21,9 +21,21 @@ class TiposCompetenciaTableSeeder extends DatabaseSeeder{
             'created_at' => $date->format('Y-m-d h:m:s'),
             'updated_at' => $date->format('Y-m-d h:m:s')            
         ); 
-       
 
-        DB::table('tipo_competencias')->insert($tipos);
+        $tipos[] = array(
+            'nombre' => 'Torneo por grupos 4 fases',
+            'grupos' => 4,
+            'fases_eliminatorias' => 3,
+            'ida_vuelta' => 0, 
+            'equipos_por_grupo' => 4,
+            'clasificados_por_grupo' => 2,
+            'descenso' => 0,
+            'created_at' => $date->format('Y-m-d h:m:s'),
+            'updated_at' => $date->format('Y-m-d h:m:s')            
+        );         
+
+        foreach ($tipos as $tipo) 
+            DB::table('tipo_competencias')->insert($tipo);
 	}
 
 }
