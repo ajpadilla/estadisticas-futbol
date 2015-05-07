@@ -23,26 +23,26 @@ Route::get('/', [
 
 Route::get('jugadores', [
 	'as' => 'players.index', 
-	'uses' => 'JugadorController@index'
+	'uses' => 'PlayerController@index'
 ]);
 
-Route::get('jugadores/nuevo', ['as' => 'players.create', 'uses' => 'JugadorController@create'] );
-Route::post('jugadores/guardar', ['as' => 'players.store', 'uses' => 'JugadorController@store' ] );
-Route::get('jugadores/ver/{id}', ['as' => 'players.show', 'uses' => 'JugadorController@show' ] );
-Route::get('jugadores/editar/{id}',  ['as' => 'players.edit','uses' => 'JugadorController@edit' ] );
-Route::post('jugadores/actualizar/{id}',  ['as' => 'players.update','uses' => 'JugadorController@update' ] );
-Route::get('jugadores/eliminar/{id}',  ['as' => 'players.destroy','uses' => 'JugadorController@destroy' ] );
+Route::get('jugadores/nuevo', ['as' => 'players.create', 'uses' => 'PlayerController@create'] );
+Route::post('jugadores/guardar', ['as' => 'players.store', 'uses' => 'PlayerController@store' ] );
+Route::get('jugadores/ver/{id}', ['as' => 'players.show', 'uses' => 'PlayerController@show' ] );
+Route::get('jugadores/editar/{id}',  ['as' => 'players.edit','uses' => 'PlayerController@edit' ] );
+Route::post('jugadores/actualizar/{id}',  ['as' => 'players.update','uses' => 'PlayerController@update' ] );
+Route::get('jugadores/eliminar/{id}',  ['as' => 'players.destroy','uses' => 'PlayerController@destroy' ] );
 
 
-Route::get('jugadores/api-eliminar',  ['as' => 'players.api.delete','uses' => 'JugadorController@destroyApi' ] );
-Route::get('jugadores/api-lista', array('as'=>'players.api.list', 'uses'=>'JugadorController@listaApi'));
-Route::get('jugadores/api-equipos/{id}', array('as'=>'players.api.teams', 'uses'=>'JugadorController@equiposApi'));
-Route::get('jugadores/api-cambiar-equipo/{id}', array('as'=>'players.api.cambiar-equipo', 'uses'=>'JugadorController@cambiarEquipoApi'));
-Route::get('jugadores/api-ver',  ['as' => 'players.api.show','uses' => 'JugadorController@showApi' ] );
-Route::get('jugadores/api-seleccionar-lista',  ['as' => 'players.api.select.list','uses' => 'JugadorController@getAllValue' ] );
-Route::post('jugadores/api-actualizar',  ['as' => 'players.api.update','uses' => 'JugadorController@updateApi' ] );
-Route::post('jugadores/api-add-equipo',  ['as' => 'players.api.add.team','uses' => 'JugadorController@addEquipoApi' ] );
-Route::post('jugadores/api-existe',  ['as' => 'players.api.existe','uses' => 'JugadorController@existeApi'] );
+Route::get('jugadores/api-eliminar',  ['as' => 'players.api.delete','uses' => 'PlayerController@destroyApi' ] );
+Route::get('jugadores/api-lista', array('as'=>'players.api.list', 'uses'=>'PlayerController@listaApi'));
+Route::get('jugadores/api-equipos/{id}', array('as'=>'players.api.teams', 'uses'=>'PlayerController@equiposApi'));
+Route::get('jugadores/api-cambiar-equipo/{id}', array('as'=>'players.api.change-team', 'uses'=>'PlayerController@cambiarEquipoApi'));
+Route::get('jugadores/api-ver',  ['as' => 'players.api.show','uses' => 'PlayerController@showApi' ] );
+Route::get('jugadores/api-seleccionar-lista',  ['as' => 'players.api.select.list','uses' => 'PlayerController@getAllValue' ] );
+Route::post('jugadores/api-actualizar',  ['as' => 'players.api.update','uses' => 'PlayerController@updateApi' ] );
+Route::post('jugadores/api-add-equipo',  ['as' => 'players.api.add.team','uses' => 'PlayerController@addEquipoApi' ] );
+Route::post('jugadores/api-existe',  ['as' => 'players.api.exist','uses' => 'PlayerController@existeApi'] );
 
 /*
 ********************************* RUTAS PARA EQUIPOS ********************************
@@ -133,9 +133,9 @@ Route::get('competencias/api-agregar-equipo/{id}/{teamId}',  ['as' => 'competiti
 Route::get('competencias/api-agregar-grupo/{id}',  ['as' => 'competitions.api.add.group','uses' => 'CompetitionController@addGroupApi' ] );
 
 
-Route::get('prueba-ruta/{id}',  ['as' => 'prueba','uses' => 'JugadorController@prueba' ] );
-Route::get('selctAjax',  ['as' => 'selctAjax','uses' => 'JugadorController@selctAjax' ] );
-Route::get('filterAjax/{dato}',  ['as' => 'filterAjax.api','uses' => 'JugadorController@filter' ] );
+Route::get('prueba-ruta/{id}',  ['as' => 'prueba','uses' => 'PlayerController@prueba' ] );
+Route::get('selctAjax',  ['as' => 'selctAjax','uses' => 'PlayerController@selctAjax' ] );
+Route::get('filterAjax/{dato}',  ['as' => 'filterAjax.api','uses' => 'PlayerController@filter' ] );
 
 /*
 ********************************* RUTAS PARA GRUPOS ********************************

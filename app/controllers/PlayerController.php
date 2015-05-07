@@ -6,8 +6,7 @@ use soccer\Forms\RegistrarJugadorForm;
 use soccer\Forms\EditarJugadorForm;
 use Laracasts\Validation\FormValidationException;
 
-
-class JugadorController extends \BaseController {
+class PlayerController extends \BaseController {
 
 	protected $repository;
 	protected $equipoRepository;
@@ -33,7 +32,7 @@ class JugadorController extends \BaseController {
 	{		
 		$this->breadcrumbs->addCrumb('Jugadores', route('players.index'));
 		$table = $this->repository->getAllTable();
-		return View::make('players.index', compact('jugadoresTable','table'));
+		return View::make('jugadores.index', compact('jugadoresTable','table'));
 	}
 
 
@@ -267,5 +266,6 @@ class JugadorController extends \BaseController {
 			return $this->getResponseArrayJson();
 		}
 	}
+
 
 }
