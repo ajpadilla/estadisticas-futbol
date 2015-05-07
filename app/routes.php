@@ -35,13 +35,13 @@ Route::get('jugadores/eliminar/{id}',  ['as' => 'players.destroy','uses' => 'Pla
 
 
 Route::get('jugadores/api-eliminar',  ['as' => 'players.api.delete','uses' => 'PlayerController@destroyApi' ] );
-Route::get('jugadores/api-lista', array('as'=>'players.api.list', 'uses'=>'PlayerController@listaApi'));
-Route::get('jugadores/api-equipos/{id}', array('as'=>'players.api.teams', 'uses'=>'PlayerController@equiposApi'));
-Route::get('jugadores/api-cambiar-equipo/{id}', array('as'=>'players.api.change-team', 'uses'=>'PlayerController@cambiarEquipoApi'));
+Route::get('jugadores/api-lista', array('as'=>'players.api.list', 'uses'=>'PlayerController@listApi'));
+Route::get('jugadores/api-equipos/{id}', array('as'=>'players.api.teams', 'uses'=>'PlayerController@teamsApi'));
+Route::get('jugadores/api-cambiar-equipo/{id}', array('as'=>'players.api.change-team', 'uses'=>'PlayerController@changeTeamApi'));
 Route::get('jugadores/api-ver',  ['as' => 'players.api.show','uses' => 'PlayerController@showApi' ] );
 Route::get('jugadores/api-seleccionar-lista',  ['as' => 'players.api.select.list','uses' => 'PlayerController@getAllValue' ] );
 Route::post('jugadores/api-actualizar',  ['as' => 'players.api.update','uses' => 'PlayerController@updateApi' ] );
-Route::post('jugadores/api-add-equipo',  ['as' => 'players.api.add.team','uses' => 'PlayerController@addEquipoApi' ] );
+Route::post('jugadores/api-add-equipo',  ['as' => 'players.api.add.team','uses' => 'PlayerController@addTeamApi' ] );
 Route::post('jugadores/api-existe',  ['as' => 'players.api.exist','uses' => 'PlayerController@existeApi'] );
 
 /*
