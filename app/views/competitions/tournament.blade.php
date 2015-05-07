@@ -1,15 +1,17 @@
 @if (!$competition->isFullGroups) 
 	<div class="row">
 		<div class="col-md-2 col-md-offset-10">
-			<button class="pull-right btn btn-lg btn-primary" id="add-group" href="{{ route('competitions.api.add.group', $competition->id) }}">Agregar grupo</button>
+			<button class="pull-right btn btn-lg btn-primary" id="add-group" href="#">Agregar grupo</button>
+		</div>
+		<div id="add-group-to-competition" class="hidden">
+			@include('groups.new')
 		</div>
 	</div>
 	<br />
 @endif
 <div class="row">
 	@if ($competition->hasGroups)
-		<?php $tableIndex = 0; ?>
-		@foreach ($competition->groups as $group) 
+		@foreach ($competition->groups as $groupTableIndex => $group) 
 			<div class="col-md-6">		
 				<div class="box border green">
 					<div class="box-title">
@@ -19,16 +21,18 @@
 						@if (!$group->isFullTeams)
 							<div class="row">
 								<div class="col-md-2 col-md-offset-10">
-									<button class="pull-right btn btn-lg btn-primary" id="add-team-to-group" href="{{ route('groups.api.add.team', $group->id) }}">Agregar equipo</button>
+									<button class="pull-right btn btn-lg btn-primary" id="add-team" href="#">Agregar equipo</button>
 								</div>
+								<div id="add-team-to-group" class="hidden">
+									@include('groups.add-team')
+								</div>								
 							</div>					
 							<br />
 						@endif
 						<div class="row">
 							<div class="col-md-12">
-								<?php $table = $tables[$tableIndex]; ?>
+								<?php $table = $table = $tables[$groupTableIndex]; ?>
 								@include('partials._index-table')
-								<?php $tableIndex++; ?>
 							</div>
 						</div>
 					</div>
