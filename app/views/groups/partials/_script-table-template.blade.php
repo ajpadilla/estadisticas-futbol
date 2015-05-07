@@ -1,7 +1,6 @@
-<script type="text/javascript">
-    jQuery(document).ready(function(){
         // dynamic table
-        oTable = jQuery("#{{ $values['table-id'] }}").dataTable({
+
+        oTable = jQuery("#{{ $id }}").dataTable({
 
         @foreach ($options as $k => $o)
             {{ json_encode($k) }}: {{ json_encode($o) }},
@@ -13,5 +12,3 @@
 
         });
     // custom values are available via $values array
-    });
-</script>

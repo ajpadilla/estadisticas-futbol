@@ -4,9 +4,11 @@
 			<button class="pull-right btn btn-lg btn-primary" id="add-group" href="{{ route('competitions.api.add.group', $competition->id) }}">Agregar grupo</button>
 		</div>
 	</div>
+	<br />
 @endif
 <div class="row">
 	@if ($competition->hasGroups)
+		<?php $tableIndex = 0; ?>
 		@foreach ($competition->groups as $group) 
 			<div class="col-md-6">		
 				<div class="box border green">
@@ -24,13 +26,25 @@
 						@endif
 						<div class="row">
 							<div class="col-md-12">
-								<?php $table = array_shift($tables); ?>
+								<?php $table = $tables[$tableIndex]; ?>
 								@include('partials._index-table')
+								<?php $tableIndex++; ?>
 							</div>
 						</div>
 					</div>
 				</div>
 			</div>	
-		@endforeach	
+		@endforeach
+		@section('scripts')
+			<script type="text/javascript">
+			    jQuery(document).ready(function(){
+					@foreach($tables as $table)
+						@if($scriptTableTemplate)
+							{{ $table->script($scriptTableTemplate) }}
+						@endif
+					@endforeach
+			    });
+			</script>	
+		@stop		
 	@endif
 </div>

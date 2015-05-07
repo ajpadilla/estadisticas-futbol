@@ -77,10 +77,10 @@ class BaseRepository
 		$datatable = Datatable::table();
 		$datatable->addColumn($this->columns);
 		$datatable->setOptions('order', [[$orderColumn , $type]]);
-		$datatable->setCustomValues('table-id', 'datatable-' . $tableId);
+		//$datatable->setCustomValues('table-id', 'datatable-' . $tableId);
+		$datatable->setId('datatable-' . $tableId);
 		$datatable->setUrl(route($route, $params));
-		if($tableId == 'datatable')
-			$datatable->noScript();	
+		$datatable->noScript();	
 		return $datatable;
 	}	
 

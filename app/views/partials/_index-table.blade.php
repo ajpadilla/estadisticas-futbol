@@ -1,7 +1,7 @@
-{{ $scriptTableTemplate }}
+{{ $table->render() }}
 
-@if($tableTemplate)
-	{{ $table->render($tableTemplate) }}
-@else
-	{{ $table->render() }}
+@if(!$scriptTableTemplate)
+	@section('scripts')	
+		{{ $table->script() }}
+	@stop
 @endif
