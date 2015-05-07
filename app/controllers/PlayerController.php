@@ -2,25 +2,25 @@
 
 use soccer\Jugador\JugadorRepository;
 use soccer\Equipo\EquipoRepository;
-use soccer\Forms\RegistrarJugadorForm;
-use soccer\Forms\EditarJugadorForm;
+use soccer\Forms\RegisterPlayerForm;
+use soccer\Forms\EditPlayerForm;
 use Laracasts\Validation\FormValidationException;
 
 class PlayerController extends \BaseController {
 
 	protected $repository;
-	protected $equipoRepository;
-	protected $registrarJugadorForm;
-	protected $editarJugadorForm;
+	protected $teamRepository;
+	protected $registerPlayerForm;
+	protected $editPlayerForm;
 
 	public function __construct(JugadorRepository $repository,
-			EquipoRepository $equipoRepository,
-			RegistrarJugadorForm $registrarJugadorForm,
-			EditarJugadorForm $editarJugadorForm){
+			EquipoRepository $teamRepository,
+			RegisterPlayerForm $registerPlayerForm,
+			EditPlayerForm $editPlayerForm){
 		$this->repository = $repository;
-		$this->equipoRepository = $equipoRepository;
-		$this->registrarJugadorForm = $registrarJugadorForm;
-		$this->editarJugadorForm = $editarJugadorForm;
+		$this->teamRepository = $teamRepository;
+		$this->registerPlayerForm = $registerPlayerForm;
+		$this->editPlayerForm = $editPlayerForm;
 	}
 
 	/**
@@ -72,7 +72,7 @@ class PlayerController extends \BaseController {
 			$input = Input::all();
 			try
 			{
-				$this->registrarJugadorForm->validate($input);
+				$this->registerPlayerForm->validate($input);
 				$jugador = $this->repository->create($input);
 				$this->setSuccess(true);
 				$this->addToResponseArray('jugador', $jugador->toArray());
@@ -109,7 +109,7 @@ class PlayerController extends \BaseController {
 	public function show($id)
 	{
 		$jugador = $this->repository->get($id);
-		$equipos = $this->equipoRepository->getAllForSelect();
+		$equipos = $this->teamRepository->getAllForSelect();
 		$this->breadcrumbs->addCrumb($jugador->nombre, route('players.show', $jugador->id));
 		$table = $this->repository->getEquiposTable($id);
 		$positionsSelect = $jugador->posiciones()->lists('jugador_posicion.posicion_id');
@@ -141,9 +141,9 @@ class PlayerController extends \BaseController {
 		$input['jugador_id'] = $id;
 		try
 		{
-			$this->editarJugadorForm->validate($input);
+			$this->editPlayerForm->validate($input);
 			$jugador = $this->repository->update($input);
-			return Redirect::route('jugadores.show', $id);
+			return Redirect::route('players.show', $id);
 		}
 		catch (FormValidationException $e)
 		{
@@ -159,7 +159,7 @@ class PlayerController extends \BaseController {
 			$input = Input::all();
 			try
 			{
-				$this->editarJugadorForm->validate($input);
+				$this->editPlayerForm->validate($input);
 				$jugador = $this->repository->update($input);
 				$this->setSuccess(true);
 				$this->addToResponseArray('jugador', $jugador);
@@ -196,12 +196,12 @@ class PlayerController extends \BaseController {
 		return $this->getResponseArrayJson();
 	}
 
-	public function listaApi()
+	public function listApi()
 	{
 		return $this->repository->getDefaultTableForAll();
 	}
 
-	public function equiposApi($id)
+	public function teamsApi($id)
 	{
 		return $this->repository->getTableForTeams($id);
 	}	
@@ -234,12 +234,12 @@ class PlayerController extends \BaseController {
 		}
 	}
 
-	public function cambiarEquipoApi($id)
+	public function changeTeamApi($id)
 	{
 		
 	}
 
-	public function addEquipoApi()
+	public function addTeamApi()
 	{
 		if(Request::ajax()) {
 			$id = Input::get('id');
