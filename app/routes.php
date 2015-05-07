@@ -42,7 +42,7 @@ Route::get('jugadores/api-ver',  ['as' => 'players.api.show','uses' => 'PlayerCo
 Route::get('jugadores/api-seleccionar-lista',  ['as' => 'players.api.select.list','uses' => 'PlayerController@getAllValue' ] );
 Route::post('jugadores/api-actualizar',  ['as' => 'players.api.update','uses' => 'PlayerController@updateApi' ] );
 Route::post('jugadores/api-add-equipo',  ['as' => 'players.api.add.team','uses' => 'PlayerController@addTeamApi' ] );
-Route::post('jugadores/api-existe',  ['as' => 'players.api.exist','uses' => 'PlayerController@existeApi'] );
+Route::post('jugadores/api-existe',  ['as' => 'players.api.exist','uses' => 'PlayerController@existApi'] );
 
 /*
 ********************************* RUTAS PARA EQUIPOS ********************************
