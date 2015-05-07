@@ -22,7 +22,7 @@
 							<div class="form-group">
 								{{ Form::label('equipo_id','Equipos',['class'=>'col-sm-2 control-label']) }}
 								<div class="col-sm-6">
-									{{ Form::select('equipo_id', $equipos, null, ['class' => 'form-control chosen-select', 'data-placeholder' => 'Escoge equipo...', 'id'=> 'equipo_id']) }}
+									{{ Form::select('equipo_id', $teams, null, ['class' => 'form-control chosen-select', 'data-placeholder' => 'Escoge equipo...', 'id'=> 'equipo_id']) }}
 								</div>
 							</div>	
 							<div class="form-group">

@@ -109,12 +109,12 @@ class PlayerController extends \BaseController {
 	public function show($id)
 	{
 		$player = $this->repository->get($id);
-		$equipos = $this->teamRepository->getAllForSelect();
+		$teams = $this->teamRepository->getAllForSelect();
 		$this->breadcrumbs->addCrumb($player->nombre, route('players.show', $player->id));
 		$table = $this->repository->getEquiposTable($id);
 		$positionsSelect = $player->posiciones()->lists('jugador_posicion.posicion_id');
 		$positions = $player->posiciones()->get(['jugador_posicion.id','posiciones.nombre']);
-		return View::make('players.show', compact('player', 'table', 'equipos', 'positions','positionsSelect'));
+		return View::make('players.show', compact('player', 'table', 'teams', 'positions','positionsSelect'));
 	}
 
 
