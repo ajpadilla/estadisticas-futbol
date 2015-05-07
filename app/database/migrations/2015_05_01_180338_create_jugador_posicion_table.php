@@ -16,11 +16,11 @@ class CreateJugadorPosicionTable extends Migration {
 		{
 			$table->increments('id');
 			$table->boolean('principal');
-			$table->integer('jugador_id')->unsigned()->index();
-			$table->foreign('jugador_id')->references('id')->on('jugadores')->onDelete('cascade');
+			$table->integer('player_id')->unsigned()->index();
+			$table->foreign('player_id')->references('id')->on('players')->onDelete('cascade');
 			$table->integer('posicion_id')->unsigned()->index();
 			$table->foreign('posicion_id')->references('id')->on('posiciones')->onDelete('cascade');
-			$table->unique(array('jugador_id', 'posicion_id'), 'jugador_posicion_unique');
+			$table->unique(array('player_id', 'posicion_id'), 'player_posicion_unique');
 			$table->timestamps();
 		});
 	}
