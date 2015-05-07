@@ -109,7 +109,7 @@ class PlayerController extends \BaseController {
 	public function show($id)
 	{
 		$jugador = $this->repository->get($id);
-		$equipos = $this->equipoRepository->getAllForSelect();
+		$equipos = $this->teamRepository->getAllForSelect();
 		$this->breadcrumbs->addCrumb($jugador->nombre, route('players.show', $jugador->id));
 		$table = $this->repository->getEquiposTable($id);
 		$positionsSelect = $jugador->posiciones()->lists('jugador_posicion.posicion_id');
