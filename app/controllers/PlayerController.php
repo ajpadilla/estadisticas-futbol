@@ -11,16 +11,16 @@ class PlayerController extends \BaseController {
 	protected $repository;
 	protected $teamRepository;
 	protected $registerPlayerForm;
-	protected $editJugadorForm;
+	protected $editPlayerForm;
 
 	public function __construct(JugadorRepository $repository,
 			EquipoRepository $teamRepository,
 			RegistrarJugadorForm $registerPlayerForm,
-			EditarJugadorForm $editJugadorForm){
+			EditarJugadorForm $editPlayerForm){
 		$this->repository = $repository;
 		$this->teamRepository = $teamRepository;
 		$this->registerPlayerForm = $registerPlayerForm;
-		$this->editJugadorForm = $editJugadorForm;
+		$this->editPlayerForm = $editPlayerForm;
 	}
 
 	/**
@@ -141,7 +141,7 @@ class PlayerController extends \BaseController {
 		$input['jugador_id'] = $id;
 		try
 		{
-			$this->editJugadorForm->validate($input);
+			$this->editPlayerForm->validate($input);
 			$jugador = $this->repository->update($input);
 			return Redirect::route('players.show', $id);
 		}
@@ -159,7 +159,7 @@ class PlayerController extends \BaseController {
 			$input = Input::all();
 			try
 			{
-				$this->editJugadorForm->validate($input);
+				$this->editPlayerForm->validate($input);
 				$jugador = $this->repository->update($input);
 				$this->setSuccess(true);
 				$this->addToResponseArray('jugador', $jugador);
