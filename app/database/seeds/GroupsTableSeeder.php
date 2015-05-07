@@ -20,6 +20,20 @@ class GroupsTableSeeder extends DatabaseSeeder{
             'updated_at' => $date->format('Y-m-d h:m:s')            
         );        
 
+        $groups[] = array(
+        	'name' => 'A',
+        	'competition_id' => 2,
+            'created_at' => $date->format('Y-m-d h:m:s'),
+            'updated_at' => $date->format('Y-m-d h:m:s')            
+        );        
+
+        $groups[] = array(
+        	'name' => 'B',
+        	'competition_id' => 2,
+            'created_at' => $date->format('Y-m-d h:m:s'),
+            'updated_at' => $date->format('Y-m-d h:m:s')            
+        );        
+
         DB::table('groups')->insert($groups);
 	}
 

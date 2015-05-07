@@ -24,7 +24,8 @@
 						@endif
 						<div class="row">
 							<div class="col-md-12">
-								@include('groups.partials._index-table')
+								<?php $table = array_shift($tables); ?>
+								@include('partials._index-table')
 							</div>
 						</div>
 					</div>

@@ -49,12 +49,12 @@ class Competition extends Eloquent implements StaplerableInterface{
 
     public function getHasGroupsAttribute()
     {
-        return $this->tipoCompetencia->groups > 1;
+        return $this->tipoCompetencia->grupos > 1;
     }
 
     public function getIsLeagueAttribute()
     {
-        return $this->tipoCompetencia->groups <= 1;
+        return $this->tipoCompetencia->grupos <= 1;
     }
 
     public function getIsClean()

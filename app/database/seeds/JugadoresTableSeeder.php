@@ -87,7 +87,7 @@ class JugadoresTableSeeder extends DatabaseSeeder{
             'nombre' => 'Lucas Orbán',
             'apodo' => 'Futbolista',
             'fecha_nacimiento' => $faker->date($format = 'Y-m-d', $max = 'now'),
-            'foto' => 'public/system/soccer/Jugador/Jugador/fotos/000/000/007/original/Lucas_Orban.jpg',
+            //'foto' => 'public/system/soccer/Jugador/Jugador/fotos/000/000/007/original/Lucas_Orban.jpg',
             'altura' => $faker->randomFloat(2, 6, 100),
             'peso' => $faker->randomFloat(2, 6, 100),
             'peso' => $faker->randomFloat(2, 6, 100), 
