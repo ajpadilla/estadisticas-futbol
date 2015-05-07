@@ -1,7 +1,7 @@
 @extends("layouts.main")
 
 @section("page-title")
-	Datos {{ $jugador->nombre }}
+	Datos {{ $player->nombre }}
 @stop
 
 @section("page-description")
@@ -13,7 +13,7 @@
 		<!-- BOX -->
 		<div class="box border">
 			<div class="box-title">
-				<h4><i class="fa fa-user"></i><span class="hidden-inline-mobile">{{ $jugador->nombre }}</span></h4>
+				<h4><i class="fa fa-user"></i><span class="hidden-inline-mobile">{{ $player->nombre }}</span></h4>
 			</div>			
 			<div class="box-body">
 				<div class="tabbable header-tabs user-profile">

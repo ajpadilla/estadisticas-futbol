@@ -1,7 +1,7 @@
 <div id="jugador-add-equipo-div" style="display:none">
 	<div id="jugador-add-equipo-div-box" class="box border primary">
 		<div class="box-title">
-			<h4><i class="fa fa-plus-square"></i>Agregar equipo a {{ $jugador->nombre }}</h4>
+			<h4><i class="fa fa-plus-square"></i>Agregar equipo a {{ $player->nombre }}</h4>
 			<div class="tools">
 				<a href="javascript:;" class="reload">
 					<i class="fa fa-refresh"></i>
@@ -18,7 +18,7 @@
 					<div class="divide-20"></div>
 					<div class="box-body big">
 						{{ Form::open(['route' => 'players.api.add.team','class'=>'form-horizontal','role'=>'form', 'method' => 'POST', 'id'=> 'jugador-add-equipo-form']) }}
-							<input id="id" name="id" type="hidden" value="{{ $jugador->id }}">
+							<input id="id" name="id" type="hidden" value="{{ $player->id }}">
 							<div class="form-group">
 								{{ Form::label('equipo_id','Equipos',['class'=>'col-sm-2 control-label']) }}
 								<div class="col-sm-6">

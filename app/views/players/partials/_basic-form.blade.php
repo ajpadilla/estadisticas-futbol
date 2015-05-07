@@ -1,9 +1,9 @@
 <h4>Información Básica</h4>
-@if (!empty($jugador))
+@if (!empty($player))
 <div class="form-group" style="display: none;">
 	{{ Form::label('jugador_id','Id',['class'=>'col-sm-2 control-label']) }}
 	<div class="col-sm-6">
-		{{ Form::text('jugador_id',$jugador->id, ['class' => 'form-control','id' => 'jugador_id']) }}
+		{{ Form::text('jugador_id',$player->id, ['class' => 'form-control','id' => 'jugador_id']) }}
 	</div>
 </div>
 @else 
