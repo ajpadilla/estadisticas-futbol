@@ -1,7 +1,7 @@
 <?php
 
 use soccer\Equipo\Equipo;
-use soccer\Jugador\Jugador;
+use soccer\Player\Player;
 
 
 class EquiposTableSeeder extends DatabaseSeeder {
@@ -224,15 +224,15 @@ class EquiposTableSeeder extends DatabaseSeeder {
             Equipo::create($equipo);
         }
 
-        $jugadores = Jugador::all();
+        $players = Player::all();
         $equipos = Equipo::all()->toArray();
 
-        foreach($jugadores as $jugador)
+        foreach($players as $player)
         {
             $equipo = $faker->randomElement($equipos);
             $equipo = Equipo::find($equipo['id']);
 
-            $jugador->equipos()->save(
+            $player->equipos()->save(
                 $equipo, [
                 'numero' => $faker->randomNumber(2),
                 'fecha_inicio' => $faker->dateTime(),

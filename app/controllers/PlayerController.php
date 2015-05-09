@@ -1,6 +1,6 @@
 <?php
 
-use soccer\Jugador\JugadorRepository;
+use soccer\Player\PlayerRepository;
 use soccer\Equipo\EquipoRepository;
 use soccer\Forms\RegisterPlayerForm;
 use soccer\Forms\EditPlayerForm;
@@ -13,7 +13,7 @@ class PlayerController extends \BaseController {
 	protected $registerPlayerForm;
 	protected $editPlayerForm;
 
-	public function __construct(JugadorRepository $repository,
+	public function __construct(PlayerRepository $repository,
 			EquipoRepository $teamRepository,
 			RegisterPlayerForm $registerPlayerForm,
 			EditPlayerForm $editPlayerForm){
@@ -32,7 +32,7 @@ class PlayerController extends \BaseController {
 	{		
 		$this->breadcrumbs->addCrumb('Jugadores', route('players.index'));
 		$table = $this->repository->getAllTable();
-		return View::make('jugadores.index', compact('jugadoresTable','table'));
+		return View::make('players.index', compact('jugadoresTable','table'));
 	}
 
 
@@ -49,7 +49,7 @@ class PlayerController extends \BaseController {
 
 	public function selctAjax()
 	{
-		return View::make('jugadores.autocomplete');
+		return View::make('players.autocomplete');
 	}
 
 	public function filter($dato)
@@ -108,13 +108,13 @@ class PlayerController extends \BaseController {
 	 */
 	public function show($id)
 	{
-		$jugador = $this->repository->get($id);
-		$equipos = $this->teamRepository->getAllForSelect();
-		$this->breadcrumbs->addCrumb($jugador->nombre, route('players.show', $jugador->id));
+		$player = $this->repository->get($id);
+		$teams = $this->teamRepository->getAllForSelect();
+		$this->breadcrumbs->addCrumb($player->nombre, route('players.show', $player->id));
 		$table = $this->repository->getEquiposTable($id);
-		$positionsSelect = $jugador->posiciones()->lists('jugador_posicion.posicion_id');
-		$positions = $jugador->posiciones()->get(['jugador_posicion.id','posiciones.nombre']);
-		return View::make('jugadores.show', compact('jugador', 'table', 'equipos', 'positions','positionsSelect'));
+		$positionsSelect = $player->posiciones()->lists('jugador_posicion.posicion_id');
+		$positions = $player->posiciones()->get(['jugador_posicion.id','posiciones.nombre']);
+		return View::make('players.show', compact('player', 'table', 'teams', 'positions','positionsSelect'));
 	}
 
 

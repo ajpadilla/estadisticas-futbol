@@ -1,4 +1,4 @@
-@include('jugadores.new')
+@include('players.new')
 @include('equipos.new')
 @include('paises.new')
 @include('posiciones.new')

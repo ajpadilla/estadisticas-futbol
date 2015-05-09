@@ -44,7 +44,7 @@ class Equipo extends Eloquent implements StaplerableInterface{
 
 	public function jugadores()
 	{
-		return $this->belongsToMany('soccer\Jugador\Jugador', 'equipo_jugador')
+		return $this->belongsToMany('soccer\Player\Player', 'equipo_jugador')
 					->withPivot('numero', 'fecha_inicio', 'fecha_fin')
 					->withTimestamps();
 	}

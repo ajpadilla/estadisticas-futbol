@@ -1,0 +1,41 @@
+<!-- STYLESHEETS --><!--[if lt IE 9]><?php echo HTML::script('assets/js/flot/excanvas.min.js'); ?>"></script><script src="http://html5shiv.googlecode.com/svn/trunk/html5.js') }}"></script><script src="http://css3-mediaqueries-js.googlecode.com/svn/trunk/css3-mediaqueries.js') }}"></script><![endif]-->
+<?php echo HTML::style('assets/css/cloud-admin.css'); ?>
+
+<?php echo HTML::style('assets/css/themes/night.css'); ?>
+
+<?php echo HTML::style('assets/css/responsive.css'); ?>
+
+
+<?php echo HTML::style('assets/font-awesome/css/font-awesome.min.css'); ?>
+
+<!-- DATE RANGE PICKER -->
+<?php echo HTML::style('assets/js/bootstrap-daterangepicker/daterangepicker-bs3.css'); ?>
+
+<!-- BOOTSTRAP FILEUPLOAD -->
+<?php echo HTML::style('assets/js/fileinput/fileinput.min.css'); ?>
+
+<!-- FANCYBOX -->
+<?php echo HTML::style('assets/js/fancybox/source/jquery.fancybox.css?v=2.1.5'); ?>
+
+
+<!-- Datatable -->
+<?php echo HTML::style('assets/css/dataTables/dataTables.bootstrap.css');; ?>
+
+
+<!-- Chosen -->
+<?php echo HTML::style('assets/css/chosen/chosen.css');; ?>
+
+
+<!-- Date picker -->
+<?php /* HTML::style('assets/css/datapicker/datepicker3.css'); */ ?>
+
+<!-- FLAGS -->
+<?php echo HTML::style('assets/css/flag-icon.min.css');; ?>
+
+
+<!-- JQUERY DATETIMEPICKER -->
+<?php echo HTML::style('assets/js/jquery-datetimepicker/jquery.datetimepicker.css');; ?>
+
+
+<!-- FONTS -->
+<link href="http://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700" rel="stylesheet" type="text/css">

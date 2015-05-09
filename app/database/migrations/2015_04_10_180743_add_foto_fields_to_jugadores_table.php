@@ -12,7 +12,7 @@ class AddFotoFieldsToJugadoresTable extends Migration {
      */
     public function up()
     {   
-        Schema::table('jugadores', function(Blueprint $table) {     
+        Schema::table('players', function(Blueprint $table) {     
             
             $table->string('foto_file_name')->nullable();
             $table->integer('foto_file_size')->nullable();
@@ -30,7 +30,7 @@ class AddFotoFieldsToJugadoresTable extends Migration {
      */
     public function down()
     {
-        Schema::table('jugadores', function(Blueprint $table) {
+        Schema::table('players', function(Blueprint $table) {
 
             $table->dropColumn('foto_file_name');
             $table->dropColumn('foto_file_size');
