@@ -20,6 +20,8 @@ class CreateChangesTable extends Migration {
 			$table->smallInteger('second')->default(0);
 			$table->integer('game_id')->unsigned();
 			$table->foreign('game_id')->references('id')->on('games')->onDelete('cascade');
+			$table->integer('team_id')->unsigned();
+			$table->foreign('team_id')->references('id')->on('equipos')->onDelete('cascade');			
 			$table->integer('player_out_id')->unsigned();
 			$table->foreign('player_out_id')->references('id')->on('players')->onDelete('cascade');
 			$table->integer('player_in_id')->unsigned();
