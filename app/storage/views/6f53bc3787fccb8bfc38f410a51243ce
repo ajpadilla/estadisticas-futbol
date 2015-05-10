@@ -1,0 +1,7 @@
+<?php if($competition->tipoCompetencia->isTournament): ?> 
+	<?php echo $__env->make('competitions.tournament', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
+<?php else: ?>
+	<?php echo $__env->make('competitions.league', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
+<?php endif; ?>
+<?php echo $__env->make('competitions.partials._add-group', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
+<?php echo $__env->make('groups.partials._add-team', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>	
