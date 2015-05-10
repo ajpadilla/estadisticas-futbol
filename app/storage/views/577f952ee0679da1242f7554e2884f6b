@@ -1,7 +1,20 @@
 <?php if($competition->tipoCompetencia->isTournament): ?> 
-	<?php echo $__env->make('competitions.tournament', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
-<?php else: ?>
-	<?php echo $__env->make('competitions.league', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
+	<?php if(!$competition->isFullGroups): ?> 
+		<div class="row">
+			<div class="col-md-2 col-md-offset-10">
+				<button class="pull-right btn btn-lg btn-primary" id="add-group" href="#">Agregar grupo</button>
+			</div>
+			<div id="add-group-to-competition" class="hidden">
+				<?php echo $__env->make('groups.new', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
+			</div>
+		</div>
+		<br />
+	<?php endif; ?>
 <?php endif; ?>
-<?php echo $__env->make('competitions.partials._add-group', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
-<?php echo $__env->make('groups.partials._add-team', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>	
+<div class="row">
+	<?php if($competition->hasGroups): ?>
+		<?php echo $__env->make('groups.partials._tables', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
+	<?php else: ?>
+		<div class="col-md-12"><h1>Competencia sin grupos y/o equipos!</h1></div>
+	<?php endif; ?>
+</div>	
