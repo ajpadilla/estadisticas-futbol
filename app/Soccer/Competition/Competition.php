@@ -43,6 +43,16 @@ class Competition extends Eloquent implements StaplerableInterface{
         return $this->hasMany('soccer\Group\Group');
     }
 
+    public function teams()
+    {
+       return $this->belongsToMany('soccer\Equipo\Equipo', 'team_id');
+    }
+
+    public function game()
+    {
+       return $this->belongsTo('soccer\Game\Game');
+    }            
+
     /*
     ********************* Custom Methods ***********************
     */  

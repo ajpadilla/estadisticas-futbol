@@ -20,7 +20,12 @@ class Game extends Eloquent {
     public function type()
     {
        return $this->belongsTo('soccer\Game\GameType', 'type_id');
-    }   
+    } 
+
+    public function competition()
+    {
+       return $this->belongsTo('soccer\Competition\Competition');
+    } 
 
     /*
     ********************* Custom Methods ***********************
