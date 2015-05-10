@@ -141,4 +141,24 @@ class CompetitionController extends \BaseController {
 	}
 	
 
+	public function addGroupApi($id)
+	{
+		//return var_dump(Input::all());
+		return Redirect::route('competencias.show', $id);
+	}
+
+	public function getAllValue()
+	{
+		if(Request::ajax())
+		{
+			$competitions = $this->repository->getAllForSelect();
+			if (count($competitions) > 0) {
+				$this->setSuccess(true);
+				$this->addToResponseArray('data', $competitions);
+			}
+		}
+		return $this->getResponseArrayJson();
+	}
+
+
 }
