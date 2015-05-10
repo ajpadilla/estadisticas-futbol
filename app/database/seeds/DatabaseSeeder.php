@@ -27,7 +27,7 @@ class DatabaseSeeder extends Seeder {
 
 		$this->call('PosicionesTableSeeder');
 		$this->call('PaisesTableSeeder');
-		$this->call('PlayeresTableSeeder');
+		$this->call('PlayersTableSeeder');
 		$this->call('EquiposTableSeeder');
 		$this->call('PosicionJugadorTableSeeder');
 		$this->call('TiposCompetenciaTableSeeder');

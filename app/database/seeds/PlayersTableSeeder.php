@@ -6,7 +6,7 @@ use soccer\Pais\Pais;
 /**
 * 
 */
-class PlayeresTableSeeder extends DatabaseSeeder{
+class PlayersTableSeeder extends DatabaseSeeder{
 	
 	/**
 	 * Run the database seeds.
@@ -98,7 +98,7 @@ class PlayeresTableSeeder extends DatabaseSeeder{
             'nombre' => 'Marcos Rojo',
             'apodo' => 'Futbolista',
             'fecha_nacimiento' => $faker->date($format = 'Y-m-d', $max = 'now'),
-            'foto' => 'public/system/soccer/Player/Player/fotos/000/000/008/original/Marcos_Rojo.jpg',
+            //'foto' => 'public/system/soccer/Player/Player/fotos/000/000/008/original/Marcos_Rojo.jpg',
             'altura' => $faker->randomFloat(2, 6, 100),
             'peso' => $faker->randomFloat(2, 6, 100),
             'peso' => $faker->randomFloat(2, 6, 100), 
@@ -109,7 +109,7 @@ class PlayeresTableSeeder extends DatabaseSeeder{
             'nombre' => 'Mateo Musacchio',
             'apodo' => 'Futbolista',
             'fecha_nacimiento' => $faker->date($format = 'Y-m-d', $max = 'now'),
-            'foto' => 'public/system/soccer/Player/Player/fotos/000/000/009/original/Musacchio.jpg',
+            //'foto' => 'public/system/soccer/Player/Player/fotos/000/000/009/original/Musacchio.jpg',
             'altura' => $faker->randomFloat(2, 6, 100),
             'peso' => $faker->randomFloat(2, 6, 100),
             'peso' => $faker->randomFloat(2, 6, 100), 
@@ -120,7 +120,7 @@ class PlayeresTableSeeder extends DatabaseSeeder{
             'nombre' => 'Ramiro Funes Mori',
             'apodo' => 'Futbolista',
             'fecha_nacimiento' => $faker->date($format = 'Y-m-d', $max = 'now'),
-            'foto' => 'public/system/soccer/Player/Player/fotos/000/000/010/original/Ramiro.jpg',
+            //'foto' => 'public/system/soccer/Player/Player/fotos/000/000/010/original/Ramiro.jpg',
             'altura' => $faker->randomFloat(2, 6, 100),
             'peso' => $faker->randomFloat(2, 6, 100),
             'peso' => $faker->randomFloat(2, 6, 100), 
