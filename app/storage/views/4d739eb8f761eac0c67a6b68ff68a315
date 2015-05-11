@@ -5,8 +5,7 @@
 			<h4><i class="fa fa-user"></i><span class="hidden-inline-mobile"><?php echo $__env->yieldContent('title-modal'); ?></span></h4>
 		</div>
 		<div class="box-body">
-			<?php echo Form::open(['route' => ['groups.api.add.team', $group->id],'class'=>'form-horizontal','role'=>'form',
-			'method' => 'POST','files' => true,'id'=> 'add-team-to-group-form']); ?>
+			<?php echo Form::open(['route' => ['groups.api.add.team', $group->id],'class'=>'form-horizontal','role'=>'form', 'id'=> 'add-team-to-group-form']); ?>
 
 			
 			<?php echo Form::close(); ?>
