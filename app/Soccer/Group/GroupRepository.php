@@ -39,7 +39,12 @@ class GroupRepository extends BaseRepository
 
 	public function create($data = array())
 	{
-		# code...
+		$group = $this->model->create($data); 
+
+		if(!empty($data['teams_ids']))
+			$group->teams()->attach($data['teams_ids']);
+		
+		return $group;
 	}
 
 	public function getAvailableTeams($competitionId)
