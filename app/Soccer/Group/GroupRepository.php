@@ -3,6 +3,7 @@
 use soccer\Group\Group;
 use soccer\Base\BaseRepository;
 use soccer\Equipo\EquipoRepository;
+use soccer\Competition\CompetitionRepository;
 use Carbon\Carbon;
 use Datatable;
 use Illuminate\Database\Eloquent\Collection;
@@ -31,6 +32,26 @@ class GroupRepository extends BaseRepository
 		$this->setModel(new Group);
 		$this->setListAllRoute('groups.api.lista');
 	}	
+
+	/**
+	*********************** Methods******************************
+	*/
+
+	public function create($data = array())
+	{
+		# code...
+	}
+
+	public function getAvailableTeams($competitionId)
+	{
+		$competitionRepository = new CompetitionRepository;
+		$equipoRepository = new EquipoRepository;
+		$competition = $competitionRepository->get($competitionId);
+		$teamsToGroup = $competition->teams;
+		$teamsToCompetition = $equipoRepository->getTeamsByCompetition($teamsToGroup->lists('team_id'));
+		return $teamsToCompetition;
+	}
+
 	/*
 	*********************** DATATABLE SETTINGS ******************************
 	*/		
