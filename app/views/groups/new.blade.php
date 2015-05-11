@@ -21,9 +21,9 @@
 			</div>
 
 			<div class="form-group">
-				{{ Form::label('teams_ids','Equipos',['class'=>'col-md-2 control-label']) }}
+				{{ Form::label('teams_ids[]','Equipos',['class'=>'col-md-2 control-label']) }}
 				<div class="col-md-6">
-					{{ Form::select('teams_ids',array(),null,['class' => 'form-control chosen-select','data-placeholder' => 'Escoger Equipos...','id'=>'competition-new-teams-ids','multiple' => true]) }}
+					{{ Form::select('teams_ids[]',array(),null,['class' => 'form-control chosen-select','data-placeholder' => 'Escoger Equipos...','id'=>'competition-new-teams-ids','multiple' => true]) }}
 				</div>
 			</div>	
 
