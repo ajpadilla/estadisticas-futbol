@@ -142,3 +142,4 @@ Route::get('filterAjax/{dato}',  ['as' => 'filterAjax.api','uses' => 'PlayerCont
 */
 Route::get('grupos/agregar-equipo/{id}/{teamId}', ['as' => 'groups.api.add.team', 'uses' => 'GroupController@addTeamApi']);
 Route::get('grupos/api-lista-grupo/{id}', ['as' => 'groups.api.list.group', 'uses' => 'GroupController@listGroupApi']);
+Route::get('grupos/equipos-por-competencia/api-lista-equipos', ['as' => 'groups.api.list.competitions.teams', 'uses' => 'GroupController@getAllTeamsForCompetitions']);
