@@ -1,0 +1,9 @@
+<?php echo $table->render(); ?>
+
+<?php echo $__env->make('equipos.new', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
+<?php echo $__env->make('jugadores.new', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
+
+<?php $__env->startSection('scripts'); ?>
+	<?php echo $table->script(); ?>
+
+<?php $__env->stopSection(); ?>

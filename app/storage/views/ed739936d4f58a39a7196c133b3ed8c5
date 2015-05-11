@@ -1,0 +1,7 @@
+<?php $__env->startSection('title-modal'); ?>
+	Nuevo Jugador
+<?php $__env->stopSection(); ?>
+
+<div id="new-player-form" style="display:none">
+	<?php echo $__env->make('players.partials._form', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
+</div>

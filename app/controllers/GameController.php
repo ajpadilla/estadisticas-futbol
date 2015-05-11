@@ -1,6 +1,19 @@
 <?php
 
+use soccer\Game\GameRepository;
+use soccer\Forms\RegisterGameForm;
+use Laracasts\Validation\FormValidationException;
+
 class GameController extends \BaseController {
+
+	protected $repository;
+	protected $registerGameForm;
+
+	public function __construct(GameRepository $repository,
+			RegisterGameForm $registerGameForm){
+		$this->repository = $repository;
+		$this->registerGameForm = $registerGameForm;
+	}
 
 	/**
 	 * Display a listing of the resource.
@@ -32,7 +45,24 @@ class GameController extends \BaseController {
 	 */
 	public function store()
 	{
-		//
+		if(Response::ajax()) {
+			$input = Input::all();
+			try
+			{
+				$this->registerGameForm->validate($input);
+				$game = $this->repository->create($input);
+				if($game) {
+					$this->setSuccess(true);
+					$this->addToResponseArray('game', $game);
+				}
+				return $this->getResponseArrayJson();
+			}
+			catch (FormValidationException $e)
+			{
+				$this->addToResponseArray('errors', $e->getErrors()->all());
+				return $this->getResponseArrayJson();
+			}			
+		}
 	}
 
 	/**

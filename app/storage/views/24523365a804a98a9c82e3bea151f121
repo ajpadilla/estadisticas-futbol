@@ -1,0 +1,44 @@
+<?php foreach($competition->groups as $groupTableIndex => $group): ?> 
+	<?php if($competition->tipoCompetencia->isTournament): ?>		
+		<div class="col-md-6">
+	<?php else: ?>
+		<div class="col-md-12">
+	<?php endif; ?>
+		<div class="box border green">
+			<div class="box-title">
+				<h4><i class="fa fa-bars"></i><?php echo $group->name; ?></h4>
+			</div>
+			<div class="box-body big">
+				<?php if(!$group->isFullTeams): ?>
+					<div class="row">
+						<div class="col-md-2 col-md-offset-10">
+							<button class="pull-right btn btn-lg btn-primary" id="add-team" href="#">Agregar equipo</button>
+						</div>
+						<div id="add-team-to-group" class="hidden">
+							<?php echo $__env->make('groups.add-team', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
+						</div>								
+					</div>					
+					<br />
+				<?php endif; ?>
+				<div class="row">
+					<div class="col-md-12">
+						<?php $table = $table = $tables[$groupTableIndex]; ?>
+						<?php echo $__env->make('partials._index-table', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>	
+<?php endforeach; ?>
+<?php $__env->startSection('scripts'); ?>
+	<script type="text/javascript">
+	    jQuery(document).ready(function(){
+			<?php foreach($tables as $table): ?>
+				<?php if($scriptTableTemplate): ?>
+					<?php echo $table->script($scriptTableTemplate); ?>
+
+				<?php endif; ?>
+			<?php endforeach; ?>
+	    });
+	</script>	
+<?php $__env->stopSection(); ?>

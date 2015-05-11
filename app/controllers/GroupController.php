@@ -100,6 +100,11 @@ class GroupController extends \BaseController {
 		
 	}	
 
+	public function addGameApi()
+	{
+		
+	}
+
 	public function listGroupApi($id)
 	{
 		return $this->repository->getDefaultTableForGroupTeams($id);

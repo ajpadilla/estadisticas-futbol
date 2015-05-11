@@ -1,5 +1,5 @@
 @foreach ($competition->groups as $groupTableIndex => $group) 
-	@if($competition->hasGroups)		
+	@if($competition->tipoCompetencia->isTournament)		
 		<div class="col-md-6">
 	@else
 		<div class="col-md-12">

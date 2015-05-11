@@ -45,8 +45,14 @@ class Competition extends Eloquent implements StaplerableInterface{
 
     public function teams()
     {
-       return $this->hasManyThrough('soccer\GroupTeam\GroupTeam', 'soccer\Group\Group');
+       //return $this->hasManyThrough('soccer\GroupTeam\GroupTeam', 'soccer\Group\Group');
+       return $this->hasManyThrough('soccer\Group\Group', 'soccer\Equipo\Equipo', 'team_id', 'group_id');
     }
+
+    public function game()
+    {
+       return $this->belongsTo('soccer\Game\Game');
+    }            
 
     /*
     ********************* Custom Methods ***********************
@@ -54,7 +60,7 @@ class Competition extends Eloquent implements StaplerableInterface{
 
     public function getHasGroupsAttribute()
     {
-        return $this->tipoCompetencia->grupos > 1;
+        return $this->tipoCompetencia->grupos > 0;
     }
 
     public function getIsLeagueAttribute()
