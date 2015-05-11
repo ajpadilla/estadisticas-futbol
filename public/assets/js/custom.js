@@ -3351,7 +3351,7 @@ var handleBootboxAddEquipoToJugador = function () {
 
         $('#add-group-to-competition-form').validate({
             rules:{
-                /*name:{
+                name:{
                     required:true,
                     rangelength: [2, 128],
                     onlyLettersNumbersAndSpaces: true
@@ -3359,9 +3359,9 @@ var handleBootboxAddEquipoToJugador = function () {
                 competition_id:{
                     required: true
                 },
-                teams_ids:{
+                'teams_ids[]':{
                     required: true
-                }*/
+                }
             },
             messages:{
                 nombre:{
