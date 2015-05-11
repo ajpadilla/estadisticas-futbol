@@ -2,18 +2,22 @@
 
 use soccer\Competition\CompetitionRepository;
 use soccer\Forms\RegisterCompetition;
+use soccer\Group\GroupRepository;
 use Laracasts\Validation\FormValidationException;
 
 class CompetitionController extends \BaseController {
 
 	protected $repository;
 	protected $registerCompetition;
+	protected $groupRepository;
 
 	public function __construct(CompetitionRepository $repository,
-			RegisterCompetition $registerCompetition
+			RegisterCompetition $registerCompetition,
+			GroupRepository $groupRepository
 		){
 		$this->repository = $repository;
 		$this->registerCompetition = $registerCompetition;
+		$this->groupRepository = $groupRepository;
 	}
 
 	/**
@@ -143,7 +147,7 @@ class CompetitionController extends \BaseController {
 
 	public function addGroupApi($id)
 	{
-		//return var_dump(Input::all());
+		$this->groupRepository->create(Input::all());
 		return Redirect::route('competencias.show', $id);
 	}
 
