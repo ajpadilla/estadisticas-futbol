@@ -114,6 +114,7 @@
 		<a id="agregar-competencia" href="{{ URL::route('competencias.store') }}"></a>
 		<a id="eliminar-competencia" href="{{ URL::route('competencias.api.eliminar') }}"></a>
 		<a id="list-of-competencies" href="{{ URL::route('competitions.api.select.list') }}"></a>
+		<a id="list-of-teams-for-competition" href="{{ URL::route('groups.api.list.competitions.teams') }}"></a>
 	</div>
 </div>
 <!-- /SIDEBAR -->
