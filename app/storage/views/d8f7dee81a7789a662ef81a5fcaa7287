@@ -113,7 +113,8 @@
 		<!--Route Competencía-->
 		<a id="agregar-competencia" href="<?php echo URL::route('competencias.store'); ?>"></a>
 		<a id="eliminar-competencia" href="<?php echo URL::route('competencias.api.eliminar'); ?>"></a>
-		
+		<a id="list-of-competencies" href="<?php echo URL::route('competitions.api.select.list'); ?>"></a>
+		<a id="list-of-teams-for-competition" href="<?php echo URL::route('groups.api.list.competitions.teams'); ?>"></a>
 	</div>
 </div>
 <!-- /SIDEBAR -->
