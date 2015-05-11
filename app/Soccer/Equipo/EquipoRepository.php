@@ -59,6 +59,11 @@ class EquipoRepository extends BaseRepository
 		}
 	}	
 
+	public function getTeamsByCompetition($idsTeamsSelected = array())
+	{
+		return $this->model->select()->whereNotIn('id',$idsTeamsSelected)->lists('nombre', 'id');
+	}
+
 	/*
 	*********************** METHODS FOR GROUPS ******************************
 	*/		
