@@ -7,6 +7,11 @@ use Carbon\Carbon;
 */
 
 class Group extends Eloquent {
+
+    protected $table = 'groups';
+
+    protected $fillable = ['name', 'competition_id'];
+
     /*
 	********************* Relations ***********************
     */	
