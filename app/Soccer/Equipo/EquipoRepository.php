@@ -62,7 +62,7 @@ class EquipoRepository extends BaseRepository
 
 	public function getTeamsByCompetition($idsTeamsSelected = array(), Competition $competition)
 	{
-		if ($competition->internacional) {
+		if($competition->internacional) {
 			return $this->model->select()->whereNotIn('id',$idsTeamsSelected)->lists('nombre', 'id');
 		}else{
 			return $this->model->select()->whereNotIn('id',$idsTeamsSelected)->wherePaisId($competition->pais_id)->lists('nombre', 'id');
