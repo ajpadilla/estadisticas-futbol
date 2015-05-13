@@ -53,7 +53,7 @@ class GroupRepository extends BaseRepository
 		$equipoRepository = new EquipoRepository;
 		$competition = $competitionRepository->get($competitionId);
 		$teamsToGroup = $competition->teams;
-		$teamsToCompetition = $equipoRepository->getTeamsByCompetition($teamsToGroup->lists('team_id'));
+		$teamsToCompetition = $equipoRepository->getTeamsByCompetition($teamsToGroup->lists('team_id'), $competition);
 		return $teamsToCompetition;
 	}
 
