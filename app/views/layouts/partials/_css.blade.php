@@ -26,5 +26,13 @@
 <!-- JQUERY DATETIMEPICKER -->
 {{ HTML::style('assets/js/jquery-datetimepicker/jquery.datetimepicker.css'); }}
 
+<!-- JQUERY SELECT2 -->
+{{--{{ HTML::style('assets/select2/dist/css/select2.css'); }}--}}
+
+
+<!-- JQUERY SELECT2 -->
+{{ HTML::style('assets/css/select2/css/select2.min.css'); }}
+{{ HTML::style('assets/css/select2/css/select2-skins.min.css'); }}
+
 <!-- FONTS -->
 <link href="http://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700" rel="stylesheet" type="text/css">
