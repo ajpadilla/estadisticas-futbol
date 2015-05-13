@@ -12,7 +12,7 @@
 				@if (!$group->isFullTeams)
 					<div class="row">
 						<div class="col-md-2 col-md-offset-10">
-							<button class="pull-right btn btn-lg btn-primary" id="add-team" href="#">Agregar equipo</button>
+							<button class="pull-right btn btn-lg btn-primary" id="add-team" href="#" value="{{ $competition->id }}">Agregar equipo </button>
 						</div>
 						<div id="add-team-to-group" class="hidden">
 							@include('groups.add-team')
