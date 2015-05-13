@@ -135,7 +135,7 @@ Route::get('competencias/api-seleccionar-lista',  ['as' => 'competitions.api.sel
 
 Route::get('prueba-ruta/{id}',  ['as' => 'prueba','uses' => 'PlayerController@prueba' ] );
 Route::get('selctAjax',  ['as' => 'selctAjax','uses' => 'PlayerController@selctAjax' ] );
-Route::get('filterAjax/{dato}',  ['as' => 'filterAjax.api','uses' => 'PlayerController@filter' ] );
+Route::get('filterAjax',  ['as' => 'filterAjax.api','uses' => 'PlayerController@filter' ] );
 
 /*
 ********************************* RUTAS PARA GRUPOS ********************************
