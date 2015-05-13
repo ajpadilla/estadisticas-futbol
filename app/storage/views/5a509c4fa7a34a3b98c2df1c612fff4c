@@ -1,0 +1,34 @@
+<?php $__env->startSection('title-modal'); ?>
+Datos Jugador
+<?php $__env->stopSection(); ?>
+
+<?php $__env->startSection("content"); ?>
+<div id="new-player-form-view">
+	<div class="col-md-8">
+		<div class="input-group">
+			<!--<span class="input-group-addon">http://</span>-->
+			<?php echo Form::text('completar', null, ['class' => 'form-control', 'placeholder'=>'','id'=>'select-autocomplete']); ?>
+
+		</div>
+		<div class="form-group">
+			<?php echo Form::label('autocomplete','País',['class'=>'col-sm-2 control-label']); ?>
+
+			<div class="col-sm-6">
+			<?php echo Form::select('autocomplete',[],null,['class' => 'select2-container col-md-12 full-width-fix form-control','id'=>'autocomplete-select-1']); ?>
+
+			</div>
+		</div>
+
+		<div class="form-group">
+			<?php echo Form::label('autocomplete','País',['class'=>'col-sm-2 control-label']); ?>
+
+			<div class="col-sm-6">
+			<?php echo Form::select('autocomplete',[],null,['class' => 'select2-container col-md-12 full-width-fix form-control','id'=>'autocomplete-select-2']); ?>
+
+			</div>
+		</div>
+
+	</div>
+</div>
+<?php $__env->stopSection(); ?>
+<?php echo $__env->make("layouts.main", array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
