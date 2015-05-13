@@ -52,11 +52,11 @@ class PlayerController extends \BaseController {
 		return View::make('players.autocomplete');
 	}
 
-	public function filter($dato)
+	public function filter()
 	{
-		$nombres = $this->repository->filterListName($dato);
+		$items = $this->repository->filterListName(Input::get('term'));
 		$this->setSuccess(true);
-		$this->addToResponseArray('nombres', $nombres);
+		$this->addToResponseArray('items', $items);
 		return $this->getResponseArrayJson();	
 	}
 
