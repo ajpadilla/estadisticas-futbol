@@ -7,11 +7,15 @@
 			<div id="add-group-to-competition" class="hidden">
 				@include('groups.new')
 			</div>
+
 		</div>
 		<br />
 	@endif
 @endif
 <div class="row">
+	<div id="add-teams-to-group" style="display:none">
+		@include('groups.add-team')
+	</div>
 	@if ($competition->hasGroups)
 		@include('groups.partials._tables')
 	@else
