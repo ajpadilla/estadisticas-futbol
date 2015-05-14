@@ -5,7 +5,7 @@
 			<h4><i class="fa fa-user"></i><span class="hidden-inline-mobile">@yield('title-modal')</span></h4>
 		</div>
 		<div class="box-body">
-			{{ Form::open(['route' => ['groups.api.add.game', $group->id],'class'=>'form-horizontal','role'=>'form', 'method' => 'POST', 'id' => 'add-game-to-group-form']) }}
+			{{ Form::open(['route' => ['groups.api.add.game'],'class'=>'form-horizontal','role'=>'form', 'method' => 'POST', 'id' => 'add-game-to-group-form']) }}
 			
 			{{ Form::close() }}
 		</div>

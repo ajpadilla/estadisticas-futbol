@@ -13,16 +13,13 @@
 					<div class="row">
 						<?php if(!$group->isFullGames): ?>
 							<div class="col-md-2 col-md-offset-1">
-								<button class="teams pull-right btn btn-lg btn-primary" id="add-team" href="#" data-group-id="<?php echo $group->id; ?>">Agregar partido</button>
-							</div>					
+								<button class="teams pull-right btn btn-lg btn-primary" id="add-game" href="#" data-group-id="<?php echo $group->id; ?>">Agregar partido</button>
+							</div>								
 						<?php endif; ?>
 						<?php if(!$group->isFull): ?>
 							<div class="col-md-2 col-md-offset-7">
 								<button class="teams pull-right btn btn-lg btn-primary" id="add-team" href="#" data-group-id="<?php echo $group->id; ?>">Agregar equipo</button>
-							</div>
-							<?php /*<div id="add-teams-to-group" class="hidden">
-								<?php echo $__env->make('groups.add-team', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
-							</div>*/ ?>							
+							</div>							
 						<?php endif; ?>
 					</div>					
 					<br />
