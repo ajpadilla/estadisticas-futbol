@@ -11,6 +11,19 @@
 |
 */
 
+Route::get('test', function() {
+	$gr = new soccer\Group\GroupRepository();
+	$group = $gr->get(2);
+	//dd($group->games()->whereLocalTeamId(3)->first());
+	//return $gr->gameAlreadyExists(2, 4, 5);
+	//dd($gr->getTeamsWithoutFullGames(2)->toArray());
+	$team = $gr->getTeamsWithoutFullGames(2)->first();
+	$competition = $group->competition->first();
+	//dd($competition->teams->toArray());
+	//dd($team->toArray());
+	dd($team->competitions->toArray());
+});
+
 Route::get('/', [
 	//'before' => 'auth',
 	'as' => 'pages.home',
@@ -21,10 +34,7 @@ Route::get('/', [
 ********************************* RUTAS PARA JUGADORES ********************************
 */
 
-Route::get('jugadores', [
-	'as' => 'players.index', 
-	'uses' => 'PlayerController@index'
-]);
+Route::get('jugadores', ['as' => 'players.index', 'uses' => 'PlayerController@index']);
 
 Route::get('jugadores/nuevo', ['as' => 'players.create', 'uses' => 'PlayerController@create'] );
 Route::post('jugadores/guardar', ['as' => 'players.store', 'uses' => 'PlayerController@store' ] );
@@ -140,7 +150,7 @@ Route::get('filterAjax',  ['as' => 'filterAjax.api','uses' => 'PlayerController@
 /*
 ********************************* RUTAS PARA GRUPOS ********************************
 */
-Route::post('grupos/agregar-equipo', ['as' => 'groups.api.add.team', 'uses' => 'GroupController@addTeamApi']);
-Route::post('grupos/agregar-juego', ['as' => 'groups.api.add.game', 'uses' => 'GroupController@addGameApi']);
+Route::post('grupos/api-agregar-equipo', ['as' => 'groups.api.add.team', 'uses' => 'GroupController@addTeamApi']);
+Route::post('grupos/api-agregar-juego', ['as' => 'groups.api.add.game', 'uses' => 'GroupController@addGameApi']);
 Route::get('grupos/api-lista-grupo/{id}', ['as' => 'groups.api.list.group', 'uses' => 'GroupController@listGroupApi']);
 Route::get('grupos/equipos-por-competencia/api-lista-equipos', ['as' => 'groups.api.list.competitions.teams', 'uses' => 'GroupController@getAllTeamsForCompetitions']);

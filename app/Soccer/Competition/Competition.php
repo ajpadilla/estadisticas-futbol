@@ -46,8 +46,20 @@ class Competition extends Eloquent implements StaplerableInterface{
     public function teams()
     {
        return $this->hasManyThrough('soccer\GroupTeam\GroupTeam', 'soccer\Group\Group');
-       //return $this->hasManyThrough('soccer\Group\Group', 'soccer\Equipo\Equipo', 'team_id', 'group_id');
+       //return $this->hasManyThrough('soccer\Group\Group', 'soccer\Equipo\Equipo', 'group_id', 'team_id');
+       //return $this->hasManyThrough('soccer\Equipo\Equipo', 'soccer\Group\Group', 'group_team.team_id', 'group_team.group_id');
     }
+
+    public function getTeamsAttribute()
+    {        
+        $teams = new \Illuminate\Database\Eloquent\Collection;
+        foreach ($this->groups as $group) 
+            foreach($group->teams as $team)
+                $teams->add($team);
+        return $teams;
+       //return $this->hasManyThrough('soccer\GroupTeam\GroupTeam', 'soccer\Group\Group');
+       //return $this->hasManyThrough('soccer\Group\Group', 'soccer\Equipo\Equipo', 'team_id', 'group_id');
+    }   
 
     public function game()
     {
@@ -73,14 +85,33 @@ class Competition extends Eloquent implements StaplerableInterface{
         return $this->groups()->count() < 1;
     }
 
-    public function getIsFullGroupsAttribute()
+    public function getIsFullAttribute()
     {
          return ($this->hasGroups && $this->groups()->count() >= $this->tipoCompetencia->grupos);
     }
 
     public function getIsFullTeamsAttribute()
     {
-        $teams = $this->groups()->first();        
-        return (!$this->hasGroups && ($teams && $teams->count() >= $this->tipoCompetencia->equipos_por_grupo));
-    }    
+        if($this->tipoCompetencia->isTournament) {
+            $teams = $this->groups()->first();        
+            return (!$this->hasGroups && ($teams && $teams->count() >= $this->tipoCompetencia->equipos_por_grupo));
+        }
+        return false;
+    }   
+
+    public function getIsFullAllGroups()
+    {
+        foreach ($this->groups as $group) 
+            if(!$group->isFull)
+                return false;
+        return true;
+    } 
+
+    public function getIsFullAllGames()
+    {
+        foreach ($this->groups as $group) 
+            if(!$group->isFullGames)
+                return false;
+        return true;
+    }     
 }

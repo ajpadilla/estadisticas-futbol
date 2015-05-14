@@ -17,26 +17,83 @@ class Group extends Eloquent {
     */	
     public function teams()
     {
-        return $this->belongsToMany('soccer\Equipo\Equipo', 'group_team', 'group_id', 'team_id');
-        //return $this->hasMany('soccer\GroupTeam\GroupTeam')->with('soccer\Equipo\Equipo');
+        return $this->belongsToMany('soccer\Equipo\Equipo', 'group_team', 'group_id', 'team_id')
+                    ->withPivot('active')
+                    ->withTimestamps();
+    }
+
+    public function groupTeams()
+    {
+        return $this->hasMany('soccer\GroupTeam\GroupTeam');
+    }
+
+    /*public function getGamesAttribute()
+    {
+        $groupTeamsId =  $this->hasMany('soccer\GroupTeam\GroupTeam')->lists('id');
+        return \soccer\Game\Game::select()
+            ->whereIn('local_team_id', $groupTeamsId)
+            ->orWhereIn('away_team_id', $groupTeamsId)
+            ->get();
     }
 
     public function games()
     {
-        return $this->hasMany('soccer\GroupTeam\GroupTeam')->games;
+        $groupTeamsId =  $this->hasMany('soccer\GroupTeam\GroupTeam')->lists('id');
+        return \soccer\Game\Game::select()
+            ->whereIn('local_team_id', $groupTeamsId)
+            ->orWhereIn('away_team_id', $groupTeamsId);
+    }*/
+
+    public function games()
+    {
+        return $this->hasMany('soccer\Game\Game');
+    }    
+
+    public function competition()
+    {
+        return $this->belongsTo('soccer\Competition\Competition');
     }
 
     /*
     ********************* Custom Methods ***********************
     */  
 
-    public function getHasGroupsAttribute()
+    public function getHasTeamsAttribute()
     {
-        return $this->tipoGroup->groups > 1;
+        return $this->teams->counts() > 0;
     }
 
-    public function getIsFullGroupsAttribute()
+    public function getTotalTeamsAttribute()
     {
-         return ($this->hasGroups && $this->groups()->count() >= $this->tipoGroup->grupos);
+        return $this->teams->count();
+    }
+
+    public function getIsFullAttribute()
+    {
+         return ($this->totalTeams >= $this->competition->tipoCompetencia->equipos_por_grupo);
+    }
+
+    public function getIsEmptyAttribute()
+    {
+         return ($this->totalTeams <= 0);
+    }    
+
+    public function getIsFullGamesAttribute()
+    {
+        //$teamsByGroup = $this->competition->tipoCompetencia->equipos_por_grupo;
+        $totalTeams = $this->totalTeams;
+        if($totalTeams) 
+        {
+            $totalGames = 0;
+            for ($i=$totalTeams-1; $i > 0 ; $i--)  
+                $totalGames += $i;                                    
+            return $totalGames <= $this->totalGames;
+        }
+        return false;
+    }
+
+    public function getTotalGamesPAttribute()
+    {
+        return $this->games->count();
     }
 }

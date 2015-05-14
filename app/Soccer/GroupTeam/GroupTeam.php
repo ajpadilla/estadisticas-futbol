@@ -22,9 +22,14 @@ class GroupTeam extends Eloquent {
         return $this->belongsTo('soccer\Group\Group');
     }    
 
-    public function games()
+    public function localGames()
     {
-        return $this->hasMany('soccer\Game\Game');
+        return $this->hasMany('soccer\Game\Game', 'local_team_id');
+    }
+
+    public function awayGames()
+    {
+        return $this->hasMany('soccer\Game\Game', 'away_team_id');
     }
 
     /*

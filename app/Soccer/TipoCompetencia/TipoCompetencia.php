@@ -62,5 +62,31 @@ class TipoCompetencia extends Eloquent {
     public function getClasificadosPorGrupoAttribute($value)
     {
         return ($value ? $value : 'No');
+    }
+
+    public function getTotalGamesByGroupAttribute()
+    {
+        $totalGames = 0;
+        for ($i=$this->equipos_por_grupo-1; $i > 0 ; $i--)  
+            $totalGames += $i;                                    
+        return ($this->ida_vuelta ? $totalGames * 2 : $totalGames);       
     }    
+
+    public function getTotalCompetitionGames()
+    {
+           
+    }
 }
+/*
+a,b,c,d
+6
+8 grupos: 32 equipos, 48 partidos (Sin ida y vuelta)
+
+Fases eliminatorias 4: 8vos, 4tos, semi, final
+Clasificados por grupo en fase de grupos 2: 32 / 2 ($totalTeams / $clasificados_por_grupo)
+Eliminación directa, fases:
+$totalClasificados / 2, hasta que quede 1.
+
+Si el torneo tiene más de 1 fase eliminatoria, entonces se pueden crear más grupos de los inicialmente planteados.
+
+*/

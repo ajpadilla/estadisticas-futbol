@@ -52,8 +52,7 @@ class GroupRepository extends BaseRepository
 		$group = $this->get($data['group_id']);
 
 		if(!empty($data['teams_ids']))
-			$group->teams()->sync($data['teams_ids'], false);
-		
+			$group->teams()->sync($data['teams_ids'], false);		
 		return $group;
 	}
 
@@ -65,6 +64,54 @@ class GroupRepository extends BaseRepository
 		$teamsToGroup = $competition->teams;
 		$teamsToCompetition = $equipoRepository->getTeamsByCompetition($teamsToGroup->lists('team_id'), $competition);
 		return $teamsToCompetition;
+	}
+
+	public function gameAlreadyExists($id, $localTeam, $awayTeam)
+	{
+		$group = $this->get($id);
+		return $group->games()->whereLocalTeamId($localTeam)->whereAwayTeamId($awayTeam)->count();
+
+		// el codigo abajo es cuando la asociación es de grupo id con games grupo id
+		/*foreach ($games as $game) 
+			if($game->localTeam->id == $localTeam && $game->awayTeam->id == $awayTeam)
+				return true;
+		return false;*/
+
+		// el codigo abajo es cuando la asociación es directo de group team con games.
+		//$localTeam = $group->groupTeams()->whereTeamId($localTeam)->first();
+		//$awayTeam = $group->groupTeam()->whereTeamId($awayTeam)->first();
+		//return $group->games()->whereLocalTeamId($localTeam->id)->whereAwayTeamId($awayTeam->id)->first();
+	}
+
+	public function getTeamsWithoutFullGames($id)
+	{
+		$group = $this->get($id);
+		if(!$group->isFullGames)
+		{
+			$unavailableTeams = array();
+			$teams = $group->teams;
+			for ($i=0; $i < count($teams); $i++) { 
+				$allLocalGames = true;
+				$allAwayGames = true;
+				$localTeam = $teams[$i];
+				for ($j=0; $j < count($teams); $j++) { 
+					if($j != $i) {
+						$awayTeam = $teams[$j];
+						$allLocalGames = $this->gameAlreadyExists($id, $localTeam->id, $awayTeam->id); 
+						$allAwayGames = $this->gameAlreadyExists($id, $awayTeam->id, $localTeam->id);
+
+						if(!$allLocalGames || !$allAwayGames)
+							break;
+					}
+				}
+				if($allLocalGames || $allAwayGames)
+					$unavailableTeams[] = $i;
+			}
+			foreach ($unavailableTeams as $index) 
+				unset($teams[$index]);
+			return $teams;
+		}
+		return false;
 	}
 
 	/*
