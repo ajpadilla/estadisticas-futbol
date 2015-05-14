@@ -3487,18 +3487,27 @@ var handleBootboxAddEquipoToJugador = function () {
     }
 
     var showPopUpToAddTeamToGroupCompetition = function () {
-
-        $(".box-body.big").delegate(".teams", "click", function() {
+        /*$('button.teams').click(function() {
             console.log('competitionId:' + $(this).attr('value'));
             console.log('gruposId:' + $(this).attr('grupo'));
             $('#group_id').val($(this).attr('grupo'));
+            addValidationRulesForms();
             popUpDataForTypeCompetition();
+            selectTeamsForGroup($(this).attr('value'));
+        });*/
+
+        $(".box-body.big").delegate(".teams", "click", function() {
+            console.log('competitionId:' + $(this).attr('value'));
+            console.log('gruposId:' + $(this).attr('data-group-id'));
+
+            $('#group_id').val($(this).attr('data-group-id'));
+            popUpDataForTypeCompetition($(this).attr('data-group-id'));
             selectTeamsForGroup($(this).attr('value'));
         });
 
     }
 
-    var popUpDataForTypeCompetition = function () {
+    var popUpDataForTypeCompetition = function (groupId) {
         addValidationRulesForms();
         $('#add-team-to-group-form').validate({
                 rules:{
@@ -3556,7 +3565,7 @@ var handleBootboxAddEquipoToJugador = function () {
                                                                 label: "Success!",
                                                                 className: "btn-success",
                                                                 callback: function () {
-                                                                    //reloadDatatable('.table');
+                                                                    reloadDatatable('#datatable-'+groupId);
                                                                 }
                                                             }
                                                         }
