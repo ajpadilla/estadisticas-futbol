@@ -27,7 +27,7 @@
 <?php endif; ?>
 
 <?php if(!$competition->isFullAllGroupsGames): ?>
-	<div id="add-game-to-group" class="hidden">
+	<div id="add-game-to-group-div" class="hidden">
 		<?php echo $__env->make('groups.add-game', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
 	</div>
 <?php endif; ?>

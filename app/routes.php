@@ -15,7 +15,8 @@ Route::get('test', function() {
 	$gr = new soccer\Group\GroupRepository();
 	$group = $gr->get(2);
 	//dd($group->games()->whereLocalTeamId(3)->first());
-	return $gr->gameAlreadyExists(2, 4, 5);
+	//return $gr->gameAlreadyExists(2, 4, 5);
+	dd($gr->getTeamsWithoutFullGames(2)->toArray());
 });
 
 Route::get('/', [

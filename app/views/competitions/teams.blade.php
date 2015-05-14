@@ -27,7 +27,7 @@
 @endif
 
 @if(!$competition->isFullAllGroupsGames)
-	<div id="add-game-to-group" class="hidden">
+	<div id="add-game-to-group-div" class="hidden">
 		@include('groups.add-game')
 	</div>
 @endif

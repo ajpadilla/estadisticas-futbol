@@ -52,8 +52,7 @@ class GroupRepository extends BaseRepository
 		$group = $this->get($data['group_id']);
 
 		if(!empty($data['teams_ids']))
-			$group->teams()->sync($data['teams_ids'], false);
-		
+			$group->teams()->sync($data['teams_ids'], false);		
 		return $group;
 	}
 
@@ -70,27 +69,43 @@ class GroupRepository extends BaseRepository
 	public function gameAlreadyExists($id, $localTeam, $awayTeam)
 	{
 		$group = $this->get($id);
-		$localTeam = $group->groupTeams()->whereTeamId($localTeam)->first();
-		$awayTeam = $group->groupTeam()->whereTeamId($awayTeam)->first();
-		return $group->games()->whereLocalTeamId($localTeam->id)->whereAwayTeamId($awayTeam->id)->first();
+		return $group->games()->whereLocalTeamId($localTeam)->whereAwayTeamId($awayTeam)->count();
+
+		// el codigo abajo es cuando la asociación es de grupo id con games grupo id
+		/*foreach ($games as $game) 
+			if($game->localTeam->id == $localTeam && $game->awayTeam->id == $awayTeam)
+				return true;
+		return false;*/
+
+		// el codigo abajo es cuando la asociación es directo de group team con games.
+		//$localTeam = $group->groupTeams()->whereTeamId($localTeam)->first();
+		//$awayTeam = $group->groupTeam()->whereTeamId($awayTeam)->first();
+		//return $group->games()->whereLocalTeamId($localTeam->id)->whereAwayTeamId($awayTeam->id)->first();
 	}
 
 	public function getTeamsWithoutFullGames($id)
 	{
-		/* Obtener los equipos para el grupo dado, que no tienen todos los partidos ya creados.
-		*  Ejemplo: El grupo tiene 4 equipos (A, B, C, D)
-		*  Supongamos que ya existen los siguientes partidos: A vs B, A vs C, A vs D, B vs C, B vs D, C vs D
-		*  El método no debería devolver equipos, ya todos juegan contra todos.
-		*  Supongamos que ya existen los siguientes partidos: A vs B, A vs C, A vs D, B vs C
-		*  El método debería devolver los equipos (B, C, D), pues B aún debe jugar contra D, D contra C
-		*  pero previo a todo esto, al tener ya el grupo, verificas si el grupo 
-		*  ya tiene todos los partidos realizados con $group->isFullGames, pues
-		*  de estar todos ya, no es necesario verificar el resto.
-		*/
 		$group = $this->get($id);
 		if(!$group->isFullGames)
 		{
-			// código aquí
+			$unavailableTeams = array();
+			$teams = $group->teams;
+			for ($i=0; $i < count($teams); $i++) { 
+				$allLocalGames = true;
+				$allAwayGames = true;
+				$localTeam = $teams[$i];
+				for ($j=0; $j < count($teams); $j++) { 
+					if($j != $i) {
+						$awayTeam = $teams[$j];
+						$allGames = $this->gameAlreadyExists($id, $localTeam->id, $awayTeam->id); 
+						$allAwayGames = $this->gameAlreadyExists($id, $awayTeam->id, $localTeam->id); 
+					}
+				}
+				if($allLocalGames || $allAwayGames)
+					$unavailableTeams[] = $i;
+			}
+			foreach ($unavailableTeams as $index) 
+				unset($teams[$index]);
 			return $teams;
 		}
 		return false;

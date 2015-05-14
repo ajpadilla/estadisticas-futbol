@@ -2295,8 +2295,6 @@ var handleBootboxAddEquipoToJugador = function () {
         });               
     }
 
-
-
     /**
      * Funciones para CRUD TIPO DE COMPETENCIA
      */

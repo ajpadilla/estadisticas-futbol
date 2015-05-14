@@ -9,12 +9,14 @@ class Game extends Eloquent {
     */	
     public function localTeam()
     {
-        return $this->belongsTo('soccer\GroupTeam\GroupTeam', 'local_team_id')->team;
+        //return $this->belongsTo('soccer\GroupTeam\GroupTeam', 'local_team_id')->team;
+        return $this->belongsTo('soccer\Equipo\Equipo', 'local_team_id');
     }
 
     public function awayTeam()
     {
-        return $this->belongsTo('soccer\GroupTeam\GroupTeam', 'away_team_id')->team;
+        //return $this->belongsTo('soccer\GroupTeam\GroupTeam', 'away_team_id')->team;
+        return $this->belongsTo('soccer\Equipo\Equipo', 'away_team_id');
     } 
 
     public function type()

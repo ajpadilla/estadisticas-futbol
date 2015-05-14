@@ -1,4 +1,4 @@
-<div id="equipo-add-jugador-div" style="display:none">
+<div id="equipo-add-jugador-div" class="hidden">
 	<div id="equipo-add-jugador-div-box" class="box border primary">
 		<div class="box-title">
 			<h4><i class="fa fa-plus-square"></i>Agregar jugador a {{ $equipo->nombre }}</h4>
