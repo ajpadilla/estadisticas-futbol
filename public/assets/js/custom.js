@@ -3120,7 +3120,7 @@ var handleBootboxAddEquipoToJugador = function () {
     }    
 
     var reloadDatatable = function (table) {
-        var table = typeof table !== 'undefined' ? tabñe : 'datatable';
+        var table = typeof table !== 'undefined' ? table : 'datatable';
         if($(table).length) {
             var table = $(table).DataTable();
             table.search('').draw();
@@ -3357,6 +3357,31 @@ var handleBootboxAddEquipoToJugador = function () {
         });
     }
 
+
+    var selectTeamsForCompetition = function(idCompetition) {
+        //console.log($(this).val());
+            $.ajax({
+                type: 'GET',
+                url: $('#list-of-teams-for-competition').attr('href'),
+                data: {'competitionId': idCompetition},
+                dataType:'json',
+                success: function(response) {
+                    console.log(response.teams);
+                    if (response.success == true) {
+                        jQuery('#competition-new-teams-ids').html('');
+                        jQuery('#competition-new-teams-ids').append('<option value=\"\"></option>');
+                        $.each(response.teams,function (k,v){
+                            $('#competition-new-teams-ids').append('<option value=\"'+k+'\">'+v+'</option>');
+                            $('#competition-new-teams-ids').trigger("chosen:updated");
+                        });
+                    }else{
+                        jQuery('#competition-new-teams-ids').html('');
+                        jQuery('#competition-new-teams-ids').append('<option value=\"\"></option>');
+                    }
+                }
+            });
+    }
+
     var showPopUpToAddNewGroup = function () {
         $('button#add-group').click(function () {
 
@@ -3403,7 +3428,7 @@ var handleBootboxAddEquipoToJugador = function () {
                 }
             });
 
-                bootbox.dialog({
+            bootbox.dialog({
                     message: $('#add-group-to-competition-form-div'),
                     buttons: {
                         success: {
@@ -3436,7 +3461,8 @@ var handleBootboxAddEquipoToJugador = function () {
     }
 
 
-    var selectTeamsForCompetition = function(idCompetition) {
+
+     var selectTeamsForGroup = function(idCompetition) {
         //console.log($(this).val());
             $.ajax({
                 type: 'GET',
@@ -3446,24 +3472,163 @@ var handleBootboxAddEquipoToJugador = function () {
                 success: function(response) {
                     console.log(response.teams);
                     if (response.success == true) {
-                        jQuery('#competition-new-teams-ids').html('');
-                        jQuery('#competition-new-teams-ids').append('<option value=\"\"></option>');
+                        jQuery('#new-teams-for-groups-ids').html('');
+                        jQuery('#new-teams-for-groups-ids').append('<option value=\"\"></option>');
                         $.each(response.teams,function (k,v){
-                            $('#competition-new-teams-ids').append('<option value=\"'+k+'\">'+v+'</option>');
-                            $('#competition-new-teams-ids').trigger("chosen:updated");
+                            $('#new-teams-for-groups-ids').append('<option value=\"'+k+'\">'+v+'</option>');
+                            $('#new-teams-for-groups-ids').trigger("chosen:updated");
                         });
                     }else{
-                        jQuery('#competition-new-teams-ids').html('');
-                        jQuery('#competition-new-teams-ids').append('<option value=\"\"></option>');
+                        jQuery('#new-teams-for-groups-ids').html('');
+                        jQuery('#new-teams-for-groups-ids').append('<option value=\"\"></option>');
                     }
                 }
             });
     }
 
-    var addTeamToGroupCompetition = function () {
-        $('button#add-team').click(function () {
-            console.log($(this).attr('value'));
+    var showPopUpToAddTeamToGroupCompetition = function () {
+
+        $(".box-body.big").delegate(".teams", "click", function() {
+            console.log('competitionId:' + $(this).attr('value'));
+            console.log('gruposId:' + $(this).attr('grupo'));
+            $('#group_id').val($(this).attr('grupo'));
+            popUpDataForTypeCompetition();
+            selectTeamsForGroup($(this).attr('value'));
         });
+
+    }
+
+    var popUpDataForTypeCompetition = function () {
+        addValidationRulesForms();
+        $('#add-team-to-group-form').validate({
+                rules:{
+                    'teams_ids[]':{
+                        required: true
+                    }
+                },
+                messages:{
+                    'teams_ids[]':{
+                        required:'Este campo es obligatorio.',
+                    }
+                },
+                highlight:function(element){
+                    $(element).closest('.form-group').removeClass('has-success').addClass('has-error');
+                },
+                unhighlight:function(element){
+                    $(element).closest('.form-group').removeClass('has-error');
+                },
+                success:function(element){
+                    element.addClass('valid').closest('.form-group').removeClass('has-error').addClass('has-success');
+                },
+            });
+
+            
+            bootbox.dialog({
+                    message: $('#add-teams-to-group-form-div'),
+                    buttons: {
+                        success: {
+                            label: "Agregar",
+                            className: "btn-primary",
+                            callback: function () {
+                                if($('#add-team-to-group-form').valid()) {
+                                    var response = false; // Esta variable debería recibir los datos por ajax.
+                                    var dataServer = null;
+
+                                    $("#add-team-to-group-form").submit(function(e){
+                                        var formData = new FormData(this);
+                                        $.ajax({
+                                            type: 'POST',
+                                            url: $('#add-new-teams-to-group').attr('href'), 
+                                            data: formData,
+                                            contentType: false,
+                                            processData: false,
+                                            dataType: "JSON",
+                                            success: function(responseServer) {
+                                                console.log(responseServer);
+                                                if(responseServer.success == true) 
+                                                {
+                                                    // Muestro otro dialog con información de éxito
+                                                    bootbox.dialog({
+                                                        message: responseServer.group.name + " Ha sido actualizado correctamente!",
+                                                        title: "Éxito",
+                                                        buttons: {
+                                                            success: {
+                                                                label: "Success!",
+                                                                className: "btn-success",
+                                                                callback: function () {
+                                                                    //reloadDatatable('.table');
+                                                                }
+                                                            }
+                                                        }
+                                                    });
+                                                    // Limpio cada elemento de las clases añadidas por el validator
+                                                    $('#add-team-to-group-form div').each(function(){
+                                                        cleanValidatorClasses(this);
+                                                    });
+                                                    //Reinicio el formulario
+                                                    $("#add-team-to-group-form")[0].reset();
+                                                    enableCountryToCompetition();
+                                                }else{
+                                                    console.log(responseServer);
+                                                     bootbox.dialog({
+                                                        message:responseServer.errores,
+                                                        title: "Error",
+                                                        buttons: {
+                                                            danger: {
+                                                                label: "Danger!",
+                                                                className: "btn-danger"
+                                                            }
+                                                        }
+                                                    });
+                                                    // Limpio cada elemento de las clases añadidas por el validator
+                                                    $('#add-team-to-group-form div').each(function(){
+                                                        cleanValidatorClasses(this);
+                                                    });
+                                                    //Reinicio el formulario
+                                                }
+                                            },
+                                            error: function(jqXHR, textStatus, errorThrown) {
+                                               console.log(errorThrown);
+                                               bootbox.dialog({
+                                                        message:" ¡Error al enviar datos al servidor!",
+                                                        title: "Error",
+                                                        buttons: {
+                                                            danger: {
+                                                                label: "Danger!",
+                                                                className: "btn-danger"
+                                                            }
+                                                        }
+                                                    });
+                                                    // Limpio cada elemento de las clases añadidas por el validator
+                                                    $('#add-team-to-group-form div').each(function(){
+                                                        cleanValidatorClasses(this);
+                                                    });
+                                                    //Reinicio el formulario
+                                            }
+                                        });
+                                        e.preventDefault(); //Prevent Default action. 
+                                    }); 
+                                    $("#add-team-to-group-form").submit();
+                                }else{
+                                    return false;
+                                }
+                                return false;
+                            }
+                        }
+                    },
+                        show: false // We will show it manually later
+                    })
+                .on('shown.bs.modal', function() {
+                    $('#add-teams-to-group-form-div')
+                            .show();                             // Show the form
+                        })
+                .on('hide.bs.modal', function(e) {
+                    // Bootbox will remove the modal (including the body which contains the form)
+                    // after hiding the modal
+                    // Therefor, we need to backup the form
+                    $('#add-teams-to-group-form-div').hide().appendTo('#add-teams-to-group');
+                })
+                .modal('show');
     }
 
     return {
@@ -3525,8 +3690,7 @@ var handleBootboxAddEquipoToJugador = function () {
             loadFilter();
             loadTypeComptetitionInfo();
             showPopUpToAddNewGroup();
-            //selectTeamsForCompetition();
-            addTeamToGroupCompetition();
+            showPopUpToAddTeamToGroupCompetition();
         }
     }
 }();
