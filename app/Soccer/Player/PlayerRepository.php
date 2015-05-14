@@ -28,7 +28,7 @@ class PlayerRepository extends BaseRepository
 
 	public function filterListName($nombre ='')
 	{
-		return $this->model->where('nombre', 'LIKE', '%' . $nombre . '%')->lists('nombre', 'id');
+		return $this->model->where('nombre', 'LIKE', '%' . $nombre . '%')->get(['id','nombre']);
 	}
 
 	public function create($data = array())

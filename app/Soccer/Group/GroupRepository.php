@@ -47,13 +47,23 @@ class GroupRepository extends BaseRepository
 		return $group;
 	}
 
+	public function updateTeams($data = array())
+	{
+		$group = $this->get($data['group_id']);
+
+		if(!empty($data['teams_ids']))
+			$group->teams()->sync($data['teams_ids'], false);
+		
+		return $group;
+	}
+
 	public function getAvailableTeams($competitionId)
 	{
 		$competitionRepository = new CompetitionRepository;
 		$equipoRepository = new EquipoRepository;
 		$competition = $competitionRepository->get($competitionId);
 		$teamsToGroup = $competition->teams;
-		$teamsToCompetition = $equipoRepository->getTeamsByCompetition($teamsToGroup->lists('team_id'));
+		$teamsToCompetition = $equipoRepository->getTeamsByCompetition($teamsToGroup->lists('team_id'), $competition);
 		return $teamsToCompetition;
 	}
 

@@ -56,6 +56,14 @@
 {{ HTML::script('assets/js/script.js') }}
 {{ HTML::script('assets/js/custom.js') }}
 
+<!-- JQUERY SELECT2 -->
+{{--{{ HTML::script('assets/select2/dist/js/select2.min.js'); }}--}}
+
+<!-- JQUERY SELECT2 -->
+{{--{{ HTML::script('assets/select2/dist/js/select2.min.js'); }}--}}
+
+<!-- JQUERY SELECT2 -->
+{{ HTML::script('assets/js/select2/js/select2.min.js'); }}
 
 <script>
 	jQuery(document).ready(function() {		

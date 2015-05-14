@@ -14,14 +14,14 @@
 				<div class="col-md-6"><?php echo Form::text('name', null, ['class' => 'form-control','id' =>'name-new-group' ]); ?></div>
 			</div>
 
-			<div class="form-group">
+			<?php /*<div class="form-group">
 			<?php echo Form::label('competition_id','Competición',['class'=>'col-md-2 control-label']); ?>
 
 				<div class="col-md-6">
 				<?php echo Form::select('competition_id',array(),null,['class' => 'form-control chosen-select','data-placeholder' => 'Escoger competición...','id'=>'competition-new-id']); ?>
 
 				</div>
-			</div>
+			</div>*/ ?>
 
 			<div class="form-group">
 				<?php echo Form::label('teams_ids[]','Equipos',['class'=>'col-md-2 control-label']); ?>

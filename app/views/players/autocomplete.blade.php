@@ -14,9 +14,17 @@ Datos Jugador
 		<div class="form-group">
 			{{ Form::label('autocomplete','País',['class'=>'col-sm-2 control-label']) }}
 			<div class="col-sm-6">
-			{{ Form::select('autocomplete',['algo' => 'algo'],null,['class' => 'form-control chosen-select','data-placeholder' => 'Escoger...','id'=>'autocomplete-select']) }}
+			{{ Form::select('autocomplete',[],null,['class' => 'select2-container col-md-12 full-width-fix form-control','id'=>'autocomplete-select-1']) }}
 			</div>
 		</div>
+
+		<div class="form-group">
+			{{ Form::label('autocomplete','País',['class'=>'col-sm-2 control-label']) }}
+			<div class="col-sm-6">
+			{{ Form::select('autocomplete',[],null,['class' => 'select2-container col-md-12 full-width-fix form-control','id'=>'autocomplete-select-2']) }}
+			</div>
+		</div>
+
 	</div>
 </div>
 @stop
