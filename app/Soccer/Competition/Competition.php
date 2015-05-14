@@ -46,8 +46,20 @@ class Competition extends Eloquent implements StaplerableInterface{
     public function teams()
     {
        return $this->hasManyThrough('soccer\GroupTeam\GroupTeam', 'soccer\Group\Group');
-       //return $this->hasManyThrough('soccer\Group\Group', 'soccer\Equipo\Equipo', 'team_id', 'group_id');
+       //return $this->hasManyThrough('soccer\Group\Group', 'soccer\Equipo\Equipo', 'group_id', 'team_id');
+       //return $this->hasManyThrough('soccer\Equipo\Equipo', 'soccer\Group\Group', 'group_team.team_id', 'group_team.group_id');
     }
+
+    public function getTeamsAttribute()
+    {        
+        $teams = new \Illuminate\Database\Eloquent\Collection;
+        foreach ($this->groups as $group) 
+            foreach($group->teams as $team)
+                $teams->add($team);
+        return $teams;
+       //return $this->hasManyThrough('soccer\GroupTeam\GroupTeam', 'soccer\Group\Group');
+       //return $this->hasManyThrough('soccer\Group\Group', 'soccer\Equipo\Equipo', 'team_id', 'group_id');
+    }   
 
     public function game()
     {

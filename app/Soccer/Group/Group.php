@@ -17,8 +17,9 @@ class Group extends Eloquent {
     */	
     public function teams()
     {
-        return $this->belongsToMany('soccer\Equipo\Equipo', 'group_team', 'group_id', 'team_id');
-        //return $this->hasMany('soccer\GroupTeam\GroupTeam')->with('soccer\Equipo\Equipo');
+        return $this->belongsToMany('soccer\Equipo\Equipo', 'group_team', 'group_id', 'team_id')
+                    ->withPivot('active')
+                    ->withTimestamps();
     }
 
     public function groupTeams()

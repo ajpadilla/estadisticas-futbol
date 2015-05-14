@@ -16,7 +16,12 @@ Route::get('test', function() {
 	$group = $gr->get(2);
 	//dd($group->games()->whereLocalTeamId(3)->first());
 	//return $gr->gameAlreadyExists(2, 4, 5);
-	dd($gr->getTeamsWithoutFullGames(2)->toArray());
+	//dd($gr->getTeamsWithoutFullGames(2)->toArray());
+	$team = $gr->getTeamsWithoutFullGames(2)->first();
+	$competition = $group->competition->first();
+	//dd($competition->teams->toArray());
+	//dd($team->toArray());
+	dd($team->competitions->toArray());
 });
 
 Route::get('/', [
