@@ -1,4 +1,4 @@
-<?php namespace soccer\Game;
+<?php namespace soccer\Game\GameType;
 
 use Eloquent;
 use Carbon\Carbon;

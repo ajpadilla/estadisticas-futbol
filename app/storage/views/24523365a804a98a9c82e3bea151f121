@@ -17,7 +17,11 @@
 							</div>								
 						<?php endif; ?>
 						<?php if(!$group->isFull): ?>
-							<div class="col-md-2 col-md-offset-7">
+							<?php if(!$group->isFullGames): ?>
+								<div class="col-md-2 col-md-offset-7">
+							<?php else: ?>
+								<div class="col-md-2 col-md-offset-10">
+							<?php endif; ?>
 								<button class="teams pull-right btn btn-lg btn-primary" id="add-team" href="#" data-group-id="<?php echo $group->id; ?>">Agregar equipo</button>
 							</div>							
 						<?php endif; ?>

@@ -86,12 +86,12 @@ class Group extends Eloquent {
             $totalGames = 0;
             for ($i=$totalTeams-1; $i > 0 ; $i--)  
                 $totalGames += $i;                                    
-            return $totalGames >= $this->totalGamesPlayed;
+            return $totalGames <= $this->totalGames;
         }
         return false;
     }
 
-    public function getTotalGamesPlayedAttribute()
+    public function getTotalGamesPAttribute()
     {
         return $this->games->count();
     }

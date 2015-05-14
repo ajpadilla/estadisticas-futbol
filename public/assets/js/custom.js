@@ -3084,6 +3084,16 @@ var handleBootboxAddEquipoToJugador = function () {
             mask: true,
             closeOnDateSelect: true
         });
+
+        $(".datepicker-time").datetimepicker({
+            lang: 'es',
+            timepicker: true,
+            format: 'Y-m-d',
+            yearStart: '1850',
+            todayButton: true,
+            mask: true,
+            closeOnDateSelect: true
+        });        
     }
 
     var handleFechaDateTimePicker = function () {

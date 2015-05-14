@@ -17,7 +17,11 @@
 							</div>								
 						@endif
 						@if (!$group->isFull)
-							<div class="col-md-2 col-md-offset-7">
+							@if (!$group->isFullGames)
+								<div class="col-md-2 col-md-offset-7">
+							@else
+								<div class="col-md-2 col-md-offset-10">
+							@endif
 								<button class="teams pull-right btn btn-lg btn-primary" id="add-team" href="#" data-group-id="{{ $group->id }}">Agregar equipo</button>
 							</div>							
 						@endif
