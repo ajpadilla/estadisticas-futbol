@@ -40,7 +40,7 @@ class Group extends Eloquent {
         return $this->teams->counts() > 0;
     }
 
-    public function totalTeams()
+    public function getTotalTeamsAttribute()
     {
         return $this->teams->count();
     }
