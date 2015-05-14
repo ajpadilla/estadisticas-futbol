@@ -26,17 +26,32 @@ class Group extends Eloquent {
         return $this->hasMany('soccer\GroupTeam\GroupTeam')->games;
     }
 
+    public function competition()
+    {
+        return $this->belongsTo('soccer\Competition\Competition');
+    }
+
     /*
     ********************* Custom Methods ***********************
     */  
 
-    public function getHasGroupsAttribute()
+    public function getHasTeamsAttribute()
     {
-        return $this->tipoGroup->groups > 1;
+        return $this->teams->counts() > 0;
     }
 
-    public function getIsFullGroupsAttribute()
+    public function totalTeams()
     {
-         return ($this->hasGroups && $this->groups()->count() >= $this->tipoGroup->grupos);
+        return $this->teams->count();
     }
+
+    public function getIsFullAttribute()
+    {
+         return ($this->totalTeams >= $this->competition->tipoCompetencia->equipos_por_grupo);
+    }
+
+    public function getIsEmptyAttribute()
+    {
+         return ($this->totalTeams <= 0);
+    }    
 }
