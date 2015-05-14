@@ -97,7 +97,7 @@ class GroupRepository extends BaseRepository
 				for ($j=0; $j < count($teams); $j++) { 
 					if($j != $i) {
 						$awayTeam = $teams[$j];
-						$allGames = $this->gameAlreadyExists($id, $localTeam->id, $awayTeam->id); 
+						$allLocalGames = $this->gameAlreadyExists($id, $localTeam->id, $awayTeam->id); 
 						$allAwayGames = $this->gameAlreadyExists($id, $awayTeam->id, $localTeam->id); 
 					}
 				}
