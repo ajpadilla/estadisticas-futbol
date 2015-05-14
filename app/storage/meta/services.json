@@ -28,10 +28,10 @@
         "Illuminate\\Workbench\\WorkbenchServiceProvider",
         "Zizaco\\Confide\\ConfideServiceProvider",
         "Zizaco\\Entrust\\EntrustServiceProvider",
+        "Barryvdh\\Debugbar\\ServiceProvider",
         "Way\\Generators\\GeneratorsServiceProvider",
         "Laracasts\\Validation\\ValidationServiceProvider",
         "Chumper\\Datatable\\DatatableServiceProvider",
-        "Codesleeve\\LaravelStapler\\LaravelStaplerServiceProvider",
         "Codesleeve\\LaravelStapler\\LaravelStaplerServiceProvider",
         "Creitive\\Breadcrumbs\\BreadcrumbsServiceProvider"
     ],
@@ -45,10 +45,10 @@
         "Illuminate\\Workbench\\WorkbenchServiceProvider",
         "Zizaco\\Confide\\ConfideServiceProvider",
         "Zizaco\\Entrust\\EntrustServiceProvider",
+        "Barryvdh\\Debugbar\\ServiceProvider",
         "Way\\Generators\\GeneratorsServiceProvider",
         "Laracasts\\Validation\\ValidationServiceProvider",
         "Chumper\\Datatable\\DatatableServiceProvider",
-        "Codesleeve\\LaravelStapler\\LaravelStaplerServiceProvider",
         "Codesleeve\\LaravelStapler\\LaravelStaplerServiceProvider",
         "Creitive\\Breadcrumbs\\BreadcrumbsServiceProvider"
     ],

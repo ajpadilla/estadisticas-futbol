@@ -54,4 +54,9 @@ class Group extends Eloquent {
     {
          return ($this->totalTeams <= 0);
     }    
+
+    public function getIsFullGamesAttribute()
+    {
+        return false;
+    }
 }
