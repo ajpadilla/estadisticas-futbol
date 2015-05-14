@@ -1,0 +1,7 @@
+<div class="row">
+	<?php if($competition->hasGames): ?>
+		<?php echo $__env->make('groups.games', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
+	<?php else: ?>
+		<div class="col-md-12"><h1>Competencia sin partidos!</h1></div>
+	<?php endif; ?>
+</div>	
