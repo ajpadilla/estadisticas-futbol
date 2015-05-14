@@ -7,12 +7,12 @@
 		<div class="box-body">
 			{{ Form::open(['route' => ['groups.api.add.team'],'class'=>'form-horizontal','role'=>'form', 'id'=> 'add-team-to-group-form']) }}
 
-			<!--<div class="form-group" >
+			<div class="form-group" style="display: none;">
 				{{ Form::label('group_id','Id',['class'=>'col-sm-2 control-label']) }}
 				<div class="col-sm-6">
 					{{ Form::text('group_id',null, ['class' => 'form-control','id' => 'group_id']) }}
 				</div>
-			</div>-->
+			</div>
 
 			<div class="form-group">
 				{{ Form::label('teams_ids[]','Equipos',['class'=>'col-md-2 control-label']) }}
