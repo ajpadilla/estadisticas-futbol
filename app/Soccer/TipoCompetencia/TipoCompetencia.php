@@ -62,5 +62,18 @@ class TipoCompetencia extends Eloquent {
     public function getClasificadosPorGrupoAttribute($value)
     {
         return ($value ? $value : 'No');
+    }
+
+    public function getTotalGamesByGroupAttribute()
+    {
+        $totalGames = 0;
+        for ($i=$this->equipos_por_grupo-1; $i > 0 ; $i--)  
+            $totalGames += $i;                                    
+        return ($this->ida_vuelta ? $totalGames * 2 : $totalGames);       
     }    
+
+    public function getTotalCompetitionGames()
+    {
+        
+    }
 }

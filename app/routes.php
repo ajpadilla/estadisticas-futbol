@@ -11,6 +11,13 @@
 |
 */
 
+Route::get('test', function() {
+	$gr = new soccer\Group\GroupRepository();
+	$group = $gr->get(2);
+	//dd($group->games()->whereLocalTeamId(3)->first());
+	return $gr->gameAlreadyExists(2, 4, 5);
+});
+
 Route::get('/', [
 	//'before' => 'auth',
 	'as' => 'pages.home',
@@ -21,10 +28,7 @@ Route::get('/', [
 ********************************* RUTAS PARA JUGADORES ********************************
 */
 
-Route::get('jugadores', [
-	'as' => 'players.index', 
-	'uses' => 'PlayerController@index'
-]);
+Route::get('jugadores', ['as' => 'players.index', 'uses' => 'PlayerController@index']);
 
 Route::get('jugadores/nuevo', ['as' => 'players.create', 'uses' => 'PlayerController@create'] );
 Route::post('jugadores/guardar', ['as' => 'players.store', 'uses' => 'PlayerController@store' ] );

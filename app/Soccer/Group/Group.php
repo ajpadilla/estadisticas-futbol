@@ -21,10 +21,32 @@ class Group extends Eloquent {
         //return $this->hasMany('soccer\GroupTeam\GroupTeam')->with('soccer\Equipo\Equipo');
     }
 
+    public function groupTeams()
+    {
+        return $this->hasMany('soccer\GroupTeam\GroupTeam');
+    }
+
+    /*public function getGamesAttribute()
+    {
+        $groupTeamsId =  $this->hasMany('soccer\GroupTeam\GroupTeam')->lists('id');
+        return \soccer\Game\Game::select()
+            ->whereIn('local_team_id', $groupTeamsId)
+            ->orWhereIn('away_team_id', $groupTeamsId)
+            ->get();
+    }
+
     public function games()
     {
-        return $this->hasMany('soccer\GroupTeam\GroupTeam')->games;
-    }
+        $groupTeamsId =  $this->hasMany('soccer\GroupTeam\GroupTeam')->lists('id');
+        return \soccer\Game\Game::select()
+            ->whereIn('local_team_id', $groupTeamsId)
+            ->orWhereIn('away_team_id', $groupTeamsId);
+    }*/
+
+    public function games()
+    {
+        return $this->hasMany('soccer\Game\Game');
+    }    
 
     public function competition()
     {
@@ -57,6 +79,20 @@ class Group extends Eloquent {
 
     public function getIsFullGamesAttribute()
     {
+        //$teamsByGroup = $this->competition->tipoCompetencia->equipos_por_grupo;
+        $totalTeams = $this->totalTeams;
+        if($totalTeams) 
+        {
+            $totalGames = 0;
+            for ($i=$totalTeams-1; $i > 0 ; $i--)  
+                $totalGames += $i;                                    
+            return $totalGames >= $this->totalGamesPlayed;
+        }
         return false;
+    }
+
+    public function getTotalGamesPlayedAttribute()
+    {
+        return $this->games->count();
     }
 }
