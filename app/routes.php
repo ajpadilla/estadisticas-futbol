@@ -140,7 +140,7 @@ Route::get('filterAjax',  ['as' => 'filterAjax.api','uses' => 'PlayerController@
 /*
 ********************************* RUTAS PARA GRUPOS ********************************
 */
-Route::get('grupos/agregar-equipo/{id}/{teamId}', ['as' => 'groups.api.add.team', 'uses' => 'GroupController@addTeamApi']);
+Route::post('grupos/agregar-equipo', ['as' => 'groups.api.add.team', 'uses' => 'GroupController@addTeamApi']);
 Route::post('grupos/agregar-juego', ['as' => 'groups.api.add.game', 'uses' => 'GroupController@addGameApi']);
 Route::get('grupos/api-lista-grupo/{id}', ['as' => 'groups.api.list.group', 'uses' => 'GroupController@listGroupApi']);
 Route::get('grupos/equipos-por-competencia/api-lista-equipos', ['as' => 'groups.api.list.competitions.teams', 'uses' => 'GroupController@getAllTeamsForCompetitions']);
