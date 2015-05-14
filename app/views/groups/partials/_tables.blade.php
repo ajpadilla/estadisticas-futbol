@@ -12,11 +12,11 @@
 				@if (!$group->isFullTeams)
 					<div class="row">
 						<div class="col-md-2 col-md-offset-10">
-							<button class="teams pull-right btn btn-lg btn-primary" id="add-team" href="#" value="{{ $competition->id }}" grupo="{{ $group->id }}">Agregar equipo</button>
+							<button class="teams pull-right btn btn-lg btn-primary" id="add-team" href="#" value="{{ $competition->id }}" data-group-id="{{ $group->id }}">Agregar equipo</button>
 						</div>
-						<div id="add-teams-to-group" class="hidden">
+						{{--<div id="add-teams-to-group" class="hidden">
 							@include('groups.add-team')
-						</div>								
+						</div>--}}							
 					</div>					
 					<br />
 				@endif
