@@ -70,14 +70,15 @@ class Group extends Eloquent {
         return $this->teams->count();
     }
 
-    public function algo()
+
+    public function getTotalMissingTeams()
     {
-        return false;
+        return $this->competition->teamsByGroup - $this->totalTeams;
     }
 
     public function getIsFullAttribute()
     {
-         return ($this->totalTeams >= $this->competition->tipoCompetencia->equipos_por_grupo);
+         return ($this->totalTeams >= $this->competition->teamsByGroup);
     }
 
     public function getIsEmptyAttribute()

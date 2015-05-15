@@ -139,7 +139,7 @@ Route::get('competencias/api-lista', array('as'=>'competitions.api.list', 'uses'
 Route::post('competencias/api-actualizar',  ['as' => 'competencias.api.update','uses' => 'CompetitionController@updateApi' ] );
 //Route::get('competencias/api-jugadores/{id}', array('as'=>'competencias.api.jugadores', 'uses'=>'CompetitionController@jugadoresApi'));
 //Route::get('competencias/api-ver',  ['as' => 'competencias.data','uses' => 'CompetitionController@showApi' ] );
-Route::get('competencias/api-agregar-equipo/{id}/{teamId}',  ['as' => 'competitions.api.add.team','uses' => 'CompetitionController@addTeamApi' ] );
+//Route::post('competencias/api-agregar-equipo/{id}/{teamId}',  ['as' => 'competitions.api.add.team','uses' => 'CompetitionController@addTeamApi' ] );
 Route::post('competencias/api-agregar-grupo',  ['as' => 'competitions.api.add.group','uses' => 'CompetitionController@addGroupApi' ] );
 Route::get('competencias/api-seleccionar-lista',  ['as' => 'competitions.api.select.list','uses' => 'CompetitionController@getAllValue' ] );
 

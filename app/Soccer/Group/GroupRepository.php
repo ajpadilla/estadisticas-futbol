@@ -52,21 +52,32 @@ class GroupRepository extends BaseRepository
 		return $group;
 	}
 
-	public function updateTeams($data = array())
+	public function addTeams($id, $teams = null)
 	{
-		$group = $this->get($data['group_id']);
-	
-		$group->numberTemas = $group->totalTeams;
-		if(!empty($data['teams_ids'])){
-			foreach ($data['teams_ids'] as $teamId) {
-				if($group->numberTemas <= $group->competition->tipoCompetencia->equipos_por_grupo){
-					$group->teams()->attach($teamId);
-					$group->numberTemas++;
-				}
-			}
+		$group = $this->get($id);
+		if($group && !empty($teams)) {
+			$competition = $group->competition;
+			if($group->totalMissingTeams < count($teams))
+				$teams = array_slice($teams, 0, $group->totalMissingTeams);
+
+			$unavailableTeams = array();
+			foreach ($teams as $index => $team) 
+				if($this->teamExistInGroup($index, $team))
+					$unavailableTeams[] = $index;
+			
+			foreach ($unavailableTeams as $team) 
+				unset($teams[$team]);
+
+			$group->attach($teams);
 		}
 		return $group;
 	}
+
+	public function teamExistInGroup($id, $team)
+	{
+		$group = $this->get($id);
+		return $group->teams()->whereTeamId($team)->first();
+	}	
 
 	public function getAvailableTeams($competitionId)
 	{

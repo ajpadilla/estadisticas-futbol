@@ -5,7 +5,7 @@
 			<h4><i class="fa fa-user"></i><span class="hidden-inline-mobile">Agregar Equipos</span></h4>
 		</div>
 		<div class="box-body">
-			{{ Form::open(['route' => ['groups.api.add.team'],'class'=>'form-horizontal','role'=>'form', 'id'=> 'add-team-to-group-form']) }}
+			{{ Form::open(['route' => ['groups.api.add.team'], 'class' => 'form-horizontal', 'role' => 'form', 'id' => 'add-team-to-group-form']) }}
 
 			<div class="form-group">
 				{{ Form::label('teams_ids[]','Equipos',['class'=>'col-md-2 control-label']) }}

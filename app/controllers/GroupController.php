@@ -99,13 +99,12 @@ class GroupController extends \BaseController {
 	{
 		if (Request::ajax()) 
 		{
-			$input = Input::all();
-			$input['group_id'] = $id;
-			$group = $this->repository->updateTeams($input);
+			$input = Input::all();		
+			$id = $input['group_id'];
+			$teams = $input['teams_ids'];
+			$group = $this->repository->addTeams($id, $teams);
 			$this->setSuccess(true);
 			$this->addToResponseArray('group', $group);
-			$this->addToResponseArray('full', $group->numberTemas);
-			$this->addToResponseArray('totalTeams', $group->totalTeams);
 			return $this->getResponseArrayJson();
 		}else{
 			$this->setSuccess(false);
