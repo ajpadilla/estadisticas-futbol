@@ -100,9 +100,9 @@ class GroupRepository extends BaseRepository
 		return $group->teams()->whereTeamId($team)->first();
 	}	
 
-	public function getAvailableTeams($id)
+	public function getAvailableTeams($id, $forList = true)
 	{
-		$teams = null;
+		$teams = false;
 		$group = $this->get($id);
 		if($group) {
 			$competition = $group->competition;
@@ -111,7 +111,15 @@ class GroupRepository extends BaseRepository
 				$teams = $equipoRepository->getAll($group->teams->lists('id'));
 			else
 				$teams = $equipoRepository->getByCountry($competition->country, $group->teams->lists('id'));
-		}		
+		}	
+		if(!empty($teams) && $forList) {
+			$listTeams = array();
+			foreach ($teams as $team) {
+				$team = array('name' = $team->nombre, 'id' => $team->id);
+				$listTeams[] = $team;
+			}
+		}
+
 		return $teams;
 	}
 

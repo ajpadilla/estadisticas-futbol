@@ -54,9 +54,21 @@ class CompetitionRepository extends BaseRepository
 		return $group;
 	}
 
-	public function getAvailableTeams($id)
+	public function getAvailableTeams($id, $forList = true)
 	{
 		$competition = $this->get($id);
+		if($competition->groups->count()) {
+			$groupRepository = new GroupRepository;
+			$teams = array();
+			foreach ($competition->with('groups') as $group)
+			{
+			    $availableTeams = $groupRepository->getAvailableTeams($group->id, $forList);
+			    if($availableTeams->count())
+			    	foreach ($availableTeams as $team) 
+			    		$teams[] = $team;
+			}
+			return empty($teams) ? false : array_unique($teams);
+		}
 		return false;
 	}
 
