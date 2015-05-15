@@ -1,13 +1,20 @@
 <?php
 
 use soccer\Group\GroupRepository;
+use soccer\Forms\RegisterTeamGroupForm;
+use Laracasts\Validation\FormValidationException;
 
 class GroupController extends \BaseController {
 
 	protected $repository;
+	protected $registerTeamGroupForm;
 
-	public function __construct(GroupRepository $repository){
+	public function __construct(
+			GroupRepository $repository,
+			RegisterTeamGroupForm $registerTeamGroupForm,
+		){
 		$this->repository = $repository;
+		$this->registerTeamGroupForm = $registerTeamGroupForm;
 	}	
 
 
@@ -97,18 +104,26 @@ class GroupController extends \BaseController {
 	*/
 	public function addTeamApi($id)
 	{
-		if (Request::ajax()) 
+		if(Request::ajax())
 		{
-			$input = Input::all();		
-			$id = $input['group_id'];
-			$teams = $input['teams_ids'];
-			$group = $this->repository->addTeams($id, $teams);
-			$this->setSuccess(true);
-			$this->addToResponseArray('group', $group);
-			return $this->getResponseArrayJson();
-		}else{
-			$this->setSuccess(false);
-			return $this->getResponseArrayJson();
+			$input = Input::all();
+			try
+			{
+				$input = Input::all();		
+				$id = $input['group_id'];
+				$teams = $input['teams_ids'];
+				$this->registerTeamGroupForm->validate($input);
+				$group = $this->repository->addTeams($id, $teams);
+				$this->setSuccess(true);
+				$this->addToResponseArray('group', $group);
+				return $this->getResponseArrayJson();			
+			}
+			catch (FormValidationException $e)
+			{
+				$this->setSuccess(false);
+				$this->addToResponseArray('errores', $e->getErrors()->all());
+				return $this->getResponseArrayJson();
+			}
 		}
 	}	
 
