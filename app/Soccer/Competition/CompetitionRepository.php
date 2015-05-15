@@ -67,7 +67,7 @@ class CompetitionRepository extends BaseRepository
 			    	foreach ($availableTeams as $team) 
 			    		$teams[] = $team;
 			}
-			return empty($teams) ? false : array_unique($teams);
+			return empty($teams) ? false : array_unique($teams, SORT_REGULAR);
 		}
 		return false;
 	}

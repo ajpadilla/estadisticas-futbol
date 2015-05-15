@@ -99,7 +99,6 @@ class GroupRepository extends BaseRepository
 		$group = $this->get($id);
 		return $group->teams()->whereTeamId($team)->first();
 	}	
-
 	public function getAvailableTeams($id, $forList = true)
 	{
 		$teams = false;
@@ -114,12 +113,9 @@ class GroupRepository extends BaseRepository
 		}	
 		if(!empty($teams) && $forList) {
 			$listTeams = array();
-			foreach ($teams as $team) {
-				$team = array('name' => $team->nombre, 'id' => $team->id);
-				$listTeams[] = $team;
-			}
+			foreach ($teams as $team) 
+				$listTeams[] = array('name' = $team->nombre, 'id' => $team->id);
 		}
-
 		return $teams;
 	}
 
