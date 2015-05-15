@@ -39,12 +39,11 @@ class GroupRepository extends BaseRepository
 
 	public function create($data = array())
 	{
-		//$group = $this->model->create($data); 
+		$group = $this->model->create($data); 
 
-		$competitionRepository = new CompetitionRepository;
-		$competition =  $competitionRepository->get($data['competition_id']);
-		print_r($competition->nombre);
-		print($competition->getIsFullAttribute());
+		if (!$group->competition->isFull) {
+			echo "Entro";
+		}
 	}
 
 	public function updateTeams($data = array())
