@@ -31,8 +31,13 @@ class CompetitionRepository extends BaseRepository
 		if (empty($data['pais_id'])) {
 			$data['pais_id'] = NULL;
 		}
-		$competencia = $this->model->create($data); 
-		return $competencia;
+		$competition = $this->model->create($data); 
+
+		if($competition->isLeague) {
+			$groupRepository = new GroupRepository;
+			$groupRepository->create(['name' => $competition->nombre, 'competition_id' => $competition->id]);
+		}
+		return $competition;
 	}
 
 	public function addGroup($id, $group, $teams = null)
