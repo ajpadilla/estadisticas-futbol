@@ -12,7 +12,11 @@
 				@if(!$group->isFullGames OR !$group->isFull)
 					<div class="row">
 						@if (!$group->isFullGames)
+							@if ($competition->tipoCompetencia->isTournament)
 							<div class="col-md-2 col-md-offset-1">
+							@else
+							<div class="col-md-2">
+							@endif
 								<button class="teams pull-right btn btn-lg btn-primary" id="add-game" href="#" data-group-id="{{ $group->id }}">Agregar partido</button>
 							</div>								
 						@endif
