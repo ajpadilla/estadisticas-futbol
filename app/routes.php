@@ -154,4 +154,4 @@ Route::get('filterAjax',  ['as' => 'filterAjax.api','uses' => 'PlayerController@
 Route::post('grupos/api-agregar-equipo', ['as' => 'groups.api.add.team', 'uses' => 'GroupController@addTeamApi']);
 Route::post('grupos/api-agregar-juego', ['as' => 'groups.api.add.game', 'uses' => 'GroupController@addGameApi']);
 Route::get('grupos/api-lista-grupo/{id}', ['as' => 'groups.api.list.group', 'uses' => 'GroupController@listGroupApi']);
-Route::post('grupos/api-equipos-disponibles', ['as' => 'groups.api.available.teams', 'uses' => 'GroupController@getAvailableTeams']);
+Route::get('grupos/api-equipos-disponibles', ['as' => 'groups.api.available.teams', 'uses' => 'GroupController@getAvailableTeams']);
