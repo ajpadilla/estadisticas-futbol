@@ -41,6 +41,7 @@ class GroupRepository extends BaseRepository
 	public function create($data = array())
 	{		
 		$group = $this->model->create($data); 
+
 		if($group) {
 			$teams = ( isset($data['teams_ids']) ? $data['teams_ids'] : array() );
 			if(!empty($teams)) {
@@ -98,9 +99,10 @@ class GroupRepository extends BaseRepository
 		$equipoRepository = new EquipoRepository;
 		$competition = $competitionRepository->get($competitionId);
 		$teamsToGroup = $competition->teams;
-		$teamsToCompetition = $equipoRepository->getTeamsByCompetition($teamsToGroup->lists('team_id'), $competition);
+		$teamsToCompetition = $equipoRepository->getTeamsByCompetition($teamsToGroup->lists('id'), $competition);
 		return $teamsToCompetition;
 	}
+
 
 	public function gameAlreadyExists($id, $localTeam, $awayTeam)
 	{

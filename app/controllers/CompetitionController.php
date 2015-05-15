@@ -2,6 +2,7 @@
 
 use soccer\Competition\CompetitionRepository;
 use soccer\Forms\RegisterCompetition;
+use soccer\Forms\RegisterGroupForm;
 use soccer\Group\GroupRepository;
 use soccer\Game\GameType\GameTypeRepository;
 use Laracasts\Validation\FormValidationException;
@@ -10,11 +11,13 @@ class CompetitionController extends \BaseController {
 
 	protected $repository;
 	protected $registerCompetition;
+	protected $registerGroupForm;
 	protected $groupRepository;
 	protected $gameTypeRepository;
 
 	public function __construct(CompetitionRepository $repository,
 			RegisterCompetition $registerCompetition,
+			RegisterGroupForm $registerGroupForm,
 			GroupRepository $groupRepository,
 			GameTypeRepository $gameTypeRepository
 		){
@@ -22,6 +25,7 @@ class CompetitionController extends \BaseController {
 		$this->registerCompetition = $registerCompetition;
 		$this->groupRepository = $groupRepository;
 		$this->gameTypeRepository = $gameTypeRepository;
+		$this->registerGroupForm = $registerGroupForm;
 	}
 
 	/**
@@ -152,10 +156,26 @@ class CompetitionController extends \BaseController {
 
 	public function addGroupApi()
 	{
-		$input = Input::all();
-		//aqui usas addGroup de CompetitionRepository
-
-		return Redirect::route('competitions.show', $id);
+		if(Request::ajax())
+		{
+			$input = Input::all();
+			try
+			{
+				$this->registerGroupForm->validate($input);
+				$group = $this->groupRepository->create($input);
+				$this->setSuccess(true);
+				$this->addToResponseArray('group', $group);
+				$this->addToResponseArray('data', $input);
+				return $this->getResponseArrayJson();					
+			}
+			catch (FormValidationException $e)
+			{
+				$this->setSuccess(false);
+				$this->addToResponseArray('data', $input);
+				$this->addToResponseArray('errores', $e->getErrors()->all());
+				return $this->getResponseArrayJson();
+			}
+		}
 	}
 
 	public function getAllValue()

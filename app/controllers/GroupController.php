@@ -95,7 +95,7 @@ class GroupController extends \BaseController {
 	/*
 	****************** API ******************
 	*/
-	public function addTeamApi()
+	public function addTeamApi($id)
 	{
 		if (Request::ajax()) 
 		{
