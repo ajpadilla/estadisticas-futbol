@@ -107,7 +107,7 @@ class GroupRepository extends BaseRepository
 		if($group) {
 			$competition = $group->competition;
 			$equipoRepository = new EquipoRepository;
-			if($competition->isInternational) 
+			if($competition->international) 
 				$teams = $equipoRepository->getAll($group->teams->lists('id'));
 			else
 				$teams = $equipoRepository->getByCountry($competition->country, $group->teams->lists('id'));

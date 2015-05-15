@@ -72,7 +72,7 @@ class EquipoRepository extends BaseRepository
 	public	function getByCountry($country, $exclude = null)
 	{
 		if($exclude)
-			return $country->teams()->whereNotIn('equipos.id', $exclude)->get();
+			return $country->teams()->whereNotIn('id', $exclude)->get();
 		return $country->teams;
 	}
 
