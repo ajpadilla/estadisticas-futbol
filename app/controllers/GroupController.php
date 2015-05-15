@@ -162,6 +162,7 @@ class GroupController extends \BaseController {
 			elseif (isset($input['competition_id'])) 
 				$teams = $this->competitionRepository->getAvailableTeams($input['competition_id']);
 			$this->setSuccess(($teams ? true : false));
+			$this->addToResponseArray('data', $input);
 			if($teams)
 				$this->addToResponseArray('teams', $teams);
 		}else{
