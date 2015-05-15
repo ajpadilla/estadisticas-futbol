@@ -154,7 +154,7 @@ class CompetitionController extends \BaseController {
 	}
 	
 
-	public function addGroupApi($id)
+	public function addGroupApi()
 	{
 		try {
 			$this->registerGroupForm->validate(Input::all());
@@ -163,7 +163,6 @@ class CompetitionController extends \BaseController {
 		} catch (FormValidationException $e) {
 			return Redirect::back()->withInput()->withErrors($e->getErrors());
 		}
-
 	}
 
 	public function getAllValue()
