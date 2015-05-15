@@ -102,7 +102,7 @@ class GroupRepository extends BaseRepository
 
 	public function getAvailableTeams($id)
 	{
-		$teams = null;
+		$teams = false;
 		$group = $this->get($id);
 		if($group) {
 			$competition = $group->competition;
