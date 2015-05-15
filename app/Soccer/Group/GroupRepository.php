@@ -51,19 +51,10 @@ class GroupRepository extends BaseRepository
 		return $group;
 	}
 
-	public function updateTeams($data = array())
-	{
-		$group = $this->get($data['group_id']);
-
-		if(!empty($data['teams_ids']))
-			$group->teams()->sync($data['teams_ids'], false);		
-		return $group;
-	}
-
 	public function addTeams($id, $teams = null)
 	{
 		$group = $this->get($id);
-		if($group) {
+		if($group && !empty($teams)) {
 			$competition = $group->competition;
 			if($group->totalMissingTeams < count($teams))
 				$teams = array_slice($teams, 0, $group->totalMissingTeams);
