@@ -3197,8 +3197,8 @@ var handleBootboxAddEquipoToJugador = function () {
      var enableCountryToCompetition = function () {
         $("select#pais-competencias").prop('disabled', false);
         $('select#pais-competencias').trigger("chosen:updated");
-        $('input[name="internacional"]').click(function() {  
-            if($('input[name="internacional"]').is(':checked')) { 
+        $('input[name="international"]').click(function() {  
+            if($('input[name="international"]').is(':checked')) { 
                 console.log('entro');
                 $("select#pais-competencias").prop('disabled', true);  
                 $('select#pais-competencias').trigger("chosen:updated"); 
@@ -3367,11 +3367,11 @@ var handleBootboxAddEquipoToJugador = function () {
 
 
     var selectTeamsForCompetition = function(idCompetition) {
-        //console.log($(this).val());
+        console.log($('#list-of-teams-for-competition').attr('href'));
             $.ajax({
                 type: 'GET',
-                url: $('#list-of-teams-for-competition').attr('href'),
-                data: {'competitionId': idCompetition},
+                url: 'grupos/api-equipos-disponibles/',
+                //data: {'competitionId': idCompetition},
                 dataType:'json',
                 success: function(response) {
                     console.log(response.teams);
@@ -3580,11 +3580,11 @@ var handleBootboxAddEquipoToJugador = function () {
 
         $(".box-body.big").delegate(".teams", "click", function() {
             console.log('competitionId:' + $(this).attr('competition-id'));
-            console.log('gruposId:' + $(this).attr('data-group-id'));
+            //console.log('gruposId:' + $(this).attr('data-group-id'));
             console.log('url:' + $(this).attr('href'));
 
             popUpDataForTypeCompetition($(this).attr('href'), $(this).attr('data-group-id'));
-            selectTeamsForGroup($(this).attr('competition-id'));
+            selectTeamsForGroup($(this).attr('data-group-id'));
         });
 
     }
