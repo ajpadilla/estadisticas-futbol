@@ -178,6 +178,21 @@ class CompetitionController extends \BaseController {
 		}
 	}
 
+	public function getAvailableTeams($id)
+	{
+		if(Request::ajax())
+		{
+			$teams = $this->repository->getAvailableTeams($id);
+			$this->setSuccess(($teams ? true : false));
+			$this->addToResponseArray('data', $input);
+			if($teams)
+				$this->addToResponseArray('teams', $teams);
+		}else{
+			$this->setSuccess(false);
+		}
+		return $this->getResponseArrayJson();
+	}	
+
 	public function getAllValue()
 	{
 		if(Request::ajax())
