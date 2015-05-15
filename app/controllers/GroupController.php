@@ -1,19 +1,23 @@
 <?php
 
 use soccer\Group\GroupRepository;
+use soccer\Competition\CompetitionRepository;
 use soccer\Forms\RegisterTeamGroupForm;
 use Laracasts\Validation\FormValidationException;
 
 class GroupController extends \BaseController {
 
 	protected $repository;
+	protected $competitionRepository;
 	protected $registerTeamGroupForm;
 
 	public function __construct(
 			GroupRepository $repository,
+			CompetitionRepository $competitionRepository,
 			RegisterTeamGroupForm $registerTeamGroupForm
 		){
 		$this->repository = $repository;
+		$this->competitionRepository = $competitionRepository;
 		$this->registerTeamGroupForm = $registerTeamGroupForm;
 	}	
 
@@ -148,11 +152,15 @@ class GroupController extends \BaseController {
 		return $this->repository->getDefaultTableForGroupTeams($id);
 	}
 
-	public function getAvailableTeams($id)
+	public function getAvailableTeams()
 	{
 		if(Request::ajax())
 		{
-			$teams = $this->repository->getAvailableTeams($id);
+			$input = Input::all();
+			if(isset($input['group_id']))
+				$teams = $this->repository->getAvailableTeams($input['group_id']);
+			elseif (isset($input['competition_id'])) 
+				$teams = $this->competitionRepository->getAvailableTeams($input['competition_id']);
 			$this->setSuccess(($teams ? true : false));
 			if($teams)
 				$this->addToResponseArray('teams', $teams);

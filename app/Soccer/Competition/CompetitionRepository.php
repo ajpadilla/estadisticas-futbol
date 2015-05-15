@@ -54,6 +54,12 @@ class CompetitionRepository extends BaseRepository
 		return $group;
 	}
 
+	public function getAvailableTeams($id)
+	{
+		$competition = $this->get($id);
+		return false;
+	}
+
     /*
 	********************* Datatable Methods ***********************
     */
