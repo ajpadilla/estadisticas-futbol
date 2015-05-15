@@ -150,11 +150,11 @@ class CompetitionController extends \BaseController {
 	}
 	
 
-	public function addGroupApi($id)
+	public function addGroupApi()
 	{
 		$input = Input::all();
-		$input['competition_id'] = $id;
-		$this->groupRepository->create($input);
+		//aqui usas addGroup de CompetitionRepository
+
 		return Redirect::route('competencias.show', $id);
 	}
 
