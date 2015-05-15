@@ -3622,18 +3622,17 @@ var handleBootboxAddEquipoToJugador = function () {
                             className: "btn-primary",
                             callback: function () 
                             {
-                                if($('#add-team-to-group-form').valid()) {
-                                    var response = false; // Esta variable debería recibir los datos por ajax.
-                                    var dataServer = null;
-
+                                if($('#add-team-to-group-form').valid()) 
+                                {
                                     $("#add-team-to-group-form").submit(function(e){
-                                        var formData = new FormData(this);
+                                        var formData = {
+                                            group_id: groupId,
+                                            teams_ids: $('#new-teams-for-groups-ids').val(),
+                                        };
                                         $.ajax({
                                             type: 'POST',
                                             url: url, 
                                             data: formData,
-                                            contentType: false,
-                                            processData: false,
                                             dataType: "JSON",
                                             success: function(responseServer) {
                                                 console.log(responseServer);
