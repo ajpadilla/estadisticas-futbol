@@ -65,10 +65,10 @@ class CompetitionRepository extends BaseRepository
 		if($competition->groups->count()) {
 			$groupRepository = new GroupRepository;
 			$teams = array();
-			foreach ($competition->with('groups') as $group)
+			foreach ($competition->groups as $group)
 			{
 			    $availableTeams = $groupRepository->getAvailableTeams($group->id, $forList);
-			    if($availableTeams->count())
+			    if(count($availableTeams))
 			    	foreach ($availableTeams as $team) 
 			    		$teams[] = $team;
 			}
