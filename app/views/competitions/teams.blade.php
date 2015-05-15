@@ -2,7 +2,7 @@
 	@if (!$competition->isFull) 
 		<div class="row">
 			<div class="col-md-2 col-md-offset-10">
-				<button class="pull-right btn btn-lg btn-primary" id="add-group" value="{{ $competition->id }}" href="#">Agregar grupo</button>
+				<button class="pull-right btn btn-lg btn-primary" id="add-group" data-competition-id="{{ $competition->id }}" href="#">Agregar grupo</button>
 			</div>
 			<div id="add-group-to-competition" class="hidden">
 				@include('groups.new')
