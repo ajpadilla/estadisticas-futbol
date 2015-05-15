@@ -12,7 +12,7 @@
 */
 
 Route::get('test', function() {
-	$gr = new soccer\Group\GroupRepository();
+	/*$gr = new soccer\Group\GroupRepository();
 	$group = $gr->get(2);
 	//dd($group->games()->whereLocalTeamId(3)->first());
 	//return $gr->gameAlreadyExists(2, 4, 5);
@@ -21,7 +21,8 @@ Route::get('test', function() {
 	$competition = $group->competition->first();
 	//dd($competition->teams->toArray());
 	//dd($team->toArray());
-	dd($team->competitions->toArray());
+	dd($team->competitions->toArray());*/
+	dd(soccer\Group\Group::findOrFail(4));
 });
 
 Route::get('/', [
