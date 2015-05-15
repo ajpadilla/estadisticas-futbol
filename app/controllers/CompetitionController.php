@@ -155,7 +155,7 @@ class CompetitionController extends \BaseController {
 		$input = Input::all();
 		//aqui usas addGroup de CompetitionRepository
 
-		return Redirect::route('competencias.show', $id);
+		return Redirect::route('competitions.show', $id);
 	}
 
 	public function getAllValue()
