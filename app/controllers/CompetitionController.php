@@ -156,12 +156,25 @@ class CompetitionController extends \BaseController {
 
 	public function addGroupApi()
 	{
-		try {
-			$this->registerGroupForm->validate(Input::all());
-			//$this->groupRepository->create($input);
-			return Redirect::route('competencias.show', $id);
-		} catch (FormValidationException $e) {
-			return Redirect::back()->withInput()->withErrors($e->getErrors());
+		if(Request::ajax())
+		{
+			$input = Input::all();
+			try
+			{
+				$this->registerGroupForm->validate($input);
+				$group = $this->groupRepository->create($input);
+				$this->setSuccess(true);
+				$this->addToResponseArray('group', $group);
+				$this->addToResponseArray('data', $input);
+				return $this->getResponseArrayJson();					
+			}
+			catch (FormValidationException $e)
+			{
+				$this->setSuccess(false);
+				$this->addToResponseArray('data', $input);
+				$this->addToResponseArray('errores', $e->getErrors()->all());
+				return $this->getResponseArrayJson();
+			}
 		}
 	}
 
