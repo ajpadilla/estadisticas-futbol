@@ -122,7 +122,7 @@ class GroupController extends \BaseController {
 			{
 				$this->setSuccess(false);
 				$this->addToResponseArray('data', $input);
-				$this->addToResponseArray('errores', $e->getErrors()->all());
+				$this->addToResponseArray('errors', $e->getErrors()->all());
 				return $this->getResponseArrayJson();
 			}
 		}
