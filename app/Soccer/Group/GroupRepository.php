@@ -38,12 +38,16 @@ class GroupRepository extends BaseRepository
 	*/
 
 	public function create($data = array())
-	{
+	{		
 		$group = $this->model->create($data); 
-
-		if(!empty($data['teams_ids']))
-			$group->teams()->attach($data['teams_ids']);
-		
+		if($group) {
+			$teams = ( isset($data['teams_ids']) ? $data['teams_ids'] : array() );
+			if(!empty($teams)) {
+				if($group->competition->teamsByGroup < count($teams))
+					$teams = array_slice($teams, 0, $group->competition->teamsByGroup);
+				$group->teams()->attach($teams);
+			}
+		}		
 		return $group;
 	}
 
