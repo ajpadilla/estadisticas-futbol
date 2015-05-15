@@ -11,7 +11,7 @@ class GroupController extends \BaseController {
 
 	public function __construct(
 			GroupRepository $repository,
-			RegisterTeamGroupForm $registerTeamGroupForm,
+			RegisterTeamGroupForm $registerTeamGroupForm
 		){
 		$this->repository = $repository;
 		$this->registerTeamGroupForm = $registerTeamGroupForm;
@@ -109,18 +109,19 @@ class GroupController extends \BaseController {
 			$input = Input::all();
 			try
 			{
-				$input = Input::all();		
-				$id = $input['group_id'];
+				$idGroup = $input['group_id'];
 				$teams = $input['teams_ids'];
 				$this->registerTeamGroupForm->validate($input);
-				$group = $this->repository->addTeams($id, $teams);
+				$group = $this->repository->addTeams($idGroup, $teams);
 				$this->setSuccess(true);
+				$this->addToResponseArray('data', $input);
 				$this->addToResponseArray('group', $group);
 				return $this->getResponseArrayJson();			
 			}
 			catch (FormValidationException $e)
 			{
 				$this->setSuccess(false);
+				$this->addToResponseArray('data', $input);
 				$this->addToResponseArray('errores', $e->getErrors()->all());
 				return $this->getResponseArrayJson();
 			}
