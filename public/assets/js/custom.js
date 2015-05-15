@@ -3557,7 +3557,7 @@ var handleBootboxAddEquipoToJugador = function () {
                         jQuery('#new-teams-for-groups-ids').html('');
                         jQuery('#new-teams-for-groups-ids').append('<option value=\"\"></option>');
                         $.each(response.teams,function (k,v){
-                            $('#new-teams-for-groups-ids').append('<option value=\"'+k+'\">'+v+'</option>');
+                            $('#new-teams-for-groups-ids').append('<option value=\"'+v.id+'\">'+v.nombre+'</option>');
                             $('#new-teams-for-groups-ids').trigger("chosen:updated");
                         });
                     }else{
