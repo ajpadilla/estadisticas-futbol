@@ -3367,14 +3367,14 @@ var handleBootboxAddEquipoToJugador = function () {
 
 
     var selectTeamsForCompetition = function(idCompetition) {
-        console.log($('#list-of-teams-for-competition').attr('href'));
+        //console.log($(this).val());
             $.ajax({
                 type: 'GET',
-                url: 'grupos/api-equipos-disponibles/',
-                //data: {'competitionId': idCompetition},
+                url: $('#list-of-teams-for-competition').attr('href'),
+                data: {'competition_id': idCompetition},
                 dataType:'json',
                 success: function(response) {
-                    console.log(response.teams);
+                    console.log(response);
                     if (response.success == true) {
                         jQuery('#competition-new-teams-ids').html('');
                         jQuery('#competition-new-teams-ids').append('<option value=\"\"></option>');
