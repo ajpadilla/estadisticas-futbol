@@ -69,6 +69,20 @@ class EquipoRepository extends BaseRepository
 		}
 	}
 
+	public	function getByCountry($country, $exclude = null)
+	{
+		if($exclude)
+			return $country->teams->whereNotIn($exclude->lists['id'])->get();
+		return $country->teams;
+	}
+
+	public function  getAll($exclude = null)
+	{
+		if($exclude)
+			return $this->getModel()->whereNotIn($exclude->lists['id'])->get();
+		return $this->getModel()->all();
+	}
+
 	/*
 	*********************** METHODS FOR GROUPS ******************************
 	*/		

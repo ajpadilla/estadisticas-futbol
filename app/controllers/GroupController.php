@@ -149,11 +149,11 @@ class GroupController extends \BaseController {
 		return $this->repository->getDefaultTableForGroupTeams($id);
 	}
 
-	public function getAllTeamsForCompetitions()
+	public function getAvailableTeams($id)
 	{
 		if(Request::ajax())
 		{
-			$teams = $this->repository->getAvailableTeams(Input::get('competitionId'));
+			$teams = $this->repository->getAvailableTeams($id);
 			$this->setSuccess(true);
 			$this->addToResponseArray('teams', $teams);
 			return $this->getResponseArrayJson();
