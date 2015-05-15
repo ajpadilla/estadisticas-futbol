@@ -22,7 +22,7 @@
 							@else
 								<div class="col-md-2 col-md-offset-10">
 							@endif
-								<button class="teams pull-right btn btn-lg btn-primary" id="add-team" href="{{ URL::route('groups.api.add.team', $group->id ) }}" competition-id="{{ $competition->id }}" data-group-id="{{ $group->id }}">Agregar equipo</button>
+								<button class="teams pull-right btn btn-lg btn-primary" id="add-team" href="{{ URL::route('groups.api.add.team') }}" data-group-id="{{ $group->id }}">Agregar equipo</button>
 							</div>							
 						@endif
 					</div>					
