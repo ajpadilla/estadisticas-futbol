@@ -55,21 +55,21 @@ class GroupRepository extends BaseRepository
 
 	public function addTeams($id, $teams = null)
 	{		
-		$group = $this->get($id);
+		$group = $this->get($id);				
 		if($group && !empty($teams)) {
 			if($group->totalMissingTeams < count($teams))
 				$teams = array_slice($teams, 0, $group->totalMissingTeams);
 
 			$unavailableTeams = array();
 			foreach ($teams as $index => $team) 
-				if($this->teamExistInGroup($index, $team))
+				if($this->teamExistInGroup($group->id, $team))
 					$unavailableTeams[] = $index;
 			
 			foreach ($unavailableTeams as $team) 
 				unset($teams[$team]);
 
 			if(!empty($teams))
-				$group->attach($teams);
+				$group->teams()->attach($teams);
 			else
 				$group = false;
 		} else {
