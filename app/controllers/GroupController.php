@@ -147,6 +147,13 @@ class GroupController extends \BaseController {
 		return $this->getResponseArrayJson();
 	}
 
+	public function existGameApi($id, $localTeam, $awayTeam)
+	{
+		if(Request::ajax()) 
+			$this->setSuccess( (bool) $this->repository->gameAlreadyExists($id, $localTeam, $awayTeam));
+		return $this->getResponseArrayJson();
+	}	
+
 	public function listGroupApi($id)
 	{
 		return $this->repository->getDefaultTableForGroupTeams($id);
