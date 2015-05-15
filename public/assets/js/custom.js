@@ -3544,12 +3544,12 @@ var handleBootboxAddEquipoToJugador = function () {
 
 
 
-     var selectTeamsForGroup = function(idCompetition) {
+     var selectTeamsForGroup = function(idGroup) {
         //console.log($(this).val());
             $.ajax({
                 type: 'GET',
                 url: $('#list-of-teams-for-competition').attr('href'),
-                data: {'competitionId': idCompetition},
+                data: {'group_id': idGroup},
                 dataType:'json',
                 success: function(response) {
                     console.log(response.teams);
