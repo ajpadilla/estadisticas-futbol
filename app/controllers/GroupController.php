@@ -95,14 +95,17 @@ class GroupController extends \BaseController {
 	/*
 	****************** API ******************
 	*/
-	public function addTeamApi()
+	public function addTeamApi($id)
 	{
 		if (Request::ajax()) 
 		{
 			$input = Input::all();
+			$input['group_id'] = $id;
 			$group = $this->repository->updateTeams($input);
 			$this->setSuccess(true);
 			$this->addToResponseArray('group', $group);
+			$this->addToResponseArray('full', $group->numberTemas);
+			$this->addToResponseArray('totalTeams', $group->totalTeams);
 			return $this->getResponseArrayJson();
 		}else{
 			$this->setSuccess(false);
