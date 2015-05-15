@@ -42,16 +42,16 @@
 						<div class="col-sm-6">
 							<div class="checkbox">
 								<label> 
-									{{ Form::checkbox('internacional', '1')}}
+									{{ Form::checkbox('international', '1')}}
 									<i></i> Internacional	
 								</label>
 							</div>
 						</div>
 					</div>
 					<div class="form-group">
-						{{ Form::label('pais_id','País',['class'=>'col-sm-2 control-label']) }}
+						{{ Form::label('country_id','País',['class'=>'col-sm-2 control-label']) }}
 						<div class="col-sm-6">
-							{{ Form::select('pais_id',array(),null,['class' => 'form-control chosen-select','data-placeholder' => 'Escoge País...','id'=>'pais-competencias']) }}
+							{{ Form::select('country_id',array(),null,['class' => 'form-control chosen-select','data-placeholder' => 'Escoge País...','id'=>'pais-competencias']) }}
 						</div>
 					</div>
 					<div class="form-group">
