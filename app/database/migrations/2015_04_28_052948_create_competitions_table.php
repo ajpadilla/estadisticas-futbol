@@ -19,7 +19,7 @@ class CreateCompetitionsTable extends Migration {
 			$table->string('imagen', 128)->nullable();
 			$table->date('desde');
 			$table->date('hasta');
-			$table->boolean('internacional')->default(false);
+			$table->boolean('international')->default(false);
 			$table->integer('tipo_competencia_id')->unsigned();
 			$table->foreign('tipo_competencia_id')
 				->references('id')->on('tipo_competencias')
@@ -29,8 +29,8 @@ class CreateCompetitionsTable extends Migration {
 
 		Schema::table('competitions', function(Blueprint $table)
 		{
-				$table->integer('pais_id')->unsigned()->nullable()->after('tipo_competencia_id');	
-				$table->foreign('pais_id')
+				$table->integer('country_id')->unsigned()->nullable()->after('tipo_competencia_id');	
+				$table->foreign('country_id')
 						->references('id')	
 						->on('paises')
 						->onDelete('no action')

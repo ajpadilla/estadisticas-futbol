@@ -27,14 +27,14 @@
 											<td>Finaliza</td>
 											<td id="card-name"><strong>{{ $competition->hasta }}</strong></td>
 										</tr>
-										@if($competition->internacional)
+										@if($competition->international)
 											<tr>
 												<td>Competición Internacional</td>
 											</tr>										
 										@else
 											<tr>
 												<td>País</td>
-												<td id="card-name"><strong>{{ $competition->pais->nombre }}</strong></td>
+												<td id="card-name"><strong>{{ $competition->country->nombre }}</strong></td>
 											</tr>										
 										@endif										
 									</tbody>

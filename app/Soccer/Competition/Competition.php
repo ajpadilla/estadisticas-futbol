@@ -33,7 +33,7 @@ class Competition extends Eloquent implements StaplerableInterface{
     	return $this->belongsTo('soccer\TipoCompetencia\TipoCompetencia');
     }
 
-    public function pais()
+    public function country()
     {
         return $this->belongsTo('soccer\Pais\Pais');
     }

@@ -11,7 +11,7 @@ class Pais extends Eloquent{
 
 	protected $fillable = ['nombre', 'bandera'];
 
-	public function equipos()
+	public function teams()
 	{
 		return $this->hasMany('soccer\Equipo\Equipo');
 	}

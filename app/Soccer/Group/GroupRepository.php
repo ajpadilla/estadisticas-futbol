@@ -100,14 +100,19 @@ class GroupRepository extends BaseRepository
 		return $group->teams()->whereTeamId($team)->first();
 	}	
 
-	public function getAvailableTeams($competitionId)
+	public function getAvailableTeams($id)
 	{
-		$competitionRepository = new CompetitionRepository;
-		$equipoRepository = new EquipoRepository;
-		$competition = $competitionRepository->get($competitionId);
-		$teamsToGroup = $competition->teams;
-		$teamsToCompetition = $equipoRepository->getTeamsByCompetition($teamsToGroup->lists('id'), $competition);
-		return $teamsToCompetition;
+		$teams = null;
+		$group = $this->get($id);
+		if($group) {
+			$competition = $group->competition;
+			$equipoRepository = new EquipoRepository;
+			if($competition->isInternational) 
+				$teams = $equipoRepository->getAll($group->teams);
+			else
+				$teams = $equipoRepository->getByCountry($competition->country, $group->teams);
+		}		
+		return $teams;
 	}
 
 
