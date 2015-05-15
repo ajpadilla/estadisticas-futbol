@@ -109,7 +109,7 @@ class GroupController extends \BaseController {
 			$input = Input::all();
 			try
 			{
-				$idGroup = $input['group_id'];
+				$idGroup = (int)$input['group_id'];
 				$teams = $input['teams_ids'];
 				$this->registerTeamGroupForm->validate($input);
 				$group = $this->repository->addTeams($idGroup, $teams);
