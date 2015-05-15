@@ -115,7 +115,7 @@ class GroupRepository extends BaseRepository
 		if(!empty($teams) && $forList) {
 			$listTeams = array();
 			foreach ($teams as $team) {
-				$team = array('name' = $team->nombre, 'id' => $team->id);
+				$team = array('name' => $team->nombre, 'id' => $team->id);
 				$listTeams[] = $team;
 			}
 		}
