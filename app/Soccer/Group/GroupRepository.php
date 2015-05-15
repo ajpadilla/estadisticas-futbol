@@ -70,17 +70,6 @@ class GroupRepository extends BaseRepository
 	{
 		$group = $this->get($id);
 		return $group->games()->whereLocalTeamId($localTeam)->whereAwayTeamId($awayTeam)->count();
-
-		// el codigo abajo es cuando la asociación es de grupo id con games grupo id
-		/*foreach ($games as $game) 
-			if($game->localTeam->id == $localTeam && $game->awayTeam->id == $awayTeam)
-				return true;
-		return false;*/
-
-		// el codigo abajo es cuando la asociación es directo de group team con games.
-		//$localTeam = $group->groupTeams()->whereTeamId($localTeam)->first();
-		//$awayTeam = $group->groupTeam()->whereTeamId($awayTeam)->first();
-		//return $group->games()->whereLocalTeamId($localTeam->id)->whereAwayTeamId($awayTeam->id)->first();
 	}
 
 	public function getTeamsWithoutFullGames($id)
