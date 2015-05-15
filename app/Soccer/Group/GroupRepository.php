@@ -4,6 +4,7 @@ use soccer\Group\Group;
 use soccer\Base\BaseRepository;
 use soccer\Equipo\EquipoRepository;
 use soccer\Competition\CompetitionRepository;
+use soccer\Game\GameRepository;
 use Carbon\Carbon;
 use Datatable;
 use Illuminate\Database\Eloquent\Collection;
@@ -55,7 +56,6 @@ class GroupRepository extends BaseRepository
 	{
 		$group = $this->get($id);
 		if($group && !empty($teams)) {
-			$competition = $group->competition;
 			if($group->totalMissingTeams < count($teams))
 				$teams = array_slice($teams, 0, $group->totalMissingTeams);
 
@@ -67,7 +67,21 @@ class GroupRepository extends BaseRepository
 			foreach ($unavailableTeams as $team) 
 				unset($teams[$team]);
 
-			$group->attach($teams);
+			if(!empty($teams))
+				$group->attach($teams);
+			else
+				$group = false;
+		} else {
+			$group = false;
+		}
+		return $group;
+	}
+
+	public function addGame($id, $game)
+	{
+		$group = $this->get($id);
+		if($group) {
+			$GameRepository = new GameRepository;
 		}
 		return $group;
 	}
