@@ -55,6 +55,8 @@ class GroupRepository extends BaseRepository
 
 	public function addTeams($id, $teams = null)
 	{
+		var_dump($id);
+		dd($teams);
 		$group = $this->get($id);
 		if($group && !empty($teams)) {
 			if($group->totalMissingTeams < count($teams))
