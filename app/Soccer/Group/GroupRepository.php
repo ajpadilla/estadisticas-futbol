@@ -81,10 +81,17 @@ class GroupRepository extends BaseRepository
 	public function addGame($id, $game)
 	{
 		$group = $this->get($id);
-		if($group) {
-			$GameRepository = new GameRepository;
+		if($group && !empty($game)) {
+			if(!$this->gameAlreadyExists($group->id, $game['local_team_id'], $game['away_team_id'])){
+				$gameRepository = new GameRepository;
+				$game = $gameRepository->create($game);
+				return $game;
+			} else {
+				return false;
+			}
+		} else {
+			return false;
 		}
-		return $group;
 	}
 
 	public function teamExistInGroup($id, $team)

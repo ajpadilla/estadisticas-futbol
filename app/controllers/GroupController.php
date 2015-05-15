@@ -113,7 +113,7 @@ class GroupController extends \BaseController {
 				$teams = $input['teams_ids'];
 				$this->registerTeamGroupForm->validate($input);
 				$group = $this->repository->addTeams($idGroup, $teams);
-				$this->setSuccess(true);
+				$this->setSuccess(($group ? true : false));
 				$this->addToResponseArray('data', $input);
 				$this->addToResponseArray('group', $group);
 				return $this->getResponseArrayJson();			
@@ -130,7 +130,18 @@ class GroupController extends \BaseController {
 
 	public function addGameApi()
 	{
-		
+		if (Request::ajax()) 
+		{
+			$input = Input::all();		
+			$id = $input['group_id'];
+			$game = $this->repository->addGame($id, $input);
+			$this->setSuccess(($game ? true : false));
+			$this->addToResponseArray('game', $game);
+			return $this->getResponseArrayJson();
+		}else{
+			$this->setSuccess(false);
+			return $this->getResponseArrayJson();
+		}		
 	}
 
 	public function listGroupApi($id)

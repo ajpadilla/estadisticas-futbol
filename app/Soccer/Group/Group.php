@@ -10,8 +10,6 @@ class Group extends Eloquent {
 
     protected $table = 'groups';
 
-    protected $numberTemas = 0;
-
     protected $fillable = ['name', 'competition_id'];
 
     /*

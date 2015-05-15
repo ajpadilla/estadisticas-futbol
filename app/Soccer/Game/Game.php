@@ -4,6 +4,9 @@ use Eloquent;
 use Carbon\Carbon;
 
 class Game extends Eloquent {
+
+    protected $fillable = ['date', 'local_team_id', 'away_team_id', 'type_id', 'stadium', 'main_referee', 'line_referee'];
+
     /*
 	********************* Relations ***********************
     */	
