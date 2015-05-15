@@ -38,12 +38,18 @@ class GroupRepository extends BaseRepository
 	*/
 
 	public function create($data = array())
-	{
+	{		
 		$group = $this->model->create($data); 
 
-		if (!$group->competition->isFull) {
-			echo "Entro";
-		}
+		if($group) {
+			$teams = ( isset($data['teams_ids']) ? $data['teams_ids'] : array() );
+			if(!empty($teams)) {
+				if($group->competition->teamsByGroup < count($teams))
+					$teams = array_slice($teams, 0, $group->competition->teamsByGroup);
+				$group->teams()->attach($teams);
+			}
+		}		
+		return $group;
 	}
 
 	public function updateTeams($data = array())
@@ -70,6 +76,44 @@ class GroupRepository extends BaseRepository
 		$teamsToGroup = $competition->teams;
 		$teamsToCompetition = $equipoRepository->getTeamsByCompetition($teamsToGroup->lists('id'), $competition);
 		return $teamsToCompetition;
+	}
+
+
+	public function gameAlreadyExists($id, $localTeam, $awayTeam)
+	{
+		$group = $this->get($id);
+		return $group->games()->whereLocalTeamId($localTeam)->whereAwayTeamId($awayTeam)->count();
+	}
+
+	public function getTeamsWithoutFullGames($id)
+	{
+		$group = $this->get($id);
+		if(!$group->isFullGames)
+		{
+			$unavailableTeams = array();
+			$teams = $group->teams;
+			for ($i=0; $i < count($teams); $i++) { 
+				$allLocalGames = true;
+				$allAwayGames = true;
+				$localTeam = $teams[$i];
+				for ($j=0; $j < count($teams); $j++) { 
+					if($j != $i) {
+						$awayTeam = $teams[$j];
+						$allLocalGames = $this->gameAlreadyExists($id, $localTeam->id, $awayTeam->id); 
+						$allAwayGames = $this->gameAlreadyExists($id, $awayTeam->id, $localTeam->id);
+
+						if(!$allLocalGames || !$allAwayGames)
+							break;
+					}
+				}
+				if($allLocalGames || $allAwayGames)
+					$unavailableTeams[] = $i;
+			}
+			foreach ($unavailableTeams as $index) 
+				unset($teams[$index]);
+			return $teams;
+		}
+		return false;
 	}
 
 	/*

@@ -43,12 +43,12 @@ class Competition extends Eloquent implements StaplerableInterface{
         return $this->hasMany('soccer\Group\Group');
     }
 
-    public function teams()
+    /*public function teams()
     {
        return $this->hasManyThrough('soccer\GroupTeam\GroupTeam', 'soccer\Group\Group');
        //return $this->hasManyThrough('soccer\Group\Group', 'soccer\Equipo\Equipo', 'group_id', 'team_id');
        //return $this->hasManyThrough('soccer\Equipo\Equipo', 'soccer\Group\Group', 'group_team.team_id', 'group_team.group_id');
-    }
+    }*/
 
     public function getTeamsAttribute()
     {        
@@ -80,7 +80,7 @@ class Competition extends Eloquent implements StaplerableInterface{
         return $this->tipoCompetencia->grupos <= 1;
     }
 
-    public function getIsClean()
+    public function getIsCleanAttribute()
     {
         return $this->groups()->count() < 1;
     }
@@ -92,14 +92,14 @@ class Competition extends Eloquent implements StaplerableInterface{
 
     public function getIsFullTeamsAttribute()
     {
-        if($this->tipoCompetencia->isTournament) {
-            $teams = $this->groups()->first();        
-            return (!$this->hasGroups && ($teams && $teams->count() >= $this->tipoCompetencia->equipos_por_grupo));
+        if(!$this->tipoCompetencia->isTournament) {
+            $team = $this->groups()->first();        
+            return (!$this->hasGroups && ($team && $team->count() >= $this->tipoCompetencia->equipos_por_grupo));
         }
         return false;
     }   
 
-    public function getIsFullAllGroups()
+    public function getIsFullAllGroupsAttribute()
     {
         foreach ($this->groups as $group) 
             if(!$group->isFull)
@@ -107,11 +107,16 @@ class Competition extends Eloquent implements StaplerableInterface{
         return true;
     } 
 
-    public function getIsFullAllGames()
+    public function getIsFullAllGamesAttribute()
     {
         foreach ($this->groups as $group) 
             if(!$group->isFullGames)
                 return false;
         return true;
-    }     
+    }   
+
+    public function getTeamsByGroupAttribute()
+    {
+        return $this->tipoCompetencia->equipos_por_grupo;
+    }  
 }

@@ -35,7 +35,24 @@ class CompetitionRepository extends BaseRepository
 		return $competencia;
 	}
 
+	public function addGroup($id, $group, $teams = null)
+	{
+		$competition = $this->get($id);
+		$groupRepository = new GroupRepository;
+		$group['competition_id'] = $competition->id;
+		$group = $groupRepository->create($group);			
+		
+		/*if(!$teams && isset($group['teams_ids'])) {
+			$teams = $group['teams_ids'];
+		}*/
 
+		/*if($group) {
+			if($competition->teamsByGroup < count($teams))
+				$teams = array_slice($teams, 0, $competition->teamsByGroup);
+			$group->attach($teams);
+		}*/
+		return $group;
+	}
 
     /*
 	********************* Datatable Methods ***********************
