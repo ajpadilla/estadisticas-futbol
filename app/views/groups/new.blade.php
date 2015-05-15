@@ -9,7 +9,7 @@
 				
 			<div class="form-group">
 				{{ Form::label('name', 'Nombre', ['class' => 'col-md-2 control-label']) }}	
-				<div class="col-md-6">{{ Form::text('name', null, ['class' => 'form-control','id' =>'name-new-group' ]) }}</div>
+				<div class="col-md-6">{{ Form::text('name', null, ['class' => 'form-control','id' =>'name-new-group-to-competition' ]) }}</div>
 			</div>
 
 			<div class="form-group">
