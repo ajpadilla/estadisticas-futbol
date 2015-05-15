@@ -99,8 +99,10 @@ class GroupController extends \BaseController {
 	{
 		if (Request::ajax()) 
 		{
-			$input = Input::all();
-			$group = $this->repository->updateTeams($input);
+			$input = Input::all();		
+			$id = $input['group_id'];
+			$teams = $input['teams_ids'];
+			$group = $this->repository->addTeams($id, $teams);
 			$this->setSuccess(true);
 			$this->addToResponseArray('group', $group);
 			return $this->getResponseArrayJson();
