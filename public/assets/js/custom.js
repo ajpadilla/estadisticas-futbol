@@ -3856,7 +3856,7 @@ var handleBootboxAddEquipoToJugador = function () {
         });
     }
 
-     var selectTeamsForGame = function () {
+     var selectTeamsForGameToGroup = function () {
         $('#local-team-for-game, #away-team-for-game').change(function (argument) {
             if($("#local-team-for-game option:selected").length > 0 && $("#away-team-for-game option:selected").length > 0){
                 var url = $('#exist-game-to-group').attr('href').split('%')[0]+$('button#add-game').attr('data-group-id')+'/'+$("#local-team-for-game").val()+'/'+$("#away-team-for-game").val();
@@ -3940,7 +3940,7 @@ var handleBootboxAddEquipoToJugador = function () {
             loadTypeComptetitionInfo();
             showPopUpToAddNewGroup();
             showPopUpToAddTeamToGroupCompetition();
-            selectTeamsForGame();
+            selectTeamsForGameToGroup();
         }
     }
 }();
