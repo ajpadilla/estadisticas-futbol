@@ -141,6 +141,8 @@ class GroupController extends \BaseController {
 			$game = $this->repository->addGame($id, $input);
 			$this->setSuccess(($game ? true : false));
 			$this->addToResponseArray('game', $game);
+			//$this->setSuccess(true);
+			$this->addToResponseArray('data', $input);
 		}else{
 			$this->setSuccess(false);
 		}		
