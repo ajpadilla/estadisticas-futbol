@@ -3086,7 +3086,7 @@ var handleBootboxAddEquipoToJugador = function () {
         $(".datepicker-time").datetimepicker({
             lang: 'es',
             timepicker: true,
-            format: 'Y-m-d',
+            format: 'Y-m-d H:i',
             yearStart: '1850',
             todayButton: true,
             mask: true,
@@ -3755,7 +3755,7 @@ var handleBootboxAddEquipoToJugador = function () {
                                         $("#add-game-to-group-form").submit(function(e){
                                             var formData = {
                                                 group_id: $('button#add-game').attr('data-group-id'),
-                                                date: $('#date-for-games').val(),
+                                                date: $('#date-for-game').val(),
                                                 local_team_id: $('#local-team-for-game').val(),
                                                 away_team_id: $('#away-team-for-game').val(),
                                                 type_id: $('#type_id-for-game').val(),
