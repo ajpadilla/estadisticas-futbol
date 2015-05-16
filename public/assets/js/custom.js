@@ -3770,7 +3770,7 @@ var handleBootboxAddEquipoToJugador = function () {
                                                 dataType: "JSON",
                                                 success: function(responseServer) {
                                                     console.log(responseServer);
-                                                    if(responseServer.success == true) 
+                                                    if(responseServer.success) 
                                                     {
                                                         // Muestro otro dialog con información de éxito
                                                         bootbox.dialog({
@@ -3781,7 +3781,7 @@ var handleBootboxAddEquipoToJugador = function () {
                                                                     label: "Success!",
                                                                     className: "btn-success",
                                                                     callback: function () {
-                                                                        reloadDatatable('#datatable-' + $('button#add-game').attr('data-group-id'));
+                                                                        //reloadDatatable('#datatable-' + $('button#add-game').attr('data-group-id'));
                                                                     }
                                                                 }
                                                             }
@@ -3793,9 +3793,9 @@ var handleBootboxAddEquipoToJugador = function () {
                                                         //Reinicio el formulario
                                                         $("#add-game-to-group-form")[0].reset();
                                                     }else{
-                                                        console.log(responseServer);
+                                                         var response = responseServer.errores ? responseServer.errores : 'Juego repetido'
                                                          bootbox.dialog({
-                                                            message:responseServer.errores,
+                                                            message: response,
                                                             title: "Error",
                                                             buttons: {
                                                                 danger: {
@@ -3804,11 +3804,9 @@ var handleBootboxAddEquipoToJugador = function () {
                                                                 }
                                                             }
                                                         });
-                                                        // Limpio cada elemento de las clases añadidas por el validator
                                                         $('#add-game-to-group-form div').each(function(){
                                                             cleanValidatorClasses(this);
                                                         });
-                                                        //Reinicio el formulario
                                                     }
                                                 },
                                                 error: function(jqXHR, textStatus, errorThrown) {
