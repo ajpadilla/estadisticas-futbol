@@ -8,9 +8,9 @@
 			{{ Form::open(['route' => ['groups.api.add.game'],'class'=>'form-horizontal','role'=>'form', 'method' => 'POST', 'id' => 'add-game-to-group-form']) }}
 			
 				<div class="form-group">
-					{{ Form::label('date', 'Fecha y hora', ['class' => 'col-md-4 control-label']) }}	
-					<div class="col-md-8">
-						{{ Form::text('date', null, ['class' => 'form-control datepicker-time','id' => 'date']) }}
+					{{ Form::label('date', 'Fecha y hora', ['class' => 'col-md-2 control-label']) }}	
+					<div class="col-md-6">
+						{{ Form::text('date', null, ['class' => 'form-control datepicker-time','id' => 'date-for-game']) }}
 					</div>
 				</div>
 
@@ -31,28 +31,28 @@
 				<div class="form-group">
 					{{ Form::label('type_id','Tipo de juego',['class'=>'col-md-2 control-label']) }}
 					<div class="col-md-6">
-						{{ Form::select('type_id', $gameTypes, null,['class' => 'form-control chosen-select','data-placeholder' => 'Escoger tipo...', 'id'=>'type_id']) }}
+						{{ Form::select('type_id', $gameTypes->lists('name','id'), null,['class' => 'form-control chosen-select','data-placeholder' => 'Escoger tipo...', 'id'=>'type_id-for-game']) }}
 					</div>
 				</div>
 
 				<div class="form-group">
 					{{ Form::label('stadium','Estadio',['class'=>'col-sm-2 control-label']) }}
 					<div class="col-sm-6">
-						{{ Form::text('stadium', null, ['class' => 'form-control','id' => 'stadium']) }}
+						{{ Form::text('stadium', null, ['class' => 'form-control','id' => 'stadium-for-game']) }}
 					</div>
 				</div>		
 
 				<div class="form-group">
 					{{ Form::label('main_referee','Arbitro principal',['class'=>'col-sm-2 control-label']) }}
 					<div class="col-sm-6">
-						{{ Form::text('main_referee', null, ['class' => 'form-control','id' => 'main_referee']) }}
+						{{ Form::text('main_referee', null, ['class' => 'form-control','id' => 'main_referee-for-game']) }}
 					</div>
 				</div>							
 
 				<div class="form-group">
 					{{ Form::label('line_referee','Arbitro de linea',['class'=>'col-sm-2 control-label']) }}
 					<div class="col-sm-6">
-						{{ Form::text('line_referee', null, ['class' => 'form-control','id' => 'line_referee']) }}
+						{{ Form::text('line_referee', null, ['class' => 'form-control','id' => 'line_referee-for-game']) }}
 					</div>
 				</div>
 
