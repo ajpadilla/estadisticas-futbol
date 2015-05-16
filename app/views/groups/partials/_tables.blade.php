@@ -17,7 +17,7 @@
 							@else
 							<div class="col-md-2">
 							@endif
-								<button class="teams pull-right btn btn-lg btn-primary" id="add-game" href="#" data-group-id="{{ $group->id }}">Agregar partido</button>
+								<button class="games pull-right btn btn-lg btn-primary" id="add-game" href="#" data-group-id="{{ $group->id }}">Agregar partido</button>
 							</div>								
 						@endif
 						@if (!$group->isFull)
