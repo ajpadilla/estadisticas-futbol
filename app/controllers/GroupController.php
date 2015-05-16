@@ -149,6 +149,21 @@ class GroupController extends \BaseController {
 		return $this->getResponseArrayJson();
 	}
 
+	public function getAvailableTeamsForGame($id)
+	{
+		if(Request::ajax())
+		{
+			$teams = $this->repository->getTeamsWithoutFullGames($id);
+			$this->setSuccess(($teams ? true : false));
+			$this->addToResponseArray('data', $input);
+			if($teams)
+				$this->addToResponseArray('teams', $teams);
+		}else{
+			$this->setSuccess(false);
+		}
+		return $this->getResponseArrayJson();		
+	}
+
 	public function existGameApi($id, $localTeam, $awayTeam)
 	{
 		if(Request::ajax()) 

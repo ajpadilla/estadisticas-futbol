@@ -156,3 +156,5 @@ Route::post('grupos/api-agregar-equipo', ['as' => 'groups.api.add.team', 'uses' 
 Route::post('grupos/api-agregar-juego', ['as' => 'groups.api.add.game', 'uses' => 'GroupController@addGameApi']);
 Route::get('grupos/api-existe-juego/{id}/{localTeam}/{awayTeam}', ['as' => 'groups.api.exist.game', 'uses' => 'GroupController@existGameApi']);
 Route::get('grupos/api-lista-grupo/{id}', ['as' => 'groups.api.list.group', 'uses' => 'GroupController@listGroupApi']);
+Route::get('grupos/api-equipos-disponibles-juego/{id}', ['as' => 'groups.api.teams.availables.game', 'uses' => 'GroupController@getAvailableTeamsForGame']);
+
