@@ -3569,14 +3569,6 @@ var handleBootboxAddEquipoToJugador = function () {
     }
 
     var showPopUpToAddTeamToGroupCompetition = function () {
-        /*$('button.teams').click(function() {
-            console.log('competitionId:' + $(this).attr('value'));
-            console.log('gruposId:' + $(this).attr('grupo'));
-            $('#group_id').val($(this).attr('grupo'));
-            addValidationRulesForms();
-            popUpDataForTypeCompetition();
-            selectTeamsForGroup($(this).attr('value'));
-        });*/
 
         $(".box-body.big").delegate(".teams", "click", function() {
             console.log('competitionId:' + $(this).attr('competition-id'));
@@ -3722,6 +3714,149 @@ var handleBootboxAddEquipoToJugador = function () {
                 .modal('show');
     }
 
+
+    var handleBootboxAddGameToGroupCompetition = function () {
+        $(".box-body.big").delegate(".games", "click", function() {
+
+            addValidationRulesForms();
+            $('#add-team-to-group-form').validate({
+                    rules:{
+                        'date':{
+                            required: true
+                        }
+                    },
+                    messages:{
+                        'teams_ids[]':{
+                            required:'Este campo es obligatorio.',
+                        }
+                    },
+                    highlight:function(element){
+                        $(element).closest('.form-group').removeClass('has-success').addClass('has-error');
+                    },
+                    unhighlight:function(element){
+                        $(element).closest('.form-group').removeClass('has-error');
+                    },
+                    success:function(element){
+                        element.addClass('valid').closest('.form-group').removeClass('has-error').addClass('has-success');
+                    },
+                });
+
+                
+                bootbox.dialog({
+                        message: $('#add-game-to-group-div-box'),
+                        buttons: {
+                            success: {
+                                label: "Agregar",
+                                className: "btn-primary",
+                                callback: function () 
+                                {
+                                    if($('#add-game-to-group-form').valid()) 
+                                    {
+                                        $("#add-game-to-group-form").submit(function(e){
+                                            var formData = {
+                                                group_id: $('button#add-game').attr('data-group-id'),
+                                                date: $('#date-for-games').val(),
+                                                local_team_id: $('#local-team-for-game').val(),
+                                                away_team_id: $('#away-team-for-game').val(),
+                                                type_id: $('#type_id-for-game').val(),
+                                                stadium: $('#stadium-for-game').val(),
+                                                main_referee: $('#main_referee-for-game').val(),
+                                                line_referee: $('#line_referee-for-game').val()
+                                            };
+                                            $.ajax({
+                                                type: 'POST',
+                                                url: $('#add-new-game-to-group').attr('href'), 
+                                                data: formData,
+                                                dataType: "JSON",
+                                                success: function(responseServer) {
+                                                    console.log(responseServer);
+                                                    if(responseServer.success == true) 
+                                                    {
+                                                        // Muestro otro dialog con información de éxito
+                                                        bootbox.dialog({
+                                                            message:"EL partido ha sido actualizado correctamente!",
+                                                            title: "Éxito",
+                                                            buttons: {
+                                                                success: {
+                                                                    label: "Success!",
+                                                                    className: "btn-success",
+                                                                    callback: function () {
+                                                                        reloadDatatable('#datatable-' + $('button#add-game').attr('data-group-id'));
+                                                                    }
+                                                                }
+                                                            }
+                                                        });
+                                                        // Limpio cada elemento de las clases añadidas por el validator
+                                                        $('#add-game-to-group-form div').each(function(){
+                                                            cleanValidatorClasses(this);
+                                                        });
+                                                        //Reinicio el formulario
+                                                        $("#add-game-to-group-form")[0].reset();
+                                                    }else{
+                                                        console.log(responseServer);
+                                                         bootbox.dialog({
+                                                            message:responseServer.errores,
+                                                            title: "Error",
+                                                            buttons: {
+                                                                danger: {
+                                                                    label: "Danger!",
+                                                                    className: "btn-danger"
+                                                                }
+                                                            }
+                                                        });
+                                                        // Limpio cada elemento de las clases añadidas por el validator
+                                                        $('#add-game-to-group-form div').each(function(){
+                                                            cleanValidatorClasses(this);
+                                                        });
+                                                        //Reinicio el formulario
+                                                    }
+                                                },
+                                                error: function(jqXHR, textStatus, errorThrown) {
+                                                   console.log(errorThrown);
+                                                   bootbox.dialog({
+                                                            message:" ¡Error al enviar datos al servidor!",
+                                                            title: "Error",
+                                                            buttons: {
+                                                                danger: {
+                                                                    label: "Danger!",
+                                                                    className: "btn-danger"
+                                                                }
+                                                            }
+                                                        });
+                                                        // Limpio cada elemento de las clases añadidas por el validator
+                                                        $('#add-game-to-group-form div').each(function(){
+                                                            cleanValidatorClasses(this);
+                                                        });
+                                                        //Reinicio el formulario
+                                                }
+                                            });
+                                            e.preventDefault(); //Prevent Default action. 
+                                        }); 
+                                        $("#add-game-to-group-form").submit();
+                                    }else{
+                                        return false;
+                                    }
+                                    return false;
+                                }
+                            }
+                        },
+                            show: false // We will show it manually later
+                        })
+                    .on('shown.bs.modal', function() {
+                        $('#add-game-to-group-div-box')
+                                .show();                             // Show the form
+                            })
+                    .on('hide.bs.modal', function(e) {
+                        // Bootbox will remove the modal (including the body which contains the form)
+                        // after hiding the modal
+                        // Therefor, we need to backup the form
+                        $('#add-game-to-group-div-box').hide().appendTo('#add-game-to-group-div');
+                    })
+                    .modal('show');
+        });
+    }
+
+
     return {
         init: function() {
             initChosen();
@@ -3759,7 +3894,7 @@ var handleBootboxAddEquipoToJugador = function () {
             handleBootboxAddEquipoToJugador();
             handleBootboxAddJugadorToEquipo();
             handleBootboxNewCompetition();
-
+            handleBootboxAddGameToGroupCompetition();
             //Plugins init
             //handleFechaDateTimePicker();
             handleDatePicker();
