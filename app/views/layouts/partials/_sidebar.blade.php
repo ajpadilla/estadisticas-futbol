@@ -120,6 +120,7 @@
 		<a id="add-new-teams-to-group" href="{{ URL::route('groups.api.add.team') }}"></a>
 		<!--Games-->
 		<a id="add-new-game-to-group" href="{{ URL::route('groups.api.add.game') }}"></a>
+		<a id="exist-game-to-group" href="{{ URL::route('groups.api.exist.game') }}"></a>
 	</div>
 </div>
 <!-- /SIDEBAR -->
