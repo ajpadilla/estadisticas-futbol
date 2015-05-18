@@ -3718,6 +3718,8 @@ var handleBootboxAddEquipoToJugador = function () {
     var handleBootboxAddGameToGroupCompetition = function () {
         $(".box-body.big").delegate(".games", "click", function() {
 
+            getAvailableTeamsForGame();
+            $('#add-team-to-group-form').trigger('reset');
             addValidationRulesForms();
             $('#add-team-to-group-form').validate({
                     rules:{
@@ -3767,9 +3769,12 @@ var handleBootboxAddEquipoToJugador = function () {
                                                 type: 'POST',
                                                 url: $('#add-new-game-to-group').attr('href'), 
                                                 data: formData,
+                                                async: true,
+                                                cache: false,
                                                 dataType: "JSON",
                                                 success: function(responseServer) {
                                                     console.log(responseServer);
+                                                    var c = 0;
                                                     if(responseServer.success) 
                                                     {
                                                         // Muestro otro dialog con información de éxito
@@ -3793,8 +3798,8 @@ var handleBootboxAddEquipoToJugador = function () {
                                                         //Reinicio el formulario
                                                         $("#add-game-to-group-form")[0].reset();
                                                     }else{
-                                                         var response = responseServer.errores ? responseServer.errores : 'Juego repetido'
-                                                         bootbox.dialog({
+                                                        var response = responseServer.errores ? responseServer.errores : 'Juego repetido'
+                                                        bootbox.dialog({
                                                             message: response,
                                                             title: "Error",
                                                             buttons: {
@@ -3811,7 +3816,7 @@ var handleBootboxAddEquipoToJugador = function () {
                                                 },
                                                 error: function(jqXHR, textStatus, errorThrown) {
                                                    console.log(errorThrown);
-                                                   bootbox.dialog({
+                                                   /*bootbox.dialog({
                                                             message:" ¡Error al enviar datos al servidor!",
                                                             title: "Error",
                                                             buttons: {
@@ -3825,10 +3830,11 @@ var handleBootboxAddEquipoToJugador = function () {
                                                         $('#add-game-to-group-form div').each(function(){
                                                             cleanValidatorClasses(this);
                                                         });
-                                                        //Reinicio el formulario
+                                                        //Reinicio el formulario*/
                                                 }
                                             });
-                                            e.preventDefault(); //Prevent Default action. 
+                                            e.preventDefault(); //Prevent Default action.
+                                            $(this).unbind('submit');
                                         }); 
                                         $("#add-game-to-group-form").submit();
                                     }else{
@@ -3858,9 +3864,9 @@ var handleBootboxAddEquipoToJugador = function () {
         $('#local-team-for-game, #away-team-for-game').change(function (argument) {
             if($("#local-team-for-game option:selected").length > 0 && $("#away-team-for-game option:selected").length > 0){
                 var url = $('#exist-game-to-group').attr('href').split('%')[0]+$('button#add-game').attr('data-group-id')+'/'+$("#local-team-for-game").val()+'/'+$("#away-team-for-game").val();
-                console.log('local-team-for-game:'+$("#local-team-for-game").val());
+                /*console.log('local-team-for-game:'+$("#local-team-for-game").val());
                 console.log('away-team-for-game:'+$("#away-team-for-game").val());
-                console.log('Url:' + url);
+                console.log('Url:' + url);*/
                 $.ajax({
                     type: 'GET',
                     url: url,
@@ -3871,9 +3877,22 @@ var handleBootboxAddEquipoToJugador = function () {
                     },*/
                     dataType:'json',
                     success: function(response) {
-                        console.log(response);
+                        //console.log(response);
                     }
                 });
+            }
+        });
+     }
+
+     var getAvailableTeamsForGame = function () {
+        var url = $('#teams-available-for-games').attr('href').split('%')[0]+$('button#add-game').attr('data-group-id');
+        //console.log(url);
+        $.ajax({
+            type: 'GET',
+            url: url,
+            dataType:'json',
+            success: function(response) {
+                console.log(response);
             }
         });
      }
