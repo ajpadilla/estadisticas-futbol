@@ -61,7 +61,7 @@ class Phase extends Eloquent {
 
     public function getIsFirstAttribute()
     {
-        return $this->competition->phases()->orderBy('from', 'ASC')->first()->id === $this->id;
+        return $this->competition->phases()->orderBy('from', 'ASC')->first()->id == $this->id;
     }
 
     public function getHasGroupsAttribute()

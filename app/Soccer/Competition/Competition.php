@@ -46,9 +46,9 @@ class Competition extends Eloquent implements StaplerableInterface{
 
     public function phases()
     {
-        return $this->hasMany('soccer\Competition\Phase\Phase')
-                    ->orderBy('from', 'ASC')
-                    ->orderBy('id', 'ASC');
+        return $this->hasMany('soccer\Competition\Phase\Phase');
+                    /*->orderBy('from', 'ASC')
+                    ->orderBy('id', 'ASC');*/
     }
 
     public function groups()

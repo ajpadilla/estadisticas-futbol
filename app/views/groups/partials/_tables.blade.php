@@ -8,7 +8,7 @@
 			<div class="tabbable header-tabs">
 				<ul class="nav nav-tabs">
 					@foreach ($competition->phases as $phaseTableIndex => $phase)
-						@if(!$phase->isFirst)
+						@if($phase->isFirst)
 							<li class="active">
 						@else
 							<li>
