@@ -46,7 +46,9 @@ class Competition extends Eloquent implements StaplerableInterface{
 
     public function phases()
     {
-        return $this->hasMany('soccer\Competition\Phase\Phase')->orderBy('from', 'DESC');
+        return $this->hasMany('soccer\Competition\Phase\Phase')
+                    ->orderBy('from', 'ASC')
+                    ->orderBy('id', 'ASC');
     }
 
     public function groups()
@@ -90,6 +92,11 @@ class Competition extends Eloquent implements StaplerableInterface{
     {
         return $this->tipoCompetencia->grupos > 0;
     }
+
+    public function getHasPhasesAttribute()
+    {
+        return $this->phases->count() > 0;
+    }    
 
     public function getIsLeagueAttribute()
     {

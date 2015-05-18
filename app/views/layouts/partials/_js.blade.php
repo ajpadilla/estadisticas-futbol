@@ -27,13 +27,19 @@
 {{-- HTML::script('assets/js/bootstrap-daterangepicker/daterangepicker.min.js') --}}
 
 <!-- SLIMSCROLL -->
-{{ HTML::script('assets/js/jQuery-slimScroll-1.3.0/jquery.slimscroll.min.js') }}
 {{ HTML::script('assets/js/jQuery-slimScroll-1.3.0/slimScrollHorizontal.min.js') }}
+{{ HTML::script('assets/js/jQuery-slimScroll-1.3.0/jquery.slimscroll.min.js') }}
+
+<!-- jQuey-BlockUI -->
+{{ HTML::script('assets/js/jQuey-BlockUI/jquery.blockUI.min.js') }}
+
 <!-- COOKIE -->
 {{ HTML::script('assets/js/jQuery-Cookie/jquery.cookie.min.js') }}
+
 <!-- Datatable -->
 {{ HTML::script('assets/js/dataTables/jquery.dataTables.js'); }}
 {{ HTML::script('assets/js/dataTables/dataTables.bootstrap.js'); }}
+
 <!-- Chosen -->
 {{ HTML::script('assets/js/chosen/chosen.jquery.js')}}
 
@@ -67,7 +73,7 @@
 
 <script>
 	jQuery(document).ready(function() {		
-		App.setPage("widgets_box");  //Set current page
+		//App.setPage("widgets_box");  //Set current page
 		App.init(); //Initialise plugins and elements
 		
 		// Custom inits

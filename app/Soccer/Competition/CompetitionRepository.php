@@ -136,9 +136,11 @@ class CompetitionRepository extends BaseRepository
 			$groupRepository = new GroupRepository;			
 			$orderColumn = $groupRepository->getColumnCount() - 1;
 			foreach ($competition->phases as $phase) {
-				$tables[$phase->id]['name'] = $phase->name;
-				foreach ($competition->groups as $group) 
-					$tables[$phase->id]['tables'][] = $groupRepository->getAllTable('groups.api.list.group', [$group->id], $orderColumn, 'desc', $group->id);
+				if($phase->hasAssociateGroups) {
+					$tables[$phase->id]['name'] = $phase->name;
+					foreach ($phase->groups as $group) 
+						$tables[$phase->id]['tables'][] = $groupRepository->getAllTable('groups.api.list.group', [$group->id], $orderColumn, 'desc', $group->id);
+				}
 			}
 		}
 		return $tables;

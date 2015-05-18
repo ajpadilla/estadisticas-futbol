@@ -59,6 +59,11 @@ class Phase extends Eloquent {
         return $this->from->diffInDays(null, false) > 0 && $this->to->diffInDays(null, false) < 0;
     }
 
+    public function getIsFirstAttribute()
+    {
+        return $this->competition->phases()->orderBy('from', 'ASC')->first()->id === $this->id;
+    }
+
     public function getHasGroupsAttribute()
     {
         return $this->format->groups > 0;
@@ -69,9 +74,19 @@ class Phase extends Eloquent {
         return $this->format->groups <= 1;
     }
 
-    public function getIsCleanAttribute()
+    public function getEmptyAttribute()
     {
         return $this->groups()->count() < 1;
+    }
+
+    public function getHasAssociateGroupsAttribute()
+    {
+        return !$this->empty;
+    }    
+
+    public function getTwoMoreGroupsAttribute()
+    {
+        return $this->groups()->count() > 1;
     }
 
     public function getIsFullAttribute()
