@@ -3086,7 +3086,7 @@ var handleBootboxAddEquipoToJugador = function () {
         $(".datepicker-time").datetimepicker({
             lang: 'es',
             timepicker: true,
-            format: 'Y-m-d',
+            format: 'Y-m-d H:m',
             yearStart: '1850',
             todayButton: true,
             mask: true,

@@ -1,4 +1,16 @@
 @foreach ($competition->phases as $phaseTableIndex => $phase) 
+	@if(!$phase->isFull)
+		<div class="row">
+			<div class="col-md-2 col-md-offset-10">
+				<button class="pull-right btn btn-lg btn-primary" id="add-group" data-phase-id="{{ $phase->id }}" href="#">Agregar grupo</button>
+			</div>
+			<div id="add-group-to-phase" class="hidden">
+				@include('groups.new')
+			</div>
+
+		</div>
+		<br />
+	@endif
 	@foreach ($phase->groups as $groupTableIndex => $group) 
 		@if($competition->tipoCompetencia->isTournament)		
 			<div class="col-md-6">
