@@ -3583,7 +3583,7 @@ var handleBootboxAddEquipoToJugador = function () {
 
     var popUpDataForTypeCompetition = function (url,groupId) {
         addValidationRulesForms();
-        $('#add-team-to-group-form').validate({
+        $('#add-phase-to-competition-form').validate({
                 rules:{
                     'teams_ids[]':{
                         required: true
@@ -3607,16 +3607,16 @@ var handleBootboxAddEquipoToJugador = function () {
 
             
             bootbox.dialog({
-                    message: $('#add-teams-to-group-form-div-box'),
+                    message: $('#add-phase-to-competition-form-div'),
                     buttons: {
                         success: {
                             label: "Agregar",
                             className: "btn-primary",
                             callback: function () 
                             {
-                                if($('#add-team-to-group-form').valid()) 
+                                if($('#add-phase-to-competition-form').valid()) 
                                 {
-                                    $("#add-team-to-group-form").submit(function(e){
+                                    $("#add-phase-to-competition-form").submit(function(e){
                                         var formData = {
                                             group_id: groupId,
                                             teams_ids: $('#new-teams-for-groups-ids').val(),
@@ -3645,11 +3645,11 @@ var handleBootboxAddEquipoToJugador = function () {
                                                         }
                                                     });
                                                     // Limpio cada elemento de las clases añadidas por el validator
-                                                    $('#add-team-to-group-form div').each(function(){
+                                                    $('#add-phase-to-competition-form div').each(function(){
                                                         cleanValidatorClasses(this);
                                                     });
                                                     //Reinicio el formulario
-                                                    $("#add-team-to-group-form")[0].reset();
+                                                    $("#add-phase-to-competition-form")[0].reset();
                                                     enableCountryToCompetition();
                                                 }else{
                                                     console.log(responseServer);
@@ -3664,7 +3664,7 @@ var handleBootboxAddEquipoToJugador = function () {
                                                         }
                                                     });
                                                     // Limpio cada elemento de las clases añadidas por el validator
-                                                    $('#add-team-to-group-form div').each(function(){
+                                                    $('#add-phase-to-competition-form div').each(function(){
                                                         cleanValidatorClasses(this);
                                                     });
                                                     //Reinicio el formulario
@@ -3897,6 +3897,152 @@ var handleBootboxAddEquipoToJugador = function () {
         });
      }
 
+
+     var handleBootboxAddPhaseToCompetition = function (argument) {
+        $('button#add-phase').click(function (argument) {
+
+            $('#add-phase-to-competition-form').trigger('reset');
+
+            addValidationRulesForms();
+            $('#add-phase-to-competition-form').validate({
+                rules:{
+                    name:{
+                        required: true
+                    },
+                    format_id:{
+                        required: true
+                    }
+                },
+                messages:{
+                    name:{
+                        required: 'Este campo es obligatorio'
+                    },
+                    format_id:{
+                         required: 'Este campo es obligatorio'
+                    }
+                },
+                highlight:function(element){
+                    $(element).closest('.form-group').removeClass('has-success').addClass('has-error');
+                },
+                unhighlight:function(element){
+                    $(element).closest('.form-group').removeClass('has-error');
+                },
+                success:function(element){
+                    element.addClass('valid').closest('.form-group').removeClass('has-error').addClass('has-success');
+                },
+            });
+
+                
+            bootbox.dialog({
+                        message: $('#add-phase-to-competition-form-div'),
+                        buttons: {
+                            success: {
+                                label: "Agregar",
+                                className: "btn-primary",
+                                callback: function () 
+                                {
+                                    if($('#add-phase-to-competition-form').valid()) 
+                                    {
+                                        $("#add-phase-to-competition-form").submit(function(e){
+                                            var formData = {
+                                                name: $('#name-new-phase-to-competition').val(),
+                                                from: $('#from-new-phase-to-competition').val(),
+                                                to: $('#to-new-phase-to-competition').val(),
+                                                competition_id: $('button#add-phase').attr('data-competition-id'),
+                                                format_id: $('#competition-new-format-id').val()
+                                            };
+                                            $.ajax({
+                                                type: 'POST',
+                                                url: $('#add-new-phase-competition').attr('href'), 
+                                                data: formData,
+                                                dataType: "JSON",
+                                                success: function(responseServer) {
+                                                    console.log(responseServer);
+                                                    if(responseServer.success) 
+                                                    {
+                                                        // Muestro otro dialog con información de éxito
+                                                        bootbox.dialog({
+                                                            message:responseServer.phase.name+" agregada correctamente!",
+                                                            title: "Éxito",
+                                                            buttons: {
+                                                                success: {
+                                                                    label: "Success!",
+                                                                    className: "btn-success",
+                                                                    callback: function () {
+                                                                        //reloadDatatable('#datatable-' + $('button#add-game').attr('data-group-id'));
+                                                                    }
+                                                                }
+                                                            }
+                                                        });
+                                                        // Limpio cada elemento de las clases añadidas por el validator
+                                                        $('#add-phase-to-competition-form div').each(function(){
+                                                            cleanValidatorClasses(this);
+                                                        });
+                                                        //Reinicio el formulario
+                                                        $("#add-phase-to-competition-form")[0].reset();
+                                                    }else{
+                                                        bootbox.dialog({
+                                                            message: responseServer.errors,
+                                                            title: "Error",
+                                                            buttons: {
+                                                                danger: {
+                                                                    label: "Danger!",
+                                                                    className: "btn-danger"
+                                                                }
+                                                            }
+                                                        });
+                                                        $('#add-phase-to-competition-form div').each(function(){
+                                                            cleanValidatorClasses(this);
+                                                        });
+                                                    }
+                                                },
+                                                error: function(jqXHR, textStatus, errorThrown) {
+                                                   console.log(errorThrown);
+                                                   bootbox.dialog({
+                                                            message:" ¡Error al enviar datos al servidor!",
+                                                            title: "Error",
+                                                            buttons: {
+                                                                danger: {
+                                                                    label: "Danger!",
+                                                                    className: "btn-danger"
+                                                                }
+                                                            }
+                                                        });
+                                                        // Limpio cada elemento de las clases añadidas por el validator
+                                                        $('#add-phase-to-competition-form div').each(function(){
+                                                            cleanValidatorClasses(this);
+                                                        });
+                                                        //Reinicio el formulario*/
+                                                }
+                                            });
+                                            e.preventDefault(); //Prevent Default action.
+                                            $(this).unbind('submit');
+                                        }); 
+                                        $("#add-phase-to-competition-form").submit();
+                                    }else{
+                                        return false;
+                                    }
+                                    return false;
+                                }
+                            }
+                        },
+                            show: false // We will show it manually later
+                        })
+                    .on('shown.bs.modal', function() {
+                        $('#add-phase-to-competition-form-div')
+                                .show();                             // Show the form
+                            })
+                    .on('hide.bs.modal', function(e) {
+                        // Bootbox will remove the modal (including the body which contains the form)
+                        // after hiding the modal
+                        // Therefor, we need to backup the form
+                        $('#add-phase-to-competition-form-div').hide().appendTo('#add-phase-to-competition');
+                    })
+                    .modal('show');
+            });
+     }
+
+
     return {
         init: function() {
             initChosen();
@@ -3935,6 +4081,7 @@ var handleBootboxAddEquipoToJugador = function () {
             handleBootboxAddJugadorToEquipo();
             handleBootboxNewCompetition();
             handleBootboxAddGameToGroupCompetition();
+            handleBootboxAddPhaseToCompetition();
             //Plugins init
             //handleFechaDateTimePicker();
             handleDatePicker();
