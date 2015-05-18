@@ -13,13 +13,13 @@
 			</div>
 
 			<div class="form-group">
-				{{ Form::label('from', 'Desde', ['class' => 'col-md-2 control-label .datepicker']) }}	
-				<div class="col-md-6">{{ Form::text('from', null, ['class' => 'form-control datepicker-time','id' =>'from-new-phase-to-competition' ]) }}</div>
+				{{ Form::label('from', 'Desde', ['class' => 'col-md-2 control-label']) }}	
+				<div class="col-md-6">{{ Form::text('from', null, ['class' => 'form-control datepicker','id' =>'from-new-phase-to-competition' ]) }}</div>
 			</div>			
 
 			<div class="form-group">
-				{{ Form::label('to', 'Hasta', ['class' => 'col-md-2 control-label .datepicker']) }}	
-				<div class="col-md-6">{{ Form::text('to', null, ['class' => 'form-control datepicker-time','id' =>'to-new-phase-to-competition' ]) }}</div>
+				{{ Form::label('to', 'Hasta', ['class' => 'col-md-2 control-label ']) }}	
+				<div class="col-md-6">{{ Form::text('to', null, ['class' => 'form-control datepicker','id' =>'to-new-phase-to-competition' ]) }}</div>
 			</div>						
 
 			<div class="form-group">
