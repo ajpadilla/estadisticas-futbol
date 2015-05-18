@@ -17,14 +17,14 @@
 				<div class="form-group">
 					{{ Form::label('local_team_id','Local',['class'=>'col-md-2 control-label']) }}
 					<div class="col-md-6">
-						{{ Form::select('local_team_id', ['1' => 'Equipo 1', '3' => 'Equipo 3'], null,['class' => 'form-control chosen-select','data-placeholder' => 'Escoger Equipo...', 'id'=>'local-team-for-game']) }}
+						{{ Form::select('local_team_id', [], null,['class' => 'form-control chosen-select','data-placeholder' => 'Escoger Equipo...', 'id'=>'local-team-for-game']) }}
 					</div>
 				</div>
 
 				<div class="form-group">
 					{{ Form::label('away_team_id','Visitante',['class'=>'col-md-2 control-label']) }}
 					<div class="col-md-6">
-						{{ Form::select('away_team_id', ['2' => 'Equipo 2', '4' => 'Equipo 4'], null,['class' => 'form-control chosen-select','data-placeholder' => 'Escoger Equipo...', 'id'=>'away-team-for-game']) }}
+						{{ Form::select('away_team_id', [], null,['class' => 'form-control chosen-select','data-placeholder' => 'Escoger Equipo...', 'id'=>'away-team-for-game']) }}
 					</div>
 				</div>
 
