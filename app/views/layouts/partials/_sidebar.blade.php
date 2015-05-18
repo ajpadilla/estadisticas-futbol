@@ -115,8 +115,10 @@
 		<a id="eliminar-competencia" href="{{ URL::route('competencias.api.eliminar') }}"></a>
 		<a id="list-of-competencies" href="{{ URL::route('competitions.api.select.list') }}"></a>
 		{{--<a id="list-of-teams-for-competition" href="{{ URL::route('groups.api.available.teams') }}"></a>--}}
-		<a id="add-new-group-to-competition" href="{{ URL::route('competitions.api.add.group') }}"></a>
-		<!--Grupos-->
+		<a id="add-new-phase-to-competition" href="{{ URL::route('competitions.api.add.phase') }}"></a>
+		<!--Phases-->
+		<a id="add-new-group-to-phase" href="{{ URL::route('phases.api.add.group') }}"></a>		
+		<!--Groups-->
 		<a id="add-new-teams-to-group" href="{{ URL::route('groups.api.add.team') }}"></a>
 		<!--Games-->
 		<a id="add-new-game-to-group" href="{{ URL::route('groups.api.add.game') }}"></a>

@@ -25,6 +25,12 @@ class Competition extends Eloquent implements StaplerableInterface{
         parent::__construct($attributes);
     }
 
+    public function getDates()
+    {
+        /* substitute your list of fields you want to be auto-converted to timestamps here: */
+        return array('created_at', 'updated_at', 'desde', 'hasta');
+    }    
+
     /*
 	********************* Relations ***********************
     */	
@@ -38,9 +44,16 @@ class Competition extends Eloquent implements StaplerableInterface{
         return $this->belongsTo('soccer\Pais\Pais');
     }
 
+    public function phases()
+    {
+        return $this->hasMany('soccer\Competition\Phase\Phase');
+                    /*->orderBy('from', 'ASC')
+                    ->orderBy('id', 'ASC');*/
+    }
+
     public function groups()
     {
-        return $this->hasMany('soccer\Group\Group');
+        return $this->hasManyThrough('soccer\Group\Group', 'soccer\Competition\Phase\Phase');
     }
 
     /*public function teams()
@@ -70,10 +83,20 @@ class Competition extends Eloquent implements StaplerableInterface{
     ********************* Custom Methods ***********************
     */  
 
+    public function getFinishedAttribute()
+    {
+        return $this->hasta->diffInDays(null, false) > 0;
+    }    
+
     public function getHasGroupsAttribute()
     {
         return $this->tipoCompetencia->grupos > 0;
     }
+
+    public function getHasPhasesAttribute()
+    {
+        return $this->phases->count() > 0;
+    }    
 
     public function getIsLeagueAttribute()
     {
@@ -113,10 +136,5 @@ class Competition extends Eloquent implements StaplerableInterface{
             if(!$group->isFullGames)
                 return false;
         return true;
-    }   
-
-    public function getTeamsByGroupAttribute()
-    {
-        return $this->tipoCompetencia->equipos_por_grupo;
-    }  
+    }    
 }

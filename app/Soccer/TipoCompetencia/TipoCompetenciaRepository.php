@@ -25,12 +25,6 @@ class TipoCompetenciaRepository extends BaseRepository
 		$this->setModel(new TipoCompetencia);
 		$this->setListAllRoute('tipos-competencia.api.lista');
 	}
-    
-    public function create($data = array())
-	{
-		$tipoCompetencia = $this->model->create($data); 
-		return $tipoCompetencia;
-	}
 
 	public function update($data = array())
 	{

@@ -77,6 +77,18 @@ class CompetitionRepository extends BaseRepository
 		return false;
 	}
 
+	public function getCurrentPhase($id)
+	{
+		$competition = $this->get($id);
+		if($competition->phases->count()) {
+			foreach ($competition->phases as $phase) 
+				if($phase->isCurrent)
+					return $phase;
+			return $competition->phases()->orderBy('from', 'DESC')->first();
+		}
+		return false;
+	}
+
     /*
 	********************* Datatable Methods ***********************
     */
@@ -123,8 +135,13 @@ class CompetitionRepository extends BaseRepository
 		if(!$competition->isClean) {
 			$groupRepository = new GroupRepository;			
 			$orderColumn = $groupRepository->getColumnCount() - 1;
-			foreach ($competition->groups as $group) 
-				$tables[] = $groupRepository->getAllTable('groups.api.list.group', [$group->id], $orderColumn, 'desc', $group->id);			
+			foreach ($competition->phases as $phase) {
+				if($phase->hasAssociateGroups) {
+					$tables[$phase->id]['name'] = $phase->name;
+					foreach ($phase->groups as $group) 
+						$tables[$phase->id]['tables'][] = $groupRepository->getAllTable('groups.api.list.group', [$group->id], $orderColumn, 'desc', $group->id);
+				}
+			}
 		}
 		return $tables;
 	}

@@ -25,6 +25,10 @@ Route::get('test', function() {
 	dd(soccer\Group\Group::findOrFail(4));
 });
 
+Route::get('prueba-ruta/{id}',  ['as' => 'prueba','uses' => 'PlayerController@prueba' ] );
+Route::get('selctAjax',  ['as' => 'selctAjax','uses' => 'PlayerController@selctAjax' ] );
+Route::get('filterAjax',  ['as' => 'filterAjax.api','uses' => 'PlayerController@filter' ] );
+
 Route::get('/', [
 	//'before' => 'auth',
 	'as' => 'pages.home',
@@ -141,13 +145,14 @@ Route::post('competencias/api-actualizar',  ['as' => 'competencias.api.update','
 //Route::get('competencias/api-jugadores/{id}', array('as'=>'competencias.api.jugadores', 'uses'=>'CompetitionController@jugadoresApi'));
 //Route::get('competencias/api-ver',  ['as' => 'competencias.data','uses' => 'CompetitionController@showApi' ] );
 //Route::post('competencias/api-agregar-equipo/{id}/{teamId}',  ['as' => 'competitions.api.add.team','uses' => 'CompetitionController@addTeamApi' ] );
-Route::post('competencias/api-agregar-grupo',  ['as' => 'competitions.api.add.group','uses' => 'CompetitionController@addGroupApi' ] );
+Route::post('competencias/api-agregar-fase',  ['as' => 'competitions.api.add.phase','uses' => 'CompetitionController@addPhaseApi' ] );
 Route::get('competencias/api-seleccionar-lista',  ['as' => 'competitions.api.select.list','uses' => 'CompetitionController@getAllValue' ] );
-
-Route::get('prueba-ruta/{id}',  ['as' => 'prueba','uses' => 'PlayerController@prueba' ] );
-Route::get('selctAjax',  ['as' => 'selctAjax','uses' => 'PlayerController@selctAjax' ] );
-Route::get('filterAjax',  ['as' => 'filterAjax.api','uses' => 'PlayerController@filter' ] );
 Route::get('competencias/api-equipos-disponibles/{id}', ['as' => 'competitions.api.available.teams', 'uses' => 'CompetitionController@getAvailableTeams']);
+
+/*
+********************************* RUTAS PARA FASES ********************************
+*/
+Route::post('fases/api-agregar-grupo',  ['as' => 'phases.api.add.group','uses' => 'PhaseController@addGroupApi' ] );
 
 /*
 ********************************* RUTAS PARA GRUPOS ********************************
