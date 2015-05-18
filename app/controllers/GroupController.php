@@ -3,6 +3,7 @@
 use soccer\Group\GroupRepository;
 use soccer\Competition\CompetitionRepository;
 use soccer\Forms\RegisterTeamGroupForm;
+use soccer\Forms\RegisterGameForm;
 use Laracasts\Validation\FormValidationException;
 
 class GroupController extends \BaseController {
@@ -10,15 +11,18 @@ class GroupController extends \BaseController {
 	protected $repository;
 	protected $competitionRepository;
 	protected $registerTeamGroupForm;
+	protected $registerGameForm;
 
 	public function __construct(
 			GroupRepository $repository,
 			CompetitionRepository $competitionRepository,
-			RegisterTeamGroupForm $registerTeamGroupForm
+			RegisterTeamGroupForm $registerTeamGroupForm,
+			RegisterGameForm $registerGameForm
 		){
 		$this->repository = $repository;
 		$this->competitionRepository = $competitionRepository;
 		$this->registerTeamGroupForm = $registerTeamGroupForm;
+		$this->registerGameForm = $registerGameForm;
 	}	
 
 
@@ -136,13 +140,20 @@ class GroupController extends \BaseController {
 	{
 		if (Request::ajax()) 
 		{
-			$input = Input::all();		
-			$id = $input['group_id'];
-			$game = $this->repository->addGame($id, $input);
-			$this->setSuccess(($game ? true : false));
-			$this->addToResponseArray('game', $game);
-			//$this->setSuccess(true);
-			$this->addToResponseArray('data', $input);
+			$input = Input::all();
+			try {
+				$id = $input['group_id'];
+				$this->registerGameForm->validate($input);
+				$game = $this->repository->addGame($id, $input);
+				$this->setSuccess(($game ? true : false));
+				$this->addToResponseArray('game', $game);
+				$this->addToResponseArray('data', $input);	
+			} catch (FormValidationException $e) {
+				$this->setSuccess(false);
+				$this->addToResponseArray('data', $input);
+				$this->addToResponseArray('errors', $e->getErrors()->all());
+				return $this->getResponseArrayJson();		
+			}		
 		}else{
 			$this->setSuccess(false);
 		}		
