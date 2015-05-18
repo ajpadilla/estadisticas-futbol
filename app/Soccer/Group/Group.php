@@ -49,18 +49,9 @@ class Group extends Eloquent {
         return $this->hasMany('soccer\Game\Game');
     }    
 
-    public function phase()
-    {
-        return $this->belongsTo('soccer\Phase\Phase');
-    }
-
     public function competition()
     {
-        if ($phase = $this->phase) {
-            return $phase->belongsTo('soccer\Competition\Competition');
-        return null;
-
-        //return $this->belongsTo('soccer\Competition\Competition');
+        return $this->belongsTo('soccer\Competition\Competition');
     }
 
     /*
