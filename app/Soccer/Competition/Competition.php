@@ -113,10 +113,5 @@ class Competition extends Eloquent implements StaplerableInterface{
             if(!$group->isFullGames)
                 return false;
         return true;
-    }   
-
-    public function getTeamsByGroupAttribute()
-    {
-        return $this->tipoCompetencia->equipos_por_grupo;
-    }  
+    }    
 }

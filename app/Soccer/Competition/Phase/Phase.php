@@ -8,7 +8,7 @@ use Carbon\Carbon;
 
 class Phase extends Eloquent {
 
-	protected $fillable = ['nombre', 'local_away_game', 'from', 'to', 'competencia_id'];
+	protected $fillable = ['name', 'from', 'to', 'competition_id', 'format_id'];
 
     /*
 	********************* Relations ***********************
@@ -17,6 +17,11 @@ class Phase extends Eloquent {
     {
     	return $this->belongsTo('soccer\Competition\Competition');
     }
+
+    public function format()
+    {
+        return $this->belongsTo('soccer\Competition\CompetitionFormat\CompetitionFormat');
+    }    
 
     public function country()
     {
@@ -37,12 +42,7 @@ class Phase extends Eloquent {
             foreach($group->teams as $team)
                 $teams->add($team);
         return $teams;
-    }   
-
-    public function game()
-    {
-       return $this->belongsTo('soccer\Game\Game');
-    }            
+    }        
 
     /*
     ********************* Custom Methods ***********************
@@ -50,12 +50,12 @@ class Phase extends Eloquent {
 
     public function getHasGroupsAttribute()
     {
-        return $this->tipoCompetencia->grupos > 0;
+        return $this->format->groups > 0;
     }
 
     public function getIsLeagueAttribute()
     {
-        return $this->tipoCompetencia->grupos <= 1;
+        return $this->format->groups <= 1;
     }
 
     public function getIsCleanAttribute()
@@ -65,14 +65,14 @@ class Phase extends Eloquent {
 
     public function getIsFullAttribute()
     {
-         return ($this->hasGroups && $this->groups()->count() >= $this->tipoCompetencia->grupos);
+         return ($this->hasGroups && $this->groups()->count() >= $this->format->groups);
     }
 
     public function getIsFullTeamsAttribute()
     {
-        if(!$this->tipoCompetencia->isTournament) {
+        if(!$this->format->isTournament) {
             $team = $this->groups()->first();        
-            return (!$this->hasGroups && ($team && $team->count() >= $this->tipoCompetencia->equipos_por_grupo));
+            return (!$this->hasGroups && ($team && $team->count() >= $this->format->teams_by_group));
         }
         return false;
     }   
@@ -95,6 +95,6 @@ class Phase extends Eloquent {
 
     public function getTeamsByGroupAttribute()
     {
-        return $this->tipoCompetencia->equipos_por_grupo;
-    }  
+        return $this->format->teams_by_group;
+    }     
 }

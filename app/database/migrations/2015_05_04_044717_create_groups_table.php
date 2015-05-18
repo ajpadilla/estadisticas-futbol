@@ -16,9 +16,6 @@ class CreateGroupsTable extends Migration {
 		{
 			$table->increments('id');
 			$table->string('name', 128);
-			$table->integer('competition_id')->unsigned();
-			$table->foreign('competition_id')->references('id')->on('competitions')->onDelete('cascade')->onUpdate('cascade');
-			$table->unique(['name', 'competition_id']);
 			$table->timestamps();
 		});
 	}

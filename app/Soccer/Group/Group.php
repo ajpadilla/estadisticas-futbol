@@ -49,10 +49,18 @@ class Group extends Eloquent {
         return $this->hasMany('soccer\Game\Game');
     }    
 
+    public function phase()
+    {
+        return $this->belongsTo('soccer\Competition\Phase\Phase');
+    }
+
     public function competition()
     {
-        return $this->belongsTo('soccer\Competition\Competition');
-    }
+        if ($phase = $this->phase) {
+            return $phase->belongsTo('soccer\Competition\Competition');
+        return null;
+        //return $this->phase->competition;
+    }    
 
     /*
     ********************* Custom Methods ***********************
@@ -71,12 +79,12 @@ class Group extends Eloquent {
 
     public function getTotalMissingTeams()
     {
-        return $this->competition->teamsByGroup - $this->totalTeams;
+        return $this->phase->teamsByGroup - $this->totalTeams;
     }
 
     public function getIsFullAttribute()
     {
-         return ($this->totalTeams >= $this->competition->teamsByGroup);
+         return ($this->totalTeams >= $this->phase->teamsByGroup);
     }
 
     public function getIsEmptyAttribute()
