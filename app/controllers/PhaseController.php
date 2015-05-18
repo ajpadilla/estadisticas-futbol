@@ -1,11 +1,12 @@
 <?php
 
-use soccer\Competition\PhaseRepository;
+use soccer\Competition\Phase\PhaseRepository;
 use soccer\Group\GroupRepository;
+use soccer\Forms\RegisterGroupForm;
 use soccer\Game\GameType\GameTypeRepository;
 use Laracasts\Validation\FormValidationException;
 
-class CompetitionController extends \BaseController {
+class PhaseController extends \BaseController {
 
 	protected $repository;
 	protected $registerCompetition;
@@ -15,9 +16,11 @@ class CompetitionController extends \BaseController {
 
 	public function __construct(PhaseRepository $repository,
 			GroupRepository $groupRepository,
+			RegisterGroupForm $registerGroupForm
 		){
 		$this->repository = $repository;
 		$this->groupRepository = $groupRepository;
+		$this->registerGroupForm = $registerGroupForm;
 	}
 
 	/**
@@ -149,10 +152,11 @@ class CompetitionController extends \BaseController {
 
 	public function addGroupApi()
 	{
+
 		if(Request::ajax())
 		{
 			$input = Input::all();
-			try
+			/*try
 			{
 				$this->registerGroupForm->validate($input);
 				$group = $this->groupRepository->create($input);
@@ -167,13 +171,20 @@ class CompetitionController extends \BaseController {
 				$this->addToResponseArray('data', $input);
 				$this->addToResponseArray('errores', $e->getErrors()->all());
 				return $this->getResponseArrayJson();
-			}
+			}*/
+			$this->setSuccess(true);
+			$this->addToResponseArray('data', $input);
+			return $this->getResponseArrayJson();
 		}
 	}
 
 	public function getAvailableTeams($id)
 	{
-		if(Request::ajax())
+		$teams = ['1' => 'Mexico', '2' => 'Brasil'];
+		$this->setSuccess(true);
+		$this->addToResponseArray('teams', $teams);
+		return $this->getResponseArrayJson();
+		/*if(Request::ajax())
 		{
 			$teams = $this->repository->getAvailableTeams($id);
 			$this->setSuccess(($teams ? true : false));
@@ -183,7 +194,7 @@ class CompetitionController extends \BaseController {
 		}else{
 			$this->setSuccess(false);
 		}
-		return $this->getResponseArrayJson();
+		return $this->getResponseArrayJson();*/
 	}	
 
 	public function getAllValue()
