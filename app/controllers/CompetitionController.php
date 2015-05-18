@@ -212,5 +212,14 @@ class CompetitionController extends \BaseController {
 		return $this->getResponseArrayJson();
 	}
 
+	public function addPhaseApi()
+	{
+		if (Request::ajax())
+		{
+			$input = Input::all();
+			$this->addToResponseArray('data', $input);
+			return $this->getResponseArrayJson();
+		}
+	}
 
 }
