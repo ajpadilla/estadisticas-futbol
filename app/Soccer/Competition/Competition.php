@@ -40,7 +40,7 @@ class Competition extends Eloquent implements StaplerableInterface{
 
     public function groups()
     {
-        return $this->hasMany('soccer\Group\Group');
+        return $this->hasManyThrough('soccer\Group\Group', 'soccer\Competition\Phase\Phase');
     }
 
     /*public function teams()

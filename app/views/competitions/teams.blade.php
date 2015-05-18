@@ -1,3 +1,14 @@
+<div class="row">
+	<div class="col-md-2 col-md-offset-10">
+		<button class="pull-right btn btn-lg btn-primary" id="add-group" data-competition-id="{{ $competition->id }}" href="#">Agregar fase</button>
+	</div>
+	<div id="add-fase-to-competition" class="hidden">
+		@include('phases.new')
+	</div>
+
+</div>
+<br />
+
 @if ($competition->tipoCompetencia->isTournament) 
 	@if (!$competition->isFull) 
 		<div class="row">

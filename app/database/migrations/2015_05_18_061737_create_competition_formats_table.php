@@ -17,7 +17,6 @@ class CreateCompetitionFormatsTable extends Migration {
 			$table->increments('id');
 			$table->string('name', 128);
 			$table->smallInteger('groups')->default(1);
-			$table->smallInteger('clasification_phases')->default(0);
 			$table->smallInteger('clasificated_by_group')->default(0);
 			$table->boolean('local_away_game')->default(false);
 			$table->boolean('local_away_game_final')->default(false);

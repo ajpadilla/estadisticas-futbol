@@ -27,23 +27,6 @@ class Group extends Eloquent {
         return $this->hasMany('soccer\GroupTeam\GroupTeam');
     }
 
-    /*public function getGamesAttribute()
-    {
-        $groupTeamsId =  $this->hasMany('soccer\GroupTeam\GroupTeam')->lists('id');
-        return \soccer\Game\Game::select()
-            ->whereIn('local_team_id', $groupTeamsId)
-            ->orWhereIn('away_team_id', $groupTeamsId)
-            ->get();
-    }
-
-    public function games()
-    {
-        $groupTeamsId =  $this->hasMany('soccer\GroupTeam\GroupTeam')->lists('id');
-        return \soccer\Game\Game::select()
-            ->whereIn('local_team_id', $groupTeamsId)
-            ->orWhereIn('away_team_id', $groupTeamsId);
-    }*/
-
     public function games()
     {
         return $this->hasMany('soccer\Game\Game');
@@ -56,7 +39,7 @@ class Group extends Eloquent {
 
     public function competition()
     {
-        if ($phase = $this->phase) {
+        if ($phase = $this->phase) 
             return $phase->belongsTo('soccer\Competition\Competition');
         return null;
         //return $this->phase->competition;

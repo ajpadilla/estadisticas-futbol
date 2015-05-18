@@ -1,4 +1,4 @@
-<?php namespace soccer\Phase\Phase;
+<?php namespace soccer\Competition\Phase;
 
 use Eloquent;
 use Carbon\Carbon;
@@ -25,7 +25,7 @@ class Phase extends Eloquent {
 
     public function country()
     {
-        if ($competition = $this->competition) {
+        if ($competition = $this->competition) 
             return $category->belongsTo('soccer\Country\Country');
         return null;
     }
