@@ -14,7 +14,7 @@ class AddPhaseIdToGroupsTable extends Migration {
 	{
 		Schema::table('groups', function(Blueprint $table)
 		{
-			$table->integer('phase_id')->unsigned()->nullable();
+			$table->integer('phase_id')->unsigned()->nullable()->after('name');
 			$table->foreign('phase_id')->references('id')->on('phases')->onDelete('cascade');
 			$table->unique('name', 'phase_id');
 		});
