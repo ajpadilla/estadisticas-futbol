@@ -40,10 +40,10 @@ class CreateTableJugadores extends Migration {
 
 		Schema::table('players', function(Blueprint $table)
 		{
-				$table->integer('country_id')->unsigned()->after('peso');	
-				$table->foreign('country_id')
+				$table->integer('pais_id')->unsigned()->after('peso');	
+				$table->foreign('pais_id')
 						->references('id')	
-						->on('countries')
+						->on('paises')
 						->onDelete('no action')
 						->onUpdate('cascade');	
 		});

@@ -15,22 +15,26 @@ class CreateCompetitionsTable extends Migration {
 		Schema::create('competitions', function(Blueprint $table)
 		{
 			$table->increments('id');
-			$table->string('name', 128);
-			$table->string('image', 128)->nullable();
-			$table->date('from');
-			$table->date('to');
+			$table->string('nombre', 128);
+			$table->string('imagen', 128)->nullable();
+			$table->date('desde');
+			$table->date('hasta');
 			$table->boolean('international')->default(false);
-			$table->integer('country_id')->unsigned()->nullable();	
-			$table->foreign('country_id')
-						->references('id')	
-						->on('countries')
-						->onDelete('no action')
-						->onUpdate('cascade');				
-			/*$table->integer('tipo_competencia_id')->unsigned();
+			$table->integer('tipo_competencia_id')->unsigned();
 			$table->foreign('tipo_competencia_id')
 				->references('id')->on('tipo_competencias')
-				->onUpdate('cascade')->onDelete('cascade');*/
+				->onUpdate('cascade')->onDelete('cascade');
 			$table->timestamps();
+		});
+
+		Schema::table('competitions', function(Blueprint $table)
+		{
+				$table->integer('country_id')->unsigned()->nullable()->after('tipo_competencia_id');	
+				$table->foreign('country_id')
+						->references('id')	
+						->on('paises')
+						->onDelete('no action')
+						->onUpdate('cascade');	
 		});
 	}
 
@@ -42,10 +46,11 @@ class CreateCompetitionsTable extends Migration {
 	 */
 	public function down()
 	{
-		/*Schema::table('competitions', function(Blueprint $table)
+		Schema::table('competitions', function(Blueprint $table)
 		{
 			$table->dropForeign('competitions_country_id_foreign');
-		});*/
+			$table->dropColumn('country_id');
+		});
 		Schema::drop('competitions');
 	}
 
