@@ -3366,44 +3366,42 @@ var handleBootboxAddEquipoToJugador = function () {
     }
 
 
-    var selectTeamsForCompetition = function(idCompetition) {
-        //console.log($(this).val());
+    var selectTeamsForCompetition = function(idPhase) {
+        var url = $('#list-teams-phase-competition').attr('href').split('%')[0]+idPhase;
+        //console.log(url);
             $.ajax({
                 type: 'GET',
-                url: $('#list-of-teams-for-competition').attr('href'),
-                data: {'competition_id': idCompetition},
+                url: url,
                 dataType:'json',
                 success: function(response) {
                     console.log(response);
                     if (response.success == true) {
-                        jQuery('#competition-new-teams-ids').html('');
-                        jQuery('#competition-new-teams-ids').append('<option value=\"\"></option>');
+                        jQuery('#phase-new-teams-ids').html('');
+                        jQuery('#phase-new-teams-ids').append('<option value=\"\"></option>');
                         $.each(response.teams,function (k,v){
-                            $('#competition-new-teams-ids').append('<option value=\"'+k+'\">'+v+'</option>');
-                            $('#competition-new-teams-ids').trigger("chosen:updated");
+                            $('#phase-new-teams-ids').append('<option value=\"'+k+'\">'+v+'</option>');
+                            $('#phase-new-teams-ids').trigger("chosen:updated");
                         });
                     }else{
-                        jQuery('#competition-new-teams-ids').html('');
-                        jQuery('#competition-new-teams-ids').append('<option value=\"\"></option>');
+                        jQuery('#phase-new-teams-ids').html('');
+                        jQuery('#phase-new-teams-ids').append('<option value=\"\"></option>');
                     }
                 }
             });
     }
 
-    var showPopUpToAddNewGroup = function () {
+    var handleBootboxAddNewGropuToPhase = function () {
         $('button#add-group').click(function () {
 
+            var phaseId = $(this).attr('data-phase-id');
+            console.log(phaseId);
             addValidationRulesForms();
-            selectTeamsForCompetition($(this).attr('data-competition-id'));
-            $('#add-group-to-competition-form').validate({
+            selectTeamsForCompetition($(this).attr('data-phase-id'));
+            $('#add-group-to-phase-form').validate({
                 rules:{
                     name:{
                         required:true,
                         rangelength: [2, 128],
-                        onlyLettersNumbersAndSpaces: true
-                    },
-                    competition_id:{
-                        required: true
                     },
                     'teams_ids[]':{
                         required: true
@@ -3413,9 +3411,6 @@ var handleBootboxAddEquipoToJugador = function () {
                     nombre:{
                         required:'Este campo es obligatorio.',
                         rangelength: 'Por favor ingrese entre [2, 128] caracteres',
-                    },
-                    competition_id:{
-                        required:'Este campo es obligatorio.',
                     },
                     teams_ids:{
                         required:'Este campo es obligatorio.',
@@ -3433,24 +3428,24 @@ var handleBootboxAddEquipoToJugador = function () {
             });
 
             bootbox.dialog({
-                    message: $('#add-group-to-competition-form-div'),
+                    message: $('#add-group-to-phase-form-div'),
                     buttons: {
                         success: {
                             label: "Agregar",
                             className: "btn-primary",
                             callback: function () 
                             {
-                                if($('#add-group-to-competition-form').valid()) 
+                                if($('#add-group-to-phase-form').valid()) 
                                 {
-                                    $("#add-group-to-competition-form").submit(function(e){
+                                    $("#add-group-to-phase-form").submit(function(e){
                                         var formData = {
-                                            name: $('#name-new-group-to-competition').val(),
-                                            competition_id: $('button#add-group').attr('data-competition-id'),
-                                            teams_ids: $('#competition-new-teams-ids').val()
+                                            name: $('#name-new-group-to-phase').val(),
+                                            phase_id: phaseId,
+                                            teams_ids: $('#phase-new-teams-ids').val()
                                         }
                                         $.ajax({
                                             type: 'POST',
-                                            url: $('#add-new-group-to-competition').attr('href'), 
+                                            url: $('#add-new-group-to-phase').attr('href'), 
                                             data: formData,
                                             dataType: "JSON",
                                             success: function(responseServer) {
@@ -3472,11 +3467,11 @@ var handleBootboxAddEquipoToJugador = function () {
                                                         }
                                                     });
                                                     // Limpio cada elemento de las clases añadidas por el validator
-                                                    $('#add-group-to-competition-form div').each(function(){
+                                                    $('#add-group-to-phase-form div').each(function(){
                                                         cleanValidatorClasses(this);
                                                     });
                                                     //Reinicio el formulario
-                                                    $("#add-group-to-competition-form")[0].reset();
+                                                    $("#add-group-to-phase-form")[0].reset();
                                                     location.reload();
                                                 }else{
                                                     console.log(responseServer);
@@ -3491,7 +3486,7 @@ var handleBootboxAddEquipoToJugador = function () {
                                                         }
                                                     });
                                                     // Limpio cada elemento de las clases añadidas por el validator
-                                                    $('#add-group-to-competition-form div').each(function(){
+                                                    $('#add-group-to-phase-form div').each(function(){
                                                         cleanValidatorClasses(this);
                                                     });
                                                     //Reinicio el formulario
@@ -3510,15 +3505,16 @@ var handleBootboxAddEquipoToJugador = function () {
                                                         }
                                                     });
                                                     // Limpio cada elemento de las clases añadidas por el validator
-                                                    $('#add-group-to-competition-form div').each(function(){
+                                                    $('#add-group-to-phase-form div').each(function(){
                                                         cleanValidatorClasses(this);
                                                     });
                                                     //Reinicio el formulario
                                             }
                                         });
                                         e.preventDefault(); //Prevent Default action. 
+                                        $(this).unbind('submit');
                                     }); 
-                                    $("#add-group-to-competition-form").submit();
+                                    $("#add-group-to-phase-form").submit();
                                 }else{
                                     return false;
                                 }
@@ -3529,14 +3525,14 @@ var handleBootboxAddEquipoToJugador = function () {
                         show: false // We will show it manually later
                     })
                 .on('shown.bs.modal', function() {
-                    $('#add-group-to-competition-form-div')
+                    $('#add-group-to-phase-form-div')
                             .show();                             // Show the form
                         })
                 .on('hide.bs.modal', function(e) {
                     // Bootbox will remove the modal (including the body which contains the form)
                     // after hiding the modal
                     // Therefor, we need to backup the form
-                    $('#add-group-to-competition-form-div').hide().appendTo('#add-group-to-competition');
+                    $('#add-group-to-phase-form-div').hide().appendTo('#add-group-to-phase');
                 })
                 .modal('show');
         });
@@ -3544,12 +3540,13 @@ var handleBootboxAddEquipoToJugador = function () {
 
 
 
-     var selectTeamsForGroup = function(idGroup) {
+     var selectTeamsForGroup = function() {
         //console.log($(this).val());
-            $.ajax({
+        //var url = $('#list-teams-phase-competition').attr('href').split('%')[0]+$('button#add-group').attr('data-phase-id');
+        //console.log($('#list-teams-phase-competition').attr('href'));
+            /*$.ajax({
                 type: 'GET',
-                url: $('#list-of-teams-for-competition').attr('href'),
-                data: {'group_id': idGroup},
+                url: url,
                 dataType:'json',
                 success: function(response) {
                     console.log(response.teams);
@@ -3565,7 +3562,7 @@ var handleBootboxAddEquipoToJugador = function () {
                         jQuery('#new-teams-for-groups-ids').append('<option value=\"\"></option>');
                     }
                 }
-            });
+            });*/
     }
 
     var showPopUpToAddTeamToGroupCompetition = function () {
@@ -3576,7 +3573,7 @@ var handleBootboxAddEquipoToJugador = function () {
             console.log('url:' + $(this).attr('href'));
 
             popUpDataForTypeCompetition($(this).attr('href'), $(this).attr('data-group-id'));
-            selectTeamsForGroup($(this).attr('data-group-id'));
+            //selectTeamsForGroup();
         });
 
     }
@@ -4102,7 +4099,7 @@ var handleBootboxAddEquipoToJugador = function () {
 
             loadFilter();
             loadTypeComptetitionInfo();
-            showPopUpToAddNewGroup();
+            handleBootboxAddNewGropuToPhase();
             showPopUpToAddTeamToGroupCompetition();
             selectTeamsForGameToGroup();
         }
