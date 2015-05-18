@@ -124,6 +124,8 @@
 		<a id="add-new-game-to-group" href="{{ URL::route('groups.api.add.game') }}"></a>
 		<a id="exist-game-to-group" href="{{ URL::route('groups.api.exist.game') }}"></a>
 		<a id="teams-available-for-games" href="{{ URL::route('groups.api.teams.availables.game') }}"></a>
+		<!--Phases-->
+		<a id="add-new-phase-competition" href="{{ URL::route('competitions.api.add.phase') }}"></a>
 	</div>
 </div>
 <!-- /SIDEBAR -->
