@@ -1,12 +1,11 @@
 @if (!$competition->finished) 
 	<div class="row">
 		<div class="col-md-2">
-			<button class="pull-left btn btn-lg btn-primary" id="add-group" data-competition-id="{{ $competition->id }}" href="#">Agregar fase</button>
+			<button class="pull-left btn btn-lg btn-primary" id="add-phase" data-competition-id="{{ $competition->id }}" href="#">Agregar fase</button>
 		</div>
 		<div id="add-phase-to-competition" class="hidden">
 			@include('phases.new')
 		</div>
-
 	</div>
 	<br />
 @endif
