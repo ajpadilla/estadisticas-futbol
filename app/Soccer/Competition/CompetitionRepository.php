@@ -77,6 +77,18 @@ class CompetitionRepository extends BaseRepository
 		return false;
 	}
 
+	public function getCurrentPhase($id)
+	{
+		$competition = $this->get($id);
+		if($competition->phases->count()) {
+			foreach ($competition->phases as $phase) 
+				if($phase->isCurrent)
+					return $phase;
+			return $competition->phases()->orderBy('from', 'DESC')->first();
+		}
+		return false;
+	}
+
     /*
 	********************* Datatable Methods ***********************
     */

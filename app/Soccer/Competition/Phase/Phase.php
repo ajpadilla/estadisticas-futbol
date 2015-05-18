@@ -10,6 +10,12 @@ class Phase extends Eloquent {
 
 	protected $fillable = ['name', 'from', 'to', 'competition_id', 'format_id'];
 
+    public function getDates()
+    {
+        /* substitute your list of fields you want to be auto-converted to timestamps here: */
+        return array('created_at', 'updated_at', 'from', 'to');
+    }
+
     /*
 	********************* Relations ***********************
     */	
@@ -47,6 +53,11 @@ class Phase extends Eloquent {
     /*
     ********************* Custom Methods ***********************
     */  
+
+    public function getIsCurrentAttribute()
+    {
+        return $this->from->diffInDays(null, false) > 0 && $this->to->diffInDays(null, false) < 0;
+    }
 
     public function getHasGroupsAttribute()
     {

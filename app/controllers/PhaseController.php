@@ -1,8 +1,6 @@
 <?php
 
-use soccer\Competition\CompetitionRepository;
-use soccer\Forms\RegisterCompetition;
-use soccer\Forms\RegisterGroupForm;
+use soccer\Competition\PhaseRepository;
 use soccer\Group\GroupRepository;
 use soccer\Game\GameType\GameTypeRepository;
 use Laracasts\Validation\FormValidationException;
@@ -15,17 +13,11 @@ class CompetitionController extends \BaseController {
 	protected $groupRepository;
 	protected $gameTypeRepository;
 
-	public function __construct(CompetitionRepository $repository,
-			RegisterCompetition $registerCompetition,
-			RegisterGroupForm $registerGroupForm,
+	public function __construct(PhaseRepository $repository,
 			GroupRepository $groupRepository,
-			GameTypeRepository $gameTypeRepository
 		){
 		$this->repository = $repository;
-		$this->registerCompetition = $registerCompetition;
 		$this->groupRepository = $groupRepository;
-		$this->gameTypeRepository = $gameTypeRepository;
-		$this->registerGroupForm = $registerGroupForm;
 	}
 
 	/**
@@ -92,11 +84,10 @@ class CompetitionController extends \BaseController {
 		$competition = $this->repository->get($id);
 		$gameTypes = $this->gameTypeRepository->getAll();
 		$tables = $this->repository->getGroupTables($id);
-		$currentPhase = $this->repository->getCurrentPhase($id);
 		//dd($tables);
 		//$tableTemplate = 'groups.partials._table-template';
 		$scriptTableTemplate = 'groups.partials._script-table-template';
-		return View::make('competitions.show', compact('competition', 'tables', 'tableTemplate', 'scriptTableTemplate', 'gameTypes', 'currentPhase'));
+		return View::make('competitions.show', compact('competition', 'tables', 'tableTemplate', 'scriptTableTemplate', 'gameTypes'));
 	}
 
 	/**

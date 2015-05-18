@@ -25,6 +25,12 @@ class Competition extends Eloquent implements StaplerableInterface{
         parent::__construct($attributes);
     }
 
+    public function getDates()
+    {
+        /* substitute your list of fields you want to be auto-converted to timestamps here: */
+        return array('created_at', 'updated_at', 'desde', 'hasta');
+    }    
+
     /*
 	********************* Relations ***********************
     */	
@@ -40,7 +46,7 @@ class Competition extends Eloquent implements StaplerableInterface{
 
     public function phases()
     {
-        return $this->hasMany('soccer\Competition\Phase\Phase');
+        return $this->hasMany('soccer\Competition\Phase\Phase')->orderBy('from', 'DESC');
     }
 
     public function groups()
@@ -74,6 +80,11 @@ class Competition extends Eloquent implements StaplerableInterface{
     /*
     ********************* Custom Methods ***********************
     */  
+
+    public function getFinishedAttribute()
+    {
+        return $this->hasta->diffInDays(null, false) > 0;
+    }    
 
     public function getHasGroupsAttribute()
     {
