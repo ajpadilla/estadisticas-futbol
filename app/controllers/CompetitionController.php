@@ -4,8 +4,10 @@ use soccer\Competition\CompetitionRepository;
 use soccer\Competition\CompetitionFormat\CompetitionFormatRepository;
 use soccer\Forms\RegisterCompetition;
 use soccer\Forms\RegisterGroupForm;
+use soccer\Forms\RegisterPhaseForm;
 use soccer\Group\GroupRepository;
 use soccer\Game\GameType\GameTypeRepository;
+use soccer\Competition\Phase\PhaseRepository;
 use Laracasts\Validation\FormValidationException;
 
 class CompetitionController extends \BaseController {
@@ -16,13 +18,17 @@ class CompetitionController extends \BaseController {
 	protected $registerGroupForm;
 	protected $groupRepository;
 	protected $gameTypeRepository;
+	protected $registerPhaseForm;
+	protected $phaseRepository;
 
 	public function __construct(CompetitionRepository $repository,
 			CompetitionFormatRepository $competitionFormatRepository,
 			RegisterCompetition $registerCompetition,
 			RegisterGroupForm $registerGroupForm,
+			RegisterPhaseForm $registerPhaseForm,
 			GroupRepository $groupRepository,
-			GameTypeRepository $gameTypeRepository
+			GameTypeRepository $gameTypeRepository,
+			PhaseRepository $phaseRepository
 		){
 		$this->repository = $repository;
 		$this->competitionFormatRepository = $competitionFormatRepository;
@@ -30,6 +36,8 @@ class CompetitionController extends \BaseController {
 		$this->groupRepository = $groupRepository;
 		$this->gameTypeRepository = $gameTypeRepository;
 		$this->registerGroupForm = $registerGroupForm;
+		$this->registerPhaseForm = $registerPhaseForm;
+		$this->phaseRepository = $phaseRepository;
 	}
 
 	/**
@@ -214,11 +222,24 @@ class CompetitionController extends \BaseController {
 
 	public function addPhaseApi()
 	{
-		if (Request::ajax())
+		if(Request::ajax())
 		{
 			$input = Input::all();
-			$this->addToResponseArray('data', $input);
-			return $this->getResponseArrayJson();
+			try
+			{
+				$this->registerPhaseForm->validate($input);
+				$phase = $this->phaseRepository->create($input);
+				$this->setSuccess(true);
+				$this->addToResponseArray('phase', $phase->toArray());
+				$this->addToResponseArray('data', $input);
+				return $this->getResponseArrayJson();				
+			}
+			catch (FormValidationException $e)
+			{
+				$this->setSuccess(false);
+				$this->addToResponseArray('errors', $e->getErrors()->all());
+				return $this->getResponseArrayJson();
+			}
 		}
 	}
 
