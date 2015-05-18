@@ -155,7 +155,7 @@ class GroupController extends \BaseController {
 		{
 			$teams = $this->repository->getTeamsWithoutFullGames($id);
 			$this->setSuccess(($teams ? true : false));
-			$this->addToResponseArray('data', $input);
+			//$this->addToResponseArray('data', $input);
 			if($teams)
 				$this->addToResponseArray('teams', $teams);
 		}else{
