@@ -3725,13 +3725,13 @@ var handleBootboxAddEquipoToJugador = function () {
 
             var groupId = $(this).attr('data-group-id');
             getAvailableTeamsForGame();
-            $('#add-team-to-group-form').trigger('reset');
+            $('#add-game-to-group-form').trigger('reset');
             addValidationRulesForms();
-            $('#add-team-to-group-form').validate({
+            $('#add-game-to-group-form').validate({
                     rules:{
                         date:{
                             required: true,
-                            customDateTimeValidator: true
+                            //customDateTimeValidator: true
                         },
                         local_team_id:{
                              required: true,
@@ -3908,17 +3908,23 @@ var handleBootboxAddEquipoToJugador = function () {
             dataType:'json',
             success: function(response) {
                 console.log(response.teams);
-                /*if (response.success == true) {
-                    jQuery('#new-teams-for-groups-ids').html('');
-                    jQuery('#new-teams-for-groups-ids').append('<option value=\"\"></option>');
+                if (response.success == true) {
+                    $('#local-team-for-game').html('');
+                    $('#local-team-for-game').append('<option value=\"\"></option>');
+                    $('#away-team-for-game').html('');
+                    $('#away-team-for-game').append('<option value=\"\"></option>');
                     $.each(response.teams,function (k,v){
-                        $('#new-teams-for-groups-ids').append('<option value=\"'+v.id+'\">'+v.name+'</option>');
-                        $('#new-teams-for-groups-ids').trigger("chosen:updated");
+                        $('#local-team-for-game').append('<option value=\"'+v.id+'\">'+v.nombre+'</option>');
+                        $('#local-team-for-game').trigger("chosen:updated");
+                        $('#away-team-for-game').append('<option value=\"'+v.id+'\">'+v.nombre+'</option>');
+                        $('#away-team-for-game').trigger("chosen:updated");
                     });
                 }else{
-                    jQuery('#new-teams-for-groups-ids').html('');
-                    jQuery('#new-teams-for-groups-ids').append('<option value=\"\"></option>');
-                }*/
+                    $('#local-team-for-game').html('');
+                    $('#local-team-for-game').append('<option value=\"\"></option>');
+                    $('#away-team-for-game').html('');
+                    $('#away-team-for-game').append('<option value=\"\"></option>');
+                }
             }
         });
      }
@@ -4130,7 +4136,7 @@ var handleBootboxAddEquipoToJugador = function () {
             loadTypeComptetitionInfo();
             handleBootboxAddNewGropuToPhase();
             showPopUpToAddTeamToGroupCompetition();
-            selectTeamsForGameToGroup();
+            //selectTeamsForGameToGroup();
         }
     }
 }();
