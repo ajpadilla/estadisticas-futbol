@@ -10,7 +10,7 @@ class Group extends Eloquent {
 
     protected $table = 'groups';
 
-    protected $fillable = ['name', 'competition_id'];
+    protected $fillable = ['name', 'phase_id'];
 
     /*
 	********************* Relations ***********************
