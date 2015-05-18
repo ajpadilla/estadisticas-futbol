@@ -63,7 +63,15 @@ var CustomApp = function () {
             try{
                 jQuery.datepicker.parseDate('yy-mm-dd', value);return true;}
             catch(e){return false;}
-        },'Por favor, Ingrese una fecha válida con el formato yy-mm-dd.');
+        },'Por favor, Ingrese una fecha válida con el formato yy-mm-dd .');
+
+
+        $.validator.addMethod('customDateTimeValidator', function(value, element) {
+            try{
+                jQuery.datepicker.parseDate('yy-mm-dd h:i', value);return true;}
+            catch(e){return false;}
+        },'Por favor, Ingrese una fecha válida con el formato yy-mm-dd h:m:s.');
+
 
         jQuery.validator.addMethod('decimalNumbers', function(value, element) {
             return this.optional(element) || /^\d{0,10}(\.\d{0,2})?$/i.test(value);
@@ -3713,21 +3721,32 @@ var handleBootboxAddEquipoToJugador = function () {
 
 
     var handleBootboxAddGameToGroupCompetition = function () {
-        $(".box-body.big").delegate(".games", "click", function() {
+        $("button#add-game").on("click", function() {
 
+            var groupId = $(this).attr('data-group-id');
             getAvailableTeamsForGame();
             $('#add-team-to-group-form').trigger('reset');
             addValidationRulesForms();
             $('#add-team-to-group-form').validate({
                     rules:{
-                        'date':{
-                            required: true
-                        }
+                        date:{
+                            required: true,
+                            customDateTimeValidator: true
+                        },
+                        local_team_id:{
+                             required: true,
+                        },
+                        away_team_id:{
+                             required: true,
+                        },   
                     },
                     messages:{
-                        'teams_ids[]':{
-                            required:'Este campo es obligatorio.',
-                        }
+                         local_team_id:{
+                             required: 'Este campo es obligatorio',
+                        },
+                        away_team_id:{
+                              required: 'Este campo es obligatorio',
+                        }, 
                     },
                     highlight:function(element){
                         $(element).closest('.form-group').removeClass('has-success').addClass('has-error');
@@ -3753,7 +3772,7 @@ var handleBootboxAddEquipoToJugador = function () {
                                     {
                                         $("#add-game-to-group-form").submit(function(e){
                                             var formData = {
-                                                group_id: $('button#add-game').attr('data-group-id'),
+                                                group_id: groupId,
                                                 date: $('#date-for-game').val(),
                                                 local_team_id: $('#local-team-for-game').val(),
                                                 away_team_id: $('#away-team-for-game').val(),
@@ -3771,12 +3790,11 @@ var handleBootboxAddEquipoToJugador = function () {
                                                 dataType: "JSON",
                                                 success: function(responseServer) {
                                                     console.log(responseServer);
-                                                    var c = 0;
                                                     if(responseServer.success) 
                                                     {
                                                         // Muestro otro dialog con información de éxito
                                                         bootbox.dialog({
-                                                            message:"EL partido ha sido actualizado correctamente!",
+                                                            message:"EL partido ha sido agregado correctamente!",
                                                             title: "Éxito",
                                                             buttons: {
                                                                 success: {
@@ -3813,7 +3831,7 @@ var handleBootboxAddEquipoToJugador = function () {
                                                 },
                                                 error: function(jqXHR, textStatus, errorThrown) {
                                                    console.log(errorThrown);
-                                                   /*bootbox.dialog({
+                                                   bootbox.dialog({
                                                             message:" ¡Error al enviar datos al servidor!",
                                                             title: "Error",
                                                             buttons: {
@@ -3827,7 +3845,7 @@ var handleBootboxAddEquipoToJugador = function () {
                                                         $('#add-game-to-group-form div').each(function(){
                                                             cleanValidatorClasses(this);
                                                         });
-                                                        //Reinicio el formulario*/
+                                                        //Reinicio el formulario
                                                 }
                                             });
                                             e.preventDefault(); //Prevent Default action.
@@ -3889,7 +3907,18 @@ var handleBootboxAddEquipoToJugador = function () {
             url: url,
             dataType:'json',
             success: function(response) {
-                console.log(response);
+                console.log(response.teams);
+                /*if (response.success == true) {
+                    jQuery('#new-teams-for-groups-ids').html('');
+                    jQuery('#new-teams-for-groups-ids').append('<option value=\"\"></option>');
+                    $.each(response.teams,function (k,v){
+                        $('#new-teams-for-groups-ids').append('<option value=\"'+v.id+'\">'+v.name+'</option>');
+                        $('#new-teams-for-groups-ids').trigger("chosen:updated");
+                    });
+                }else{
+                    jQuery('#new-teams-for-groups-ids').html('');
+                    jQuery('#new-teams-for-groups-ids').append('<option value=\"\"></option>');
+                }*/
             }
         });
      }
