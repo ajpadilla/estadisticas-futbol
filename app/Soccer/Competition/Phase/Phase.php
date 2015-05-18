@@ -21,7 +21,7 @@ class Phase extends Eloquent {
     public function country()
     {
         if ($competition = $this->competition) {
-            return $category->belongsTo('soccer\Pais\Pais');
+            return $category->belongsTo('soccer\Country\Country');
         return null;
     }
 

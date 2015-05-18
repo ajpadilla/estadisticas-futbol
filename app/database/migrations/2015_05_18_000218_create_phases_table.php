@@ -19,8 +19,11 @@ class CreatePhasesTable extends Migration {
 			$table->date('from');
 			$table->date('to');
 			$table->string('local_away_game', 128)->default(false);
+			$table->boolean('away_goal')->default(false);
 			$table->integer('competition_id')->unsigned();
 			$table->foreign('competition_id')->references('id')->on('competitions')->onDelete('cascade');
+			//$table->integer('format_id')->unsigned();
+			//$table->foreign('format_id')->references('id')->on('formats')->onDelete('cascade');
 			$table->timestamps();
 		});
 	}
