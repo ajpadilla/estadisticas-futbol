@@ -89,8 +89,13 @@ class Group extends Eloquent {
         return false;
     }
 
-    public function getTotalGamesPAttribute()
+    public function getTotalGamesAttribute()
     {
         return $this->games->count();
     }
+
+    public function getHasGamesAttribute()
+    {
+        return $this->totalGames > 0;
+    }    
 }

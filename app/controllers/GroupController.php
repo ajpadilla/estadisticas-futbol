@@ -173,6 +173,13 @@ class GroupController extends \BaseController {
 
 	public function listGroupApi($id)
 	{
-		return $this->repository->getDefaultTableForGroupTeams($id);
+		if(Request::ajax())
+			return $this->repository->getDefaultTableForGroupTeams($id);		
+	}
+
+	public function listGameApi($id)
+	{
+		if(Request::ajax()) 
+			return $this->repository->getDefaultTableForGroupGames($id);
 	}
 }

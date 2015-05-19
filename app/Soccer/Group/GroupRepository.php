@@ -157,6 +157,13 @@ class GroupRepository extends BaseRepository
 		return false;
 	}
 
+	public function getGames($id)
+	{
+		$group = $this->get($id);
+		//dd($group->games->toArray());
+		return $group->games;
+	}
+
 	/*
 	*********************** DATATABLE SETTINGS ******************************
 	*/		
@@ -295,6 +302,18 @@ class GroupRepository extends BaseRepository
 				return implode(" ", $teamRepository->getActionColumn());
 			});
 			return $teamRepository->getTableCollectionForRender();
+		}
+		return null;
+	}	
+
+	public function getDefaultTableForGroupGames($id)
+	{
+		$games = $this->getGames($id);
+		if($games) {
+			$gameRepository = new GameRepository;
+			$gameRepository->setDatatableCollection($games);
+			$gameRepository->setDefaultTableSettings();
+			return $gameRepository->getTableCollectionForRender();
 		}
 		return null;
 	}	

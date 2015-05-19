@@ -177,7 +177,7 @@ class PhaseController extends \BaseController {
 	{
 		if(Request::ajax())
 		{
-			$teams = $this->repository->getAvailableTeams($id);
+			$teams = $this->repository->getAvailableTeamsForGroup($id);
 			$this->setSuccess(($teams ? true : false));
 			$this->addToResponseArray('data', ($teams ? $teams : array()));			
 		}else{

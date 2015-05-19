@@ -2,6 +2,7 @@
 
 use soccer\Base\BaseRepository;
 use soccer\Group\GroupRepository;
+use soccer\Game\GameRepository;
 use soccer\Competition\Competition;
 /**
 * 
@@ -127,4 +128,23 @@ class CompetitionRepository extends BaseRepository
 		}
 		return $tables;
 	}
+
+	public function getGamesTables($id)
+	{		
+		$competition = $this->get($id);
+		$tables = array();		
+		if($competition->hasGames) {
+			$gameRepository = new GameRepository;			
+			$orderColumn = $gameRepository->getColumnCount() - 1;
+			foreach ($competition->phasesWithGames as $phase) {
+				if($phase->hasAssociateGroups && $phase->hasGames) {
+					$tables[$phase->id]['name'] = $phase->name;
+					foreach ($phase->groupsWithGames as $group) 
+						if($group->hasGames) 
+							$tables[$phase->id]['tables'][] = $gameRepository->getAllTable('groups.api.list.games', [$group->id], $orderColumn, 'desc', 'game-' . $group->id);
+				}
+			}
+		}
+		return $tables;
+	}	
 }

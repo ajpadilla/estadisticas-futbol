@@ -82,5 +82,6 @@
 </script>
 
 @yield('scripts')
+@yield('scripts2')
 
 <!-- /JAVASCRIPTS -->

@@ -41,6 +41,11 @@ class Phase extends Eloquent {
         return $this->hasMany('soccer\Group\Group');
     }
 
+    public function games()
+    {
+        return $this->hasManyThrough('soccer\Game\Game', 'soccer\Group\Group');
+    }
+
     public function getTeamsAttribute()
     {     
         $teams = new \Illuminate\Database\Eloquent\Collection;
@@ -53,6 +58,16 @@ class Phase extends Eloquent {
     /*
     ********************* Custom Methods ***********************
     */  
+
+    public function getHasGamesAttribute()
+    {
+        return $this->games->count() > 0;
+    }    
+
+    public function getGroupsWithGamesAttribute()
+    {
+        return $this->groups()->has('games')->get();
+    }
 
     public function getIsCurrentAttribute()
     {

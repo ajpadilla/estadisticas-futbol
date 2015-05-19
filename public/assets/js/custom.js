@@ -3102,6 +3102,7 @@ var handleBootboxAddEquipoToJugador = function () {
         $(".datepicker-time").datetimepicker({
             lang: 'es',
             timepicker: true,
+            step: 5,
             format: 'Y-m-d H:i',
             yearStart: '1850',
             todayButton: true,
@@ -3607,7 +3608,7 @@ var handleBootboxAddEquipoToJugador = function () {
                                                     {
                                                         // Muestro otro dialog con información de éxito
                                                         bootbox.dialog({
-                                                            message: responseServer.group.name + " Ha sido actualizado correctamente!",
+                                                            message: responseServer.data.name + " Ha sido actualizado correctamente!",
                                                             title: "Éxito",
                                                             buttons: {
                                                                 success: {
@@ -3872,29 +3873,32 @@ var handleBootboxAddEquipoToJugador = function () {
 
      var getAvailableTeamsForGame = function () {
         var url = $('#teams-available-for-games').attr('href').split('%')[0]+$('button#add-game').attr('data-group-id');
+        alert(url);
         //console.log(url);
         $.ajax({
             type: 'GET',
             url: url,
             dataType:'json',
             success: function(response) {
-                console.log(response.teams);
+                var option = '<option value=\"\"></option>';
                 if (response.success == true) {
                     $('#local-team-for-game').html('');
-                    $('#local-team-for-game').append('<option value=\"\"></option>');
+                    $('#local-team-for-game').append(option);
                     $('#away-team-for-game').html('');
-                    $('#away-team-for-game').append('<option value=\"\"></option>');
-                    $.each(response.teams,function (k,v){
-                        $('#local-team-for-game').append('<option value=\"'+v.id+'\">'+v.nombre+'</option>');
-                        $('#local-team-for-game').trigger("chosen:updated");
-                        $('#away-team-for-game').append('<option value=\"'+v.id+'\">'+v.nombre+'</option>');
-                        $('#away-team-for-game').trigger("chosen:updated");
+                    $('#away-team-for-game').append(option);
+                    $.each(response.data,function (k,v){
+                        option = '<option value=\"'+v.id+'\">'+v.nombre+'</option>';
+                        var chosenUpdate = 'chosen:updated';
+                        $('#local-team-for-game').append(option);
+                        $('#local-team-for-game').trigger(chosenUpdate);
+                        $('#away-team-for-game').append(option);
+                        $('#away-team-for-game').trigger(chosenUpdate);
                     });
                 }else{
                     $('#local-team-for-game').html('');
-                    $('#local-team-for-game').append('<option value=\"\"></option>');
+                    $('#local-team-for-game').append(option);
                     $('#away-team-for-game').html('');
-                    $('#away-team-for-game').append('<option value=\"\"></option>');
+                    $('#away-team-for-game').append(option);
                 }
             }
         });

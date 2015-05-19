@@ -34,7 +34,7 @@ class PhaseRepository extends BaseRepository
 		return $phase;
 	}
 
-	public function getAvailableTeams($id, $forList = true)
+	public function getAvailableTeamsForGroup($id, $forList = true)
 	{
 		$phase = $this->get($id);
 		if($phase->groups->count()) {
