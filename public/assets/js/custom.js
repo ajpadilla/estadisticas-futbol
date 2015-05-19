@@ -278,6 +278,7 @@ var CustomApp = function () {
                                             }
                                         });
                                         e.preventDefault(); //Prevent Default action. 
+                                        $(this).unbind('submit');
                                     }); 
                                     $("#player-form").submit();
                                 } else {
@@ -785,6 +786,7 @@ var CustomApp = function () {
                                             }
                                         });
                                         e.preventDefault(); //Prevent Default action. 
+                                        $(this).unbind('submit');
                                     }); 
                                     $("#team-form").submit();
                                 } else {
@@ -1238,7 +1240,8 @@ var CustomApp = function () {
                                                     $("#country-form")[0].reset();
                                             }
                                         });
-                                        e.preventDefault(); //Prevent Default action. 
+                                        e.preventDefault(); //Prevent Default action.
+                                        $(this).unbind('submit'); 
                                     }); 
                                     $("#country-form").submit();
                                 } else {
@@ -1700,6 +1703,7 @@ var CustomApp = function () {
                                             }
                                         });
                                         e.preventDefault(); //Prevent Default action. 
+                                        $(this).unbind('submit');
                                     }); 
                                     $("#position-form").submit();
                                 } else {
@@ -2099,6 +2103,7 @@ var handleBootboxAddJugadorToEquipo = function () {
                                             }
                                         });
                                         e.preventDefault(); //Prevent Default action. 
+                                        $(this).unbind('submit');
                                     }); 
                                     $("#equipo-add-jugador-form").submit();
                                 } else {
@@ -2278,6 +2283,7 @@ var handleBootboxAddEquipoToJugador = function () {
                                             }
                                         });
                                         e.preventDefault(); //Prevent Default action. 
+                                        $(this).unbind('submit');
                                     }); 
                                     $("#jugador-add-equipo-form").submit();
                                 } else {
@@ -2485,7 +2491,8 @@ var handleBootboxAddEquipoToJugador = function () {
                                                     //Reinicio el formulario
                                             }
                                         });
-                                        e.preventDefault(); //Prevent Default action. 
+                                        e.preventDefault(); //Prevent Default action.
+                                        $(this).unbind('submit'); 
                                     }); 
                                     $("#type-of-competition-form").submit();
                                 } else {
@@ -2945,7 +2952,8 @@ var handleBootboxAddEquipoToJugador = function () {
                                                     //Reinicio el formulario
                                             }
                                         });
-                                        e.preventDefault(); //Prevent Default action. 
+                                        e.preventDefault(); //Prevent Default action.
+                                        $(this).unbind('submit'); 
                                     }); 
                                     $("#competition-form").submit();
                                 } else {
@@ -3374,7 +3382,7 @@ var handleBootboxAddEquipoToJugador = function () {
     }
 
 
-    var selectTeamsForCompetition = function(idPhase) {
+    var selectTeamsForCompetition = function(id,idPhase) {
         var url = $('#list-teams-phase-competition').attr('href').split('%')[0]+idPhase;
         //console.log(url);
             $.ajax({
@@ -3384,27 +3392,27 @@ var handleBootboxAddEquipoToJugador = function () {
                 success: function(response) {
                     console.log(response);
                     if (response.success == true) {
-                        jQuery('#phase-new-teams-ids').html('');
-                        jQuery('#phase-new-teams-ids').append('<option value=\"\"></option>');
+                        jQuery(id).html('');
+                        jQuery(id).append('<option value=\"\"></option>');
                         $.each(response.teams,function (k,v){
-                            $('#phase-new-teams-ids').append('<option value=\"'+k+'\">'+v+'</option>');
-                            $('#phase-new-teams-ids').trigger("chosen:updated");
+                            $(id).append('<option value=\"'+k+'\">'+v+'</option>');
+                            $(id).trigger("chosen:updated");
                         });
                     }else{
-                        jQuery('#phase-new-teams-ids').html('');
-                        jQuery('#phase-new-teams-ids').append('<option value=\"\"></option>');
+                        jQuery(id).html('');
+                        jQuery(id).append('<option value=\"\"></option>');
                     }
                 }
             });
     }
 
-    var handleBootboxAddNewGropuToPhase = function () {
+    var handleBootboxAddNewGroupToPhase = function () {
         $('button#add-group').click(function () {
 
             var phaseId = $(this).attr('data-phase-id');
             console.log(phaseId);
             addValidationRulesForms();
-            selectTeamsForCompetition($(this).attr('data-phase-id'));
+            selectTeamsForCompetition('#phase-new-teams-ids',$(this).attr('data-phase-id'));
             $('#add-group-to-phase-form').validate({
                 rules:{
                     name:{
@@ -3547,39 +3555,15 @@ var handleBootboxAddEquipoToJugador = function () {
     }
 
 
-
-     var selectTeamsForGroup = function() {
-        //console.log($(this).val());
-        //var url = $('#list-teams-phase-competition').attr('href').split('%')[0]+$('button#add-group').attr('data-phase-id');
-        //console.log($('#list-teams-phase-competition').attr('href'));
-            /*$.ajax({
-                type: 'GET',
-                url: url,
-                dataType:'json',
-                success: function(response) {
-                    console.log(response.teams);
-                    if (response.success == true) {
-                        jQuery('#new-teams-for-groups-ids').html('');
-                        jQuery('#new-teams-for-groups-ids').append('<option value=\"\"></option>');
-                        $.each(response.teams,function (k,v){
-                            $('#new-teams-for-groups-ids').append('<option value=\"'+v.id+'\">'+v.name+'</option>');
-                            $('#new-teams-for-groups-ids').trigger("chosen:updated");
-                        });
-                    }else{
-                        jQuery('#new-teams-for-groups-ids').html('');
-                        jQuery('#new-teams-for-groups-ids').append('<option value=\"\"></option>');
-                    }
-                }
-            });*/
-    }
-
     var handleBootboxAddTeamToGroupCompetition = function () {
 
         $("button#add-team").on("click", function() {
-            
-            var groupId = $(this).attr('data-group-id');
-            console.log(groupId);
 
+            var groupId = $(this).attr('data-group-id');
+            var phaseId = $(this).attr('data-phase-id');
+            /*console.log('group:'+groupId);
+            console.log('phaseId:'+phaseId);*/
+            selectTeamsForCompetition('#new-teams-for-groups-ids',phaseId);
             addValidationRulesForms();
             $('#add-team-to-group-form').validate({
                     rules:{
@@ -3621,7 +3605,7 @@ var handleBootboxAddEquipoToJugador = function () {
                                             };
                                             $.ajax({
                                                 type: 'POST',
-                                                url: url, 
+                                                url: $('#add-new-teams-to-group').attr('href'), 
                                                 data: formData,
                                                 dataType: "JSON",
                                                 success: function(responseServer) {
@@ -3688,6 +3672,7 @@ var handleBootboxAddEquipoToJugador = function () {
                                                 }
                                             });
                                             e.preventDefault(); //Prevent Default action. 
+                                            $(this).unbind('submit');
                                         }); 
                                         $("#add-team-to-group-form").submit();
                                     }else{
@@ -4107,6 +4092,8 @@ var handleBootboxAddEquipoToJugador = function () {
             handleBootboxNewCompetition();
             handleBootboxAddGameToGroupCompetition();
             handleBootboxAddPhaseToCompetition();
+            handleBootboxAddNewGroupToPhase();
+            handleBootboxAddTeamToGroupCompetition();
             //Plugins init
             //handleFechaDateTimePicker();
             handleDatePicker();
@@ -4127,8 +4114,7 @@ var handleBootboxAddEquipoToJugador = function () {
 
             loadFilter();
             loadTypeComptetitionInfo();
-            handleBootboxAddNewGropuToPhase();
-            handleBootboxAddTeamToGroupCompetition();
+            
             //selectTeamsForGameToGroup();
         }
     }
