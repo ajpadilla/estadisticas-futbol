@@ -115,28 +115,20 @@ class GroupController extends \BaseController {
 		if(Request::ajax())
 		{
 			$input = Input::all();
-			/*try
-			{
+			try {
 				$idGroup = (int)$input['group_id'];
 				$teams = $input['teams_ids'];
 				$this->registerTeamGroupForm->validate($input);
 				$group = $this->repository->addTeams($idGroup, $teams);
 				$this->setSuccess(($group ? true : false));
-				$this->addToResponseArray('data', $input);
-				$this->addToResponseArray('group', $group);
-				return $this->getResponseArrayJson();			
+				$this->addToResponseArray('data', ($group ? $group : $input));
 			}
 			catch (FormValidationException $e)
 			{
 				$this->setSuccess(false);
 				$this->addToResponseArray('data', $input);
 				$this->addToResponseArray('errors', $e->getErrors()->all());
-				return $this->getResponseArrayJson();
-			}*/
-
-			$this->setSuccess(true);
-			$this->addToResponseArray('group', $group = ['name' => 'grupo']);
-			$this->addToResponseArray('data', $input);
+			}
 			return $this->getResponseArrayJson();
 		}
 	}	

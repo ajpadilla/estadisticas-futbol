@@ -60,7 +60,7 @@ class Group extends Eloquent {
     }
 
 
-    public function getTotalMissingTeams()
+    public function getTotalMissingTeamsAttribute()
     {
         return $this->phase->teamsByGroup - $this->totalTeams;
     }

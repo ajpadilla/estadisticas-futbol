@@ -180,21 +180,15 @@ class PhaseController extends \BaseController {
 
 	public function getAvailableTeams($id)
 	{
-		$teams = ['1' => 'Mexico', '2' => 'Brasil'];
-		$this->setSuccess(true);
-		$this->addToResponseArray('teams', $teams);
-		return $this->getResponseArrayJson();
-		/*if(Request::ajax())
+		if(Request::ajax())
 		{
 			$teams = $this->repository->getAvailableTeams($id);
 			$this->setSuccess(($teams ? true : false));
-			$this->addToResponseArray('data', $input);
-			if($teams)
-				$this->addToResponseArray('teams', $teams);
+			$this->addToResponseArray('data', ($teams ? $teams : array()));			
 		}else{
 			$this->setSuccess(false);
 		}
-		return $this->getResponseArrayJson();*/
+		return $this->getResponseArrayJson();
 	}	
 
 	public function getAllValue()

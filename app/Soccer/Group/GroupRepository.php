@@ -41,7 +41,6 @@ class GroupRepository extends BaseRepository
 	public function create($data = array())
 	{		
 		$group = $this->model->create($data); 
-
 		if($group) {
 			$teams = ( isset($data['teams_ids']) ? $data['teams_ids'] : array() );
 			if(!empty($teams)) {
@@ -59,15 +58,15 @@ class GroupRepository extends BaseRepository
 		if($group && !empty($teams)) {
 			if($group->totalMissingTeams < count($teams))
 				$teams = array_slice($teams, 0, $group->totalMissingTeams);
-
+			
 			$unavailableTeams = array();
 			foreach ($teams as $index => $team) 
 				if($this->teamExistInGroup($group->id, $team))
 					$unavailableTeams[] = $index;
-			
+
 			foreach ($unavailableTeams as $team) 
 				unset($teams[$team]);
-
+			
 			if(!empty($teams))
 				$group->teams()->attach($teams);
 			else

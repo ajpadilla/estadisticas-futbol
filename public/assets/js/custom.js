@@ -3390,12 +3390,11 @@ var handleBootboxAddEquipoToJugador = function () {
                 url: url,
                 dataType:'json',
                 success: function(response) {
-                    console.log(response);
                     if (response.success == true) {
                         jQuery(id).html('');
                         jQuery(id).append('<option value=\"\"></option>');
-                        $.each(response.teams,function (k,v){
-                            $(id).append('<option value=\"'+k+'\">'+v+'</option>');
+                        $.each(response.data, function (k, team){
+                            $(id).append('<option value=\"'+team.id+'\">'+team.name+'</option>');
                             $(id).trigger("chosen:updated");
                         });
                     }else{
@@ -3621,7 +3620,7 @@ var handleBootboxAddEquipoToJugador = function () {
                                                                     label: "Success!",
                                                                     className: "btn-success",
                                                                     callback: function () {
-                                                                        reloadDatatable('#datatable-'+groupId);
+                                                                        reloadDatatable('#datatable-' + groupId);
                                                                     }
                                                                 }
                                                             }
