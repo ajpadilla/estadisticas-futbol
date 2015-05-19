@@ -243,7 +243,7 @@ var CustomApp = function () {
                                                     updatePlayerForm();
                                                 }else{
                                                      bootbox.dialog({
-                                                        message: responseServer.errores,
+                                                        message: responseServer.errors,
                                                         title: "Error",
                                                         buttons: {
                                                             danger: {
@@ -494,7 +494,7 @@ var CustomApp = function () {
                                                 }else{
                                                     $('#player-form-div').show();
                                                      bootbox.dialog({
-                                                        message:responseServer.errores,
+                                                        message:responseServer.errors,
                                                         title: "Error",
                                                         buttons: {
                                                             danger: {
@@ -748,7 +748,7 @@ var CustomApp = function () {
                                                 }else{
                                                     console.log(responseServer);
                                                      bootbox.dialog({
-                                                        message:responseServer.errores,
+                                                        message:responseServer.errors,
                                                         title: "Error",
                                                         buttons: {
                                                             danger: {
@@ -956,7 +956,7 @@ var CustomApp = function () {
                                                     //Reinicio el formulario
                                                 }else{
                                                      bootbox.dialog({
-                                                        message: responseServer.errores,
+                                                        message: responseServer.errors,
                                                         title: "Error",
                                                         buttons: {
                                                             danger: {
@@ -1667,7 +1667,7 @@ var CustomApp = function () {
                                                 }else{
                                                     console.log(responseServer);
                                                      bootbox.dialog({
-                                                        message:responseServer.errores,
+                                                        message:responseServer.errors,
                                                         title: "Error",
                                                         buttons: {
                                                             danger: {
@@ -1841,7 +1841,7 @@ var CustomApp = function () {
                                                     //Reinicio el formulario
                                                 }else{
                                                      bootbox.dialog({
-                                                        message: responseServer.errores,
+                                                        message: responseServer.errors,
                                                         title: "Error",
                                                         buttons: {
                                                             danger: {
@@ -2066,7 +2066,7 @@ var handleBootboxAddJugadorToEquipo = function () {
                                                     //updatePlayerForm();
                                                 }else{
                                                      bootbox.dialog({
-                                                        message: response.errores,
+                                                        message: response.errors,
                                                         title: "Error",
                                                         buttons: {
                                                             danger: {
@@ -2246,7 +2246,7 @@ var handleBootboxAddEquipoToJugador = function () {
                                                     //updatePlayerForm();
                                                 }else{
                                                      bootbox.dialog({
-                                                        message: response.errores,
+                                                        message: response.errors,
                                                         title: "Error",
                                                         buttons: {
                                                             danger: {
@@ -2456,7 +2456,7 @@ var handleBootboxAddEquipoToJugador = function () {
                                                 }else{
                                                     console.log(responseServer);
                                                      bootbox.dialog({
-                                                        message:responseServer.errores,
+                                                        message:responseServer.errors,
                                                         title: "Error",
                                                         buttons: {
                                                             danger: {
@@ -2684,7 +2684,7 @@ var handleBootboxAddEquipoToJugador = function () {
                                                     //Reinicio el formulario
                                                 }else{
                                                      bootbox.dialog({
-                                                        message: responseServer.errores,
+                                                        message: responseServer.errors,
                                                         title: "Error",
                                                         buttons: {
                                                             danger: {
@@ -2917,7 +2917,7 @@ var handleBootboxAddEquipoToJugador = function () {
                                                 }else{
                                                     console.log(responseServer);
                                                      bootbox.dialog({
-                                                        message:responseServer.errores,
+                                                        message:responseServer.errors,
                                                         title: "Error",
                                                         buttons: {
                                                             danger: {
@@ -3485,7 +3485,7 @@ var handleBootboxAddEquipoToJugador = function () {
                                                 }else{
                                                     console.log(responseServer);
                                                      bootbox.dialog({
-                                                        message:responseServer.errores,
+                                                        message:responseServer.errors,
                                                         title: "Error",
                                                         buttons: {
                                                             danger: {
@@ -3629,7 +3629,7 @@ var handleBootboxAddEquipoToJugador = function () {
                                                     }else{
                                                         console.log(responseServer);
                                                          bootbox.dialog({
-                                                            message:responseServer.errores,
+                                                            message:responseServer.errors,
                                                             title: "Error",
                                                             buttons: {
                                                                 danger: {
@@ -3784,7 +3784,7 @@ var handleBootboxAddEquipoToJugador = function () {
                                                         //Reinicio el formulario
                                                         $("#add-game-to-group-form")[0].reset();
                                                     }else{
-                                                        var response = responseServer.errores ? responseServer.errores : 'Juego repetido'
+                                                        var response = responseServer.errors ? responseServer.errors : 'Juego repetido'
                                                         bootbox.dialog({
                                                             message: response,
                                                             title: "Error",

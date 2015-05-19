@@ -152,7 +152,6 @@ class PhaseController extends \BaseController {
 
 	public function addGroupApi()
 	{
-
 		if(Request::ajax())
 		{
 			$input = Input::all();
@@ -160,21 +159,17 @@ class PhaseController extends \BaseController {
 			{
 				$this->registerGroupForm->validate($input);
 				$group = $this->groupRepository->create($input);
-				$this->setSuccess(true);
-				$this->addToResponseArray('group', $group);
-				$this->addToResponseArray('data', $input);
-				return $this->getResponseArrayJson();					
+				$this->setSuccess(($group ? true : false));
+				$this->addToResponseArray('data', ($group ? $group : $input));				
 			}
 			catch (FormValidationException $e)
 			{
 				$this->setSuccess(false);
 				$this->addToResponseArray('data', $input);
-				$this->addToResponseArray('errores', $e->getErrors()->all());
-				return $this->getResponseArrayJson();
+				$this->addToResponseArray('errors', $e->getErrors()->all());
 			}
-			/*$this->setSuccess(true);
-			$this->addToResponseArray('data', $input);
-			return $this->getResponseArrayJson();*/
+			return $this->getResponseArrayJson();
+
 		}
 	}
 
