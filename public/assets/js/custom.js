@@ -3557,10 +3557,17 @@ var handleBootboxAddEquipoToJugador = function () {
 
     var handleBootboxAddTeamToGroupCompetition = function () {
 
-        $("button#add-team").on("click", function() {
-
+        $(".box-body").delegate(".teams", "click", function() {
             var groupId = $(this).attr('data-group-id');
             var phaseId = $(this).attr('data-phase-id');
+            console.log('group:'+groupId);
+            console.log('phaseId:'+phaseId);
+        });
+
+        $("button#add-team").on("click", function() {
+
+            /*var groupId = $(this).attr('data-group-id');
+            var phaseId = $(this).attr('data-phase-id');*/
             /*console.log('group:'+groupId);
             console.log('phaseId:'+phaseId);*/
             selectTeamsForCompetition('#new-teams-for-groups-ids',phaseId);
