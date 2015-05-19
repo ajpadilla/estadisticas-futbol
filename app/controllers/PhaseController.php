@@ -156,7 +156,7 @@ class PhaseController extends \BaseController {
 		if(Request::ajax())
 		{
 			$input = Input::all();
-			/*try
+			try
 			{
 				$this->registerGroupForm->validate($input);
 				$group = $this->groupRepository->create($input);
@@ -171,10 +171,10 @@ class PhaseController extends \BaseController {
 				$this->addToResponseArray('data', $input);
 				$this->addToResponseArray('errores', $e->getErrors()->all());
 				return $this->getResponseArrayJson();
-			}*/
-			$this->setSuccess(true);
+			}
+			/*$this->setSuccess(true);
 			$this->addToResponseArray('data', $input);
-			return $this->getResponseArrayJson();
+			return $this->getResponseArrayJson();*/
 		}
 	}
 
