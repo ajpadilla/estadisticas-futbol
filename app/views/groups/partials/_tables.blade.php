@@ -57,7 +57,7 @@
 															@else
 																<div class="col-md-12">
 															@endif
-																<button class="teams pull-right btn btn-lg btn-primary" id="add-team" href="{{ URL::route('groups.api.add.team') }}" competition-id="{{ $competition->id }}" data-group-id="{{ $group->id }}">Agregar equipo</button>
+																<button class="teams pull-right btn btn-lg btn-primary" id="add-team" href="{{ URL::route('groups.api.add.team') }}" competition-id="{{ $competition->id }}" data-group-id="{{ $group->id }}" data-phase-id="{{ $phase->id }}">Agregar equipo</button>
 															</div>							
 														@endif
 													</div>					
