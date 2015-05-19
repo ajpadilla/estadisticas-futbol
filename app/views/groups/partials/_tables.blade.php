@@ -23,7 +23,7 @@
 							@if(!$phase->isFull)
 								<div class="row">
 									<div class="col-md-2 col-md-offset-10">
-										<button class="pull-right btn btn-lg btn-primary" id="add-group" data-phase-id="{{ $phase->id }}" href="#">Agregar grupo</button>
+										<button class="group pull-right btn btn-lg btn-primary" id="add-group" data-phase-id="{{ $phase->id }}" href="#">Agregar grupo</button>
 									</div>
 								</div>
 								<div class="separator"></div>
