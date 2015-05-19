@@ -115,7 +115,7 @@ class GroupController extends \BaseController {
 		if(Request::ajax())
 		{
 			$input = Input::all();
-			try
+			/*try
 			{
 				$idGroup = (int)$input['group_id'];
 				$teams = $input['teams_ids'];
@@ -132,7 +132,12 @@ class GroupController extends \BaseController {
 				$this->addToResponseArray('data', $input);
 				$this->addToResponseArray('errors', $e->getErrors()->all());
 				return $this->getResponseArrayJson();
-			}
+			}*/
+
+			$this->setSuccess(true);
+			$this->addToResponseArray('group', $group = ['name' => 'grupo']);
+			$this->addToResponseArray('data', $input);
+			return $this->getResponseArrayJson();
 		}
 	}	
 
