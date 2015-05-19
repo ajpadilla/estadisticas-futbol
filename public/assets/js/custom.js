@@ -3383,8 +3383,7 @@ var handleBootboxAddEquipoToJugador = function () {
     }
 
 
-    var selectTeamsForCompetition = function(id,idPhase) {
-        var url = $('#list-teams-phase-competition').attr('href').split('%')[0]+idPhase;
+    var selectTeamsForCompetition = function(id,url) {
         //console.log(url);
             $.ajax({
                 type: 'GET',
@@ -3407,12 +3406,13 @@ var handleBootboxAddEquipoToJugador = function () {
     }
 
     var handleBootboxAddNewGroupToPhase = function () {
-        $('button#add-group').click(function () {
+        $('button.group').click(function () {
 
             var phaseId = $(this).attr('data-phase-id');
-            console.log(phaseId);
+            //console.log(phaseId);
+            var url = $('#list-teams-phase-competition').attr('href').split('%')[0]+phaseId;
+            selectTeamsForCompetition('#phase-new-teams-ids',url);
             addValidationRulesForms();
-            selectTeamsForCompetition('#phase-new-teams-ids',$(this).attr('data-phase-id'));
             $('#add-group-to-phase-form').validate({
                 rules:{
                     name:{
@@ -3551,20 +3551,14 @@ var handleBootboxAddEquipoToJugador = function () {
 
     var handleBootboxAddTeamToGroupCompetition = function () {
 
-        $(".box-body").delegate(".teams", "click", function() {
+        $("button.teams").on("click", function() {
+
             var groupId = $(this).attr('data-group-id');
             var phaseId = $(this).attr('data-phase-id');
-            console.log('group:'+groupId);
-            console.log('phaseId:'+phaseId);
-        });
-
-        $("button#add-team").on("click", function() {
-
-            /*var groupId = $(this).attr('data-group-id');
-            var phaseId = $(this).attr('data-phase-id');*/
+            var url = $('#list-teams-phase-competition').attr('href').split('%')[0]+phaseId;
             /*console.log('group:'+groupId);
             console.log('phaseId:'+phaseId);*/
-            selectTeamsForCompetition('#new-teams-for-groups-ids',phaseId);
+            selectTeamsForCompetition('#new-teams-for-groups-ids',url);
             addValidationRulesForms();
             $('#add-team-to-group-form').validate({
                     rules:{
@@ -3700,10 +3694,13 @@ var handleBootboxAddEquipoToJugador = function () {
     }
 
     var handleBootboxAddGameToGroupCompetition = function () {
-        $("button#add-game").on("click", function() {
+        $("button.games").on("click", function() {
 
             var groupId = $(this).attr('data-group-id');
-            getAvailableTeamsForGame();
+            //console.log(groupId);
+            var url = $('#teams-available-for-games').attr('href').split('%')[0]+groupId;
+            getAvailableTeamsForGame('#local-team-for-game',url);
+            getAvailableTeamsForGame('#away-team-for-game',url);
             $('#add-game-to-group-form').trigger('reset');
             addValidationRulesForms();
             $('#add-game-to-group-form').validate({
@@ -3878,9 +3875,7 @@ var handleBootboxAddEquipoToJugador = function () {
         });
      }
 
-     var getAvailableTeamsForGame = function () {
-        var url = $('#teams-available-for-games').attr('href').split('%')[0]+$('button#add-game').attr('data-group-id');
-        alert(url);
+     var getAvailableTeamsForGame = function (id,url) {
         //console.log(url);
         $.ajax({
             type: 'GET',
@@ -3889,23 +3884,17 @@ var handleBootboxAddEquipoToJugador = function () {
             success: function(response) {
                 var option = '<option value=\"\"></option>';
                 if (response.success == true) {
-                    $('#local-team-for-game').html('');
-                    $('#local-team-for-game').append(option);
-                    $('#away-team-for-game').html('');
-                    $('#away-team-for-game').append(option);
+                    $(id).html('');
+                    $(id).append(option);
                     $.each(response.data,function (k,v){
                         option = '<option value=\"'+v.id+'\">'+v.nombre+'</option>';
                         var chosenUpdate = 'chosen:updated';
-                        $('#local-team-for-game').append(option);
-                        $('#local-team-for-game').trigger(chosenUpdate);
-                        $('#away-team-for-game').append(option);
-                        $('#away-team-for-game').trigger(chosenUpdate);
+                        $(id).append(option);
+                        $(id).trigger(chosenUpdate);
                     });
                 }else{
-                    $('#local-team-for-game').html('');
-                    $('#local-team-for-game').append(option);
-                    $('#away-team-for-game').html('');
-                    $('#away-team-for-game').append(option);
+                    $(id).html('');
+                    $(id).append(option);
                 }
             }
         });
