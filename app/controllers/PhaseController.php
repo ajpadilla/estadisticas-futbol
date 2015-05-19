@@ -152,7 +152,6 @@ class PhaseController extends \BaseController {
 
 	public function addGroupApi()
 	{
-
 		if(Request::ajax())
 		{
 			$input = Input::all();
@@ -160,41 +159,31 @@ class PhaseController extends \BaseController {
 			{
 				$this->registerGroupForm->validate($input);
 				$group = $this->groupRepository->create($input);
-				$this->setSuccess(true);
-				$this->addToResponseArray('group', $group);
-				$this->addToResponseArray('data', $input);
-				return $this->getResponseArrayJson();					
+				$this->setSuccess(($group ? true : false));
+				$this->addToResponseArray('data', ($group ? $group : $input));				
 			}
 			catch (FormValidationException $e)
 			{
 				$this->setSuccess(false);
 				$this->addToResponseArray('data', $input);
-				$this->addToResponseArray('errores', $e->getErrors()->all());
-				return $this->getResponseArrayJson();
+				$this->addToResponseArray('errors', $e->getErrors()->all());
 			}
-			/*$this->setSuccess(true);
-			$this->addToResponseArray('data', $input);
-			return $this->getResponseArrayJson();*/
+			return $this->getResponseArrayJson();
+
 		}
 	}
 
 	public function getAvailableTeams($id)
 	{
-		$teams = ['1' => 'Mexico', '2' => 'Brasil'];
-		$this->setSuccess(true);
-		$this->addToResponseArray('teams', $teams);
-		return $this->getResponseArrayJson();
-		/*if(Request::ajax())
+		if(Request::ajax())
 		{
-			$teams = $this->repository->getAvailableTeams($id);
+			$teams = $this->repository->getAvailableTeamsForGroup($id);
 			$this->setSuccess(($teams ? true : false));
-			$this->addToResponseArray('data', $input);
-			if($teams)
-				$this->addToResponseArray('teams', $teams);
+			$this->addToResponseArray('data', ($teams ? $teams : array()));			
 		}else{
 			$this->setSuccess(false);
 		}
-		return $this->getResponseArrayJson();*/
+		return $this->getResponseArrayJson();
 	}	
 
 	public function getAllValue()

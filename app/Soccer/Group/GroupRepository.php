@@ -41,7 +41,6 @@ class GroupRepository extends BaseRepository
 	public function create($data = array())
 	{		
 		$group = $this->model->create($data); 
-
 		if($group) {
 			$teams = ( isset($data['teams_ids']) ? $data['teams_ids'] : array() );
 			if(!empty($teams)) {
@@ -59,15 +58,15 @@ class GroupRepository extends BaseRepository
 		if($group && !empty($teams)) {
 			if($group->totalMissingTeams < count($teams))
 				$teams = array_slice($teams, 0, $group->totalMissingTeams);
-
+			
 			$unavailableTeams = array();
 			foreach ($teams as $index => $team) 
 				if($this->teamExistInGroup($group->id, $team))
 					$unavailableTeams[] = $index;
-			
+
 			foreach ($unavailableTeams as $team) 
 				unset($teams[$team]);
-
+			
 			if(!empty($teams))
 				$group->teams()->attach($teams);
 			else
@@ -156,6 +155,13 @@ class GroupRepository extends BaseRepository
 			return $teams;
 		}
 		return false;
+	}
+
+	public function getGames($id)
+	{
+		$group = $this->get($id);
+		//dd($group->games->toArray());
+		return $group->games;
 	}
 
 	/*
@@ -296,6 +302,18 @@ class GroupRepository extends BaseRepository
 				return implode(" ", $teamRepository->getActionColumn());
 			});
 			return $teamRepository->getTableCollectionForRender();
+		}
+		return null;
+	}	
+
+	public function getDefaultTableForGroupGames($id)
+	{
+		$games = $this->getGames($id);
+		if($games) {
+			$gameRepository = new GameRepository;
+			$gameRepository->setDatatableCollection($games);
+			$gameRepository->setDefaultTableSettings();
+			return $gameRepository->getTableCollectionForRender();
 		}
 		return null;
 	}	

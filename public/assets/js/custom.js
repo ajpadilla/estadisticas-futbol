@@ -243,7 +243,7 @@ var CustomApp = function () {
                                                     updatePlayerForm();
                                                 }else{
                                                      bootbox.dialog({
-                                                        message: responseServer.errores,
+                                                        message: responseServer.errors,
                                                         title: "Error",
                                                         buttons: {
                                                             danger: {
@@ -494,7 +494,7 @@ var CustomApp = function () {
                                                 }else{
                                                     $('#player-form-div').show();
                                                      bootbox.dialog({
-                                                        message:responseServer.errores,
+                                                        message:responseServer.errors,
                                                         title: "Error",
                                                         buttons: {
                                                             danger: {
@@ -748,7 +748,7 @@ var CustomApp = function () {
                                                 }else{
                                                     console.log(responseServer);
                                                      bootbox.dialog({
-                                                        message:responseServer.errores,
+                                                        message:responseServer.errors,
                                                         title: "Error",
                                                         buttons: {
                                                             danger: {
@@ -956,7 +956,7 @@ var CustomApp = function () {
                                                     //Reinicio el formulario
                                                 }else{
                                                      bootbox.dialog({
-                                                        message: responseServer.errores,
+                                                        message: responseServer.errors,
                                                         title: "Error",
                                                         buttons: {
                                                             danger: {
@@ -1667,7 +1667,7 @@ var CustomApp = function () {
                                                 }else{
                                                     console.log(responseServer);
                                                      bootbox.dialog({
-                                                        message:responseServer.errores,
+                                                        message:responseServer.errors,
                                                         title: "Error",
                                                         buttons: {
                                                             danger: {
@@ -1841,7 +1841,7 @@ var CustomApp = function () {
                                                     //Reinicio el formulario
                                                 }else{
                                                      bootbox.dialog({
-                                                        message: responseServer.errores,
+                                                        message: responseServer.errors,
                                                         title: "Error",
                                                         buttons: {
                                                             danger: {
@@ -2066,7 +2066,7 @@ var handleBootboxAddJugadorToEquipo = function () {
                                                     //updatePlayerForm();
                                                 }else{
                                                      bootbox.dialog({
-                                                        message: response.errores,
+                                                        message: response.errors,
                                                         title: "Error",
                                                         buttons: {
                                                             danger: {
@@ -2246,7 +2246,7 @@ var handleBootboxAddEquipoToJugador = function () {
                                                     //updatePlayerForm();
                                                 }else{
                                                      bootbox.dialog({
-                                                        message: response.errores,
+                                                        message: response.errors,
                                                         title: "Error",
                                                         buttons: {
                                                             danger: {
@@ -2456,7 +2456,7 @@ var handleBootboxAddEquipoToJugador = function () {
                                                 }else{
                                                     console.log(responseServer);
                                                      bootbox.dialog({
-                                                        message:responseServer.errores,
+                                                        message:responseServer.errors,
                                                         title: "Error",
                                                         buttons: {
                                                             danger: {
@@ -2684,7 +2684,7 @@ var handleBootboxAddEquipoToJugador = function () {
                                                     //Reinicio el formulario
                                                 }else{
                                                      bootbox.dialog({
-                                                        message: responseServer.errores,
+                                                        message: responseServer.errors,
                                                         title: "Error",
                                                         buttons: {
                                                             danger: {
@@ -2917,7 +2917,7 @@ var handleBootboxAddEquipoToJugador = function () {
                                                 }else{
                                                     console.log(responseServer);
                                                      bootbox.dialog({
-                                                        message:responseServer.errores,
+                                                        message:responseServer.errors,
                                                         title: "Error",
                                                         buttons: {
                                                             danger: {
@@ -3102,6 +3102,7 @@ var handleBootboxAddEquipoToJugador = function () {
         $(".datepicker-time").datetimepicker({
             lang: 'es',
             timepicker: true,
+            step: 5,
             format: 'Y-m-d H:i',
             yearStart: '1850',
             todayButton: true,
@@ -3390,12 +3391,11 @@ var handleBootboxAddEquipoToJugador = function () {
                 url: url,
                 dataType:'json',
                 success: function(response) {
-                    console.log(response);
                     if (response.success == true) {
                         jQuery(id).html('');
                         jQuery(id).append('<option value=\"\"></option>');
-                        $.each(response.teams,function (k,v){
-                            $(id).append('<option value=\"'+k+'\">'+v+'</option>');
+                        $.each(response.data, function (k, team){
+                            $(id).append('<option value=\"'+team.id+'\">'+team.name+'</option>');
                             $(id).trigger("chosen:updated");
                         });
                     }else{
@@ -3418,18 +3418,12 @@ var handleBootboxAddEquipoToJugador = function () {
                     name:{
                         required:true,
                         rangelength: [2, 128],
-                    },
-                    'teams_ids[]':{
-                        required: true
                     }
                 },
                 messages:{
                     nombre:{
                         required:'Este campo es obligatorio.',
                         rangelength: 'Por favor ingrese entre [2, 128] caracteres',
-                    },
-                    teams_ids:{
-                        required:'Este campo es obligatorio.',
                     }
                 },
                 highlight:function(element){
@@ -3492,7 +3486,7 @@ var handleBootboxAddEquipoToJugador = function () {
                                                 }else{
                                                     console.log(responseServer);
                                                      bootbox.dialog({
-                                                        message:responseServer.errores,
+                                                        message:responseServer.errors,
                                                         title: "Error",
                                                         buttons: {
                                                             danger: {
@@ -3621,14 +3615,14 @@ var handleBootboxAddEquipoToJugador = function () {
                                                     {
                                                         // Muestro otro dialog con información de éxito
                                                         bootbox.dialog({
-                                                            message: responseServer.group.name + " Ha sido actualizado correctamente!",
+                                                            message: responseServer.data.name + " Ha sido actualizado correctamente!",
                                                             title: "Éxito",
                                                             buttons: {
                                                                 success: {
                                                                     label: "Success!",
                                                                     className: "btn-success",
                                                                     callback: function () {
-                                                                        reloadDatatable('#datatable-'+groupId);
+                                                                        reloadDatatable('#datatable-' + groupId);
                                                                     }
                                                                 }
                                                             }
@@ -3643,7 +3637,7 @@ var handleBootboxAddEquipoToJugador = function () {
                                                     }else{
                                                         console.log(responseServer);
                                                          bootbox.dialog({
-                                                            message:responseServer.errores,
+                                                            message:responseServer.errors,
                                                             title: "Error",
                                                             buttons: {
                                                                 danger: {
@@ -3798,7 +3792,7 @@ var handleBootboxAddEquipoToJugador = function () {
                                                         //Reinicio el formulario
                                                         $("#add-game-to-group-form")[0].reset();
                                                     }else{
-                                                        var response = responseServer.errores ? responseServer.errores : 'Juego repetido'
+                                                        var response = responseServer.errors ? responseServer.errors : 'Juego repetido'
                                                         bootbox.dialog({
                                                             message: response,
                                                             title: "Error",
@@ -3886,29 +3880,32 @@ var handleBootboxAddEquipoToJugador = function () {
 
      var getAvailableTeamsForGame = function () {
         var url = $('#teams-available-for-games').attr('href').split('%')[0]+$('button#add-game').attr('data-group-id');
+        alert(url);
         //console.log(url);
         $.ajax({
             type: 'GET',
             url: url,
             dataType:'json',
             success: function(response) {
-                console.log(response.teams);
+                var option = '<option value=\"\"></option>';
                 if (response.success == true) {
                     $('#local-team-for-game').html('');
-                    $('#local-team-for-game').append('<option value=\"\"></option>');
+                    $('#local-team-for-game').append(option);
                     $('#away-team-for-game').html('');
-                    $('#away-team-for-game').append('<option value=\"\"></option>');
-                    $.each(response.teams,function (k,v){
-                        $('#local-team-for-game').append('<option value=\"'+v.id+'\">'+v.nombre+'</option>');
-                        $('#local-team-for-game').trigger("chosen:updated");
-                        $('#away-team-for-game').append('<option value=\"'+v.id+'\">'+v.nombre+'</option>');
-                        $('#away-team-for-game').trigger("chosen:updated");
+                    $('#away-team-for-game').append(option);
+                    $.each(response.data,function (k,v){
+                        option = '<option value=\"'+v.id+'\">'+v.nombre+'</option>';
+                        var chosenUpdate = 'chosen:updated';
+                        $('#local-team-for-game').append(option);
+                        $('#local-team-for-game').trigger(chosenUpdate);
+                        $('#away-team-for-game').append(option);
+                        $('#away-team-for-game').trigger(chosenUpdate);
                     });
                 }else{
                     $('#local-team-for-game').html('');
-                    $('#local-team-for-game').append('<option value=\"\"></option>');
+                    $('#local-team-for-game').append(option);
                     $('#away-team-for-game').html('');
-                    $('#away-team-for-game').append('<option value=\"\"></option>');
+                    $('#away-team-for-game').append(option);
                 }
             }
         });
@@ -3986,6 +3983,7 @@ var handleBootboxAddEquipoToJugador = function () {
                                                                     label: "Success!",
                                                                     className: "btn-success",
                                                                     callback: function () {
+                                                                        location.reload();
                                                                         //reloadDatatable('#datatable-' + $('button#add-game').attr('data-group-id'));
                                                                     }
                                                                 }
