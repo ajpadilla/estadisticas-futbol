@@ -3417,18 +3417,12 @@ var handleBootboxAddEquipoToJugador = function () {
                     name:{
                         required:true,
                         rangelength: [2, 128],
-                    },
-                    'teams_ids[]':{
-                        required: true
                     }
                 },
                 messages:{
                     nombre:{
                         required:'Este campo es obligatorio.',
                         rangelength: 'Por favor ingrese entre [2, 128] caracteres',
-                    },
-                    teams_ids:{
-                        required:'Este campo es obligatorio.',
                     }
                 },
                 highlight:function(element){
@@ -3978,6 +3972,7 @@ var handleBootboxAddEquipoToJugador = function () {
                                                                     label: "Success!",
                                                                     className: "btn-success",
                                                                     callback: function () {
+                                                                        location.reload();
                                                                         //reloadDatatable('#datatable-' + $('button#add-game').attr('data-group-id'));
                                                                     }
                                                                 }
