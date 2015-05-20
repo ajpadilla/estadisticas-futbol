@@ -144,6 +144,7 @@ Route::get('competencias/api-equipos-disponibles/{id}', ['as' => 'competitions.a
 */
 Route::post('fases/api-agregar-grupo',  ['as' => 'phases.api.add.group','uses' => 'PhaseController@addGroupApi' ] );
 Route::get('fases/api-equipos-disponibles-grupo/{id}', ['as' => 'phases.api.teams.availables.group', 'uses' => 'PhaseController@getAvailableTeams']);
+
 /*
 ********************************* PATH FOR GROUPS ********************************
 */
@@ -154,3 +155,10 @@ Route::get('grupos/api-existe-juego/{id}/{localTeam}/{awayTeam}', ['as' => 'grou
 Route::get('grupos/api-lista-grupo/{id}', ['as' => 'groups.api.list.group', 'uses' => 'GroupController@listGroupApi']);
 Route::get('grupos/api-equipos-disponibles-juego/{id}', ['as' => 'groups.api.teams.availables.game', 'uses' => 'GroupController@getAvailableTeamsForGame']);
 
+/*
+********************************* GAME FOR GROUPS ********************************
+*/
+Route::post('games/api-agregar-alineacion', ['as' => 'games.api.add.alignment', 'uses' => 'GameController@addAlignmentApi']);
+Route::post('games/api-agregar-cambio', ['as' => 'games.api.add.change', 'uses' => 'GameController@addChangeApi']);
+Route::post('games/api-agregar-gol', ['as' => 'games.api.add.goal', 'uses' => 'GameController@addGoalApi']);
+Route::post('games/api-agregar-sancion', ['as' => 'games.api.add.sanction', 'uses' => 'GameController@addSantionApi']);

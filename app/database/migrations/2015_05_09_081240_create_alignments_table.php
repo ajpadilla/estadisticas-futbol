@@ -20,7 +20,9 @@ class CreateAlignmentsTable extends Migration {
 			$table->integer('team_id')->unsigned();
 			$table->foreign('team_id')->references('id')->on('equipos')->onDelete('cascade');
 			$table->integer('player_id')->unsigned();
-			$table->foreign('player_id')->references('id')->on('players')->onDelete('cascade');
+			$table->foreign('player_id')->references('id')->on('players')->onDelete('cascade');			
+			$table->integer('position_id')->unsigned();
+			$table->foreign('position_id')->references('id')->on('posiciones')->onDelete('cascade');
 			$table->integer('type_id')->unsigned();
 			$table->foreign('type_id')->references('id')->on('alignment_types')->onDelete('cascade');
 			$table->timestamps();
