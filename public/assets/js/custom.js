@@ -4055,7 +4055,7 @@ var handleBootboxAddEquipoToJugador = function () {
             url: url,
             dataType:'json',
             success: function(response) {
-                console.log(response.teams);
+                //console.log(response.teams);
                 var option = '<option value=\"\"></option>';
                 if (response.success == true) {
                     $(idField).html('');
@@ -4078,13 +4078,13 @@ var handleBootboxAddEquipoToJugador = function () {
         $('#teams-for-games-id').change(function () {
             var teamId = $(this).val();
             var url = $('#players-for-games').attr('href').split('%')[0]+gameId+'/'+teamId;
-            console.log(url);
+            //console.log(url);
             $.ajax({
                 type: 'GET',
                 url: url,
                 dataType:'json',
                 success: function(response) {
-                    console.log(response);
+                    //console.log(response);
                     var option = '<option value=\"\"></option>';
                     if (response.success == true) {
                         $(idField).html('');
