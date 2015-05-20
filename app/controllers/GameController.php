@@ -1,18 +1,30 @@
 <?php
 
 use soccer\Game\GameRepository;
+use soccer\Game\Goal\GoalRepository;
 use soccer\Forms\RegisterGameForm;
+use soccer\Forms\RegisterGoalForm;
+use soccer\Forms\AvailablePlayersForTeamForm;
 use Laracasts\Validation\FormValidationException;
 
 class GameController extends \BaseController {
 
 	protected $repository;
 	protected $registerGameForm;
+	protected $availablePlayersForTeamForm;
+	protected $goalRepository;
+	protected $registerGoalForm;
 
 	public function __construct(GameRepository $repository,
-			RegisterGameForm $registerGameForm){
+			RegisterGameForm $registerGameForm,
+			AvailablePlayersForTeamForm $availablePlayersForTeamForm,
+			GoalRepository $goalRepository,
+			RegisterGoalForm $registerGoalForm){
 		$this->repository = $repository;
 		$this->registerGameForm = $registerGameForm;
+		$this->availablePlayersForTeamForm = $availablePlayersForTeamForm;
+		$this->goalRepository = $goalRepository;
+		$this->registerGoalForm = $registerGoalForm;
 	}
 
 	/**
@@ -135,5 +147,64 @@ class GameController extends \BaseController {
 			return $this->getResponseArrayJson();
 		}
 	}
+
+	public function getAvailablePlayersForTeam($id, $teamId)
+	{
+		if (Request::ajax()) 
+		{
+			/*$this->addToResponseArray('players', []);
+			return $this->getResponseArrayJson();*/
+
+			$input = [];
+			$input['id'] = $id;
+			$input['teamId'] = $teamId;
+			try
+			{
+				$this->availablePlayersForTeamForm->validate($input);
+				$players = $this->repository->availablePlayersForTeam($id, $teamId);
+				if(count($players) > 0) {
+					$this->setSuccess(true);
+					$this->addToResponseArray('players', $players);
+					return $this->getResponseArrayJson();
+				}else{
+					$this->setSuccess(false);
+					return $this->getResponseArrayJson();
+				}
+			}
+			catch (FormValidationException $e)
+			{
+				$this->addToResponseArray('errors', $e->getErrors()->all());
+				return $this->getResponseArrayJson();
+			}
+		}else{
+			$this->setSuccess(false);
+			return $this->getResponseArrayJson();
+		}
+	}
+
+	
+	public function addGoalApi()
+	{
+		if(Request::ajax())
+		{
+			$input = Input::all();
+			try
+			{
+				$this->registerGoalForm->validate($input);
+				$goal = $this->goalRepository->create($input);
+				$this->setSuccess(true);
+				$this->addToResponseArray('goal', $goal);
+				$this->addToResponseArray('data', $input);
+				return $this->getResponseArrayJson();
+			}
+			catch (FormValidationException $e)
+			{
+				$this->setSuccess(false);
+				$this->addToResponseArray('errors', $e->getErrors()->all());
+				return $this->getResponseArrayJson();				
+			}
+		}
+	}
+
 
 }
