@@ -1,0 +1,22 @@
+<div class="row">
+	<?php if($competition->hasGames): ?>
+		<div class="col-md-12 box-container ui-sortable">
+			<!-- BOX -->
+			<div class="box">
+				<div class="box-title">
+					<h4><i class="fa fa-bars"></i><span class="hidden-inline-mobile">Fases</span></h4>
+				</div>
+				<div class="box-body">
+					<div class="tabbable header-tabs">
+						<?php echo $__env->make('competitions.partials._phases-tabs', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>				
+						<?php echo $__env->make('competitions.partials._phases-content-tab', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
+					</div>
+				</div>
+			</div>
+			<!-- /BOX -->
+		</div>
+	<?php else: ?>
+		<div class="col-md-12"><h1>Competencia sin partidos!</h1></div>
+	<?php endif; ?>
+</div>	
+

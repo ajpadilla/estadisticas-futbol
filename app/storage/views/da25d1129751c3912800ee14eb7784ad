@@ -1,0 +1,7 @@
+<?php $__env->startSection('title-modal'); ?>
+	Nuevo Pais
+<?php $__env->stopSection(); ?>
+
+<div id="new-country-form" style="display:none">
+	<?php echo $__env->make('paises.partials._form', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
+</div>
