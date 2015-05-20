@@ -30,7 +30,6 @@ Route::get('/', [
 */
 
 Route::get('jugadores', ['as' => 'players.index', 'uses' => 'PlayerController@index']);
-
 Route::get('jugadores/nuevo', ['as' => 'players.create', 'uses' => 'PlayerController@create'] );
 Route::post('jugadores/guardar', ['as' => 'players.store', 'uses' => 'PlayerController@store' ] );
 Route::get('jugadores/ver/{id}', ['as' => 'players.show', 'uses' => 'PlayerController@show' ] );
@@ -158,10 +157,14 @@ Route::get('grupos/api-equipos-disponibles-juego/{id}', ['as' => 'groups.api.tea
 /*
 ********************************* GAME FOR GROUPS ********************************
 */
+
+
+Route::get('juegos/ver/{id}', ['as' => 'games.show', 'uses' => 'GameController@show' ] );
 Route::post('juegos/api-agregar-alineacion', ['as' => 'games.api.add.alignment', 'uses' => 'GameController@addAlignmentApi']);
 Route::post('juegos/api-agregar-cambio', ['as' => 'games.api.add.change', 'uses' => 'GameController@addChangeApi']);
 Route::post('juegos/api-agregar-gol', ['as' => 'games.api.add.goal', 'uses' => 'GameController@addGoalApi']);
 Route::post('juegos/api-agregar-sancion', ['as' => 'games.api.add.sanction', 'uses' => 'GameController@addSantionApi']);
+
 Route::get('juegos/api-equipos-disponibles-juego/{id}', ['as' => 'games.api.teams.availables.game', 'uses' => 'GameController@getAvailableTeams']);
 Route::get('juegos/api-jugadores-disponible-equipo/{id}/{teamId}', ['as' => 'games.api.available.players.team', 'uses' => 'GameController@getAvailablePlayersForTeam']);
 /*
@@ -169,3 +172,4 @@ Route::get('juegos/api-jugadores-disponible-equipo/{id}/{teamId}', ['as' => 'gam
 */
 
 Route::get('tipo-goles/api-seleccionar-lista',  ['as' => 'goal-types.api.select.list','uses' => 'GoalTypeController@getAllValue' ] );
+

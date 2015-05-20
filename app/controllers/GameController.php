@@ -86,7 +86,8 @@ class GameController extends \BaseController {
 	 */
 	public function show($id)
 	{
-		//
+		$game = $this->repository->get($id);
+		return View::make('games.show', compact('game'));
 	}
 
 	/**

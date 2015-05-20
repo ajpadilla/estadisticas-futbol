@@ -63,12 +63,12 @@
 					   <!-- /JUGADORES -->
 
 					   <!-- PARTIDOS TAB -->
-					   <div class="tab-pane fade" id="pro_games">
+					   {{-- <div class="tab-pane fade" id="pro_games">
 						  <!-- FAQ -->
 							<div class="row">
 								
 							</div>
-					   </div>
+					   </div> --}}
 					   <!-- /PARTIDOS -->					   
 					</div>
 				</div>
