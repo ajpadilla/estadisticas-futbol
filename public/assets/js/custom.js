@@ -3901,8 +3901,8 @@ var handleBootboxAddEquipoToJugador = function () {
      }
 
 
-     var handleBootboxAddPhaseToCompetition = function (argument) {
-        $('button#add-phase').click(function (argument) {
+     var handleBootboxAddPhaseToCompetition = function () {
+        $('button#add-phase').click(function () {
 
             $('#add-phase-to-competition-form').trigger('reset');
 
@@ -4047,6 +4047,225 @@ var handleBootboxAddEquipoToJugador = function () {
      }
 
 
+     var getTeamsForGames = function  (idField, url) 
+     {
+        //console.log(url);
+         $.ajax({
+            type: 'GET',
+            url: url,
+            dataType:'json',
+            success: function(response) {
+                console.log(response.teams);
+                var option = '<option value=\"\"></option>';
+                if (response.success == true) {
+                    $(idField).html('');
+                    $(idField).append(option);
+                    $.each(response.teams,function (index,object){
+                        option = '<option value=\"'+object.id+'\">'+object.nombre+'</option>';
+                        var chosenUpdate = 'chosen:updated';
+                        $(idField).append(option);
+                        $(idField).trigger(chosenUpdate);
+                    });
+                }else{
+                    $(idField).html('');
+                    $(idField).append(option);
+                }
+            }
+        });
+     }
+
+     var getAvailablePlayersForGame = function (idField,gameId) {
+        $('#teams-for-games-id').change(function () {
+            var teamId = $(this).val();
+            var url = $('#players-for-games').attr('href').split('%')[0]+gameId+'/'+teamId;
+            console.log(url);
+            $.ajax({
+                type: 'GET',
+                url: url,
+                dataType:'json',
+                success: function(response) {
+                    console.log(response);
+                    var option = '<option value=\"\"></option>';
+                    if (response.success == true) {
+                        $(idField).html('');
+                        $(idField).append(option);
+                        $.each(response.players,function (index,object){
+                            option = '<option value=\"'+index+'\">'+object+'</option>';
+                            var chosenUpdate = 'chosen:updated';
+                            $(idField).append(option);
+                            $(idField).trigger(chosenUpdate);
+                        });
+                    }else{
+                        $(idField).html('');
+                        $(idField).append(option);
+                    }
+                }
+            });
+        });
+     }
+
+     var handleBootboxAddGoalToGame = function () {
+
+         $(".table").delegate(".add-goal", "click", function() {
+
+            /*console.log('Gol');
+            console.log($(this).attr('id'));
+            console.log($(this).attr('id').split('-')[2]);*/
+
+            var gameId = $(this).attr('id').split('-')[2];
+            var url = $('#teams-for-games').attr('href').split('%')[0]+gameId;
+
+            getTeamsForGames('#teams-for-games-id',url);
+            getAvailablePlayersForGame('#player-for-game-id', gameId);
+            getAvailablePlayersForGame('#assistance-for-game-id', gameId);
+
+            loadFieldSelect($('#list-of-goal-types').attr('href'),'#goal-types-for-games-id');
+            addValidationRulesForms();
+            $('#add-goals-to-game-form').trigger('reset');
+            $('#add-goals-to-game-form').validate({
+                rules:{
+                    name:{
+                        required: true
+                    },
+                    format_id:{
+                        required: true
+                    }
+                },
+                messages:{
+                    name:{
+                        required: 'Este campo es obligatorio'
+                    },
+                    format_id:{
+                         required: 'Este campo es obligatorio'
+                    }
+                },
+                highlight:function(element){
+                    $(element).closest('.form-group').removeClass('has-success').addClass('has-error');
+                },
+                unhighlight:function(element){
+                    $(element).closest('.form-group').removeClass('has-error');
+                },
+                success:function(element){
+                    element.addClass('valid').closest('.form-group').removeClass('has-error').addClass('has-success');
+                },
+            });
+
+                
+            bootbox.dialog({
+                        message: $('#add-goals-to-game-form-div-box'),
+                        buttons: {
+                            success: {
+                                label: "Agregar",
+                                className: "btn-primary",
+                                callback: function () 
+                                {
+                                    if($('#add-goals-to-game-form').valid()) 
+                                    {
+                                        $("#add-goals-to-game-form").submit(function(e){
+                                            var formData = {
+                                                observations: $('#observations-game').val(),
+                                                minute: $('#minute-game').val(),
+                                                second: $('#second-game').val(),
+                                                type_id: $('#goal-types-for-games-id').val(),
+                                                game_id: gameId,
+                                                team_id: $('#teams-for-games-id').val(),
+                                                player_id: $('#player-for-game-id').val(),
+                                                assistance_id: $('#assistance-for-game-id').val()
+                                            };
+                                            $.ajax({
+                                                type: 'POST',
+                                                url: $('#add-new-goal-for-game').attr('href'), 
+                                                data: formData,
+                                                dataType: "JSON",
+                                                success: function(responseServer) {
+                                                    console.log(responseServer);
+                                                    if(responseServer.success) 
+                                                    {
+                                                        // Muestro otro dialog con información de éxito
+                                                        bootbox.dialog({
+                                                            message:"Gol agregado correctamente!",
+                                                            title: "Éxito",
+                                                            buttons: {
+                                                                success: {
+                                                                    label: "Success!",
+                                                                    className: "btn-success",
+                                                                    callback: function () {
+                                                                        location.reload();
+                                                                        //reloadDatatable('#datatable-' + $('button#add-game').attr('data-group-id'));
+                                                                    }
+                                                                }
+                                                            }
+                                                        });
+                                                        // Limpio cada elemento de las clases añadidas por el validator
+                                                        $('#add-goals-to-game-form div').each(function(){
+                                                            cleanValidatorClasses(this);
+                                                        });
+                                                        //Reinicio el formulario
+                                                        $("#add-goals-to-game-form")[0].reset();
+                                                    }else{
+                                                        bootbox.dialog({
+                                                            message: responseServer.errors,
+                                                            title: "Error",
+                                                            buttons: {
+                                                                danger: {
+                                                                    label: "Danger!",
+                                                                    className: "btn-danger"
+                                                                }
+                                                            }
+                                                        });
+                                                        $('#add-goals-to-game-form div').each(function(){
+                                                            cleanValidatorClasses(this);
+                                                        });
+                                                    }
+                                                },
+                                                error: function(jqXHR, textStatus, errorThrown) {
+                                                   console.log(errorThrown);
+                                                   bootbox.dialog({
+                                                            message:" ¡Error al enviar datos al servidor!",
+                                                            title: "Error",
+                                                            buttons: {
+                                                                danger: {
+                                                                    label: "Danger!",
+                                                                    className: "btn-danger"
+                                                                }
+                                                            }
+                                                        });
+                                                        // Limpio cada elemento de las clases añadidas por el validator
+                                                        $('#add-goals-to-game-form div').each(function(){
+                                                            cleanValidatorClasses(this);
+                                                        });
+                                                        //Reinicio el formulario*/
+                                                }
+                                            });
+                                            e.preventDefault(); //Prevent Default action.
+                                            $(this).unbind('submit');
+                                        }); 
+                                        $("#add-goals-to-game-form").submit();
+                                    }else{
+                                        return false;
+                                    }
+                                    return false;
+                                }
+                            }
+                        },
+                            show: false // We will show it manually later
+                        })
+                    .on('shown.bs.modal', function() {
+                        $('#add-goals-to-game-form-div-box')
+                                .show();                             // Show the form
+                            })
+                    .on('hide.bs.modal', function(e) {
+                        // Bootbox will remove the modal (including the body which contains the form)
+                        // after hiding the modal
+                        // Therefor, we need to backup the form
+                        $('#add-goals-to-game-form-div-box').hide().appendTo('#add-goals-to-game');
+                    })
+                    .modal('show');
+
+        });
+     }
+
+
     return {
         init: function() {
             initChosen();
@@ -4088,6 +4307,7 @@ var handleBootboxAddEquipoToJugador = function () {
             handleBootboxAddPhaseToCompetition();
             handleBootboxAddNewGroupToPhase();
             handleBootboxAddTeamToGroupCompetition();
+            handleBootboxAddGoalToGame();
             //Plugins init
             //handleFechaDateTimePicker();
             handleDatePicker();
