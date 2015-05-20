@@ -30,7 +30,6 @@ Route::get('/', [
 */
 
 Route::get('jugadores', ['as' => 'players.index', 'uses' => 'PlayerController@index']);
-
 Route::get('jugadores/nuevo', ['as' => 'players.create', 'uses' => 'PlayerController@create'] );
 Route::post('jugadores/guardar', ['as' => 'players.store', 'uses' => 'PlayerController@store' ] );
 Route::get('jugadores/ver/{id}', ['as' => 'players.show', 'uses' => 'PlayerController@show' ] );
@@ -158,7 +157,9 @@ Route::get('grupos/api-equipos-disponibles-juego/{id}', ['as' => 'groups.api.tea
 /*
 ********************************* GAME FOR GROUPS ********************************
 */
-Route::post('games/api-agregar-alineacion', ['as' => 'games.api.add.alignment', 'uses' => 'GameController@addAlignmentApi']);
-Route::post('games/api-agregar-cambio', ['as' => 'games.api.add.change', 'uses' => 'GameController@addChangeApi']);
-Route::post('games/api-agregar-gol', ['as' => 'games.api.add.goal', 'uses' => 'GameController@addGoalApi']);
-Route::post('games/api-agregar-sancion', ['as' => 'games.api.add.sanction', 'uses' => 'GameController@addSantionApi']);
+
+Route::get('juegos/ver/{id}', ['as' => 'games.show', 'uses' => 'GameController@show' ] );
+Route::post('juegos/api-agregar-alineacion', ['as' => 'games.api.add.alignment', 'uses' => 'GameController@addAlignmentApi']);
+Route::post('juegos/api-agregar-cambio', ['as' => 'games.api.add.change', 'uses' => 'GameController@addChangeApi']);
+Route::post('juegos/api-agregar-gol', ['as' => 'games.api.add.goal', 'uses' => 'GameController@addGoalApi']);
+Route::post('juegos/api-agregar-sancion', ['as' => 'games.api.add.sanction', 'uses' => 'GameController@addSantionApi']);
