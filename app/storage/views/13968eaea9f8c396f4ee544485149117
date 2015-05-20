@@ -5,7 +5,7 @@
 			<h4><i class="fa fa-user"></i><span class="hidden-inline-mobile">Agregar Goles</span></h4>
 		</div>
 		<div class="box-body">
-			<?php echo Form::open(['route' => ['groups.api.add.team'], 'class' => 'form-horizontal', 'role' => 'form', 'id' => 'add-goals-to-game-form']); ?>
+			<?php echo Form::open(['route' => ['games.api.add.goal'], 'class' => 'form-horizontal', 'role' => 'form', 'id' => 'add-goals-to-game-form']); ?>
 
 
 			<div class="form-group">
@@ -18,18 +18,18 @@
 			</div>
 
 			<div class="form-group">
-			<?php echo Form::label('minuto','Minuto',['class'=>'col-sm-2 control-label']); ?>
+			<?php echo Form::label('minute','Minuto',['class'=>'col-sm-2 control-label']); ?>
 
 				<div class="col-sm-6">
-				<?php echo Form::text('minuto',null, ['class' => 'form-control','id' => 'minute-game']); ?>
+				<?php echo Form::text('minute',null, ['class' => 'form-control','id' => 'minute-game']); ?>
 
 				</div>
 			</div>
 			<div class="form-group">
-				<?php echo Form::label('segundo','Segundo',['class'=>'col-sm-2 control-label']); ?>
+				<?php echo Form::label('second','Segundo',['class'=>'col-sm-2 control-label']); ?>
 
 				<div class="col-sm-6">
-					<?php echo Form::text('segundo',null, ['class' => 'form-control','id' => 'second-game']); ?>
+					<?php echo Form::text('second',null, ['class' => 'form-control','id' => 'second-game']); ?>
 
 				</div>
 			</div>
@@ -38,22 +38,22 @@
 				<?php echo Form::label('type_id','Tipo de gol',['class'=>'col-md-2 control-label']); ?>
 
 				<div class="col-md-6">
-					<?php echo Form::select('type_id',[],null,['class' => 'form-control chosen-select','data-placeholder' => 'Escoger Tipo...','id'=>'type-goal-for-games-id']); ?>
+					<?php echo Form::select('type_id',[],null,['class' => 'form-control chosen-select','data-placeholder' => 'Escoger Tipo...','id'=>'goal-types-for-games-id']); ?>
 
 				</div>
 			</div>
 
 			<div class="form-group">
-				<?php echo Form::label('teams_id','Equipo',['class'=>'col-md-2 control-label']); ?>
+				<?php echo Form::label('team_id','Equipo',['class'=>'col-md-2 control-label']); ?>
 
 				<div class="col-md-6">
-					<?php echo Form::select('teams_id',[],null,['class' => 'form-control chosen-select','data-placeholder' => 'Escoger Equipo...','id'=>'teams-for-games-id']); ?>
+					<?php echo Form::select('team_id',[],null,['class' => 'form-control chosen-select','data-placeholder' => 'Escoger Equipo...','id'=>'teams-for-games-id']); ?>
 
 				</div>
 			</div>	
 
 			<div class="form-group">
-				<?php echo Form::label('player_id','Jugadores',['class'=>'col-md-2 control-label']); ?>
+				<?php echo Form::label('player_id','Jugador',['class'=>'col-md-2 control-label']); ?>
 
 				<div class="col-md-6">
 					<?php echo Form::select('player_id',[],null,['class' => 'form-control chosen-select','data-placeholder' => 'Escoger Jugadores...','id'=>'player-for-game-id']); ?>
@@ -62,10 +62,10 @@
 			</div>
 
 			<div class="form-group">
-				<?php echo Form::label('player_id','Asistencia',['class'=>'col-md-2 control-label']); ?>
+				<?php echo Form::label('assistance_id','Asistencia',['class'=>'col-md-2 control-label']); ?>
 
 				<div class="col-md-6">
-					<?php echo Form::select('player_id',[],null,['class' => 'form-control chosen-select','data-placeholder' => 'Escoger Jugadores...','id'=>'player-for-game-id']); ?>
+					<?php echo Form::select('assistance_id',[],null,['class' => 'form-control chosen-select','data-placeholder' => 'Escoger Jugadores...','id'=>'assistance-for-game-id']); ?>
 
 				</div>
 			</div>
