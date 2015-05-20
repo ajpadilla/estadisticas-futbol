@@ -2,6 +2,7 @@
 
 use soccer\Game\Game;
 use soccer\Base\BaseRepository;
+use soccer\Equipo\EquipoRepository;
 use Carbon\Carbon;
 use Datatable;
 use Illuminate\Database\Eloquent\Collection;
@@ -97,4 +98,15 @@ class GameRepository extends BaseRepository
 			 return $model->status;
 		});	
 	}	
+
+	public function availableTeams($id)
+	{
+		$teamsIds = [];
+		$game = $this->get($id);
+		$teamsIds[0] = $game->local_team_id;
+		$teamsIds[1] = $game->away_team_id;
+		$teamRepository = new EquipoRepository;
+		$teams = $teamRepository->getModel()->select()->whereIn('id', $teamsIds)->get();
+		return $teams;
+	}
 }
