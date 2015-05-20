@@ -117,4 +117,23 @@ class GameController extends \BaseController {
 	************************** API METHODS *****************************
 	*/	
 
+	public function getAvailableTeams($id)
+	{
+		if (Request::ajax()) 
+		{
+			$teams = $this->repository->availableTeams($id);
+			if (count($teams) > 0) {
+				$this->setSuccess(true);
+				$this->addToResponseArray('teams', $teams);
+				return $this->getResponseArrayJson();
+			}else{
+				$this->setSuccess(false);
+				return $this->getResponseArrayJson();
+			}
+		}else{
+			$this->setSuccess(false);
+			return $this->getResponseArrayJson();
+		}
+	}
+
 }
