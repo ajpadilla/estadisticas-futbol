@@ -19,57 +19,66 @@
 				<div class="tabbable header-tabs user-profile">
 					<ul class="nav nav-tabs">
 						<li>
-							<a href="#pro_players" data-toggle="tab">
-								<i class="fa fa-question"></i> 
-								<span class="hidden-inline-mobile"> Jugadores</span>
-							</a>
-						</li>
-						<li>
-							<a href="#pro_games" data-toggle="tab">
-								<i class="fa fa-question"></i> 
-								<span class="hidden-inline-mobile"> Partidos</span>
-							</a>
-						</li>
-						<li>
-							<a href="#pro_edit" data-toggle="tab" id="editar-equipo">
+							<a href="#pro_alignments" data-toggle="tab" id="game-alignments">
 								<i class="fa fa-edit"></i> 
-								<span class="hidden-inline-mobile"> Editar Cuenta</span>
+								<span class="hidden-inline-mobile"> Alineaciones</span>
 							</a>
 						</li>
+						<li>
+							<a href="#pro_sanctions" data-toggle="tab" id="game-sanctions">
+								<i class="fa fa-edit"></i> 
+								<span class="hidden-inline-mobile"> Sanciones</span>
+							</a>
+						</li>
+						<li>
+							<a href="#pro_goals" data-toggle="tab" id="game-goals">
+								<i class="fa fa-edit"></i> 
+								<span class="hidden-inline-mobile"> Goles</span>
+							</a>
+						</li>
+						<li>
+							<a href="#pro_changes" data-toggle="tab" id="game-changes">
+								<i class="fa fa-edit"></i> 
+								<span class="hidden-inline-mobile"> Cambios</span>
+							</a>
+						</li>						
 						<li class="active">
-							<a href="#pro_details" data-toggle="tab">
+							<a href="#pro_resume" data-toggle="tab" id="game-resume">
 								<i class="fa fa-dot-circle-o"></i> 
-								<span class="hidden-inline-mobile">Detalles</span>
+								<span class="hidden-inline-mobile">Resumen</span>
 							</a>
 						</li>
 					</ul>
 					<div class="tab-content">
 					   <!-- OVERVIEW -->
-					   <div class="tab-pane fade in active" id="pro_details">
-					   		@include('equipos.profile-overview')
+					   <div class="tab-pane fade in active" id="pro_resume">
+					   		@include('games.profile-overview')
 					   </div>
 					   <!-- /OVERVIEW -->
 					   
 					   <!-- EDIT ACCOUNT -->
-					   <div class="tab-pane fade" id="pro_edit">
-							@include('equipos.edit')
+					   <div class="tab-pane fade" id="pro_changes">
+							@include('games.changes')
 					   </div>
 					   <!-- /EDIT ACCOUNT -->
 					   
 					   <!-- JUGADORES TAB -->
-					   <div class="tab-pane fade" id="pro_players">						  
-					   		@include('equipos.jugadores')
+					   <div class="tab-pane fade" id="pro_goals">						  
+					   		@include('games.goals')
 					   </div>
 					   <!-- /JUGADORES -->
 
 					   <!-- PARTIDOS TAB -->
-					   {{-- <div class="tab-pane fade" id="pro_games">
-						  <!-- FAQ -->
-							<div class="row">
-								
-							</div>
-					   </div> --}}
-					   <!-- /PARTIDOS -->					   
+					   <div class="tab-pane fade" id="pro_changes">
+							@include('games.changes')
+					   </div>
+					   <!-- /PARTIDOS -->			
+
+   					   <!-- PARTIDOS TAB -->
+					   <div class="tab-pane fade" id="pro_alignments">
+							@include('games.alignments')
+					   </div>
+					   <!-- /PARTIDOS -->	
 					</div>
 				</div>
 				<!-- /USER PROFILE -->
