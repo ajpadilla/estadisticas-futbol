@@ -18,5 +18,9 @@
 	<?php else: ?>
 		<div class="col-md-12"><h1>Competencia sin partidos!</h1></div>
 	<?php endif; ?>
+</div>
+
+<div id="add-goals-to-game" class="hidden">
+	<?php echo $__env->make('games.add-goal', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
 </div>	
 

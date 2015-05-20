@@ -8,11 +8,12 @@
 			<div class="tabbable header-tabs">
 				<ul class="nav nav-tabs">
 					<?php foreach($competition->phases as $phaseTableIndex => $phase): ?>
-						<?php if($phase->isFirst): ?>
+						<?php /* <?php if($phase->isFirst): ?>
 							<li class="active">
 						<?php else: ?>
 							<li>
-						<?php endif; ?>
+						<?php endif; ?> */ ?>
+						<li>
 							<a href="#tab--<?php echo $phase->id; ?>" data-toggle="tab"><span class="hidden-inline-mobile"><?php echo $phase->name; ?></span></a>
 						</li>
 					<?php endforeach; ?>
