@@ -2,7 +2,7 @@
 use soccer\Posicion\PosicionRepository;
 use soccer\Forms\RegistrarPosicionForm;
 use soccer\Forms\EditarPosicionForm;
-
+use Laracasts\Validation\FormValidationException;
 
 class PosicionController extends \BaseController {
 
