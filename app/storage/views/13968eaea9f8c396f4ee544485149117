@@ -12,7 +12,7 @@
 				<?php echo Form::label('observations','Observación',['class'=>'col-sm-2 control-label']); ?>
 
 				<div class="col-sm-6">
-					<?php echo Form::text('observations',null, ['class' => 'form-control datepicker','placeholder'=>'','id' =>'observations-game']); ?>
+					<?php echo Form::text('observations',null, ['class' => 'form-control','placeholder'=>'','id' =>'observations-game']); ?>
 
 				</div>
 			</div>
