@@ -163,7 +163,7 @@ Route::post('juegos/api-agregar-cambio', ['as' => 'games.api.add.change', 'uses'
 Route::post('juegos/api-agregar-gol', ['as' => 'games.api.add.goal', 'uses' => 'GameController@addGoalApi']);
 Route::post('juegos/api-agregar-sancion', ['as' => 'games.api.add.sanction', 'uses' => 'GameController@addSantionApi']);
 Route::get('juegos/api-equipos-disponibles-juego/{id}', ['as' => 'games.api.teams.availables.game', 'uses' => 'GameController@getAvailableTeams']);
-
+Route::get('juegos/api-jugadores-disponible-equipo/{id}/{teamId}', ['as' => 'games.api.available.players.team', 'uses' => 'GameController@getAvailablePlayersForTeam']);
 /*
 ********************************* GOALS FOR GAMES ********************************
 */
