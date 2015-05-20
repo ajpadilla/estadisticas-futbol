@@ -127,8 +127,11 @@
 		<a id="add-new-group-to-phase" href="{{ URL::route('phases.api.add.group') }}"></a>
 		<!--Goals-->
 		<a id="list-of-goal-types" href="{{ URL::route('goal-types.api.select.list') }}"></a>
+		<a id="add-new-goal-for-game" href="{{ URL::route('games.api.add.goal') }}"></a>
 		<!--Games-->
 		<a id="teams-for-games" href="{{ URL::route('games.api.teams.availables.game') }}"></a>
+		<a id="players-for-games" href="{{ URL::route('games.api.available.players.team') }}"></a>
+
 	</div>
 </div>
 <!-- /SIDEBAR -->
