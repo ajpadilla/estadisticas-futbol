@@ -1,0 +1,130 @@
+<!-- SIDEBAR -->
+<div id="sidebar" class="sidebar">
+	<div class="sidebar-menu nav-collapse">
+		<div class="divide-20"></div>
+		<!-- SEARCH BAR -->
+		<div id="search-bar">
+			<input class="search" type="text" placeholder="Search"><i class="fa fa-search search-icon"></i>
+		</div>
+		<!-- /SEARCH BAR -->
+		
+		<!-- SIDEBAR MENU -->
+		<ul>
+			<li>
+				<a href="index.html">
+					<i class="fa fa-tachometer fa-fw"></i> <span class="menu-text">Dashboard</span>
+				</a>
+			</li>
+			<li class="has-sub">
+				<a href="javascript:;" class="">
+					<i class="fa fa-bookmark-o fa-fw"></i> <span class="menu-text">Jugadores</span>
+					<span class="arrow"></span>
+				</a>
+				<ul class="sub">
+					<li><a class="" href="<?php echo URL::route('players.index'); ?>"><span class="sub-menu-text">Lista</span></a></li>
+					<li><a id="new-player" class="" href="#new-player-form"><span class="sub-menu-text">Crear</span></a></li>
+				</ul>
+			</li>
+			<li class="has-sub">
+				<a href="javascript:;" class="">
+					<i class="fa fa-bookmark-o fa-fw"></i> <span class="menu-text">Equipos</span>
+					<span class="arrow"></span>
+				</a>
+				<ul class="sub">
+					<li><a class="" href="<?php echo URL::route('equipos.index'); ?>"><span class="sub-menu-text">Lista</span></a></li>
+					<li><a id="new-team" class="" href="#new-team-form"><span class="sub-menu-text">Crear</span></a></li>
+				</ul>
+			</li>	
+			<li class="has-sub">
+				<a href="javascript:;" class="">
+					<i class="fa fa-bookmark-o fa-fw"></i> <span class="menu-text">Tipos de Competencia</span>
+					<span class="arrow"></span>
+				</a>
+				<ul class="sub">
+					<li><a class="" href="<?php echo URL::route('tipos-competencia.index'); ?>"><span class="sub-menu-text">Lista</span></a></li>
+					<li><a id="new-type-of-competition" class="" href="#new-type-of-competition-form"><span class="sub-menu-text">Crear</span></a></li>
+				</ul>
+			</li>	
+			<li class="has-sub">
+				<a href="javascript:;" class="">
+					<i class="fa fa-bookmark-o fa-fw"></i> <span class="menu-text">Competencias</span>
+					<span class="arrow"></span>
+				</a>
+				<ul class="sub">
+					<li><a class="" href="<?php echo URL::route('competencias.index'); ?>"><span class="sub-menu-text">Lista</span></a></li>
+					<li><a id="new-competition" class="" href="#new-competition-form"><span class="sub-menu-text">Crear</span></a></li>
+				</ul>
+			</li>					
+			<li class="has-sub">
+				<a href="javascript:;" class="">
+					<i class="fa fa-bookmark-o fa-fw"></i> <span class="menu-text">Paises</span>
+					<span class="arrow"></span>
+				</a>
+				<ul class="sub">
+					<li><a class="" href="<?php echo URL::route('paises.index'); ?>"><span class="sub-menu-text">Lista</span></a></li>
+					<li><a id="new-country" class="" href="#new-country-form"><span class="sub-menu-text">Crear</span></a></li>
+				</ul>
+			</li>	
+			
+			<li class="has-sub">
+				<a href="javascript:;" class="">
+					<i class="fa fa-bookmark-o fa-fw"></i> <span class="menu-text">Posiciones</span>
+					<span class="arrow"></span>
+				</a>
+				<ul class="sub">
+					<li><a class="" href="<?php echo URL::route('posiciones.index'); ?>"><span class="sub-menu-text">Lista</span></a></li>
+					<li><a id="new-position" class="" href="#new-position-form"><span class="sub-menu-text">Crear</span></a></li>
+				</ul>
+			</li>
+
+		</ul>
+		<!-- /SIDEBAR MENU -->
+		<!--Routes Paises-->
+		<a id="lista-paises" href="<?php echo URL::route('paises.api.select.list'); ?>"></a>
+		<a id="agregar-pais" href="<?php echo URL::route('paises.store'); ?>"></a>
+		<a id="datos-pais" href="<?php echo URL::route('paises.api.show'); ?>"></a>
+		<a id="editar-pais" href="<?php echo URL::route('paises.update'); ?>"></a>
+		<a id="eliminar-pais" href="<?php echo URL::route('paises.delete-ajax'); ?>"></a>
+		<!--Routes Posiciones-->
+		<a id="agregar-posicion" href="<?php echo URL::route('posiciones.store'); ?>"></a>
+		<a id="lista-posiciones" href="<?php echo URL::route('posiciones.api.select.list'); ?>"></a>
+		<a id="ver-posicion" href="<?php echo URL::route('posiciones.api.show'); ?>"></a>
+		<a id="editar-posicion" href="<?php echo URL::route('posiciones.api.update'); ?>"></a>
+		<a id="eliminar-posicion" href="<?php echo URL::route('posiciones.api.eliminar'); ?>"></a>	
+		<!--Routes Jugadores-->
+		<a id="add-player" href="<?php echo URL::route('players.store'); ?>"></a>
+		<a id="data-player" href="<?php echo URL::route('players.api.show'); ?>"></a>
+		<a id="update-player" href="<?php echo URL::route('players.api.update'); ?>"></a>
+		<a id="delete-player" href="<?php echo URL::route('players.api.delete'); ?>"></a>
+		<a id="list-players" href="<?php echo URL::route('players.api.select.list'); ?>"></a>
+		<!--Routes Equipos-->
+		<a id="lista-equipos" href="<?php echo URL::route('equipos.api.select.list'); ?>"></a>
+		<a id="agregar-equipo" href="<?php echo URL::route('equipos.store'); ?>"></a>
+		<a id="ver-equipo" href="<?php echo URL::route('equipos.api.show'); ?>"></a>	
+		<a id="editar-equipo" href="<?php echo URL::route('equipos.api.update'); ?>"></a>
+		<a id="eliminar-equipo" href="<?php echo URL::route('equipos.api.eliminar'); ?>"></a>
+		<a id="verificar-jugador-equipo" href="<?php echo URL::route('equipos.api.verificar-jugador'); ?>"></a>
+		<!--Route Tipo Compentencia-->
+		<a id="agregar-tipo-competencia" href="<?php echo URL::route('tipos-competencia.store'); ?>"></a>
+		<a id="editar-tipo-competencia" href="<?php echo URL::route('tipos-competencia.api.update'); ?>"></a>
+		<a id="ver-tipo-competencia" href="<?php echo URL::route('tipos-competencia.api.show'); ?>"></a>
+		<a id="eliminar-tipo-competencia" href="<?php echo URL::route('tipos-competencia.api.eliminar'); ?>"></a>
+		<a id="lista-tipos-competencias" href="<?php echo URL::route('tipos-competencia.api.select.list'); ?>"></a>
+		<!--Route Competencía-->
+		<a id="agregar-competencia" href="<?php echo URL::route('competencias.store'); ?>"></a>
+		<a id="eliminar-competencia" href="<?php echo URL::route('competencias.api.eliminar'); ?>"></a>
+		<a id="list-of-competencies" href="<?php echo URL::route('competitions.api.select.list'); ?>"></a>
+		<?php /*<a id="list-of-teams-for-competition" href="<?php echo URL::route('groups.api.available.teams'); ?>"></a>*/ ?>
+		<!--Groups-->
+		<a id="add-new-teams-to-group" href="<?php echo URL::route('groups.api.add.team'); ?>"></a>
+		<!--Games-->
+		<a id="add-new-game-to-group" href="<?php echo URL::route('groups.api.add.game'); ?>"></a>
+		<a id="exist-game-to-group" href="<?php echo URL::route('groups.api.exist.game'); ?>"></a>
+		<a id="teams-available-for-games" href="<?php echo URL::route('groups.api.teams.availables.game'); ?>"></a>
+		<!--Phases-->
+		<a id="add-new-phase-competition" href="<?php echo URL::route('competitions.api.add.phase'); ?>"></a>
+		<a id="list-teams-phase-competition" href="<?php echo URL::route('phases.api.teams.availables.group'); ?>"></a>
+		<a id="add-new-group-to-phase" href="<?php echo URL::route('phases.api.add.group'); ?>""></a>
+	</div>
+</div>
+<!-- /SIDEBAR -->

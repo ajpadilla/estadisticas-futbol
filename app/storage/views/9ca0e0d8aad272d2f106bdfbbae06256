@@ -1,0 +1,7 @@
+<?php $__env->startSection('title-modal'); ?>
+	Datos De Tipo De Competencía
+<?php $__env->stopSection(); ?>
+
+<div id="view-type-of-competition-form" style="display:none">
+	<?php echo $__env->make('tipos-competencia.partials._form-info', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
+</div>

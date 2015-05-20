@@ -1,0 +1,11 @@
+<ul class="nav nav-tabs">
+	<?php foreach($competition->phasesWithGames as $phaseTableIndex => $phase): ?>
+		<?php if($phase->isFirst): ?>
+			<li class="active">
+		<?php else: ?>
+			<li>
+		<?php endif; ?>
+			<a href="#tab-<?php echo $phase->id; ?>" data-toggle="tab"><span class="hidden-inline-mobile"><?php echo $phase->name; ?></span></a>
+		</li>
+	<?php endforeach; ?>
+</ul>
