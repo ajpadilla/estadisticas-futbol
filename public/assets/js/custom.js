@@ -4124,19 +4124,61 @@ var handleBootboxAddEquipoToJugador = function () {
             $('#add-goals-to-game-form').trigger('reset');
             $('#add-goals-to-game-form').validate({
                 rules:{
-                    name:{
-                        required: true
+                    observations:{
+                        rangelength:[1,256],
                     },
-                    format_id:{
-                        required: true
+                    minute:{
+                        required: true,
+                        rangelength:[1,3],
+                    },
+                    second:{
+                        required: true,
+                        rangelength:[1,2],
+                    },
+                    type_id:{
+                        required: true,
+                        digits: true
+                    },
+                    team_id:{
+                        required: true,
+                        digits: true
+                    },
+                    player_id:{
+                        required: true,
+                        digits: true
+                    },
+                    assistance_id:{
+                        required: true,
+                        digits: true
                     }
                 },
                 messages:{
-                    name:{
-                        required: 'Este campo es obligatorio'
+                    observations:{
+                        rangelength: 'Por favor ingrese entre [2, 256] caracteres',
                     },
-                    format_id:{
-                         required: 'Este campo es obligatorio'
+                    minute:{
+                        required: 'Este campo es obligatorio',
+                        rangelength:'Por favor ingrese entre [1, 3] caracteres',
+                    },
+                    second:{
+                        required: 'Este campo es obligatorio',
+                        rangelength: 'Por favor ingrese entre [1, 2] caracteres',
+                    },
+                    type_id:{
+                        required: 'Este campo es obligatorio',
+                        digits: 'Ingrese un numero entero'
+                    },
+                    team_id:{
+                        required: 'Este campo es obligatorio',
+                        digits: 'Ingrese un numero entero'
+                    },
+                    player_id:{
+                        required: 'Este campo es obligatorio',
+                        digits: 'Ingrese un numero entero'
+                    },
+                    assistance_id:{
+                        required: 'Este campo es obligatorio',
+                        digits: 'Ingrese un numero entero'
                     }
                 },
                 highlight:function(element){
