@@ -124,7 +124,11 @@
 		<!--Phases-->
 		<a id="add-new-phase-competition" href="{{ URL::route('competitions.api.add.phase') }}"></a>
 		<a id="list-teams-phase-competition" href="{{ URL::route('phases.api.teams.availables.group') }}"></a>
-		<a id="add-new-group-to-phase" href="{{ URL::route('phases.api.add.group') }}""></a>
+		<a id="add-new-group-to-phase" href="{{ URL::route('phases.api.add.group') }}"></a>
+		<!--Goals-->
+		<a id="list-of-goal-types" href="{{ URL::route('goal-types.api.select.list') }}"></a>
+		<!--Games-->
+		<a id="teams-for-games" href="{{ URL::route('games.api.teams.availables.game') }}"></a>
 	</div>
 </div>
 <!-- /SIDEBAR -->
