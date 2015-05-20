@@ -109,4 +109,11 @@ class GameRepository extends BaseRepository
 		$teams = $teamRepository->getModel()->select()->whereIn('id', $teamsIds)->get();
 		return $teams;
 	}
+
+	public function availablePlayersForTeam($id, $teamId)
+	{
+		$teamRepository = new EquipoRepository;
+		$players = $teamRepository->get($teamId)->jugadores->lists('nombre', 'id');;
+		return $players;
+	}
 }
