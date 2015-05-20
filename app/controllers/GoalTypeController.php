@@ -4,6 +4,7 @@ use soccer\Game\Goal\GoalTypeRepository;
 
 class GoalTypeController extends \BaseController {
 
+	protected $repository;
 
 	public function __construct(GoalTypeRepository $repository) {
 		$this->repository = $repository;
