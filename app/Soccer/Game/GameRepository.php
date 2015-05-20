@@ -35,9 +35,9 @@ class GameRepository extends BaseRepository
 		{
 			$this->cleanActionColumn();
 			$this->addActionColumn("<a class='add-alignment' href='#add-alignment-form' id='add-alignment-".$model->id."'>Alineación</a><br />");
-			$this->addActionColumn("<a  class='add-changes' href='#add-changes-form' id='add-changes-".$model->id."'>Cambios</a><br />");
-			$this->addActionColumn("<a  class='add-goals' href='#add-goals-form' id='add-goals-".$model->id."'>Goles</a><br />");
-			$this->addActionColumn("<a class='add-santions' href='#add-santions-form' id='add-santions-".$model->id."'>Sanciones</a>");
+			$this->addActionColumn("<a  class='add-change' href='#add-change-form' id='add-change-".$model->id."'>Cambios</a><br />");
+			$this->addActionColumn("<a  class='add-goal' href='#add-goal-form' id='add-goal-".$model->id."'>Goles</a><br />");
+			$this->addActionColumn("<a class='add-santion' href='#add-santion-form' id='add-santion-".$model->id."'>Sanciones</a>");
 			return implode(" ", $this->getActionColumn());
 		});
 
