@@ -30,14 +30,14 @@
 			<div class="form-group">
 				{{ Form::label('type_id','Tipo de sanción',['class'=>'col-md-2 control-label']) }}
 				<div class="col-md-6">
-					{{ Form::select('type_id',[],null,['class' => 'form-control chosen-select','data-placeholder' => 'Escoger Tipo...','id'=>'goal-types-for-sanction-id']) }}
+					{{ Form::select('type_id',[],null,['class' => 'form-control chosen-select','data-placeholder' => 'Escoger Tipo...','id'=>'sanction-types-id']) }}
 				</div>
 			</div>
 
 			<div class="form-group">
 				{{ Form::label('team_id','Equipo',['class'=>'col-md-2 control-label']) }}
 				<div class="col-md-6">
-					{{ Form::select('team_id',[],null,['class' => 'form-control chosen-select','data-placeholder' => 'Escoger Equipo...','id'=>'teams-for-sanction-id']) }}
+					{{ Form::select('team_id',[],null,['class' => 'form-control chosen-select','data-placeholder' => 'Escoger Equipo...','id'=>'teams-for-game-sanction-id']) }}
 				</div>
 			</div>	
 
