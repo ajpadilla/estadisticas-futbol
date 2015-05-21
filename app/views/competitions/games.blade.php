@@ -15,14 +15,14 @@
 			</div>
 			<!-- /BOX -->
 		</div>
+		<div id="add-goals-to-game" class="hidden">
+			@include('games.add-goal')
+		</div>	
+		<div id="add-sanction-to-game" class="hidden">
+			@include('games.add-sanction')
+		</div>	
 	@else
 		<div class="col-md-12"><h1>Competencia sin partidos!</h1></div>
 	@endif
 </div>
 
-<div id="add-goals-to-game" class="hidden">
-	@include('games.add-goal')
-</div>	
-<div id="add-sanction-to-game" class="hidden">
-	@include('games.add-sanction')
-</div>	
