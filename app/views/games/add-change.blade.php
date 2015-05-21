@@ -2,7 +2,7 @@
 	<!-- BOX -->
 	<div  id="add-change-to-game-form-div-box" class="box border primary col-md-12">
 		<div class="box-title">
-			<h4><i class="fa fa-user"></i><span class="hidden-inline-mobile">Agregar Sanción</span></h4>
+			<h4><i class="fa fa-user"></i><span class="hidden-inline-mobile">Realizar Cambio De Jugador</span></h4>
 		</div>
 		<div class="box-body">
 			{{ Form::open(['route' => ['games.api.add.change'], 'class' => 'form-horizontal', 'role' => 'form', 'id' => 'add-change-to-game-form']) }}
