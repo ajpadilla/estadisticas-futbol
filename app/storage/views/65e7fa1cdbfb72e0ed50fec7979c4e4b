@@ -1,7 +1,0 @@
-<?php $__env->startSection('title-modal'); ?>
-	Crear Equipo
-<?php $__env->stopSection(); ?>
-
-<div id="new-team-form" style="display:none">
-	<?php echo $__env->make('equipos.partials._form', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
-</div>
