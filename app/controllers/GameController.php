@@ -2,8 +2,10 @@
 
 use soccer\Game\GameRepository;
 use soccer\Game\Goal\GoalRepository;
+use soccer\Game\Sanction\SanctionRepository;
 use soccer\Forms\RegisterGameForm;
 use soccer\Forms\RegisterGoalForm;
+use soccer\Forms\RegisterSanctionForm;
 use soccer\Forms\AvailablePlayersForTeamForm;
 use Laracasts\Validation\FormValidationException;
 
@@ -14,17 +16,24 @@ class GameController extends \BaseController {
 	protected $availablePlayersForTeamForm;
 	protected $goalRepository;
 	protected $registerGoalForm;
+	protected $registerSanctionForm;
+	protected $sanctionRepository;
 
 	public function __construct(GameRepository $repository,
 			RegisterGameForm $registerGameForm,
 			AvailablePlayersForTeamForm $availablePlayersForTeamForm,
 			GoalRepository $goalRepository,
-			RegisterGoalForm $registerGoalForm){
+			RegisterGoalForm $registerGoalForm,
+			RegisterSanctionForm $registerSanctionForm,
+			SanctionRepository $sanctionRepository){
+
 		$this->repository = $repository;
 		$this->registerGameForm = $registerGameForm;
 		$this->availablePlayersForTeamForm = $availablePlayersForTeamForm;
 		$this->goalRepository = $goalRepository;
 		$this->registerGoalForm = $registerGoalForm;
+		$this->registerSanctionForm = $registerSanctionForm;
+		$this->sanctionRepository = $sanctionRepository;
 	}
 
 	/**
@@ -207,5 +216,27 @@ class GameController extends \BaseController {
 		}
 	}
 
+	public function addSantionApi()
+	{
+		if(Request::ajax())
+		{
+			$input = Input::all();
+			try
+			{
+				$this->registerSanctionForm->validate($input);
+				$sanction = $this->sanctionRepository->create($input);
+				$this->setSuccess(true);
+				$this->addToResponseArray('sanction', $sanction);
+				$this->addToResponseArray('data', $input);
+				return $this->getResponseArrayJson();
+			}
+			catch (FormValidationException $e)
+			{
+				$this->setSuccess(false);
+				$this->addToResponseArray('errors', $e->getErrors()->all());
+				return $this->getResponseArrayJson();				
+			}
+		}
+	}
 
 }
