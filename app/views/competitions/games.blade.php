@@ -21,6 +21,9 @@
 		<div id="add-sanction-to-game" class="hidden">
 			@include('games.add-sanction')
 		</div>	
+		<div id="add-change-to-game" class="hidden">
+			@include('games.add-change')
+		</div>	
 	@else
 		<div class="col-md-12"><h1>Competencia sin partidos!</h1></div>
 	@endif
