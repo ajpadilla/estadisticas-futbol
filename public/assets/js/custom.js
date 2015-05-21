@@ -4074,8 +4074,8 @@ var handleBootboxAddEquipoToJugador = function () {
         });
      }
 
-     var getAvailablePlayersForGame = function (idField,gameId) {
-        $('#teams-for-games-id').change(function () {
+     var getAvailablePlayersForGame = function (idSelect,idField,gameId) {
+        $(idSelect).change(function () {
             var teamId = $(this).val();
             var url = $('#players-for-games').attr('href').split('%')[0]+gameId+'/'+teamId;
             //console.log(url);
@@ -4086,18 +4086,19 @@ var handleBootboxAddEquipoToJugador = function () {
                 success: function(response) {
                     //console.log(response);
                     var option = '<option value=\"\"></option>';
+                    var chosenUpdate = 'chosen:updated';
                     if (response.success == true) {
                         $(idField).html('');
                         $(idField).append(option);
                         $.each(response.players,function (index,object){
                             option = '<option value=\"'+index+'\">'+object+'</option>';
-                            var chosenUpdate = 'chosen:updated';
                             $(idField).append(option);
                             $(idField).trigger(chosenUpdate);
                         });
                     }else{
                         $(idField).html('');
                         $(idField).append(option);
+                        $(idField).trigger(chosenUpdate);
                     }
                 }
             });
@@ -4116,8 +4117,8 @@ var handleBootboxAddEquipoToJugador = function () {
             var url = $('#teams-for-games').attr('href').split('%')[0]+gameId;
 
             getTeamsForGames('#teams-for-games-id',url);
-            getAvailablePlayersForGame('#player-for-game-id', gameId);
-            getAvailablePlayersForGame('#assistance-for-game-id', gameId);
+            getAvailablePlayersForGame('#teams-for-games-id','#player-for-game-id', gameId);
+            getAvailablePlayersForGame('#teams-for-games-id','#assistance-for-game-id', gameId);
 
             loadFieldSelect($('#list-of-goal-types').attr('href'),'#goal-types-for-games-id');
             addValidationRulesForms();
@@ -4308,6 +4309,199 @@ var handleBootboxAddEquipoToJugador = function () {
      }
 
 
+     var handleBootboxAddSanctionsToGame = function () {
+
+         $(".table").delegate(".add-santion", "click", function() {
+
+            console.log('sanction');
+            console.log($(this).attr('id'));
+            console.log($(this).attr('id').split('-')[2]);
+
+            var gameId = $(this).attr('id').split('-')[2];
+            var url = $('#teams-for-games').attr('href').split('%')[0]+gameId;
+
+            loadFieldSelect($('#list-of-sanction-types').attr('href'),'#sanction-types-id');
+            getTeamsForGames('#teams-for-game-sanction-id',url);
+            getAvailablePlayersForGame('#teams-for-game-sanction-id','#player-for-sanction-id', gameId);
+
+            addValidationRulesForms();
+            $('#add-sanction-to-game-form').trigger('reset');
+            $('#add-sanction-to-game-form').validate({
+                rules:{
+                    observations:{
+                        rangelength:[1,256],
+                    },
+                    minute:{
+                        required: true,
+                        rangelength:[1,3],
+                    },
+                    second:{
+                        required: true,
+                        rangelength:[1,2],
+                    },
+                    type_id:{
+                        required: true,
+                        digits: true
+                    },
+                    team_id:{
+                        required: true,
+                        digits: true
+                    },
+                    player_id:{
+                        required: true,
+                        digits: true
+                    },
+                },
+                messages:{
+                    observations:{
+                        rangelength: 'Por favor ingrese entre [2, 256] caracteres',
+                    },
+                    minute:{
+                        required: 'Este campo es obligatorio',
+                        rangelength:'Por favor ingrese entre [1, 3] caracteres',
+                    },
+                    second:{
+                        required: 'Este campo es obligatorio',
+                        rangelength: 'Por favor ingrese entre [1, 2] caracteres',
+                    },
+                    type_id:{
+                        required: 'Este campo es obligatorio',
+                        digits: 'Ingrese un numero entero'
+                    },
+                    team_id:{
+                        required: 'Este campo es obligatorio',
+                        digits: 'Ingrese un numero entero'
+                    },
+                    player_id:{
+                        required: 'Este campo es obligatorio',
+                        digits: 'Ingrese un numero entero'
+                    },
+                },
+                highlight:function(element){
+                    $(element).closest('.form-group').removeClass('has-success').addClass('has-error');
+                },
+                unhighlight:function(element){
+                    $(element).closest('.form-group').removeClass('has-error');
+                },
+                success:function(element){
+                    element.addClass('valid').closest('.form-group').removeClass('has-error').addClass('has-success');
+                },
+            });
+
+                
+            bootbox.dialog({
+                        message: $('#add-sanction-to-game-form-div-box'),
+                        buttons: {
+                            success: {
+                                label: "Agregar",
+                                className: "btn-primary",
+                                callback: function () 
+                                {
+                                    if($('#add-sanction-to-game-form').valid()) 
+                                    {
+                                        $("#add-sanction-to-game-form").submit(function(e){
+                                            var formData = {
+                                                observations: $('#observations-sanction').val(),
+                                                minute: $('#minute-sanction').val(),
+                                                second: $('#second-sanction').val(),
+                                                type_id: $('#sanction-types-id').val(),
+                                                game_id: gameId,
+                                                team_id: $('#teams-for-game-sanction-id').val(),
+                                                player_id: $('#player-for-sanction-id').val(),
+                                            };
+                                            $.ajax({
+                                                type: 'POST',
+                                                url: $('#add-new-sanction').attr('href'), 
+                                                data: formData,
+                                                dataType: "JSON",
+                                                success: function(responseServer) {
+                                                    console.log(responseServer);
+                                                    if(responseServer.success) 
+                                                    {
+                                                        // Muestro otro dialog con información de éxito
+                                                        bootbox.dialog({
+                                                            message:"Sanción agregada correctamente!",
+                                                            title: "Éxito",
+                                                            buttons: {
+                                                                success: {
+                                                                    label: "Success!",
+                                                                    className: "btn-success",
+                                                                    callback: function () {
+                                                                        location.reload();
+                                                                        //reloadDatatable('#datatable-' + $('button#add-game').attr('data-group-id'));
+                                                                    }
+                                                                }
+                                                            }
+                                                        });
+                                                        // Limpio cada elemento de las clases añadidas por el validator
+                                                        $('#add-sanction-to-game-form div').each(function(){
+                                                            cleanValidatorClasses(this);
+                                                        });
+                                                        //Reinicio el formulario
+                                                        $("#add-sanction-to-game-form")[0].reset();
+                                                    }else{
+                                                        bootbox.dialog({
+                                                            message: responseServer.errors,
+                                                            title: "Error",
+                                                            buttons: {
+                                                                danger: {
+                                                                    label: "Danger!",
+                                                                    className: "btn-danger"
+                                                                }
+                                                            }
+                                                        });
+                                                        $('#add-sanction-to-game-form div').each(function(){
+                                                            cleanValidatorClasses(this);
+                                                        });
+                                                    }
+                                                },
+                                                error: function(jqXHR, textStatus, errorThrown) {
+                                                   console.log(errorThrown);
+                                                   bootbox.dialog({
+                                                            message:" ¡Error al enviar datos al servidor!",
+                                                            title: "Error",
+                                                            buttons: {
+                                                                danger: {
+                                                                    label: "Danger!",
+                                                                    className: "btn-danger"
+                                                                }
+                                                            }
+                                                        });
+                                                        // Limpio cada elemento de las clases añadidas por el validator
+                                                        $('#add-sanction-to-game-form div').each(function(){
+                                                            cleanValidatorClasses(this);
+                                                        });
+                                                        //Reinicio el formulario*/
+                                                }
+                                            });
+                                            e.preventDefault(); //Prevent Default action.
+                                            $(this).unbind('submit');
+                                        }); 
+                                        $("#add-sanction-to-game-form").submit();
+                                    }else{
+                                        return false;
+                                    }
+                                    return false;
+                                }
+                            }
+                        },
+                            show: false // We will show it manually later
+                        })
+                    .on('shown.bs.modal', function() {
+                        $('#add-sanction-to-game-form-div-box')
+                                .show();                             // Show the form
+                            })
+                    .on('hide.bs.modal', function(e) {
+                        // Bootbox will remove the modal (including the body which contains the form)
+                        // after hiding the modal
+                        // Therefor, we need to backup the form
+                        $('#add-sanction-to-game-form-div-box').hide().appendTo('#add-sanction-to-game');
+                    })
+                    .modal('show');
+        });
+     }
+
+
     return {
         init: function() {
             initChosen();
@@ -4350,6 +4544,7 @@ var handleBootboxAddEquipoToJugador = function () {
             handleBootboxAddNewGroupToPhase();
             handleBootboxAddTeamToGroupCompetition();
             handleBootboxAddGoalToGame();
+            handleBootboxAddSanctionsToGame();
             //Plugins init
             //handleFechaDateTimePicker();
             handleDatePicker();
