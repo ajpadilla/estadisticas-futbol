@@ -2,7 +2,7 @@
 	<!-- BOX -->
 	<div  id="add-sanction-to-game-form-div-box" class="box border primary col-md-12">
 		<div class="box-title">
-			<h4><i class="fa fa-user"></i><span class="hidden-inline-mobile">Agregar Goles</span></h4>
+			<h4><i class="fa fa-user"></i><span class="hidden-inline-mobile">Agregar Sanción</span></h4>
 		</div>
 		<div class="box-body">
 			{{ Form::open(['route' => ['games.api.add.sanction'], 'class' => 'form-horizontal', 'role' => 'form', 'id' => 'add-sanction-to-game-form']) }}
@@ -28,7 +28,7 @@
 			</div>
 		
 			<div class="form-group">
-				{{ Form::label('type_id','Tipo de gol',['class'=>'col-md-2 control-label']) }}
+				{{ Form::label('type_id','Tipo de sanción',['class'=>'col-md-2 control-label']) }}
 				<div class="col-md-6">
 					{{ Form::select('type_id',[],null,['class' => 'form-control chosen-select','data-placeholder' => 'Escoger Tipo...','id'=>'goal-types-for-sanction-id']) }}
 				</div>
