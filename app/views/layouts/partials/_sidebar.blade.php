@@ -135,6 +135,8 @@
 		<a id="list-of-sanction-types" href="{{ URL::route('sanction-types.api.select.list') }}"></a>
 		<!--Sanctions-->
 		<a id="add-new-sanction" href="{{ URL::route('games.api.add.sanction') }}"></a>
+		<!--Change-->
+		<a id="add-new-change" href="{{ URL::route('games.api.add.change') }}"></a>
 	</div>
 </div>
 <!-- /SIDEBAR -->
