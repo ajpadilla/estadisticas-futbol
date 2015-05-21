@@ -3,9 +3,11 @@
 use soccer\Game\GameRepository;
 use soccer\Game\Goal\GoalRepository;
 use soccer\Game\Sanction\SanctionRepository;
+use soccer\Game\Change\ChangeRepository;
 use soccer\Forms\RegisterGameForm;
 use soccer\Forms\RegisterGoalForm;
 use soccer\Forms\RegisterSanctionForm;
+use soccer\Forms\RegisterChangeForm;
 use soccer\Forms\AvailablePlayersForTeamForm;
 use Laracasts\Validation\FormValidationException;
 
@@ -18,6 +20,8 @@ class GameController extends \BaseController {
 	protected $registerGoalForm;
 	protected $registerSanctionForm;
 	protected $sanctionRepository;
+	protected $registerChangeForm;
+	protected $changeRepository;
 
 	public function __construct(GameRepository $repository,
 			RegisterGameForm $registerGameForm,
@@ -25,7 +29,9 @@ class GameController extends \BaseController {
 			GoalRepository $goalRepository,
 			RegisterGoalForm $registerGoalForm,
 			RegisterSanctionForm $registerSanctionForm,
-			SanctionRepository $sanctionRepository){
+			SanctionRepository $sanctionRepository,
+			RegisterChangeForm $registerChangeForm,
+			ChangeRepository $changeRepository){
 
 		$this->repository = $repository;
 		$this->registerGameForm = $registerGameForm;
@@ -34,6 +40,8 @@ class GameController extends \BaseController {
 		$this->registerGoalForm = $registerGoalForm;
 		$this->registerSanctionForm = $registerSanctionForm;
 		$this->sanctionRepository = $sanctionRepository;
+		$this->registerChangeForm = $registerChangeForm;
+		$this->changeRepository = $changeRepository;
 	}
 
 	/**
@@ -227,6 +235,29 @@ class GameController extends \BaseController {
 				$sanction = $this->sanctionRepository->create($input);
 				$this->setSuccess(true);
 				$this->addToResponseArray('sanction', $sanction);
+				$this->addToResponseArray('data', $input);
+				return $this->getResponseArrayJson();
+			}
+			catch (FormValidationException $e)
+			{
+				$this->setSuccess(false);
+				$this->addToResponseArray('errors', $e->getErrors()->all());
+				return $this->getResponseArrayJson();				
+			}
+		}
+	}
+
+	public function addChangeApi()
+	{
+		if(Request::ajax())
+		{
+			$input = Input::all();
+			try
+			{
+				$this->registerChangeForm->validate($input);
+				$change = $this->changeRepository->create($input);
+				$this->setSuccess(true);
+				$this->addToResponseArray('change', $change);
 				$this->addToResponseArray('data', $input);
 				return $this->getResponseArrayJson();
 			}
