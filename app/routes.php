@@ -173,3 +173,9 @@ Route::get('juegos/api-jugadores-disponible-equipo/{id}/{teamId}', ['as' => 'gam
 
 Route::get('tipo-goles/api-seleccionar-lista',  ['as' => 'goal-types.api.select.list','uses' => 'GoalTypeController@getAllValue' ] );
 
+/*
+********************************* SANCTIONS TYPES FOR GAMES ********************************
+*/
+
+Route::get('tipo-sanciones/api-seleccionar-lista',  ['as' => 'sanction-types.api.select.list','uses' => 'SanctionTypesController@getAllValue' ] );
+
