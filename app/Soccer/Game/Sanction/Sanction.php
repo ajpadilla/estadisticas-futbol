@@ -4,6 +4,8 @@ use Eloquent;
 use Carbon\Carbon;
 
 class Sanction extends Eloquent {
+    protected $fillable = ['observations', 'minute','second','type_id','game_id','team_id','player_id'];
+
     /*
 	********************* Relations ***********************
     */	
