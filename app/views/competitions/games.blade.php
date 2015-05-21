@@ -23,6 +23,6 @@
 <div id="add-goals-to-game" class="hidden">
 	@include('games.add-goal')
 </div>	
-<div id="add-goals-to-game" class="hidden">
+<div id="add-sanction-to-game" class="hidden">
 	@include('games.add-sanction')
 </div>	
