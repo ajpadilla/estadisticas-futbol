@@ -131,7 +131,10 @@
 		<!--Games-->
 		<a id="teams-for-games" href="{{ URL::route('games.api.teams.availables.game') }}"></a>
 		<a id="players-for-games" href="{{ URL::route('games.api.available.players.team') }}"></a>
-
+		<!--Sanctions Types-->
+		<a id="list-of-sanction-types" href="{{ URL::route('sanction-types.api.select.list') }}"></a>
+		<!--Sanctions-->
+		<a id="add-new-sanction" href="{{ URL::route('games.api.add.sanction') }}"></a>
 	</div>
 </div>
 <!-- /SIDEBAR -->
