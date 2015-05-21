@@ -4,6 +4,8 @@ use Eloquent;
 use Carbon\Carbon;
 
 class Change extends Eloquent {
+    protected $fillable = ['observations', 'minute','second','game_id','team_id','player_out_id','player_in_id'];
+
     /*
 	********************* Relations ***********************
     */	
