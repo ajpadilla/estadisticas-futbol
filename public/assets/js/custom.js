@@ -4066,6 +4066,7 @@ var handleBootboxAddEquipoToJugador = function () {
                     }else{
                         $(idField).html('');
                         $(idField).append('<option value=\"\"></option>');
+                        $(idField).trigger("chosen:updated");
                     }
             }
         });
