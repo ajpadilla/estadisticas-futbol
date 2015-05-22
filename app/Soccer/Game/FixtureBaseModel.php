@@ -28,6 +28,8 @@ class FixtureBaseModel extends Eloquent {
 
     public function getTimeAttribute()
     {
-        return (string)$this->minute . ':' . (string)$this->second;
+        $minute = ($this->minute < 10) ? '0' . $this->minute : $this->minute;
+        $second = ($this->second < 10) ? '0' . $this->second : $this->second;
+        return $minute . ':' . $second;
     }
 }
