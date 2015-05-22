@@ -51,9 +51,11 @@ class BaseRepository
 
 	public function getAllForSelect()
 	{
-		return $this->getAll()->lists('nombre', 'id');
+		if($this->getModel()->first()->nombre)
+			return $this->getAll()->lists('nombre', 'id');
+		return $this->getAll()->lists('name', 'id');
 	}	
-
+	
 	public function delete($id)
 	{
 		$model = $this->get($id); 
