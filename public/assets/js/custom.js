@@ -4312,11 +4312,12 @@ var handleBootboxAddEquipoToJugador = function () {
         });
      }
 
+
        var getAvailablePlayersForGameSanction = function (gameId) {
-        $('#teams-for-game-sanction-id').change(function () {
+        //console.log(gameId);
+        $('select#teams-for-game-sanction-id').change(function () {
             var teamId = $(this).val();
             var url = $('#players-for-games').attr('href').split('%')[0]+gameId+'/'+teamId;
-            //console.log(url);
             $.ajax({
                 type: 'GET',
                 url: url,
@@ -4324,37 +4325,57 @@ var handleBootboxAddEquipoToJugador = function () {
                 success: function(response) {
                     //console.log(response);
                     if (response.success == true) {
-                        $('#player-for-sanction-id').html('');
-                        $('#player-for-sanction-id').append('<option value=\"\"></option>');
+                        $('select#player-for-sanction-id').html('');
+                        $('select#player-for-sanction-id').append('<option value=\"\"></option>');
                         $.each(response.players, function (index, player){
-                            $('#player-for-sanction-id').append('<option value=\"'+index+'\">'+player+'</option>');
-                            $('#player-for-sanction-id').trigger("chosen:updated");
+                            $('select#player-for-sanction-id').append('<option value=\"'+index+'\">'+player+'</option>');
+                            $('select#player-for-sanction-id').trigger("chosen:updated");
                         });
                     }else{
-                        $('#player-for-sanction-id').html('');
-                        $('#player-for-sanction-id').append('<option value=\"\"></option>');
-                        $('#player-for-sanction-id').trigger("chosen:updated");
+                        $('select#player-for-sanction-id').html('');
+                        $('select#player-for-sanction-id').append('<option value=\"\"></option>');
+                        $('select#player-for-sanction-id').trigger("chosen:updated");
                     }
                 }
             });
         });
      }
 
-     var handleBootboxAddSanctionsToGame = function () {
+     var getTeamsForGamesSanction = function (url) 
+     {
+        //console.log(url);
+         $.ajax({
+            type: 'GET',
+            url: url,
+            dataType:'json',
+            success: function(response) {
+                 //console.log(response);
+                    if (response.success == true) 
+                    {
+                        $('select#teams-for-game-sanction-id').html('');
+                        $('select#teams-for-game-sanction-id').append('<option value=\"\"></option>');
+                        $.each(response.teams,function (index,object){
+                            option = '<option value=\"'+object.id+'\">'+object.nombre+'</option>';
+                            //console.log(option);
+                            $('select#teams-for-game-sanction-id').append('<option value=\"'+object.id+'\">'+object.nombre+'</option>');
+                            $('select#teams-for-game-sanction-id').trigger('chosen:updated');
+                        });
+                    }else{
+                        $('select#teams-for-game-sanction-id').html('');
+                        $('select#teams-for-game-sanction-id').append(option);
+                        $('select#teams-for-game-sanction-id').trigger('chosen:updated');
+                    }
+            }
+        });
+     }
 
-         $(".table").delegate(".add-santion", "click", function() {
+     var bootboxAddSanction = function (gameId) {
 
-            /*console.log('sanction');
-            console.log($(this).attr('id'));
-            console.log($(this).attr('id').split('-')[2]);*/
-
-            var gameId = $(this).attr('id').split('-')[2];
             var url = $('#teams-for-games').attr('href').split('%')[0]+gameId;
-
-            getTeamsForGames('#teams-for-game-sanction-id',url);
+            getTeamsForGamesSanction(url);
             getAvailablePlayersForGameSanction(gameId);
 
-            loadFieldSelect($('#list-of-sanction-types').attr('href'),'#sanction-types-id');
+            loadFieldSelect($('#list-of-sanction-types').attr('href'),'select#sanction-types-id');
             addValidationRulesForms();
             $('#add-sanction-to-game-form').trigger('reset');
             $('#add-sanction-to-game-form').validate({
@@ -4432,24 +4453,24 @@ var handleBootboxAddEquipoToJugador = function () {
                                     {
                                         $("#add-sanction-to-game-form").submit(function(e){
                                             var formData = {
-                                                observations: $('#observations-sanction').val(),
-                                                minute: $('#minute-sanction').val(),
-                                                second: $('#second-sanction').val(),
-                                                type_id: $('#sanction-types-id').val(),
+                                                observations: jQuery('#observations-sanction').val() ? jQuery("input[name='observations_sanction']").val() : jQuery('.observations').val(),
+                                                minute: jQuery('#minute-sanction').val(),
+                                                second: jQuery('#second-sanction').val(),
+                                                type_id: jQuery('select#sanction-types-id').val(),
                                                 game_id: gameId,
-                                                team_id: $('#teams-for-game-sanction-id').val(),
-                                                player_id: $('#player-for-sanction-id').val(),
+                                                team_id: jQuery('select#teams-for-game-sanction-id').val(),
+                                                player_id: jQuery('select#player-for-sanction-id').val(),
                                             };
+                                            //console.log(formData);
                                             $.ajax({
                                                 type: 'POST',
                                                 url: $('#add-new-sanction').attr('href'), 
                                                 data: formData,
                                                 dataType: "JSON",
                                                 success: function(responseServer) {
-                                                    console.log(responseServer);
+                                                    //console.log(responseServer);
                                                     if(responseServer.success) 
                                                     {
-                                                        // Muestro otro dialog con información de éxito
                                                         bootbox.dialog({
                                                             message:"Sanción agregada correctamente!",
                                                             title: "Éxito",
@@ -4458,17 +4479,14 @@ var handleBootboxAddEquipoToJugador = function () {
                                                                     label: "Success!",
                                                                     className: "btn-success",
                                                                     callback: function () {
-                                                                        location.reload();
-                                                                        //reloadDatatable('#datatable-' + $('button#add-game').attr('data-group-id'));
+                                                                        reloadDatatable('#datatable-sanctions')
                                                                     }
                                                                 }
                                                             }
                                                         });
-                                                        // Limpio cada elemento de las clases añadidas por el validator
                                                         $('#add-sanction-to-game-form div').each(function(){
                                                             cleanValidatorClasses(this);
                                                         });
-                                                        //Reinicio el formulario
                                                         $("#add-sanction-to-game-form")[0].reset();
                                                     }else{
                                                         bootbox.dialog({
@@ -4498,11 +4516,10 @@ var handleBootboxAddEquipoToJugador = function () {
                                                                 }
                                                             }
                                                         });
-                                                        // Limpio cada elemento de las clases añadidas por el validator
                                                         $('#add-sanction-to-game-form div').each(function(){
                                                             cleanValidatorClasses(this);
                                                         });
-                                                        //Reinicio el formulario*/
+                                                        //Reinicio el formulario
                                                 }
                                             });
                                             e.preventDefault(); //Prevent Default action.
@@ -4529,6 +4546,18 @@ var handleBootboxAddEquipoToJugador = function () {
                         $('#add-sanction-to-game-form-div-box').hide().appendTo('#add-sanction-to-game');
                     })
                     .modal('show');
+     }
+
+     var handleBootboxAddSanctionsToGame = function () {
+
+         $(".table").delegate(".add-santion", "click", function() {
+            var gameId = $(this).attr('id').split('-')[2];
+            bootboxAddSanction(gameId);
+        });
+
+        $('button.add-new-sanction').click( function() {
+            var gameId = $(this).attr('id').split('-')[2];
+            bootboxAddSanction(gameId);
         });
      }
 
@@ -4564,17 +4593,26 @@ var handleBootboxAddEquipoToJugador = function () {
     }
 
 
+
+
      var handleBootboxAddChangeToGame = function () {
 
-         $(".table").delegate(".add-change", "click", function() {
-
-            /*console.log('change');
-            console.log($(this).attr('id'));
-            console.log($(this).attr('id').split('-')[2]);*/
-
+         $(".table").delegate(".add-change ", "click", function() {
             var gameId = $(this).attr('id').split('-')[2];
-            var url = $('#teams-for-games').attr('href').split('%')[0]+gameId;
+            bootboxAddChange(gameId);
+        });
 
+        $('button.add-change').click( function() {
+            var gameId = $(this).attr('id').split('-')[2];
+            bootboxAddChange(gameId);
+        });
+     
+     }
+
+
+     var bootboxAddChange = function  (gameId) {
+
+            var url = $('#teams-for-games').attr('href').split('%')[0]+gameId;
             getTeamsForGames('#teams-for-game-change-id',url);
             getAvailablePlayersForGameChange('#player-out-for-change-id', gameId);
             getAvailablePlayersForGameChange('#player-in-for-change-id', gameId);
@@ -4686,8 +4724,7 @@ var handleBootboxAddEquipoToJugador = function () {
                                                                     label: "Success!",
                                                                     className: "btn-success",
                                                                     callback: function () {
-                                                                        location.reload();
-                                                                        //reloadDatatable('#datatable-' + $('button#add-game').attr('data-group-id'));
+                                                                        reloadDatatable('#datatable-changes');
                                                                     }
                                                                 }
                                                             }
@@ -4757,9 +4794,7 @@ var handleBootboxAddEquipoToJugador = function () {
                         $('#add-change-to-game-form-div-box').hide().appendTo('#add-change-to-game');
                     })
                     .modal('show');
-        });
      }
-
 
     return {
         init: function() {
