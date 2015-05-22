@@ -83,5 +83,6 @@
 
 @yield('scripts')
 @yield('scripts2')
+@yield('scripts3')
 
 <!-- /JAVASCRIPTS -->

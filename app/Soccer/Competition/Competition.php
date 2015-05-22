@@ -74,10 +74,10 @@ class Competition extends Eloquent implements StaplerableInterface{
        //return $this->hasManyThrough('soccer\Group\Group', 'soccer\Equipo\Equipo', 'team_id', 'group_id');
     }   
 
-    public function games()
+    /* public function games()
     {
        return $this->belongsTo('soccer\Game\Game');
-    }            
+    } */           
 
     /*
     ********************* Custom Methods ***********************

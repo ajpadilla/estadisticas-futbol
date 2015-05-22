@@ -1,23 +1,13 @@
 <?php namespace soccer\Game\Change;
 
-use Eloquent;
-use Carbon\Carbon;
+use use soccer\Game\FixtureBaseModel;
 
-class Change extends Eloquent {
+class Change extends FixtureBaseModel {
     protected $fillable = ['observations', 'minute','second','game_id','team_id','player_out_id','player_in_id'];
 
     /*
-	********************* Relations ***********************
-    */	
-    public function game()
-    {
-       return $this->belongsTo('soccer\Game\Game');
-    }   
-
-    public function team()
-    {
-        return $this->belongsTo('soccer\Equipo\Equipo', 'team_id');
-    } 
+    ********************* Relations ***********************
+    */
 
     public function playerOut()
     {
@@ -27,7 +17,8 @@ class Change extends Eloquent {
     public function playerIn()
     {
        return $this->belongsTo('soccer\Player\Player', 'player_in_id');
-    }   
+    }  
+
     /*
     ********************* Custom Methods ***********************
     */  

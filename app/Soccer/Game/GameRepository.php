@@ -27,6 +27,19 @@ class GameRepository extends BaseRepository
 		$this->setModel(new Game);
 		$this->setListAllRoute('games.api.list');
 	}	
+
+	public function availableTeams($id)
+	{
+		return $this->get($id)->games;
+	}
+
+	public function availablePlayersForGameTeam($id, $teamId)
+	{
+		$teamRepository = new EquipoRepository;
+		$players = $teamRepository->get($teamId)->jugadores->lists('nombre', 'id');;
+		return $players;
+	}
+
 	/*
 	*********************** DATATABLE SETTINGS ******************************
 	*/			
@@ -45,9 +58,9 @@ class GameRepository extends BaseRepository
 		$this->addColumnToCollection('Acciones', function($model)
 		{
 			$this->cleanActionColumn();
-			$this->addActionColumn("<a class='show-game' href='#show_game' id='show_game_".$model->id."'>Ver</a><br />");
-			$this->addActionColumn("<a  class='edit-game' href='#edit-team-form' id='edit_game_".$model->id."'>Editar</a><br />");
-			$this->addActionColumn("<a  class='details-game' href='#details-team-form' id='edit_game_".$model->id."'>Editar</a><br />");
+			$this->addActionColumn("<a class='show-game' href='" . route('games.show', $model->id) . "' id='show_game_".$model->id."'>Ver</a><br />");
+			$this->addActionColumn("<a  class='edit-game' href='#edit-game-form' id='edit_game_".$model->id."'>Editar</a><br />");
+			$this->addActionColumn("<a  class='details-game' href='#details-game-form' id='edit_game_".$model->id."'>Editar</a><br />");
 			$this->addActionColumn("<a class='delete-game' href='#' id='delete_game_".$model->id."'>Eliminar</a>");
 			return implode(" ", $this->getActionColumn());
 		});
@@ -98,22 +111,4 @@ class GameRepository extends BaseRepository
 			 return $model->status;
 		});	
 	}	
-
-	public function availableTeams($id)
-	{
-		$teamsIds = [];
-		$game = $this->get($id);
-		$teamsIds[0] = $game->local_team_id;
-		$teamsIds[1] = $game->away_team_id;
-		$teamRepository = new EquipoRepository;
-		$teams = $teamRepository->getModel()->select()->whereIn('id', $teamsIds)->get();
-		return $teams;
-	}
-
-	public function availablePlayersForTeam($id, $teamId)
-	{
-		$teamRepository = new EquipoRepository;
-		$players = $teamRepository->get($teamId)->jugadores->lists('nombre', 'id');;
-		return $players;
-	}
 }

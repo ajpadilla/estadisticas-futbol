@@ -38,9 +38,47 @@ class Game extends Eloquent {
        return $this->belongsTo('soccer\Competition\Competition');
     } 
 
+    public function goals()
+    {
+        return $this->hasMany('soccer\Game\Goal\Goal');
+    }
+
+    public function changes()
+    {
+        return $this->hasMany('soccer\Game\Change\Change');
+    }
+
+    public function sanctions()
+    {
+        return $this->hasMany('soccer\Game\Sanction\Sanction');
+    }    
+
     /*
     ********************* Custom Methods ***********************
-    */  
+    */ 
+
+    public function getTeamsAttribute()
+     {
+        $teams = new \Illuminate\Database\Eloquent\Collection;
+        $teams->add($this->localTeam);
+        $teams->add($this->awayTeam);
+        return $teams;
+     } 
+
+    public function getHasGoalsAttribute()
+    {
+        return $this->goals->count() > 0;
+    }    
+
+    public function getHasSanctionsAttribute()
+    {
+        return $this->sanctions->count() > 0;
+    }
+
+    public function getHasChangesAttribute()
+    {
+        return $this->changes->count() > 0;
+    }
 
     public function setDateAttribute($value)
     {

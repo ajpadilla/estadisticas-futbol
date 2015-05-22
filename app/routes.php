@@ -168,7 +168,7 @@ Route::post('juegos/api-agregar-sancion', ['as' => 'games.api.add.sanction', 'us
 Route::get('juegos/api-equipos-disponibles-juego/{id}', ['as' => 'games.api.teams.availables.game', 'uses' => 'GameController@getAvailableTeams']);
 Route::get('juegos/api-jugadores-disponible-equipo/{id}/{teamId}', ['as' => 'games.api.available.players.team', 'uses' => 'GameController@getAvailablePlayersForTeam']);
 /*
-********************************* GOALS FOR GAMES ********************************
+********************************* GOALS TYPES FOR GAMES ********************************
 */
 
 Route::get('tipo-goles/api-seleccionar-lista',  ['as' => 'goal-types.api.select.list','uses' => 'GoalTypeController@getAllValue' ] );

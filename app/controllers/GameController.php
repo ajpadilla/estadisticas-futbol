@@ -104,7 +104,10 @@ class GameController extends \BaseController {
 	public function show($id)
 	{
 		$game = $this->repository->get($id);
-		return View::make('games.show', compact('game'));
+		$goalsTable = $this->repository->getGoalsTable($game->id);
+		$sanctionsTable = $this->repository->getSanctionsTable($game->id);
+		$changesTable = $this->repository->getChangesTable($game->id);
+		return View::make('games.show', compact('game', 'goalsTable', 'changesTable', 'sanctionsTable'));
 	}
 
 	/**
@@ -155,15 +158,9 @@ class GameController extends \BaseController {
 			if (count($teams) > 0) {
 				$this->setSuccess(true);
 				$this->addToResponseArray('teams', $teams);
-				return $this->getResponseArrayJson();
-			}else{
-				$this->setSuccess(false);
-				return $this->getResponseArrayJson();
 			}
-		}else{
-			$this->setSuccess(false);
-			return $this->getResponseArrayJson();
 		}
+		return $this->getResponseArrayJson();
 	}
 
 	public function getAvailablePlayersForTeam($id, $teamId)
@@ -179,25 +176,19 @@ class GameController extends \BaseController {
 			try
 			{
 				$this->availablePlayersForTeamForm->validate($input);
-				$players = $this->repository->availablePlayersForTeam($id, $teamId);
+				$players = $this->repository->availablePlayersForGameTeam($id, $teamId);
 				if(count($players) > 0) {
 					$this->setSuccess(true);
 					$this->addToResponseArray('players', $players);
-					return $this->getResponseArrayJson();
-				}else{
-					$this->setSuccess(false);
 					return $this->getResponseArrayJson();
 				}
 			}
 			catch (FormValidationException $e)
 			{
 				$this->addToResponseArray('errors', $e->getErrors()->all());
-				return $this->getResponseArrayJson();
 			}
-		}else{
-			$this->setSuccess(false);
-			return $this->getResponseArrayJson();
 		}
+		return $this->getResponseArrayJson();
 	}
 
 	

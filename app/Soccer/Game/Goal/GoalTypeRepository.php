@@ -18,10 +18,5 @@ class GoalTypeRepository extends BaseRepository
 
 		$this->setModel(new GoalType);
 		$this->setListAllRoute('');
-	}
-
-	public function getAllForSelect()
-	{
-		return $this->getAll()->lists('name', 'id');
 	}	
 }
