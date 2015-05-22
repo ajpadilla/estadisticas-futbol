@@ -61,7 +61,7 @@ class GoalRepository extends BaseRepository
 
 		$this->collection->addColumn('Asistencia', function($model)
 		{
-			 return $model->assistance;
+			 return $model->assistance->nombre;
 		});
 		
 		$this->collection->addColumn('Tipo', function($model)
