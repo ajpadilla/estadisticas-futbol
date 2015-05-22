@@ -261,4 +261,21 @@ class GameController extends \BaseController {
 		}
 	}
 
+	public function goalsApi($id)
+	{
+		if(Request::ajax()) 
+			return $this->repository->getDefaultTableForGoals($id);
+	}
+
+	public function changesApi($id)
+	{
+		if(Request::ajax()) 
+			return $this->repository->getDefaultTableForChanges($id);
+	}
+
+	public function sanctionsApi($id)
+	{
+		if(Request::ajax()) 
+			return $this->repository->getDefaultTableForSanctions($id);
+	}
 }

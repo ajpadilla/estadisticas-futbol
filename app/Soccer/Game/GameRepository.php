@@ -40,6 +40,21 @@ class GameRepository extends BaseRepository
 		return $players;
 	}
 
+	public function getGoals($id)
+	{
+		return $this->get($id)->goals;
+	}
+
+	public function getChanges($id)
+	{
+		return $this->get($id)->changes;
+	}
+
+	public function getSanctions($id)
+	{
+		return $this->get($id)->sanctions;
+	}
+
 	/*
 	*********************** DATATABLE SETTINGS ******************************
 	*/			
@@ -110,5 +125,59 @@ class GameRepository extends BaseRepository
 		{
 			 return $model->status;
 		});	
+	}	
+
+	public function getGoalsTable($id)
+	{		
+		$goalRepository = new GoalRepository;		
+		return $goalRepository->getAllTable('games.api.goals', [$id]);
+	}	
+
+	public function getDefaultTableForGoals($id)
+	{
+		$goals = $this->getGoals($id);
+		if($goals) {
+			$goalRepository = new GoalRepository;
+			$goalRepository->setDatatableCollection($goals);
+			$goalRepository->setDefaultTableSettings();
+			return $goalRepository->getTableCollectionForRender();
+		}
+		return null;
+	}	
+
+	public function getChangesTable($id)
+	{		
+		$changeRepository = new ChangeRepository;		
+		return $changeRepository->getAllTable('games.api.changes', [$id]);
+	}
+
+	public function getDefaultTableForChanges($id)
+	{
+		$changes = $this->getChanges($id);
+		if($changes) {
+			$changeRepository = new ChangeRepository;
+			$changeRepository->setDatatableCollection($changes);
+			$changeRepository->setDefaultTableSettings();
+			return $changeRepository->getTableCollectionForRender();
+		}
+		return null;
+	}	
+
+	public function getSanctionsTable($id)
+	{		
+		$sanctionRepository = new SanctionRepository;		
+		return $sanctionRepository->getAllTable('games.api.sanctions', [$id]);
+	}
+
+	public function getDefaultTableForSanctions($id)
+	{
+		$sanctions = $this->getSanctions($id);
+		if($sanctions) {
+			$sanctionRepository = new SanctionRepository;
+			$sanctionRepository->setDatatableCollection($sanctions);
+			$sanctionRepository->setDefaultTableSettings();
+			return $sanctionRepository->getTableCollectionForRender();
+		}
+		return null;
 	}	
 }

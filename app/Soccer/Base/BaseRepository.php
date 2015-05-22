@@ -42,10 +42,12 @@ class BaseRepository
 		return $model;
 	}
 
-	public function getAll()
+	public function  getAll($exclude = null)
 	{
-		return $this->model->all();
-	}	
+		if($exclude)
+			return $this->getModel()->whereNotIn('id', $exclude)->get();
+		return $this->getModel()->all();
+	}		
 
 	public function getAllForSelect()
 	{
