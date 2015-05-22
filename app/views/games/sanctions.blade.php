@@ -7,7 +7,7 @@
 			<div class="box-body big">
 				<div class="row">
 					<div class="col-md-2 col-md-offset-10">
-						<button class="add-sanction pull-right btn btn-lg btn-primary" id="add-sanction-{{ $game->id }}" href="#add-sanction-form">Agregar Sanción</button>
+						<button class="add-new-sanction pull-right btn btn-lg btn-primary" id="add-sanction-{{ $game->id }}" href="#add-sanction-form">Agregar Sanción</button>
 					</div>
 				</div>
 				<br>			
