@@ -4,6 +4,7 @@ use soccer\Game\Game;
 use soccer\Game\Goal\GoalRepository;
 use soccer\Game\Change\ChangeRepository;
 use soccer\Game\Sanction\SanctionRepository;
+use soccer\Game\Alignment\AlignmentRepository;
 use soccer\Base\BaseRepository;
 use soccer\Equipo\EquipoRepository;
 use Carbon\Carbon;
@@ -58,6 +59,13 @@ class GameRepository extends BaseRepository
 		return $this->get($id)->sanctions;
 	}
 
+	public function getAlignments($id, $teamId)
+	{
+		$game = $this->get($id);
+		if($game) 
+			return $game->alignments()->whereTeamId($teamId)->get();
+		return new Collection;
+	}
 	/*
 	*********************** DATATABLE SETTINGS ******************************
 	*/			
@@ -182,5 +190,31 @@ class GameRepository extends BaseRepository
 			return $sanctionRepository->getTableCollectionForRender();
 		}
 		return null;
-	}	
+	}
+
+	public function getLocalAlignmentsTable($id)
+	{		
+		$alignmentRepository = new AlignmentRepository;		
+		$localTeamId = $this->get($id)->localTeam->id;
+		return $alignmentRepository->getAllTable('games.api.alignments', [$id, $localTeamId], 3, 'asc', 'local-alignments');
+	}
+
+	public function getAwayAlignmentsTable($id)
+	{		
+		$alignmentRepository = new AlignmentRepository;		
+		$awayTeamId = $this->get($id)->awayTeam->id;
+		return $alignmentRepository->getAllTable('games.api.alignments', [$id, $awayTeamId], 3, 'asc', 'away-alignments');
+	}
+
+	public function getDefaultTableForAlignments($id, $teamId)
+	{
+		$alignments = $this->getAlignments($id, $teamId);
+		if($alignments) {
+			$alignmentRepository = new AlignmentRepository;
+			$alignmentRepository->setDatatableCollection($alignments);
+			$alignmentRepository->setDefaultTableSettings();
+			return $alignmentRepository->getTableCollectionForRender();
+		}
+		return null;
+	}		
 }

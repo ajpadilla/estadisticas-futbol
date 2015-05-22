@@ -1,25 +1,15 @@
 <?php namespace soccer\Game\Alignment;
 
-use Eloquent;
-use Carbon\Carbon;
+use soccer\Game\FixtureBaseModel;
 
-class Alignment extends Eloquent {
+class Alignment extends FixtureBaseModel {
     /*
 	********************* Relations ***********************
     */	
-    public function game()
-    {
-       return $this->belongsTo('soccer\Game\Game');
-    }   
 
-    public function team()
+    public function position()
     {
-        return $this->belongsTo('soccer\Equipo\Equipo', 'team_id');
-    } 
-
-    public function player()
-    {
-       return $this->belongsTo('soccer\Player\Player');
+       return $this->belongsTo('soccer\Posicion\Posicion', 'position_id');
     }   
 
     public function type()

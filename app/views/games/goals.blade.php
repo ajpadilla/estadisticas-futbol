@@ -14,7 +14,6 @@
 				<div class="row">
 					<div class="col-md-12">
 						<?php $table = $goalsTable; ?>
-						<?php $scriptSection = false; ?>
 						@include('partials._index-table')
 					</div>
 				</div>

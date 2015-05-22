@@ -15,6 +15,7 @@ class CreateAlignmentsTable extends Migration {
 		Schema::create('alignments', function(Blueprint $table)
 		{
 			$table->increments('id');
+			$table->text('observations')->nullable();
 			$table->integer('game_id')->unsigned();
 			$table->foreign('game_id')->references('id')->on('games')->onDelete('cascade');			
 			$table->integer('team_id')->unsigned();

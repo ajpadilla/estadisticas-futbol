@@ -93,5 +93,7 @@
 	    {{ $goalsTable->script($scriptTableTemplate) }}
 	    {{ $changesTable->script($scriptTableTemplate) }}
 	    {{ $sanctionsTable->script($scriptTableTemplate) }}
+	    {{ $localAlignmentTable->script($scriptTableTemplate) }}
+	    {{ $awayAlignmentTable->script($scriptTableTemplate) }}
 	</script>	
 @stop

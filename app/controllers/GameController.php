@@ -107,8 +107,10 @@ class GameController extends \BaseController {
 		$goalsTable = $this->repository->getGoalsTable($game->id);
 		$sanctionsTable = $this->repository->getSanctionsTable($game->id);
 		$changesTable = $this->repository->getChangesTable($game->id);
+		$localAlignmentTable = $this->repository->getLocalAlignmentsTable($game->id);
+		$awayAlignmentTable = $this->repository->getAwayAlignmentsTable($game->id);
 		$scriptTableTemplate = 'partials._script-table-template';
-		return View::make('games.show', compact('game', 'goalsTable', 'changesTable', 'sanctionsTable', 'scriptTableTemplate'));
+		return View::make('games.show', compact('game', 'goalsTable', 'changesTable', 'sanctionsTable', 'localAlignmentTable', 'awayAlignmentTable', 'scriptTableTemplate'));
 	}
 
 	/**
@@ -278,5 +280,11 @@ class GameController extends \BaseController {
 	{
 		if(Request::ajax()) 
 			return $this->repository->getDefaultTableForSanctions($id);
+	}	
+
+	public function alignmentsApi($id, $teamId)
+	{
+		if(Request::ajax()) 
+			return $this->repository->getDefaultTableForAlignments($id, $teamId);
 	}
 }

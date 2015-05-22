@@ -14,7 +14,6 @@
 				<div class="row">
 					<div class="col-md-12">
 						<?php $table = $changesTable; ?>
-						<?php $scriptSection = 1 ?>
 						@include('partials._index-table')
 					</div>
 				</div>

@@ -51,6 +51,11 @@ class Game extends Eloquent {
     public function sanctions()
     {
         return $this->hasMany('soccer\Game\Sanction\Sanction');
+    }        
+
+    public function alignments()
+    {
+        return $this->hasMany('soccer\Game\Alignment\Alignment');
     }    
 
     /*
