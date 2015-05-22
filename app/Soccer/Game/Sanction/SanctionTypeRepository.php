@@ -20,8 +20,5 @@ class SanctionTypeRepository extends BaseRepository
 		$this->setListAllRoute('');
 	}
 
-	public function getAllForSelect()
-	{
-		return $this->getAll()->lists('name', 'id');
-	}	
+	
 }
