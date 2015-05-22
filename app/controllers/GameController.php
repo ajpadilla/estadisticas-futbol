@@ -170,9 +170,6 @@ class GameController extends \BaseController {
 	{
 		if (Request::ajax()) 
 		{
-			/*$this->addToResponseArray('players', []);
-			return $this->getResponseArrayJson();*/
-
 			$input = [];
 			$input['id'] = $id;
 			$input['teamId'] = $teamId;
@@ -207,15 +204,13 @@ class GameController extends \BaseController {
 				$this->setSuccess(true);
 				$this->addToResponseArray('goal', $goal);
 				$this->addToResponseArray('data', $input);
-				return $this->getResponseArrayJson();
 			}
 			catch (FormValidationException $e)
 			{
-				$this->setSuccess(false);
 				$this->addToResponseArray('errors', $e->getErrors()->all());
-				return $this->getResponseArrayJson();				
 			}
 		}
+		return $this->getResponseArrayJson();				
 	}
 
 	public function addSantionApi()
@@ -230,15 +225,13 @@ class GameController extends \BaseController {
 				$this->setSuccess(true);
 				$this->addToResponseArray('sanction', $sanction);
 				$this->addToResponseArray('data', $input);
-				return $this->getResponseArrayJson();
 			}
 			catch (FormValidationException $e)
 			{
-				$this->setSuccess(false);
 				$this->addToResponseArray('errors', $e->getErrors()->all());
-				return $this->getResponseArrayJson();				
 			}
 		}
+		return $this->getResponseArrayJson();				
 	}
 
 	public function addChangeApi()
@@ -263,6 +256,27 @@ class GameController extends \BaseController {
 			}
 		}
 	}
+
+	public function addAlignmentApi()
+	{
+		if(Request::ajax())
+		{
+			$input = Input::all();
+			try
+			{
+				$this->registerAlignmentForm->validate($input);
+				$alignment = $this->alignmentRepository->create($input);
+				$this->setSuccess(true);
+				$this->addToResponseArray('alignment', $alignment);
+				$this->addToResponseArray('data', $input);
+			}
+			catch (FormValidationException $e)
+			{
+				$this->addToResponseArray('errors', $e->getErrors()->all());
+			}
+		}
+		return $this->getResponseArrayJson();				
+	}	
 
 	public function goalsApi($id)
 	{
