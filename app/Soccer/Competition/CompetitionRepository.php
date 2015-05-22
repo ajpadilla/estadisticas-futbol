@@ -97,12 +97,12 @@ class CompetitionRepository extends BaseRepository
 
 		$this->collection->addColumn('Inicia', function($model)
 		{
-			 return $model->desde;
+			 return $model->from;
 		});
 
 		$this->collection->addColumn('Finaliza', function($model)
 		{
-			 return $model->hasta;
+			 return $model->to;
 		});
 
 		$this->collection->addColumn('Tipo de competencia', function($model)

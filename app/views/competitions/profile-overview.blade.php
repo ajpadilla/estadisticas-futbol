@@ -21,11 +21,11 @@
 										</tr>
 										<tr>
 											<td>Inicia</td>
-											<td id="card-name"><strong>{{ $competition->desde }}</strong></td>
+											<td id="card-name"><strong>{{ $competition->from }}</strong></td>
 										</tr>
 										<tr>
 											<td>Finaliza</td>
-											<td id="card-name"><strong>{{ $competition->hasta }}</strong></td>
+											<td id="card-name"><strong>{{ $competition->to }}</strong></td>
 										</tr>
 										@if($competition->international)
 											<tr>

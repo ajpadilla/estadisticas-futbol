@@ -146,5 +146,15 @@ class Competition extends Eloquent implements StaplerableInterface{
             if(!$group->isFullGames)
                 return false;
         return true;
-    }    
+    }   
+
+    public function getFromAttribute()
+    {
+        return $this->desde->format('d-m-Y');
+    } 
+
+    public function getToAttribute()
+    {
+        return $this->hasta->format('d-m-Y');
+    }     
 }
