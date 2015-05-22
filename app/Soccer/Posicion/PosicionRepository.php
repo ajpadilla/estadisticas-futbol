@@ -16,23 +16,11 @@ class PosicionRepository extends BaseRepository
 		];
 		$this->setModel(new Posicion);
 		$this->setListAllRoute('posiciones.api.lista');
-	}
-
-
-	public function getAll()
-	{
-		return Posicion::all();
 	}	
 
 	public function listAll()
 	{
 		return Posicion::select()->lists('nombre', 'id');
-	}
-
-	public function create($data = array())
-	{
-		$posicion = $this->model->create($data); 
-		return $posicion;
 	}
 
 	public function update($data = array())

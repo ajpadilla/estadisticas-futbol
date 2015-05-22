@@ -69,8 +69,8 @@
 					   <!-- /JUGADORES -->
 
 					   <!-- PARTIDOS TAB -->
-					   <div class="tab-pane fade" id="pro_changes">
-							@include('games.changes')
+					   <div class="tab-pane fade" id="pro_sanctions">
+							@include('games.sanctions')
 					   </div>
 					   <!-- /PARTIDOS -->			
 
@@ -86,4 +86,12 @@
 		</div>
 		<!-- /BOX -->					
 	</div>
-@stop	
+@stop
+
+@section('scripts')
+	<script type="text/javascript">
+	    {{ $goalsTable->script($scriptTableTemplate) }}
+	    {{ $changesTable->script($scriptTableTemplate) }}
+	    {{ $sanctionsTable->script($scriptTableTemplate) }}
+	</script>	
+@stop

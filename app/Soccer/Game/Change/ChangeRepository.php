@@ -22,7 +22,7 @@ class ChangeRepository extends BaseRepository
 				'Acciones'
 		];
 
-		$this->setModel(new Goal);
+		$this->setModel(new Change);
 		$this->setListAllRoute('changes.api.list');
 	}
 
@@ -43,7 +43,7 @@ class ChangeRepository extends BaseRepository
 
 	public function setBodyTableSettings()
 	{		
-		$this->collection->searchColumns('Equipo', 'Sale', 'Entra', 'Tiempo', );
+		$this->collection->searchColumns('Equipo', 'Sale', 'Entra', 'Tiempo');
 		$this->collection->orderColumns('Equipo', 'Sale', 'Entra', 'Tiempo', 'Observaciones');
 
 		$this->collection->addColumn('Equipo', function($model)

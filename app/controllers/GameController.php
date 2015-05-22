@@ -107,7 +107,8 @@ class GameController extends \BaseController {
 		$goalsTable = $this->repository->getGoalsTable($game->id);
 		$sanctionsTable = $this->repository->getSanctionsTable($game->id);
 		$changesTable = $this->repository->getChangesTable($game->id);
-		return View::make('games.show', compact('game', 'goalsTable', 'changesTable', 'sanctionsTable'));
+		$scriptTableTemplate = 'partials._script-table-template';
+		return View::make('games.show', compact('game', 'goalsTable', 'changesTable', 'sanctionsTable', 'scriptTableTemplate'));
 	}
 
 	/**

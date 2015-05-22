@@ -1,6 +1,9 @@
 <?php namespace soccer\Game;
 
 use soccer\Game\Game;
+use soccer\Game\Goal\GoalRepository;
+use soccer\Game\Change\ChangeRepository;
+use soccer\Game\Sanction\SanctionRepository;
 use soccer\Base\BaseRepository;
 use soccer\Equipo\EquipoRepository;
 use Carbon\Carbon;
@@ -30,7 +33,7 @@ class GameRepository extends BaseRepository
 
 	public function availableTeams($id)
 	{
-		return $this->get($id)->games;
+		return $this->get($id)->teams;
 	}
 
 	public function availablePlayersForGameTeam($id, $teamId)
@@ -130,7 +133,7 @@ class GameRepository extends BaseRepository
 	public function getGoalsTable($id)
 	{		
 		$goalRepository = new GoalRepository;		
-		return $goalRepository->getAllTable('games.api.goals', [$id]);
+		return $goalRepository->getAllTable('games.api.goals', [$id], 3, 'asc', 'goals');
 	}	
 
 	public function getDefaultTableForGoals($id)
@@ -148,7 +151,7 @@ class GameRepository extends BaseRepository
 	public function getChangesTable($id)
 	{		
 		$changeRepository = new ChangeRepository;		
-		return $changeRepository->getAllTable('games.api.changes', [$id]);
+		return $changeRepository->getAllTable('games.api.changes', [$id], 4, 'asc', 'changes');
 	}
 
 	public function getDefaultTableForChanges($id)
@@ -166,7 +169,7 @@ class GameRepository extends BaseRepository
 	public function getSanctionsTable($id)
 	{		
 		$sanctionRepository = new SanctionRepository;		
-		return $sanctionRepository->getAllTable('games.api.sanctions', [$id]);
+		return $sanctionRepository->getAllTable('games.api.sanctions', [$id], 3, 'asc', 'sanctions');
 	}
 
 	public function getDefaultTableForSanctions($id)

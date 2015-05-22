@@ -22,8 +22,6 @@
 		</div>
 	</div>
 </div>
-@if($game->hasChanges)	
-	<div id="add-change-to-game" class="hidden">
-		@include('games.add-change')
-	</div>	
-@endif
+<div id="add-change-to-game" class="hidden">
+	@include('games.add-change')
+</div>

@@ -108,7 +108,7 @@ class CompetitionController extends \BaseController {
 		$currentPhase = $this->repository->getCurrentPhase($id);
 		$formats = $this->competitionFormatRepository->getAll();
 		//$tableTemplate = 'groups.partials._table-template';
-		$scriptTableTemplate = 'groups.partials._script-table-template';
+		$scriptTableTemplate = 'partials._script-table-template';
 		return View::make('competitions.show', compact('competition', 'tables', 'gamesTables', 'tableTemplate', 'scriptTableTemplate', 'gameTypes', 'currentPhase', 'formats'));
 	}
 

@@ -1,9 +1,8 @@
 <?php namespace soccer\Game\Sanction;
 
-use Eloquent;
-use Carbon\Carbon;
+use soccer\Game\FixtureBaseModel;
 
-class Sanction extends Eloquent {
+class Sanction extends FixtureBaseModel {
     protected $fillable = ['observations', 'minute','second','type_id','game_id','team_id','player_id'];
 
     /*

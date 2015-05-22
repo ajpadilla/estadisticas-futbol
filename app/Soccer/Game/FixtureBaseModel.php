@@ -1,4 +1,4 @@
-<?php namespace soccer\Game\Goal;
+<?php namespace soccer\Game;
 
 use Eloquent;
 use Carbon\Carbon;
@@ -28,6 +28,6 @@ class FixtureBaseModel extends Eloquent {
 
     public function getTimeAttribute()
     {
-        return $this->minute + ':' + $this->second;
+        return (string)$this->minute . ':' . (string)$this->second;
     }
 }

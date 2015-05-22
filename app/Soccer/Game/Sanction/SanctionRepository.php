@@ -19,7 +19,7 @@ class SanctionRepository extends BaseRepository
 				'Acciones'
 		];
 
-		$this->setModel(new Goal);
+		$this->setModel(new Sanction);
 		$this->setListAllRoute('sanctions.api.list');
 	}
 

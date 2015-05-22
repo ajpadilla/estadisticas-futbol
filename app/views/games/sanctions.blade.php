@@ -13,7 +13,7 @@
 				<br>			
 				<div class="row">
 					<div class="col-md-12">
-						<?php $table = $changesTable; ?>
+						<?php $table = $sanctionsTable; ?>
 						<?php $scriptSection = 2 ?>
 						@include('partials._index-table')
 					</div>
@@ -22,8 +22,6 @@
 		</div>
 	</div>
 </div>
-@if($game->hasSanctions)	
-	<div id="add-sanction-to-game" class="hidden">
-		@include('games.add-sanction')
-	</div>	
-@endif
+<div id="add-sanction-to-game" class="hidden">
+	@include('games.add-sanction')
+</div>
