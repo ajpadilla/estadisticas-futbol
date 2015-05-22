@@ -4103,17 +4103,9 @@ var handleBootboxAddEquipoToJugador = function () {
         });
      }
 
-     var handleBootboxAddGoalToGame = function () {
+     var bootboxAddGoal = function  (gameId) {
 
-         $(".table").delegate(".add-goal", "click", function() {
-
-            /*console.log('Gol');
-            console.log($(this).attr('id'));
-            console.log($(this).attr('id').split('-')[2]);*/
-
-            var gameId = $(this).attr('id').split('-')[2];
             var url = $('#teams-for-games').attr('href').split('%')[0]+gameId;
-
             getTeamsForGames('#teams-for-games-id',url);
             getAvailablePlayersForGameGoal('#player-for-game-id', gameId);
             getAvailablePlayersForGameGoal('#assistance-for-game-id', gameId);
@@ -4231,8 +4223,7 @@ var handleBootboxAddEquipoToJugador = function () {
                                                                     label: "Success!",
                                                                     className: "btn-success",
                                                                     callback: function () {
-                                                                        location.reload();
-                                                                        //reloadDatatable('#datatable-' + $('button#add-game').attr('data-group-id'));
+                                                                        reloadDatatable('#datatable-goals')
                                                                     }
                                                                 }
                                                             }
@@ -4302,7 +4293,22 @@ var handleBootboxAddEquipoToJugador = function () {
                         $('#add-goals-to-game-form-div-box').hide().appendTo('#add-goals-to-game');
                     })
                     .modal('show');
+     }
 
+     var handleBootboxAddGoalToGame = function () {
+
+         $(".table").delegate(".add-goal", "click", function() {
+            /*console.log('Gol');
+            console.log($(this).attr('id'));
+            console.log($(this).attr('id').split('-')[2]);*/
+            var gameId = $(this).attr('id').split('-')[2];
+            bootboxAddGoal(gameId);
+            
+        });
+
+        $('button.add-goal').click(function () {
+            var gameId = $(this).attr('id').split('-')[2];
+            bootboxAddGoal(gameId);
         });
      }
 
