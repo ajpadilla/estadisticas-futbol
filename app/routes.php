@@ -174,6 +174,7 @@ Route::get('juegos/api-sanciones/{id}', array('as'=>'games.api.sanctions', 'uses
 Route::get('juegos/api-alineaciones/{id}/{teamId}', array('as'=>'games.api.alignments', 'uses'=>'GameController@alignmentsApi'));
 Route::get('juegos/api-eliminar-gol', array('as'=>'games.api.delete.goal', 'uses'=>'GameController@destroyGoalApi'));
 Route::get('juegos/api-eliminar-sancion', array('as'=>'games.api.delete.sanction', 'uses'=>'GameController@destroySanctionApi'));
+Route::get('juegos/api-eliminar-cambio', array('as'=>'games.api.delete.change', 'uses'=>'GameController@destroyChangeApi'));
 
 /*
 ********************************* GOALS TYPES FOR GAMES ********************************
