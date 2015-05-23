@@ -131,6 +131,10 @@
 		<!--Games-->
 		<a id="teams-for-games" href="{{ URL::route('games.api.teams.availables.game') }}"></a>
 		<a id="players-for-games" href="{{ URL::route('games.api.available.players.team') }}"></a>
+		<a id="delete-goal-game" href="{{ URL::route('games.api.delete.goal') }}"></a>
+		<a id="delete-sanction-game" href="{{ URL::route('games.api.delete.sanction') }}"></a>
+		<a id="delete-change-game" href="{{ URL::route('games.api.delete.change') }}"></a>
+
 		<!--Sanctions Types-->
 		<a id="list-of-sanction-types" href="{{ URL::route('sanction-types.api.select.list') }}"></a>
 		<!--Sanctions-->

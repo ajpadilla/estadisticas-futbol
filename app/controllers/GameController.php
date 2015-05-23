@@ -301,4 +301,26 @@ class GameController extends \BaseController {
 		if(Request::ajax()) 
 			return $this->repository->getDefaultTableForAlignments($id, $teamId);
 	}
+
+	public function destroyGoalApi()
+	{
+		if(Request::ajax())
+			$this->setSuccess($this->goalRepository->delete(Input::get('goalId')));
+		return $this->getResponseArrayJson();
+	}
+
+	public function destroySanctionApi()
+	{
+		if(Request::ajax())
+			$this->setSuccess($this->sanctionRepository->delete(Input::get('sanctionId')));
+		return $this->getResponseArrayJson();
+	}
+
+	public function destroyChangeApi()
+	{
+		if(Request::ajax())
+			$this->setSuccess($this->changeRepository->delete(Input::get('changeId')));
+		return $this->getResponseArrayJson();
+	}
+
 }
