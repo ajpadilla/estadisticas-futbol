@@ -4593,9 +4593,7 @@ var handleBootboxAddEquipoToJugador = function () {
     }
 
 
-
-
-     var handleBootboxAddChangeToGame = function () {
+    var handleBootboxAddChangeToGame = function () {
 
          $(".table").delegate(".add-change ", "click", function() {
             var gameId = $(this).attr('id').split('-')[2];
@@ -4796,6 +4794,52 @@ var handleBootboxAddEquipoToJugador = function () {
                     .modal('show');
      }
 
+
+    //Metodo para eliminar país de la BD.
+    var deleteGoal = function(idGoal) 
+    {
+        bootbox.confirm("¿Esta seguro de eliminar el Gol?", function(result) 
+        {
+            //console.log("Confirm result: "+result);
+            if (result == true)
+            {
+                $.ajax({
+                    type: 'GET',
+                    url: $('#delete-goal-game').attr('href'),
+                    data: {'goalId': idGoal},
+                    dataType: "JSON",
+                    success: function(response) {
+                        if (response.success == true) {
+                            $('#delete_goal_'+idGoal).parent().parent().remove();
+                            bootbox.dialog({
+                                message:" ¡Gol Eliminado!",
+                                title: "Éxito",
+                                buttons: {
+                                    success: {
+                                        label: "Success!",
+                                        className: "btn-success",
+                                        callback: function () {
+                                            reloadDatatable('#datatable-goals')
+                                        }
+                                    }
+                                }
+                            });
+                        }
+                    }
+                });
+            }
+        });
+    }
+
+    var implementActionsToGoal = function() 
+    {
+        $(".table").delegate(".delete-goal", "click", function() {
+             action = getAttributeIdActionSelect($(this).attr('id'));
+             console.log(action.number);
+             deleteGoal(action.number);
+        });
+    }
+
     return {
         init: function() {
             initChosen();
@@ -4851,6 +4895,7 @@ var handleBootboxAddEquipoToJugador = function () {
             implementActionsToPosition();
             implementActionsToTypeCompetition();
             implementActionsToCompetitions();
+            implementActionsToGoal();
 
 
             loadPositionSelectPlayerCreate();
