@@ -97,6 +97,43 @@ class GoalController extends \BaseController {
 		//
 	}
 
-	
+	public function showApi()
+	{
+		if (Request::ajax())
+		{
+			if (Input::has('goalId'))
+			{
+				$goal = $this->repository->get(Input::get('goalId'));
+				$this->setSuccess(($goal ? true : false));
+				$this->addToResponseArray('goal', $goal);
+				return $this->getResponseArrayJson();
+			}else{
+				return $this->getResponseArrayJson();
+			}
+		}
+	}
+
+	public function updateApi()
+	{
+		if(Request::ajax())
+		{
+			$input = Input::all();
+			try
+			{
+				$this->registerGoalForm->validate($input);
+				$goal = $this->repository->get($input['goal_id']);
+				$goal->update($input);
+				$this->setSuccess(true);
+				$this->addToResponseArray('goal', $goal);
+				return $this->getResponseArrayJson();					
+			}
+			catch (FormValidationException $e)
+			{
+				$this->addToResponseArray('errores', $e->getErrors()->all());
+				return $this->getResponseArrayJson();
+			}
+		}
+	}
+
 
 }
