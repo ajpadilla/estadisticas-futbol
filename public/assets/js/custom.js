@@ -4794,8 +4794,7 @@ var handleBootboxAddEquipoToJugador = function () {
                     .modal('show');
      }
 
-
-    //Metodo para eliminar país de la BD.
+    
     var deleteGoal = function(idGoal) 
     {
         bootbox.confirm("¿Esta seguro de eliminar el Gol?", function(result) 
@@ -4835,8 +4834,53 @@ var handleBootboxAddEquipoToJugador = function () {
     {
         $(".table").delegate(".delete-goal", "click", function() {
              action = getAttributeIdActionSelect($(this).attr('id'));
-             console.log(action.number);
+             //console.log(action.number);
              deleteGoal(action.number);
+        });
+    }
+
+
+    var deleteSanction = function(idSanction) 
+    {
+        bootbox.confirm("¿Esta seguro de eliminar la sanción?", function(result) 
+        {
+            //console.log("Confirm result: "+result);
+            if (result == true)
+            {
+                $.ajax({
+                    type: 'GET',
+                    url: $('#delete-sanction-game').attr('href'),
+                    data: {'sanctionId': idSanction},
+                    dataType: "JSON",
+                    success: function(response) {
+                        if (response.success == true) {
+                            $('#delete_sanction_'+idSanction).parent().parent().remove();
+                            bootbox.dialog({
+                                message:" ¡Gol Eliminado!",
+                                title: "Éxito",
+                                buttons: {
+                                    success: {
+                                        label: "Success!",
+                                        className: "btn-success",
+                                        callback: function () {
+                                            reloadDatatable('#datatable-sanctions')
+                                        }
+                                    }
+                                }
+                            });
+                        }
+                    }
+                });
+            }
+        });
+    }
+
+    var implementActionsToSanction = function() 
+    {
+        $(".table").delegate(".delete-sanction", "click", function() {
+             action = getAttributeIdActionSelect($(this).attr('id'));
+             //console.log(action.number);
+             deleteSanction(action.number);
         });
     }
 
@@ -4896,6 +4940,7 @@ var handleBootboxAddEquipoToJugador = function () {
             implementActionsToTypeCompetition();
             implementActionsToCompetitions();
             implementActionsToGoal();
+            implementActionsToSanction();
 
 
             loadPositionSelectPlayerCreate();
