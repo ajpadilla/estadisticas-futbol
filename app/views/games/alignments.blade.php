@@ -40,5 +40,5 @@
 	</div>
 </div>
 <div id="add-alignment-to-game" class="hidden">
-	@include('games.add-sanction')
+	@include('games.add-alignment')
 </div>
