@@ -316,5 +316,11 @@ class GameController extends \BaseController {
 		return $this->getResponseArrayJson();
 	}
 
+	public function destroyChangeApi()
+	{
+		if(Request::ajax())
+			$this->setSuccess($this->changeRepository->delete(Input::get('changeId')));
+		return $this->getResponseArrayJson();
+	}
 
 }
