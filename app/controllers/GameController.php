@@ -309,4 +309,12 @@ class GameController extends \BaseController {
 		return $this->getResponseArrayJson();
 	}
 
+	public function destroySanctionApi()
+	{
+		if(Request::ajax())
+			$this->setSuccess($this->sanctionRepository->delete(Input::get('sanctionId')));
+		return $this->getResponseArrayJson();
+	}
+
+
 }
