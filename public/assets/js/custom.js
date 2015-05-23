@@ -4856,7 +4856,7 @@ var handleBootboxAddEquipoToJugador = function () {
                         if (response.success == true) {
                             $('#delete_sanction_'+idSanction).parent().parent().remove();
                             bootbox.dialog({
-                                message:" ¡Gol Eliminado!",
+                                message:" ¡Sanción Eliminada!",
                                 title: "Éxito",
                                 buttons: {
                                     success: {
@@ -4881,6 +4881,50 @@ var handleBootboxAddEquipoToJugador = function () {
              action = getAttributeIdActionSelect($(this).attr('id'));
              //console.log(action.number);
              deleteSanction(action.number);
+        });
+    }
+
+     var deleteChange = function(idChange) 
+    {
+        bootbox.confirm("¿Esta seguro de eliminar el cambio?", function(result) 
+        {
+            //console.log("Confirm result: "+result);
+            if (result == true)
+            {
+                $.ajax({
+                    type: 'GET',
+                    url: $('#delete-change-game').attr('href'),
+                    data: {'changeId': idChange},
+                    dataType: "JSON",
+                    success: function(response) {
+                        if (response.success == true) {
+                            $('#delete_change_'+idChange).parent().parent().remove();
+                            bootbox.dialog({
+                                message:" ¡Cambio Eliminado!",
+                                title: "Éxito",
+                                buttons: {
+                                    success: {
+                                        label: "Success!",
+                                        className: "btn-success",
+                                        callback: function () {
+                                            reloadDatatable('#datatable-changes')
+                                        }
+                                    }
+                                }
+                            });
+                        }
+                    }
+                });
+            }
+        });
+    }
+
+    var implementActionsToChange = function() 
+    {
+        $(".table").delegate(".delete-change", "click", function() {
+             action = getAttributeIdActionSelect($(this).attr('id'));
+             //console.log(action.number);
+             deleteChange(action.number);
         });
     }
 
@@ -4941,6 +4985,7 @@ var handleBootboxAddEquipoToJugador = function () {
             implementActionsToCompetitions();
             implementActionsToGoal();
             implementActionsToSanction();
+            implementActionsToChange();
 
 
             loadPositionSelectPlayerCreate();
