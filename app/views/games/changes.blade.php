@@ -24,3 +24,7 @@
 <div id="add-change-to-game" class="hidden">
 	@include('games.add-change')
 </div>
+<div id="edit-change-to-game" class="hidden">
+	@include('games.edit-change')
+</div>	
+@include('games.edit-change-tpl')
