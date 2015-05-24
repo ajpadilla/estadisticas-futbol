@@ -24,3 +24,7 @@
 <div id="add-sanction-to-game" class="hidden">
 	@include('games.add-sanction')
 </div>
+<div id="edit-sanction-to-game" class="hidden">
+	@include('games.edit-sanction')
+</div>
+@include('games.edit-sanction-tpl')
