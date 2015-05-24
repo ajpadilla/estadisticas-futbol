@@ -39,6 +39,6 @@
 		</div>
 	</div>
 </div>
-{{--<div id="add-alignment-to-game" class="hidden">
-	@include('games.add-sanction')
-</div>--}}
+<div id="add-alignment-to-game" class="hidden">
+	@include('games.add-alignment')
+</div>
