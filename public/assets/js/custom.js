@@ -5202,7 +5202,7 @@ var handleBootboxAddEquipoToJugador = function () {
      var loadDataForEditSanction = function(idSanction) {
         $.ajax({
             type: 'GET',
-            url: $('#data-santction').attr('href'),    
+            url: $('#data-sanction').attr('href'),    
             data: {'sanctionId': idSanction},
             dataType: "JSON",
             success: function(response) 
@@ -5539,12 +5539,72 @@ var handleBootboxAddEquipoToJugador = function () {
         });
     }
 
+
+
+     var loadDataForEditChange = function(idChange) {
+        $.ajax({
+            type: 'GET',
+            url: $('#data-santction').attr('href'),    
+            data: {'changeId': idChange},
+            dataType: "JSON",
+            success: function(response) 
+            {
+                console.log(response);
+                 if (response != null) 
+                 {
+                    if (response.success) {
+                        var gameId = response.sanction.game_id;
+                        var url = $('#teams-for-games').attr('href').split('%')[0]+gameId;
+                    
+                        var sanction = $('#edit-sanction-to-game-form-div-box');
+                        var data = {
+                            title: "Editar Sanción",
+                            observations_sanction: response.sanction.observations,
+                            minute_sanction: response.sanction.minute,
+                            second_sanction: response.sanction.second,
+                            type_sanction_id: response.sanction.type_id,
+                            type_sanction: response.sanction.type.name,
+                            team_sanction_id: response.sanction.team_id,
+                            team_sanction: response.sanction.team.nombre,
+                            player_sanction_id: response.sanction.player_id,
+                            player_sanction: response.sanction.player.nombre,
+                        };
+                        var template = $('#edit-sanction-tpl').html();
+                        var html = Mustache.to_html(template, data);
+                        sanction.html(html);
+                        initChosen();
+
+                        getTeamsForGamesEditSanction(url);
+                        getAvailablePlayersForGameSanctionEdit(gameId);
+                        loadFieldSelect($('#list-of-sanction-types').attr('href'),'select#sanction-type-for-game-id-edit');
+
+                        $('select#team-for-sanction-edit').val(response.sanction.team_id);
+                        $('select#team-for-sanction-edit').trigger("chosen:updated");
+                        $('select#team-for-sanction-edit').on('chosen:updated', function(event){
+                            $('select#team-for-sanction-edit').val(response.sanction.team_id);
+                        });
+                        $('select#sanction-type-for-game-id-edit').val(response.sanction.type_id);
+                        $('select#sanction-type-for-game-id-edit').trigger("chosen:updated");
+                        $('select#sanction-type-for-game-id-edit').on('chosen:updated', function(event){
+                            $('select#sanction-type-for-game-id-edit').val(response.sanction.type_id);
+                        });
+                    }
+                } 
+            }
+        });
+    }
+
     var implementActionsToChange = function() 
     {
         $(".table").delegate(".delete-change", "click", function() {
              action = getAttributeIdActionSelect($(this).attr('id'));
              //console.log(action.number);
              deleteChange(action.number);
+        });
+
+        $(".table").delegate(".edit-change", "click", function() {
+             action = getAttributeIdActionSelect($(this).attr('id'));
+             console.log(action.number);
         });
     }
 
