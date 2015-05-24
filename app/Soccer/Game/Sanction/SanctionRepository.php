@@ -37,7 +37,7 @@ class SanctionRepository extends BaseRepository
 		$this->addColumnToCollection('Acciones', function($model)
 		{
 			$this->cleanActionColumn();
-			$this->addActionColumn("<a  class='edit-sanction' href='#edit-sanction-form' id='edit_sanction_".$model->id."'>Editar</a><br />");
+			$this->addActionColumn("<a  class='edit-sanction' href='#edit-sanction-form' id='edit_sanction_".$model->id."' data-game-id='".$model->game_id."'>Editar</a><br />");
 			$this->addActionColumn("<a class='delete-sanction' href='#' id='delete_sanction_".$model->id."'>Eliminar</a>");
 			return implode(" ", $this->getActionColumn());
 		});
