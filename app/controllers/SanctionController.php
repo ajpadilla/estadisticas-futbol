@@ -1,6 +1,20 @@
 <?php
+use soccer\Game\Sanction\SanctionRepository;
+use soccer\Forms\RegisterSanctionForm;
+use Laracasts\Validation\FormValidationException;
 
 class SanctionController extends \BaseController {
+
+	protected $repository;
+	protected $registerSanctionForm;
+
+	public function __construct(SanctionRepository $repository,
+		RegisterSanctionForm $registerSanctionForm){
+		$this->repository = $repository;
+		$this->registerSanctionForm = $registerSanctionForm;
+	}
+
+
 
 	/**
 	 * Display a listing of the resource.
@@ -82,5 +96,43 @@ class SanctionController extends \BaseController {
 		//
 	}
 
+
+	public function showApi()
+	{
+		if (Request::ajax())
+		{
+			if (Input::has('sanctionId'))
+			{
+				$sanction = $this->repository->get(Input::get('sanctionId'));
+				$this->setSuccess(($sanction ? true : false));
+				$this->addToResponseArray('sanction', $sanction);
+				return $this->getResponseArrayJson();
+			}else{
+				return $this->getResponseArrayJson();
+			}
+		}
+	}
+
+	public function updateApi()
+	{
+		if(Request::ajax())
+		{
+			$input = Input::all();
+			try
+			{
+				$this->registerSanctionForm->validate($input);
+				$sanction = $this->repository->get($input['sanction_id']);
+				$sanction->update($input);
+				$this->setSuccess(true);
+				$this->addToResponseArray('sanction', $sanction);
+				return $this->getResponseArrayJson();					
+			}
+			catch (FormValidationException $e)
+			{
+				$this->addToResponseArray('errores', $e->getErrors()->all());
+				return $this->getResponseArrayJson();
+			}
+		}
+	}
 
 }
