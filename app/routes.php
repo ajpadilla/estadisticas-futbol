@@ -197,6 +197,14 @@ Route::get('sanciones/api-ver', array('as'=>'sanctions.api.show', 'uses'=>'Sanct
 Route::post('sanciones/api-actualizar', array('as'=>'sanctions.api.update', 'uses'=>'SanctionController@updateApi'));
 
 /*
+********************************* CHANGE FOR GAMES ********************************
+*/
+
+Route::get('cambios/api-ver', array('as'=>'changes.api.show', 'uses'=>'ChangeController@showApi'));
+Route::post('cambios/api-actualizar', array('as'=>'changes.api.update', 'uses'=>'ChangeController@updateApi'));
+
+
+/*
 ********************************* SANCTIONS TYPES FOR GAMES ********************************
 */
 

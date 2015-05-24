@@ -145,6 +145,9 @@
 		<a id="update-sanction" href="{{ URL::route('sanctions.api.update') }}"></a>
 		<!--Change-->
 		<a id="add-new-change" href="{{ URL::route('games.api.add.change') }}"></a>
+		<a id="data-change" href="{{ URL::route('changes.api.show') }}"></a>
+		<a id="update-change" href="{{ URL::route('changes.api.update') }}"></a>
+		
 	</div>
 </div>
 <!-- /SIDEBAR -->
