@@ -1,19 +1,19 @@
 <?php
-use soccer\Game\Sanction\SanctionRepository;
-use soccer\Forms\RegisterSanctionForm;
+use soccer\Game\Change\ChangeRepository;
+use soccer\Forms\RegisterChangeForm;
 use Laracasts\Validation\FormValidationException;
 
-class SanctionController extends \BaseController {
+class ChangeController extends \BaseController {
+
 
 	protected $repository;
-	protected $registerSanctionForm;
+	protected $registerChangeForm;
 
-	public function __construct(SanctionRepository $repository,
-		RegisterSanctionForm $registerSanctionForm){
+	public function __construct(ChangeRepository $repository,
+		RegisterChangeForm $registerChangeForm){
 		$this->repository = $repository;
-		$this->registerSanctionForm = $registerSanctionForm;
+		$this->registerChangeForm = $registerChangeForm;
 	}
-
 
 
 	/**
@@ -100,11 +100,11 @@ class SanctionController extends \BaseController {
 	{
 		if (Request::ajax())
 		{
-			if (Input::has('sanctionId'))
+			if (Input::has('changeId'))
 			{
-				$sanction = $this->repository->get(Input::get('sanctionId'));
-				$this->setSuccess(($sanction ? true : false));
-				$this->addToResponseArray('sanction', $sanction);
+				$change = $this->repository->get(Input::get('changeId'));
+				$this->setSuccess(($change ? true : false));
+				$this->addToResponseArray('change', $change);
 				return $this->getResponseArrayJson();
 			}else{
 				return $this->getResponseArrayJson();
@@ -119,11 +119,11 @@ class SanctionController extends \BaseController {
 			$input = Input::all();
 			try
 			{
-				$this->registerSanctionForm->validate($input);
-				$sanction = $this->repository->get($input['sanction_id']);
-				$sanction->update($input);
+				$this->registerChangeForm->validate($input);
+				$change = $this->repository->get($input['change_id']);
+				$change->update($input);
 				$this->setSuccess(true);
-				$this->addToResponseArray('sanction', $sanction);
+				$this->addToResponseArray('change', $change);
 				return $this->getResponseArrayJson();					
 			}
 			catch (FormValidationException $e)
