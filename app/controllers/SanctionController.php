@@ -96,7 +96,6 @@ class SanctionController extends \BaseController {
 		//
 	}
 
-
 	public function showApi()
 	{
 		if (Request::ajax())
