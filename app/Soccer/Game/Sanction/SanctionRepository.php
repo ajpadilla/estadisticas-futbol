@@ -23,6 +23,11 @@ class SanctionRepository extends BaseRepository
 		$this->setListAllRoute('sanctions.api.list');
 	}
 
+	public function get($id)
+	{
+		return $this->model->with('team','player','type')->findOrFail($id);
+	}	
+
 	/*
 	*********************** DATATABLE SETTINGS ******************************
 	*/			
