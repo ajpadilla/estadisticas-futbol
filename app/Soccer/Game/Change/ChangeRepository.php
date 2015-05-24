@@ -26,6 +26,12 @@ class ChangeRepository extends BaseRepository
 		$this->setListAllRoute('changes.api.list');
 	}
 
+	public function get($id)
+	{
+		return $this->model->with('team','playerOut','playerIn')->findOrFail($id);
+	}	
+
+
 	/*
 	*********************** DATATABLE SETTINGS ******************************
 	*/			
@@ -35,7 +41,7 @@ class ChangeRepository extends BaseRepository
 		$this->addColumnToCollection('Acciones', function($model)
 		{
 			$this->cleanActionColumn();
-			$this->addActionColumn("<a  class='edit-change' href='#edit-change-form' id='edit_change_".$model->id."'>Editar</a><br />");
+			$this->addActionColumn("<a  class='edit-change' href='#edit-change-form' id='edit_change_".$model->id."' data-game-id='".$model->game_id."'>Editar</a><br />");
 			$this->addActionColumn("<a class='delete-change' href='#' id='delete_change_".$model->id."'>Eliminar</a>");
 			return implode(" ", $this->getActionColumn());
 		});
