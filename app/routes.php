@@ -190,6 +190,13 @@ Route::post('goles/api-actualizar', array('as'=>'goals.api.update', 'uses'=>'Goa
 Route::get('tipo-goles/api-seleccionar-lista',  ['as' => 'goal-types.api.select.list','uses' => 'GoalTypeController@getAllValue' ] );
 
 /*
+********************************* SANCTIONS FOR GAMES ********************************
+*/
+
+Route::get('sanciones/api-ver', array('as'=>'sanctions.api.show', 'uses'=>'SanctionController@showApi'));
+Route::post('sanciones/api-actualizar', array('as'=>'sanctions.api.update', 'uses'=>'SanctionController@updateApi'));
+
+/*
 ********************************* SANCTIONS TYPES FOR GAMES ********************************
 */
 
