@@ -4056,7 +4056,7 @@ var handleBootboxAddEquipoToJugador = function () {
             url: url,
             dataType:'json',
             success: function(response) {
-                //console.log(response.teams);
+                console.log(response.teams);
                  if (response.success == true) {
                         $(idField).html('');
                         $(idField).append('<option value=\"\"></option>');
@@ -6080,6 +6080,261 @@ var handleBootboxAddEquipoToJugador = function () {
         });
     }
 
+    var getTeamsForAlignment = function (idField, url,index) 
+     {
+        /*console.log(url);
+        console.log(idField);*/
+         $.ajax({
+            type: 'GET',
+            url: url,
+            dataType:'json',
+            success: function(response) {
+                //console.log(response.teams);
+                 if (response.success == true) {
+                        $(idField).html('');
+                        $(idField).append('<option value=\"\"></option>');
+                        $.each(response.teams, function (index, team){
+                            $(idField).append('<option value=\"'+team.id+'\">'+team.nombre+'</option>');
+                            $(idField).trigger("chosen:updated");
+                        });
+                        $(idField).val(index);
+                        $(idField).trigger("chosen:updated");
+                    }else{
+                        $(idField).html('');
+                        $(idField).append('<option value=\"\"></option>');
+                        $(idField).trigger("chosen:updated");
+                    }
+            }
+        });
+     }
+
+    var loadDataForEditAlignment = function(idAlignment) {
+        $.ajax({
+            type: 'GET',
+            url: $('#data-alignment').attr('href'),    
+            data: {'alignmentId': idAlignment},
+            dataType: "JSON",
+            success: function(response) 
+            {
+                //console.log(response);
+                 if (response != null) 
+                 {
+                    if (response.success)
+                     {
+                        var gameId = response.alignment.game_id;
+                        var url = $('#teams-for-games').attr('href').split('%')[0]+gameId;
+                    
+                        var alignment = $('#edit-alignment-to-game-form-div-box');
+                        var data = {
+                            title: "Editar Alineación",
+                            observations_alignment: response.alignment.observations,
+                            team_alignment_id: response.alignment.team_id,
+                            team_alignment: response.alignment.team.nombre,
+                            player_alignment_id: response.alignment.player_id,
+                            player_name: response.alignment.player.nombre,
+                            position_alignment_id: response.alignment.position_id,
+                            position_name: response.alignment.position.nombre,
+                            type_alignment_id: response.alignment.type_id,
+                            type_alignment_name: response.alignment.type.name
+                        };
+                        var template = $('#edit-alignment-tpl').html();
+                        var html = Mustache.to_html(template, data);
+                        alignment.html(html);
+                        //console.log(html)
+                        initChosen();
+                        getTeamsForAlignment('select#team-for-alignment-edit',url,response.alignment.team_id);
+                        getAvailablePlayersForAlignmentGame('select#team-for-alignment-edit','select#player-alignment-id-edit',gameId)
+                        loadFieldSelect($('#lista-posiciones').attr('href'),'select#position-alignment-id-edit');
+                        loadFieldSelect($('#list-of-alignment-types').attr('href'),'select#type-alignment-id-edit');
+                        
+                        $('select#position-alignment-id-edit').val(response.alignment.position_id);
+                        $('select#position-alignment-id-edit').trigger("chosen:updated");
+                        $('select#position-alignment-id-edit').on('chosen:updated', function(event){
+                            $('select#position-alignment-id-edit').val(response.alignment.position_id);
+                        });
+
+                        $('select#type-alignment-id-edit').val(response.alignment.type_id);
+                        $('select#type-alignment-id-edit').trigger("chosen:updated");
+                        $('select#type-alignment-id-edit').on('chosen:updated', function(event){
+                            $('select#type-alignment-id-edit').val(response.alignment.type_id);
+                        });
+                        bootboxEditAlignment(gameId, response.alignment.id);
+                    }
+                }
+            }
+        });
+    }
+
+    var bootboxEditAlignment = function  (gameId, alignmentId) {
+
+            addValidationRulesForms();
+            $('#edit-alignment-to-game-form').validate({
+                rules:{
+                    observations:{
+                        rangelength:[1,256],
+                    },
+                    type_id:{
+                        required: true,
+                        digits: true
+                    },
+                    team_id:{
+                        required: true,
+                        digits: true
+                    },
+                    player_id:{
+                        required: true,
+                        digits: true
+                    },
+                    position_id:{
+                        required: true,
+                        digits: true
+                    }
+                },
+                messages:{
+                    observations:{
+                        rangelength: 'Por favor ingrese entre [2, 256] caracteres',
+                    },
+                    type_id:{
+                        required: 'Este campo es obligatorio',
+                        digits: 'Ingrese un numero entero'
+                    },
+                    team_id:{
+                        required: 'Este campo es obligatorio',
+                        digits: 'Ingrese un numero entero'
+                    },
+                    player_id:{
+                        required: 'Este campo es obligatorio',
+                        digits: 'Ingrese un numero entero'
+                    },
+                    position_id:{
+                        required: 'Este campo es obligatorio',
+                        digits: 'Ingrese un numero entero'
+                    }
+                },
+                highlight:function(element){
+                    $(element).closest('.form-group').removeClass('has-success').addClass('has-error');
+                },
+                unhighlight:function(element){
+                    $(element).closest('.form-group').removeClass('has-error');
+                },
+                success:function(element){
+                    element.addClass('valid').closest('.form-group').removeClass('has-error').addClass('has-success');
+                },
+            });
+
+                
+            bootbox.dialog({
+                        message: $('#edit-alignment-to-game-form-div-box'),
+                        buttons: {
+                            success: {
+                                label: "Agregar",
+                                className: "btn-primary",
+                                callback: function () 
+                                {
+                                    if($('#edit-alignment-to-game-form').valid()) 
+                                    {
+                                        $("#edit-alignment-to-game-form").submit(function(e){
+                                            var formData = {
+                                                alignment_id: alignmentId,
+                                                observations: $('#observations-alignment-edit').val(),
+                                                game_id: gameId,
+                                                team_id: $('#team-for-alignment-edit').val(),
+                                                player_id: $('#player-alignment-id-edit').val(),
+                                                position_id: $('#position-alignment-id-edit').val(),
+                                                type_id: $('#type-alignment-id-edit').val(),
+                                            };
+                                            //console.log(formData);
+                                            $.ajax({
+                                                type: 'POST',
+                                                url: $('#update-alignment').attr('href'), 
+                                                data: formData,
+                                                dataType: "JSON",
+                                                success: function(responseServer) {
+                                                    //console.log(responseServer);
+                                                    if(responseServer.success) 
+                                                    {
+                                                        // Muestro otro dialog con información de éxito
+                                                        bootbox.dialog({
+                                                            message:"Alineación actualizada correctamente!",
+                                                            title: "Éxito",
+                                                            buttons: {
+                                                                success: {
+                                                                    label: "Success!",
+                                                                    className: "btn-success",
+                                                                    callback: function () {
+                                                                        reloadDatatable('#datatable-local-alignments');
+                                                                        reloadDatatable('#datatable-away-alignments');
+                                                                    }
+                                                                }
+                                                            }
+                                                        });
+                                                        // Limpio cada elemento de las clases añadidas por el validator
+                                                        $('#edit-alignment-to-game-form div').each(function(){
+                                                            cleanValidatorClasses(this);
+                                                        });
+                                                        //Reinicio el formulario
+                                                        $("#edit-alignment-to-game-form")[0].reset();
+                                                    }else{
+                                                        bootbox.dialog({
+                                                            message: responseServer.errors,
+                                                            title: "Error",
+                                                            buttons: {
+                                                                danger: {
+                                                                    label: "Danger!",
+                                                                    className: "btn-danger"
+                                                                }
+                                                            }
+                                                        });
+                                                        $('#edit-alignment-to-game-form div').each(function(){
+                                                            cleanValidatorClasses(this);
+                                                        });
+                                                    }
+                                                },
+                                                error: function(jqXHR, textStatus, errorThrown) {
+                                                   console.log(errorThrown);
+                                                   bootbox.dialog({
+                                                            message:" ¡Error al enviar datos al servidor!",
+                                                            title: "Error",
+                                                            buttons: {
+                                                                danger: {
+                                                                    label: "Danger!",
+                                                                    className: "btn-danger"
+                                                                }
+                                                            }
+                                                        });
+                                                        // Limpio cada elemento de las clases añadidas por el validator
+                                                        $('#edit-alignment-to-game-form div').each(function(){
+                                                            cleanValidatorClasses(this);
+                                                        });
+                                                        //Reinicio el formulario*/
+                                                }
+                                            });
+                                            e.preventDefault(); //Prevent Default action.
+                                            $(this).unbind('submit');
+                                        }); 
+                                        $("#edit-alignment-to-game-form").submit();
+                                    }else{
+                                        return false;
+                                    }
+                                    return false;
+                                }
+                            }
+                        },
+                            show: false // We will show it manually later
+                        })
+                    .on('shown.bs.modal', function() {
+                        $('#edit-alignment-to-game-form-div-box')
+                                .show();                             // Show the form
+                            })
+                    .on('hide.bs.modal', function(e) {
+                        // Bootbox will remove the modal (including the body which contains the form)
+                        // after hiding the modal
+                        // Therefor, we need to backup the form
+                        $('#edit-alignment-to-game-form-div-box').hide().appendTo('#edit-alignment-to-game');
+                    })
+                    .modal('show');
+     }
+
     var implementActionsToAlignment = function() 
     {
         $(".table").delegate(".delete-alignment", "click", function() {
@@ -6088,14 +6343,14 @@ var handleBootboxAddEquipoToJugador = function () {
              deleteAlignment(action.number);
         });
 
-        /*$(".table").delegate(".edit-alignment", "click", function() {
+        $(".table").delegate(".edit-alignment", "click", function() {
              action = getAttributeIdActionSelect($(this).attr('id'));
-             var changeId = action.number;
+             var alignmentId = action.number;
              var gameId = $(this).attr('data-game-id');
-             loadDataForEditChange(changeId);
-             bootboxEditChange(gameId, changeId);
+             loadDataForEditAlignment(alignmentId);
+             //bootboxEditAlignment(gameId, alignmentId);
              //console.log(action.number);
-        });*/
+        });
     }
 
 
