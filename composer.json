@@ -1,6 +1,6 @@
 {
 	"name": "Estadísticas de fútbol",
-	"description": "Sistema para control estadístico de fútbol.",
+	"description": "Sistema para control estadístico de fútbol. Pendiente usar conarwelsh/mustache-l4: dev-master",
 	"keywords": ["framework", "laravel"],
 	"license": "MIT",
 	"require": {
@@ -25,10 +25,10 @@
 		"bkwld/croppa": "~3.0",
 		"fzaninotto/faker" : "dev-master",
 		"nesbot/carbon": "~1.14",
-		"creitive/laravel4-breadcrumbs": "~1.0",
-		"barryvdh/laravel-debugbar": "~1.8"
+		"creitive/laravel4-breadcrumbs": "~1.0"
 	},
 	"require-dev": {
+		"barryvdh/laravel-debugbar": "~1.8",
 		"codeception/codeception": "2.0.*",
 		"fzaninotto/faker": "1.5.x-dev",
 		"way/generators": "~2.0",

@@ -3459,12 +3459,11 @@ var handleBootboxAddEquipoToJugador = function () {
                                             data: formData,
                                             dataType: "JSON",
                                             success: function(responseServer) {
-                                                console.log(responseServer);
                                                 if(responseServer.success == true) 
                                                 {
                                                     // Muestro otro dialog con información de éxito
                                                     bootbox.dialog({
-                                                        message: responseServer.group.name + " ha sido agregado correctamente!",
+                                                        message: responseServer.data.name + " ha sido agregado correctamente!",
                                                         title: "Éxito",
                                                         buttons: {
                                                             success: {
@@ -3484,7 +3483,6 @@ var handleBootboxAddEquipoToJugador = function () {
                                                     $("#add-group-to-phase-form")[0].reset();
                                                     location.reload();
                                                 }else{
-                                                    console.log(responseServer);
                                                      bootbox.dialog({
                                                         message:responseServer.errors,
                                                         title: "Error",
