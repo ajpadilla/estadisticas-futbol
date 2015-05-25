@@ -177,10 +177,32 @@ Route::get('juegos/api-eliminar-sancion', array('as'=>'games.api.delete.sanction
 Route::get('juegos/api-eliminar-cambio', array('as'=>'games.api.delete.change', 'uses'=>'GameController@destroyChangeApi'));
 
 /*
+********************************* GOALS FOR GAMES ********************************
+*/
+
+Route::get('goles/api-ver', array('as'=>'goals.api.show', 'uses'=>'GoalController@showApi'));
+Route::post('goles/api-actualizar', array('as'=>'goals.api.update', 'uses'=>'GoalController@updateApi'));
+
+/*
 ********************************* GOALS TYPES FOR GAMES ********************************
 */
 
 Route::get('tipo-goles/api-seleccionar-lista',  ['as' => 'goal-types.api.select.list','uses' => 'GoalTypeController@getAllValue' ] );
+
+/*
+********************************* SANCTIONS FOR GAMES ********************************
+*/
+
+Route::get('sanciones/api-ver', array('as'=>'sanctions.api.show', 'uses'=>'SanctionController@showApi'));
+Route::post('sanciones/api-actualizar', array('as'=>'sanctions.api.update', 'uses'=>'SanctionController@updateApi'));
+
+/*
+********************************* CHANGE FOR GAMES ********************************
+*/
+
+Route::get('cambios/api-ver', array('as'=>'changes.api.show', 'uses'=>'ChangeController@showApi'));
+Route::post('cambios/api-actualizar', array('as'=>'changes.api.update', 'uses'=>'ChangeController@updateApi'));
+
 
 /*
 ********************************* SANCTIONS TYPES FOR GAMES ********************************

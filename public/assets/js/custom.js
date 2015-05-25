@@ -4047,7 +4047,8 @@ var handleBootboxAddEquipoToJugador = function () {
 
      var getTeamsForGames = function (idField, url) 
      {
-        //console.log(url);
+        /*console.log(url);
+        console.log(idField);*/
          $.ajax({
             type: 'GET',
             url: url,
@@ -4828,6 +4829,320 @@ var handleBootboxAddEquipoToJugador = function () {
         });
     }
 
+    var loadDataForEditGoal = function(idGoal) {
+        $.ajax({
+            type: 'GET',
+            url: $('#data-goal').attr('href'),    
+            data: {'goalId': idGoal},
+            dataType: "JSON",
+            success: function(response) {
+                //console.log(response);
+                 if (response != null) 
+                 {
+                    if (response.success) {
+                        var gameId = response.goal.game_id;
+                        var url = $('#teams-for-games').attr('href').split('%')[0]+gameId;
+
+                        var goal = $('#edit-goals-to-game-form-div-box');
+                        var data = {
+                            title: "Editar Gol",
+                            observations_game: response.goal.observations,
+                            minute_game: response.goal.minute,
+                            second_game: response.goal.second,
+                            type_goal_id: response.goal.type_id,
+                            type_goal: response.goal.type.name,
+                            team_goal_id: response.goal.team_id,
+                            team_goal: response.goal.team.nombre,
+                            player_goal_id: response.goal.player_id,
+                            player_goal: response.goal.player.nombre,
+                            assistance_goal_id: response.goal.assistance_id,
+                            assistance_goal: response.goal.assistance.nombre,
+
+                        };
+                        var template = $('#edit-goal-tpl').html();
+                        var html = Mustache.to_html(template, data);
+                        goal.html(html);
+                        initChosen();
+                        getTeamsForGames('#team-for-game-edit',url);
+                        bootboxAddGoalEdit(response.goal.id,response.goal.game_id);
+
+                        $('select#team-for-game-edit').val(response.goal.team_id);
+                        $('select#team-for-game-edit').trigger("chosen:updated");
+                        $('select#team-for-game-edit').on('chosen:updated', function(event){
+                            $('select#team-for-game-edit').val(response.goal.team_id);
+                        });
+                        $('select#goal-types-for-games-id-edit').val(response.goal.type_id);
+                        $('select#goal-types-for-games-id-edit').trigger("chosen:updated");
+                        $('select#goal-types-for-games-id-edit').on('chosen:updated', function(event){
+                            $('select#goal-types-for-games-id-edit').val(response.goal.type_id);
+                        });
+                        /*$('#observations-game-edit').val(response.goal.observations);
+                        $('#minute-game-edit').val(response.goal.minute);
+                        $('#second-game-edit').val(response.goal.second);
+                        $('select#player-for-game-id-edit').html('<option value=\"'+response.goal.player.id+'\">'+response.goal.player.nombre+'</option>');
+                        $('select#player-for-game-id-edit').trigger("chosen:updated");
+                        $('select#assistance-for-game-id-edit').html('<option value=\"'+response.goal.assistance.id+'\">'+response.goal.assistance.nombre+'</option>');
+                        $('select#assistance-for-game-id-edit').trigger("chosen:updated");*/
+                    }
+                } 
+            }
+        });
+    }
+
+    var getAvailablePlayersForEditGoal = function (idField,gameId) {
+        $('select#team-for-game-edit').change(function () {
+            var teamId = $(this).val();
+            var url = $('#players-for-games').attr('href').split('%')[0]+gameId+'/'+teamId;
+            //console.log(url);
+            $.ajax({
+                type: 'GET',
+                url: url,
+                dataType:'json',
+                success: function(response) {
+                    //console.log(response);
+                    var option = '<option value=\"\"></option>';
+                    var chosenUpdate = 'chosen:updated';
+                    if (response.success == true) {
+                        $(idField).html('');
+                        $(idField).append(option);
+                        $.each(response.players,function (index,object){
+                            option = '<option value=\"'+index+'\">'+object+'</option>';
+                            $(idField).append(option);
+                            $(idField).trigger(chosenUpdate);
+                        });
+                    }else{
+                        $(idField).html('');
+                        $(idField).append(option);
+                        $(idField).trigger(chosenUpdate);
+                    }
+                }
+            });
+        });
+     }
+
+
+     var getTeamsForGoalGame = function (url) 
+     {
+        //console.log(url);
+         $.ajax({
+            type: 'GET',
+            url: url,
+            dataType:'json',
+            success: function(response) {
+                 //console.log(response);
+                    if (response.success == true) 
+                    {
+                        $('select##team-for-game-edit').html('');
+                        $('select##team-for-game-edit').append('<option value=\"\"></option>');
+                        $.each(response.teams,function (index,object){
+                            option = '<option value=\"'+object.id+'\">'+object.nombre+'</option>';
+                            //console.log(option);
+                            $('select##team-for-game-edit').append('<option value=\"'+object.id+'\">'+object.nombre+'</option>');
+                            $('select##team-for-game-edit').trigger('chosen:updated');
+                        });
+                    }else{
+                        $('select##team-for-game-edit').html('');
+                        $('select##team-for-game-edit').append(option);
+                        $('select##team-for-game-edit').trigger('chosen:updated');
+                    }
+            }
+        });
+     }
+
+     var bootboxAddGoalEdit = function  (goalId, gameId) {
+
+            getAvailablePlayersForEditGoal('select#player-for-game-id-edit', gameId);
+            getAvailablePlayersForEditGoal('select#assistance-for-game-id-edit', gameId);
+            loadFieldSelect($('#list-of-goal-types').attr('href'),'select#goal-types-for-games-id-edit');
+
+            addValidationRulesForms();
+            $('#edit-goals-to-game-form').validate({
+                rules:{
+                    observations:{
+                        rangelength:[1,256],
+                    },
+                    minute:{
+                        required: true,
+                        rangelength:[1,3],
+                    },
+                    second:{
+                        required: true,
+                        rangelength:[1,2],
+                    },
+                    type_id:{
+                        required: true,
+                        digits: true
+                    },
+                    team_id:{
+                        required: true,
+                        digits: true
+                    },
+                    player_id:{
+                        required: true,
+                        digits: true
+                    },
+                    assistance_id:{
+                        required: true,
+                        digits: true
+                    }
+                },
+                messages:{
+                    observations:{
+                        rangelength: 'Por favor ingrese entre [2, 256] caracteres',
+                    },
+                    minute:{
+                        required: 'Este campo es obligatorio',
+                        rangelength:'Por favor ingrese entre [1, 3] caracteres',
+                    },
+                    second:{
+                        required: 'Este campo es obligatorio',
+                        rangelength: 'Por favor ingrese entre [1, 2] caracteres',
+                    },
+                    type_id:{
+                        required: 'Este campo es obligatorio',
+                        digits: 'Ingrese un numero entero'
+                    },
+                    team_id:{
+                        required: 'Este campo es obligatorio',
+                        digits: 'Ingrese un numero entero'
+                    },
+                    player_id:{
+                        required: 'Este campo es obligatorio',
+                        digits: 'Ingrese un numero entero'
+                    },
+                    assistance_id:{
+                        required: 'Este campo es obligatorio',
+                        digits: 'Ingrese un numero entero'
+                    }
+                },
+                highlight:function(element){
+                    $(element).closest('.form-group').removeClass('has-success').addClass('has-error');
+                },
+                unhighlight:function(element){
+                    $(element).closest('.form-group').removeClass('has-error');
+                },
+                success:function(element){
+                    element.addClass('valid').closest('.form-group').removeClass('has-error').addClass('has-success');
+                },
+            });
+    
+
+            bootbox.dialog({
+                        message: $('#edit-goals-to-game-form-div-box'),
+                        buttons: {
+                            success: {
+                                label: "Agregar",
+                                className: "btn-primary",
+                                callback: function () 
+                                {
+                                    if($('#edit-goals-to-game-form').valid()) 
+                                    {
+                                        $("#edit-goals-to-game-form").submit(function(e){
+                                            var formData = {
+                                                goal_id: goalId,
+                                                observations: $('#observations-game-edit').val(),
+                                                minute: $('#minute-game-edit').val(),
+                                                second: $('#second-game-edit').val(),
+                                                type_id: $('#goal-types-for-games-id-edit').val(),
+                                                game_id: gameId,
+                                                team_id: $('#team-for-game-edit').val(),
+                                                player_id: $('#player-for-game-id-edit').val(),
+                                                assistance_id: $('#assistance-for-game-id-edit').val()
+                                            };
+                                            //console.log(formData);
+                                            $.ajax({
+                                                type: 'POST',
+                                                url: $('#update-data-goal').attr('href'), 
+                                                data: formData,
+                                                dataType: "JSON",
+                                                success: function(responseServer) {
+                                                    //console.log(responseServer);
+                                                    if(responseServer.success) 
+                                                    {
+                                                        $('#observations-game-edit').val(responseServer.goal.observations);
+                                                        $('#minute-game-edit').val(responseServer.goal.minute);
+                                                        $('#second-game-edit').val(responseServer.goal.second);
+                                                        // Muestro otro dialog con información de éxito
+                                                        bootbox.dialog({
+                                                            message:"Gol agregado correctamente!",
+                                                            title: "Éxito",
+                                                            buttons: {
+                                                                success: {
+                                                                    label: "Success!",
+                                                                    className: "btn-success",
+                                                                    callback: function () {
+                                                                        reloadDatatable('#datatable-goals')
+                                                                    }
+                                                                }
+                                                            }
+                                                        });
+                                                        // Limpio cada elemento de las clases añadidas por el validator
+                                                        $('#edit-goals-to-game-form div').each(function(){
+                                                            cleanValidatorClasses(this);
+                                                        });
+                                                        //Reinicio el formulario
+                                                        $("#edit-goals-to-game-form")[0].reset();
+                                                    }else{
+                                                        bootbox.dialog({
+                                                            message: responseServer.errors,
+                                                            title: "Error",
+                                                            buttons: {
+                                                                danger: {
+                                                                    label: "Danger!",
+                                                                    className: "btn-danger"
+                                                                }
+                                                            }
+                                                        });
+                                                        $('#edit-goals-to-game-form div').each(function(){
+                                                            cleanValidatorClasses(this);
+                                                        });
+                                                    }
+                                                },
+                                                error: function(jqXHR, textStatus, errorThrown) {
+                                                   console.log(errorThrown);
+                                                   bootbox.dialog({
+                                                            message:" ¡Error al enviar datos al servidor!",
+                                                            title: "Error",
+                                                            buttons: {
+                                                                danger: {
+                                                                    label: "Danger!",
+                                                                    className: "btn-danger"
+                                                                }
+                                                            }
+                                                        });
+                                                        // Limpio cada elemento de las clases añadidas por el validator
+                                                        $('#edit-goals-to-game-form div').each(function(){
+                                                            cleanValidatorClasses(this);
+                                                        });
+                                                        //Reinicio el formulario
+                                                }
+                                            });
+                                            e.preventDefault(); //Prevent Default action.
+                                            $(this).unbind('submit');
+                                        }); 
+                                        $("#edit-goals-to-game-form").submit();
+                                    }else{
+                                        return false;
+                                    }
+                                    return false;
+                                }
+                            }
+                        },
+                            show: false // We will show it manually later
+                        })
+                    .on('shown.bs.modal', function() {
+                        $('#edit-goals-to-game-form-div-box')
+                                .show();                             // Show the form
+                            })
+                    .on('hide.bs.modal', function(e) {
+                        // Bootbox will remove the modal (including the body which contains the form)
+                        // after hiding the modal
+                        // Therefor, we need to backup the form
+                        $('#edit-goals-to-game-form-div-box').hide().appendTo('#edit-goals-to-game');
+                    })
+                    .modal('show');
+     }
+
     var implementActionsToGoal = function() 
     {
         $(".table").delegate(".delete-goal", "click", function() {
@@ -4835,6 +5150,14 @@ var handleBootboxAddEquipoToJugador = function () {
              //console.log(action.number);
              deleteGoal(action.number);
         });
+
+        $(".table").delegate(".edit-goal", "click", function() {
+            action = getAttributeIdActionSelect($(this).attr('id'));
+            //console.log($(this).attr('data-goal-game-id'));
+            loadDataForEditGoal(action.number);
+        });
+
+
     }
 
 
@@ -4873,6 +5196,293 @@ var handleBootboxAddEquipoToJugador = function () {
         });
     }
 
+
+     var loadDataForEditSanction = function(idSanction) {
+        $.ajax({
+            type: 'GET',
+            url: $('#data-sanction').attr('href'),    
+            data: {'sanctionId': idSanction},
+            dataType: "JSON",
+            success: function(response) 
+            {
+                //console.log(response);
+                 if (response != null) 
+                 {
+                    if (response.success) {
+                        var gameId = response.sanction.game_id;
+                        var url = $('#teams-for-games').attr('href').split('%')[0]+gameId;
+                    
+                        var sanction = $('#edit-sanction-to-game-form-div-box');
+                        var data = {
+                            title: "Editar Sanción",
+                            observations_sanction: response.sanction.observations,
+                            minute_sanction: response.sanction.minute,
+                            second_sanction: response.sanction.second,
+                            type_sanction_id: response.sanction.type_id,
+                            type_sanction: response.sanction.type.name,
+                            team_sanction_id: response.sanction.team_id,
+                            team_sanction: response.sanction.team.nombre,
+                            player_sanction_id: response.sanction.player_id,
+                            player_sanction: response.sanction.player.nombre,
+                        };
+                        var template = $('#edit-sanction-tpl').html();
+                        var html = Mustache.to_html(template, data);
+                        sanction.html(html);
+                        initChosen();
+
+                        getTeamsForGamesEditSanction(url);
+                        getAvailablePlayersForGameSanctionEdit(gameId);
+                        loadFieldSelect($('#list-of-sanction-types').attr('href'),'select#sanction-type-for-game-id-edit');
+
+                        $('select#team-for-sanction-edit').val(response.sanction.team_id);
+                        $('select#team-for-sanction-edit').trigger("chosen:updated");
+                        $('select#team-for-sanction-edit').on('chosen:updated', function(event){
+                            $('select#team-for-sanction-edit').val(response.sanction.team_id);
+                        });
+                        $('select#sanction-type-for-game-id-edit').val(response.sanction.type_id);
+                        $('select#sanction-type-for-game-id-edit').trigger("chosen:updated");
+                        $('select#sanction-type-for-game-id-edit').on('chosen:updated', function(event){
+                            $('select#sanction-type-for-game-id-edit').val(response.sanction.type_id);
+                        });
+                    }
+                } 
+            }
+        });
+    }
+
+
+     var getTeamsForGamesEditSanction = function (url) 
+     {
+        //console.log(url);
+         $.ajax({
+            type: 'GET',
+            url: url,
+            dataType:'json',
+            success: function(response) {
+                 //console.log(response);
+                    if (response.success == true) 
+                    {
+                        $('select#team-for-sanction-edit').html('');
+                        $('select#team-for-sanction-edit').append('<option value=\"\"></option>');
+                        $.each(response.teams,function (index,object){
+                            option = '<option value=\"'+object.id+'\">'+object.nombre+'</option>';
+                            //console.log(option);
+                            $('select#team-for-sanction-edit').append('<option value=\"'+object.id+'\">'+object.nombre+'</option>');
+                            $('select#team-for-sanction-edit').trigger('chosen:updated');
+                        });
+                    }else{
+                        $('select#team-for-sanction-edit').html('');
+                        $('select#team-for-sanction-edit').append(option);
+                        $('select#team-for-sanction-edit').trigger('chosen:updated');
+                    }
+            }
+        });
+     }
+
+
+       var getAvailablePlayersForGameSanctionEdit = function (gameId) {
+        //console.log(gameId);
+        $('select#team-for-sanction-edit').change(function () {
+            var teamId = $(this).val();
+            var url = $('#players-for-games').attr('href').split('%')[0]+gameId+'/'+teamId;
+            $.ajax({
+                type: 'GET',
+                url: url,
+                dataType:'json',
+                success: function(response) {
+                    //console.log(response);
+                    if (response.success == true) {
+                        $('select#player-for-sanction-id-edit').html('');
+                        $('select#player-for-sanction-id-edit').append('<option value=\"\"></option>');
+                        $.each(response.players, function (index, player){
+                            $('select#player-for-sanction-id-edit').append('<option value=\"'+index+'\">'+player+'</option>');
+                            $('select#player-for-sanction-id-edit').trigger("chosen:updated");
+                        });
+                    }else{
+                        $('select#player-for-sanction-id-edit').html('');
+                        $('select#player-for-sanction-id-edit').append('<option value=\"\"></option>');
+                        $('select#player-for-sanction-id-edit').trigger("chosen:updated");
+                    }
+                }
+            });
+        });
+     }
+
+    var bootboxEditSanction = function (gameId, sanctionId) {
+
+            addValidationRulesForms();
+            $('#edit-sanction-to-game-form').trigger('reset');
+            $('#edit-sanction-to-game-form').validate({
+                rules:{
+                    observations:{
+                        rangelength:[1,256],
+                    },
+                    minute:{
+                        required: true,
+                        rangelength:[1,3],
+                    },
+                    second:{
+                        required: true,
+                        rangelength:[1,2],
+                    },
+                    type_id:{
+                        required: true,
+                        digits: true
+                    },
+                    team_id:{
+                        required: true,
+                        digits: true
+                    },
+                    player_id:{
+                        required: true,
+                        digits: true
+                    },
+                },
+                messages:{
+                    observations:{
+                        rangelength: 'Por favor ingrese entre [2, 256] caracteres',
+                    },
+                    minute:{
+                        required: 'Este campo es obligatorio',
+                        rangelength:'Por favor ingrese entre [1, 3] caracteres',
+                    },
+                    second:{
+                        required: 'Este campo es obligatorio',
+                        rangelength: 'Por favor ingrese entre [1, 2] caracteres',
+                    },
+                    type_id:{
+                        required: 'Este campo es obligatorio',
+                        digits: 'Ingrese un numero entero'
+                    },
+                    team_id:{
+                        required: 'Este campo es obligatorio',
+                        digits: 'Ingrese un numero entero'
+                    },
+                    player_id:{
+                        required: 'Este campo es obligatorio',
+                        digits: 'Ingrese un numero entero'
+                    },
+                },
+                highlight:function(element){
+                    $(element).closest('.form-group').removeClass('has-success').addClass('has-error');
+                },
+                unhighlight:function(element){
+                    $(element).closest('.form-group').removeClass('has-error');
+                },
+                success:function(element){
+                    element.addClass('valid').closest('.form-group').removeClass('has-error').addClass('has-success');
+                },
+            });
+
+                
+            bootbox.dialog({
+                        message: $('#edit-sanction-to-game-form-div-box'),
+                        buttons: {
+                            success: {
+                                label: "Agregar",
+                                className: "btn-primary",
+                                callback: function () 
+                                {
+                                    if($('#edit-sanction-to-game-form').valid()) 
+                                    {
+                                        $("#edit-sanction-to-game-form").submit(function(e){
+                                            var formData = {
+                                                sanction_id: sanctionId,
+                                                observations: $('#observations-sanction-edit').val(),
+                                                minute: $('#minute-sanction-edit').val(),
+                                                second: $('#second-sanction-edit').val(),
+                                                type_id: $('select#sanction-type-for-game-id-edit').val(),
+                                                game_id: gameId,
+                                                team_id: $('select#team-for-sanction-edit').val(),
+                                                player_id: $('select#player-for-sanction-id-edit').val(),
+                                            };
+                                            //console.log(formData);
+                                            $.ajax({
+                                                type: 'POST',
+                                                url: $('#update-sanction').attr('href'), 
+                                                data: formData,
+                                                dataType: "JSON",
+                                                success: function(responseServer) {
+                                                    //console.log(responseServer);
+                                                    if(responseServer.success) 
+                                                    {
+                                                        bootbox.dialog({
+                                                            message:"Sanción actualizada correctamente!",
+                                                            title: "Éxito",
+                                                            buttons: {
+                                                                success: {
+                                                                    label: "Success!",
+                                                                    className: "btn-success",
+                                                                    callback: function () {
+                                                                        reloadDatatable('#datatable-sanctions')
+                                                                    }
+                                                                }
+                                                            }
+                                                        });
+                                                        $('#edit-sanction-to-game-form div').each(function(){
+                                                            cleanValidatorClasses(this);
+                                                        });
+                                                        $("#edit-sanction-to-game-form")[0].reset();
+                                                    }else{
+                                                        bootbox.dialog({
+                                                            message: responseServer.errors,
+                                                            title: "Error",
+                                                            buttons: {
+                                                                danger: {
+                                                                    label: "Danger!",
+                                                                    className: "btn-danger"
+                                                                }
+                                                            }
+                                                        });
+                                                        $('#edit-sanction-to-game-form div').each(function(){
+                                                            cleanValidatorClasses(this);
+                                                        });
+                                                    }
+                                                },
+                                                error: function(jqXHR, textStatus, errorThrown) {
+                                                   console.log(errorThrown);
+                                                   bootbox.dialog({
+                                                            message:" ¡Error al enviar datos al servidor!",
+                                                            title: "Error",
+                                                            buttons: {
+                                                                danger: {
+                                                                    label: "Danger!",
+                                                                    className: "btn-danger"
+                                                                }
+                                                            }
+                                                        });
+                                                        $('#edit-sanction-to-game-form div').each(function(){
+                                                            cleanValidatorClasses(this);
+                                                        });
+                                                        //Reinicio el formulario
+                                                }
+                                            });
+                                            e.preventDefault(); //Prevent Default action.
+                                            $(this).unbind('submit');
+                                        }); 
+                                        $("#edit-sanction-to-game-form").submit();
+                                    }else{
+                                        return false;
+                                    }
+                                    return false;
+                                }
+                            }
+                        },
+                            show: false // We will show it manually later
+                        })
+                    .on('shown.bs.modal', function() {
+                        $('#edit-sanction-to-game-form-div-box')
+                                .show();                             // Show the form
+                            })
+                    .on('hide.bs.modal', function(e) {
+                        // Bootbox will remove the modal (including the body which contains the form)
+                        // after hiding the modal
+                        // Therefor, we need to backup the form
+                        $('#edit-sanction-to-game-form-div-box').hide().appendTo('#edit-sanction-to-game');
+                    })
+                    .modal('show');
+     }
+
     var implementActionsToSanction = function() 
     {
         $(".table").delegate(".delete-sanction", "click", function() {
@@ -4880,9 +5490,19 @@ var handleBootboxAddEquipoToJugador = function () {
              //console.log(action.number);
              deleteSanction(action.number);
         });
+
+        $(".table").delegate(".edit-sanction", "click", function() {
+             action = getAttributeIdActionSelect($(this).attr('id'));
+             var sanctionId = action.number;
+             var gameId = $(this).attr('data-game-id');
+             loadDataForEditSanction(sanctionId);
+             bootboxEditSanction(gameId, sanctionId);
+             //console.log(action.number);
+        });
     }
 
-     var deleteChange = function(idChange) 
+
+    var deleteChange = function(idChange) 
     {
         bootbox.confirm("¿Esta seguro de eliminar el cambio?", function(result) 
         {
@@ -4917,12 +5537,283 @@ var handleBootboxAddEquipoToJugador = function () {
         });
     }
 
+    var getAvailablePlayersForGameChangeEdit = function (idField,gameId) {
+        $('select#team-for-change-edit').change(function () {
+            var teamId = $(this).val();
+            var url = $('#players-for-games').attr('href').split('%')[0]+gameId+'/'+teamId;
+            //console.log(url);
+            $.ajax({
+                type: 'GET',
+                url: url,
+                dataType:'json',
+                success: function(response) {
+                    //console.log(response);
+                    var option = '<option value=\"\"></option>';
+                    var chosenUpdate = 'chosen:updated';
+                    if (response.success == true) {
+                        $(idField).html('');
+                        $(idField).append(option);
+                        $.each(response.players,function (index,object){
+                            option = '<option value=\"'+index+'\">'+object+'</option>';
+                            $(idField).append(option);
+                            $(idField).trigger(chosenUpdate);
+                        });
+                    }else{
+                        $(idField).html('');
+                        $(idField).append(option);
+                        $(idField).trigger(chosenUpdate);
+                    }
+                }
+            });
+        });
+    }
+
+
+     var loadDataForEditChange = function(idChange) {
+        $.ajax({
+            type: 'GET',
+            url: $('#data-change').attr('href'),    
+            data: {'changeId': idChange},
+            dataType: "JSON",
+            success: function(response) 
+            {
+                //console.log(response);
+                 if (response != null) 
+                 {
+                    if (response.success) {
+                        var gameId = response.change.game_id;
+                        var url = $('#teams-for-games').attr('href').split('%')[0]+gameId;
+                    
+                        var change = $('#edit-change-to-game-form-div-box');
+                        var data = {
+                            title: "Editar Cambio",
+                            observations_change: response.change.observations,
+                            minute_change: response.change.minute,
+                            second_change: response.change.second,
+                            team_change_id: response.change.team_id,
+                            team_change: response.change.team.nombre,
+                            player_change_out_id: response.change.player_out_id,
+                            player_out_name: response.change.player_out.nombre,
+                            player_change_in_id: response.change.player_in_id,
+                            player_in_name: response.change.player_in.nombre,
+                        };
+                        var template = $('#edit-change-tpl').html();
+                        var html = Mustache.to_html(template, data);
+                        change.html(html);
+                        //console.log(html)
+                        initChosen();
+
+                        getTeamsForGames('#team-for-change-edit',url);
+                        getAvailablePlayersForGameChangeEdit('select#player-change-out-id-edit', gameId);
+                        getAvailablePlayersForGameChangeEdit('select#player-change-in-id-edit', gameId);
+
+                        $('select#team-for-change-edit').val(response.change.team_id);
+                        $('select#team-for-change-edit').trigger("chosen:updated");
+                        $('select#team-for-change-edit').on('chosen:updated', function(event){
+                            $('select#team-for-change-edit').val(response.change.team_id);
+                        });
+                    }
+                }
+            }
+        });
+    }
+
+    var bootboxEditChange = function  (gameId, changeId) {
+
+            addValidationRulesForms();
+            $('#edit-change-to-game-form').validate({
+                rules:{
+                    observations:{
+                        rangelength:[1,256],
+                    },
+                    minute:{
+                        required: true,
+                        rangelength:[1,3],
+                    },
+                    second:{
+                        required: true,
+                        rangelength:[1,2],
+                    },
+                    team_id:{
+                        required: true,
+                        digits: true
+                    },
+                    player_out_id:{
+                        required: true,
+                        digits: true
+                    },
+                    player_in_id:{
+                        required: true,
+                        digits: true
+                    },
+                },
+                messages:{
+                    observations:{
+                        rangelength: 'Por favor ingrese entre [2, 256] caracteres',
+                    },
+                    minute:{
+                        required: 'Este campo es obligatorio',
+                        rangelength:'Por favor ingrese entre [1, 3] caracteres',
+                    },
+                    second:{
+                        required: 'Este campo es obligatorio',
+                        rangelength: 'Por favor ingrese entre [1, 2] caracteres',
+                    },
+                    type_id:{
+                        required: 'Este campo es obligatorio',
+                        digits: 'Ingrese un numero entero'
+                    },
+                    team_id:{
+                        required: 'Este campo es obligatorio',
+                        digits: 'Ingrese un numero entero'
+                    },
+                    player_out_id:{
+                        required: 'Este campo es obligatorio',
+                        digits: 'Ingrese un numero entero'
+                    },
+                    player_in_id:{
+                        required: 'Este campo es obligatorio',
+                        digits: 'Ingrese un numero entero'
+                    },
+                },
+                highlight:function(element){
+                    $(element).closest('.form-group').removeClass('has-success').addClass('has-error');
+                },
+                unhighlight:function(element){
+                    $(element).closest('.form-group').removeClass('has-error');
+                },
+                success:function(element){
+                    element.addClass('valid').closest('.form-group').removeClass('has-error').addClass('has-success');
+                },
+            });
+
+                
+            bootbox.dialog({
+                        message: $('#edit-change-to-game-form-div-box'),
+                        buttons: {
+                            success: {
+                                label: "Agregar",
+                                className: "btn-primary",
+                                callback: function () 
+                                {
+                                    if($('#edit-change-to-game-form').valid()) 
+                                    {
+                                        $("#edit-change-to-game-form").submit(function(e){
+                                            var formData = {
+                                                change_id: changeId,
+                                                observations: $('#observations-change-edit').val(),
+                                                minute: $('#minute-change-edit').val(),
+                                                second: $('#second-change-edit').val(),
+                                                game_id: gameId,
+                                                team_id: $('select#team-for-change-edit').val(),
+                                                player_out_id: $('select#player-change-out-id-edit').val(),
+                                                player_in_id: $('select#player-change-in-id-edit').val(),
+                                            };
+                                            $.ajax({
+                                                type: 'POST',
+                                                url: $('#update-change').attr('href'), 
+                                                data: formData,
+                                                dataType: "JSON",
+                                                success: function(responseServer) {
+                                                    console.log(responseServer);
+                                                    if(responseServer.success) 
+                                                    {
+                                                        // Muestro otro dialog con información de éxito
+                                                        bootbox.dialog({
+                                                            message:"Cambio actualizado correctamente!",
+                                                            title: "Éxito",
+                                                            buttons: {
+                                                                success: {
+                                                                    label: "Success!",
+                                                                    className: "btn-success",
+                                                                    callback: function () {
+                                                                        reloadDatatable('#datatable-changes');
+                                                                    }
+                                                                }
+                                                            }
+                                                        });
+                                                        // Limpio cada elemento de las clases añadidas por el validator
+                                                        $('#edit-change-to-game-form div').each(function(){
+                                                            cleanValidatorClasses(this);
+                                                        });
+                                                        //Reinicio el formulario
+                                                        $("#edit-change-to-game-form")[0].reset();
+                                                    }else{
+                                                        bootbox.dialog({
+                                                            message: responseServer.errors,
+                                                            title: "Error",
+                                                            buttons: {
+                                                                danger: {
+                                                                    label: "Danger!",
+                                                                    className: "btn-danger"
+                                                                }
+                                                            }
+                                                        });
+                                                        $('#edit-change-to-game-form div').each(function(){
+                                                            cleanValidatorClasses(this);
+                                                        });
+                                                    }
+                                                },
+                                                error: function(jqXHR, textStatus, errorThrown) {
+                                                   console.log(errorThrown);
+                                                   bootbox.dialog({
+                                                            message:" ¡Error al enviar datos al servidor!",
+                                                            title: "Error",
+                                                            buttons: {
+                                                                danger: {
+                                                                    label: "Danger!",
+                                                                    className: "btn-danger"
+                                                                }
+                                                            }
+                                                        });
+                                                        // Limpio cada elemento de las clases añadidas por el validator
+                                                        $('#edit-change-to-game-form div').each(function(){
+                                                            cleanValidatorClasses(this);
+                                                        });
+                                                        //Reinicio el formulario*/
+                                                }
+                                            });
+                                            e.preventDefault(); //Prevent Default action.
+                                            $(this).unbind('submit');
+                                        }); 
+                                        $("#edit-change-to-game-form").submit();
+                                    }else{
+                                        return false;
+                                    }
+                                    return false;
+                                }
+                            }
+                        },
+                            show: false // We will show it manually later
+                        })
+                    .on('shown.bs.modal', function() {
+                        $('#edit-change-to-game-form-div-box')
+                                .show();                             // Show the form
+                            })
+                    .on('hide.bs.modal', function(e) {
+                        // Bootbox will remove the modal (including the body which contains the form)
+                        // after hiding the modal
+                        // Therefor, we need to backup the form
+                        $('#edit-change-to-game-form-div-box').hide().appendTo('#edit-change-to-game');
+                    })
+                    .modal('show');
+     }
+
     var implementActionsToChange = function() 
     {
         $(".table").delegate(".delete-change", "click", function() {
              action = getAttributeIdActionSelect($(this).attr('id'));
              //console.log(action.number);
              deleteChange(action.number);
+        });
+
+        $(".table").delegate(".edit-change", "click", function() {
+             action = getAttributeIdActionSelect($(this).attr('id'));
+             var changeId = action.number;
+             var gameId = $(this).attr('data-game-id');
+             loadDataForEditChange(changeId);
+             bootboxEditChange(gameId, changeId);
+             //console.log(action.number);
         });
     }
 

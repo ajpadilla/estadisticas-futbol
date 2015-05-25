@@ -1,20 +1,19 @@
 <?php
-
-use soccer\Forms\RegisterGoalForm;
-use soccer\Game\Goal\GoalRepository;
+use soccer\Game\Sanction\SanctionRepository;
+use soccer\Forms\RegisterSanctionForm;
 use Laracasts\Validation\FormValidationException;
 
-class GoalController extends \BaseController {
+class SanctionController extends \BaseController {
 
 	protected $repository;
-	protected $registerGoalForm;
+	protected $registerSanctionForm;
 
-	public function __construct(GoalRepository $repository,
-			RegisterGoalForm $registerGoalForm
-		) {
+	public function __construct(SanctionRepository $repository,
+		RegisterSanctionForm $registerSanctionForm){
 		$this->repository = $repository;
-		$this->registerGoalForm = $registerGoalForm;
+		$this->registerSanctionForm = $registerSanctionForm;
 	}
+
 
 
 	/**
@@ -101,11 +100,11 @@ class GoalController extends \BaseController {
 	{
 		if (Request::ajax())
 		{
-			if (Input::has('goalId'))
+			if (Input::has('sanctionId'))
 			{
-				$goal = $this->repository->get(Input::get('goalId'));
-				$this->setSuccess(($goal ? true : false));
-				$this->addToResponseArray('goal', $goal);
+				$sanction = $this->repository->get(Input::get('sanctionId'));
+				$this->setSuccess(($sanction ? true : false));
+				$this->addToResponseArray('sanction', $sanction);
 				return $this->getResponseArrayJson();
 			}else{
 				return $this->getResponseArrayJson();
@@ -120,11 +119,11 @@ class GoalController extends \BaseController {
 			$input = Input::all();
 			try
 			{
-				$this->registerGoalForm->validate($input);
-				$goal = $this->repository->get($input['goal_id']);
-				$goal->update($input);
+				$this->registerSanctionForm->validate($input);
+				$sanction = $this->repository->get($input['sanction_id']);
+				$sanction->update($input);
 				$this->setSuccess(true);
-				$this->addToResponseArray('goal', $goal);
+				$this->addToResponseArray('sanction', $sanction);
 				return $this->getResponseArrayJson();					
 			}
 			catch (FormValidationException $e)
@@ -134,6 +133,5 @@ class GoalController extends \BaseController {
 			}
 		}
 	}
-
 
 }

@@ -1,19 +1,18 @@
 <?php
-
-use soccer\Forms\RegisterGoalForm;
-use soccer\Game\Goal\GoalRepository;
+use soccer\Game\Change\ChangeRepository;
+use soccer\Forms\RegisterChangeForm;
 use Laracasts\Validation\FormValidationException;
 
-class GoalController extends \BaseController {
+class ChangeController extends \BaseController {
+
 
 	protected $repository;
-	protected $registerGoalForm;
+	protected $registerChangeForm;
 
-	public function __construct(GoalRepository $repository,
-			RegisterGoalForm $registerGoalForm
-		) {
+	public function __construct(ChangeRepository $repository,
+		RegisterChangeForm $registerChangeForm){
 		$this->repository = $repository;
-		$this->registerGoalForm = $registerGoalForm;
+		$this->registerChangeForm = $registerChangeForm;
 	}
 
 
@@ -101,11 +100,11 @@ class GoalController extends \BaseController {
 	{
 		if (Request::ajax())
 		{
-			if (Input::has('goalId'))
+			if (Input::has('changeId'))
 			{
-				$goal = $this->repository->get(Input::get('goalId'));
-				$this->setSuccess(($goal ? true : false));
-				$this->addToResponseArray('goal', $goal);
+				$change = $this->repository->get(Input::get('changeId'));
+				$this->setSuccess(($change ? true : false));
+				$this->addToResponseArray('change', $change);
 				return $this->getResponseArrayJson();
 			}else{
 				return $this->getResponseArrayJson();
@@ -120,11 +119,11 @@ class GoalController extends \BaseController {
 			$input = Input::all();
 			try
 			{
-				$this->registerGoalForm->validate($input);
-				$goal = $this->repository->get($input['goal_id']);
-				$goal->update($input);
+				$this->registerChangeForm->validate($input);
+				$change = $this->repository->get($input['change_id']);
+				$change->update($input);
 				$this->setSuccess(true);
-				$this->addToResponseArray('goal', $goal);
+				$this->addToResponseArray('change', $change);
 				return $this->getResponseArrayJson();					
 			}
 			catch (FormValidationException $e)
@@ -134,6 +133,5 @@ class GoalController extends \BaseController {
 			}
 		}
 	}
-
 
 }

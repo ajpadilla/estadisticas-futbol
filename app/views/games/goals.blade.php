@@ -24,3 +24,7 @@
 <div id="add-goals-to-game" class="hidden">
 	@include('games.add-goal')
 </div>	
+ <div id="edit-goals-to-game" class="hidden">
+	@include('games.edit-goal')
+</div>	
+@include('games.edit-goal-tpl')

@@ -24,6 +24,12 @@ class GoalRepository extends BaseRepository
 		$this->setListAllRoute('goals.api.list');
 	}
 
+	public function get($id)
+	{
+		return $this->model->with('team','player','type','assistance')->findOrFail($id);
+	}	
+
+
 	/*
 	*********************** DATATABLE SETTINGS ******************************
 	*/			
@@ -33,7 +39,7 @@ class GoalRepository extends BaseRepository
 		$this->addColumnToCollection('Acciones', function($model)
 		{
 			$this->cleanActionColumn();
-			$this->addActionColumn("<a  class='edit-goal' href='#edit-goal-form' id='edit_goal_".$model->id."'>Editar</a><br />");
+			$this->addActionColumn("<a  class='edit-goal' href='#edit-goal-form' id='edit_goal_".$model->id."' data-goal-game-id='".$model->game_id."'>Editar</a><br />");
 			$this->addActionColumn("<a class='delete-goal' href='#' id='delete_goal_".$model->id."'>Eliminar</a>");
 			return implode(" ", $this->getActionColumn());
 		});

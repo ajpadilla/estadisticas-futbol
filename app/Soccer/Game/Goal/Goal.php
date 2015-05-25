@@ -8,7 +8,7 @@ class Goal extends FixtureBaseModel {
     /*
 	********************* Relations ***********************
     */
-
+   
     public function type()
     {
        return $this->belongsTo('soccer\Game\Goal\GoalType', 'type_id');

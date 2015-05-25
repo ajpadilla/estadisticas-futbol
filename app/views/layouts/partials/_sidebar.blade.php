@@ -128,6 +128,8 @@
 		<!--Goals-->
 		<a id="list-of-goal-types" href="{{ URL::route('goal-types.api.select.list') }}"></a>
 		<a id="add-new-goal-for-game" href="{{ URL::route('games.api.add.goal') }}"></a>
+		<a id="data-goal" href="{{ URL::route('goals.api.show') }}"></a>
+		<a id="update-data-goal" href="{{ URL::route('goals.api.update') }}"></a>
 		<!--Games-->
 		<a id="teams-for-games" href="{{ URL::route('games.api.teams.availables.game') }}"></a>
 		<a id="players-for-games" href="{{ URL::route('games.api.available.players.team') }}"></a>
@@ -139,8 +141,13 @@
 		<a id="list-of-sanction-types" href="{{ URL::route('sanction-types.api.select.list') }}"></a>
 		<!--Sanctions-->
 		<a id="add-new-sanction" href="{{ URL::route('games.api.add.sanction') }}"></a>
+		<a id="data-sanction" href="{{ URL::route('sanctions.api.show') }}"></a>
+		<a id="update-sanction" href="{{ URL::route('sanctions.api.update') }}"></a>
 		<!--Change-->
 		<a id="add-new-change" href="{{ URL::route('games.api.add.change') }}"></a>
+		<a id="data-change" href="{{ URL::route('changes.api.show') }}"></a>
+		<a id="update-change" href="{{ URL::route('changes.api.update') }}"></a>
+		
 	</div>
 </div>
 <!-- /SIDEBAR -->

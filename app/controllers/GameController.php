@@ -323,4 +323,6 @@ class GameController extends \BaseController {
 		return $this->getResponseArrayJson();
 	}
 
+	
+
 }
