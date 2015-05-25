@@ -152,7 +152,9 @@
 		<a id="list-of-alignment-types" href="{{ URL::route('alignmentsType.api.select.list') }}"></a>
 		<!--Alignments-->
 		<a id="delete-alignments" href="{{ URL::route('alignments.api.delete') }}"></a>
-
+		<a id="data-alignment" href="{{ URL::route('alignments.api.show') }}"></a>
+		<a id="update-alignment" href="{{ URL::route('alignments.api.update') }}"></a>
+		
 	</div>
 </div>
 <!-- /SIDEBAR -->
