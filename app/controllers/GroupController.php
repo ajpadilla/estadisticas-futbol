@@ -182,4 +182,11 @@ class GroupController extends \BaseController {
 		if(Request::ajax()) 
 			return $this->repository->getDefaultTableForGroupGames($id);
 	}
+
+	public function removeTeamApi($id, $teamId)
+	{
+		if(Request::ajax())
+			$this->setSuccess($this->repository->removeTeam($id, $teamId));
+		return $this->getResponseArrayJson();
+	}
 }
