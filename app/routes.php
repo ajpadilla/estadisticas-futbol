@@ -207,9 +207,9 @@ Route::post('cambios/api-actualizar', array('as'=>'changes.api.update', 'uses'=>
 ********************************* ALIGMENT FOR GAMES ********************************
 */
 
-Route::get('alineaciones/api-ver', array('as'=>'alignments.api.show', 'uses'=>'ChangeController@showApi'));
-Route::post('alineaciones/api-actualizar', array('as'=>'alignments.api.update', 'uses'=>'ChangeController@updateApi'));
-
+Route::get('alineaciones/api-ver', array('as'=>'alignments.api.show', 'uses'=>'AlignmentController@showApi'));
+Route::post('alineaciones/api-actualizar', array('as'=>'alignments.api.update', 'uses'=>'AlignmentController@updateApi'));
+Route::get('alineaciones/api-eliminar', array('as'=>'alignments.api.delete', 'uses'=>'AlignmentController@destroyApi'));
 /*
 ********************************* ALIGMENT TYPE FOR GAMES ********************************
 */
