@@ -5232,7 +5232,7 @@ var handleBootboxAddEquipoToJugador = function () {
                         sanction.html(html);
                         initChosen();
 
-                        getTeamsForGamesEditSanction(url);
+                        getTeamsForGamesEditSanction(url, response.sanction.team_id);
                         getAvailablePlayersForGameSanctionEdit(gameId);
                         loadFieldSelect($('#list-of-sanction-types').attr('href'),'select#sanction-type-for-game-id-edit');
 
@@ -5253,7 +5253,7 @@ var handleBootboxAddEquipoToJugador = function () {
     }
 
 
-     var getTeamsForGamesEditSanction = function (url) 
+     var getTeamsForGamesEditSanction = function (url, index) 
      {
         //console.log(url);
          $.ajax({
@@ -5272,6 +5272,8 @@ var handleBootboxAddEquipoToJugador = function () {
                             $('select#team-for-sanction-edit').append('<option value=\"'+object.id+'\">'+object.nombre+'</option>');
                             $('select#team-for-sanction-edit').trigger('chosen:updated');
                         });
+                        $('select#team-for-sanction-edit').val(index);
+                        $('select#team-for-sanction-edit').trigger('chosen:updated');
                     }else{
                         $('select#team-for-sanction-edit').html('');
                         $('select#team-for-sanction-edit').append(option);
@@ -6080,7 +6082,7 @@ var handleBootboxAddEquipoToJugador = function () {
         });
     }
 
-    var getTeamsForAlignment = function (idField, url,index) 
+    var getTeamsForGameIndex = function (idField, url,index) 
      {
         /*console.log(url);
         console.log(idField);*/
@@ -6142,7 +6144,7 @@ var handleBootboxAddEquipoToJugador = function () {
                         alignment.html(html);
                         //console.log(html)
                         initChosen();
-                        getTeamsForAlignment('select#team-for-alignment-edit',url,response.alignment.team_id);
+                        getTeamsForGameIndex('select#team-for-alignment-edit',url,response.alignment.team_id);
                         getAvailablePlayersForAlignmentGame('select#team-for-alignment-edit','select#player-alignment-id-edit',gameId)
                         loadFieldSelect($('#lista-posiciones').attr('href'),'select#position-alignment-id-edit');
                         loadFieldSelect($('#list-of-alignment-types').attr('href'),'select#type-alignment-id-edit');
