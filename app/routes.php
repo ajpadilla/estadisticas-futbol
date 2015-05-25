@@ -210,6 +210,12 @@ Route::post('cambios/api-actualizar', array('as'=>'changes.api.update', 'uses'=>
 Route::get('alineaciones/api-ver', array('as'=>'alignments.api.show', 'uses'=>'ChangeController@showApi'));
 Route::post('alineaciones/api-actualizar', array('as'=>'alignments.api.update', 'uses'=>'ChangeController@updateApi'));
 
+/*
+********************************* ALIGMENT TYPE FOR GAMES ********************************
+*/
+
+Route::get('tipos-alineaciones/api-seleccionar-lista', array('as'=>'alignmentsType.api.select.list', 'uses'=>'AlignmentsTypeController@getAllValue'));
+
 
 /*
 ********************************* SANCTIONS TYPES FOR GAMES ********************************
