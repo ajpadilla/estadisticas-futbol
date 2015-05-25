@@ -4056,7 +4056,7 @@ var handleBootboxAddEquipoToJugador = function () {
             url: url,
             dataType:'json',
             success: function(response) {
-                console.log(response.teams);
+                //console.log(response.teams);
                  if (response.success == true) {
                         $(idField).html('');
                         $(idField).append('<option value=\"\"></option>');
@@ -4212,7 +4212,7 @@ var handleBootboxAddEquipoToJugador = function () {
                                                 data: formData,
                                                 dataType: "JSON",
                                                 success: function(responseServer) {
-                                                    console.log(responseServer);
+                                                    //console.log(responseServer);
                                                     if(responseServer.success) 
                                                     {
                                                         // Muestro otro dialog con información de éxito
@@ -4865,7 +4865,7 @@ var handleBootboxAddEquipoToJugador = function () {
                         var html = Mustache.to_html(template, data);
                         goal.html(html);
                         initChosen();
-                        getTeamsForGames('#team-for-game-edit',url);
+                        getTeamsForGoalGame(url, response.goal.team_id);
                         bootboxAddGoalEdit(response.goal.id,response.goal.game_id);
 
                         $('select#team-for-game-edit').val(response.goal.team_id);
@@ -4923,7 +4923,7 @@ var handleBootboxAddEquipoToJugador = function () {
      }
 
 
-     var getTeamsForGoalGame = function (url) 
+     var getTeamsForGoalGame = function (url, indexTeam) 
      {
         //console.log(url);
          $.ajax({
@@ -4934,18 +4934,20 @@ var handleBootboxAddEquipoToJugador = function () {
                  //console.log(response);
                     if (response.success == true) 
                     {
-                        $('select##team-for-game-edit').html('');
-                        $('select##team-for-game-edit').append('<option value=\"\"></option>');
+                        $('select#team-for-game-edit').html('');
+                        $('select#team-for-game-edit').append('<option value=\"\"></option>');
                         $.each(response.teams,function (index,object){
                             option = '<option value=\"'+object.id+'\">'+object.nombre+'</option>';
                             //console.log(option);
-                            $('select##team-for-game-edit').append('<option value=\"'+object.id+'\">'+object.nombre+'</option>');
-                            $('select##team-for-game-edit').trigger('chosen:updated');
+                            $('select#team-for-game-edit').append('<option value=\"'+object.id+'\">'+object.nombre+'</option>');
+                            $('select#team-for-game-edit').trigger('chosen:updated');
                         });
+                        $('select#team-for-game-edit').val(indexTeam);
+                        $('select#team-for-game-edit').trigger('chosen:updated');
                     }else{
-                        $('select##team-for-game-edit').html('');
-                        $('select##team-for-game-edit').append(option);
-                        $('select##team-for-game-edit').trigger('chosen:updated');
+                        $('select#team-for-game-edit').html('');
+                        $('select#team-for-game-edit').append(option);
+                        $('select#team-for-game-edit').trigger('chosen:updated');
                     }
             }
         });
