@@ -5575,6 +5575,38 @@ var handleBootboxAddEquipoToJugador = function () {
     }
 
 
+
+      var getTeamsForGamesEditChange = function (url, indexTeam) 
+     {
+        //console.log(url);
+         $.ajax({
+            type: 'GET',
+            url: url,
+            dataType:'json',
+            success: function(response) {
+                 //console.log(response);
+                    if (response.success == true) 
+                    {
+                        $('select#team-for-change-edit').html('');
+                        $('select#team-for-change-edit').append('<option value=\"\"></option>');
+                        $.each(response.teams,function (index,object){
+                            option = '<option value=\"'+object.id+'\">'+object.nombre+'</option>';
+                            //console.log(option);
+                            $('select#team-for-change-edit').append('<option value=\"'+object.id+'\">'+object.nombre+'</option>');
+                            $('select#team-for-change-edit').trigger('chosen:updated');
+                        });
+                        $('select#team-for-change-edit').val(indexTeam);
+                        $('select#team-for-change-edit').trigger('chosen:updated');
+                    }else{
+                        $('select#team-for-change-edit').html('');
+                        $('select#team-for-change-edit').append(option);
+                        $('select#team-for-change-edit').trigger('chosen:updated');
+                    }
+            }
+        });
+     }
+
+
      var loadDataForEditChange = function(idChange) {
         $.ajax({
             type: 'GET',
@@ -5609,7 +5641,7 @@ var handleBootboxAddEquipoToJugador = function () {
                         //console.log(html)
                         initChosen();
 
-                        getTeamsForGames('#team-for-change-edit',url);
+                        getTeamsForGamesEditChange (url ,response.change.team_id);
                         getAvailablePlayersForGameChangeEdit('select#player-change-out-id-edit', gameId);
                         getAvailablePlayersForGameChangeEdit('select#player-change-in-id-edit', gameId);
 
