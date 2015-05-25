@@ -10,7 +10,7 @@
 			<div class="form-group">
 				{{ Form::label('observations','Observación',['class'=>'col-sm-2 control-label']) }}
 				<div class="col-sm-6">
-					{{ Form::text('observations',null, ['class' => 'form-control','placeholder'=>'','id' =>'observations-change']) }}
+					{{ Form::text('observations',null, ['class' => 'form-control','placeholder'=>'','id' =>'observations-alignment']) }}
 				</div>
 			</div>
 
@@ -31,7 +31,7 @@
 			<div class="form-group">
 				{{ Form::label('position_id','Posición',['class'=>'col-md-2 control-label']) }}
 				<div class="col-md-6">
-					{{ Form::select('position_id',[],null,['class' => 'form-control chosen-select','data-placeholder' => 'Escoger Tipo...','id'=>'alignment-position-id']) }}
+					{{ Form::select('position_id',[],null,['class' => 'form-control chosen-select','data-placeholder' => 'Escoger Tipo...','id'=>'position-alignment-id']) }}
 				</div>
 			</div>
 
