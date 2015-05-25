@@ -5954,7 +5954,8 @@ var handleBootboxAddEquipoToJugador = function () {
                                                                     label: "Success!",
                                                                     className: "btn-success",
                                                                     callback: function () {
-                                                                        reloadDatatable('#datatable-local-alignments')
+                                                                        reloadDatatable('#datatable-local-alignments');
+                                                                        reloadDatatable('#datatable-away-alignments');
                                                                     }
                                                                 }
                                                             }
@@ -6043,6 +6044,61 @@ var handleBootboxAddEquipoToJugador = function () {
         });
      }
 
+     var deleteAlignment = function(idAlignment ) 
+    {
+        bootbox.confirm("¿Esta seguro de eliminar la alineación?", function(result) 
+        {
+            //console.log("Confirm result: "+result);
+            if (result == true)
+            {
+                $.ajax({
+                    type: 'GET',
+                    url: $('#delete-alignments').attr('href'),
+                    data: {'alignmentId': idAlignment},
+                    dataType: "JSON",
+                    success: function(response) {
+                        if (response.success == true) {
+                            $('#delete_alignment_'+idAlignment).parent().parent().remove();
+                            bootbox.dialog({
+                                message:" ¡Alineación Eliminada!",
+                                title: "Éxito",
+                                buttons: {
+                                    success: {
+                                        label: "Success!",
+                                        className: "btn-success",
+                                        callback: function () {
+                                            reloadDatatable('#datatable-local-alignments');
+                                            reloadDatatable('#datatable-away-alignments');
+                                        }
+                                    }
+                                }
+                            });
+                        }
+                    }
+                });
+            }
+        });
+    }
+
+    var implementActionsToAlignment = function() 
+    {
+        $(".table").delegate(".delete-alignment", "click", function() {
+             action = getAttributeIdActionSelect($(this).attr('id'));
+             //console.log(action.number);
+             deleteAlignment(action.number);
+        });
+
+        /*$(".table").delegate(".edit-alignment", "click", function() {
+             action = getAttributeIdActionSelect($(this).attr('id'));
+             var changeId = action.number;
+             var gameId = $(this).attr('data-game-id');
+             loadDataForEditChange(changeId);
+             bootboxEditChange(gameId, changeId);
+             //console.log(action.number);
+        });*/
+    }
+
+
     return {
         init: function() {
             initChosen();
@@ -6102,7 +6158,8 @@ var handleBootboxAddEquipoToJugador = function () {
             implementActionsToGoal();
             implementActionsToSanction();
             implementActionsToChange();
-
+            implementActionsToAlignment();
+            
 
             loadPositionSelectPlayerCreate();
             loadPositionSelectPlayerEdit();
