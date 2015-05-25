@@ -5819,6 +5819,230 @@ var handleBootboxAddEquipoToJugador = function () {
         });
     }
 
+
+    var getAvailablePlayersForAlignmentGame = function (idSelect,idField,gameId) {
+        $(idSelect).change(function () {
+            var teamId = $(this).val();
+            var url = $('#players-for-games').attr('href').split('%')[0]+gameId+'/'+teamId;
+            //console.log(url);
+            $.ajax({
+                type: 'GET',
+                url: url,
+                dataType:'json',
+                success: function(response) {
+                    //console.log(response);
+                    var option = '<option value=\"\"></option>';
+                    var chosenUpdate = 'chosen:updated';
+                    if (response.success == true) {
+                        $(idField).html('');
+                        $(idField).append(option);
+                        $.each(response.players,function (index,object){
+                            option = '<option value=\"'+index+'\">'+object+'</option>';
+                            $(idField).append(option);
+                            $(idField).trigger(chosenUpdate);
+                        });
+                    }else{
+                        $(idField).html('');
+                        $(idField).append(option);
+                        $(idField).trigger(chosenUpdate);
+                    }
+                }
+            });
+        });
+     }
+
+     var bootboxAddAlignment = function (gameId) {
+
+            var url = $('#teams-for-games').attr('href').split('%')[0]+gameId;
+            getTeamsForGames('#team-for-alignment-id',url);
+            getAvailablePlayersForAlignmentGame('#team-for-alignment-id','#player-for-alignment-id',gameId)
+
+            loadFieldSelect($('#lista-posiciones').attr('href'),'#position-alignment-id');
+            loadFieldSelect($('#list-of-alignment-types').attr('href'),'#alignment-type-id');
+            addValidationRulesForms();
+            $('#add-alignment-to-game-form').trigger('reset');
+            $('#add-alignment-to-game-form').validate({
+                rules:{
+                    observations:{
+                        rangelength:[1,256],
+                    },
+                    type_id:{
+                        required: true,
+                        digits: true
+                    },
+                    team_id:{
+                        required: true,
+                        digits: true
+                    },
+                    player_id:{
+                        required: true,
+                        digits: true
+                    },
+                    position_id:{
+                        required: true,
+                        digits: true
+                    }
+                },
+                messages:{
+                    observations:{
+                        rangelength: 'Por favor ingrese entre [2, 256] caracteres',
+                    },
+                    type_id:{
+                        required: 'Este campo es obligatorio',
+                        digits: 'Ingrese un numero entero'
+                    },
+                    team_id:{
+                        required: 'Este campo es obligatorio',
+                        digits: 'Ingrese un numero entero'
+                    },
+                    player_id:{
+                        required: 'Este campo es obligatorio',
+                        digits: 'Ingrese un numero entero'
+                    },
+                    position_id:{
+                        required: 'Este campo es obligatorio',
+                        digits: 'Ingrese un numero entero'
+                    }
+                },
+                highlight:function(element){
+                    $(element).closest('.form-group').removeClass('has-success').addClass('has-error');
+                },
+                unhighlight:function(element){
+                    $(element).closest('.form-group').removeClass('has-error');
+                },
+                success:function(element){
+                    element.addClass('valid').closest('.form-group').removeClass('has-error').addClass('has-success');
+                },
+            });
+
+                
+            bootbox.dialog({
+                        message: $('#add-alignment-to-game-form-div-box'),
+                        buttons: {
+                            success: {
+                                label: "Agregar",
+                                className: "btn-primary",
+                                callback: function () 
+                                {
+                                    if($('#add-alignment-to-game-form').valid()) 
+                                    {
+                                        $("#add-alignment-to-game-form").submit(function(e){
+                                            var formData = {
+                                                observations: $('#observations-alignment').val(),
+                                                game_id: gameId,
+                                                team_id: $('#team-for-alignment-id').val(),
+                                                player_id: $('#player-for-alignment-id').val(),
+                                                position_id: $('#position-alignment-id').val(),
+                                                type_id: $('#alignment-type-id').val(),
+                                            };
+                                           // console.log(formData);
+                                            $.ajax({
+                                                type: 'POST',
+                                                url: $('#add-new-alignment-for-game').attr('href'), 
+                                                data: formData,
+                                                dataType: "JSON",
+                                                success: function(responseServer) {
+                                                    //console.log(responseServer);
+                                                    if(responseServer.success) 
+                                                    {
+                                                        // Muestro otro dialog con información de éxito
+                                                        bootbox.dialog({
+                                                            message:"Alineación agregada correctamente!",
+                                                            title: "Éxito",
+                                                            buttons: {
+                                                                success: {
+                                                                    label: "Success!",
+                                                                    className: "btn-success",
+                                                                    callback: function () {
+                                                                        reloadDatatable('#datatable-local-alignments')
+                                                                    }
+                                                                }
+                                                            }
+                                                        });
+                                                        // Limpio cada elemento de las clases añadidas por el validator
+                                                        $('#add-alignment-to-game-form div').each(function(){
+                                                            cleanValidatorClasses(this);
+                                                        });
+                                                        //Reinicio el formulario
+                                                        $("#add-alignment-to-game-form")[0].reset();
+                                                    }else{
+                                                        bootbox.dialog({
+                                                            message: responseServer.errors,
+                                                            title: "Error",
+                                                            buttons: {
+                                                                danger: {
+                                                                    label: "Danger!",
+                                                                    className: "btn-danger"
+                                                                }
+                                                            }
+                                                        });
+                                                        $('#add-alignment-to-game-form div').each(function(){
+                                                            cleanValidatorClasses(this);
+                                                        });
+                                                    }
+                                                },
+                                                error: function(jqXHR, textStatus, errorThrown) {
+                                                   //console.log(errorThrown);
+                                                   bootbox.dialog({
+                                                            message:" ¡Error al enviar datos al servidor!",
+                                                            title: "Error",
+                                                            buttons: {
+                                                                danger: {
+                                                                    label: "Danger!",
+                                                                    className: "btn-danger"
+                                                                }
+                                                            }
+                                                        });
+                                                        // Limpio cada elemento de las clases añadidas por el validator
+                                                        $('#add-alignment-to-game-form div').each(function(){
+                                                            cleanValidatorClasses(this);
+                                                        });
+                                                        //Reinicio el formulario*/
+                                                }
+                                            });
+                                            e.preventDefault(); //Prevent Default action.
+                                            $(this).unbind('submit');
+                                        }); 
+                                        $("#add-alignment-to-game-form").submit();
+                                    }else{
+                                        return false;
+                                    }
+                                    return false;
+                                }
+                            }
+                        },
+                            show: false // We will show it manually later
+                        })
+                    .on('shown.bs.modal', function() {
+                        $('#add-alignment-to-game-form-div-box')
+                                .show();                             // Show the form
+                            })
+                    .on('hide.bs.modal', function(e) {
+                        // Bootbox will remove the modal (including the body which contains the form)
+                        // after hiding the modal
+                        // Therefor, we need to backup the form
+                        $('#add-alignment-to-game-form-div-box').hide().appendTo('#add-alignment-to-game');
+                    })
+                    .modal('show');
+     }
+
+     var handleBootboxAddAlignment = function () {
+
+        $(".table").delegate(".add-alignment", "click", function() {
+            /*console.log($(this).attr('id'));
+            console.log($(this).attr('id').split('-')[2]);*/
+            var gameId = $(this).attr('id').split('-')[2];
+            bootboxAddAlignment(gameId);
+        });
+
+        $('button.add-alignment').click(function () {
+            /*console.log($(this).attr('id'));
+            console.log($(this).attr('id').split('-')[2]);*/
+            var gameId = $(this).attr('id').split('-')[2];
+            bootboxAddAlignment (gameId);
+        });
+     }
+
     return {
         init: function() {
             initChosen();
@@ -5863,6 +6087,7 @@ var handleBootboxAddEquipoToJugador = function () {
             handleBootboxAddGoalToGame();
             handleBootboxAddSanctionsToGame();
             handleBootboxAddChangeToGame();
+            handleBootboxAddAlignment();
             //Plugins init
             //handleFechaDateTimePicker();
             handleDatePicker();

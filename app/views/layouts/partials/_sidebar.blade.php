@@ -121,6 +121,7 @@
 		<a id="add-new-game-to-group" href="{{ URL::route('groups.api.add.game') }}"></a>
 		<a id="exist-game-to-group" href="{{ URL::route('groups.api.exist.game') }}"></a>
 		<a id="teams-available-for-games" href="{{ URL::route('groups.api.teams.availables.game') }}"></a>
+		<a id="add-new-alignment-for-game" href="{{ URL::route('games.api.add.alignment') }}"></a>
 		<!--Phases-->
 		<a id="add-new-phase-competition" href="{{ URL::route('competitions.api.add.phase') }}"></a>
 		<a id="list-teams-phase-competition" href="{{ URL::route('phases.api.teams.availables.group') }}"></a>
@@ -147,7 +148,8 @@
 		<a id="add-new-change" href="{{ URL::route('games.api.add.change') }}"></a>
 		<a id="data-change" href="{{ URL::route('changes.api.show') }}"></a>
 		<a id="update-change" href="{{ URL::route('changes.api.update') }}"></a>
-		
+		<!--Alignment Types-->
+		<a id="list-of-alignment-types" href="{{ URL::route('alignmentsType.api.select.list') }}"></a>
 	</div>
 </div>
 <!-- /SIDEBAR -->

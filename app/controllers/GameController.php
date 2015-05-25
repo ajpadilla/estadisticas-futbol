@@ -3,11 +3,13 @@
 use soccer\Game\GameRepository;
 use soccer\Game\Goal\GoalRepository;
 use soccer\Game\Sanction\SanctionRepository;
+use soccer\Game\Alignment\AlignmentRepository;
 use soccer\Game\Change\ChangeRepository;
 use soccer\Forms\RegisterGameForm;
 use soccer\Forms\RegisterGoalForm;
 use soccer\Forms\RegisterSanctionForm;
 use soccer\Forms\RegisterChangeForm;
+use soccer\Forms\RegisterAlignmentForm;
 use soccer\Forms\AvailablePlayersForTeamForm;
 use Laracasts\Validation\FormValidationException;
 
@@ -22,6 +24,8 @@ class GameController extends \BaseController {
 	protected $sanctionRepository;
 	protected $registerChangeForm;
 	protected $changeRepository;
+	protected $registerAlignmentForm;
+	protected $alignmentRepository;
 
 	public function __construct(GameRepository $repository,
 			RegisterGameForm $registerGameForm,
@@ -31,7 +35,9 @@ class GameController extends \BaseController {
 			RegisterSanctionForm $registerSanctionForm,
 			SanctionRepository $sanctionRepository,
 			RegisterChangeForm $registerChangeForm,
-			ChangeRepository $changeRepository){
+			ChangeRepository $changeRepository,
+			RegisterAlignmentForm $registerAlignmentForm,
+			AlignmentRepository $alignmentRepository){
 
 		$this->repository = $repository;
 		$this->registerGameForm = $registerGameForm;
@@ -42,6 +48,8 @@ class GameController extends \BaseController {
 		$this->sanctionRepository = $sanctionRepository;
 		$this->registerChangeForm = $registerChangeForm;
 		$this->changeRepository = $changeRepository;
+		$this->registerAlignmentForm = $registerAlignmentForm;
+		$this->alignmentRepository = $alignmentRepository;
 	}
 
 	/**
