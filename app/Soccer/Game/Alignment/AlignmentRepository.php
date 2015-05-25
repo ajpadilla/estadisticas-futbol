@@ -22,6 +22,11 @@ class AlignmentRepository extends BaseRepository
 		$this->setListAllRoute('alignments.api.list');
 	}
 
+	public function get($id)
+	{
+		return $this->model->with('team','player','type','position')->findOrFail($id);
+	}	
+
 	/*
 	*********************** DATATABLE SETTINGS ******************************
 	*/			
@@ -31,7 +36,7 @@ class AlignmentRepository extends BaseRepository
 		$this->addColumnToCollection('Acciones', function($model)
 		{
 			$this->cleanActionColumn();
-			$this->addActionColumn("<a  class='edit-alignment' href='#edit-alignment-form' id='edit_alignment_".$model->id."'>Editar</a><br />");
+			$this->addActionColumn("<a  class='edit-alignment' href='#edit-alignment-form' id='edit_alignment_".$model->id."' data-game-id=".$model->game_id."'>Editar</a><br />");
 			$this->addActionColumn("<a class='delete-alignment' href='#' id='delete_alignment_".$model->id."'>Eliminar</a>");
 			return implode(" ", $this->getActionColumn());
 		});

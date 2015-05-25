@@ -42,3 +42,7 @@
 <div id="add-alignment-to-game" class="hidden">
 	@include('games.add-alignment')
 </div>
+<div id="edit-alignment-to-game" class="hidden">
+	@include('games.edit-alignment')
+</div>
+@include('games.edit-alignment-tpl')
