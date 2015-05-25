@@ -19,7 +19,7 @@
 							<div class="row">
 								<div class="col-md-2 col-md-offset-10">
 									{{-- <button class="delete-phase pull-right btn btn-lg btn-primary" id="delete-phase" href="{{ URL::route('phases.api.edit', $phase->id) }}">Editar Fase</button> --}}	
-									<button class="delete-phase pull-right btn btn-lg btn-primary" id="delete-phase" href="{{ URL::route('phases.api.delete', $phase->id) }}" data-phase-id="{{ $phase-id }}">Eliminar Fase</button>						
+									<button class="delete-phase pull-right btn btn-lg btn-primary" id="delete-phase" href="{{ URL::route('phases.api.delete', $phase->id) }}" data-phase-id="{{ $phase->id }}">Eliminar Fase</button>						
 									@if(!$phase->isFull)
 										<button class="group pull-right btn btn-lg btn-primary" id="add-group" data-phase-id="{{ $phase->id }}" href="#">Agregar grupo</button>
 									@endif	
@@ -41,7 +41,7 @@
 													<div class="row">
 														<div class="col-md-12">
 															{{-- <button class="edit-group pull-right btn btn-lg btn-primary" id="edit-group" href="{{ URL::route('groups.api.edit', $group->id) }}">Editar Grupo</button> --}}
-															<button class="delete-group pull-right btn btn-lg btn-primary" id="delete-group" href="{{ URL::route('groups.api.delete', $group->id) }}" data-group-id="{{ $group-id }}">Eliminar Grupo</button>	
+															<button class="delete-group pull-right btn btn-lg btn-primary" id="delete-group" href="{{ URL::route('groups.api.delete', $group->id) }}" data-group-id="{{ $group->id }}">Eliminar Grupo</button>	
 															@if (!$group->isFull)
 																<button class="games pull-right btn btn-lg btn-primary" id="add-game" href="#" data-group-id="{{ $group->id }}">Agregar partido</button>
 															@endif
