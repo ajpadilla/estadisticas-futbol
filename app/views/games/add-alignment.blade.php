@@ -24,14 +24,14 @@
 			<div class="form-group">
 				{{ Form::label('player_id','Jugador',['class'=>'col-md-2 control-label']) }}
 				<div class="col-md-6">
-					{{ Form::select('player_id',[],null,['class' => 'form-control chosen-select','data-placeholder' => 'Escoger Jugadores...','id'=>'player-for-alignment-id']) }}
+					{{ Form::select('player_id',[],null,['class' => 'form-control chosen-select','data-placeholder' => 'Escoger Jugador...','id'=>'player-for-alignment-id']) }}
 				</div>
 			</div>
 	
 			<div class="form-group">
 				{{ Form::label('position_id','Posición',['class'=>'col-md-2 control-label']) }}
 				<div class="col-md-6">
-					{{ Form::select('position_id',[],null,['class' => 'form-control chosen-select','data-placeholder' => 'Escoger Tipo...','id'=>'position-alignment-id']) }}
+					{{ Form::select('position_id',[],null,['class' => 'form-control chosen-select','data-placeholder' => 'Escoger Posición...','id'=>'position-alignment-id']) }}
 				</div>
 			</div>
 
