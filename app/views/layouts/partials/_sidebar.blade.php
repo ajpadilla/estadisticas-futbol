@@ -147,7 +147,8 @@
 		<a id="add-new-change" href="{{ URL::route('games.api.add.change') }}"></a>
 		<a id="data-change" href="{{ URL::route('changes.api.show') }}"></a>
 		<a id="update-change" href="{{ URL::route('changes.api.update') }}"></a>
-		
+		<!--Alignment Types-->
+		<a id="list-of-alignment-types" href="{{ URL::route('alignmentsType.api.select.list') }}"></a>
 	</div>
 </div>
 <!-- /SIDEBAR -->
