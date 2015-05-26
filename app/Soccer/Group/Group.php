@@ -67,7 +67,7 @@ class Group extends Eloquent {
 
     public function getIsFullAttribute()
     {
-         return ($this->totalTeams >= $this->phase->teamsByGroup);
+        return ($this->totalTeams >= $this->phase->teamsByGroup);
     }
 
     public function getIsEmptyAttribute()
