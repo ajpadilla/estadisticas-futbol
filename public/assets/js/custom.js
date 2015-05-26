@@ -3550,6 +3550,51 @@ var handleBootboxAddEquipoToJugador = function () {
         });
     }
 
+    var deleteGroup = function(idGroup) 
+    {
+        bootbox.confirm("¿Esta seguro de eliminar el grupo?", function(result) 
+        {
+            //console.log("Confirm result: "+result);
+            if (result == true)
+            {
+                $.ajax({
+                    type: 'GET',
+                    url: $('#delete-group').attr('href'),
+                    data: {'groupId': idGroup},
+                    dataType: "JSON",
+                    success: function(response) {
+                        if (response.success == true) {
+                            bootbox.dialog({
+                                message:" ¡Grupo Eliminado!",
+                                title: "Éxito",
+                                buttons: {
+                                    success: {
+                                        label: "Success!",
+                                        className: "btn-success",
+                                        callback: function () {
+                                            deleteElement('#div-group-'+idGroup);
+                                            //deleteElement('#li-phase-'+idPhase);
+                                        }
+                                    }
+                                }
+                            });
+                        }
+                    }
+                });
+            }
+        });
+    }
+
+
+    var implementActionsToGroup= function() 
+    {
+        $('button.delete-group').click(function () {
+            var groupId = $(this).attr('data-group-id');
+            //console.log(groupId);
+            deleteGroup(groupId);
+        });
+    }
+
 
     var handleBootboxAddTeamToGroupCompetition = function () {
 
@@ -6498,6 +6543,7 @@ var handleBootboxAddEquipoToJugador = function () {
             implementActionsToChange();
             implementActionsToAlignment();
             implementActionsToPhase();
+            implementActionsToGroup();
 
             loadPositionSelectPlayerCreate();
             loadPositionSelectPlayerEdit();
