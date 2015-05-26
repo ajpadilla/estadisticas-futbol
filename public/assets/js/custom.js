@@ -3152,6 +3152,10 @@ var handleBootboxAddEquipoToJugador = function () {
         }
     }
 
+    var deleteElement = function (selector) {
+        $(selector).remove();
+    }
+
     var loadSelectForPlayer = function(idPlayer) {
         $.ajax({
             type: 'GET',
@@ -3170,8 +3174,8 @@ var handleBootboxAddEquipoToJugador = function () {
                         $('select#posicion_id_jugador_edit').append('<option value=\"'+v.id+'\">'+v.nombre+'</option>');
                         $('select#posicion_id_jugador_edit').trigger("chosen:updated");
                         $('#posiciones_id_jugador_edit').trigger("chosen:updated");
-                        console.log(v.id);
-                        console.log(v.nombre)
+                        /*console.log(v.id);
+                        console.log(v.nombre);*/
                     });
                     $('select#posicion_id_jugador_edit').val(response.posicion.id);
                     $('#pais_id_jugador_edit').val(response.pais.id);
@@ -4043,6 +4047,51 @@ var handleBootboxAddEquipoToJugador = function () {
                     .modal('show');
             });
      }
+
+    var deletePhase = function(idPhase) 
+    {
+        bootbox.confirm("¿Esta seguro de eliminar la fase?", function(result) 
+        {
+            //console.log("Confirm result: "+result);
+            if (result == true)
+            {
+                $.ajax({
+                    type: 'GET',
+                    url: $('#delete-phase').attr('href'),
+                    data: {'phaseId': idPhase},
+                    dataType: "JSON",
+                    success: function(response) {
+                        if (response.success == true) {
+                            bootbox.dialog({
+                                message:" ¡Fase Eliminada!",
+                                title: "Éxito",
+                                buttons: {
+                                    success: {
+                                        label: "Success!",
+                                        className: "btn-success",
+                                        callback: function () {
+                                            deleteElement('#li-phase-'+idPhase);
+                                            deleteElement('#tab-phase-'+idPhase);
+                                        }
+                                    }
+                                }
+                            });
+                        }
+                    }
+                });
+            }
+        });
+    }
+
+
+    var implementActionsToPhase= function() 
+    {
+        $('button.delete-phase').click(function () {
+            var phaseId = $(this).attr('data-phase-id');
+            //console.log(phaseId);
+            deletePhase(phaseId);
+        });
+    }
 
 
      var getTeamsForGames = function (idField, url) 
@@ -6448,7 +6497,7 @@ var handleBootboxAddEquipoToJugador = function () {
             implementActionsToSanction();
             implementActionsToChange();
             implementActionsToAlignment();
-            
+            implementActionsToPhase();
 
             loadPositionSelectPlayerCreate();
             loadPositionSelectPlayerEdit();
