@@ -307,7 +307,7 @@ class GroupRepository extends BaseRepository
 			{
 				$teamRepository->cleanActionColumn();
 				$teamRepository->addActionColumn("<a class='show-team' href='" . route('equipos.show', $model->id) . "' id='show-team'>Ver</a><br />");
-				$teamRepository->addActionColumn("<a class='remove-from-group' href='" . route('groups.api.remove.team', [$id, $model->id]) . "' id='remove-from-group'>Sacar</a><br />");
+				$teamRepository->addActionColumn("<a class='remove-from-group' href='" . route('groups.api.remove.team', [$id, $model->id]) . "' id='delete_teamToGroup_".$model->id."' data-group-id='".$id."'>Sacar</a><br />");
 				return implode(" ", $teamRepository->getActionColumn());
 			});
 			return $teamRepository->getTableCollectionForRender();
