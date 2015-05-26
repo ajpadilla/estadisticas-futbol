@@ -303,7 +303,7 @@ class GroupRepository extends BaseRepository
 		if($teams) {
 			$teamRepository->setDatatableCollection($teams);
 			$this->setTableGroupContent($id, $teamRepository);
-			$teamRepository->addColumnToCollection('Acciones', function($model) use ($teamRepository)
+			$teamRepository->addColumnToCollection('Acciones', function($model) use ($teamRepository, $id) 
 			{
 				$teamRepository->cleanActionColumn();
 				$teamRepository->addActionColumn("<a class='show-team' href='" . route('equipos.show', $model->id) . "' id='show-team'>Ver</a><br />");
