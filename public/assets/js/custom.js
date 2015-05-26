@@ -3740,6 +3740,59 @@ var handleBootboxAddEquipoToJugador = function () {
             });
     }
 
+
+
+    var deleteTeamGroup = function(url,teamId, groupId) 
+    {
+        bootbox.confirm("¿Esta seguro de sacar el equipo?", function(result) 
+        {
+            //console.log("Confirm result: "+result);
+            if (result == true)
+            {
+                $.ajax({
+                    type: 'GET',
+                    url: url,
+                    //data: {},
+                    dataType: "JSON",
+                    success: function(response) {
+                        if (response.success == true) 
+                        {
+                            $('#delete_teamToGroup_'+teamId).parent().parent().remove();
+                            bootbox.dialog({
+                                message:" ¡Equipo Eliminado!",
+                                title: "Éxito",
+                                buttons: {
+                                    success: {
+                                        label: "Success!",
+                                        className: "btn-success",
+                                        callback: function () {
+                                            reloadDatatable('#datatable-'+groupId);
+                                        }
+                                    }
+                                }
+                            });
+                        }
+                    }
+                });
+            }
+        });
+    }
+
+
+    var implementActionsToTeamGroup= function() 
+    {
+       $(".table").delegate(".remove-from-group", "click", function(event) {
+            event.preventDefault();
+            action = getAttributeIdActionSelect($(this).attr('id'));
+            var url = $(this).attr('href');
+            var groupId = $(this).attr('data-group-id');
+            var teamId = action.number;
+            //console.log(action);
+            deleteTeamGroup(url, teamId, groupId);
+        });
+    }
+
+
     var handleBootboxAddGameToGroupCompetition = function () {
         $("button.games").on("click", function() {
 
@@ -6544,6 +6597,7 @@ var handleBootboxAddEquipoToJugador = function () {
             implementActionsToAlignment();
             implementActionsToPhase();
             implementActionsToGroup();
+            implementActionsToTeamGroup();
 
             loadPositionSelectPlayerCreate();
             loadPositionSelectPlayerEdit();
