@@ -31,7 +31,7 @@
 										@if($phase->twoMoreGroups)
 											<div id="div-group-{{ $group->id }}" class="col-md-6">
 										@else
-											<div class="col-md-12">
+											<div id="div-group-{{ $group->id }}" class="col-md-12">
 										@endif
 											<div class="box">
 												<div class="box-title">
