@@ -92,8 +92,7 @@ class Game extends Eloquent {
 
     public function getStatusAttribute()
     {
-        //return ($this->finished ? 'Finalizado' : 'Pendiente');
-        return 'Finalizado';
+        return ($this->finished ? 'Finalizado' : 'Pendiente');
     }
 
     public function getDateOnlyAttribute()
@@ -119,5 +118,10 @@ class Game extends Eloquent {
     public function getLineRefereeAttribute($value)
     {
         return ($value ? $value : '-');
-    }      
+    }    
+
+    public function getFinishedAttribute()
+    {
+        return $this->date->diffInMinutes(Carbon::now()->addMinutes(120)) < 0;
+    }  
 }

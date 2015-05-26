@@ -138,4 +138,11 @@ class Phase extends Eloquent {
     {
         return $this->format->teams_by_group;
     }     
+
+    public function getGamesPlayedAttribute()
+    {
+        return $this->games()
+                    ->where('date', '>', Carbon::now()->addMinutes(120)->format('Y-m-d h:i'))
+                    ->count();
+    }    
 }
