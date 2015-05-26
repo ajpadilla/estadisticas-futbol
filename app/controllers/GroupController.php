@@ -189,4 +189,11 @@ class GroupController extends \BaseController {
 			$this->setSuccess($this->repository->removeTeam($id, $teamId));
 		return $this->getResponseArrayJson();
 	}
+
+	public function destroyApi()
+	{
+		if(Request::ajax())
+			$this->setSuccess($this->repository->delete(Input::get('groupId')));
+		return $this->getResponseArrayJson();
+	}
 }

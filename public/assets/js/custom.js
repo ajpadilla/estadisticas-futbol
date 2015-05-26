@@ -3152,6 +3152,10 @@ var handleBootboxAddEquipoToJugador = function () {
         }
     }
 
+    var deleteElement = function (selector) {
+        $(selector).remove();
+    }
+
     var loadSelectForPlayer = function(idPlayer) {
         $.ajax({
             type: 'GET',
@@ -3170,8 +3174,8 @@ var handleBootboxAddEquipoToJugador = function () {
                         $('select#posicion_id_jugador_edit').append('<option value=\"'+v.id+'\">'+v.nombre+'</option>');
                         $('select#posicion_id_jugador_edit').trigger("chosen:updated");
                         $('#posiciones_id_jugador_edit').trigger("chosen:updated");
-                        console.log(v.id);
-                        console.log(v.nombre)
+                        /*console.log(v.id);
+                        console.log(v.nombre);*/
                     });
                     $('select#posicion_id_jugador_edit').val(response.posicion.id);
                     $('#pais_id_jugador_edit').val(response.pais.id);
@@ -3546,6 +3550,51 @@ var handleBootboxAddEquipoToJugador = function () {
         });
     }
 
+    var deleteGroup = function(idGroup) 
+    {
+        bootbox.confirm("¿Esta seguro de eliminar el grupo?", function(result) 
+        {
+            //console.log("Confirm result: "+result);
+            if (result == true)
+            {
+                $.ajax({
+                    type: 'GET',
+                    url: $('#delete-group').attr('href'),
+                    data: {'groupId': idGroup},
+                    dataType: "JSON",
+                    success: function(response) {
+                        if (response.success == true) {
+                            bootbox.dialog({
+                                message:" ¡Grupo Eliminado!",
+                                title: "Éxito",
+                                buttons: {
+                                    success: {
+                                        label: "Success!",
+                                        className: "btn-success",
+                                        callback: function () {
+                                            deleteElement('#div-group-'+idGroup);
+                                            //deleteElement('#li-phase-'+idPhase);
+                                        }
+                                    }
+                                }
+                            });
+                        }
+                    }
+                });
+            }
+        });
+    }
+
+
+    var implementActionsToGroup= function() 
+    {
+        $('button.delete-group').click(function () {
+            var groupId = $(this).attr('data-group-id');
+            //console.log(groupId);
+            deleteGroup(groupId);
+        });
+    }
+
 
     var handleBootboxAddTeamToGroupCompetition = function () {
 
@@ -3690,6 +3739,59 @@ var handleBootboxAddEquipoToJugador = function () {
                     .modal('show');
             });
     }
+
+
+
+    var deleteTeamGroup = function(url,teamId, groupId) 
+    {
+        bootbox.confirm("¿Esta seguro de sacar el equipo?", function(result) 
+        {
+            //console.log("Confirm result: "+result);
+            if (result == true)
+            {
+                $.ajax({
+                    type: 'GET',
+                    url: url,
+                    //data: {},
+                    dataType: "JSON",
+                    success: function(response) {
+                        if (response.success == true) 
+                        {
+                            $('#delete_teamToGroup_'+teamId).parent().parent().remove();
+                            bootbox.dialog({
+                                message:" ¡Equipo Eliminado!",
+                                title: "Éxito",
+                                buttons: {
+                                    success: {
+                                        label: "Success!",
+                                        className: "btn-success",
+                                        callback: function () {
+                                            reloadDatatable('#datatable-'+groupId);
+                                        }
+                                    }
+                                }
+                            });
+                        }
+                    }
+                });
+            }
+        });
+    }
+
+
+    var implementActionsToTeamGroup= function() 
+    {
+       $(".table").delegate(".remove-from-group", "click", function(event) {
+            event.preventDefault();
+            action = getAttributeIdActionSelect($(this).attr('id'));
+            var url = $(this).attr('href');
+            var groupId = $(this).attr('data-group-id');
+            var teamId = action.number;
+            //console.log(action);
+            deleteTeamGroup(url, teamId, groupId);
+        });
+    }
+
 
     var handleBootboxAddGameToGroupCompetition = function () {
         $("button.games").on("click", function() {
@@ -4043,6 +4145,51 @@ var handleBootboxAddEquipoToJugador = function () {
                     .modal('show');
             });
      }
+
+    var deletePhase = function(idPhase) 
+    {
+        bootbox.confirm("¿Esta seguro de eliminar la fase?", function(result) 
+        {
+            //console.log("Confirm result: "+result);
+            if (result == true)
+            {
+                $.ajax({
+                    type: 'GET',
+                    url: $('#delete-phase').attr('href'),
+                    data: {'phaseId': idPhase},
+                    dataType: "JSON",
+                    success: function(response) {
+                        if (response.success == true) {
+                            bootbox.dialog({
+                                message:" ¡Fase Eliminada!",
+                                title: "Éxito",
+                                buttons: {
+                                    success: {
+                                        label: "Success!",
+                                        className: "btn-success",
+                                        callback: function () {
+                                            deleteElement('#li-phase-'+idPhase);
+                                            deleteElement('#tab-phase-'+idPhase);
+                                        }
+                                    }
+                                }
+                            });
+                        }
+                    }
+                });
+            }
+        });
+    }
+
+
+    var implementActionsToPhase= function() 
+    {
+        $('button.delete-phase').click(function () {
+            var phaseId = $(this).attr('data-phase-id');
+            //console.log(phaseId);
+            deletePhase(phaseId);
+        });
+    }
 
 
      var getTeamsForGames = function (idField, url) 
@@ -6448,7 +6595,9 @@ var handleBootboxAddEquipoToJugador = function () {
             implementActionsToSanction();
             implementActionsToChange();
             implementActionsToAlignment();
-            
+            implementActionsToPhase();
+            implementActionsToGroup();
+            implementActionsToTeamGroup();
 
             loadPositionSelectPlayerCreate();
             loadPositionSelectPlayerEdit();

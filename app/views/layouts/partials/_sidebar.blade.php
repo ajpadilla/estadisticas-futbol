@@ -122,10 +122,12 @@
 		<a id="exist-game-to-group" href="{{ URL::route('groups.api.exist.game') }}"></a>
 		<a id="teams-available-for-games" href="{{ URL::route('groups.api.teams.availables.game') }}"></a>
 		<a id="add-new-alignment-for-game" href="{{ URL::route('games.api.add.alignment') }}"></a>
+		<a id="delete-group" href="{{ URL::route('groups.api.delete') }}"></a>
 		<!--Phases-->
 		<a id="add-new-phase-competition" href="{{ URL::route('competitions.api.add.phase') }}"></a>
 		<a id="list-teams-phase-competition" href="{{ URL::route('phases.api.teams.availables.group') }}"></a>
 		<a id="add-new-group-to-phase" href="{{ URL::route('phases.api.add.group') }}"></a>
+		<a id="delete-phase" href="{{ URL::route('phases.api.delete') }}"></a>
 		<!--Goals-->
 		<a id="list-of-goal-types" href="{{ URL::route('goal-types.api.select.list') }}"></a>
 		<a id="add-new-goal-for-game" href="{{ URL::route('games.api.add.goal') }}"></a>

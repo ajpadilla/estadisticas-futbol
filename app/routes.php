@@ -141,14 +141,14 @@ Route::get('competencias/api-equipos-disponibles/{id}', ['as' => 'competitions.a
 /*
 ********************************* RUTAS PARA FASES ********************************
 */
-Route::get('fases/api-eliminar/{id}', ['as' => 'phases.api.delete', 'uses' => 'PhaseController@destroyApi']);
+Route::get('fases/api-eliminar', ['as' => 'phases.api.delete', 'uses' => 'PhaseController@destroyApi']);
 Route::post('fases/api-agregar-grupo',  ['as' => 'phases.api.add.group','uses' => 'PhaseController@addGroupApi' ] );
 Route::get('fases/api-equipos-disponibles-grupo/{id}', ['as' => 'phases.api.teams.availables.group', 'uses' => 'PhaseController@getAvailableTeams']);
 
 /*
 ********************************* PATH FOR GROUPS ********************************
 */
-Route::get('grupos/api-eliminar/{id}', ['as' => 'groups.api.delete', 'uses' => 'GroupController@destroyApi']);
+Route::get('grupos/api-eliminar', ['as' => 'groups.api.delete', 'uses' => 'GroupController@destroyApi']);
 Route::post('grupos/api-agregar-equipo', ['as' => 'groups.api.add.team', 'uses' => 'GroupController@addTeamApi']);
 Route::post('grupos/api-agregar-juego', ['as' => 'groups.api.add.game', 'uses' => 'GroupController@addGameApi']);
 Route::get('grupos/api-lista-juegos/{id}', ['as' => 'groups.api.list.games', 'uses' => 'GroupController@listGameApi']);
