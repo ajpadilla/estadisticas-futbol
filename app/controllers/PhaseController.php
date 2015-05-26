@@ -140,7 +140,7 @@ class PhaseController extends \BaseController {
 	public function destroyApi()
 	{
 		if(Request::ajax())
-			$this->setSuccess($this->repository->delete(Input::get('competitionId')));
+			$this->setSuccess($this->repository->delete(Input::get('phaseId')));
 		return $this->getResponseArrayJson();
 	}
 
