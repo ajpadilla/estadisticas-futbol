@@ -183,7 +183,7 @@ class PhaseController extends \BaseController {
 		{
 			$teams = $this->repository->getAvailableTeamsForGroup($id);
 			$this->setSuccess(($teams ? true : false));
-			$this->addToResponseArray('data', ($teams ? $teams : array()));			
+			$this->addToResponseArray('data', ($teams ? $teams : array()));
 		}else{
 			$this->setSuccess(false);
 		}
