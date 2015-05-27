@@ -3,9 +3,11 @@
 use soccer\Equipo\Equipo;
 use soccer\Base\BaseRepository;
 use soccer\Player\PlayerRepository;
+use soccer\Game\GameRepository;
 use soccer\Group\GroupRepository;
 use soccer\Competition\Competition;
 use Carbon\Carbon;
+use DB;
 use Datatable;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Support\Facades\File;
@@ -101,43 +103,91 @@ class EquipoRepository extends BaseRepository
 
 	public function getPlayedGamesByGroup($id, $groupId)
 	{
-		// Obtengo todos los partidos que ya se han jugado para este equipo en ese grupo 
-		return 0;		
+		$gameRepository = new GameRepository;
+		$query = $gameRepository->getModel()->select();
+		$query->where('games.local_team_id', '=', $id)
+			  ->orWhere('games.away_team_id', '=', $id)
+			  ->where('games.group_id', '=', $groupId)
+			  ->where('games.date', '<', Carbon::now()->addMinutes(120)->format('Y-m-d h:i:00'));
+		return $query->count();	
 	}
 
 	public function getWinGamesByGroup($id, $groupId)
 	{
-		// Obtengo todos los partidos que ya se han jugado para este equipo en ese grupo 
-		return 0;		
+		$winGames = 0;
+
+		$team = $this->get($id);		
+		$localGames = $team->localGames()->whereGroupId($groupId)->get();
+		foreach ($localGames as $game) 
+			$winGames += ($game->localGoals > $game->awayGoals ? 1 : 0);
+		
+		$awayGames = $team->awayGames()->whereGroupId($groupId)->get();
+			foreach ($awayGames as $game) 
+				$winGames += ($game->localGoals < $game->awayGoals ? 1 : 0);		
+
+		return $winGames;
 	}
 
 	public function getLostGamesByGroup($id, $groupId)
 	{
-		// Obtengo todos los partidos que ya se han jugado para este equipo en ese grupo 
-		return 0;		
+		$lostGames = 0;
+
+		$team = $this->get($id);		
+		$localGames = $team->localGames()->whereGroupId($groupId)->get();
+		foreach ($localGames as $game) 
+			$lostGames += ($game->localGoals < $game->awayGoals ? 1 : 0);
+		
+		$awayGames = $team->awayGames()->whereGroupId($groupId)->get();
+			foreach ($awayGames as $game) 
+				$lostGames += ($game->localGoals > $game->awayGoals ? 1 : 0);		
+
+		return $lostGames;	
 	}
 
 	public function getTieGamesByGroup($id, $groupId)
 	{
-		// Obtengo todos los partidos que ya se han jugado para este equipo en ese grupo 
-		return 0;		
+		$tieGames = 0;
+
+		$team = $this->get($id);		
+		$localGames = $team->localGames()->whereGroupId($groupId)->get();
+		foreach ($localGames as $game) 
+			$tieGames += ($game->localGoals == $game->awayGoals ? 1 : 0);
+		
+		$awayGames = $team->awayGames()->whereGroupId($groupId)->get();
+			foreach ($awayGames as $game) 
+				$tieGames += ($game->localGoals == $game->awayGoals ? 1 : 0);		
+
+		return $tieGames;		
 	}
 
 	public function getScoredGoalsByGroup($id, $groupId)
 	{
-		// Obtengo todos los partidos que ya se han jugado para este equipo en ese grupo 
-		return 0;		
+		$goals = 0;
+		$team = $this->get($id);
+		$goals += $team->localGoals()->whereGroupId($groupId)->whereTeamId($id)->count();
+		$goals += $team->awayGoals()->whereGroupId($groupId)->whereTeamId($id)->count();
+
+		return $goals;		
 	}
 
 	public function getAgainstGoalsByGroup($id, $groupId)
 	{
-		// Obtengo todos los partidos que ya se han jugado para este equipo en ese grupo 
-		return 0;		
+		$goals = 0;
+
+		$team = $this->get($id);		
+		$localGames = $team->localGames()->whereGroupId($groupId)->get();
+		foreach ($localGames as $game) 
+			$goals += $game->awayGoals;
+		
+		$awayGames = $team->awayGames()->whereGroupId($groupId)->get();
+			foreach ($awayGames as $game) 
+				$goals += $game->localGoals;		
+
+		return $goals;
 	}
 
 	public function getGoalsDifferenceByGroup($id, $groupId)
-	{
-		// Obtengo todos los partidos que ya se han jugado para este equipo en ese grupo 
+	{		
 		return 0;		
 	}
 

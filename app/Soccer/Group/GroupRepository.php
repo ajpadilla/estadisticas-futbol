@@ -240,14 +240,59 @@ class GroupRepository extends BaseRepository
 		*/
 	}	
 
+	public function getOrderedFixturesArrayByGroup($id, $teamRepository)
+	{
+		$fixtures = array();
+		foreach ($teamRepository->getSortByPointsByGroup($id) as $team) {
+			$winGames = $teamRepository->getWinGamesByGroup($team->id, $id);
+			$lostGames = $teamRepository->getLostGamesByGroup($team->id, $id);
+			$tieGames = $teamRepository->getTieGamesByGroup($team->id, $id);
+			$scoredGoals = $teamRepository->getScoredGoalsByGroup($team->id, $id);
+			$againstGoals = $teamRepository->getAgainstGoalsByGroup($team->id, $id);
+
+			$teamFixtures = array(
+				'id' => $team->id,
+				'pos' => 0,
+				'gamesPlayed' => $teamRepository->getPlayedGamesByGroup($team->id, $id),
+				'winGames' => $winGames,
+				'lostGames' => $lostGames,
+				'tieGames' => $tieGames,
+				'scoredGoals' => $scoredGoals,
+				'againstGoals' => $againstGoals,
+				'goalsDiff' => $scoredGoals - $againstGoals,
+				'points' => ($winGames * 3) + $tieGames
+			);
+			$fixtures[$team->id] = $teamFixtures;
+		}
+
+		usort($fixtures, function($a, $b) {
+    		return $a['points'] <= $b['points'];
+		});
+
+		$i = 1;
+
+		$orderedFixtures = array();
+		foreach ($fixtures as $index => $fixture) {
+			$fixture['pos'] = $i;
+			unset($fixtures[$index]);
+			$orderedFixtures[$fixture['id']] = $fixture;
+			$i++;
+		}
+		unset($fixtures);
+		return $orderedFixtures;
+	}
+
 	private function setTableGroupContent($id, EquipoRepository $teamRepository)
 	{
 		$teamRepository->collection->searchColumns('Pos', 'Equipo', 'JJ', 'JG', 'JP', 'JE', 'GF', 'GC', 'DG', 'PTS');
 		$teamRepository->collection->orderColumns('Pos', 'Equipo', 'JJ', 'JG', 'JP', 'JE', 'GF', 'GC', 'DG', 'PTS');
 
-		$teamRepository->collection->addColumn('Pos', function($model) use ($teamRepository, $id)
+		$fixtures = $this->getOrderedFixturesArrayByGroup($id, $teamRepository);
+
+		$teamRepository->collection->addColumn('Pos', function($model) use ($teamRepository, $id, $fixtures)
 		{
-			return $teamRepository->getPositionForTeamInGroup($model->id, $id);
+			return $fixtures[$model->id]['pos'];
+			//return $teamRepository->getPositionForTeamInGroup($model->id, $id);
 		});
 
 		$teamRepository->collection->addColumn('Equipo', function($model)
@@ -255,44 +300,54 @@ class GroupRepository extends BaseRepository
 			return $model->nombre;
 		});
 
-		$teamRepository->collection->addColumn('JJ', function($model) use ($teamRepository, $id)
+		$teamRepository->collection->addColumn('JJ', function($model) use ($teamRepository, $id, $fixtures)
 		{
-			return $teamRepository->getPlayedGamesByGroup($model->id, $id);
+			return $fixtures[$model->id]['gamesPlayed'];
+			//return $teamRepository->getPlayedGamesByGroup($model->id, $id);
 		});
 
-		$teamRepository->collection->addColumn('JG', function($model) use ($teamRepository, $id)
+		$teamRepository->collection->addColumn('JG', function($model) use ($teamRepository, $id, $fixtures)
 		{
-			return $teamRepository->getWinGamesByGroup($model->id, $id);
+			return $fixtures[$model->id]['winGames'];
+			//$winGames = $teamRepository->getWinGamesByGroup($model->id, $id);
+			//return $winGames;
 		});		
 
-		$teamRepository->collection->addColumn('JP', function($model) use ($teamRepository, $id)
+		$teamRepository->collection->addColumn('JP', function($model) use ($teamRepository, $id, $fixtures)
 		{
-			return $teamRepository->getLostGamesByGroup($model->id, $id);
+			return $fixtures[$model->id]['lostGames'];
+			//return $teamRepository->getLostGamesByGroup($model->id, $id);
 		});
 
-		$teamRepository->collection->addColumn('JE', function($model) use ($teamRepository, $id)
+		$teamRepository->collection->addColumn('JE', function($model) use ($teamRepository, $id, $fixtures)
 		{
-			return $teamRepository->getTieGamesByGroup($model->id, $id);
+			return $fixtures[$model->id]['tieGames'];
+			//$tieGames = $teamRepository->getTieGamesByGroup($model->id, $id);
+			//return $tieGames;
 		});
 		
-		$teamRepository->collection->addColumn('GF', function($model) use ($teamRepository, $id)
+		$teamRepository->collection->addColumn('GF', function($model) use ($teamRepository, $id, $fixtures)
 		{
-			return $teamRepository->getScoredGoalsByGroup($model->id, $id);
+			return $fixtures[$model->id]['scoredGoals'];
+			//$scoredGoals = $teamRepository->getScoredGoalsByGroup($model->id, $id);
+			//return $scoredGoals;
 		});
 		
-		$teamRepository->collection->addColumn('GC', function($model) use ($teamRepository, $id)
+		$teamRepository->collection->addColumn('GC', function($model) use ($teamRepository, $id, $fixtures)
 		{
-			return $teamRepository->getAgainstGoalsByGroup($model->id, $id);
+			return $fixtures[$model->id]['againstGoals'];
+			//$againstGoals = $teamRepository->getAgainstGoalsByGroup($model->id, $id);
+			//return $againstGoals;
 		});
 
-		$teamRepository->collection->addColumn('DG', function($model) use ($teamRepository, $id)
+		$teamRepository->collection->addColumn('DG', function($model) use ($teamRepository, $id, $fixtures)
 		{
-			return $teamRepository->getGoalsDifferenceByGroup($model->id, $id);
+			return $fixtures[$model->id]['goalsDiff'];
 		});
 
-		$teamRepository->collection->addColumn('PTS', function($model) use ($teamRepository, $id)
+		$teamRepository->collection->addColumn('PTS', function($model) use ($teamRepository, $id, $fixtures)
 		{
-			return $teamRepository->getPointsByGroup($model->id, $id);
+			return $fixtures[$model->id]['points'];
 		});
 	}	
 

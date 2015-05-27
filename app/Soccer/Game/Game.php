@@ -75,6 +75,16 @@ class Game extends Eloquent {
         return $this->goals->count() > 0;
     }    
 
+    public function getLocalGoalsAttribute()
+    {
+        return $this->goals()->whereTeamId($this->local_team_id)->count();
+    }
+
+    public function getAwayGoalsAttribute()
+    {
+        return $this->goals()->whereTeamId($this->away_team_id)->count();
+    }    
+
     public function getHasSanctionsAttribute()
     {
         return $this->sanctions->count() > 0;
