@@ -6,7 +6,7 @@
 		</div>
 		<div class="box-body">
 			{{ Form::open(['route' => 'competitions.api.add.phase','class'=>'form-horizontal', 'role'=>'form', 'method' => 'POST', 'id' => 'add-phase-to-competition-form']) }}
-				
+
 			<div class="form-group">
 				{{ Form::label('name', 'Nombre', ['class' => 'col-md-2 control-label']) }}	
 				<div class="col-md-6">{{ Form::text('name', null, ['class' => 'form-control','id' =>'name-new-phase-to-competition' ]) }}</div>
@@ -29,6 +29,16 @@
 				</div>
 			</div>	
 
+			<div class="form-group">
+				<div class="col-md-6">
+					<div class="checkbox">
+						<label> 
+						{{ Form::checkbox('last', '1', false)}}
+							<i></i> Último	
+						</label>
+					</div>
+				</div>
+			</div>
 			{{ Form::close() }}
 		</div>
 	</div>
