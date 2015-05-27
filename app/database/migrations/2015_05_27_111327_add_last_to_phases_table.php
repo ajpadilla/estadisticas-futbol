@@ -14,7 +14,7 @@ class AddLastToPhasesTable extends Migration {
 	{
 		Schema::table('phases', function(Blueprint $table)
 		{
-			$table->boolean('last')->default(false);
+			$table->boolean('last')->default(false)->after('format_id');
 		});
 	}
 
@@ -28,7 +28,7 @@ class AddLastToPhasesTable extends Migration {
 	{
 		Schema::table('phases', function(Blueprint $table)
 		{
-			$table->removeColunm('last');
+			$table->dropColumn('last');
 		});
 	}
 
