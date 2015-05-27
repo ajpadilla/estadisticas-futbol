@@ -91,7 +91,7 @@ class BaseRepository
 
 	public function setCollection($collection)
 	{
-		$this->collection = $collection;
+		$this->collection = Datatable::collection($collection);
 	}	
 
 	public function setDatatableCollection(Collection $collection)

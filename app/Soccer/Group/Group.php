@@ -98,4 +98,11 @@ class Group extends Eloquent {
     {
         return $this->totalGames > 0;
     }    
+
+    public function getGamesPlayedAttribute()
+    {
+        return $this->games()
+                    ->where('date', '>', Carbon::now()->addMinutes(120)->format('Y-m-d h:i'))
+                    ->count();
+    }
 }

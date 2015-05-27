@@ -75,6 +75,16 @@ class Game extends Eloquent {
         return $this->goals->count() > 0;
     }    
 
+    public function getLocalGoalsAttribute()
+    {
+        return $this->goals()->whereTeamId($this->local_team_id)->count();
+    }
+
+    public function getAwayGoalsAttribute()
+    {
+        return $this->goals()->whereTeamId($this->away_team_id)->count();
+    }    
+
     public function getHasSanctionsAttribute()
     {
         return $this->sanctions->count() > 0;
@@ -92,8 +102,7 @@ class Game extends Eloquent {
 
     public function getStatusAttribute()
     {
-        //return ($this->finished ? 'Finalizado' : 'Pendiente');
-        return 'Finalizado';
+        return ($this->finished ? 'Finalizado' : 'Pendiente');
     }
 
     public function getDateOnlyAttribute()
@@ -119,5 +128,10 @@ class Game extends Eloquent {
     public function getLineRefereeAttribute($value)
     {
         return ($value ? $value : '-');
-    }      
+    }    
+
+    public function getFinishedAttribute()
+    {
+        return $this->date->diffInMinutes(Carbon::now()->addMinutes(120)) < 0;
+    }  
 }

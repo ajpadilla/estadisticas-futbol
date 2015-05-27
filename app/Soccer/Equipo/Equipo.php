@@ -68,13 +68,23 @@ class Equipo extends Eloquent implements StaplerableInterface{
 
     public function localGames()
     {
-        return $this->hasMany('soccer\Game\Game');
+        return $this->hasMany('soccer\Game\Game', 'local_team_id');
     }    
 
     public function awayGames()
     {
-        return $this->hasMany('soccer\Game\Game');
+        return $this->hasMany('soccer\Game\Game', 'away_team_id');
     }    
+
+    public function localGoals()
+    {
+    	return $this->hasManyThrough('soccer\Game\Goal\Goal', 'soccer\Game\Game', 'local_team_id', 'game_id');
+    }
+
+    public function awayGoals()
+    {
+    	return $this->hasManyThrough('soccer\Game\Goal\Goal', 'soccer\Game\Game', 'away_team_id', 'game_id');
+    }
 
 	/*
 	***************** CUSTOM SETTINGS FOR ATTRIBUTES *************************

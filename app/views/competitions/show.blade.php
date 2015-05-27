@@ -21,13 +21,7 @@
 						<li>
 							<a href="#pro_teams" data-toggle="tab">
 								<i class="fa fa-question"></i> 
-								<span class="hidden-inline-mobile"> 
-									@if ($competition->tipoCompetencia->isTournament) 
-										Grupos
-									@else
-										Equipos
-									@endif
-								</span>
+								<span class="hidden-inline-mobile"> Fases </span>
 							</a>
 						</li>
 						<li>
