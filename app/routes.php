@@ -158,6 +158,8 @@ Route::get('grupos/api-existe-juego/{id}/{localTeam}/{awayTeam}', ['as' => 'grou
 Route::get('grupos/api-lista-grupo/{id}', ['as' => 'groups.api.list.group', 'uses' => 'GroupController@listGroupApi']);
 Route::get('grupos/api-equipos-disponibles-juego/{id}', ['as' => 'groups.api.teams.availables.game', 'uses' => 'GroupController@getAvailableTeamsForGame']);
 Route::get('grupos/api-sacar-equipo/{id}/{teamId}', ['as' => 'groups.api.remove.team', 'uses' => 'GroupController@removeTeamApi']);
+Route::get('grupos/api-ver', ['as'=>'groups.api.show', 'uses'=>'GroupController@showApi']);
+Route::post('grupos/api-actualizar',  ['as' => 'groups.api.update','uses' => 'GroupController@updateApi' ] );
 
 /*
 ********************************* GAME FOR GROUPS ********************************

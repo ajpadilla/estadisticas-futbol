@@ -117,6 +117,8 @@
 		{{--<a id="list-of-teams-for-competition" href="{{ URL::route('groups.api.available.teams') }}"></a>--}}
 		<!--Groups-->
 		<a id="add-new-teams-to-group" href="{{ URL::route('groups.api.add.team') }}"></a>
+		<a id="data-group" href="{{ URL::route('groups.api.show') }}"></a>
+		<a id="update-group" href="{{ URL::route('groups.api.update') }}"></a>
 		<!--Games-->
 		<a id="add-new-game-to-group" href="{{ URL::route('groups.api.add.game') }}"></a>
 		<a id="exist-game-to-group" href="{{ URL::route('groups.api.exist.game') }}"></a>

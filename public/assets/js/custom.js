@@ -3574,7 +3574,6 @@ var handleBootboxAddEquipoToJugador = function () {
                                         className: "btn-success",
                                         callback: function () {
                                             deleteElement('#div-group-'+idGroup);
-                                            //deleteElement('#li-phase-'+idPhase);
                                         }
                                     }
                                 }
@@ -3587,12 +3586,186 @@ var handleBootboxAddEquipoToJugador = function () {
     }
 
 
+    var bootboxEditGroup = function (groupId) {
+        var phaseId = $(this).attr('data-phase-id');
+            /*var url = $('#list-teams-phase-competition').attr('href').split('%')[0]+phaseId;
+            selectTeamsForCompetition('#phase-new-teams-ids',url);*/
+            addValidationRulesForms();
+            $('#edit-group-to-phase-form').validate({
+                rules:{
+                    name:{
+                        required:true,
+                        rangelength: [2, 128],
+                    }
+                },
+                messages:{
+                    nombre:{
+                        required:'Este campo es obligatorio.',
+                        rangelength: 'Por favor ingrese entre [2, 128] caracteres',
+                    }
+                },
+                highlight:function(element){
+                    $(element).closest('.form-group').removeClass('has-success').addClass('has-error');
+                },
+                unhighlight:function(element){
+                    $(element).closest('.form-group').removeClass('has-error');
+                },
+                success:function(element){
+                    element.addClass('valid').closest('.form-group').removeClass('has-error').addClass('has-success');
+                },
+            });
+
+            bootbox.dialog({
+                    message: $('#edit-group-form-div-box'),
+                    buttons: {
+                        success: {
+                            label: "Agregar",
+                            className: "btn-primary",
+                            callback: function () 
+                            {
+                                if($('#edit-group-to-phase-form').valid()) 
+                                {
+                                    $("#edit-group-to-phase-form").submit(function(e){
+                                        var formData = {
+                                            name: $('#name-new-group-to-phase').val(),
+                                            phase_id: phaseId,
+                                            teams_ids: $('#phase-new-teams-ids').val()
+                                        }
+                                        $.ajax({
+                                            type: 'POST',
+                                            url: $('#add-new-group-to-phase').attr('href'), 
+                                            data: formData,
+                                            dataType: "JSON",
+                                            success: function(responseServer) {
+                                                if(responseServer.success == true) 
+                                                {
+                                                    // Muestro otro dialog con información de éxito
+                                                    bootbox.dialog({
+                                                        message: responseServer.data.name + " ha sido agregado correctamente!",
+                                                        title: "Éxito",
+                                                        buttons: {
+                                                            success: {
+                                                                label: "Success!",
+                                                                className: "btn-success",
+                                                                callback: function () {
+                                                                    reloadDatatable();
+                                                                }
+                                                            }
+                                                        }
+                                                    });
+                                                    // Limpio cada elemento de las clases añadidas por el validator
+                                                    $('#edit-group-to-phase-form div').each(function(){
+                                                        cleanValidatorClasses(this);
+                                                    });
+                                                    //Reinicio el formulario
+                                                    $("#edit-group-to-phase-form")[0].reset();
+                                                    location.reload();
+                                                }else{
+                                                     bootbox.dialog({
+                                                        message:responseServer.errors,
+                                                        title: "Error",
+                                                        buttons: {
+                                                            danger: {
+                                                                label: "Danger!",
+                                                                className: "btn-danger"
+                                                            }
+                                                        }
+                                                    });
+                                                    // Limpio cada elemento de las clases añadidas por el validator
+                                                    $('#edit-group-to-phase-form div').each(function(){
+                                                        cleanValidatorClasses(this);
+                                                    });
+                                                    //Reinicio el formulario
+                                                }
+                                            },
+                                            error: function(jqXHR, textStatus, errorThrown) {
+                                               console.log(errorThrown);
+                                               bootbox.dialog({
+                                                        message:" ¡Error al enviar datos al servidor!",
+                                                        title: "Error",
+                                                        buttons: {
+                                                            danger: {
+                                                                label: "Danger!",
+                                                                className: "btn-danger"
+                                                            }
+                                                        }
+                                                    });
+                                                    // Limpio cada elemento de las clases añadidas por el validator
+                                                    $('#edit-group-to-phase-form div').each(function(){
+                                                        cleanValidatorClasses(this);
+                                                    });
+                                                    //Reinicio el formulario
+                                            }
+                                        });
+                                        e.preventDefault(); //Prevent Default action. 
+                                        $(this).unbind('submit');
+                                    }); 
+                                    $("#edit-group-to-phase-form").submit();
+                                }else{
+                                    return false;
+                                }
+                                return false;
+                            }
+                        }
+                    },
+                        show: false // We will show it manually later
+                    })
+                .on('shown.bs.modal', function() {
+                    $('#edit-group-form-div-box')
+                            .show();                             // Show the form
+                        })
+                .on('hide.bs.modal', function(e) {
+                    // Bootbox will remove the modal (including the body which contains the form)
+                    // after hiding the modal
+                    // Therefor, we need to backup the form
+                    $('#edit-group-form-div-box').hide().appendTo('#edit-group-to-phase');
+                })
+                .modal('show');
+    }
+
+    var loadDataForEditGroup = function (idGroup) {
+        $.ajax({
+            type: 'GET',
+            url: $('#data-group').attr('href'),    
+            data: {'groupId': idGroup},
+            dataType: "JSON",
+            success: function(response) 
+            {
+                //console.log(response);
+                 if (response != null) 
+                 {
+                    if (response.success)
+                     {
+                        var group = $('#edit-group-form-div-box');
+                        var data = {
+                            title: "Editar Grupo",
+                            name: response.group.name,
+                        };
+                        var template = $('#edit-group-tpl').html();
+                        var html = Mustache.to_html(template, data);
+                        group.html(html);
+                        //console.log(html)
+                        initChosen();
+                        
+                        bootboxEditGroup(response.group.id);
+                    }
+                }
+            }
+        });
+    }
+
     var implementActionsToGroup= function() 
     {
         $('button.delete-group').click(function () {
             var groupId = $(this).attr('data-group-id');
             //console.log(groupId);
             deleteGroup(groupId);
+        });
+
+        $('button.edit-group').click(function () {
+            var groupId = $(this).attr('data-group-id');
+            loadDataForEditGroup(groupId);
+            //console.log(groupId);
         });
     }
 
