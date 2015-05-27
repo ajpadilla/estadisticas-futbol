@@ -1,6 +1,7 @@
 <?php namespace soccer\Equipo;
 
 use soccer\Equipo\Equipo;
+use soccer\Game\Game;
 use soccer\Base\BaseRepository;
 use soccer\Player\PlayerRepository;
 use soccer\Game\GameRepository;
@@ -88,6 +89,17 @@ class EquipoRepository extends BaseRepository
 	/*
 	*********************** METHODS FOR GROUPS ******************************
 	*/		
+
+	public function getLocalGamesByGroup($id, $groupId)
+	{
+		return Game::whereLocalTeamId($id)->whereGroupId($groupId)->get();
+	}
+
+	public function getAwayGamesByGroup($id, $groupId)
+	{
+		return Game::whereAwayTeamId($id)->whereGroupId($groupId)->get();
+	}	
+
 	public function getSortByPointsByGroup($groupId, $type = 'DESC')
 	{
 		$groupRepository = new GroupRepository;
@@ -115,31 +127,29 @@ class EquipoRepository extends BaseRepository
 	public function getWinGamesByGroup($id, $groupId)
 	{
 		$winGames = 0;
-
-		$team = $this->get($id);		
-		$localGames = $team->localGames()->whereGroupId($groupId)->get();
+		
+		$localGames = $this->getLocalGamesByGroup($id, $groupId);
 		foreach ($localGames as $game) 
 			$winGames += ($game->localGoals > $game->awayGoals ? 1 : 0);
 		
-		$awayGames = $team->awayGames()->whereGroupId($groupId)->get();
-			foreach ($awayGames as $game) 
-				$winGames += ($game->localGoals < $game->awayGoals ? 1 : 0);		
-
+		$awayGames = $this->getAwayGamesByGroup($id, $groupId);
+		foreach ($awayGames as $game) 
+				$winGames += ($game->localGoals < $game->awayGoals ? 1 : 0);				
+		
 		return $winGames;
 	}
 
 	public function getLostGamesByGroup($id, $groupId)
 	{
 		$lostGames = 0;
-
-		$team = $this->get($id);		
-		$localGames = $team->localGames()->whereGroupId($groupId)->get();
+		
+		$localGames = $this->getLocalGamesByGroup($id, $groupId);
 		foreach ($localGames as $game) 
 			$lostGames += ($game->localGoals < $game->awayGoals ? 1 : 0);
 		
-		$awayGames = $team->awayGames()->whereGroupId($groupId)->get();
-			foreach ($awayGames as $game) 
-				$lostGames += ($game->localGoals > $game->awayGoals ? 1 : 0);		
+		$awayGames = $this->getAwayGamesByGroup($id, $groupId);
+		foreach ($awayGames as $game) 
+			$lostGames += ($game->localGoals > $game->awayGoals ? 1 : 0);		
 
 		return $lostGames;	
 	}
@@ -148,14 +158,13 @@ class EquipoRepository extends BaseRepository
 	{
 		$tieGames = 0;
 
-		$team = $this->get($id);		
-		$localGames = $team->localGames()->whereGroupId($groupId)->get();
+		$localGames = $this->getLocalGamesByGroup($id, $groupId);
 		foreach ($localGames as $game) 
 			$tieGames += ($game->localGoals == $game->awayGoals ? 1 : 0);
 		
-		$awayGames = $team->awayGames()->whereGroupId($groupId)->get();
-			foreach ($awayGames as $game) 
-				$tieGames += ($game->localGoals == $game->awayGoals ? 1 : 0);		
+		$awayGames = $this->getAwayGamesByGroup($id, $groupId);
+		foreach ($awayGames as $game) 
+			$tieGames += ($game->localGoals == $game->awayGoals ? 1 : 0);		
 
 		return $tieGames;		
 	}
@@ -174,27 +183,25 @@ class EquipoRepository extends BaseRepository
 	{
 		$goals = 0;
 
-		$team = $this->get($id);		
-		$localGames = $team->localGames()->whereGroupId($groupId)->get();
+		$localGames = $this->getLocalGamesByGroup($id, $groupId);
 		foreach ($localGames as $game) 
 			$goals += $game->awayGoals;
 		
-		$awayGames = $team->awayGames()->whereGroupId($groupId)->get();
-			foreach ($awayGames as $game) 
-				$goals += $game->localGoals;		
+		$awayGames = $this->getAwayGamesByGroup($id, $groupId);
+		foreach ($awayGames as $game) 
+			$goals += $game->localGoals;		
 
 		return $goals;
 	}
 
 	public function getGoalsDifferenceByGroup($id, $groupId)
 	{		
-		return 0;		
+		return $this->getScoredGoalsByGroup($id, $groupId) - $this->getAgainstGoalsByGroup($id, $groupId);		
 	}
 
 	public function getPointsByGroup($id, $groupId)
 	{
-		// Obtengo todos los partidos que ya se han jugado para este equipo en ese grupo 
-		return 0;		
+		return ($this->getWinGamesByGroup($id, $groupId) * 2) + $this->getTieGamesByGroup($id, $groupId);		
 	}
 
 	public function getPositionForTeamInGroup($id, $groupId)

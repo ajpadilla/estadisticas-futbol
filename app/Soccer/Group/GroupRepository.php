@@ -187,59 +187,6 @@ class GroupRepository extends BaseRepository
 		});
 	}
 
-	public function setBodyTableSettings()
-	{
-		/*
-		$this->collection->searchColumns('Equipo', 'JJ', 'JG', 'JP', 'JE', 'GF', 'GC', 'DG', 'PTS');
-		$this->collection->orderColumns('Equipo', 'JJ', 'JG', 'JP', 'JE', 'GF', 'GC', 'DG', 'PTS');
-
-		$this->collection->addColumn('Equipo', function($model)
-		{
-			 return $model->nombre;
-		});
-
-		$this->collection->addColumn('JJ', function($model)
-		{
-			 return $model->nombre;
-		});
-
-		$this->collection->addColumn('JG', function($model)
-		{
-			 return $model->nombre;
-		});		
-
-		$this->collection->addColumn('JP', function($model)
-		{
-			 return $model->nombre;
-		});
-
-		$this->collection->addColumn('JE', function($model)
-		{
-			 return $model->nombre;
-		});
-		
-		$this->collection->addColumn('GF', function($model)
-		{
-			 return $model->nombre;
-		});
-		
-		$this->collection->addColumn('GC', function($model)
-		{
-			 return $model->nombre;
-		});
-
-		$this->collection->addColumn('DG', function($model)
-		{
-			 return $model->nombre;
-		});
-
-		$this->collection->addColumn('PTS', function($model)
-		{
-			 return $model->nombre;
-		});
-		*/
-	}	
-
 	public function getOrderedFixturesArrayByGroup($id, $teamRepository)
 	{
 		$fixtures = array();
