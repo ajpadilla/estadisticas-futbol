@@ -18,7 +18,7 @@
 						<div class="tab-pane" id="tab-phase-{{ $phase->id }}">
 							<div class="row">
 								<div class="col-md-12">
-									{{-- <button class="delete-phase pull-right btn btn-lg btn-primary" id="delete-phase" href="{{ URL::route('phases.api.edit', $phase->id) }}">Editar Fase</button> --}}	
+									<button class="edit-phase pull-right btn btn-lg btn-primary" id="edit-phase" href="{{ URL::route('phases.api.update', $phase->id) }}" data-phase-id="{{ $phase->id }}">Editar Fase</button>
 									<button class="delete-phase pull-right btn btn-lg btn-primary" id="delete-phase" href="{{ URL::route('phases.api.delete', $phase->id) }}" data-phase-id="{{ $phase->id }}">Eliminar Fase</button>						
 									@if(!$phase->isFull)
 										<button class="group pull-right btn btn-lg btn-primary" id="add-group" data-phase-id="{{ $phase->id }}" href="#">Agregar grupo</button>
