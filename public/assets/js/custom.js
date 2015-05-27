@@ -3804,6 +3804,42 @@ var handleBootboxAddEquipoToJugador = function () {
     }
 
 
+    var selectTeamsForGroupCompetition = function(id,url, groupId) {
+        //console.log(url);
+        $.ajax({
+            type: 'GET',
+            url: url,
+            dataType:'json',
+            success: function(response) {
+                //console.log(response);
+                if (response.success == true) 
+                {
+                    if (response.data.length > 0) 
+                    {
+                        jQuery(id).html('');
+                        jQuery(id).append('<option value=\"\"></option>');
+                        $.each(response.data, function (k, team){
+                            $(id).append('<option value=\"'+team.id+'\">'+team.name+'</option>');
+                            $(id).trigger("chosen:updated");
+                        });
+                        bootboxAddTeamToGroupCompetition(groupId);
+                    }else{
+                       bootbox.dialog({
+                        message: "No hay equipos disponibles",
+                        title: "Error",
+                        buttons: {
+                            danger: {
+                                label: "Danger!",
+                                className: "btn-danger"
+                            }
+                        }
+                    });
+                   }
+               }
+           }
+       });
+    }
+
     var handleBootboxAddTeamToGroupCompetition = function () {
 
         $("button.teams").on("click", function() {
@@ -3813,9 +3849,13 @@ var handleBootboxAddEquipoToJugador = function () {
             var url = $('#list-teams-phase-competition').attr('href').split('%')[0]+phaseId;
             /*console.log('group:'+groupId);
             console.log('phaseId:'+phaseId);*/
-            selectTeamsForCompetition('#new-teams-for-groups-ids',url);
-            addValidationRulesForms();
-            $('#add-team-to-group-form').validate({
+            selectTeamsForGroupCompetition('select#new-teams-for-groups-ids',url, groupId);
+        });
+    }
+
+    var bootboxAddTeamToGroupCompetition = function  (groupId) {
+        addValidationRulesForms();
+        $('#add-team-to-group-form').validate({
                     rules:{
                         'teams_ids[]':{
                             required: true
@@ -3859,7 +3899,7 @@ var handleBootboxAddEquipoToJugador = function () {
                                                 data: formData,
                                                 dataType: "JSON",
                                                 success: function(responseServer) {
-                                                    console.log(responseServer);
+                                                    //console.log(responseServer);
                                                     if(responseServer.success == true) 
                                                     {
                                                         // Muestro otro dialog con información de éxito
@@ -3945,9 +3985,7 @@ var handleBootboxAddEquipoToJugador = function () {
                         $('#add-teams-to-group-form-div-box').hide().appendTo('#add-teams-to-group');
                     })
                     .modal('show');
-            });
     }
-
 
 
     var deleteTeamGroup = function(url,teamId, groupId) 
