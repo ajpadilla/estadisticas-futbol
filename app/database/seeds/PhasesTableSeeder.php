@@ -18,7 +18,8 @@ class PhasesTableSeeder extends DatabaseSeeder{
             'competition_id' => 1,
             'format_id' => 1,
             'from' => $date->format('Y-m-d h:m:s'),
-            'to' => $date->format('Y-m-d h:m:s'),                   
+            'to' => $date->format('Y-m-d h:m:s'),    
+            'last' => true,
             'created_at' => $date->format('Y-m-d h:m:s'),
             'updated_at' => $date->format('Y-m-d h:m:s')            
         );          

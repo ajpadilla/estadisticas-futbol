@@ -23,7 +23,7 @@ class CreateCompetitionFormatsTable extends Migration {
 			$table->boolean('away_goal')->default(false);			
 			$table->smallInteger('teams_by_group')->default(0);
 			$table->smallInteger('promotion')->default(0);			
-			$table->smallInteger('descent')->default(0);			
+			$table->smallInteger('descent')->default(0);	
 			$table->timestamps();
 		});
 	}
