@@ -128,6 +128,8 @@
 		<a id="list-teams-phase-competition" href="{{ URL::route('phases.api.teams.availables.group') }}"></a>
 		<a id="add-new-group-to-phase" href="{{ URL::route('phases.api.add.group') }}"></a>
 		<a id="delete-phase" href="{{ URL::route('phases.api.delete') }}"></a>
+		<a id="data-phase" href="{{ URL::route('phases.api.show') }}"></a>
+		<a id="update-phase" href="{{ URL::route('phases.api.update') }}"></a>
 		<!--Goals-->
 		<a id="list-of-goal-types" href="{{ URL::route('goal-types.api.select.list') }}"></a>
 		<a id="add-new-goal-for-game" href="{{ URL::route('games.api.add.goal') }}"></a>

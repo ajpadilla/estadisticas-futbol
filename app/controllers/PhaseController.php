@@ -3,6 +3,8 @@
 use soccer\Competition\Phase\PhaseRepository;
 use soccer\Group\GroupRepository;
 use soccer\Forms\RegisterGroupForm;
+use soccer\Forms\RegisterPhaseForm;
+use soccer\Forms\EditPhaseForm;
 use soccer\Game\GameType\GameTypeRepository;
 use Laracasts\Validation\FormValidationException;
 
@@ -13,14 +15,20 @@ class PhaseController extends \BaseController {
 	protected $registerGroupForm;
 	protected $groupRepository;
 	protected $gameTypeRepository;
+	protected $registerPhaseForm;
+	protected $editPhaseForm;
 
 	public function __construct(PhaseRepository $repository,
 			GroupRepository $groupRepository,
-			RegisterGroupForm $registerGroupForm
+			RegisterGroupForm $registerGroupForm,
+			RegisterPhaseForm $registerPhaseForm,
+			EditPhaseForm $editPhaseForm
 		){
 		$this->repository = $repository;
 		$this->groupRepository = $groupRepository;
 		$this->registerGroupForm = $registerGroupForm;
+		$this->registerPhaseForm = $registerPhaseForm;
+		$this->editPhaseForm = $editPhaseForm;;
 	}
 
 	/**
@@ -132,10 +140,6 @@ class PhaseController extends \BaseController {
 	/*
 	************************** API METHODS *****************************
 	*/
-	public function updateApi($id)
-	{
-		# code...
-	}
 
 	public function destroyApi()
 	{
@@ -199,5 +203,44 @@ class PhaseController extends \BaseController {
 		return $this->getResponseArrayJson();
 	}
 
+	public function showApi()
+	{
+		if (Request::ajax())
+		{
+			if (Input::has('phaseId'))
+			{
+				$phase = $this->repository->get(Input::get('phaseId'));
+				$this->setSuccess(($phase ? true : false));
+				$this->addToResponseArray('phase', $phase);
+				$this->addToResponseArray('from', date_format($phase->from, 'Y-m-d'));
+				$this->addToResponseArray('to', date_format($phase->to, 'Y-m-d'));
+				return $this->getResponseArrayJson();
+			}else{
+				return $this->getResponseArrayJson();
+			}
+		}
+	}
+
+	public function updateApi()
+	{
+		if(Request::ajax())
+		{
+			$input = Input::all();
+			try
+			{
+				$this->editPhaseForm->validate($input);
+				$phase = $this->repository->get($input['phase_id']);
+				$phase->update($input);
+				$this->setSuccess(true);
+				$this->addToResponseArray('phase', $phase);
+				return $this->getResponseArrayJson();					
+			}
+			catch (FormValidationException $e)
+			{
+				$this->addToResponseArray('errores', $e->getErrors()->all());
+				return $this->getResponseArrayJson();
+			}
+		}
+	}
 
 }

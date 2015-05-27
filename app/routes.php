@@ -144,6 +144,8 @@ Route::get('competencias/api-equipos-disponibles/{id}', ['as' => 'competitions.a
 Route::get('fases/api-eliminar', ['as' => 'phases.api.delete', 'uses' => 'PhaseController@destroyApi']);
 Route::post('fases/api-agregar-grupo',  ['as' => 'phases.api.add.group','uses' => 'PhaseController@addGroupApi' ] );
 Route::get('fases/api-equipos-disponibles-grupo/{id}', ['as' => 'phases.api.teams.availables.group', 'uses' => 'PhaseController@getAvailableTeams']);
+Route::post('fases/api-actualizar',  ['as' => 'phases.api.update','uses' => 'PhaseController@updateApi' ] );
+Route::get('fases/api-ver', ['as'=>'phases.api.show', 'uses'=>'PhaseController@showApi']);
 
 /*
 ********************************* PATH FOR GROUPS ********************************
