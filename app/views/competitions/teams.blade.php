@@ -6,6 +6,10 @@
 		<div id="add-phase-to-competition" class="hidden">
 			@include('phases.new')
 		</div>
+		<div id="edit-phase-to-competition" class="hidden">
+			@include('phases.edit')
+		</div>
+		@include('phases.edit-tpl')
 	</div>
 	<br />
 @endif
