@@ -3037,6 +3037,7 @@ var handleBootboxAddEquipoToJugador = function () {
   */
 
     var loadFieldSelect = function(url,idField) {
+        
         $.ajax({
             type: 'GET',
             url: url,
