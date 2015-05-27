@@ -201,11 +201,11 @@ class GroupController extends \BaseController {
 	{
 		if (Request::ajax())
 		{
-			if (Input::has('sanctionId'))
+			if (Input::has('groupId'))
 			{
-				$sanction = $this->repository->get(Input::get('sanctionId'));
-				$this->setSuccess(($sanction ? true : false));
-				$this->addToResponseArray('sanction', $sanction);
+				$group = $this->repository->get(Input::get('groupId'));
+				$this->setSuccess(($group ? true : false));
+				$this->addToResponseArray('group', $group);
 				return $this->getResponseArrayJson();
 			}else{
 				return $this->getResponseArrayJson();
