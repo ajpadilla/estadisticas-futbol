@@ -4189,6 +4189,177 @@ var handleBootboxAddEquipoToJugador = function () {
         });
     }
 
+    var loadDataForEditPhase = function (idPhase) {
+        $.ajax({
+            type: 'GET',
+            url: $('#data-phase').attr('href'),    
+            data: {'phaseId': idPhase},
+            dataType: "JSON",
+            success: function(response) 
+            {
+                //console.log(response);
+                 if (response != null) 
+                 {
+                    if (response.success)
+                     {
+                        var phase = $('#edit-phase-form-div-box');
+                        var data = {
+                            title: "Editar Fase",
+                            name: response.phase.name,
+                            from: response.from,
+                            to: response.to,
+                            last_value: response.phase.last
+                        };
+                        var template = $('#edit-phase-tpl').html();
+                        var html = Mustache.to_html(template, data);
+                        phase.html(html);
+                        //console.log(html)
+                        handleDatePicker();
+                        
+                        bootboxEditPhase(response.phase.id);
+                        $("input[name='last_phase_edit']").prop('checked', response.phase.last);
+                    }
+                }
+            }
+        });
+    }
+
+    var bootboxEditPhase = function (phaseId) {
+        addValidationRulesForms();
+        $('#edit-phase-form').validate(
+        {
+            rules:{
+                name_edit:{
+                        required: true
+                    },
+            },
+            messages:{
+                    name_edit:{
+                        required: 'Este campo es obligatorio'
+                    }
+            },
+            highlight:function(element){
+                $(element).closest('.form-group').removeClass('has-success').addClass('has-error');
+            },
+            unhighlight:function(element){
+                $(element).closest('.form-group').removeClass('has-error');
+            },
+            success:function(element){
+                element.addClass('valid').closest('.form-group').removeClass('has-error').addClass('has-success');
+            },
+        });
+                
+            bootbox.dialog({
+                        message: $('#edit-phase-form-div-box'),
+                        buttons: {
+                            success: {
+                                label: "Agregar",
+                                className: "btn-primary",
+                                callback: function () 
+                                {
+                                    if($('#edit-phase-form').valid()) 
+                                    {
+                                        $("#edit-phase-form").submit(function(e){
+                                            var checkboxLast = $("input[name='last_phase_edit']");
+                                            checkboxLast.val(checkboxLast[0].checked ? 1 : 0);
+
+                                            var formData = {
+                                                phase_id: phaseId,
+                                                name: $('#name-phase-edit').val(),
+                                                from: $('#from-phase-edit').val(),
+                                                to: $('#to-phase-edit').val(),
+                                                last: checkboxLast.val()
+                                            };
+                                            //console.log(formData);
+                                            $.ajax({
+                                                type: 'POST',
+                                                url: $('#update-phase').attr('href'), 
+                                                data: formData,
+                                                dataType: "JSON",
+                                                success: function(responseServer) {
+                                                    console.log(responseServer);
+                                                    if(responseServer.success) 
+                                                    {
+                                                        // Muestro otro dialog con información de éxito
+                                                        bootbox.dialog({
+                                                            message:responseServer.phase.name+" actualizada correctamente!",
+                                                            title: "Éxito",
+                                                            buttons: {
+                                                                success: {
+                                                                    label: "Success!",
+                                                                    className: "btn-success",
+                                                                    callback: function () {
+                                                                        location.reload();
+                                                                    }
+                                                                }
+                                                            }
+                                                        });
+                                                        // Limpio cada elemento de las clases añadidas por el validator
+                                                        $('#edit-phase-form div').each(function(){
+                                                            cleanValidatorClasses(this);
+                                                        });
+                                                        //Reinicio el formulario
+                                                        $("#edit-phase-form")[0].reset();
+                                                    }else{
+                                                        bootbox.dialog({
+                                                            message: responseServer.errors,
+                                                            title: "Error",
+                                                            buttons: {
+                                                                danger: {
+                                                                    label: "Danger!",
+                                                                    className: "btn-danger"
+                                                                }
+                                                            }
+                                                        });
+                                                        $('#edit-phase-form div').each(function(){
+                                                            cleanValidatorClasses(this);
+                                                        });
+                                                    }
+                                                },
+                                                error: function(jqXHR, textStatus, errorThrown) {
+                                                   console.log(errorThrown);
+                                                   bootbox.dialog({
+                                                            message:" ¡Error al enviar datos al servidor!",
+                                                            title: "Error",
+                                                            buttons: {
+                                                                danger: {
+                                                                    label: "Danger!",
+                                                                    className: "btn-danger"
+                                                                }
+                                                            }
+                                                        });
+                                                        // Limpio cada elemento de las clases añadidas por el validator
+                                                        $('#edit-phase-form div').each(function(){
+                                                            cleanValidatorClasses(this);
+                                                        });
+                                                        //Reinicio el formulario
+                                                }
+                                            });
+                                            e.preventDefault(); //Prevent Default action.
+                                            $(this).unbind('submit');
+                                        }); 
+                                        $("#edit-phase-form").submit();
+                                    }else{
+                                        return false;
+                                    }
+                                    return false;
+                                }
+                            }
+                        },
+                            show: false // We will show it manually later
+                        })
+                    .on('shown.bs.modal', function() {
+                        $('#edit-phase-form-div-box')
+                                .show();                             // Show the form
+                            })
+                    .on('hide.bs.modal', function(e) {
+                        // Bootbox will remove the modal (including the body which contains the form)
+                        // after hiding the modal
+                        // Therefor, we need to backup the form
+                        $('#edit-phase-form-div-box').hide().appendTo('#edit-phase-to-competition');
+                    })
+                    .modal('show');
+    }
 
     var implementActionsToPhase= function() 
     {
@@ -4198,13 +4369,10 @@ var handleBootboxAddEquipoToJugador = function () {
             deletePhase(phaseId);
         });
 
-        $(".table").delegate(".edit-alignment", "click", function() {
-             action = getAttributeIdActionSelect($(this).attr('id'));
-             var alignmentId = action.number;
-             var gameId = $(this).attr('data-game-id');
-             loadDataForEditAlignment(alignmentId);
-             //bootboxEditAlignment(gameId, alignmentId);
-             //console.log(action.number);
+        $('button.edit-phase').click(function () {
+            var phaseId = $(this).attr('data-phase-id');
+            loadDataForEditPhase(phaseId);
+            //console.log(phaseId);
         });
     }
 
