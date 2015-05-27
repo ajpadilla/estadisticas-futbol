@@ -191,11 +191,13 @@ class GroupRepository extends BaseRepository
 	{
 		$fixtures = array();
 		foreach ($teamRepository->getSortByPointsByGroup($id) as $team) {
-			$winGames = $teamRepository->getWinGamesByGroup($team->id, $id);
-			$lostGames = $teamRepository->getLostGamesByGroup($team->id, $id);
-			$tieGames = $teamRepository->getTieGamesByGroup($team->id, $id);
+			$localGames = $teamRepository->getLocalGamesByGroup($team->id, $id);
+			$awayGames = $teamRepository->getAwayGamesByGroup($team->id, $id);
+			$winGames = $teamRepository->getWinGamesByGroup($team->id, $id, $localGames, $awayGames);
+			$lostGames = $teamRepository->getLostGamesByGroup($team->id, $id, $localGames, $awayGames);
+			$tieGames = $teamRepository->getTieGamesByGroup($team->id, $id, $localGames, $awayGames);
 			$scoredGoals = $teamRepository->getScoredGoalsByGroup($team->id, $id);
-			$againstGoals = $teamRepository->getAgainstGoalsByGroup($team->id, $id);
+			$againstGoals = $teamRepository->getAgainstGoalsByGroup($team->id, $id, $localGames, $awayGames);
 
 			$teamFixtures = array(
 				'id' => $team->id,
