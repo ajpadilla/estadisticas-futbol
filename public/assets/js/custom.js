@@ -3410,25 +3410,59 @@ var handleBootboxAddEquipoToJugador = function () {
             });
     }
 
+    var selectTeamsForGrouToPhase = function(id,url) {
+        //console.log(url);
+        $.ajax({
+            type: 'GET',
+            url: url,
+            dataType:'json',
+            success: function(response) {
+                //console.log(response);
+                if (response.success == true) 
+                {
+                    if (response.data.length > 0) 
+                    {
+                        jQuery(id).html('');
+                        jQuery(id).append('<option value=\"\"></option>');
+                        $.each(response.data, function (k, team){
+                            $(id).append('<option value=\"'+team.id+'\">'+team.name+'</option>');
+                            $(id).trigger("chosen:updated");
+                        });
+                    }else{
+                        $(id).prop('disabled', true); 
+                        $(id).attr('data-placeholder','Sin equipos disponibles'); 
+                        $(id).trigger("chosen:updated"); 
+                    }
+                }
+            }
+        });
+    }
+
     var handleBootboxAddNewGroupToPhase = function () {
         $('button.group').click(function () {
 
             var phaseId = $(this).attr('data-phase-id');
             //console.log(phaseId);
             var url = $('#list-teams-phase-competition').attr('href').split('%')[0]+phaseId;
-            selectTeamsForCompetition('#phase-new-teams-ids',url);
+            selectTeamsForGrouToPhase('select#phase-new-teams-ids',url);
             addValidationRulesForms();
             $('#add-group-to-phase-form').validate({
                 rules:{
                     name:{
                         required:true,
                         rangelength: [2, 128],
+                    },
+                    'teams_ids[]':{
+                        required: true
                     }
                 },
                 messages:{
                     nombre:{
                         required:'Este campo es obligatorio.',
                         rangelength: 'Por favor ingrese entre [2, 128] caracteres',
+                    },
+                    'teams_ids[]':{
+                        required:'Este campo es obligatorio.',
                     }
                 },
                 highlight:function(element){
