@@ -34,7 +34,7 @@
 					<div class="checkbox">
 						<label> 
 						{{ Form::checkbox('last', '1', false)}}
-							<i></i> Último	
+							<i></i> Última	
 						</label>
 					</div>
 				</div>
