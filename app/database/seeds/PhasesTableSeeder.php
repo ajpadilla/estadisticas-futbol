@@ -19,7 +19,7 @@ class PhasesTableSeeder extends DatabaseSeeder{
             'format_id' => 1,
             'from' => $date->format('Y-m-d h:m:s'),
             'to' => $date->format('Y-m-d h:m:s'),    
-            'last' => true,
+            'last' => false,
             'created_at' => $date->format('Y-m-d h:m:s'),
             'updated_at' => $date->format('Y-m-d h:m:s')            
         );          
@@ -29,7 +29,8 @@ class PhasesTableSeeder extends DatabaseSeeder{
             'competition_id' => 2,
             'format_id' => 2,
             'from' => $date->format('Y-m-d h:m:s'),
-            'to' => $date->format('Y-m-d h:m:s'),                   
+            'to' => $date->format('Y-m-d h:m:s'), 
+            'last' => false,                  
             'created_at' => $date->format('Y-m-d h:m:s'),
             'updated_at' => $date->format('Y-m-d h:m:s')            
         ); 
@@ -39,7 +40,8 @@ class PhasesTableSeeder extends DatabaseSeeder{
             'competition_id' => 2,
             'format_id' => 3,
             'from' => $date->format('Y-m-d h:m:s'),
-            'to' => $date->format('Y-m-d h:m:s'),                   
+            'to' => $date->format('Y-m-d h:m:s'), 
+            'last' => false,                  
             'created_at' => $date->format('Y-m-d h:m:s'),
             'updated_at' => $date->format('Y-m-d h:m:s')            
         );         
