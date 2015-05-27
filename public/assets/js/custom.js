@@ -4048,13 +4048,18 @@ var handleBootboxAddEquipoToJugador = function () {
                                     if($('#add-phase-to-competition-form').valid()) 
                                     {
                                         $("#add-phase-to-competition-form").submit(function(e){
+                                            var checkboxLast = $("input[name='last']");
+                                            checkboxLast.val(checkboxLast[0].checked ? 1 : 0);
+
                                             var formData = {
                                                 name: $('#name-new-phase-to-competition').val(),
                                                 from: $('#from-new-phase-to-competition').val(),
                                                 to: $('#to-new-phase-to-competition').val(),
                                                 competition_id: $('button#add-phase').attr('data-competition-id'),
-                                                format_id: $('#competition-new-format-id').val()
+                                                format_id: $('#competition-new-format-id').val(),
+                                                last: checkboxLast.val()
                                             };
+                                            //console.log(formData);
                                             $.ajax({
                                                 type: 'POST',
                                                 url: $('#add-new-phase-competition').attr('href'), 
@@ -4117,7 +4122,7 @@ var handleBootboxAddEquipoToJugador = function () {
                                                         $('#add-phase-to-competition-form div').each(function(){
                                                             cleanValidatorClasses(this);
                                                         });
-                                                        //Reinicio el formulario*/
+                                                        //Reinicio el formulario
                                                 }
                                             });
                                             e.preventDefault(); //Prevent Default action.
