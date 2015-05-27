@@ -36,3 +36,7 @@
 <div id="add-group-to-phase" class="hidden">
 	@include('groups.new')
 </div>
+<div id="edit-group-to-phase" class="hidden">
+	@include('groups.edit')
+</div>
+@include('groups.edit-tpl')
