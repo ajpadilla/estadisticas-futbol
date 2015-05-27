@@ -117,7 +117,7 @@ class CompetitionRepository extends BaseRepository
 		$tables = array();		
 		if(!$competition->isClean) {
 			$groupRepository = new GroupRepository;			
-			$orderColumn = $groupRepository->getColumnCount() - 2;
+			$orderColumn = [$groupRepository->getColumnCount() - 2, $groupRepository->getColumnCount() - 3, $groupRepository->getColumnCount() - 5, $groupRepository->getColumnCount() - 4];
 			foreach ($competition->phases as $phase) {
 				if($phase->hasAssociateGroups) {
 					$tables[$phase->id]['name'] = $phase->name;
