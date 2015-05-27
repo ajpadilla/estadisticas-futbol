@@ -4152,6 +4152,8 @@ var handleBootboxAddEquipoToJugador = function () {
             });
      }
 
+
+
     var deletePhase = function(idPhase) 
     {
         bootbox.confirm("¿Esta seguro de eliminar la fase?", function(result) 
@@ -4194,6 +4196,15 @@ var handleBootboxAddEquipoToJugador = function () {
             var phaseId = $(this).attr('data-phase-id');
             //console.log(phaseId);
             deletePhase(phaseId);
+        });
+
+        $(".table").delegate(".edit-alignment", "click", function() {
+             action = getAttributeIdActionSelect($(this).attr('id'));
+             var alignmentId = action.number;
+             var gameId = $(this).attr('data-game-id');
+             loadDataForEditAlignment(alignmentId);
+             //bootboxEditAlignment(gameId, alignmentId);
+             //console.log(action.number);
         });
     }
 
