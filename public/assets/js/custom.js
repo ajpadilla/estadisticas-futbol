@@ -6966,7 +6966,7 @@ var handleBootboxAddEquipoToJugador = function () {
             }
         });
     }
-      var loadSelectForPlayer = function(idPlayer) {
+      var loadDataBladeForPlayer = function(idPlayer) {
         $.ajax({
             type: 'GET',
             url: $('#data-player').attr('href'),    
@@ -7019,7 +7019,7 @@ var handleBootboxAddEquipoToJugador = function () {
             initChosen();
 
             if ($('#jugador_id_edit').val() != null) {
-                loadSelectForPlayer($('#jugador_id_edit').val());
+                loadDataBladeForPlayer($('#jugador_id_edit').val());
             }
 
             if($('#equipo_id_edit').val() != null){
