@@ -52,6 +52,8 @@ class GroupRepository extends BaseRepository
 		return $group;
 	}
 
+	
+
 	public function addTeams($id, $teams = null)
 	{		
 		$group = $this->get($id);				
