@@ -40,7 +40,7 @@
 												<div class="box-body">
 													<div class="row">
 														<div class="col-md-12">
-															{{--<button class="edit-group pull-right btn btn-lg btn-primary" id="edit-group" href="{{ URL::route('groups.api.update', $group->id) }}" data-group-id="{{ $group->id }}">Editar Grupo</button>--}}
+															<button class="edit-group pull-right btn btn-lg btn-primary" id="edit-group" href="{{ URL::route('groups.api.update', $group->id) }}" data-group-id="{{ $group->id }}">Editar Grupo</button>
 															<button class="delete-group pull-right btn btn-lg btn-primary" id="delete-group" href="{{ URL::route('groups.api.delete', $group->id) }}" data-group-id="{{ $group->id }}">Eliminar Grupo</button>	
 															@if (!$group->isFullGames)
 																<button class="games pull-right btn btn-lg btn-primary" id="add-game" href="#" data-group-id="{{ $group->id }}">Agregar partido</button>
