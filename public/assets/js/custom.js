@@ -622,7 +622,7 @@ var CustomApp = function () {
     *********************************FORMULARIOS DE EQUIPOS ********************************
     */
 
-    updateTeamForm = function() {
+    var updateTeamForm = function() {
         loadFieldSelect($('#lista-paises').attr('href'),'#pais_equipo');
        // $('.chosen-select').trigger("chosen:updated");
     }
@@ -2857,6 +2857,7 @@ var handleBootboxAddEquipoToJugador = function () {
         var updateCompetitionForm = function() {
             $("#competition-form").trigger("reset");
             loadFieldSelect($('#lista-tipos-competencias').attr('href'),'#tipos-competencias');
+            loadFieldSelect($('#lista-paises').attr('href'),'#pais-competencias');
         }
 
         // Mostrar formulario para agregar nueva Posición
@@ -7026,13 +7027,13 @@ var handleBootboxAddEquipoToJugador = function () {
                 loadDataForBladeEditTeam($('#equipo_id_edit').val());
             }
                 
-            loadFieldSelect($('#lista-equipos').attr('href'),'#equipo_id');
+            /*loadFieldSelect($('#lista-equipos').attr('href'),'#equipo_id');
             loadFieldSelect($('#lista-equipos').attr('href'),'#equipo_id_jugador');
 
             loadFieldSelect($('#lista-paises').attr('href'),'#pais_equipo');
-            //loadFieldSelect($('#list-players').attr('href'),'#jugadores');
+            loadFieldSelect($('#list-players').attr('href'),'#jugadores');
             loadFieldSelect($('#lista-tipos-competencias').attr('href'),'#tipos-competencias');
-            loadFieldSelect($('#lista-paises').attr('href'),'#pais-competencias');
+            loadFieldSelect($('#lista-paises').attr('href'),'#pais-competencias');*/
 
             //initDataPicker();
             
