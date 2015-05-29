@@ -172,6 +172,7 @@
 		<a id="update-alignment" href="{{ URL::route('alignments.api.update') }}"></a>
 		<!--Competition Formats-->
 		<a id="add-new-competition-format" href="{{ URL::route('competitionFormats.store') }}"></a>
+		<a id="delete-competition-format" href="{{ URL::route('competitionFormats.api.delete') }}"></a>
 	</div>
 </div>
 <!-- /SIDEBAR -->

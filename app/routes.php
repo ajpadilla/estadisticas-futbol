@@ -242,3 +242,4 @@ Route::post('formatos-competicia/actualizar/{id}',  ['as' => 'competitionFormats
 Route::get('formatos-competicia/eliminar/{id}',  ['as' => 'competitionFormats.destroy','uses' => 'CompetitionFormatController@destroy' ] );
 
 Route::get('formatos-competicia/api-lista', array('as'=>'competitionFormats.api.list', 'uses'=>'CompetitionFormatController@listApi'));
+Route::get('formatos-competicia/api-eliminar', array('as'=>'competitionFormats.api.delete', 'uses'=>'CompetitionFormatController@destroyApi'));
