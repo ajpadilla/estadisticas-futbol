@@ -22,7 +22,8 @@ class CompetitionFormatController extends \BaseController {
 	 */
 	public function index()
 	{
-		//
+		$table = $this->repository->getAllTable();
+		return View::make('competition-formats.index', compact('table'));
 	}
 
 
@@ -113,6 +114,10 @@ class CompetitionFormatController extends \BaseController {
 	}
 
 
+	public function listApi()
+	{
+		return $this->repository->getDefaultTableForAll();
+	}
 
 
 }
