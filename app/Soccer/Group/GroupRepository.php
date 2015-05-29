@@ -38,6 +38,11 @@ class GroupRepository extends BaseRepository
 	*********************** Methods******************************
 	*/
 
+	public function get($id)
+	{
+		return $this->model->with('teams')->findOrFail($id);
+	}
+
 	public function create($data = array())
 	{		
 		$group = $this->model->create($data); 
@@ -53,6 +58,22 @@ class GroupRepository extends BaseRepository
 	}
 
 	
+	public function update($data = array())
+	{		
+		$group = $this->get($data['group_id']);
+		$group->update($data); 
+		
+		if($group) {
+			$teams = ( isset($data['teams_ids']) ? $data['teams_ids'] : array() );
+			if(!empty($teams)) {
+				if($group->competition->teamsByGroup < count($teams))
+					$teams = array_slice($teams, 0, $group->competition->teamsByGroup);
+				$group->teams()->sync($teams);
+			}
+		}		
+		return $group;
+	}
+
 
 	public function addTeams($id, $teams = null)
 	{		
