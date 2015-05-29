@@ -35,7 +35,7 @@
 					<li><a id="new-team" class="" href="#new-team-form"><span class="sub-menu-text">Crear</span></a></li>
 				</ul>
 			</li>	
-			<li class="has-sub">
+			{{--<li class="has-sub">
 				<a href="javascript:;" class="">
 					<i class="fa fa-bookmark-o fa-fw"></i> <span class="menu-text">Tipos de Competencia</span>
 					<span class="arrow"></span>
@@ -44,7 +44,17 @@
 					<li><a class="" href="{{ URL::route('tipos-competencia.index') }}"><span class="sub-menu-text">Lista</span></a></li>
 					<li><a id="new-type-of-competition" class="" href="#new-type-of-competition-form"><span class="sub-menu-text">Crear</span></a></li>
 				</ul>
-			</li>	
+			</li>--}}
+			<li class="has-sub">
+				<a href="javascript:;" class="">
+					<i class="fa fa-bookmark-o fa-fw"></i> <span class="menu-text">Formatos De Competencia</span>
+					<span class="arrow"></span>
+				</a>
+				<ul class="sub">
+					<li><a class="" href="{{ URL::route('tipos-competencia.index') }}"><span class="sub-menu-text">Lista</span></a></li>
+					<li><a id="new-competition-format" class="" href="#new-competition-format-form"><span class="sub-menu-text">Crear</span></a></li>
+				</ul>
+			</li>
 			<li class="has-sub">
 				<a href="javascript:;" class="">
 					<i class="fa fa-bookmark-o fa-fw"></i> <span class="menu-text">Competencias</span>
@@ -160,7 +170,8 @@
 		<a id="delete-alignments" href="{{ URL::route('alignments.api.delete') }}"></a>
 		<a id="data-alignment" href="{{ URL::route('alignments.api.show') }}"></a>
 		<a id="update-alignment" href="{{ URL::route('alignments.api.update') }}"></a>
-		
+		<!--Competition Formats-->
+		<a id="add-new-competition-format" href="{{ URL::route('competitionFormats.store') }}"></a>
 	</div>
 </div>
 <!-- /SIDEBAR -->

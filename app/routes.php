@@ -229,3 +229,15 @@ Route::get('tipos-alineaciones/api-seleccionar-lista', array('as'=>'alignmentsTy
 
 Route::get('tipo-sanciones/api-seleccionar-lista',  ['as' => 'sanction-types.api.select.list','uses' => 'SanctionTypesController@getAllValue' ] );
 
+/*
+********************************* Competition Formats ********************************
+*/
+
+Route::get('formatos-competicia', ['as' => 'competitionFormats.index', 'uses' => 'CompetitionFormatController@index']);
+Route::get('formatos-competicia/nuevo', ['as' => 'competitionFormats.create', 'uses' => 'CompetitionFormatController@create'] );
+Route::post('formatos-competicia/guardar', ['as' => 'competitionFormats.store', 'uses' => 'CompetitionFormatController@store' ] );
+Route::get('formatos-competicia/ver/{id}', ['as' => 'competitionFormats.show', 'uses' => 'CompetitionFormatController@show' ] );
+Route::get('formatos-competicia/editar/{id}',  ['as' => 'competitionFormats.edit','uses' => 'CompetitionFormatController@edit' ] );
+Route::post('formatos-competicia/actualizar/{id}',  ['as' => 'competitionFormats.update','uses' => 'CompetitionFormatController@update' ] );
+Route::get('formatos-competicia/eliminar/{id}',  ['as' => 'competitionFormats.destroy','uses' => 'CompetitionFormatController@destroy' ] );
+
