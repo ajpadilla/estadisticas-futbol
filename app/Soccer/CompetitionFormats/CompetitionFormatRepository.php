@@ -32,8 +32,8 @@ class CompetitionFormatRepository extends BaseRepository
 		$this->addColumnToCollection('Acciones', function($model)
 		{
 			$this->cleanActionColumn();
-			$this->addActionColumn("<a  class='edit-type-competition' href='#new-type-of-competition-form' id='edit_type-competition_".$model->id."'>Editar</a><br />");
-			$this->addActionColumn("<a class='delete-type-competition' href='#' id='delete_type-competition_".$model->id."'>Eliminar</a>");
+			$this->addActionColumn("<a  class='edit-competition-format' href='#new-type-of-competition-form' id='edit_type-competition_".$model->id."'>Editar</a><br />");
+			$this->addActionColumn("<a class='delete-competition-format' href='#' id='delete_competition-format_".$model->id."'>Eliminar</a>");
 			return implode(" ", $this->getActionColumn());
 		});
 	}
