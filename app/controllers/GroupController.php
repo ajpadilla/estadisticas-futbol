@@ -4,6 +4,7 @@ use soccer\Group\GroupRepository;
 use soccer\Competition\CompetitionRepository;
 use soccer\Forms\RegisterTeamGroupForm;
 use soccer\Forms\RegisterGameForm;
+use soccer\Forms\EditGroupForm;
 use Laracasts\Validation\FormValidationException;
 
 class GroupController extends \BaseController {
@@ -12,17 +13,20 @@ class GroupController extends \BaseController {
 	protected $competitionRepository;
 	protected $registerTeamGroupForm;
 	protected $registerGameForm;
+	protected $editGroupForm;
 
 	public function __construct(
 			GroupRepository $repository,
 			CompetitionRepository $competitionRepository,
 			RegisterTeamGroupForm $registerTeamGroupForm,
-			RegisterGameForm $registerGameForm
+			RegisterGameForm $registerGameForm,
+			EditGroupForm $editGroupForm
 		){
 		$this->repository = $repository;
 		$this->competitionRepository = $competitionRepository;
 		$this->registerTeamGroupForm = $registerTeamGroupForm;
 		$this->registerGameForm = $registerGameForm;
+		$this->editGroupForm = $editGroupForm;
 	}	
 
 
@@ -213,18 +217,17 @@ class GroupController extends \BaseController {
 		}
 	}
 
-	/*public function updateApi()
+	public function updateApi()
 	{
 		if(Request::ajax())
 		{
 			$input = Input::all();
 			try
 			{
-				$this->registerSanctionForm->validate($input);
-				$sanction = $this->repository->get($input['sanction_id']);
-				$sanction->update($input);
+				$this->editGroupForm->validate($input);
+				$group = $this->repository->update($input);
 				$this->setSuccess(true);
-				$this->addToResponseArray('sanction', $sanction);
+				$this->addToResponseArray('group', $group);
 				return $this->getResponseArrayJson();					
 			}
 			catch (FormValidationException $e)
@@ -233,6 +236,6 @@ class GroupController extends \BaseController {
 				return $this->getResponseArrayJson();
 			}
 		}
-	}*/
+	}
 
 }
