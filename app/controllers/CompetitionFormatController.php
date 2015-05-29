@@ -119,5 +119,11 @@ class CompetitionFormatController extends \BaseController {
 		return $this->repository->getDefaultTableForAll();
 	}
 
+	public function destroyApi()
+	{
+		if(Request::ajax())
+			$this->setSuccess($this->repository->delete(Input::get('competitionFormatId')));
+		return $this->getResponseArrayJson();
+	}
 
 }
