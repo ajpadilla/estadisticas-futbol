@@ -51,7 +51,7 @@
 					<span class="arrow"></span>
 				</a>
 				<ul class="sub">
-					<li><a class="" href="{{ URL::route('tipos-competencia.index') }}"><span class="sub-menu-text">Lista</span></a></li>
+					<li><a class="" href="{{ URL::route('competitionFormats.index') }}"><span class="sub-menu-text">Lista</span></a></li>
 					<li><a id="new-competition-format" class="" href="#new-competition-format-form"><span class="sub-menu-text">Crear</span></a></li>
 				</ul>
 			</li>
