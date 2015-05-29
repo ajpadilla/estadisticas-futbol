@@ -6695,10 +6695,74 @@ var handleBootboxAddEquipoToJugador = function () {
 
         $('#new-competition-format-form').validate({
             rules:{
-                
+                name:{
+                    required: true,
+                    rangelength : [2,128]
+                },
+                groups:{
+                    digits: true,
+                    rangelength: [1,6]
+                },
+                clasificated_by_group:{
+                    digits: true,
+                    rangelength: [1,6]
+                },
+                local_away_game:{
+
+                },
+                local_away_game_final:{
+
+                },
+                away_goal:{
+
+                },
+                teams_by_group:{
+                    digits: true,
+                    rangelength: [1,6]
+                },
+                promotion:{
+                    digits: true,
+                    rangelength: [1,6]
+                },
+                descent:{
+                    digits: true,
+                    rangelength: [1,6]
+                }
             },
             messages:{
-               
+                name:{
+                    required: 'Este campo es obligatorio',
+                    rangelength: 'Por favor ingrese entre [2, 128] caracteres',
+                },
+                groups:{
+                    digits: 'Por vafor ingrese un valor entero',
+                    rangelength: 'Por favor ingrese entre [1, 6] digitos enteros'
+                },
+                clasificated_by_group:{
+                    digits: 'Por vafor ingrese un valor entero',
+                    rangelength: 'Por favor ingrese entre [1, 6] digitos enteros'
+                },
+                local_away_game:{
+
+                },
+                local_away_game_final:{
+
+                },
+                away_goal:{
+
+                },
+                teams_by_group:{
+                    digits: 'Por vafor ingrese un valor entero',
+                    rangelength: 'Por favor ingrese entre [1, 6] digitos enteros'
+                },
+                promotion:{
+                    digits: 'Por vafor ingrese un valor entero',
+                    rangelength: 'Por favor ingrese entre [1, 6] digitos enteros'
+                },
+                descent:{
+                    digits: 'Por vafor ingrese un valor entero',
+                    rangelength: 'Por favor ingrese entre [1, 6] digitos enteros'
+                }
             },
             highlight:function(element){
                 $(element).closest('.form-group').removeClass('has-success').addClass('has-error');
@@ -6757,7 +6821,7 @@ var handleBootboxAddEquipoToJugador = function () {
                                                                 label: "Success!",
                                                                 className: "btn-success",
                                                                  callback: function () {
-                                                                    reloadDatatable();
+                                                                    reloadDatatable('#datatable');
                                                                 }
                                                             }
                                                         }
