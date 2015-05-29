@@ -3362,7 +3362,7 @@ var handleBootboxAddEquipoToJugador = function () {
             });
     }
 
-    var selectTeamsForGrouToPhase = function(id,url) {
+    var selectTeamsForGroupToPhase = function(id,url) {
         //console.log(url);
         $.ajax({
             type: 'GET',
@@ -3396,7 +3396,7 @@ var handleBootboxAddEquipoToJugador = function () {
             var phaseId = $(this).attr('data-phase-id');
             //console.log(phaseId);
             var url = $('#list-teams-phase-competition').attr('href').split('%')[0]+phaseId;
-            selectTeamsForGrouToPhase('select#phase-new-teams-ids',url);
+            selectTeamsForGroupToPhase('select#phase-new-teams-ids',url);
             addValidationRulesForms();
             $('#add-group-to-phase-form').validate({
                 rules:{
@@ -3572,16 +3572,59 @@ var handleBootboxAddEquipoToJugador = function () {
     }
 
 
+     var selectTeamsForEditGroupToPhase = function(id, url, teams) {
+        //console.log(url);
+        $.ajax({
+            type: 'GET',
+            url: url,
+            dataType:'json',
+            success: function(response) {
+                //console.log(response);
+                var teamsIds = new Array();
+                var index = 0;
+                if (response.success == true) 
+                {
+                    if(response.data.length > 0 && teams.length > 0) 
+                    {
+                        jQuery(id).html('');
+                        jQuery(id).append('<option value=\"\"></option>');
+                        $.each(response.data, function (k, team){
+                            $(id).append('<option value=\"'+team.id+'\">'+team.name+'</option>');
+                            $(id).trigger("chosen:updated");
+                        });
+                        $.each(teams, function (k, team){
+                            $(id).append('<option value=\"'+team.id+'\">'+team.nombre+'</option>');
+                            $(id).trigger("chosen:updated");
+                            teamsIds.push(team.id);
+                        });
+                        $(id).val(teamsIds);
+                        $(id).trigger("chosen:updated");
+                    }else if(response.data.length <= 0 && teams.length > 0){
+                        $.each(teams, function (k, team){
+                            $(id).append('<option value=\"'+team.id+'\">'+team.nombre+'</option>');
+                            $(id).trigger("chosen:updated");
+                            teamsIds.push(team.id);
+                        });
+                        $(id).val(teamsIds);
+                        $(id).trigger("chosen:updated");
+                    }else if(response.data.length <= 0 && teams.length <= 0){
+                        $(id).prop('disabled', true); 
+                        $(id).attr('data-placeholder','Sin equipos disponibles'); 
+                        $(id).trigger("chosen:updated");
+                    }
+                }
+            }
+        });
+    }
+
     var bootboxEditGroup = function (groupId) {
         var phaseId = $(this).attr('data-phase-id');
-            /*var url = $('#list-teams-phase-competition').attr('href').split('%')[0]+phaseId;
-            selectTeamsForCompetition('#phase-new-teams-ids',url);*/
             addValidationRulesForms();
             $('#edit-group-to-phase-form').validate({
                 rules:{
                     name:{
                         required:true,
-                        rangelength: [2, 128],
+                        rangelength: [1, 128]
                     }
                 },
                 messages:{
@@ -3613,13 +3656,15 @@ var handleBootboxAddEquipoToJugador = function () {
                                 {
                                     $("#edit-group-to-phase-form").submit(function(e){
                                         var formData = {
-                                            name: $('#name-new-group-to-phase').val(),
-                                            phase_id: phaseId,
-                                            teams_ids: $('#phase-new-teams-ids').val()
+                                            group_id: groupId,
+                                            name: $('#name-group-edit').val(),
+                                            //phase_id: phaseId,
+                                            teams_ids: $('#teams-for-group-ids-edit').val()
                                         }
+                                        //console.log(formData);
                                         $.ajax({
                                             type: 'POST',
-                                            url: $('#add-new-group-to-phase').attr('href'), 
+                                            url: $('#update-group').attr('href'), 
                                             data: formData,
                                             dataType: "JSON",
                                             success: function(responseServer) {
@@ -3627,14 +3672,14 @@ var handleBootboxAddEquipoToJugador = function () {
                                                 {
                                                     // Muestro otro dialog con información de éxito
                                                     bootbox.dialog({
-                                                        message: responseServer.data.name + " ha sido agregado correctamente!",
+                                                        message: responseServer.group.name + " ha sido actualizado correctamente!",
                                                         title: "Éxito",
                                                         buttons: {
                                                             success: {
                                                                 label: "Success!",
                                                                 className: "btn-success",
                                                                 callback: function () {
-                                                                    reloadDatatable();
+                                                                    reloadDatatable('#datatable-'+groupId);
                                                                 }
                                                             }
                                                         }
@@ -3645,7 +3690,6 @@ var handleBootboxAddEquipoToJugador = function () {
                                                     });
                                                     //Reinicio el formulario
                                                     $("#edit-group-to-phase-form")[0].reset();
-                                                    location.reload();
                                                 }else{
                                                      bootbox.dialog({
                                                         message:responseServer.errors,
@@ -3722,6 +3766,8 @@ var handleBootboxAddEquipoToJugador = function () {
                  {
                     if (response.success)
                      {
+                        var phaseId = response.group.phase_id;
+                        var url = $('#list-teams-phase-competition').attr('href').split('%')[0]+phaseId;
                         var group = $('#edit-group-form-div-box');
                         var data = {
                             title: "Editar Grupo",
@@ -3732,7 +3778,7 @@ var handleBootboxAddEquipoToJugador = function () {
                         group.html(html);
                         //console.log(html)
                         initChosen();
-                        
+                        selectTeamsForEditGroupToPhase('#teams-for-group-ids-edit', url, response.group.teams);
                         bootboxEditGroup(response.group.id);
                     }
                 }
