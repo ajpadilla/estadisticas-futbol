@@ -142,18 +142,19 @@ class CompetitionFormatController extends \BaseController {
 		}
 	}
 
-	/*public function updateApi()
+	public function updateApi()
 	{
 		if(Request::ajax())
 		{
 			$input = Input::all();
 			try
 			{
-				$this->registerSanctionForm->validate($input);
-				$sanction = $this->repository->get($input['sanction_id']);
-				$sanction->update($input);
+				$this->registerCompetitionFormatForm->validate($input);
+				$competitionFormat = $this->repository->get($input['competition_format_id']);
+				$competitionFormat->update($input);
 				$this->setSuccess(true);
-				$this->addToResponseArray('sanction', $sanction);
+				$this->addToResponseArray('competitionFormat', $competitionFormat);
+				$this->addToResponseArray('data', $input);
 				return $this->getResponseArrayJson();					
 			}
 			catch (FormValidationException $e)
@@ -162,6 +163,6 @@ class CompetitionFormatController extends \BaseController {
 				return $this->getResponseArrayJson();
 			}
 		}
-	}*/
+	}
 
 }
