@@ -174,6 +174,7 @@
 		<a id="add-new-competition-format" href="{{ URL::route('competitionFormats.store') }}"></a>
 		<a id="delete-competition-format" href="{{ URL::route('competitionFormats.api.delete') }}"></a>
 		<a id="data-competition-format" href="{{ URL::route('competitionFormats.api.show') }}"></a>
+		<a id="update-competition-format" href="{{ URL::route('competitionFormats.api.update') }}"></a>
 	</div>
 </div>
 <!-- /SIDEBAR -->
