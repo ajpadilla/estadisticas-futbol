@@ -1,14 +1,6 @@
 <div id="add-competition-format-form-div" class="box border primary">
 	<div class="box-title">
 		<h4><i class="fa fa-plus-square"></i>Crear Formatos De Competencia</h4>
-		<div class="tools">
-			<a href="javascript:;" class="reload">
-				<i class="fa fa-refresh"></i>
-			</a>
-			<a href="javascript:;" class="collapse">
-				<i class="fa fa-chevron-up"></i>
-			</a>
-		</div>
 	</div>
 	<div class="box-body" style="display: block;">
 		<div class="row">
