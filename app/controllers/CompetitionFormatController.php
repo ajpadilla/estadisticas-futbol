@@ -126,4 +126,42 @@ class CompetitionFormatController extends \BaseController {
 		return $this->getResponseArrayJson();
 	}
 
+	public function showApi()
+	{
+		if (Request::ajax())
+		{
+			if (Input::has('competitionFormatId'))
+			{
+				$competitionFormat = $this->repository->get(Input::get('competitionFormatId'));
+				$this->setSuccess(($competitionFormat ? true : false));
+				$this->addToResponseArray('competitionFormat', $competitionFormat);
+				return $this->getResponseArrayJson();
+			}else{
+				return $this->getResponseArrayJson();
+			}
+		}
+	}
+
+	/*public function updateApi()
+	{
+		if(Request::ajax())
+		{
+			$input = Input::all();
+			try
+			{
+				$this->registerSanctionForm->validate($input);
+				$sanction = $this->repository->get($input['sanction_id']);
+				$sanction->update($input);
+				$this->setSuccess(true);
+				$this->addToResponseArray('sanction', $sanction);
+				return $this->getResponseArrayJson();					
+			}
+			catch (FormValidationException $e)
+			{
+				$this->addToResponseArray('errores', $e->getErrors()->all());
+				return $this->getResponseArrayJson();
+			}
+		}
+	}*/
+
 }
