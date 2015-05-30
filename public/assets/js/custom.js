@@ -7053,7 +7053,7 @@ var handleBootboxAddEquipoToJugador = function () {
         // Mostrar formulario para agregar nuevo jugador
         $('#new-competition-format').on('click', function() 
         {
-            $("#competition-format-form").trigger("reset");
+            $("#new-competition-format-form").trigger("reset");
             bootbox
                 .dialog(
                 {
@@ -7207,6 +7207,275 @@ var handleBootboxAddEquipoToJugador = function () {
         });
     }
 
+    var bootboxEditCompetitionFormat = function (competitionFormatId) {
+
+        $('#edit-competition-format-form').validate({
+            rules:{
+                name:{
+                    required: true,
+                    rangelength : [2,128]
+                },
+                groups:{
+                    digits: true,
+                    rangelength: [1,6]
+                },
+                clasificated_by_group:{
+                    digits: true,
+                    rangelength: [1,6]
+                },
+                local_away_game:{
+
+                },
+                local_away_game_final:{
+
+                },
+                away_goal:{
+
+                },
+                teams_by_group:{
+                    digits: true,
+                    rangelength: [1,6]
+                },
+                promotion:{
+                    digits: true,
+                    rangelength: [1,6]
+                },
+                descent:{
+                    digits: true,
+                    rangelength: [1,6]
+                }
+            },
+            messages:{
+                name:{
+                    required: 'Este campo es obligatorio',
+                    rangelength: 'Por favor ingrese entre [2, 128] caracteres',
+                },
+                groups:{
+                    digits: 'Por vafor ingrese un valor entero',
+                    rangelength: 'Por favor ingrese entre [1, 6] digitos enteros'
+                },
+                clasificated_by_group:{
+                    digits: 'Por vafor ingrese un valor entero',
+                    rangelength: 'Por favor ingrese entre [1, 6] digitos enteros'
+                },
+                local_away_game:{
+
+                },
+                local_away_game_final:{
+
+                },
+                away_goal:{
+
+                },
+                teams_by_group:{
+                    digits: 'Por vafor ingrese un valor entero',
+                    rangelength: 'Por favor ingrese entre [1, 6] digitos enteros'
+                },
+                promotion:{
+                    digits: 'Por vafor ingrese un valor entero',
+                    rangelength: 'Por favor ingrese entre [1, 6] digitos enteros'
+                },
+                descent:{
+                    digits: 'Por vafor ingrese un valor entero',
+                    rangelength: 'Por favor ingrese entre [1, 6] digitos enteros'
+                }
+            },
+            highlight:function(element){
+                $(element).closest('.form-group').removeClass('has-success').addClass('has-error');
+            },
+            unhighlight:function(element){
+                $(element).closest('.form-group').removeClass('has-error');
+            },
+            success:function(element){
+                element.addClass('valid').closest('.form-group').removeClass('has-error').addClass('has-success');
+            }
+        });
+
+        bootbox
+                .dialog(
+                {
+                    message: $('#edit-competition-format-form-div-box'),
+                    buttons: 
+                    {
+                        success: 
+                        {
+                            label: "Guardar",
+                            className: "btn-primary",
+                            callback: function () 
+                            {
+                                // Si quieres usar aquí jqueryForm, es lo mismo, lo agregas y ya. Creo que es buena idea!
+
+                                //ajax para el envío del formulario.
+                                if($('#edit-competition-format-form').valid()) {
+
+                                    var response = false; // Esta variable debería recibir los datos por ajax.
+                                    var dataServer = null;
+
+                                    $("#edit-competition-format-form").submit(function(e){
+                                        var checkboxlocalAwayGame= $("#local-away-game-edit");
+                                        checkboxlocalAwayGame.val(checkboxlocalAwayGame[0].checked ? 1 : 0);
+
+                                        var checkboxlocalAwayGameFinal= $("#local-away-game-final-edit");
+                                        checkboxlocalAwayGameFinal.val(checkboxlocalAwayGameFinal[0].checked ? 1 : 0);
+
+                                        var checkboxAwayGoal= $("#away-goal-edit");
+                                        checkboxAwayGoal.val(checkboxAwayGoal[0].checked ? 1 : 0);
+
+                                        var formData = {
+                                            competition_format_id: competitionFormatId ,
+                                            name: $('#name-competition-format-edit').val() ,
+                                            groups: $('#groups-competition-format-edit').val(),
+                                            clasificated_by_group: $('#clasificated-by-group-competition-format-edit').val(),
+                                            local_away_game: checkboxlocalAwayGame.val(),
+                                            local_away_game_final: checkboxlocalAwayGameFinal.val(),
+                                            away_goal: checkboxAwayGoal.val(),
+                                            teams_by_group: $('#teams-by-group-competition-format-edit').val(),
+                                            promotion: $('#promotion-competition-format-edit').val(),
+                                            descent: $('#descent-competition-format-edit').val()
+                                        }
+                                        //console.log(formData);
+                                        $.ajax({
+                                            type: 'POST',
+                                            url: $('#update-competition-format').attr('href'), 
+                                            data: formData,
+                                            dataType: "JSON",
+                                            success: function(responseServer) {
+                                                //console.log(responseServer);
+                                                if(responseServer.success == true) 
+                                                {
+                                                    // Muestro otro dialog con información de éxito
+                                                    bootbox.dialog({
+                                                        message: responseServer.competitionFormat.name + " ha sido actualizado correctamente!",
+                                                        title: "Éxito",
+                                                        buttons: {
+                                                            success: {
+                                                                label: "Success!",
+                                                                className: "btn-success",
+                                                                 callback: function () {
+                                                                    reloadDatatable('#datatable');
+                                                                }
+                                                            }
+                                                        }
+                                                    });
+                                                    // Limpio cada elemento de las clases añadidas por el validator
+                                                    $('#edit-competition-format-form div').each(function(){
+                                                        cleanValidatorClasses(this);
+                                                    });
+                                                    //Reinicio el formulario
+                                                    //$("#edit-competition-format-form")[0].reset();
+                                                }else{
+                                                     bootbox.dialog({
+                                                        message: responseServer.errors,
+                                                        title: "Error",
+                                                        buttons: {
+                                                            danger: {
+                                                                label: "Ok!",
+                                                                className: "btn-danger"
+                                                            }
+                                                        }
+                                                    });
+                                                    // Limpio cada elemento de las clases añadidas por el validator
+                                                    $('#edit-competition-format-form div').each(function(){
+                                                        cleanValidatorClasses(this);
+                                                    });
+                                                    //Reinicio el formulario
+                                                }
+                                            },
+                                            error: function(jqXHR, textStatus, errorThrown) {
+                                               bootbox.dialog({
+                                                        message:" ¡Error al enviar datos al servidor!",
+                                                        title: "Error",
+                                                        buttons: {
+                                                            danger: {
+                                                                label: "Danger!",
+                                                                className: "btn-danger"
+                                                            }
+                                                        }
+                                                    });
+                                                    // Limpio cada elemento de las clases añadidas por el validator
+                                                    $('#edit-competition-format-form div').each(function(){
+                                                        cleanValidatorClasses(this);
+                                                    });
+                                                    //Reinicio el formulario
+                                            }
+                                        });
+                                        e.preventDefault(); //Prevent Default action. 
+                                        $(this).unbind('submit');
+                                    }); 
+                                    $("#edit-competition-format-form").submit();
+                                } else {
+                                    return false;
+                                }
+                                return false;
+                            }
+                        }
+                    },
+                    show: false // We will show it manually later
+                })
+                .on('shown.bs.modal', function() {
+                    $('#edit-competition-format-form-div-box')
+                        .show();                             // Show the form
+                })
+            .on('hide.bs.modal', function(e) {
+                // Bootbox will remove the modal (including the body which contains the form)
+                // after hiding the modal
+                // Therefor, we need to backup the form
+                
+                $('#edit-competition-format-form-div-box').hide().appendTo('#edit-competition-format-div');
+            })
+            .modal('show');
+    }
+
+    var loadDataForEditCompetitionFormat = function (competitionFormatId) {
+        $.ajax({
+            type: 'GET',
+            url: $('#data-competition-format').attr('href'),    
+            data: {'competitionFormatId': competitionFormatId},
+            dataType: "JSON",
+            success: function(response) 
+            {
+                //console.log(response);
+                 if (response != null) 
+                 {
+                    if (response.success)
+                     {
+                       
+                        var competitionFormat = $('#edit-competition-format-form-div-box');
+                        var data = {
+                            title: "Editar Formato de competencia",
+                            name: response.competitionFormat.name,
+                            groups: response.competitionFormat.groups,
+                            clasificated_by_group: response.competitionFormat.clasificated_by_group,
+                            local_away_game: response.competitionFormat.local_away_game,
+                            local_away_game_final: response.competitionFormat.local_away_game_final,
+                            away_goal: response.competitionFormat.away_goal,
+                            teams_by_group: response.competitionFormat.teams_by_group,
+                            promotion: response.competitionFormat.promotion,
+                            descent: response.competitionFormat.descent,
+                        };
+                        var template = $('#edit-competition-format-tpl').html();
+                        var html = Mustache.to_html(template, data);
+                        competitionFormat.html(html);
+
+                        $('input[name="local_away_game"]').prop('checked', transformToBoolean(response.competitionFormat.local_away_game));
+                        $('input[name="local_away_game_final"]').prop('checked', transformToBoolean(response.competitionFormat.local_away_game_final));
+                        $('input[name="away_goal"]').prop('checked', transformToBoolean(response.competitionFormat.away_goal));
+                        bootboxEditCompetitionFormat(response.competitionFormat.id);
+                    }
+                }
+            }
+        });
+    }
+
+    var transformToBoolean = function (value) 
+    {
+        if (value == 'Si') {
+            return 1;
+        }else{
+            return 0;
+        }
+    }
+
     var implementActionsToCompetitionFormat = function() 
     {
         $(".table").delegate(".delete-competition-format", "click", function() {
@@ -7215,14 +7484,11 @@ var handleBootboxAddEquipoToJugador = function () {
              deleteCompetitionFormat(action.number);
         });
 
-        /*$(".table").delegate(".edit-alignment", "click", function() {
+        $(".table").delegate(".edit-competition-format", "click", function() {
              action = getAttributeIdActionSelect($(this).attr('id'));
-             var alignmentId = action.number;
-             var gameId = $(this).attr('data-game-id');
-             loadDataForEditAlignment(alignmentId);
-             //bootboxEditAlignment(gameId, alignmentId);
-             //console.log(action.number);
-        });*/
+             //console.log(action);
+             loadDataForEditCompetitionFormat(action.number);
+        });
     }
 
 
