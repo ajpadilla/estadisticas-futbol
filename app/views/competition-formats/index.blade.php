@@ -1,11 +1,11 @@
 @extends("layouts.main")
 
 @section("page-title")
-	Lista de Competencias
+Lista de Competencias
 @stop
 
 @section("page-description")
-	Formatos De Competencia
+Formatos De Competencia
 @stop
 
 @section("content")
@@ -33,8 +33,10 @@
 			@include('partials._index-table')
 		</div>
 	</div>
-	{{--@include('Competencias.new')
-	@include('Competencias.partials._form_view-template')--}}
+	<div id="edit-competition-format-div" class="hidden">
+		@include('competition-formats.edit')
+	</div>
+	@include('competition-formats.edit-tpl')
 </div>
 
 @stop
