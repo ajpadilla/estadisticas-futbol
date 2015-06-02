@@ -345,6 +345,7 @@ class GameController extends \BaseController {
 				$game = $this->repository->get(Input::get('gameId'));
 				$this->setSuccess(($game ? true : false));
 				$this->addToResponseArray('game', $game);
+				$this->addToResponseArray('date', date_format($game->date,'Y-m-d H:i'));
 				return $this->getResponseArrayJson();
 			}else{
 				return $this->getResponseArrayJson();
@@ -363,7 +364,7 @@ class GameController extends \BaseController {
 				$game = $this->repository->get($input['game_id']);
 				$game->update($input);
 				$this->setSuccess(($game ? true : false));
-				//$this->addToResponseArray('game', $game);
+				$this->addToResponseArray('game', $game);
 				$this->addToResponseArray('data', $input);
 				return $this->getResponseArrayJson();					
 			}
