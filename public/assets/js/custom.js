@@ -3370,12 +3370,12 @@ var handleBootboxAddEquipoToJugador = function () {
             dataType:'json',
             success: function(response) {
                 //console.log(response);
-                if (response.success == true) 
+                if(response.success == true) 
                 {
                     if (response.data.length > 0) 
                     {
-                        jQuery(id).html('');
-                        jQuery(id).append('<option value=\"\"></option>');
+                        $(id).html('');
+                        $(id).append('<option value=\"\"></option>');
                         $.each(response.data, function (k, team){
                             $(id).append('<option value=\"'+team.id+'\">'+team.name+'</option>');
                             $(id).trigger("chosen:updated");
@@ -3385,6 +3385,10 @@ var handleBootboxAddEquipoToJugador = function () {
                         $(id).attr('data-placeholder','Sin equipos disponibles'); 
                         $(id).trigger("chosen:updated"); 
                     }
+                }else{
+                    $(id).prop('disabled', true); 
+                    $(id).attr('data-placeholder','Sin equipos disponibles'); 
+                    $(id).trigger("chosen:updated"); 
                 }
             }
         });
@@ -3584,10 +3588,11 @@ var handleBootboxAddEquipoToJugador = function () {
                 var index = 0;
                 if (response.success == true) 
                 {
+                    $('#name-group-edit').prop('disabled', true); 
                     if(response.data.length > 0 && teams.length > 0) 
                     {
-                        jQuery(id).html('');
-                        jQuery(id).append('<option value=\"\"></option>');
+                        $(id).html('');
+                        $(id).append('<option value=\"\"></option>');
                         $.each(response.data, function (k, team){
                             $(id).append('<option value=\"'+team.id+'\">'+team.name+'</option>');
                             $(id).trigger("chosen:updated");
@@ -3599,7 +3604,15 @@ var handleBootboxAddEquipoToJugador = function () {
                         });
                         $(id).val(teamsIds);
                         $(id).trigger("chosen:updated");
-                    }else if(response.data.length <= 0 && teams.length > 0){
+                    }else if(response.data.length > 0 && teams.length == 0){
+                        $(id).html('');
+                        $(id).append('<option value=\"\"></option>');
+                        $.each(response.data, function (k, team){
+                            $(id).append('<option value=\"'+team.id+'\">'+team.name+'</option>');
+                            $(id).trigger("chosen:updated");
+                        });
+                        $(id).trigger("chosen:updated");
+                    }else if(response.data.length == 0 && teams.length > 0){
                         $.each(teams, function (k, team){
                             $(id).append('<option value=\"'+team.id+'\">'+team.nombre+'</option>');
                             $(id).trigger("chosen:updated");
@@ -3607,12 +3620,14 @@ var handleBootboxAddEquipoToJugador = function () {
                         });
                         $(id).val(teamsIds);
                         $(id).trigger("chosen:updated");
-                    }else if(response.data.length <= 0 && teams.length <= 0){
+                    }else if(response.data.length == 0 && teams.length == 0){
+                        $('#name-group-edit').prop('disabled', false); 
                         $(id).prop('disabled', true); 
                         $(id).attr('data-placeholder','Sin equipos disponibles'); 
                         $(id).trigger("chosen:updated");
                     }
                 }else{
+                    $('#name-group-edit').prop('disabled', false); 
                     $(id).prop('disabled', true); 
                     $(id).attr('data-placeholder','Sin equipos disponibles'); 
                     $(id).trigger("chosen:updated");
