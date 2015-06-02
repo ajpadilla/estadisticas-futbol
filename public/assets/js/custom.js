@@ -7541,7 +7541,7 @@ var handleBootboxAddEquipoToJugador = function () {
                         var game = $('#edit-game-to-phase-form-div-box');
                         var data = {
                             title: "Editar Juego",
-                            date: response.game.date,
+                            date: response.date,
                             type_id: response.game.type_id,
                             type_name: response.game.type.name,
                         };
