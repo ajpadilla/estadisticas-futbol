@@ -366,12 +366,22 @@ class GameController extends \BaseController {
 				$this->setSuccess(($game ? true : false));
 				$this->addToResponseArray('game', $game);
 				$this->addToResponseArray('data', $input);
-				return $this->getResponseArrayJson();					
 			}
 			catch (FormValidationException $e)
 			{
 				$this->addToResponseArray('errores', $e->getErrors()->all());
-				return $this->getResponseArrayJson();
+			}
+		}
+		return $this->getResponseArrayJson();
+	}
+
+	public function getFixturesApi($id)
+	{
+		if(Request::ajax()) {
+			$fixtures = $this->repository->getFixtures($id);
+			if($fixtures) {
+				$this->setSuccess(true);
+				$this->addToResponseArray('fixtures', $fixtures);
 			}
 		}
 		return $this->getResponseArrayJson();
