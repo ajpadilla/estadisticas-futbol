@@ -13,10 +13,33 @@ class AlignmentsTypeRepository extends BaseRepository
 {
 	
 	function __construct() {
-		$this->columns = [];
+		$this->columns = ['Nombre','Acciones'];
 
 		$this->setModel(new AlignmentType);
-		$this->setListAllRoute('');
+		$this->setListAllRoute('alignmentsType.api.list');
 	}
+
+
+	public function setDefaultActionColumn() {
+
+		$this->addColumnToCollection('Acciones', function($model)
+		{
+			$this->cleanActionColumn();
+			$this->addActionColumn("<a  class='edit-alignment-type' href='#edit-alignment-type-form' id='edit_alignment-type_".$model->id."'>Editar</a><br />");
+			$this->addActionColumn("<a class='delete-alignment-type' href='#' id='delete_alignment-type_".$model->id."'>Eliminar</a>");
+			return implode(" ", $this->getActionColumn());
+		});
+	}
+
+	public function setBodyTableSettings()
+	{		
+		$this->collection->searchColumns('Nombre');
+		$this->collection->orderColumns('Nombre');
+
+		$this->collection->addColumn('Nombre', function($model)
+		{
+			 return $model->name;
+		});
+	}	
 
 }
