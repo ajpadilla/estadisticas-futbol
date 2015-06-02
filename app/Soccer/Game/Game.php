@@ -40,7 +40,7 @@ class Game extends Eloquent {
 
     public function group()
     {
-       return $this->belongsTo('soccer\Group\Group');
+       return $this->belongsTo('soccer\Group\Group','group_id');
     } 
 
     public function goals()
