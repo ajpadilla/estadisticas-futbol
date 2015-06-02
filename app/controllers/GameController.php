@@ -10,6 +10,7 @@ use soccer\Forms\RegisterGoalForm;
 use soccer\Forms\RegisterSanctionForm;
 use soccer\Forms\RegisterChangeForm;
 use soccer\Forms\RegisterAlignmentForm;
+use soccer\Forms\EditGameForm;
 use soccer\Forms\AvailablePlayersForTeamForm;
 use Laracasts\Validation\FormValidationException;
 
@@ -26,6 +27,7 @@ class GameController extends \BaseController {
 	protected $changeRepository;
 	protected $registerAlignmentForm;
 	protected $alignmentRepository;
+	protected $editGameForm;
 
 	public function __construct(GameRepository $repository,
 			RegisterGameForm $registerGameForm,
@@ -37,7 +39,8 @@ class GameController extends \BaseController {
 			RegisterChangeForm $registerChangeForm,
 			ChangeRepository $changeRepository,
 			RegisterAlignmentForm $registerAlignmentForm,
-			AlignmentRepository $alignmentRepository){
+			AlignmentRepository $alignmentRepository,
+			EditGameForm $editGameForm){
 
 		$this->repository = $repository;
 		$this->registerGameForm = $registerGameForm;
@@ -50,6 +53,7 @@ class GameController extends \BaseController {
 		$this->changeRepository = $changeRepository;
 		$this->registerAlignmentForm = $registerAlignmentForm;
 		$this->alignmentRepository = $alignmentRepository;
+		$this->editGameForm = $editGameForm;
 	}
 
 	/**
@@ -331,6 +335,44 @@ class GameController extends \BaseController {
 		return $this->getResponseArrayJson();
 	}
 
-	
+
+	public function showApi()
+	{
+		if (Request::ajax())
+		{
+			if (Input::has('gameId'))
+			{
+				$game = $this->repository->get(Input::get('gameId'));
+				$this->setSuccess(($game ? true : false));
+				$this->addToResponseArray('game', $game);
+				return $this->getResponseArrayJson();
+			}else{
+				return $this->getResponseArrayJson();
+			}
+		}
+	}
+
+	public function updateApi()
+	{
+		if(Request::ajax())
+		{
+			$input = Input::all();
+			try
+			{
+				$this->editGameForm->validate($input);
+				$game = $this->repository->get($input['game_id']);
+				$game->update($input);
+				$this->setSuccess(($game ? true : false));
+				$this->addToResponseArray('game', $game);
+				$this->addToResponseArray('data', $input);
+				return $this->getResponseArrayJson();					
+			}
+			catch (FormValidationException $e)
+			{
+				$this->addToResponseArray('errores', $e->getErrors()->all());
+				return $this->getResponseArrayJson();
+			}
+		}
+	}
 
 }
