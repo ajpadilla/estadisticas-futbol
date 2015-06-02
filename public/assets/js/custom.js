@@ -7535,7 +7535,9 @@ var handleBootboxAddEquipoToJugador = function () {
                  {
                     if (response.success)
                      {
-                       var gameId = response.game.id;
+                        var gameId = response.game.id;
+                        var phaseId = response.game.group.phase_id; 
+
                         var game = $('#edit-game-to-phase-form-div-box');
                         var data = {
                             title: "Editar Juego",
@@ -7551,14 +7553,14 @@ var handleBootboxAddEquipoToJugador = function () {
                         handleDatePicker();
 
                         loadFieldSelectGameType('#type-id-for-game-edit', response.game.type_id);
-                        bootboxEditGame(gameId);
+                        bootboxEditGame(gameId, phaseId);
                     }
                 }
             }
         });
     }
 
-  var bootboxEditGame = function (gameId) {
+  var bootboxEditGame = function (gameId, phaseId) {
 
         $('#edit-game-form').validate({
             rules:{
@@ -7634,7 +7636,7 @@ var handleBootboxAddEquipoToJugador = function () {
                                                                 label: "Success!",
                                                                 className: "btn-success",
                                                                  callback: function () {
-                                                                    reloadDatatable('#datatable-game'+gameId);
+                                                                    reloadDatatable('#datatable-game-'+phaseId);
                                                                 }
                                                             }
                                                         }
