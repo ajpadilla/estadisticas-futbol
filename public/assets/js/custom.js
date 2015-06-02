@@ -3612,6 +3612,10 @@ var handleBootboxAddEquipoToJugador = function () {
                         $(id).attr('data-placeholder','Sin equipos disponibles'); 
                         $(id).trigger("chosen:updated");
                     }
+                }else{
+                    $(id).prop('disabled', true); 
+                    $(id).attr('data-placeholder','Sin equipos disponibles'); 
+                    $(id).trigger("chosen:updated");
                 }
             }
         });
@@ -3648,7 +3652,7 @@ var handleBootboxAddEquipoToJugador = function () {
                     message: $('#edit-group-form-div-box'),
                     buttons: {
                         success: {
-                            label: "Agregar",
+                            label: "Guardar",
                             className: "btn-primary",
                             callback: function () 
                             {
@@ -4496,7 +4500,7 @@ var handleBootboxAddEquipoToJugador = function () {
                         message: $('#edit-phase-form-div-box'),
                         buttons: {
                             success: {
-                                label: "Agregar",
+                                label: "Guardar",
                                 className: "btn-primary",
                                 callback: function () 
                                 {
@@ -5608,7 +5612,7 @@ var handleBootboxAddEquipoToJugador = function () {
                         message: $('#edit-goals-to-game-form-div-box'),
                         buttons: {
                             success: {
-                                label: "Agregar",
+                                label: "Guardar",
                                 className: "btn-primary",
                                 callback: function () 
                                 {
@@ -5958,7 +5962,7 @@ var handleBootboxAddEquipoToJugador = function () {
                         message: $('#edit-sanction-to-game-form-div-box'),
                         buttons: {
                             success: {
-                                label: "Agregar",
+                                label: "Guardar",
                                 className: "btn-primary",
                                 callback: function () 
                                 {
@@ -6303,7 +6307,7 @@ var handleBootboxAddEquipoToJugador = function () {
                         message: $('#edit-change-to-game-form-div-box'),
                         buttons: {
                             success: {
-                                label: "Agregar",
+                                label: "Guardar",
                                 className: "btn-primary",
                                 callback: function () 
                                 {
@@ -6326,7 +6330,7 @@ var handleBootboxAddEquipoToJugador = function () {
                                                 data: formData,
                                                 dataType: "JSON",
                                                 success: function(responseServer) {
-                                                    console.log(responseServer);
+                                                    //console.log(responseServer);
                                                     if(responseServer.success) 
                                                     {
                                                         // Muestro otro dialog con información de éxito
@@ -6837,7 +6841,7 @@ var handleBootboxAddEquipoToJugador = function () {
                         message: $('#edit-alignment-to-game-form-div-box'),
                         buttons: {
                             success: {
-                                label: "Agregar",
+                                label: "Guardar",
                                 className: "btn-primary",
                                 callback: function () 
                                 {
@@ -7312,6 +7316,7 @@ var handleBootboxAddEquipoToJugador = function () {
                                     var dataServer = null;
 
                                     $("#edit-competition-format-form").submit(function(e){
+
                                         var checkboxlocalAwayGame= $("#local-away-game-edit");
                                         checkboxlocalAwayGame.val(checkboxlocalAwayGame[0].checked ? 1 : 0);
 
