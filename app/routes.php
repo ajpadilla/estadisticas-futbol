@@ -181,6 +181,13 @@ Route::get('juegos/api-alineaciones/{id}/{teamId}', array('as'=>'games.api.align
 Route::get('juegos/api-eliminar-gol', array('as'=>'games.api.delete.goal', 'uses'=>'GameController@destroyGoalApi'));
 Route::get('juegos/api-eliminar-sancion', array('as'=>'games.api.delete.sanction', 'uses'=>'GameController@destroySanctionApi'));
 Route::get('juegos/api-eliminar-cambio', array('as'=>'games.api.delete.change', 'uses'=>'GameController@destroyChangeApi'));
+Route::get('juegos/api-ver', ['as'=>'games.api.show', 'uses'=>'GameController@showApi']);
+Route::post('juegos/api-actualizar',  ['as' => 'games.api.update','uses' => 'GameController@updateApi' ] );
+
+/*
+********************************* GAME TYPE ********************************
+*/
+Route::get('tipo-juegos/api-seleccionar-lista',  ['as' => 'game-types.api.select.list','uses' => 'GameTypeController@getAllValue' ] );
 
 /*
 ********************************* GOALS FOR GAMES ********************************
