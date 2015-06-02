@@ -28,7 +28,13 @@ class GameRepository extends BaseRepository
 
 		$this->setModel(new Game);
 		$this->setListAllRoute('games.api.list');
+	}
+
+	public function get($id)
+	{
+		return $this->model->with('type')->findOrFail($id);
 	}	
+
 
 	public function availableTeams($id)
 	{
