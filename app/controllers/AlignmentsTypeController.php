@@ -1,13 +1,17 @@
 <?php
 
 use soccer\Game\Alignment\AlignmentsTypeRepository;
+use soccer\Forms\RegisterAlignmentTypeForm;
 
 class AlignmentsTypeController extends \BaseController {
 
 	protected $repository;
+	protected $registerAlignmentTypeForm;
 
-	public function __construct(AlignmentsTypeRepository $repository){
+	public function __construct(AlignmentsTypeRepository $repository,
+		RegisterAlignmentTypeForm $registerAlignmentTypeForm){
 		$this->repository = $repository;
+		$this->registerAlignmentTypeForm = $registerAlignmentTypeForm;
 	}
 
 
@@ -18,7 +22,8 @@ class AlignmentsTypeController extends \BaseController {
 	 */
 	public function index()
 	{
-		//
+		$table = $this->repository->getAllTable();
+		return View::make('alignment-types.index', compact('table'));
 	}
 
 
@@ -40,9 +45,25 @@ class AlignmentsTypeController extends \BaseController {
 	 */
 	public function store()
 	{
-		//
+		if(Request::ajax())
+		{
+			$input = Input::all();
+			try
+			{
+				$this->registerAlignmentTypeForm->validate($input);
+				$alignmentType = $this->repository->create($input);
+				$this->setSuccess(true);
+				$this->addToResponseArray('alignmentType', $alignmentType);
+				$this->addToResponseArray('data', $input);
+				return $this->getResponseArrayJson();				
+			}
+			catch (FormValidationException $e)
+			{
+				$this->addToResponseArray('errores', $e->getErrors()->all());
+				return $this->getResponseArrayJson();
+			}
+		}
 	}
-
 
 	/**
 	 * Display the specified resource.
@@ -107,6 +128,56 @@ class AlignmentsTypeController extends \BaseController {
 		}else{
 			return $this->getResponseArrayJson();
 		}
+	}
+
+	public function listApi()
+	{
+		return $this->repository->getDefaultTableForAll();
+	}
+
+	public function showApi()
+	{
+		if (Request::ajax())
+		{
+			if (Input::has('alignmentTypeId'))
+			{
+				$alignmentType = $this->repository->get(Input::get('alignmentTypeId'));
+				$this->setSuccess(($alignmentType ? true : false));
+				$this->addToResponseArray('alignmentType', $alignmentType);
+				return $this->getResponseArrayJson();
+			}else{
+				return $this->getResponseArrayJson();
+			}
+		}
+	}
+
+	public function updateApi()
+	{
+		if(Request::ajax())
+		{
+			$input = Input::all();
+			try
+			{
+				$this->registerAlignmentTypeForm->validate($input);
+				$alignmentType = $this->repository->get($input['alignment_type_id']);
+				$alignmentType->update($input);
+				$this->setSuccess(true);
+				$this->addToResponseArray('alignmentType', $alignmentType);
+				return $this->getResponseArrayJson();					
+			}
+			catch (FormValidationException $e)
+			{
+				$this->addToResponseArray('errores', $e->getErrors()->all());
+				return $this->getResponseArrayJson();
+			}
+		}
+	}
+
+	public function destroyApi()
+	{
+		if(Request::ajax())
+			$this->setSuccess($this->repository->delete(Input::get('alignmentTypeId')));
+		return $this->getResponseArrayJson();
 	}
 
 }
