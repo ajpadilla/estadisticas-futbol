@@ -153,7 +153,8 @@
 		<a id="delete-goal-game" href="{{ URL::route('games.api.delete.goal') }}"></a>
 		<a id="delete-sanction-game" href="{{ URL::route('games.api.delete.sanction') }}"></a>
 		<a id="delete-change-game" href="{{ URL::route('games.api.delete.change') }}"></a>
-
+		<a id="data-game" href="{{ URL::route('games.api.show') }}"></a>
+		<a id="update-game" href="{{ URL::route('games.api.update') }}"></a>
 		<!--Sanctions Types-->
 		<a id="list-of-sanction-types" href="{{ URL::route('sanction-types.api.select.list') }}"></a>
 		<!--Sanctions-->
@@ -175,6 +176,8 @@
 		<a id="delete-competition-format" href="{{ URL::route('competitionFormats.api.delete') }}"></a>
 		<a id="data-competition-format" href="{{ URL::route('competitionFormats.api.show') }}"></a>
 		<a id="update-competition-format" href="{{ URL::route('competitionFormats.api.update') }}"></a>
+		<!--Game types-->
+		<a id="list-game-type" href="{{ URL::route('game-types.api.select.list') }}"></a>
 	</div>
 </div>
 <!-- /SIDEBAR -->

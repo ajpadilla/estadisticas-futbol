@@ -27,6 +27,10 @@
 	<div id="add-alignment-to-game" class="hidden">
 		@include('games.add-alignment')
 	</div>
+	<div id="edit-game-to-phase" class="hidden">
+		@include('games.edit')
+	</div>
+	@include('games.edit-tpl')
 	@else
 	<div class="col-md-12"><h1>Competencia sin partidos!</h1></div>
 	@endif

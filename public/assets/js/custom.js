@@ -7497,6 +7497,234 @@ var handleBootboxAddEquipoToJugador = function () {
     }
 
 
+    var loadFieldSelectGameType = function (selector, index) {
+        $.ajax({
+            type: 'GET',
+            url: $('#list-game-type').attr('href'),
+            dataType:'json',
+            success: function(response) {
+                //console.log(response.data);
+                if (response.success == true) {
+                    $(selector).html('');
+                    $(selector).append('<option value=\"\"></option>');
+                    $.each(response.data,function (k,v){
+                        $(selector).append('<option value=\"'+k+'\">'+v+'</option>');
+                        $(selector).trigger("chosen:updated");
+                        $(selector).trigger("chosen:updated");
+                    });
+                    $(selector).val(index);
+                    $(selector).trigger("chosen:updated");
+                }else{
+                    $(selector).html('');
+                    $(selector).append('<option value=\"\"></option>');
+                }
+            }
+        });
+    }
+
+    var loadDataForEditGame = function (gameId) {
+        $.ajax({
+            type: 'GET',
+            url: $('#data-game').attr('href'),    
+            data: {'gameId': gameId},
+            dataType: "JSON",
+            success: function(response) 
+            {
+                //console.log(response);
+                 if (response != null) 
+                 {
+                    if (response.success)
+                     {
+                       var gameId = response.game.id;
+                        var game = $('#edit-game-to-phase-form-div-box');
+                        var data = {
+                            title: "Editar Juego",
+                            date: response.game.date,
+                            type_id: response.game.type_id,
+                            type_name: response.game.type.name,
+                        };
+                        var template = $('#edit-game-tpl').html();
+                        var html = Mustache.to_html(template, data);
+                        game.html(html);
+
+                        initChosen();
+                        handleDatePicker();
+
+                        loadFieldSelectGameType('#type-id-for-game-edit', response.game.type_id);
+                        bootboxEditGame(gameId);
+                    }
+                }
+            }
+        });
+    }
+
+  var bootboxEditGame = function (gameId) {
+
+        $('#edit-game-form').validate({
+            rules:{
+                date:{
+                    required: true
+                },
+                type_id:{
+                    required: true
+                }
+            },
+            messages:{
+                date:{
+                    required: 'Este campo es obligatorio',
+                },
+                type_id:{
+                    required: 'Este campo es obligatorio',
+                }
+            },
+            highlight:function(element){
+                $(element).closest('.form-group').removeClass('has-success').addClass('has-error');
+            },
+            unhighlight:function(element){
+                $(element).closest('.form-group').removeClass('has-error');
+            },
+            success:function(element){
+                element.addClass('valid').closest('.form-group').removeClass('has-error').addClass('has-success');
+            }
+        });
+
+        bootbox
+                .dialog(
+                {
+                    message: $('#edit-game-to-phase-form-div-box'),
+                    buttons: 
+                    {
+                        success: 
+                        {
+                            label: "Guardar",
+                            className: "btn-primary",
+                            callback: function () 
+                            {
+                                // Si quieres usar aquí jqueryForm, es lo mismo, lo agregas y ya. Creo que es buena idea!
+
+                                //ajax para el envío del formulario.
+                                if($('#edit-game-form').valid()) {
+
+                                    var response = false; // Esta variable debería recibir los datos por ajax.
+                                    var dataServer = null;
+
+                                    $("#edit-game-form").submit(function(e){
+                                        var formData = {
+                                            game_id: gameId,
+                                            date: $('#date-for-game-edit').val(),
+                                            type_id: $('#type-id-for-game-edit').val()
+                                        };
+
+                                        //console.log(formData);
+                                        $.ajax({
+                                            type: 'POST',
+                                            url: $('#update-game').attr('href'), 
+                                            data: formData,
+                                            dataType: "JSON",
+                                            success: function(responseServer) {
+                                                //console.log(responseServer);
+                                                if(responseServer.success == true) 
+                                                {
+                                                    // Muestro otro dialog con información de éxito
+                                                    bootbox.dialog({
+                                                        message:" El juego ha sido actualizado correctamente!",
+                                                        title: "Éxito",
+                                                        buttons: {
+                                                            success: {
+                                                                label: "Success!",
+                                                                className: "btn-success",
+                                                                 callback: function () {
+                                                                    reloadDatatable('#datatable-game'+gameId);
+                                                                }
+                                                            }
+                                                        }
+                                                    });
+                                                    // Limpio cada elemento de las clases añadidas por el validator
+                                                    $('#edit-game-form div').each(function(){
+                                                        cleanValidatorClasses(this);
+                                                    });
+                                                    //Reinicio el formulario
+                                                    //$("#edit-game-form")[0].reset();
+                                                }else{
+                                                     bootbox.dialog({
+                                                        message: responseServer.errors,
+                                                        title: "Error",
+                                                        buttons: {
+                                                            danger: {
+                                                                label: "Ok!",
+                                                                className: "btn-danger"
+                                                            }
+                                                        }
+                                                    });
+                                                    // Limpio cada elemento de las clases añadidas por el validator
+                                                    $('#edit-game-form div').each(function(){
+                                                        cleanValidatorClasses(this);
+                                                    });
+                                                    //Reinicio el formulario
+                                                }
+                                            },
+                                            error: function(jqXHR, textStatus, errorThrown) {
+                                               bootbox.dialog({
+                                                        message:" ¡Error al enviar datos al servidor!",
+                                                        title: "Error",
+                                                        buttons: {
+                                                            danger: {
+                                                                label: "Danger!",
+                                                                className: "btn-danger"
+                                                            }
+                                                        }
+                                                    });
+                                                    // Limpio cada elemento de las clases añadidas por el validator
+                                                    $('#edit-game-form div').each(function(){
+                                                        cleanValidatorClasses(this);
+                                                    });
+                                                    //Reinicio el formulario
+                                            }
+                                        });
+                                        e.preventDefault(); //Prevent Default action. 
+                                        $(this).unbind('submit');
+                                    }); 
+                                    $("#edit-game-form").submit();
+                                } else {
+                                    return false;
+                                }
+                                return false;
+                            }
+                        }
+                    },
+                    show: false // We will show it manually later
+                })
+                .on('shown.bs.modal', function() {
+                    $('#edit-game-to-phase-form-div-box')
+                        .show();                             // Show the form
+                })
+            .on('hide.bs.modal', function(e) {
+                // Bootbox will remove the modal (including the body which contains the form)
+                // after hiding the modal
+                // Therefor, we need to backup the form
+                
+                $('#edit-game-to-phase-form-div-box').hide().appendTo('#edit-game-to-phase');
+            })
+            .modal('show');
+    }
+
+    var implementActionsToGame = function() 
+    {
+        /*$(".table").delegate(".delete-competition-format", "click", function() {
+             action = getAttributeIdActionSelect($(this).attr('id'));
+             //console.log(action);
+             deleteCompetitionFormat(action.number);
+        });*/
+
+        $(".table").delegate(".edit-game", "click", function() {
+             action = getAttributeIdActionSelect($(this).attr('id'));
+             //console.log(action);
+             loadDataForEditGame(action.number);
+        });
+    }
+
+
+
 
     var loadFieldSelectPositionsPlayer = function(url, idField,index) {
         $.ajax({
@@ -7658,6 +7886,7 @@ var handleBootboxAddEquipoToJugador = function () {
             implementActionsToGroup();
             implementActionsToTeamGroup();
             implementActionsToCompetitionFormat();
+            implementActionsToGame();
 
             loadPositionSelectPlayerCreate();
             loadPositionSelectPlayerEdit();
