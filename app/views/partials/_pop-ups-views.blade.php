@@ -6,4 +6,4 @@
 @include('tipos-competencia.show-pop-up')
 @include('competitions.new')
 @include('competition-formats.new')
-
+@include('alignment-types.new')
