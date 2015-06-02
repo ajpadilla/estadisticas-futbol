@@ -12,7 +12,8 @@
 */
 
 Route::get('test', function() {
-	dd(soccer\Group\Group::findOrFail(1)->totalMissingTeams);
+	$gR = new soccer\Game\GameRepository;
+	dd($gR->getFixtures(6)->toArray());
 });
 
 Route::get('prueba-ruta/{id}',  ['as' => 'prueba','uses' => 'PlayerController@prueba' ] );

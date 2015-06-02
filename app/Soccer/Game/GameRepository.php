@@ -70,6 +70,55 @@ class GameRepository extends BaseRepository
 			return $game->alignments()->whereTeamId($teamId)->get();
 		return new Collection;
 	}
+
+	public function getFixtures($id)
+	{
+		$game = $this->get($id);
+		$changes = $game->changes;
+		$sanctions = $game->sanctions;
+		$goals = $game->goals;
+
+		$fixtures = new Collection;
+
+		$orderFixtures = array();
+
+		foreach ($changes as $change) 
+			$orderFixtures[] = array('id' => $change->id, 'time' => $change->time, 'type' => 'change');
+
+		foreach ($sanctions as $sanction) 
+			$orderFixtures[] = array('id' => $sanction->id, 'time' => $sanction->time, 'type' => 'sanction');
+
+		foreach ($goals as $goal) 
+			$orderFixtures[] = array('id' => $goal->id, 'time' => $goal->time, 'type' => 'goal');	
+			
+		usort($orderFixtures, function($a, $b) {
+			return $a['time'] >= $b['time'];
+		});
+
+		foreach ($orderFixtures as $fixture) {
+			switch ($fixture['type']) {
+				case 'change':
+					$fixtures->add($changes->filter(function($change) use ($fixture) {
+						if ($change->id == $fixture['id']) return true;
+					}));
+				break;
+
+				case 'sanction':
+					$fixtures->add($sanctions->filter(function($sanction) use ($fixture) {
+						if ($sanction->id == $fixture['id']) return true;
+					}));
+				break;
+				
+				case 'goal':
+					$fixtures->add($goals->filter(function($goal) use ($fixture) {
+						if ($goal->id == $fixture['id']) return true;
+					}));
+				break;
+			}			
+		}
+
+		return $fixtures;
+	}
 	/*
 	*********************** DATATABLE SETTINGS ******************************
 	*/			
