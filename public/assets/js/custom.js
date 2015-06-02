@@ -7727,6 +7727,387 @@ var handleBootboxAddEquipoToJugador = function () {
 
 
 
+    var handleBootboxNewAlignmentType = function () {
+
+
+       addValidationRulesForms();
+
+        $('#add-alignment-type-form').validate({
+            rules:{
+                name:{
+                    required: true,
+                    rangelength : [2,128]
+                }
+            },
+            messages:{
+                name:{
+                    required: 'Este campo es obligatorio',
+                    rangelength: 'Por favor ingrese entre [2, 128] caracteres',
+                }
+            },
+            highlight:function(element){
+                $(element).closest('.form-group').removeClass('has-success').addClass('has-error');
+                 $(element).closest('.control-group').removeClass('has-success').addClass('has-error');
+            },
+            unhighlight:function(element){
+                $(element).closest('.form-group').removeClass('has-error');
+                $(element).closest('.control-group').removeClass('has-error');
+            },
+            success:function(element){
+                element.addClass('valid').closest('.form-group').removeClass('has-error').addClass('has-success');
+                element.addClass('valid').closest('.control-group').removeClass('has-error').addClass('has-success');
+            }
+        });
+
+        var updateAlignmentType= function() {
+            $("#add-alignment-type-form").trigger("reset");
+        }
+
+        // Mostrar formulario para agregar nueva Posición
+        $('#new-alignment-type').on('click', function() {
+            updateAlignmentType();
+            bootbox
+                .dialog({
+                    message: $('#alignment-type-form-div'),
+                    buttons: {
+                        success: {
+                            label: "Guardar",
+                            className: "btn-primary",
+                            callback: function () 
+                            {
+                                // Si quieres usar aquí jqueryForm, es lo mismo, lo agregas y ya. Creo que es buena idea!
+
+                                //ajax para el envío del formulario.
+                                if($('#add-alignment-type-form').valid()) {
+
+                                    var response = false; // Esta variable debería recibir los datos por ajax.
+                                    var dataServer = null;
+
+                                    $("#add-alignment-type-form").submit(function(e){
+                                        var formData = new FormData(this);
+                                        $.ajax({
+                                            type: 'POST',
+                                            url: $('#add-new-alignment-type').attr('href'), 
+                                            data: formData,
+                                            contentType: false,
+                                            processData: false,
+                                            dataType: "JSON",
+                                            success: function(responseServer) {
+                                                //console.log(responseServer);
+                                                if(responseServer.success == true) 
+                                                {
+                                                    // Muestro otro dialog con información de éxito
+                                                    bootbox.dialog({
+                                                        message: responseServer.alignmentType.name + " ha sido agregado correctamente!",
+                                                        title: "Éxito",
+                                                        buttons: {
+                                                            success: {
+                                                                label: "Success!",
+                                                                className: "btn-success",
+                                                                callback: function () {
+                                                                    reloadDatatable('#datatable');
+                                                                }
+                                                            }
+                                                        }
+                                                    });
+                                                    // Limpio cada elemento de las clases añadidas por el validator
+                                                    $('#add-alignment-type-form div').each(function(){
+                                                        cleanValidatorClasses(this);
+                                                    });
+                                                    //Reinicio el formulario
+                                                    $("#add-alignment-type-form")[0].reset();
+                                                    updateAlignmentType();
+                                                }else{
+                                                    console.log(responseServer);
+                                                     bootbox.dialog({
+                                                        message:responseServer.errors,
+                                                        title: "Error",
+                                                        buttons: {
+                                                            danger: {
+                                                                label: "Danger!",
+                                                                className: "btn-danger"
+                                                            }
+                                                        }
+                                                    });
+                                                    // Limpio cada elemento de las clases añadidas por el validator
+                                                    $('#add-alignment-type-form div').each(function(){
+                                                        cleanValidatorClasses(this);
+                                                    });
+                                                    //Reinicio el formulario
+                                                }
+                                            },
+                                            error: function(jqXHR, textStatus, errorThrown) {
+                                               console.log(errorThrown);
+                                               bootbox.dialog({
+                                                        message:" ¡Error al enviar datos al servidor!",
+                                                        title: "Error",
+                                                        buttons: {
+                                                            danger: {
+                                                                label: "Danger!",
+                                                                className: "btn-danger"
+                                                            }
+                                                        }
+                                                    });
+                                                    // Limpio cada elemento de las clases añadidas por el validator
+                                                    $('#add-alignment-type-form div').each(function(){
+                                                        cleanValidatorClasses(this);
+                                                    });
+                                                    //Reinicio el formulario
+                                            }
+                                        });
+                                        e.preventDefault(); //Prevent Default action.
+                                        $(this).unbind('submit'); 
+                                    }); 
+                                    $("#add-alignment-type-form").submit();
+                                } else {
+                                    return false;
+                                }
+                                return false;
+                            }
+                        }
+                    },
+                    show: false // We will show it manually later
+                })
+                .on('shown.bs.modal', function() {
+                    $('#alignment-type-form-div')
+                        .show();                             // Show the form
+            })
+            .on('hide.bs.modal', function(e) {
+                // Bootbox will remove the modal (including the body which contains the form)
+                // after hiding the modal
+                // Therefor, we need to backup the form
+                $('#alignment-type-form-div').hide().appendTo('#new-alignment-type-form');
+            })
+            .modal('show');
+        });               
+    }
+
+    var bootboxEditAlignmentType = function (alignmentTypeId) {
+        
+        $('#edit-alignmet-type-form').validate({
+            rules:{
+                name:{
+                    required: true,
+                    rangelength : [2,128]
+                }
+            },
+            messages:{
+                name:{
+                    required: 'Este campo es obligatorio',
+                    rangelength: 'Por favor ingrese entre [2, 128] caracteres',
+                }
+            },
+            highlight:function(element){
+                $(element).closest('.form-group').removeClass('has-success').addClass('has-error');
+            },
+            unhighlight:function(element){
+                $(element).closest('.form-group').removeClass('has-error');
+            },
+            success:function(element){
+                element.addClass('valid').closest('.form-group').removeClass('has-error').addClass('has-success');
+            }
+        });
+
+        bootbox
+                .dialog(
+                {
+                    message: $('#edit-alignmet-type-form-div-box'),
+                    buttons: 
+                    {
+                        success: 
+                        {
+                            label: "Guardar",
+                            className: "btn-primary",
+                            callback: function () 
+                            {
+                                // Si quieres usar aquí jqueryForm, es lo mismo, lo agregas y ya. Creo que es buena idea!
+
+                                //ajax para el envío del formulario.
+                                if($('#edit-alignmet-type-form').valid()) {
+
+                                    var response = false; // Esta variable debería recibir los datos por ajax.
+                                    var dataServer = null;
+
+                                    $("#edit-alignmet-type-form").submit(function(e){
+                                        var formData = {
+                                            alignment_type_id: alignmentTypeId,
+                                            name: $('#alignmet-type-name-edit').val(),
+                                        };
+
+                                        //console.log(formData);
+                                        $.ajax({
+                                            type: 'POST',
+                                            url: $('#update-alignmet-type').attr('href'), 
+                                            data: formData,
+                                            dataType: "JSON",
+                                            success: function(responseServer) {
+                                                //console.log(responseServer);
+                                                if(responseServer.success == true) 
+                                                {
+                                                    // Muestro otro dialog con información de éxito
+                                                    bootbox.dialog({
+                                                        message: responseServer.alignmentType.name+" ha sido actualizado correctamente!",
+                                                        title: "Éxito",
+                                                        buttons: {
+                                                            success: {
+                                                                label: "Success!",
+                                                                className: "btn-success",
+                                                                 callback: function () {
+                                                                    reloadDatatable('#datatable');
+                                                                }
+                                                            }
+                                                        }
+                                                    });
+                                                    // Limpio cada elemento de las clases añadidas por el validator
+                                                    $('#edit-alignmet-type-form div').each(function(){
+                                                        cleanValidatorClasses(this);
+                                                    });
+                                                    //Reinicio el formulario
+                                                    //$("#edit-alignmet-type-form")[0].reset();
+                                                }else{
+                                                     bootbox.dialog({
+                                                        message: responseServer.errors,
+                                                        title: "Error",
+                                                        buttons: {
+                                                            danger: {
+                                                                label: "Ok!",
+                                                                className: "btn-danger"
+                                                            }
+                                                        }
+                                                    });
+                                                    // Limpio cada elemento de las clases añadidas por el validator
+                                                    $('#edit-alignmet-type-form div').each(function(){
+                                                        cleanValidatorClasses(this);
+                                                    });
+                                                    //Reinicio el formulario
+                                                }
+                                            },
+                                            error: function(jqXHR, textStatus, errorThrown) {
+                                               bootbox.dialog({
+                                                        message:" ¡Error al enviar datos al servidor!",
+                                                        title: "Error",
+                                                        buttons: {
+                                                            danger: {
+                                                                label: "Danger!",
+                                                                className: "btn-danger"
+                                                            }
+                                                        }
+                                                    });
+                                                    // Limpio cada elemento de las clases añadidas por el validator
+                                                    $('#edit-alignmet-type-form div').each(function(){
+                                                        cleanValidatorClasses(this);
+                                                    });
+                                                    //Reinicio el formulario
+                                            }
+                                        });
+                                        e.preventDefault(); //Prevent Default action. 
+                                        $(this).unbind('submit');
+                                    }); 
+                                    $("#edit-alignmet-type-form").submit();
+                                } else {
+                                    return false;
+                                }
+                                return false;
+                            }
+                        }
+                    },
+                    show: false // We will show it manually later
+                })
+                .on('shown.bs.modal', function() {
+                    $('#edit-alignmet-type-form-div-box')
+                        .show();                             // Show the form
+                })
+            .on('hide.bs.modal', function(e) {
+                // Bootbox will remove the modal (including the body which contains the form)
+                // after hiding the modal
+                // Therefor, we need to backup the form
+                
+                $('#edit-alignmet-type-form-div-box').hide().appendTo('#edit-alignment-type-format-div');
+            })
+            .modal('show');
+    }
+
+    var loadDataForEditAlignmentType = function (alignmentTypeId) {
+        $.ajax({
+            type: 'GET',
+            url: $('#data-alignment-type').attr('href'),    
+            data: {'alignmentTypeId': alignmentTypeId},
+            dataType: "JSON",
+            success: function(response) 
+            {
+                //console.log(response);
+                 if (response != null) 
+                 {
+                    if (response.success)
+                     {
+
+                        var alignmentType = $('#edit-alignmet-type-form-div-box');
+                        var data = {
+                            title: "Editar tipo de alineación",
+                            name: response.alignmentType.name
+                        };
+                        var template = $('#edit-alignmet-type-tpl').html();
+                        var html = Mustache.to_html(template, data);
+                        alignmentType.html(html);
+
+                        bootboxEditAlignmentType(alignmentTypeId);
+                    }
+                }
+            }
+        });
+    }
+
+      var deleteAlignmentType = function (alignmentTypeId) {
+        
+        bootbox.confirm("¿Esta seguro de eliminar el tipo de alineación?", function(result) {
+            //console.log("Confirm result: "+result);
+            if (result == true){
+               $.ajax({
+                type: 'GET',
+                url: $('#delete-alignment-type').attr('href'),
+                data: {'alignmentTypeId': alignmentTypeId},
+                dataType: "JSON",
+                success: function(response) {
+                    if (response.success == true) {
+                        $('#delete_alignment-type_'+alignmentTypeId).parent().parent().remove();
+                        bootbox.dialog({
+                            message:"Alineación Eliminada!",
+                            title: "Éxito",
+                            buttons: {
+                                success: {
+                                    label: "Success!",
+                                    className: "btn-success",
+                                    callback: function () {
+                                        reloadDatatable('#datatable');
+                                    }
+                                }
+                            }
+                        });
+                    };
+                }
+            });
+           };
+       });
+    }
+
+    var implementActionsToAlignmentType = function() 
+    {
+        $(".table").delegate(".delete-alignment-type", "click", function() {
+             action = getAttributeIdActionSelect($(this).attr('id'));
+             //console.log(action);
+            deleteAlignmentType(action.number);
+        });
+
+        $(".table").delegate(".edit-alignment-type", "click", function() {
+             action = getAttributeIdActionSelect($(this).attr('id'));
+             //console.log(action);
+             loadDataForEditAlignmentType(action.number);
+        });
+    }
+
+
+
+
 
     var loadFieldSelectPositionsPlayer = function(url, idField,index) {
         $.ajax({
@@ -7869,6 +8250,7 @@ var handleBootboxAddEquipoToJugador = function () {
             handleBootboxAddChangeToGame();
             handleBootboxAddAlignment();
             handleBootboxNewCompetitionFormats();
+            handleBootboxNewAlignmentType();
             //Plugins init
             //handleFechaDateTimePicker();
             handleDatePicker();
@@ -7889,6 +8271,7 @@ var handleBootboxAddEquipoToJugador = function () {
             implementActionsToTeamGroup();
             implementActionsToCompetitionFormat();
             implementActionsToGame();
+            implementActionsToAlignmentType();
 
             loadPositionSelectPlayerCreate();
             loadPositionSelectPlayerEdit();
