@@ -363,7 +363,7 @@ class GameController extends \BaseController {
 				$game = $this->repository->get($input['game_id']);
 				$game->update($input);
 				$this->setSuccess(($game ? true : false));
-				$this->addToResponseArray('game', $game);
+				//$this->addToResponseArray('game', $game);
 				$this->addToResponseArray('data', $input);
 				return $this->getResponseArrayJson();					
 			}
@@ -373,6 +373,7 @@ class GameController extends \BaseController {
 				return $this->getResponseArrayJson();
 			}
 		}
+		return $this->getResponseArrayJson();
 	}
 
 }
