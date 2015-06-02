@@ -32,7 +32,7 @@ class GameRepository extends BaseRepository
 
 	public function get($id)
 	{
-		return $this->model->with('type')->findOrFail($id);
+		return $this->model->with('type','group')->findOrFail($id);
 	}	
 
 

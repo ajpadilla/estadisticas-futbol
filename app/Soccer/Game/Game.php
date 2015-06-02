@@ -38,6 +38,11 @@ class Game extends Eloquent {
        return $this->belongsTo('soccer\Competition\Competition');
     } 
 
+    public function group()
+    {
+       return $this->belongsTo('soccer\Group\Group');
+    } 
+
     public function goals()
     {
         return $this->hasMany('soccer\Game\Goal\Goal');
