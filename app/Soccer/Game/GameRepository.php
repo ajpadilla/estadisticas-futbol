@@ -117,7 +117,7 @@ class GameRepository extends BaseRepository
 			}			
 		}
 
-		return $fixtures;
+		return ($fixtures->isEmpty() ? false : $fixtures);
 	}
 	/*
 	*********************** DATATABLE SETTINGS ******************************
@@ -273,5 +273,7 @@ class GameRepository extends BaseRepository
 			return $alignmentRepository->getTableCollectionForRender();
 		}
 		return null;
-	}		
+	}	
+
+
 }

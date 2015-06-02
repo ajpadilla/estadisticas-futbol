@@ -184,6 +184,7 @@ Route::get('juegos/api-eliminar-sancion', array('as'=>'games.api.delete.sanction
 Route::get('juegos/api-eliminar-cambio', array('as'=>'games.api.delete.change', 'uses'=>'GameController@destroyChangeApi'));
 Route::get('juegos/api-ver', ['as'=>'games.api.show', 'uses'=>'GameController@showApi']);
 Route::post('juegos/api-actualizar',  ['as' => 'games.api.update','uses' => 'GameController@updateApi' ] );
+Route::get('juegos/api-fixture-list/{id}', array('as'=>'games.api.fixtures', 'uses'=>'GameController@getFixturesApi'));
 
 /*
 ********************************* GAME TYPE ********************************
