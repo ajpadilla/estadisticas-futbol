@@ -87,6 +87,18 @@
 				</ul>
 			</li>
 
+
+			<li class="has-sub">
+				<a href="javascript:;" class="">
+					<i class="fa fa-bookmark-o fa-fw"></i> <span class="menu-text">Tipo de alineación</span>
+					<span class="arrow"></span>
+				</a>
+				<ul class="sub">
+					<li><a class="" href="{{ URL::route('alignmentsType.index') }}"><span class="sub-menu-text">Lista</span></a></li>
+					<li><a id="new-alignment-type" class="" href="#new-alignment-type-form"><span class="sub-menu-text">Crear</span></a></li>
+				</ul>
+			</li>
+
 		</ul>
 		<!-- /SIDEBAR MENU -->
 		<!--Routes Paises-->
@@ -167,6 +179,10 @@
 		<a id="update-change" href="{{ URL::route('changes.api.update') }}"></a>
 		<!--Alignment Types-->
 		<a id="list-of-alignment-types" href="{{ URL::route('alignmentsType.api.select.list') }}"></a>
+		<a id="add-new-alignment-type" href="{{ URL::route('alignmentsType.store') }}"></a>
+		<a id="data-alignment-type" href="{{ URL::route('alignmentsType.api.show') }}"></a>
+		<a id="update-alignmet-type" href="{{ URL::route('alignmentsType.api.update') }}"></a>
+		<a id="delete-alignment-type" href="{{ URL::route('alignmentsType.api.delete') }}"></a>
 		<!--Alignments-->
 		<a id="delete-alignments" href="{{ URL::route('alignments.api.delete') }}"></a>
 		<a id="data-alignment" href="{{ URL::route('alignments.api.show') }}"></a>

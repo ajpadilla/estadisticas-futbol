@@ -226,9 +226,13 @@ Route::get('alineaciones/api-eliminar', array('as'=>'alignments.api.delete', 'us
 /*
 ********************************* ALIGMENT TYPE FOR GAMES ********************************
 */
-
+Route::get('tipos-alineaciones', ['as' => 'alignmentsType.index', 'uses' => 'AlignmentsTypeController@index']);
 Route::get('tipos-alineaciones/api-seleccionar-lista', array('as'=>'alignmentsType.api.select.list', 'uses'=>'AlignmentsTypeController@getAllValue'));
-
+Route::post('tipos-alineaciones/guardar', ['as' => 'alignmentsType.store', 'uses' => 'AlignmentsTypeController@store' ] );
+Route::get('tipos-alineaciones/api-lista', array('as'=>'alignmentsType.api.list', 'uses'=>'AlignmentsTypeController@listApi'));
+Route::get('tipos-alineaciones/api-ver', array('as'=>'alignmentsType.api.show', 'uses'=>'AlignmentsTypeController@showApi'));
+Route::post('tipos-alineacione/api-actualizar',  ['as' => 'alignmentsType.api.update','uses' => 'AlignmentsTypeController@updateApi' ] );
+Route::get('tipos-alineacione/api-eliminar', array('as'=>'alignmentsType.api.delete', 'uses'=>'AlignmentsTypeController@destroyApi'));
 
 /*
 ********************************* SANCTIONS TYPES FOR GAMES ********************************
@@ -252,7 +256,3 @@ Route::get('formatos-competicia/api-lista', array('as'=>'competitionFormats.api.
 Route::get('formatos-competicia/api-eliminar', array('as'=>'competitionFormats.api.delete', 'uses'=>'CompetitionFormatController@destroyApi'));
 Route::get('formatos-competicia/api-ver', array('as'=>'competitionFormats.api.show', 'uses'=>'CompetitionFormatController@showApi'));
 Route::post('formatos-competicia/api-actualizar',  ['as' => 'competitionFormats.api.update','uses' => 'CompetitionFormatController@updateApi' ] );
-
-/*
-********************************* Alignment Types ********************************
-*/
