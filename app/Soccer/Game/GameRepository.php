@@ -20,9 +20,7 @@ class GameRepository extends BaseRepository
 				'Hora',
 				'Local',
 				'Visitante',
-				'Estadio',
-				'Arbitro Principal',
-				'Arbitro de Linea',
+				'Resultado',
 				'Estatus',
 				'Agregar Fixtures',
 				'Acciones'
@@ -86,7 +84,6 @@ class GameRepository extends BaseRepository
 			$this->cleanActionColumn();
 			$this->addActionColumn("<a class='show-game' href='" . route('games.show', $model->id) . "' id='show_game_".$model->id."'>Ver</a><br />");
 			$this->addActionColumn("<a  class='edit-game' href='#edit-game-form' id='edit_game_".$model->id."'>Editar</a><br />");
-			$this->addActionColumn("<a  class='details-game' href='#details-game-form' id='edit_game_".$model->id."'>Editar</a><br />");
 			$this->addActionColumn("<a class='delete-game' href='#' id='delete_game_".$model->id."'>Eliminar</a>");
 			return implode(" ", $this->getActionColumn());
 		});
@@ -94,8 +91,8 @@ class GameRepository extends BaseRepository
 
 	public function setBodyTableSettings()
 	{		
-		$this->collection->searchColumns('Fecha', 'Local', 'Visitante', 'Estadio', 'Estatus');
-		$this->collection->orderColumns('Fecha', 'Local', 'Visitante', 'Estadio', 'Estatus');
+		$this->collection->searchColumns('Fecha', 'Local', 'Visitante', 'Estatus');
+		$this->collection->orderColumns('Fecha', 'Local', 'Visitante', 'Estatus');
 
 		$this->collection->addColumn('Fecha', function($model)
 		{
@@ -117,7 +114,12 @@ class GameRepository extends BaseRepository
 			 return $model->awayTeam->nombre;
 		});
 
-		$this->collection->addColumn('Estadio', function($model)
+		$this->collection->addColumn('Resultado', function($model)
+		{
+			 return $model->localGoals . ' - ' . $model->awayGoals;
+		});		
+
+		/*$this->collection->addColumn('Estadio', function($model)
 		{
 			 return $model->stadium;
 		});
@@ -130,7 +132,7 @@ class GameRepository extends BaseRepository
 		$this->collection->addColumn('Arbitro de Línea', function($model)
 		{
 			 return $model->line_referee;
-		});
+		});*/
 
 		$this->collection->addColumn('Estatus', function($model)
 		{

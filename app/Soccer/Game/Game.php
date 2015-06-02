@@ -132,6 +132,6 @@ class Game extends Eloquent {
 
     public function getFinishedAttribute()
     {
-        return $this->date->diffInMinutes(Carbon::now()->addMinutes(120)) < 0;
+        return $this->date->diffInMinutes(Carbon::now()->addMinutes(120)) > 0;
     }  
 }

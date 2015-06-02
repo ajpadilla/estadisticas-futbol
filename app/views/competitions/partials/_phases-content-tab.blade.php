@@ -23,7 +23,7 @@
 								@endif
 								<div class="row">
 									@if($group->hasGames)
-										<div class="col-md-12">
+										<div class="col-md-12">											
 											<?php $table = $gamesTables[$phase->id]['tables'][$groupTableIndex]; ?>
 											@include('partials._index-table')
 										</div>
