@@ -4,6 +4,8 @@ use Eloquent;
 use Carbon\Carbon;
 
 class SanctionType extends Eloquent {
+    protected $fillable = ['name'];
+
     /*
 	********************* Relations ***********************
     */	
