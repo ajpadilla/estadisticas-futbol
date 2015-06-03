@@ -96,12 +96,12 @@
 				<ul class="sub">
 					<li class="has-sub-sub">
 						<a href="javascript:;" class="">
-							<i class="fa fa-bookmark-o fa-fw"></i> <span class="menu-text">Sancciones</span>
+							<i class="fa fa-bookmark-o fa-fw"></i> <span class="menu-text">Sanciones</span>
 							<span class="arrow"></span>
 						</a>
 						<ul class="sub-sub">
-							<li><a class="" href="{{ URL::route('posiciones.index') }}"><span class="sub-menu-text">Lista</span></a></li>
-							<li><a id="new-position" class="" href="#new-position-form"><span class="sub-menu-text">Crear</span></a></li>
+							<li><a class="" href="{{ URL::route('sanction-types.index') }}"><span class="sub-menu-text">Lista</span></a></li>
+							<li><a id="new-sanction-type" class="" href="#new-sanction-type-format-form-div"><span class="sub-menu-text">Crear</span></a></li>
 						</ul>
 					</li>
 					<li class="has-sub-sub">
@@ -187,6 +187,11 @@
 		<a id="update-game" href="{{ URL::route('games.api.update') }}"></a>
 		<!--Sanctions Types-->
 		<a id="list-of-sanction-types" href="{{ URL::route('sanction-types.api.select.list') }}"></a>
+		<a id="add-new-sanction-type" href="{{ URL::route('sanction-types.store') }}"></a>
+		<a id="data-sanction-type" href="{{ URL::route('sanction-types.api.show') }}"></a>
+		<a id="update-sanction-type" href="{{ URL::route('sanction-types.api.update') }}"></a>
+		<a id="delete-sanction-type" href="{{ URL::route('sanction-types.api.delete') }}"></a>
+		
 		<!--Sanctions-->
 		<a id="add-new-sanction" href="{{ URL::route('games.api.add.sanction') }}"></a>
 		<a id="data-sanction" href="{{ URL::route('sanctions.api.show') }}"></a>

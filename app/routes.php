@@ -239,8 +239,13 @@ Route::get('tipos-alineacione/api-eliminar', array('as'=>'alignmentsType.api.del
 /*
 ********************************* SANCTIONS TYPES FOR GAMES ********************************
 */
-
+Route::get('tipos-sanciones', ['as' => 'sanction-types.index', 'uses' => 'SanctionTypesController@index']);
 Route::get('tipo-sanciones/api-seleccionar-lista',  ['as' => 'sanction-types.api.select.list','uses' => 'SanctionTypesController@getAllValue' ] );
+Route::post('tipos-sanciones/guardar', ['as' => 'sanction-types.store', 'uses' => 'SanctionTypesController@store' ] );
+Route::get('tipos-sanciones/api-lista', array('as'=>'sanction-types.api.list', 'uses'=>'SanctionTypesController@listApi'));
+Route::get('tipos-sanciones/api-ver', array('as'=>'sanction-types.api.show', 'uses'=>'SanctionTypesController@showApi'));
+Route::post('tipos-sanciones/api-actualizar',  ['as' => 'sanction-types.api.update','uses' => 'SanctionTypesController@updateApi' ] );
+Route::get('tipos-sanciones/api-eliminar', array('as'=>'sanction-types.api.delete', 'uses'=>'SanctionTypesController@destroyApi'));
 
 /*
 ********************************* Competition Formats ********************************
