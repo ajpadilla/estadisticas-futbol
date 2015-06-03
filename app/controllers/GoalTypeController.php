@@ -1,13 +1,17 @@
 <?php
 
 use soccer\Game\Goal\GoalTypeRepository;
+use soccer\Forms\RegisterGoalTypeForm;
 
 class GoalTypeController extends \BaseController {
 
 	protected $repository;
+	protected $registerGoalTypeForm;
 
-	public function __construct(GoalTypeRepository $repository) {
+	public function __construct(GoalTypeRepository $repository,
+		RegisterGoalTypeForm $registerGoalTypeForm) {
 		$this->repository = $repository;
+		$this->registerGoalTypeForm = $registerGoalTypeForm;
 	}
 
 
@@ -40,8 +44,26 @@ class GoalTypeController extends \BaseController {
 	 */
 	public function store()
 	{
-		//
+		if(Request::ajax())
+		{
+			$input = Input::all();
+			try
+			{
+				$this->registerGoalTypeForm->validate($input);
+				$goalType = $this->repository->create($input);
+				$this->setSuccess(true);
+				$this->addToResponseArray('goalType', $goalType);
+				$this->addToResponseArray('data', $input);
+				return $this->getResponseArrayJson();				
+			}
+			catch (FormValidationException $e)
+			{
+				$this->addToResponseArray('errors', $e->getErrors()->all());
+				return $this->getResponseArrayJson();
+			}
+		}
 	}
+
 
 
 	/**
