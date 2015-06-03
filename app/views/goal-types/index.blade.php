@@ -1,18 +1,18 @@
 @extends("layouts.main")
 
 @section("page-title")
-Lista Tipo De Sanciones 
+Lista Tipo De Goles
 @stop
 
 @section("page-description")
-Tipo De Sanciones 
+Tipo De Goles
 @stop
 
 @section("content")
 <div class="col-md-12">
 	<div class="box border green">
 		<div class="box-title">
-			<h4><i class="fa fa-table"></i>Lista De Tipo De Sanciones </h4>
+			<h4><i class="fa fa-table"></i>Lista De Tipo De Goles </h4>
 		<!--<div class="tools hidden-xs">
 			<a href="#box-config" data-toggle="modal" class="config">
 				<i class="fa fa-cog"></i>
@@ -29,7 +29,7 @@ Tipo De Sanciones
 		</div>-->
 	</div>
 	<div class="box-body">
-		<button class="add-sanction-type pull-left btn btn-lg btn-primary" href="#">Agregar Tipo de Sanción</button>
+		<button class="add-goal-type pull-left btn btn-lg btn-primary" href="#">Agregar Tipo De Gol</button>
 		<div class="row"><br/></div>
 		@include('partials._index-table')
 	</div>
