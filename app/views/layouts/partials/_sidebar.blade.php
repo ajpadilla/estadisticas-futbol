@@ -110,7 +110,7 @@
 							<span class="arrow"></span>
 						</a>
 						<ul class="sub-sub">
-							<li><a class="" href="{{ URL::route('posiciones.index') }}"><span class="sub-menu-text">Lista</span></a></li>
+							<li><a class="" href="{{ URL::route('goal-types.index') }}"><span class="sub-menu-text">Lista</span></a></li>
 							<li><a id="new-goal-type" class="" href="#new-goal-type-form-div-box"><span class="sub-menu-text">Crear</span></a></li>
 						</ul>
 					</li>				
