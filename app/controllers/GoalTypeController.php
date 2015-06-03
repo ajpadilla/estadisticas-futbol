@@ -179,12 +179,12 @@ class GoalTypeController extends \BaseController {
 		}
 	}
 
-	/*public function destroyApi()
+	public function destroyApi()
 	{
 		if(Request::ajax())
-			$this->setSuccess($this->repository->delete(Input::get('sanctionTypeId')));
+			$this->setSuccess($this->repository->delete(Input::get('goalTypeId')));
 		return $this->getResponseArrayJson();
-	}*/
+	}
 
 
 }
