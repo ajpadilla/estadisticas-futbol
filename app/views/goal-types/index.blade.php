@@ -34,10 +34,10 @@ Tipo De Goles
 		@include('partials._index-table')
 	</div>
 </div>
-<div id="edit-sanction-type-div" class="hidden">
-	@include('sanction-types.edit')
+<div id="edit-goal-type-div" class="hidden">
+	@include('goal-types.edit')
 </div>
-@include('sanction-types.edit-tpl')
+@include('goal-types.edit-tpl')
 </div>
 
 @stop
