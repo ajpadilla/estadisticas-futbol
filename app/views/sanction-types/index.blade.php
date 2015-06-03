@@ -29,7 +29,7 @@ Tipo De Sanciones
 		</div>-->
 	</div>
 	<div class="box-body">
-		<button class="add-sanction-type pull-left btn btn-lg btn-primary" href="#">Agregar Tipo de Sanción</button>
+		<button class="add-sanction-type pull-left btn btn-lg btn-primary" href="#">Agregar Tipo De Sanción</button>
 		<div class="row"><br/></div>
 		@include('partials._index-table')
 	</div>
