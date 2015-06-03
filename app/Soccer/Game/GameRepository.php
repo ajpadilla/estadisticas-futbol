@@ -71,7 +71,7 @@ class GameRepository extends BaseRepository
 		return new Collection;
 	}
 
-	public function getFixtures($id)
+	public function getFixtures($id, $formatedToView = false)
 	{
 		$game = $this->get($id);
 		$changes = $game->changes;
@@ -96,25 +96,53 @@ class GameRepository extends BaseRepository
 		});
 
 		foreach ($orderFixtures as $fixture) {
-			switch ($fixture['type']) {
-				case 'change':
-					$fixtures->add($changes->filter(function($change) use ($fixture) {
-						if ($change->id == $fixture['id']) return true;
-					}));
-				break;
+			if ($formatedToView) {										
+				switch ($fixture['type']) {
+					case 'change':
+						$change = $changes->filter(function($change) use ($fixture) {
+							if ($change->id == $fixture['id']) return true;
+						})->first();
+						$change = '(' . $change->time . ') entra (' . $change->player_in->nombre . ') sale (' . $change->player_out->nombre. ')';
+						$fixtures->add($change);
+					break;
 
-				case 'sanction':
-					$fixtures->add($sanctions->filter(function($sanction) use ($fixture) {
-						if ($sanction->id == $fixture['id']) return true;
-					}));
-				break;
-				
-				case 'goal':
-					$fixtures->add($goals->filter(function($goal) use ($fixture) {
-						if ($goal->id == $fixture['id']) return true;
-					}));
-				break;
-			}			
+					case 'sanction':
+						$sanction = $sanctions->filter(function($sanction) use ($fixture) {
+							if ($sanction->id == $fixture['id']) return true;
+						})->first();
+						$sanction = '(' . $sanction->time . ') ' . $sanction->player->nombre . ', es sancionado  (' . $sanction->type->name. ')';
+						$fixtures->add($sanction);
+					break;
+					
+					case 'goal':
+						$goal = $goals->filter(function($goal) use ($fixture) {
+							if ($goal->id == $fixture['id']) return true;
+						})->first();
+						$goal = '(' . $goal->time . ') ' . $goal->player->nombre . ', ha marcado un gol  (' . $goal->type->name. ')';
+						$fixtures->add($goal);
+					break;
+				}
+			} else {
+		 		switch ($fixture['type']) {
+					case 'change':
+						$fixtures->add($changes->filter(function($change) use ($fixture) {
+							if ($change->id == $fixture['id']) return true;
+						})->first());
+					break;
+
+					case 'sanction':
+						$fixtures->add($sanctions->filter(function($sanction) use ($fixture) {
+							if ($sanction->id == $fixture['id']) return true;
+						})->first());
+					break;
+					
+					case 'goal':
+						$fixtures->add($goals->filter(function($goal) use ($fixture) {
+							if ($goal->id == $fixture['id']) return true;
+						})->first());
+					break;
+				}	
+			}		
 		}
 
 		return ($fixtures->isEmpty() ? false : $fixtures);
