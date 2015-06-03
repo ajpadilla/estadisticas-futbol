@@ -90,12 +90,30 @@
 
 			<li class="has-sub">
 				<a href="javascript:;" class="">
-					<i class="fa fa-bookmark-o fa-fw"></i> <span class="menu-text">Tipo de alineación</span>
+					<i class="fa fa-bookmark-o fa-fw"></i> <span class="menu-text">Juegos</span>
 					<span class="arrow"></span>
 				</a>
 				<ul class="sub">
-					<li><a class="" href="{{ URL::route('alignmentsType.index') }}"><span class="sub-menu-text">Lista</span></a></li>
-					<li><a id="new-alignment-type" class="" href="#new-alignment-type-form"><span class="sub-menu-text">Crear</span></a></li>
+					<li class="has-sub-sub">
+						<a href="javascript:;" class="">
+							<i class="fa fa-bookmark-o fa-fw"></i> <span class="menu-text">Sancciones</span>
+							<span class="arrow"></span>
+						</a>
+						<ul class="sub-sub">
+							<li><a class="" href="{{ URL::route('posiciones.index') }}"><span class="sub-menu-text">Lista</span></a></li>
+							<li><a id="new-position" class="" href="#new-position-form"><span class="sub-menu-text">Crear</span></a></li>
+						</ul>
+					</li>
+					<li class="has-sub-sub">
+						<a href="javascript:;" class="">
+							<i class="fa fa-bookmark-o fa-fw"></i> <span class="menu-text">Goles</span>
+							<span class="arrow"></span>
+						</a>
+						<ul class="sub-sub">
+							<li><a class="" href="{{ URL::route('posiciones.index') }}"><span class="sub-menu-text">Lista</span></a></li>
+							<li><a id="new-position" class="" href="#new-position-form"><span class="sub-menu-text">Crear</span></a></li>
+						</ul>
+					</li>				
 				</ul>
 			</li>
 
