@@ -8483,6 +8483,146 @@ var handleBootboxAddEquipoToJugador = function () {
     }
 
 
+    var bootboxAddGoalType = function(){
+            $('#new-goal-type-form').trigger('reset');
+            $('#new-goal-type-form').validate({
+                rules:{
+                    name:{
+                        required: true,
+                        rangelength : [2,128]
+                    }
+                },
+                messages:{
+                    name:{
+                        required: 'Este campo es obligatorio',
+                        rangelength: 'Por favor ingrese entre [2, 128] caracteres',
+                    }
+                },
+                highlight:function(element){
+                    $(element).closest('.form-group').removeClass('has-success').addClass('has-error');
+                },
+                unhighlight:function(element){
+                    $(element).closest('.form-group').removeClass('has-error');
+                },
+                success:function(element){
+                    element.addClass('valid').closest('.form-group').removeClass('has-error').addClass('has-success');
+                },
+            });
+            bootbox.dialog({
+                        message: $('#add-goal-type-form-div'),
+                        buttons: {
+                            success: {
+                                label: "Agregar",
+                                className: "btn-primary",
+                                callback: function () 
+                                {
+                                    if($('#new-goal-type-form').valid()) 
+                                    {
+                                        $("#new-goal-type-form").submit(function(e){
+                                            var formData = new FormData(this);
+                                            $.ajax({
+                                                type: 'POST',
+                                                url: $('#add-new-goal-type').attr('href'), 
+                                                data: formData,
+                                                contentType: false,
+                                                processData: false,
+                                                dataType: "JSON",
+                                                success: function(responseServer) {
+                                                    //console.log(responseServer);
+                                                    if(responseServer.success) 
+                                                    {
+                                                        // Muestro otro dialog con información de éxito
+                                                        bootbox.dialog({
+                                                            message:responseServer.goalType.name+ " agregado correctamente!",
+                                                            title: "Éxito",
+                                                            buttons: {
+                                                                success: {
+                                                                    label: "Success!",
+                                                                    className: "btn-success",
+                                                                    callback: function () {
+                                                                        reloadDatatable('#datatable')
+                                                                    }
+                                                                }
+                                                            }
+                                                        });
+                                                        // Limpio cada elemento de las clases añadidas por el validator
+                                                        $('#new-goal-type-form div').each(function(){
+                                                            cleanValidatorClasses(this);
+                                                        });
+                                                        //Reinicio el formulario
+                                                        $("#new-goal-type-form")[0].reset();
+                                                    }else{
+                                                        bootbox.dialog({
+                                                            message: responseServer.errors,
+                                                            title: "Error",
+                                                            buttons: {
+                                                                danger: {
+                                                                    label: "Danger!",
+                                                                    className: "btn-danger"
+                                                                }
+                                                            }
+                                                        });
+                                                        $('#new-goal-type-form div').each(function(){
+                                                            cleanValidatorClasses(this);
+                                                        });
+                                                    }
+                                                },
+                                                error: function(jqXHR, textStatus, errorThrown) {
+                                                   console.log(errorThrown);
+                                                   bootbox.dialog({
+                                                            message:" ¡Error al enviar datos al servidor!",
+                                                            title: "Error",
+                                                            buttons: {
+                                                                danger: {
+                                                                    label: "Danger!",
+                                                                    className: "btn-danger"
+                                                                }
+                                                            }
+                                                        });
+                                                        // Limpio cada elemento de las clases añadidas por el validator
+                                                        $('#new-goal-type-form div').each(function(){
+                                                            cleanValidatorClasses(this);
+                                                        });
+                                                        //Reinicio el formulario*/
+                                                }
+                                            });
+                                            e.preventDefault(); //Prevent Default action.
+                                            $(this).unbind('submit');
+                                        }); 
+                                        $("#new-goal-type-form").submit();
+                                    }else{
+                                        return false;
+                                    }
+                                    return false;
+                                }
+                            }
+                        },
+                            show: false // We will show it manually later
+                        })
+                    .on('shown.bs.modal', function() {
+                        $('#add-goal-type-form-div')
+                                .show();                             // Show the form
+                            })
+                    .on('hide.bs.modal', function(e) {
+                        // Bootbox will remove the modal (including the body which contains the form)
+                        // after hiding the modal
+                        // Therefor, we need to backup the form
+                        $('#add-goal-type-form-div').hide().appendTo('#new-goal-type-form-div-box');
+                    })
+                    .modal('show');
+     }
+
+     var handleBootboxAddGoalType= function () {
+        $('#new-goal-type').on('click', function() {
+            bootboxAddGoalType();
+        });
+
+        /*$('button.add-sanction-type').on('click', function() {
+            bootboxAddSanctionType();
+        });*/
+     }
+
+
 
 
     var loadFieldSelectPositionsPlayer = function(url, idField,index) {
@@ -8628,6 +8768,7 @@ var handleBootboxAddEquipoToJugador = function () {
             handleBootboxNewCompetitionFormats();
             handleBootboxNewAlignmentType();
             handleBootboxAddSanctionType();
+            handleBootboxAddGoalType();
             //Plugins init
             //handleFechaDateTimePicker();
             handleDatePicker();
