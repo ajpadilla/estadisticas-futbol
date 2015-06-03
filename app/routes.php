@@ -251,6 +251,7 @@ Route::post('tipo-goles/guardar', ['as' => 'goal-types.store', 'uses' => 'GoalTy
 Route::get('tipo-goles/api-lista', array('as'=>'goal-types.api.list', 'uses'=>'GoalTypeController@listApi'));
 Route::get('tipo-goles/api-ver', array('as'=>'goal-types.api.show', 'uses'=>'GoalTypeController@showApi'));
 Route::post('tipo-goles/api-actualizar',  ['as' => 'goal-types.api.update','uses' => 'GoalTypeController@updateApi' ] );
+Route::get('tipo-goles/api-eliminar', array('as'=>'goal-types.api.delete', 'uses'=>'GoalTypeController@destroyApi'));
 
 
 /*
