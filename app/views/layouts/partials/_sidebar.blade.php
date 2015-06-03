@@ -181,6 +181,7 @@
 		<a id="add-new-goal-type" href="{{ URL::route('goal-types.store') }}"></a>
 		<a id="data-goal-type" href="{{ URL::route('goal-types.api.show') }}"></a>
 		<a id="update-goal-type" href="{{ URL::route('goal-types.api.update') }}"></a>
+		<a id="delete-goal-type" href="{{ URL::route('goal-types.api.delete') }}"></a>
 		<!--Games-->
 		<a id="teams-for-games" href="{{ URL::route('games.api.teams.availables.game') }}"></a>
 		<a id="players-for-games" href="{{ URL::route('games.api.available.players.team') }}"></a>
