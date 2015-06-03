@@ -7,3 +7,5 @@
 @include('competitions.new')
 @include('competition-formats.new')
 @include('alignment-types.new')
+@include('sanction-types.new')
+
