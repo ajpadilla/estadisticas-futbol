@@ -22,7 +22,8 @@ class GoalTypeController extends \BaseController {
 	 */
 	public function index()
 	{
-		//
+		$table = $this->repository->getAllTable();
+		return View::make('goal-types.index', compact('table'));
 	}
 
 
@@ -132,6 +133,11 @@ class GoalTypeController extends \BaseController {
 			$this->setSuccess(false);
 			return $this->getResponseArrayJson();
 		}
+	}
+
+	public function listApi()
+	{
+		return $this->repository->getDefaultTableForAll();
 	}
 
 }
