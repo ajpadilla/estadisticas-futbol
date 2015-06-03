@@ -140,4 +140,51 @@ class GoalTypeController extends \BaseController {
 		return $this->repository->getDefaultTableForAll();
 	}
 
+
+	public function showApi()
+	{
+		if (Request::ajax())
+		{
+			if (Input::has('goalTypeId'))
+			{
+				$goalType = $this->repository->get(Input::get('goalTypeId'));
+				$this->setSuccess(($goalType ? true : false));
+				$this->addToResponseArray('goalType', $goalType);
+				return $this->getResponseArrayJson();
+			}else{
+				return $this->getResponseArrayJson();
+			}
+		}
+	}
+
+	public function updateApi()
+	{
+		if(Request::ajax())
+		{
+			$input = Input::all();
+			try
+			{
+				$this->registerGoalTypeForm->validate($input);
+				$goalType = $this->repository->get($input['goal_type_id']);
+				$goalType->update($input);
+				$this->setSuccess(true);
+				$this->addToResponseArray('goalType', $goalType);
+				return $this->getResponseArrayJson();					
+			}
+			catch (FormValidationException $e)
+			{
+				$this->addToResponseArray('errors', $e->getErrors()->all());
+				return $this->getResponseArrayJson();
+			}
+		}
+	}
+
+	/*public function destroyApi()
+	{
+		if(Request::ajax())
+			$this->setSuccess($this->repository->delete(Input::get('sanctionTypeId')));
+		return $this->getResponseArrayJson();
+	}*/
+
+
 }
