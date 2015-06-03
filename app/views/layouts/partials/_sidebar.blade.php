@@ -101,7 +101,7 @@
 						</a>
 						<ul class="sub-sub">
 							<li><a class="" href="{{ URL::route('sanction-types.index') }}"><span class="sub-menu-text">Lista</span></a></li>
-							<li><a id="new-sanction-type" class="" href="#new-sanction-type-format-form-div"><span class="sub-menu-text">Crear</span></a></li>
+							<li><a id="new-sanction-type" class="" href="#new-sanction-type-form-div-box"><span class="sub-menu-text">Crear</span></a></li>
 						</ul>
 					</li>
 					<li class="has-sub-sub">
@@ -111,7 +111,7 @@
 						</a>
 						<ul class="sub-sub">
 							<li><a class="" href="{{ URL::route('posiciones.index') }}"><span class="sub-menu-text">Lista</span></a></li>
-							<li><a id="new-position" class="" href="#new-position-form"><span class="sub-menu-text">Crear</span></a></li>
+							<li><a id="new-goal-type" class="" href="#new-goal-type-form-div-box"><span class="sub-menu-text">Crear</span></a></li>
 						</ul>
 					</li>				
 				</ul>
@@ -173,10 +173,12 @@
 		<a id="data-phase" href="{{ URL::route('phases.api.show') }}"></a>
 		<a id="update-phase" href="{{ URL::route('phases.api.update') }}"></a>
 		<!--Goals-->
-		<a id="list-of-goal-types" href="{{ URL::route('goal-types.api.select.list') }}"></a>
 		<a id="add-new-goal-for-game" href="{{ URL::route('games.api.add.goal') }}"></a>
 		<a id="data-goal" href="{{ URL::route('goals.api.show') }}"></a>
 		<a id="update-data-goal" href="{{ URL::route('goals.api.update') }}"></a>
+		<!--Goals Types-->
+		<a id="list-of-goal-types" href="{{ URL::route('goal-types.api.select.list') }}"></a>
+		<a id="add-new-goal-type" href="{{ URL::route('goal-types.store') }}"></a>
 		<!--Games-->
 		<a id="teams-for-games" href="{{ URL::route('games.api.teams.availables.game') }}"></a>
 		<a id="players-for-games" href="{{ URL::route('games.api.available.players.team') }}"></a>

@@ -198,11 +198,6 @@ Route::get('tipo-juegos/api-seleccionar-lista',  ['as' => 'game-types.api.select
 Route::get('goles/api-ver', array('as'=>'goals.api.show', 'uses'=>'GoalController@showApi'));
 Route::post('goles/api-actualizar', array('as'=>'goals.api.update', 'uses'=>'GoalController@updateApi'));
 
-/*
-********************************* GOALS TYPES FOR GAMES ********************************
-*/
-
-Route::get('tipo-goles/api-seleccionar-lista',  ['as' => 'goal-types.api.select.list','uses' => 'GoalTypeController@getAllValue' ] );
 
 /*
 ********************************* SANCTIONS FOR GAMES ********************************
@@ -246,6 +241,14 @@ Route::get('tipos-sanciones/api-lista', array('as'=>'sanction-types.api.list', '
 Route::get('tipos-sanciones/api-ver', array('as'=>'sanction-types.api.show', 'uses'=>'SanctionTypesController@showApi'));
 Route::post('tipos-sanciones/api-actualizar',  ['as' => 'sanction-types.api.update','uses' => 'SanctionTypesController@updateApi' ] );
 Route::get('tipos-sanciones/api-eliminar', array('as'=>'sanction-types.api.delete', 'uses'=>'SanctionTypesController@destroyApi'));
+
+/*
+********************************* GOALS TYPES FOR GAMES ********************************
+*/
+
+Route::get('tipo-goles/api-seleccionar-lista',  ['as' => 'goal-types.api.select.list','uses' => 'GoalTypeController@getAllValue' ] );
+Route::post('tipo-goles/guardar', ['as' => 'goal-types.store', 'uses' => 'GoalTypeController@store' ] );
+
 
 /*
 ********************************* Competition Formats ********************************
