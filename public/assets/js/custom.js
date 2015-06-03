@@ -8798,21 +8798,21 @@ var handleBootboxAddEquipoToJugador = function () {
         });
     }
 
-    var deleteGoalType= function (sanctionTypeId) {
+    var deleteGoalType = function (goalTypeId) {
         
-        bootbox.confirm("¿Esta seguro de eliminar el tipo de sanción?", function(result) {
+        bootbox.confirm("¿Esta seguro de eliminar el tipo de gol?", function(result) {
             //console.log("Confirm result: "+result);
             if (result == true){
                $.ajax({
                 type: 'GET',
-                url: $('#delete-sanction-type').attr('href'),
-                data: {'sanctionTypeId': sanctionTypeId},
+                url: $('#delete-goal-type').attr('href'),
+                data: {'goalTypeId': goalTypeId},
                 dataType: "JSON",
                 success: function(response) {
                     if (response.success == true) {
-                        $('#delete_sanction-type_'+sanctionTypeId).parent().parent().remove();
+                        $('#delete_goal-type_'+goalTypeId).parent().parent().remove();
                         bootbox.dialog({
-                            message:"Sanción Eliminada!",
+                            message:"Tipo de gol Eliminado!",
                             title: "Éxito",
                             buttons: {
                                 success: {
@@ -8833,11 +8833,11 @@ var handleBootboxAddEquipoToJugador = function () {
 
     var implementActionsToGoalType = function() 
     {
-        /*$(".table").delegate(".delete-sanction-type", "click", function() {
+        $(".table").delegate(".delete-goal-type", "click", function() {
              action = getAttributeIdActionSelect($(this).attr('id'));
              //console.log(action);
-            deleteSanctionType(action.number);
-        });*/
+            deleteGoalType(action.number);
+        });
 
         $(".table").delegate(".edit-goal-type", "click", function() {
              action = getAttributeIdActionSelect($(this).attr('id'));
