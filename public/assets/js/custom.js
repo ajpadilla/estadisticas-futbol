@@ -8617,9 +8617,9 @@ var handleBootboxAddEquipoToJugador = function () {
             bootboxAddGoalType();
         });
 
-        /*$('button.add-sanction-type').on('click', function() {
-            bootboxAddSanctionType();
-        });*/
+        $('button.add-goal-type').on('click', function() {
+            bootboxAddGoalType();
+        });
      }
 
 
