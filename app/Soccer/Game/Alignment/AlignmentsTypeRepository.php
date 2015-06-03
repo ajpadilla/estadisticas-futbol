@@ -20,6 +20,11 @@ class AlignmentsTypeRepository extends BaseRepository
 	}
 
 
+	/*
+	*********************** DATATABLE SETTINGS ******************************
+	*/			
+
+
 	public function setDefaultActionColumn() {
 
 		$this->addColumnToCollection('Acciones', function($model)
