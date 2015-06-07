@@ -98,7 +98,7 @@ var CustomApp = function () {
                 nombre:{
                     required:true,
                     rangelength: [2, 128],
-                    onlyLettersNumbersAndSpaces: true
+                    //onlyLettersNumbersAndSpaces: true
                 },
                 fecha_nacimiento:{
                     customDateValidator:true
