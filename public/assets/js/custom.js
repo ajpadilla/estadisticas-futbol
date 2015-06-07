@@ -98,7 +98,7 @@ var CustomApp = function () {
                 nombre:{
                     required:true,
                     rangelength: [2, 128],
-                    onlyLettersNumbersAndSpaces: true
+                    //onlyLettersNumbersAndSpaces: true
                 },
                 fecha_nacimiento:{
                     customDateValidator:true
@@ -222,14 +222,14 @@ var CustomApp = function () {
                                                 {
                                                     // Muestro otro dialog con información de éxito
                                                     bootbox.dialog({
-                                                        message: responseServer.jugador.nombre + " Ha sido agregado correctamente!",
+                                                        message: responseServer.jugador.nombre + " ha sido agregado correctamente!",
                                                         title: "Éxito",
                                                         buttons: {
                                                             success: {
                                                                 label: "Success!",
                                                                 className: "btn-success",
                                                                  callback: function () {
-                                                                    reloadDatatable();
+                                                                    reloadDatatable('#datatable');
                                                                 }
                                                             }
                                                         }
@@ -481,7 +481,7 @@ var CustomApp = function () {
                                                                 label: "Success!",
                                                                 className: "btn-success",
                                                                 callback: function () {
-                                                                    reloadDatatable();
+                                                                    reloadDatatable('#datatable');
                                                                 }
                                                             }
                                                         }
@@ -566,7 +566,7 @@ var CustomApp = function () {
                 dataType: "JSON",
                 success: function(response) {
                     if (response.success == true) {
-                        $('#eliminar_jugador_'+idPlayer).parent().parent().remove();
+                        $('#delete_player_'+idPlayer).parent().parent().remove();
                         bootbox.dialog({
                             message:" ¡Jugador Eliminado!",
                             title: "Éxito",
@@ -575,7 +575,7 @@ var CustomApp = function () {
                                     label: "Success!",
                                     className: "btn-success",
                                     callback: function () {
-                                        reloadDatatable();
+                                        reloadDatatable('#datatable');
                                     }
                                 }
                             }
@@ -592,6 +592,7 @@ var CustomApp = function () {
     {
         $(".table").delegate(".delete-player", "click", function() {
              action = getAttributeIdActionSelect($(this).attr('id'));
+             //console.log(action);
              deletePlayer(action.number);
         });
     }
