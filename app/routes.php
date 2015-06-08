@@ -13,7 +13,7 @@
 
 Route::get('test', function() {
 	$gR = new soccer\Game\GameRepository;
-	dd($gR->getFixtures(6)->toArray());
+	dd($gR->getFixtures(6, true)->toArray());
 });
 
 Route::get('prueba-ruta/{id}',  ['as' => 'prueba','uses' => 'PlayerController@prueba' ] );

@@ -43,38 +43,29 @@
 		<!-- BOX -->
 		<div class="box border inverse">
 			<div class="box-title">
-				<h4><i class="fa fa-bars"></i>Estadísticas</h4>
-				{{--<div class="tools">
-					<a href="#box-config" data-toggle="modal" class="config">
-						<i class="fa fa-cog"></i>
-					</a>
+				<h4><i class="fa fa-bars"></i>Timeline del partido</h4>
+				<div class="tools">
 					<a href="javascript:;" class="reload">
 						<i class="fa fa-refresh"></i>
+					</a>
+					{{--
+					<a href="#box-config" data-toggle="modal" class="config">
+						<i class="fa fa-cog"></i>
 					</a>
 					<a href="javascript:;" class="collapse">
 						<i class="fa fa-chevron-up"></i>
 					</a>
 					<a href="javascript:;" class="remove">
 						<i class="fa fa-times"></i>
-					</a>
-				</div>--}}
+					</a>--}}
+				</div>
 			</div>
 			<div class="box-body big sparkline-stats">
+				@foreach($fixtures as $fixture)
 				<div class="sparkline-row">
-					<span class="title">Diferencia de Goles</span>
-					<span class="value">7453</span>
-					{{-- <div class="linechart linechart-lg">1:3,2.8:4,3:3,4:3.4,5:7.5,6:2.3,7:5.4</div> --}}
+					<span class="title">{{ $fixture }}</span>
 				</div>
-				<div class="sparkline-row">
-					<span class="title">Partidos Ganados</span>
-					<span class="value"><i class="fa fa-usd"></i> 45,732</span>
-					{{-- <span class="sparkline big" data-color="blue">16,6,23,14,12,10,15,4,19,18,4,24</span> --}}
-				</div>
-				<div class="sparkline-row">
-					<span class="title">Partidos Perdidos</span>
-					<span class="value"><i class="fa fa-usd"></i> 25,674</span>
-					{{-- <span class="sparklinepie big">16,6,23</span> --}}
-				</div>
+				@endforeach
 			</div>
 		</div>
 		<!-- /BOX -->

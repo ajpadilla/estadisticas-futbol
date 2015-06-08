@@ -122,7 +122,8 @@ class GameController extends \BaseController {
 		$localAlignmentTable = $this->repository->getLocalAlignmentsTable($game->id);
 		$awayAlignmentTable = $this->repository->getAwayAlignmentsTable($game->id);
 		$scriptTableTemplate = 'partials._script-table-template';
-		return View::make('games.show', compact('game', 'goalsTable', 'changesTable', 'sanctionsTable', 'localAlignmentTable', 'awayAlignmentTable', 'scriptTableTemplate'));
+		$fixtures = $this->repository->getFixtures($id, true);
+		return View::make('games.show', compact('game', 'goalsTable', 'changesTable', 'sanctionsTable', 'fixtures', 'localAlignmentTable', 'awayAlignmentTable', 'scriptTableTemplate'));
 	}
 
 	/**
@@ -378,7 +379,7 @@ class GameController extends \BaseController {
 	public function getFixturesApi($id)
 	{
 		if(Request::ajax()) {
-			$fixtures = $this->repository->getFixtures($id);
+			$fixtures = $this->repository->getFixtures($id, true);
 			if($fixtures) {
 				$this->setSuccess(true);
 				$this->addToResponseArray('fixtures', $fixtures);
