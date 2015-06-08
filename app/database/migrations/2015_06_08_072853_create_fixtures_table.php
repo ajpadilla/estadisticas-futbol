@@ -16,7 +16,9 @@ class CreateFixturesTable extends Migration {
 		{
 			$table->increments('id');
 			$table->string('description', 256)->nullable();
-			$table->string('time', 6);
+			//$table->string('time', 6);
+			$table->smallInteger('minute')->default(0);
+			$table->smallInteger('second')->default(0);			
 			$table->integer('type_id')->unsigned();
 			$table->foreign('type_id')->references('id')->on('fixture_types')->onDelete('cascade');
 			$table->integer('game_id')->unsigned();
