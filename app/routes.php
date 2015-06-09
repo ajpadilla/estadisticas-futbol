@@ -185,6 +185,7 @@ Route::get('juegos/api-eliminar-cambio', array('as'=>'games.api.delete.change', 
 Route::get('juegos/api-ver', ['as'=>'games.api.show', 'uses'=>'GameController@showApi']);
 Route::post('juegos/api-actualizar',  ['as' => 'games.api.update','uses' => 'GameController@updateApi' ] );
 Route::get('juegos/api-fixture-list/{id}', array('as'=>'games.api.fixtures', 'uses'=>'GameController@getFixturesApi'));
+Route::post('juegos/api-registrar-estado-tiempo/{id}/{fixtureTypeId}', ['as'=>'games.api.register-time-status', 'uses'=>'GameController@registerTimeStatusApi']);
 
 /*
 ********************************* GAME TYPE ********************************
@@ -270,3 +271,8 @@ Route::get('formatos-competicia/api-lista', array('as'=>'competitionFormats.api.
 Route::get('formatos-competicia/api-eliminar', array('as'=>'competitionFormats.api.delete', 'uses'=>'CompetitionFormatController@destroyApi'));
 Route::get('formatos-competicia/api-ver', array('as'=>'competitionFormats.api.show', 'uses'=>'CompetitionFormatController@showApi'));
 Route::post('formatos-competicia/api-actualizar',  ['as' => 'competitionFormats.api.update','uses' => 'CompetitionFormatController@updateApi' ] );
+
+/*
+********************************* Fixture Types ********************************
+*/
+

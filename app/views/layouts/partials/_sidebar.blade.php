@@ -201,6 +201,7 @@
 		<a id="delete-change-game" href="{{ URL::route('games.api.delete.change') }}"></a>
 		<a id="data-game" href="{{ URL::route('games.api.show') }}"></a>
 		<a id="update-game" href="{{ URL::route('games.api.update') }}"></a>
+		<a id="register-time-status-game" href="{{ URL::route('games.api.register-time-status') }}"></a>
 		<!--Sanctions Types-->
 		<a id="list-of-sanction-types" href="{{ URL::route('sanction-types.api.select.list') }}"></a>
 		<a id="add-new-sanction-type" href="{{ URL::route('sanction-types.store') }}"></a>
