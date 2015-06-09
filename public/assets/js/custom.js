@@ -8857,10 +8857,10 @@ var handleBootboxAddEquipoToJugador = function () {
                 $.ajax({
                     type: 'POST',
                     url: url,
-                    data: {'minute': 0, 'second': 0},
+                    data: {},
                     dataType: "JSON",
                     success: function(response) {
-                        console.log(response);
+                        //console.log(response);
                         /*if (response.success == true) {
                         }else{
                             bootbox.dialog({
