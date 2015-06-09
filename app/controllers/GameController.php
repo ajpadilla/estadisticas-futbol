@@ -5,6 +5,8 @@ use soccer\Game\Goal\GoalRepository;
 use soccer\Game\Sanction\SanctionRepository;
 use soccer\Game\Alignment\AlignmentRepository;
 use soccer\Game\Change\ChangeRepository;
+use soccer\Game\Fixture\FixtureRepository;
+use soccer\Game\Fixture\FixtureTypeRepository;
 use soccer\Forms\RegisterGameForm;
 use soccer\Forms\RegisterGoalForm;
 use soccer\Forms\RegisterSanctionForm;
@@ -12,6 +14,7 @@ use soccer\Forms\RegisterChangeForm;
 use soccer\Forms\RegisterAlignmentForm;
 use soccer\Forms\EditGameForm;
 use soccer\Forms\AvailablePlayersForTeamForm;
+
 use Laracasts\Validation\FormValidationException;
 
 class GameController extends \BaseController {
@@ -28,6 +31,8 @@ class GameController extends \BaseController {
 	protected $registerAlignmentForm;
 	protected $alignmentRepository;
 	protected $editGameForm;
+	protected $fixtureRepository;
+	protected $fixtureTypeRepository;
 
 	public function __construct(GameRepository $repository,
 			RegisterGameForm $registerGameForm,
@@ -40,7 +45,9 @@ class GameController extends \BaseController {
 			ChangeRepository $changeRepository,
 			RegisterAlignmentForm $registerAlignmentForm,
 			AlignmentRepository $alignmentRepository,
-			EditGameForm $editGameForm){
+			EditGameForm $editGameForm,
+			FixtureRepository $fixtureRepository,
+			FixtureTypeRepository $fixtureTypeRepository){
 
 		$this->repository = $repository;
 		$this->registerGameForm = $registerGameForm;
@@ -54,6 +61,8 @@ class GameController extends \BaseController {
 		$this->registerAlignmentForm = $registerAlignmentForm;
 		$this->alignmentRepository = $alignmentRepository;
 		$this->editGameForm = $editGameForm;
+		$this->fixtureRepository = $fixtureRepository;
+		$this->fixtureTypeRepository = $fixtureTypeRepository;
 	}
 
 	/**
@@ -123,7 +132,8 @@ class GameController extends \BaseController {
 		$awayAlignmentTable = $this->repository->getAwayAlignmentsTable($game->id);
 		$scriptTableTemplate = 'partials._script-table-template';
 		$fixtures = $this->repository->getFixtures($id, true);
-		return View::make('games.show', compact('game', 'goalsTable', 'changesTable', 'sanctionsTable', 'fixtures', 'localAlignmentTable', 'awayAlignmentTable', 'scriptTableTemplate'));
+		$fixtureTypes = $this->fixtureTypeRepository->getAllForSelect();
+		return View::make('games.show', compact('game', 'goalsTable', 'changesTable', 'sanctionsTable', 'fixtures', 'localAlignmentTable', 'awayAlignmentTable', 'scriptTableTemplate','fixtureTypes'));
 	}
 
 	/**
@@ -387,5 +397,27 @@ class GameController extends \BaseController {
 		}
 		return $this->getResponseArrayJson();
 	}
+
+	public function registerTimeStatusApi($id, $fixtureTypeId)
+	 {
+	 	if(Request::ajax())
+		{
+			$input = Input::all();
+			$input['game_id'] = $id;
+			$input['type_id'] = $fixtureTypeId;
+			try
+			{
+				$fixture = $this->fixtureRepository->create($input);
+				$this->setSuccess(true);
+				$this->addToResponseArray('fixture', $fixture);
+				$this->addToResponseArray('data', $input);
+			}
+			catch (FormValidationException $e)
+			{
+				$this->addToResponseArray('errors', $e->getErrors()->all());
+			}
+		}
+		return $this->getResponseArrayJson();
+	 }
 
 }
