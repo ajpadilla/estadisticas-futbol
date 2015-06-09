@@ -70,6 +70,7 @@
 						</a>--}}
 					</div>
 				</div>
+				@if (!empty($fixtures))
 				<div class="box-body big sparkline-stats">
 					@foreach($fixtures as $fixture)
 					<div class="sparkline-row">
@@ -77,6 +78,7 @@
 					</div>
 					@endforeach
 				</div>
+				@endif 
 			</div>
 			<!-- /BOX -->
 			<!-- /SAMPLE -->
