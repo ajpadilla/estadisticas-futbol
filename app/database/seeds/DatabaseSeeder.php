@@ -40,6 +40,7 @@ class DatabaseSeeder extends Seeder {
 		$this->call('GoalTypesTableSeeder');
 		$this->call('SanctionsTypesTableSeeder');
 		$this->call('AlignmentsTypeTableSeeder');
+		$this->call('FixtureTypesTableSeeder');
 	}
 
 }

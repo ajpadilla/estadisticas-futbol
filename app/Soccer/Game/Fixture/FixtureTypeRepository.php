@@ -1,6 +1,6 @@
-<?php namespace soccer\Game\Sanction;
+<?php namespace soccer\Game\Fixture;
 
-use soccer\Game\Sanction\SanctionType;
+use soccer\Game\Fixture\FixtureType;
 use soccer\Base\BaseRepository;
 use Carbon\Carbon;
 use Datatable;
@@ -10,14 +10,14 @@ use Illuminate\Database\Eloquent\Collection;
 /**
 * 
 */
-class SanctionTypeRepository extends BaseRepository
+class FixtureTypeRepository extends BaseRepository
 {
 	
 	function __construct() {
 		$this->columns = ['Nombre', 'Acciones'];
 
-		$this->setModel(new SanctionType);
-		$this->setListAllRoute('sanction-types.api.list');
+		$this->setModel(new FixtureType);
+		$this->setListAllRoute('');
 	}
 
 /*
