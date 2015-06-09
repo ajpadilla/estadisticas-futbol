@@ -2,10 +2,13 @@
 
 	<!-- /PROFILE STATICS -->
 	<div class="row">
-		<button class="games pull-left btn btn-lg btn-primary" id="add-game" href="#" data-group-id="{{ $game->id }}">Inicia Partido</button>
+		{{--<button class="games pull-left btn btn-lg btn-primary" id="add-game" href="#" data-group-id="{{ $game->id }}">Inicia Partido</button>
 		<button class="games pull-left btn btn-lg btn-primary" id="add-game" href="#" data-group-id="{{ $game->id }}">Fin 1er Tiempo</button>
 		<button class="games pull-left btn btn-lg btn-primary" id="add-game" href="#" data-group-id="{{ $game->id }}">Inicia 2do Tiempo</button>
-		<button class="games pull-left btn btn-lg btn-primary" id="add-game" href="#" data-group-id="{{ $game->id }}">Fin Partido</button>
+		<button class="games pull-left btn btn-lg btn-primary" id="add-game" href="#" data-group-id="{{ $game->id }}">Fin Partido</button>--}}
+		@foreach ($fixtureTypes as $index => $fixtureType)
+		<input type="checkbox" data-game-id="{{ $game->id }}" name="fixture-type" value="{{$index}}">{{$fixtureType}}<br>
+		@endforeach 
 	</div>
 	<!-- PROFILE DETAILS -->
 	<div class="row">
