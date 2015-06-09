@@ -1,13 +1,12 @@
-<?php namespace soccer\Game\Sanction;
+<?php namespace soccer\Game\Fixture;
 
-use soccer\Game\Sanction\Sanction;
+use soccer\Game\Fixture\Fixture;
 use soccer\Base\BaseRepository;
-
 
 /**
 * 
 */
-class SanctionRepository extends BaseRepository
+class FixtureRepository extends BaseRepository
 {
 	function __construct() {
 		$this->columns = [
@@ -19,8 +18,8 @@ class SanctionRepository extends BaseRepository
 				'Acciones'
 		];
 
-		$this->setModel(new Sanction);
-		$this->setListAllRoute('fixtures.api.list');
+		$this->setModel(new Fixture);
+		$this->setListAllRoute('');
 	}
 
 	public function get($id)
