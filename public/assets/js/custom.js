@@ -8848,6 +8848,37 @@ var handleBootboxAddEquipoToJugador = function () {
     }
 
 
+    var checkFixtureTypeSelected = function () {
+        $('input[name="fixture-type"]').click(function() {
+            if ($('input[name="fixture-type"]').is(':checked')) {
+                var fixtureTypeId = $(this).val();
+                var gameId = $(this).attr('data-game-id');
+                var url = $('#register-time-status-game').attr('href').split('%')[0]+gameId+'/'+fixtureTypeId;
+                $.ajax({
+                    type: 'POST',
+                    url: url,
+                    data: {'minute': 0, 'second': 0},
+                    dataType: "JSON",
+                    success: function(response) {
+                        console.log(response);
+                        /*if (response.success == true) {
+                        }else{
+                            bootbox.dialog({
+                                message: response.errors,
+                                title: "Error",
+                                buttons: {
+                                    danger: {
+                                        label: "Ok!",
+                                        className: "btn-danger"
+                                    }
+                                }
+                            });
+                        }*/
+                    }
+                });
+            }
+        });
+    }
 
 
     var loadFieldSelectPositionsPlayer = function(url, idField,index) {
@@ -9025,6 +9056,8 @@ var handleBootboxAddEquipoToJugador = function () {
 
             loadFilter();
             loadTypeComptetitionInfo();
+
+            checkFixtureTypeSelected();
             
             //checkIfGameExist();
         }
