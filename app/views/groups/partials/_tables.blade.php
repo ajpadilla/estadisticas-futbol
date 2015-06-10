@@ -43,7 +43,7 @@
 															<button class="edit-group pull-right btn btn-lg btn-primary" id="edit-group" href="{{ URL::route('groups.api.update', $group->id) }}" data-group-id="{{ $group->id }}">Editar Grupo</button>
 															<button class="delete-group pull-right btn btn-lg btn-primary" id="delete-group" href="{{ URL::route('groups.api.delete', $group->id) }}" data-group-id="{{ $group->id }}">Eliminar Grupo</button>	
 															@if (!$group->isFullGames)
-																<button class="games pull-right btn btn-lg btn-primary" id="add-game" href="#" data-group-id="{{ $group->id }}">Agregar partido</button>
+																<button class="games pull-right btn btn-lg btn-primary" id="add-game" href="#" data-refresh="1" data-group-id="{{ $group->id }}">Agregar partido</button>
 															@endif
 															@if (!$group->isFull)
 																<button class="teams pull-right btn btn-lg btn-primary" id="add-team" href="{{ URL::route('groups.api.add.team') }}" competition-id="{{ $competition->id }}" data-group-id="{{ $group->id }}" data-phase-id="{{ $phase->id }}">Agregar equipo</button>

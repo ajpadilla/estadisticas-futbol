@@ -66,6 +66,7 @@ class PlayerRepository extends BaseRepository
 
 	public function getClubes($id)
 	{
+		//return $this->get($id)->equipos()->whereTipo('club')->get();
 		return $this->get($id)->equipos()->clubes()->get();
 	}
 
@@ -92,7 +93,7 @@ class PlayerRepository extends BaseRepository
 		{
 			$this->cleanActionColumn();
 			$this->addActionColumn("<a class='show-player' href='" . route('players.show', $model->id) . "' id='ver_jugador'>Ver</a><br />");
-			$this->addActionColumn("<a  class='edit-player' href='#new-player-form' id='edit_player_".$model->id."'>Editar</a><br />");
+			//$this->addActionColumn("<a  class='edit-player' href='#new-player-form' id='edit_player_".$model->id."'>Editar</a><br />");
 			$this->addActionColumn("<a class='delete-player' href='#' id='delete_player_".$model->id."'>Eliminar</a>");
 			return implode(" ", $this->getActionColumn());
 		});
@@ -190,8 +191,8 @@ class PlayerRepository extends BaseRepository
 		{
 			$equipoRepository->cleanActionColumn();
 			$equipoRepository->addActionColumn("<a class='ver-equipo' href='" . route('equipos.show', $model->id) . "' id='ver_".$model->id."'>Ver</a><br />");
-			$equipoRepository->addActionColumn("<a  class='editar-equipo' href='#new-equipo-form' id='editar_".$model->id."'>Sacar</a><br />");
-			$equipoRepository->addActionColumn("<a  class='editar-equipo' href='#new-equipo-form' id='estadisticas_".$model->id."'>Estadísticas</a><br />");
+			//$equipoRepository->addActionColumn("<a  class='editar-equipo' href='#new-equipo-form' id='editar_".$model->id."'>Sacar</a><br />");
+			//$equipoRepository->addActionColumn("<a  class='editar-equipo' href='#new-equipo-form' id='estadisticas_".$model->id."'>Estadísticas</a><br />");
 			//$equipoRepository->addActionColumn("<a class='eliminar-jugador' href='" . route('equipos.api.eliminar', $model->id) . "' id='eliminar-jugador'>Eliminar</a><br />");
 			//$equipoRepository->addActionColumn("<a class='cambiar-equipo' href='" . route('equipos.api.cambiar-equipo', $model->id) . "' id='eliminar-jugador'>Cambiar</a>");
 			return implode(" ", $equipoRepository->getActionColumn());

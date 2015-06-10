@@ -97,7 +97,7 @@ var CustomApp = function () {
             rules:{
                 nombre:{
                     required:true,
-                    rangelength: [2, 128],
+                    rangelength: [1, 128],
                     //onlyLettersNumbersAndSpaces: true
                 },
                 fecha_nacimiento:{
@@ -113,7 +113,7 @@ var CustomApp = function () {
                     number: true
                 },
                 apodo:{
-                    rangelength: [2, 128],
+                    rangelength: [1, 128],
                 },
                 posicion_id:{
                     required:true,
@@ -137,10 +137,10 @@ var CustomApp = function () {
             messages:{
                 nombre:{
                     required:'Este campo es obligatorio.',
-                    rangelength: 'Por favor ingrese entre [2, 128] caracteres',
+                    rangelength: 'Por favor ingrese entre [1, 128] caracteres',
                 },
                 lugar_nacimiento:{
-                    rangelength: 'Por favor ingrese entre [2, 128] caracteres',
+                    rangelength: 'Por favor ingrese entre [1, 128] caracteres',
                 },
                 altura:{
                     number: 'Ingrese un valor numerico'
@@ -149,7 +149,7 @@ var CustomApp = function () {
                     number: 'Ingrese un valor numerico'
                 },
                 apodo:{
-                    rangelength: 'Por favor ingrese entre [2, 128] caracteres',
+                    rangelength: 'Por favor ingrese entre [1, 128] caracteres',
                 },
                 posicion_id:{
                     required:'Este campo es obligatorio.',
@@ -161,7 +161,7 @@ var CustomApp = function () {
                      url: 'Por favor ingrese una url valida'
                 },
                 historia:{
-                    rangelength: 'Por favor ingrese entre [2, 128] caracteres',
+                    rangelength: 'Por favor ingrese entre [1, 128] caracteres',
                 },
                 facebook_url:{
                      url: 'Por favor ingrese una url valida'
@@ -348,7 +348,7 @@ var CustomApp = function () {
             rules:{
                 nombre:{
                     required:true,
-                    rangelength: [2, 128],
+                    rangelength: [1, 128],
                     onlyLettersNumbersAndSpaces: true
                 },
                 fecha_nacimiento:{
@@ -365,7 +365,7 @@ var CustomApp = function () {
                 },
                 apodo:{
                     required:true,
-                    rangelength: [2, 128],
+                    rangelength: [1, 128],
                     onlyLettersNumbersAndSpaces: true
                 },
                 posicion_id:{
@@ -392,7 +392,7 @@ var CustomApp = function () {
             messages:{
                 nombre:{
                     required:'Este campo es obligatorio.',
-                    rangelength: 'Por favor ingrese entre [2, 128] caracteres',
+                    rangelength: 'Por favor ingrese entre [1, 128] caracteres',
                     onlyLettersNumbersAndSpaces: true
                 },
                 fecha_nacimiento:{
@@ -406,7 +406,7 @@ var CustomApp = function () {
                 },
                 apodo:{
                     required:'Este campo es obligatorio.',
-                    rangelength: 'Por favor ingrese entre [2, 128] caracteres',
+                    rangelength: 'Por favor ingrese entre [1, 128] caracteres',
                 },
                 posicion_id:{
                     required:'Este campo es obligatorio.',
@@ -1119,12 +1119,12 @@ var CustomApp = function () {
             rules:{
                 nombre:{
                     required:true,
-                    rangelength: [2, 128],
+                    rangelength: [1, 128],
                     onlyLettersNumbersAndSpaces: true
                 },
                  bandera:{
                     required:true,
-                    rangelength: [2, 128],
+                    rangelength: [1, 128],
                     onlyLettersNumbersAndSpaces: true
                 }
             },
@@ -1351,12 +1351,12 @@ var CustomApp = function () {
             rules:{
                 nombre:{
                     required:true,
-                    rangelength: [2, 128],
+                    rangelength: [1, 128],
                     onlyLettersNumbersAndSpaces: true
                 },
                  bandera:{
                     required:true,
-                    rangelength: [2, 128],
+                    rangelength: [1, 128],
                     onlyLettersNumbersAndSpaces: true
                 }
             },
@@ -1577,7 +1577,7 @@ var CustomApp = function () {
               rules:{
                 nombre:{
                     required:true,
-                    rangelength : [2,128]
+                    rangelength : [1,128]
                 },
                 abreviacion:{
                     required:true,
@@ -1587,7 +1587,7 @@ var CustomApp = function () {
             messages:{
                 nombre:{
                     required: 'Este campo es obligatorio',
-                    rangelength: 'Por favor ingrese entre [2, 128] caracteres',
+                    rangelength: 'Por favor ingrese entre [1, 128] caracteres',
                 },
                 abreviacion:{
                     required: 'Este campo es obligatorio',
@@ -1623,7 +1623,7 @@ var CustomApp = function () {
                                     sPaginationType: "full_numbers"
                                 });*/
 
-                                //reloadDatatable();
+                                reloadDatatable();
 
                                 //ajax para el envío del formulario.
                                 if($('#position-form').valid()) {
@@ -1761,7 +1761,7 @@ var CustomApp = function () {
            rules:{
                 nombre:{
                     required:true,
-                    rangelength : [2,128]
+                    rangelength : [1,128]
                 },
                 abreviacion:{
                     required:true,
@@ -1771,7 +1771,7 @@ var CustomApp = function () {
             messages:{
                 nombre:{
                     required: 'Este campo es obligatorio',
-                    rangelength: 'Por favor ingrese entre [2, 128] caracteres',
+                    rangelength: 'Por favor ingrese entre [1, 128] caracteres',
                 },
                 abreviacion:{
                     required: 'Este campo es obligatorio',
@@ -2245,6 +2245,7 @@ var handleBootboxAddEquipoToJugador = function () {
                                                     });
                                                     //Reinicio el formulario
                                                     //updatePlayerForm();
+                                                    reloadDatatable();
                                                 }else{
                                                      bootbox.dialog({
                                                         message: response.errors,
@@ -2323,7 +2324,7 @@ var handleBootboxAddEquipoToJugador = function () {
               rules:{
                 nombre:{
                     required: true,
-                    rangelength : [2,128]
+                    rangelength : [1,128]
                 },
                 grupos:{
                     digits: true,
@@ -2359,7 +2360,7 @@ var handleBootboxAddEquipoToJugador = function () {
             messages:{
                 nombre:{
                     required: 'Este campo es obligatorio',
-                    rangelength: 'Por favor ingrese entre [2, 128] caracteres',
+                    rangelength: 'Por favor ingrese entre [1, 128] caracteres',
                 },
                 grupos:{
                     digits: 'Por vafor ingrese un valor entero',
@@ -2556,7 +2557,7 @@ var handleBootboxAddEquipoToJugador = function () {
            rules:{
                 nombre:{
                     required: true,
-                    rangelength : [2,128]
+                    rangelength : [1,128]
                 },
                 grupos:{
                     digits: true,
@@ -2590,7 +2591,7 @@ var handleBootboxAddEquipoToJugador = function () {
             messages:{
                 nombre:{
                     required: 'Este campo es obligatorio',
-                    rangelength: 'Por favor ingrese entre [2, 128] caracteres',
+                    rangelength: 'Por favor ingrese entre [1, 128] caracteres',
                 },
                 grupos:{
                     digits: 'Por vafor ingrese un valor entero',
@@ -2812,7 +2813,7 @@ var handleBootboxAddEquipoToJugador = function () {
               rules:{
                 nombre:{
                     required: true,
-                    rangelength : [2,128]
+                    rangelength : [1,128]
                 },
                 desde:{
                     required:true,
@@ -2829,7 +2830,7 @@ var handleBootboxAddEquipoToJugador = function () {
             messages:{
                 nombre:{
                     required: 'Este campo es obligatorio',
-                    rangelength: 'Por favor ingrese entre [2, 128] caracteres',
+                    rangelength: 'Por favor ingrese entre [1, 128] caracteres',
                 },
                 desde:{
                     required: 'Este campo es obligatorio',
@@ -3148,7 +3149,7 @@ var handleBootboxAddEquipoToJugador = function () {
     }    
 
     var reloadDatatable = function (table) {
-        var table = typeof table !== 'undefined' ? table : 'datatable';
+        var table = typeof table !== 'undefined' ? table : '#datatable';
         if($(table).length) {
             var table = $(table).DataTable();
             table.search('').draw();
@@ -3407,7 +3408,7 @@ var handleBootboxAddEquipoToJugador = function () {
                 rules:{
                     name:{
                         required:true,
-                        rangelength: [2, 128],
+                        rangelength: [1, 128],
                     },
                     'teams_ids[]':{
                         required: true
@@ -3416,7 +3417,7 @@ var handleBootboxAddEquipoToJugador = function () {
                 messages:{
                     nombre:{
                         required:'Este campo es obligatorio.',
-                        rangelength: 'Por favor ingrese entre [2, 128] caracteres',
+                        rangelength: 'Por favor ingrese entre [1, 128] caracteres',
                     },
                     'teams_ids[]':{
                         required:'Este campo es obligatorio.',
@@ -3650,7 +3651,7 @@ var handleBootboxAddEquipoToJugador = function () {
                 messages:{
                     nombre:{
                         required:'Este campo es obligatorio.',
-                        rangelength: 'Por favor ingrese entre [2, 128] caracteres',
+                        rangelength: 'Por favor ingrese entre [1, 128] caracteres',
                     }
                 },
                 highlight:function(element){
@@ -4141,7 +4142,10 @@ var handleBootboxAddEquipoToJugador = function () {
                                                                     label: "Success!",
                                                                     className: "btn-success",
                                                                     callback: function () {
-                                                                        //reloadDatatable('#datatable-' + $('button#add-game').attr('data-group-id'));
+                                                                        if($(this).attr('data-refresh'))
+                                                                            location.reload();
+                                                                        else
+                                                                            reloadDatatable('#datatable-' + $('button#add-game').attr('data-group-id'));
                                                                     }
                                                                 }
                                                             }
@@ -4342,7 +4346,7 @@ var handleBootboxAddEquipoToJugador = function () {
                                                                     className: "btn-success",
                                                                     callback: function () {
                                                                         location.reload();
-                                                                        //reloadDatatable('#datatable-' + $('button#add-game').attr('data-group-id'));
+                                                                        reloadDatatable('#datatable-' + $('button#add-game').attr('data-group-id'));
                                                                     }
                                                                 }
                                                             }
@@ -6992,7 +6996,7 @@ var handleBootboxAddEquipoToJugador = function () {
             rules:{
                 name:{
                     required: true,
-                    rangelength : [2,128]
+                    rangelength : [1,128]
                 },
                 groups:{
                     digits: true,
@@ -7027,7 +7031,7 @@ var handleBootboxAddEquipoToJugador = function () {
             messages:{
                 name:{
                     required: 'Este campo es obligatorio',
-                    rangelength: 'Por favor ingrese entre [2, 128] caracteres',
+                    rangelength: 'Por favor ingrese entre [1, 128] caracteres',
                 },
                 groups:{
                     digits: 'Por vafor ingrese un valor entero',
@@ -7233,7 +7237,7 @@ var handleBootboxAddEquipoToJugador = function () {
             rules:{
                 name:{
                     required: true,
-                    rangelength : [2,128]
+                    rangelength : [1,128]
                 },
                 groups:{
                     digits: true,
@@ -7268,7 +7272,7 @@ var handleBootboxAddEquipoToJugador = function () {
             messages:{
                 name:{
                     required: 'Este campo es obligatorio',
-                    rangelength: 'Por favor ingrese entre [2, 128] caracteres',
+                    rangelength: 'Por favor ingrese entre [1, 128] caracteres',
                 },
                 groups:{
                     digits: 'Por vafor ingrese un valor entero',
@@ -7752,13 +7756,13 @@ var handleBootboxAddEquipoToJugador = function () {
             rules:{
                 name:{
                     required: true,
-                    rangelength : [2,128]
+                    rangelength : [1,128]
                 }
             },
             messages:{
                 name:{
                     required: 'Este campo es obligatorio',
-                    rangelength: 'Por favor ingrese entre [2, 128] caracteres',
+                    rangelength: 'Por favor ingrese entre [1, 128] caracteres',
                 }
             },
             highlight:function(element){
@@ -7904,13 +7908,13 @@ var handleBootboxAddEquipoToJugador = function () {
             rules:{
                 name:{
                     required: true,
-                    rangelength : [2,128]
+                    rangelength : [1,128]
                 }
             },
             messages:{
                 name:{
                     required: 'Este campo es obligatorio',
-                    rangelength: 'Por favor ingrese entre [2, 128] caracteres',
+                    rangelength: 'Por favor ingrese entre [1, 128] caracteres',
                 }
             },
             highlight:function(element){
@@ -8128,13 +8132,13 @@ var handleBootboxAddEquipoToJugador = function () {
                 rules:{
                     name:{
                         required: true,
-                        rangelength : [2,128]
+                        rangelength : [1,128]
                     }
                 },
                 messages:{
                     name:{
                         required: 'Este campo es obligatorio',
-                        rangelength: 'Por favor ingrese entre [2, 128] caracteres',
+                        rangelength: 'Por favor ingrese entre [1, 128] caracteres',
                     }
                 },
                 highlight:function(element){
@@ -8267,13 +8271,13 @@ var handleBootboxAddEquipoToJugador = function () {
             rules:{
                 name:{
                     required: true,
-                    rangelength : [2,128]
+                    rangelength : [1,128]
                 }
             },
             messages:{
                 name:{
                     required: 'Este campo es obligatorio',
-                    rangelength: 'Por favor ingrese entre [2, 128] caracteres',
+                    rangelength: 'Por favor ingrese entre [1, 128] caracteres',
                 }
             },
             highlight:function(element){
@@ -8490,13 +8494,13 @@ var handleBootboxAddEquipoToJugador = function () {
                 rules:{
                     name:{
                         required: true,
-                        rangelength : [2,128]
+                        rangelength : [1,128]
                     }
                 },
                 messages:{
                     name:{
                         required: 'Este campo es obligatorio',
-                        rangelength: 'Por favor ingrese entre [2, 128] caracteres',
+                        rangelength: 'Por favor ingrese entre [1, 128] caracteres',
                     }
                 },
                 highlight:function(element){
@@ -8631,13 +8635,13 @@ var handleBootboxAddEquipoToJugador = function () {
             rules:{
                 name:{
                     required: true,
-                    rangelength : [2,128]
+                    rangelength : [1,128]
                 }
             },
             messages:{
                 name:{
                     required: 'Este campo es obligatorio',
-                    rangelength: 'Por favor ingrese entre [2, 128] caracteres',
+                    rangelength: 'Por favor ingrese entre [1, 128] caracteres',
                 }
             },
             highlight:function(element){

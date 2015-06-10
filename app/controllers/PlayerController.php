@@ -248,6 +248,11 @@ class PlayerController extends \BaseController {
 		return $this->getResponseArrayJson();
 	}
 
+	public function existApi()
+	{
+		return false;
+	}
+
 	public function getAllValue()
 	{
 		if(Request::ajax())

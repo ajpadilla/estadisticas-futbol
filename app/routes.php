@@ -69,7 +69,7 @@ Route::get('equipos/api-ver',  ['as' => 'equipos.api.show','uses' => 'EquipoCont
 Route::get('equipos/api-seleccionar-lista',  ['as' => 'equipos.api.select.list','uses' => 'EquipoController@getAllValue' ] );
 Route::get('equipos/api-verificar-jugador',  ['as' => 'equipos.api.verificar-jugador','uses' => 'EquipoController@confirmExistsPlayerTeam' ] );
 Route::post('equipos/api-existe-numero',  ['as' => 'equipos.api.existe.numero','uses' => 'EquipoController@existeNumeroApi' ] );
-Route::post('equipos/api-existe',  ['as' => 'equipos.api.existe','uses' => 'EquipoController@existeApi'] );
+Route::post('equipos/api-existe',  ['as' => 'equipos.api.existe','uses' => 'EquipoController@existApi'] );
 Route::post('equipos/api-add-jugador',  ['as' => 'equipos.api.add.jugador','uses' => 'EquipoController@addJugadorApi' ] );
 
 /*

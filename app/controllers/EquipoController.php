@@ -226,6 +226,11 @@ class EquipoController extends \BaseController {
 		return false;
 	}
 
+	public function existsApi()
+	{
+		return false;
+	}
+
 	public function addJugadorApi()
 	{
 		if(Request::ajax()) {

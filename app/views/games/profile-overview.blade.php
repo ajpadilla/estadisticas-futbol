@@ -58,7 +58,7 @@
 				<div class="box-title">
 					<h4><i class="fa fa-bars"></i>Timeline del partido</h4>
 					<div class="tools">
-						<a href="javascript:;" class="reload">
+						{{-- <a href="javascript:;" class="reload">
 							<i class="fa fa-refresh"></i>
 						</a>
 						{{--
