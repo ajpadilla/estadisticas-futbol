@@ -4130,7 +4130,6 @@ var handleBootboxAddEquipoToJugador = function () {
                                                 cache: false,
                                                 dataType: "JSON",
                                                 success: function(responseServer) {
-                                                    console.log(responseServer);
                                                     if(responseServer.success) 
                                                     {
                                                         // Muestro otro dialog con información de éxito
@@ -4142,7 +4141,7 @@ var handleBootboxAddEquipoToJugador = function () {
                                                                     label: "Success!",
                                                                     className: "btn-success",
                                                                     callback: function () {
-                                                                        if($(this).attr('data-refresh'))
+                                                                        if($(this).attr('data-refresh') == 1)
                                                                             location.reload();
                                                                         else
                                                                             reloadDatatable('#datatable-' + $('button#add-game').attr('data-group-id'));
