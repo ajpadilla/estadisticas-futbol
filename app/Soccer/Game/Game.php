@@ -63,6 +63,11 @@ class Game extends Eloquent {
         return $this->hasMany('soccer\Game\Alignment\Alignment');
     }    
 
+    public function fixtures()
+    {
+        return $this->hasMany('soccer\Game\Fixture\Fixture');
+    }     
+
     /*
     ********************* Custom Methods ***********************
     */ 

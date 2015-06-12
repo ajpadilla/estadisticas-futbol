@@ -27,6 +27,60 @@ class FixtureRepository extends BaseRepository
 		return $this->model->with('team','player','type')->findOrFail($id);
 	}	
 
+	public function saveTimeStatus($id, $fixtureTypeId)
+	{
+		$fixture = $this->getModel();
+		$fixture->type_id = $fixtureTypeId;
+		$fixture->game_id = $id;
+
+		$minute = 0;
+		$second = 0;
+		switch ($fixtureTypeId) {
+			case 2:	
+				$minute = 45;
+				$second = 0;
+			break;
+			case 3:	
+				$minute = 45;
+				$second = 1;
+			break;			
+			case 4:	
+				$minute = 90;
+				$second = 0;
+			break;			
+			case 5:	
+				$minute = 90;
+				$second = 1;
+			break;	
+			case 6:	
+				$minute = 105;
+				$second = 0;
+			break;	
+			case 7:	
+				$minute = 105;
+				$second = 1;
+			break;			
+			case 8:	
+				$minute = 120;
+				$second = 0;
+			break;
+			case 9:	
+				$minute = 120;
+				$second = 0;
+			break;		
+			case 10:	
+				$minute = 120;
+				$second = 0;
+			break;												
+		}
+
+		$fixture->minute = $minute;
+		$fixture->second = $second;
+		$fixture->save();
+
+		return $fixture;
+	}
+
 	/*
 	*********************** DATATABLE SETTINGS ******************************
 	*/			

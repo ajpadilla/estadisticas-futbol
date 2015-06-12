@@ -5,14 +5,39 @@
 		{{--<button class="games pull-left btn btn-lg btn-primary" id="add-game" href="#" data-group-id="{{ $game->id }}">Inicia Partido</button>
 		<button class="games pull-left btn btn-lg btn-primary" id="add-game" href="#" data-group-id="{{ $game->id }}">Fin 1er Tiempo</button>
 		<button class="games pull-left btn btn-lg btn-primary" id="add-game" href="#" data-group-id="{{ $game->id }}">Inicia 2do Tiempo</button>
-		<button class="games pull-left btn btn-lg btn-primary" id="add-game" href="#" data-group-id="{{ $game->id }}">Fin Partido</button>--}}
-		@foreach ($fixtureTypes as $index => $fixtureType)
-		<input type="checkbox" data-game-id="{{ $game->id }}" name="fixture-type" value="{{$index}}">{{$fixtureType}}<br>
-		@endforeach 
+		<button class="games pull-left btn btn-lg btn-primary" id="add-game" href="#" data-group-id="{{ $game->id }}">Fin Partido</button>--}}		
+		<div class="col-md-offset-1 col-md-10">
+			<div class="box-border-inverse">
+				<div class="box-title">
+					<h4>Control de tiempo</h4>
+				</div>
+				<div class="box-body">
+					<table class="table">
+						<thead>
+							<tr>
+								@foreach ($fixtureTypes as $index => $fixtureType)
+									<th>{{ $fixtureType }}</th>
+								@endforeach
+							</tr>
+						</thead>
+						<tbody>
+							<tr>
+								@foreach ($fixtureTypes as $index => $fixtureType)
+									<td>
+										<input type="checkbox" data-game-id="{{ $game->id }}" name="fixture-type" value="{{ $index }}">
+									</td>
+								@endforeach
+							</tr>
+						</tbody>
+					</table>
+				</div>
+			</div>
+		</div>
 	</div>
 	<!-- PROFILE DETAILS -->
 	<div class="row">
-		<div class="col-md-8">
+		<div class="col-md-1"></div>			
+		<div class="col-md-7">
 			<div class="row">
 				<!-- PROFILE DETAILS -->
 				<div class="col-md-12">
@@ -52,7 +77,7 @@
 		</div>
 
 		<!-- PROFILE STATICS -->
-		<div class="col-md-4">
+		<div class="col-md-3">
 			<!-- BOX -->
 			<div class="box border inverse">
 				<div class="box-title">
@@ -61,7 +86,6 @@
 						{{-- <a href="javascript:;" class="reload">
 							<i class="fa fa-refresh"></i>
 						</a>
-						{{--
 						<a href="#box-config" data-toggle="modal" class="config">
 							<i class="fa fa-cog"></i>
 						</a>
@@ -70,7 +94,7 @@
 						</a>
 						<a href="javascript:;" class="remove">
 							<i class="fa fa-times"></i>
-						</a>--}}
+						</a> --}}
 					</div>
 				</div>
 				@if (!empty($fixtures))
@@ -86,6 +110,7 @@
 			<!-- /BOX -->
 			<!-- /SAMPLE -->
 		</div>		
+	
 	</div>
 	<!-- /PROFILE DETAILS -->
 </div>

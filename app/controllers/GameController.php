@@ -407,7 +407,7 @@ class GameController extends \BaseController {
 			$input['type_id'] = $fixtureTypeId;
 			try
 			{
-				$fixture = $this->fixtureRepository->create($input);
+				$fixture = $this->fixtureRepository->saveTimeStatus($id, $fixtureTypeId);
 				$this->setSuccess(true);
 				$this->addToResponseArray('fixture', $fixture);
 				$this->addToResponseArray('data', $input);

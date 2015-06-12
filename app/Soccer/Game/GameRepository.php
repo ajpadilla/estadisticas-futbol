@@ -77,20 +77,28 @@ class GameRepository extends BaseRepository
 		$changes = $game->changes;
 		$sanctions = $game->sanctions;
 		$goals = $game->goals;
+		$fixtures = $game->fixtures;
 
-		$fixtures = new Collection;
+		$fixturesCollection = new Collection;
 
 		$orderFixtures = array();
 
-		foreach ($changes as $change) 
-			$orderFixtures[] = array('id' => $change->id, 'time' => $change->time, 'type' => 'change');
+		if($changes)
+			foreach ($changes as $change) 
+				$orderFixtures[] = array('id' => $change->id, 'time' => $change->time, 'type' => 'change');
 
-		foreach ($sanctions as $sanction) 
-			$orderFixtures[] = array('id' => $sanction->id, 'time' => $sanction->time, 'type' => 'sanction');
+		if($sanctions)
+			foreach ($sanctions as $sanction) 
+				$orderFixtures[] = array('id' => $sanction->id, 'time' => $sanction->time, 'type' => 'sanction');
 
-		foreach ($goals as $goal) 
-			$orderFixtures[] = array('id' => $goal->id, 'time' => $goal->time, 'type' => 'goal');	
-			
+		if($goals)
+			foreach ($goals as $goal) 
+				$orderFixtures[] = array('id' => $goal->id, 'time' => $goal->time, 'type' => 'goal');	
+
+		if($fixtures)
+			foreach ($fixtures as $fixture) 
+				$orderFixtures[] = array('id' => $fixture->id, 'time' => $fixture->time, 'type' => 'status');
+
 		usort($orderFixtures, function($a, $b) {
 			return $a['time'] >= $b['time'];
 		});
@@ -103,7 +111,7 @@ class GameRepository extends BaseRepository
 							if ($change->id == $fixture['id']) return true;
 						})->first();
 						$change = '(' . $change->time . ') entra (' . $change->player_in->nombre . ') sale (' . $change->player_out->nombre. ')';
-						$fixtures->add($change);
+						$fixturesCollection->add($change);
 					break;
 
 					case 'sanction':
@@ -111,7 +119,7 @@ class GameRepository extends BaseRepository
 							if ($sanction->id == $fixture['id']) return true;
 						})->first();
 						$sanction = '(' . $sanction->time . ') ' . $sanction->player->nombre . ', es sancionado  (' . $sanction->type->name. ')';
-						$fixtures->add($sanction);
+						$fixturesCollection->add($sanction);
 					break;
 					
 					case 'goal':
@@ -119,33 +127,47 @@ class GameRepository extends BaseRepository
 							if ($goal->id == $fixture['id']) return true;
 						})->first();
 						$goal = '(' . $goal->time . ') ' . $goal->player->nombre . ', ha marcado un gol  (' . $goal->type->name. ')';
-						$fixtures->add($goal);
+						$fixturesCollection->add($goal);
 					break;
+
+					case 'status':
+						$fixtureObj = $fixtures->filter(function($fixtureObj) use ($fixture) {
+							if ($fixtureObj->id == $fixture['id']) return true;
+						})->first();
+						$fixtureObj = '(' . $fixtureObj->time . ') ' . $fixtureObj->type->name;
+						$fixturesCollection->add($fixtureObj);
+					break;					
 				}
 			} else {
 		 		switch ($fixture['type']) {
 					case 'change':
-						$fixtures->add($changes->filter(function($change) use ($fixture) {
+						$fixturesCollection->add($changes->filter(function($change) use ($fixture) {
 							if ($change->id == $fixture['id']) return true;
 						})->first());
 					break;
 
 					case 'sanction':
-						$fixtures->add($sanctions->filter(function($sanction) use ($fixture) {
+						$fixturesCollection->add($sanctions->filter(function($sanction) use ($fixture) {
 							if ($sanction->id == $fixture['id']) return true;
 						})->first());
 					break;
 					
 					case 'goal':
-						$fixtures->add($goals->filter(function($goal) use ($fixture) {
+						$fixturesCollection->add($goals->filter(function($goal) use ($fixture) {
 							if ($goal->id == $fixture['id']) return true;
 						})->first());
 					break;
+
+					case 'fixture':
+						$fixturesCollection->add($fixtures->filter(function($fixtureObj) use ($fixture) {
+							if ($fixtureObj->id == $fixture['id']) return true;
+						})->first());
+					break;					
 				}	
 			}		
 		}
 
-		return ($fixtures->isEmpty() ? false : $fixtures);
+		return ($fixturesCollection->isEmpty() ? false : $fixturesCollection);
 	}
 	/*
 	*********************** DATATABLE SETTINGS ******************************
