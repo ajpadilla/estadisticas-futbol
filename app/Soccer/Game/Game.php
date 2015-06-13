@@ -112,7 +112,7 @@ class Game extends Eloquent {
 
     public function getStatusAttribute()
     {
-        $fixtures = $this->fixtures()->orderBy('id', 'ASC')->lists('id');
+        $fixtures = $this->fixtures()->orderBy('id', 'ASC')->lists('type_id');
         $status = 'Pendiente';
         if($fixtures) {
             if(in_array(11, $fixtures))
@@ -150,7 +150,7 @@ class Game extends Eloquent {
 
     public function getFinishedAttribute()
     {
-        return $this->fixtures()->whereId(11)->count();
+        return $this->fixtures()->whereTypeId(11)->count();
         // return $this->date->diffInMinutes(Carbon::now()->addMinutes(120)) > 0;
     }  
 }

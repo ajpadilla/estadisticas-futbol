@@ -25,11 +25,11 @@ class FixtureTypeRepository extends BaseRepository
 	{
 		$gameRepository = new GameRepository;
 		$game = $gameRepository->get($gameId);
-		$fixtureTypes = $this->getAllForSelect();
+		$fixtureTypes = $this->getAllForSelect();		
 		if($game) {			
 			foreach ($fixtureTypes as $typeId => $type) {
-				$check = (boolean)$game->fixtures->filter(function($fixture) use ($typeId) 			{
-									if ($fixture->id == $typeId) return true;
+				$check = (boolean)$game->fixtures->filter(function($fixture) use ($typeId) {
+									if ($fixture->type_id == $typeId) return true;
 								})->count();
 				$type = array('type' => $type);
 				if($check)

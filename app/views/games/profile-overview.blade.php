@@ -2,12 +2,9 @@
 
 	<!-- /PROFILE STATICS -->
 	<div class="row">
-		{{--<button class="games pull-left btn btn-lg btn-primary" id="add-game" href="#" data-group-id="{{ $game->id }}">Inicia Partido</button>
-		<button class="games pull-left btn btn-lg btn-primary" id="add-game" href="#" data-group-id="{{ $game->id }}">Fin 1er Tiempo</button>
-		<button class="games pull-left btn btn-lg btn-primary" id="add-game" href="#" data-group-id="{{ $game->id }}">Inicia 2do Tiempo</button>
-		<button class="games pull-left btn btn-lg btn-primary" id="add-game" href="#" data-group-id="{{ $game->id }}">Fin Partido</button>--}}		
 		<div class="col-md-offset-1 col-md-10">
-			<div class="box-border-inverse">
+			:disabled
+			<div class="box-border-inverse"> 
 				<div class="box-title">
 					<h4>Control de tiempo</h4>
 				</div>
@@ -24,7 +21,7 @@
 							<tr>
 								@foreach ($fixtureTypes as $typeId => $type)
 									<td>
-										{{ Form::checkbox('fixture-type', $typeId, isset($type['check']), ['data-game-id' => $game->id, (isset($type['check']) ? 'disabled' : null)]) }}
+										{{ Form::checkbox('fixture-type', $typeId, isset($type['check']), ['data-game-id' => $game->id, ((isset($type['check']) OR $game->finished) ? 'disabled' : null)]) }}
 									</td>
 								@endforeach
 							</tr>
@@ -98,17 +95,17 @@
 					</div>
 				</div>
 				@if (!empty($fixtures))
-				<div class="box-body big sparkline-stats">
-					<div class="sparkline-row">					
-						<ul>
-						@foreach($fixtures as $fixture)
-							<li>
-								<span class="title">{{ $fixture }}</span>
-							</li>
-						@endforeach
-						</ul>
+					<div class="box-body big sparkline-stats">
+						<div class="sparkline-row">					
+							<ul>
+							@foreach($fixtures as $fixture)
+								<li>
+									<span class="title">{{ $fixture }}</span>
+								</li>
+							@endforeach
+							</ul>
+						</div>
 					</div>
-				</div>
 				@endif 
 			</div>
 			<!-- /BOX -->
