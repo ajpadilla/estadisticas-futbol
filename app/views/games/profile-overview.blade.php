@@ -15,16 +15,16 @@
 					<table class="table">
 						<thead>
 							<tr>
-								@foreach ($fixtureTypes as $index => $fixtureType)
-									<th>{{ $fixtureType }}</th>
+								@foreach ($fixtureTypes as $type)
+									<th>{{ $type['type'] }}</th>
 								@endforeach
 							</tr>
 						</thead>
 						<tbody>
 							<tr>
-								@foreach ($fixtureTypes as $index => $fixtureType)
+								@foreach ($fixtureTypes as $typeId => $type)
 									<td>
-										<input type="checkbox" data-game-id="{{ $game->id }}" name="fixture-type" value="{{ $index }}">
+										{{ Form::checkbox('fixture-type', $typeId, isset($type['check']), ['data-game-id' => $game->id, (isset($type['check']) ? 'disabled' : null)]) }}
 									</td>
 								@endforeach
 							</tr>
@@ -99,11 +99,15 @@
 				</div>
 				@if (!empty($fixtures))
 				<div class="box-body big sparkline-stats">
-					@foreach($fixtures as $fixture)
-					<div class="sparkline-row">
-						<span class="title">{{ $fixture }}</span>
+					<div class="sparkline-row">					
+						<ul>
+						@foreach($fixtures as $fixture)
+							<li>
+								<span class="title">{{ $fixture }}</span>
+							</li>
+						@endforeach
+						</ul>
 					</div>
-					@endforeach
 				</div>
 				@endif 
 			</div>

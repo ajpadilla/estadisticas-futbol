@@ -132,7 +132,7 @@ class GameController extends \BaseController {
 		$awayAlignmentTable = $this->repository->getAwayAlignmentsTable($game->id);
 		$scriptTableTemplate = 'partials._script-table-template';
 		$fixtures = $this->repository->getFixtures($id, true);
-		$fixtureTypes = $this->fixtureTypeRepository->getAllForSelect();
+		$fixtureTypes = $this->fixtureTypeRepository->getForGame($game->id);		
 		return View::make('games.show', compact('game', 'goalsTable', 'changesTable', 'sanctionsTable', 'fixtures', 'localAlignmentTable', 'awayAlignmentTable', 'scriptTableTemplate','fixtureTypes'));
 	}
 

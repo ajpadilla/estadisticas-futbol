@@ -2,6 +2,7 @@
 
 use soccer\Game\Fixture\FixtureType;
 use soccer\Base\BaseRepository;
+use soccer\Game\GameRepository;
 use Carbon\Carbon;
 use Datatable;
 use Illuminate\Database\Eloquent\Collection;
@@ -18,6 +19,25 @@ class FixtureTypeRepository extends BaseRepository
 
 		$this->setModel(new FixtureType);
 		$this->setListAllRoute('');
+	}
+
+	public function getForGame($gameId)
+	{
+		$gameRepository = new GameRepository;
+		$game = $gameRepository->get($gameId);
+		$fixtureTypes = $this->getAllForSelect();
+		if($game) {			
+			foreach ($fixtureTypes as $typeId => $type) {
+				$check = (boolean)$game->fixtures->filter(function($fixture) use ($typeId) 			{
+									if ($fixture->id == $typeId) return true;
+								})->count();
+				$type = array('type' => $type);
+				if($check)
+					$type['check'] = $check;
+				$fixtureTypes[$typeId] = $type;
+			}	
+		}
+		return $fixtureTypes;	
 	}
 
 /*

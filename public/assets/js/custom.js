@@ -8863,6 +8863,7 @@ var handleBootboxAddEquipoToJugador = function () {
                     data: {},
                     dataType: "JSON",
                     success: function(response) {
+                        location.reload();
                         //console.log(response);
                         /*if (response.success == true) {
                         }else{

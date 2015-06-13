@@ -12,6 +12,11 @@ class PageController extends \BaseController {
 		return View::make('pages.home');
 	}
 
+	public function adminIndex()
+	{		
+		return View::make('pages.home');
+	}	
+
 
 	/**
 	 * Show the form for creating a new resource.
