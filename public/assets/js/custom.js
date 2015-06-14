@@ -19,7 +19,7 @@ var CustomApp = function () {
             });
         } catch(e) {
           alert('fileinput.js does not support older browsers!');
-        }        
+        }
     }
 
     /*-----------------------------------------------------------------------------------*/
@@ -51,7 +51,7 @@ var CustomApp = function () {
             $(element).closest('.form-group').removeClass('has-success');
     }
 
-    var addValidationRulesForms = function() 
+    var addValidationRulesForms = function()
     {
         $.validator.setDefaults({ ignore: ":hidden:not(.chosen-select)" });
 
@@ -182,7 +182,7 @@ var CustomApp = function () {
         });
 
         // Mostrar formulario para agregar nuevo jugador
-        $('#new-player').on('click', function() 
+        $('#new-player').on('click', function()
         {
             $("#player-form").trigger("reset");
             updatePlayerForm();
@@ -190,13 +190,13 @@ var CustomApp = function () {
                 .dialog(
                 {
                     message: $('#player-form-div'),
-                    buttons: 
+                    buttons:
                     {
-                        success: 
+                        success:
                         {
                             label: "Guardar",
                             className: "btn-primary",
-                            callback: function () 
+                            callback: function ()
                             {
                                 // Si quieres usar aquí jqueryForm, es lo mismo, lo agregas y ya. Creo que es buena idea!
 
@@ -211,14 +211,14 @@ var CustomApp = function () {
 
                                         $.ajax({
                                             type: 'POST',
-                                            url: $('#add-player').attr('href'), 
+                                            url: $('#add-player').attr('href'),
                                             data: formData,
                                             contentType: false,
                                             processData: false,
                                             dataType: "JSON",
                                             success: function(responseServer) {
                                                 console.log(responseServer);
-                                                if(responseServer.success == true) 
+                                                if(responseServer.success == true)
                                                 {
                                                     // Muestro otro dialog con información de éxito
                                                     bootbox.dialog({
@@ -277,9 +277,9 @@ var CustomApp = function () {
                                                     //Reinicio el formulario
                                             }
                                         });
-                                        e.preventDefault(); //Prevent Default action. 
+                                        e.preventDefault(); //Prevent Default action.
                                         $(this).unbind('submit');
-                                    }); 
+                                    });
                                     $("#player-form").submit();
                                 } else {
                                     return false;
@@ -298,18 +298,18 @@ var CustomApp = function () {
                 // Bootbox will remove the modal (including the body which contains the form)
                 // after hiding the modal
                 // Therefor, we need to backup the form
-                
+
                 $('#player-form-div').hide().appendTo('#new-player-form');
             })
             .modal('show');
-        });               
+        });
     }
 
-  
+
     var loadDataForEditPlayer = function(idPlayer) {
         $.ajax({
             type: 'GET',
-            url: $('#data-player').attr('href'),    
+            url: $('#data-player').attr('href'),
             data: {'jugadorId': idPlayer},
             dataType: "JSON",
             success: function(response) {
@@ -343,7 +343,7 @@ var CustomApp = function () {
         addValidationRulesForms();
 
         $('#player-form').validate({
-            onkeyup: true,  
+            onkeyup: true,
             onfocusout: false,
             rules:{
                 nombre:{
@@ -436,7 +436,7 @@ var CustomApp = function () {
                 element.addClass('valid').closest('.form-group').removeClass('has-error').addClass('has-success');
             }
         });
-    
+
         loadDataForEditPlayer(idPlayer);
 
         bootbox.dialog({
@@ -445,12 +445,12 @@ var CustomApp = function () {
                         success: {
                             label: "Guardar",
                             className: "btn-primary",
-                            callback: function () 
+                            callback: function ()
                             {
                                 // Si quieres usar aquí jqueryForm, es lo mismo, lo agregas y ya. Creo que es buena idea!
 
                                 //ajax para el envío del formulario.
-                                if($('#player-form').valid()) 
+                                if($('#player-form').valid())
                                 {
 
                                     var response = false; // Esta variable debería recibir los datos por ajax.
@@ -462,14 +462,14 @@ var CustomApp = function () {
 
                                         $.ajax({
                                             type: 'POST',
-                                            url: $('#update-player').attr('href'), 
+                                            url: $('#update-player').attr('href'),
                                             data: formData,
                                             contentType: false,
                                             processData: false,
                                             dataType: "JSON",
                                             success: function(responseServer) {
                                                 //console.log(responseServer);
-                                                if(responseServer.success == true) 
+                                                if(responseServer.success == true)
                                                 {
                                                     $('#player-form-div').show();
                                                     // Muestro otro dialog con información de éxito
@@ -528,8 +528,8 @@ var CustomApp = function () {
                                                     //Reinicio el formulario
                                             }
                                         });
-                                        e.preventDefault(); //Prevent Default action. 
-                                    }); 
+                                        e.preventDefault(); //Prevent Default action.
+                                    });
                                     $("#player-form").submit();
                                 } else {
                                     return false;
@@ -588,7 +588,7 @@ var CustomApp = function () {
     }
 
     // Metodo para ejecutar opciones(ver, editar, borrar) de la lista de Jugadores
-    var implementActionsToPlayer = function() 
+    var implementActionsToPlayer = function()
     {
         $(".table").delegate(".delete-player", "click", function() {
              action = getAttributeIdActionSelect($(this).attr('id'));
@@ -610,8 +610,8 @@ var CustomApp = function () {
                 autoDimensions: true,
                 autoSize: true,
                 width: 50
-            });          
-        //});            
+            });
+        //});
     }
 
     var initChosen = function() {
@@ -700,7 +700,7 @@ var CustomApp = function () {
                         success: {
                             label: "Guardar",
                             className: "btn-primary",
-                            callback: function () 
+                            callback: function ()
                             {
                                 // Si quieres usar aquí jqueryForm, es lo mismo, lo agregas y ya. Creo que es buena idea!
 
@@ -716,14 +716,14 @@ var CustomApp = function () {
 
                                         $.ajax({
                                             type: 'POST',
-                                            url: $('#agregar-equipo').attr('href'), 
+                                            url: $('#agregar-equipo').attr('href'),
                                             data: formData,
                                             contentType: false,
                                             processData: false,
                                             dataType: "JSON",
                                             success: function(responseServer) {
                                                 console.log(responseServer);
-                                                if(responseServer.success == true) 
+                                                if(responseServer.success == true)
                                                 {
                                                     // Muestro otro dialog con información de éxito
                                                     bootbox.dialog({
@@ -786,9 +786,9 @@ var CustomApp = function () {
                                                     // updateTeamForm();
                                             }
                                         });
-                                        e.preventDefault(); //Prevent Default action. 
+                                        e.preventDefault(); //Prevent Default action.
                                         $(this).unbind('submit');
-                                    }); 
+                                    });
                                     $("#team-form").submit();
                                 } else {
                                     return false;
@@ -810,16 +810,16 @@ var CustomApp = function () {
                 $('#team-form-div').hide().appendTo('#new-team-form');
             })
             .modal('show');
-        });               
+        });
     }
 
     loadDataForEditTeam = function(idTeam) {
          $.ajax({
             type: 'GET',
-            url: $('#ver-equipo').attr('href'),    
+            url: $('#ver-equipo').attr('href'),
             data: {'equipoId': idTeam},
             dataType: "JSON",
-            success: function(response) 
+            success: function(response)
             {
                 if (response.success == true) {
                     //console.log(response);
@@ -848,7 +848,7 @@ var CustomApp = function () {
         addValidationRulesForms();
 
         $('#team-form').validate({
-            
+
             rules:{
                 nombre:{
                     required:true,
@@ -903,7 +903,7 @@ var CustomApp = function () {
                 element.addClass('valid').closest('.form-group').removeClass('has-error').addClass('has-success');
             }
         });
-       
+
         loadDataForEditTeam(idTeam);
 
         bootbox.dialog({
@@ -916,7 +916,7 @@ var CustomApp = function () {
                                 // Si quieres usar aquí jqueryForm, es lo mismo, lo agregas y ya. Creo que es buena idea!
 
                                 //ajax para el envío del formulario.
-                                if($('#team-form').valid()) 
+                                if($('#team-form').valid())
                                 {
 
                                     var response = false; // Esta variable debería recibir los datos por ajax.
@@ -927,14 +927,14 @@ var CustomApp = function () {
                                         //console.log($(this).serialize());
                                         $.ajax({
                                             type: 'POST',
-                                            url: $('#editar-equipo').attr('href'), 
+                                            url: $('#editar-equipo').attr('href'),
                                             data: formData,
                                             contentType: false,
                                             processData: false,
                                             dataType: "JSON",
                                             success: function(responseServer) {
                                                 console.log(responseServer);
-                                                if(responseServer.success == true) 
+                                                if(responseServer.success == true)
                                                 {
                                                     // Muestro otro dialog con información de éxito
                                                     bootbox.dialog({
@@ -991,8 +991,8 @@ var CustomApp = function () {
                                                     //Reinicio el formulario
                                             }
                                         });
-                                        e.preventDefault(); //Prevent Default action. 
-                                    }); 
+                                        e.preventDefault(); //Prevent Default action.
+                                    });
                                     $("#team-form").submit();
                                 } else {
                                     return false;
@@ -1016,7 +1016,7 @@ var CustomApp = function () {
             .modal('show');
     }
 
-    
+
         //Metodo para eliminar equipo de la BD.
     var deleteTeam = function (idTeam) {
         bootbox.confirm("¿Esta seguro de eliminar el Equipo?", function(result) {
@@ -1052,7 +1052,7 @@ var CustomApp = function () {
 
 
     //Metodo para cargar vista seleccionada en lista de equipos
-    var implementActionsToTeam = function() 
+    var implementActionsToTeam = function()
     {
         $(".table").delegate(".edit-team", "click", function() {
            action = getAttributeIdActionSelect($(this).attr('id'));
@@ -1065,7 +1065,7 @@ var CustomApp = function () {
         });
     }
 
-    var validateSelectPlayers = function(typeOfTeam) 
+    var validateSelectPlayers = function(typeOfTeam)
     {
         //console.log(typeOfTeam);
         if(typeOfTeam == 'Selección'){
@@ -1173,13 +1173,13 @@ var CustomApp = function () {
 
                                         $.ajax({
                                             type: 'POST',
-                                            url: $('#agregar-pais').attr('href'), 
+                                            url: $('#agregar-pais').attr('href'),
                                             data: formData,
                                             contentType: false,
                                             processData: false,
                                             dataType: "JSON",
                                             success: function(responseServer) {
-                                                if(responseServer.success == true) 
+                                                if(responseServer.success == true)
                                                 {
                                                     dataServer = responseServer;
                                                     //console.log(dataServer);
@@ -1242,8 +1242,8 @@ var CustomApp = function () {
                                             }
                                         });
                                         e.preventDefault(); //Prevent Default action.
-                                        $(this).unbind('submit'); 
-                                    }); 
+                                        $(this).unbind('submit');
+                                    });
                                     $("#country-form").submit();
                                 } else {
                                     return false;
@@ -1265,10 +1265,10 @@ var CustomApp = function () {
                 $('#country-form-div').hide().appendTo('#new-country-form');
             })
             .modal('show');
-        });               
+        });
     }
 
-        
+
       //Metodo para ver datos por País
     var viewDataCountry = function(idCountry) {
 
@@ -1298,7 +1298,7 @@ var CustomApp = function () {
 
           $.ajax({
             type: 'GET',
-            url: $('#datos-pais').attr('href'),    
+            url: $('#datos-pais').attr('href'),
             data: {'countryId': idCountry},
             dataType: "JSON",
             success: function(response) {
@@ -1378,10 +1378,10 @@ var CustomApp = function () {
                 element.addClass('valid').closest('.form-group').removeClass('has-error').addClass('has-success');
             }
         });
-    
+
         $.ajax({
             type: 'GET',
-            url: $('#datos-pais').attr('href'),    
+            url: $('#datos-pais').attr('href'),
             data: {'countryId': idCountry},
             dataType: "JSON",
             success: function(response) {
@@ -1394,7 +1394,7 @@ var CustomApp = function () {
                 }
             }
         });
-        
+
         bootbox.dialog({
                     message: $('#country-form-div'),
                     buttons: {
@@ -1416,13 +1416,13 @@ var CustomApp = function () {
 
                                         $.ajax({
                                             type: 'POST',
-                                            url: $('#editar-pais').attr('href'), 
+                                            url: $('#editar-pais').attr('href'),
                                             data: formData,
                                             contentType: false,
                                             processData: false,
                                             dataType: "JSON",
                                             success: function(responseServer) {
-                                                if(responseServer.success == true) 
+                                                if(responseServer.success == true)
                                                 {
                                                     dataServer = responseServer;
                                                     //console.log(dataServer);
@@ -1484,8 +1484,8 @@ var CustomApp = function () {
                                                     $("#country-form")[0].reset();
                                             }
                                         });
-                                        e.preventDefault(); //Prevent Default action. 
-                                    }); 
+                                        e.preventDefault(); //Prevent Default action.
+                                    });
                                     $("#country-form").submit();
                                 } else {
                                     return false;
@@ -1544,7 +1544,7 @@ var CustomApp = function () {
 
 
     // Metodo para saber cual opcion(ver, editar, borrar) fue seleccionada de la lista de Paises
-    var implementActionsToCountry = function() 
+    var implementActionsToCountry = function()
     {
 
         $(".table").delegate(".show-country", "click", function() {
@@ -1565,7 +1565,7 @@ var CustomApp = function () {
 
 
     /**
-     * Metodos para CRUD POSICIONES 
+     * Metodos para CRUD POSICIONES
     */
 
     var handleBootboxNewPosition = function () {
@@ -1615,11 +1615,11 @@ var CustomApp = function () {
                         success: {
                             label: "Guardar",
                             className: "btn-primary",
-                            callback: function () 
+                            callback: function ()
                             {
                                 // Si quieres usar aquí jqueryForm, es lo mismo, lo agregas y ya. Creo que es buena idea!
                                 /*$('.table').dataTable({
-                                    bDestroy : true,  
+                                    bDestroy : true,
                                     sPaginationType: "full_numbers"
                                 });*/
 
@@ -1636,14 +1636,14 @@ var CustomApp = function () {
 
                                         $.ajax({
                                             type: 'POST',
-                                            url: $('#agregar-posicion').attr('href'), 
+                                            url: $('#agregar-posicion').attr('href'),
                                             data: formData,
                                             contentType: false,
                                             processData: false,
                                             dataType: "JSON",
                                             success: function(responseServer) {
                                                 console.log(responseServer);
-                                                if(responseServer.success == true) 
+                                                if(responseServer.success == true)
                                                 {
                                                     // Muestro otro dialog con información de éxito
                                                     bootbox.dialog({
@@ -1703,9 +1703,9 @@ var CustomApp = function () {
                                                     //Reinicio el formulario
                                             }
                                         });
-                                        e.preventDefault(); //Prevent Default action. 
+                                        e.preventDefault(); //Prevent Default action.
                                         $(this).unbind('submit');
-                                    }); 
+                                    });
                                     $("#position-form").submit();
                                 } else {
                                     return false;
@@ -1727,17 +1727,17 @@ var CustomApp = function () {
                 $('#position-form-div').hide().appendTo('#new-position-form');
             })
             .modal('show');
-        });               
+        });
     }
 
 
     loadDataForEditPosition = function(idPosition) {
          $.ajax({
             type: 'GET',
-            url: $('#ver-posicion').attr('href'),    
+            url: $('#ver-posicion').attr('href'),
             data: {'positionId': idPosition},
             dataType: "JSON",
-            success: function(response) 
+            success: function(response)
             {
                 if (response.success == true) {
                     console.log(response);
@@ -1751,13 +1751,13 @@ var CustomApp = function () {
 
 
     // Metodo para editar datos de POSICIÓN
-       
+
     var editPosition = function(idPosition) {
 
         addValidationRulesForms();
 
         $('#position-form').validate({
-            
+
            rules:{
                 nombre:{
                     required:true,
@@ -1801,7 +1801,7 @@ var CustomApp = function () {
                                 // Si quieres usar aquí jqueryForm, es lo mismo, lo agregas y ya. Creo que es buena idea!
 
                                 //ajax para el envío del formulario.
-                                if($('#position-form').valid()) 
+                                if($('#position-form').valid())
                                 {
 
                                     var response = false; // Esta variable debería recibir los datos por ajax.
@@ -1812,14 +1812,14 @@ var CustomApp = function () {
 
                                         $.ajax({
                                             type: 'POST',
-                                            url: $('#editar-posicion').attr('href'), 
+                                            url: $('#editar-posicion').attr('href'),
                                             data: formData,
                                             contentType: false,
                                             processData: false,
                                             dataType: "JSON",
                                             success: function(responseServer) {
                                                 //console.log(responseServer);
-                                                if(responseServer.success == true) 
+                                                if(responseServer.success == true)
                                                 {
                                                     // Muestro otro dialog con información de éxito
                                                     bootbox.dialog({
@@ -1877,8 +1877,8 @@ var CustomApp = function () {
                                                     //Reinicio el formulario
                                             }
                                         });
-                                        e.preventDefault(); //Prevent Default action. 
-                                    }); 
+                                        e.preventDefault(); //Prevent Default action.
+                                    });
                                     $("#position-form").submit();
                                 } else {
                                     return false;
@@ -1939,7 +1939,7 @@ var CustomApp = function () {
 
     // Metodo para saber cual opcion(ver, editar, borrar) fue seleccionada de la lista de Paises
     var implementActionsToPosition = function() {
-        
+
         $(".table").delegate(".edit-position", "click", function() {
            action = getAttributeIdActionSelect($(this).attr('id'));
            editPosition(action.number);
@@ -1952,20 +1952,20 @@ var CustomApp = function () {
     }
 
 /**
- ************************ ADD NEW JUGADOR TO EQUIPO *********************** 
-*/    
+ ************************ ADD NEW JUGADOR TO EQUIPO ***********************
+*/
 var handleBootboxAddJugadorToEquipo = function () {
 
         //addValidationRulesForms();
 
         $('#equipo-add-jugador-form').validate({
-            rules:{              
+            rules:{
                 numero:{
                     required:true,
                     number:true,
                     range: [1, 99],
                     remote: {
-                        url: "/equipos/api-existe-numero",
+                        url: $('#number-exists').attr('href'),
                         type: "post",
                         data: {
                             id: function() {
@@ -1975,26 +1975,32 @@ var handleBootboxAddJugadorToEquipo = function () {
                                 return $( "#numero" ).val();
                             }
                         }
-                    }                    
+                    }
                 },
-                jugador_id:{
-                    required:true,
+                hasta:{
+                    required:false,
                     remote: {
-                        url: "/jugadores/api-existe",
+                        url: $('#available-player').attr('href'),
                         type: "post",
                         data: {
-                            jugador_id: function() {
+                            id: function() {
                                 return $("#equipo-add-jugador-form .chosen-select").val();
+                            },
+                            from: function() {
+                                return $("#equipo-add-jugador-form #desde").val();
+                            },
+                            to: function() {
+                                return $("#equipo-add-jugador-form #hasta").val();
                             }
                         }
-                    }                    
+                    }
                 }
             },
-            messages:{          
-                numero:{                    
+            messages:{
+                numero:{
                     remote: 'Este numero ya esta en uso!'
                 },
-                jugador_id:{
+                hasta:{
                    remote: 'Este jugador ya esta registrado para este equipo, para la fecha seleccionada!'
                 }
             },
@@ -2010,19 +2016,19 @@ var handleBootboxAddJugadorToEquipo = function () {
         });
 
         // Mostrar formulario para agregar nuevo jugador
-        $('#add-jugador').on('click', function() 
+        $('#add-jugador').on('click', function()
         {
             bootbox
                 .dialog(
                 {
                     message: $('#equipo-add-jugador-div-box'),
-                    buttons: 
+                    buttons:
                     {
-                        success: 
+                        success:
                         {
                             label: "Guardar",
                             className: "btn-primary",
-                            callback: function () 
+                            callback: function ()
                             {
                                 // Si quieres usar aquí jqueryForm, es lo mismo, lo agregas y ya. Creo que es buena idea!
 
@@ -2036,14 +2042,14 @@ var handleBootboxAddJugadorToEquipo = function () {
                                         var formData = new FormData(this);
                                         $.ajax({
                                             type: 'POST',
-                                            url: $('#add-jugador').attr('href'), 
+                                            url: $('#add-jugador').attr('href'),
                                             data: formData,
                                             contentType: false,
                                             processData: false,
                                             dataType: "JSON",
                                             success: function(response) {
                                                 //console.log(responseServer);
-                                                if(response.success) 
+                                                if(response.success)
                                                 {
                                                     // Muestro otro dialog con información de éxito
                                                     bootbox.dialog({
@@ -2103,9 +2109,9 @@ var handleBootboxAddJugadorToEquipo = function () {
                                                     //updatePlayerForm();
                                             }
                                         });
-                                        e.preventDefault(); //Prevent Default action. 
+                                        e.preventDefault(); //Prevent Default action.
                                         $(this).unbind('submit');
-                                    }); 
+                                    });
                                     $("#equipo-add-jugador-form").submit();
                                 } else {
                                     return false;
@@ -2127,55 +2133,61 @@ var handleBootboxAddJugadorToEquipo = function () {
                 $('#equipo-add-jugador-div-box').hide().appendTo('#equipo-add-jugador-div');
             })
             .modal('show');
-        });               
+        });
     }
 
 
 /**
- ************************ ADD NEW EQUIPO TO JUGADOR *********************** 
+ ************************ ADD NEW EQUIPO TO JUGADOR ***********************
 */
 var handleBootboxAddEquipoToJugador = function () {
 
         //addValidationRulesForms();
 
         $('#jugador-add-equipo-form').validate({
-            rules:{              
+            rules:{
                 numero:{
                     required:true,
                     number:true,
                     range: [1, 99],
                     remote: {
-                        url: "/equipos/api-existe-numero",
+                        url: $('#number-exists').attr('href'),
                         type: "post",
                         data: {
                             id: function() {
-                                return $("#jugador-add-equipo-form .chosen-select").val()
+                                return $("#jugador-add-equipo-form .chosen-select").val();
                             },
                             numero: function() {
                                 return $( "#numero" ).val();
                             }
                         }
-                    }                    
+                    }
                 },
-                equipo_id:{
-                    required:true,
+                hasta:{
+                    required:false,
                     remote: {
-                        url: "/equipos/api-existe",
+                        url: $('#available-player').attr('href'),
                         type: "post",
                         data: {
-                            equipo_id: function() {
-                                return $("#equipo-add-jugador-form .chosen-select").val();
+                            id: function() {
+                                return $("#id").val();
+                            },
+                            from: function() {
+                                return $("#jugador-add-equipo-form #desde").val();
+                            },
+                            to: function() {
+                                return $("#jugador-add-equipo-form #hasta").val();
                             }
                         }
-                    }                    
+                    }
                 }
             },
-            messages:{          
-                numero:{                    
+            messages:{
+                numero:{
                     remote: 'Este numero ya esta en uso!'
                 },
-                equipo_id:{
-                   remote: 'Este equipo ya esta registrado para este jugador, para la fecha seleccionada!'
+                hasta:{
+                   remote: 'Este jugador ya esta registrado para este equipo, para la fecha seleccionada!'
                 }
             },
             highlight:function(element){
@@ -2190,19 +2202,19 @@ var handleBootboxAddEquipoToJugador = function () {
         });
 
         // Mostrar formulario para agregar nuevo jugador
-        $('#add-equipo').on('click', function() 
+        $('#add-equipo').on('click', function()
         {
             bootbox
                 .dialog(
                 {
                     message: $('#jugador-add-equipo-div-box'),
-                    buttons: 
+                    buttons:
                     {
-                        success: 
+                        success:
                         {
                             label: "Guardar",
                             className: "btn-primary",
-                            callback: function () 
+                            callback: function ()
                             {
                                 // Si quieres usar aquí jqueryForm, es lo mismo, lo agregas y ya. Creo que es buena idea!
 
@@ -2216,14 +2228,14 @@ var handleBootboxAddEquipoToJugador = function () {
                                         var formData = new FormData(this);
                                         $.ajax({
                                             type: 'POST',
-                                            url: $('#add-equipo').attr('href'), 
+                                            url: $('#add-equipo').attr('href'),
                                             data: formData,
                                             contentType: false,
                                             processData: false,
                                             dataType: "JSON",
                                             success: function(response) {
                                                 //console.log(responseServer);
-                                                if(response.success) 
+                                                if(response.success)
                                                 {
                                                     // Muestro otro dialog con información de éxito
                                                     bootbox.dialog({
@@ -2284,9 +2296,9 @@ var handleBootboxAddEquipoToJugador = function () {
                                                     //updatePlayerForm();
                                             }
                                         });
-                                        e.preventDefault(); //Prevent Default action. 
+                                        e.preventDefault(); //Prevent Default action.
                                         $(this).unbind('submit');
-                                    }); 
+                                    });
                                     $("#jugador-add-equipo-form").submit();
                                 } else {
                                     return false;
@@ -2308,7 +2320,7 @@ var handleBootboxAddEquipoToJugador = function () {
                 $('#jugador-add-equipo-div-box').hide().appendTo('#jugador-add-equipo-div');
             })
             .modal('show');
-        });               
+        });
     }
 
     /**
@@ -2380,7 +2392,7 @@ var handleBootboxAddEquipoToJugador = function () {
                 },
                 ascenso:{
                     digits: 'Por vafor ingrese un valor entero',
-                    rangelength: 'Por favor ingrese entre [1, 6] digitos enteros' 
+                    rangelength: 'Por favor ingrese entre [1, 6] digitos enteros'
                 },
                 descenso:{
                     digits: 'Por vafor ingrese un valor entero',
@@ -2412,7 +2424,7 @@ var handleBootboxAddEquipoToJugador = function () {
                         success: {
                             label: "Guardar",
                             className: "btn-primary",
-                            callback: function () 
+                            callback: function ()
                             {
                                 // Si quieres usar aquí jqueryForm, es lo mismo, lo agregas y ya. Creo que es buena idea!
 
@@ -2426,14 +2438,14 @@ var handleBootboxAddEquipoToJugador = function () {
                                         var formData = new FormData(this);
                                         $.ajax({
                                             type: 'POST',
-                                            url: $('#agregar-tipo-competencia').attr('href'), 
+                                            url: $('#agregar-tipo-competencia').attr('href'),
                                             data: formData,
                                             contentType: false,
                                             processData: false,
                                             dataType: "JSON",
                                             success: function(responseServer) {
                                                 console.log(responseServer);
-                                                if(responseServer.success == true) 
+                                                if(responseServer.success == true)
                                                 {
                                                     // Muestro otro dialog con información de éxito
                                                     bootbox.dialog({
@@ -2494,8 +2506,8 @@ var handleBootboxAddEquipoToJugador = function () {
                                             }
                                         });
                                         e.preventDefault(); //Prevent Default action.
-                                        $(this).unbind('submit'); 
-                                    }); 
+                                        $(this).unbind('submit');
+                                    });
                                     $("#type-of-competition-form").submit();
                                 } else {
                                     return false;
@@ -2517,17 +2529,17 @@ var handleBootboxAddEquipoToJugador = function () {
                 $('#type-of-competition-form-div').hide().appendTo('#new-type-of-competition-form');
             })
             .modal('show');
-        });               
+        });
     }
 
 
     loadDataForTypeCompetition = function(idTypeCompetition) {
          $.ajax({
             type: 'GET',
-            url: $('#ver-tipo-competencia').attr('href'),    
+            url: $('#ver-tipo-competencia').attr('href'),
             data: {'typeCompetitionId': idTypeCompetition},
             dataType: "JSON",
-            success: function(response) 
+            success: function(response)
             {
                 if (response.success == true) {
                     console.log(response);
@@ -2547,13 +2559,13 @@ var handleBootboxAddEquipoToJugador = function () {
     }
 
      // Metodo para editar datos de TIPO DE COMPETENCIA
-       
+
     var editTypeOfCompetition = function(idTypeCompetition) {
 
         addValidationRulesForms();
 
         $('#type-of-competition-form').validate({
-            
+
            rules:{
                 nombre:{
                     required: true,
@@ -2612,7 +2624,7 @@ var handleBootboxAddEquipoToJugador = function () {
                 },
                 ascenso:{
                     digits: 'Por vafor ingrese un valor entero',
-                    rangelength: 'Por favor ingrese entre [1, 6] digitos enteros' 
+                    rangelength: 'Por favor ingrese entre [1, 6] digitos enteros'
                 },
                 descenso:{
                     digits: 'Por vafor ingrese un valor entero',
@@ -2646,7 +2658,7 @@ var handleBootboxAddEquipoToJugador = function () {
                                 // Si quieres usar aquí jqueryForm, es lo mismo, lo agregas y ya. Creo que es buena idea!
 
                                 //ajax para el envío del formulario.
-                                if($('#type-of-competition-form').valid()) 
+                                if($('#type-of-competition-form').valid())
                                 {
 
                                     var response = false; // Esta variable debería recibir los datos por ajax.
@@ -2656,14 +2668,14 @@ var handleBootboxAddEquipoToJugador = function () {
                                         var formData = new FormData(this);
                                         $.ajax({
                                             type: 'POST',
-                                            url: $('#editar-tipo-competencia').attr('href'), 
+                                            url: $('#editar-tipo-competencia').attr('href'),
                                             data: formData,
                                             contentType: false,
                                             processData: false,
                                             dataType: "JSON",
                                             success: function(responseServer) {
                                                 console.log(responseServer);
-                                                if(responseServer.success == true) 
+                                                if(responseServer.success == true)
                                                 {
                                                     // Muestro otro dialog con información de éxito
                                                     bootbox.dialog({
@@ -2720,8 +2732,8 @@ var handleBootboxAddEquipoToJugador = function () {
                                                     //Reinicio el formulario
                                             }
                                         });
-                                        e.preventDefault(); //Prevent Default action. 
-                                    }); 
+                                        e.preventDefault(); //Prevent Default action.
+                                    });
                                     $("#type-of-competition-form").submit();
                                 } else {
                                     return false;
@@ -2748,7 +2760,7 @@ var handleBootboxAddEquipoToJugador = function () {
 
     //Metodo para eliminar Tipo de competencía de la BD.
     var deleteTypeOfCompetition= function (idTypeCompetition) {
-        
+
         bootbox.confirm("¿Esta seguro de eliminar el tipo de competencía?", function(result) {
             //console.log("Confirm result: "+result);
             if (result == true){
@@ -2782,7 +2794,7 @@ var handleBootboxAddEquipoToJugador = function () {
 
 
     // Metodo para saber cual opcion(ver, editar, borrar) fue seleccionada de la lista de Paises
-    var implementActionsToTypeCompetition = function() 
+    var implementActionsToTypeCompetition = function()
     {
         $(".table").delegate(".edit-type-competition", "click", function() {
             action = getAttributeIdActionSelect($(this).attr('id'));
@@ -2796,9 +2808,9 @@ var handleBootboxAddEquipoToJugador = function () {
     }
 
     /**
-      * 
+      *
     */
-   
+
 
     /**
      * Funciones para CRUD COMPETENCIAS
@@ -2872,7 +2884,7 @@ var handleBootboxAddEquipoToJugador = function () {
                         success: {
                             label: "Guardar",
                             className: "btn-primary",
-                            callback: function () 
+                            callback: function ()
                             {
                                 // Si quieres usar aquí jqueryForm, es lo mismo, lo agregas y ya. Creo que es buena idea!
 
@@ -2886,14 +2898,14 @@ var handleBootboxAddEquipoToJugador = function () {
                                         var formData = new FormData(this);
                                         $.ajax({
                                             type: 'POST',
-                                            url: $('#agregar-competencia').attr('href'), 
+                                            url: $('#agregar-competencia').attr('href'),
                                             data: formData,
                                             contentType: false,
                                             processData: false,
                                             dataType: "JSON",
                                             success: function(responseServer) {
                                                 console.log(responseServer);
-                                                if(responseServer.success == true) 
+                                                if(responseServer.success == true)
                                                 {
                                                     // Muestro otro dialog con información de éxito
                                                     bootbox.dialog({
@@ -2956,8 +2968,8 @@ var handleBootboxAddEquipoToJugador = function () {
                                             }
                                         });
                                         e.preventDefault(); //Prevent Default action.
-                                        $(this).unbind('submit'); 
-                                    }); 
+                                        $(this).unbind('submit');
+                                    });
                                     $("#competition-form").submit();
                                 } else {
                                     return false;
@@ -2979,12 +2991,12 @@ var handleBootboxAddEquipoToJugador = function () {
                 $('#competition-form-div').hide().appendTo('#new-competition-form');
             })
             .modal('show');
-        });               
+        });
     }
 
      //Metodo para eliminar Tipo de competencía de la BD.
     var deleteCompetition= function (idCompetition) {
-        
+
         bootbox.confirm("¿Esta seguro de eliminar competencía?", function(result) {
             //console.log("Confirm result: "+result);
             if (result == true){
@@ -3018,7 +3030,7 @@ var handleBootboxAddEquipoToJugador = function () {
 
 
     // Metodo para saber cual opcion(ver, editar, borrar) fue seleccionada de la lista de Paises
-    var implementActionsToCompetitions = function() 
+    var implementActionsToCompetitions = function()
     {
         $(".table").delegate(".delete-competition", "click", function() {
              action = getAttributeIdActionSelect($(this).attr('id'));
@@ -3028,7 +3040,7 @@ var handleBootboxAddEquipoToJugador = function () {
 
 
     var getAttributeIdActionSelect = function (id) {
-        var action = new Object(); 
+        var action = new Object();
         action.typeAction = id ? id.split('_')[0] : '';
         action.view = id ? id.split('_')[1] : '';
         action.number = id ? id.split('_')[2] : '';
@@ -3036,11 +3048,11 @@ var handleBootboxAddEquipoToJugador = function () {
     }
 
  /**
-  * 
+  *
   */
 
     var loadFieldSelect = function(url,idField) {
-        
+
         $.ajax({
             type: 'GET',
             url: url,
@@ -3112,7 +3124,7 @@ var handleBootboxAddEquipoToJugador = function () {
             todayButton: true,
             mask: true,
             closeOnDateSelect: true
-        });        
+        });
     }
 
     var handleFechaDateTimePicker = function () {
@@ -3146,7 +3158,7 @@ var handleBootboxAddEquipoToJugador = function () {
          );
          //Set the initial state of the picker label
          $('#fecha span').html('Custom');*/
-    }    
+    }
 
     var reloadDatatable = function (table) {
         var table = typeof table !== 'undefined' ? table : '#datatable';
@@ -3160,9 +3172,9 @@ var handleBootboxAddEquipoToJugador = function () {
         $(selector).remove();
     }
 
-  
 
-    var loadPositionSelectPlayerCreate = function() 
+
+    var loadPositionSelectPlayerCreate = function()
     {
         $('.posiciones-jugador').change(function() {
             $('select#posicion_id_jugador').html('');
@@ -3175,8 +3187,8 @@ var handleBootboxAddEquipoToJugador = function () {
             });
         });
      }
-    
-     var loadPositionSelectPlayerEdit = function() 
+
+     var loadPositionSelectPlayerEdit = function()
     {
         $('.posiciones-jugador').change(function() {
             $('select#posicion_id_jugador_edit').html('');
@@ -3189,25 +3201,25 @@ var handleBootboxAddEquipoToJugador = function () {
             });
         });
      }
-    
+
 
      var enableCountryToCompetition = function () {
         $("select#pais-competencias").prop('disabled', false);
         $('select#pais-competencias').trigger("chosen:updated");
-        $('input[name="international"]').click(function() {  
-            if($('input[name="international"]').is(':checked')) { 
+        $('input[name="international"]').click(function() {
+            if($('input[name="international"]').is(':checked')) {
                 console.log('entro');
-                $("select#pais-competencias").prop('disabled', true);  
-                $('select#pais-competencias').trigger("chosen:updated"); 
-            } else {  
+                $("select#pais-competencias").prop('disabled', true);
+                $('select#pais-competencias').trigger("chosen:updated");
+            } else {
                 console.log('salio');
                 $("select#pais-competencias").prop('disabled', false);
-                $('select#pais-competencias').trigger("chosen:updated");   
-            }  
-        }); 
+                $('select#pais-competencias').trigger("chosen:updated");
+            }
+        });
      }
 
-   
+
 
     var loadFilter = function () {
         $("#autocomplete-select-1").select2({
@@ -3282,7 +3294,7 @@ var handleBootboxAddEquipoToJugador = function () {
     var showTipeComptetitionInfo = function (url, idTypeCompetition) {
         $.ajax({
             type: 'GET',
-            url: url,    
+            url: url,
             data: {'typeCompetitionId': idTypeCompetition},
             dataType: "JSON",
             success: function(response) {
@@ -3298,7 +3310,7 @@ var handleBootboxAddEquipoToJugador = function () {
                     $('#type-competition-descent-show').html('<strong>'+ response.tipoCompetencia.descenso +'</strong>');
                     $('#type-competition-classified-group-show').html('<strong>'+ response.tipoCompetencia.clasificados_por_grupo +'</strong>');
                     showPopUpDataForTypeCompetition();
-                }              
+                }
             }
         });
     }
@@ -3328,7 +3340,7 @@ var handleBootboxAddEquipoToJugador = function () {
                 $('#show-type-of-competition-form-div').hide().appendTo('#view-type-of-competition-form');
             })
         .modal('show');
-    }   
+    }
 
     var loadTypeComptetitionInfo = function () {
         $('a#show-competition-type').click(function (event) {
@@ -3372,9 +3384,9 @@ var handleBootboxAddEquipoToJugador = function () {
             dataType:'json',
             success: function(response) {
                 //console.log(response);
-                if(response.success == true) 
+                if(response.success == true)
                 {
-                    if (response.data.length > 0) 
+                    if (response.data.length > 0)
                     {
                         $(id).html('');
                         $(id).append('<option value=\"\"></option>');
@@ -3383,14 +3395,14 @@ var handleBootboxAddEquipoToJugador = function () {
                             $(id).trigger("chosen:updated");
                         });
                     }else{
-                        $(id).prop('disabled', true); 
-                        $(id).attr('data-placeholder','Sin equipos disponibles'); 
-                        $(id).trigger("chosen:updated"); 
+                        $(id).prop('disabled', true);
+                        $(id).attr('data-placeholder','Sin equipos disponibles');
+                        $(id).trigger("chosen:updated");
                     }
                 }else{
-                    $(id).prop('disabled', true); 
-                    $(id).attr('data-placeholder','Sin equipos disponibles'); 
-                    $(id).trigger("chosen:updated"); 
+                    $(id).prop('disabled', true);
+                    $(id).attr('data-placeholder','Sin equipos disponibles');
+                    $(id).trigger("chosen:updated");
                 }
             }
         });
@@ -3440,9 +3452,9 @@ var handleBootboxAddEquipoToJugador = function () {
                         success: {
                             label: "Agregar",
                             className: "btn-primary",
-                            callback: function () 
+                            callback: function ()
                             {
-                                if($('#add-group-to-phase-form').valid()) 
+                                if($('#add-group-to-phase-form').valid())
                                 {
                                     $("#add-group-to-phase-form").submit(function(e){
                                         var formData = {
@@ -3452,11 +3464,11 @@ var handleBootboxAddEquipoToJugador = function () {
                                         }
                                         $.ajax({
                                             type: 'POST',
-                                            url: $('#add-new-group-to-phase').attr('href'), 
+                                            url: $('#add-new-group-to-phase').attr('href'),
                                             data: formData,
                                             dataType: "JSON",
                                             success: function(responseServer) {
-                                                if(responseServer.success == true) 
+                                                if(responseServer.success == true)
                                                 {
                                                     // Muestro otro dialog con información de éxito
                                                     bootbox.dialog({
@@ -3516,9 +3528,9 @@ var handleBootboxAddEquipoToJugador = function () {
                                                     //Reinicio el formulario
                                             }
                                         });
-                                        e.preventDefault(); //Prevent Default action. 
+                                        e.preventDefault(); //Prevent Default action.
                                         $(this).unbind('submit');
-                                    }); 
+                                    });
                                     $("#add-group-to-phase-form").submit();
                                 }else{
                                     return false;
@@ -3543,9 +3555,9 @@ var handleBootboxAddEquipoToJugador = function () {
         });
     }
 
-    var deleteGroup = function(idGroup) 
+    var deleteGroup = function(idGroup)
     {
-        bootbox.confirm("¿Esta seguro de eliminar el grupo?", function(result) 
+        bootbox.confirm("¿Esta seguro de eliminar el grupo?", function(result)
         {
             //console.log("Confirm result: "+result);
             if (result == true)
@@ -3588,10 +3600,10 @@ var handleBootboxAddEquipoToJugador = function () {
                 //console.log(response);
                 var teamsIds = new Array();
                 var index = 0;
-                if (response.success == true) 
+                if (response.success == true)
                 {
-                    $('#name-group-edit').prop('disabled', true); 
-                    if(response.data.length > 0 && teams.length > 0) 
+                    $('#name-group-edit').prop('disabled', true);
+                    if(response.data.length > 0 && teams.length > 0)
                     {
                         $(id).html('');
                         $(id).append('<option value=\"\"></option>');
@@ -3623,15 +3635,15 @@ var handleBootboxAddEquipoToJugador = function () {
                         $(id).val(teamsIds);
                         $(id).trigger("chosen:updated");
                     }else if(response.data.length == 0 && teams.length == 0){
-                        $('#name-group-edit').prop('disabled', false); 
-                        $(id).prop('disabled', true); 
-                        $(id).attr('data-placeholder','Sin equipos disponibles'); 
+                        $('#name-group-edit').prop('disabled', false);
+                        $(id).prop('disabled', true);
+                        $(id).attr('data-placeholder','Sin equipos disponibles');
                         $(id).trigger("chosen:updated");
                     }
                 }else{
-                    $('#name-group-edit').prop('disabled', false); 
-                    $(id).prop('disabled', true); 
-                    $(id).attr('data-placeholder','Sin equipos disponibles'); 
+                    $('#name-group-edit').prop('disabled', false);
+                    $(id).prop('disabled', true);
+                    $(id).attr('data-placeholder','Sin equipos disponibles');
                     $(id).trigger("chosen:updated");
                 }
             }
@@ -3671,9 +3683,9 @@ var handleBootboxAddEquipoToJugador = function () {
                         success: {
                             label: "Guardar",
                             className: "btn-primary",
-                            callback: function () 
+                            callback: function ()
                             {
-                                if($('#edit-group-to-phase-form').valid()) 
+                                if($('#edit-group-to-phase-form').valid())
                                 {
                                     $("#edit-group-to-phase-form").submit(function(e){
                                         var formData = {
@@ -3685,11 +3697,11 @@ var handleBootboxAddEquipoToJugador = function () {
                                         //console.log(formData);
                                         $.ajax({
                                             type: 'POST',
-                                            url: $('#update-group').attr('href'), 
+                                            url: $('#update-group').attr('href'),
                                             data: formData,
                                             dataType: "JSON",
                                             success: function(responseServer) {
-                                                if(responseServer.success == true) 
+                                                if(responseServer.success == true)
                                                 {
                                                     // Muestro otro dialog con información de éxito
                                                     bootbox.dialog({
@@ -3748,9 +3760,9 @@ var handleBootboxAddEquipoToJugador = function () {
                                                     //Reinicio el formulario
                                             }
                                         });
-                                        e.preventDefault(); //Prevent Default action. 
+                                        e.preventDefault(); //Prevent Default action.
                                         $(this).unbind('submit');
-                                    }); 
+                                    });
                                     $("#edit-group-to-phase-form").submit();
                                 }else{
                                     return false;
@@ -3777,13 +3789,13 @@ var handleBootboxAddEquipoToJugador = function () {
     var loadDataForEditGroup = function (idGroup) {
         $.ajax({
             type: 'GET',
-            url: $('#data-group').attr('href'),    
+            url: $('#data-group').attr('href'),
             data: {'groupId': idGroup},
             dataType: "JSON",
-            success: function(response) 
+            success: function(response)
             {
                 //console.log(response);
-                 if (response != null) 
+                 if (response != null)
                  {
                     if (response.success)
                      {
@@ -3807,7 +3819,7 @@ var handleBootboxAddEquipoToJugador = function () {
         });
     }
 
-    var implementActionsToGroup= function() 
+    var implementActionsToGroup= function()
     {
         $('button.delete-group').click(function () {
             var groupId = $(this).attr('data-group-id');
@@ -3831,9 +3843,9 @@ var handleBootboxAddEquipoToJugador = function () {
             dataType:'json',
             success: function(response) {
                 //console.log(response);
-                if (response.success == true) 
+                if (response.success == true)
                 {
-                    if (response.data.length > 0) 
+                    if (response.data.length > 0)
                     {
                         jQuery(id).html('');
                         jQuery(id).append('<option value=\"\"></option>');
@@ -3896,16 +3908,16 @@ var handleBootboxAddEquipoToJugador = function () {
                     },
                 });
 
-                
+
                 bootbox.dialog({
                         message: $('#add-teams-to-group-form-div-box'),
                         buttons: {
                             success: {
                                 label: "Agregar",
                                 className: "btn-primary",
-                                callback: function () 
+                                callback: function ()
                                 {
-                                    if($('#add-team-to-group-form').valid()) 
+                                    if($('#add-team-to-group-form').valid())
                                     {
                                         $("#add-team-to-group-form").submit(function(e){
                                             var formData = {
@@ -3914,12 +3926,12 @@ var handleBootboxAddEquipoToJugador = function () {
                                             };
                                             $.ajax({
                                                 type: 'POST',
-                                                url: $('#add-new-teams-to-group').attr('href'), 
+                                                url: $('#add-new-teams-to-group').attr('href'),
                                                 data: formData,
                                                 dataType: "JSON",
                                                 success: function(responseServer) {
                                                     //console.log(responseServer);
-                                                    if(responseServer.success == true) 
+                                                    if(responseServer.success == true)
                                                     {
                                                         // Muestro otro dialog con información de éxito
                                                         bootbox.dialog({
@@ -3980,9 +3992,9 @@ var handleBootboxAddEquipoToJugador = function () {
                                                         //Reinicio el formulario
                                                 }
                                             });
-                                            e.preventDefault(); //Prevent Default action. 
+                                            e.preventDefault(); //Prevent Default action.
                                             $(this).unbind('submit');
-                                        }); 
+                                        });
                                         $("#add-team-to-group-form").submit();
                                     }else{
                                         return false;
@@ -4007,9 +4019,9 @@ var handleBootboxAddEquipoToJugador = function () {
     }
 
 
-    var deleteTeamGroup = function(url,teamId, groupId) 
+    var deleteTeamGroup = function(url,teamId, groupId)
     {
-        bootbox.confirm("¿Esta seguro de sacar el equipo?", function(result) 
+        bootbox.confirm("¿Esta seguro de sacar el equipo?", function(result)
         {
             //console.log("Confirm result: "+result);
             if (result == true)
@@ -4020,7 +4032,7 @@ var handleBootboxAddEquipoToJugador = function () {
                     //data: {},
                     dataType: "JSON",
                     success: function(response) {
-                        if (response.success == true) 
+                        if (response.success == true)
                         {
                             $('#delete_teamToGroup_'+teamId).parent().parent().remove();
                             bootbox.dialog({
@@ -4044,7 +4056,7 @@ var handleBootboxAddEquipoToJugador = function () {
     }
 
 
-    var implementActionsToTeamGroup= function() 
+    var implementActionsToTeamGroup= function()
     {
        $(".table").delegate(".remove-from-group", "click", function(event) {
             event.preventDefault();
@@ -4079,7 +4091,7 @@ var handleBootboxAddEquipoToJugador = function () {
                         },
                         away_team_id:{
                              required: true,
-                        },   
+                        },
                     },
                     messages:{
                          local_team_id:{
@@ -4087,7 +4099,7 @@ var handleBootboxAddEquipoToJugador = function () {
                         },
                         away_team_id:{
                               required: 'Este campo es obligatorio',
-                        }, 
+                        },
                     },
                     highlight:function(element){
                         $(element).closest('.form-group').removeClass('has-success').addClass('has-error');
@@ -4100,16 +4112,16 @@ var handleBootboxAddEquipoToJugador = function () {
                     },
                 });
 
-                
+
                 bootbox.dialog({
                         message: $('#add-game-to-group-div-box'),
                         buttons: {
                             success: {
                                 label: "Agregar",
                                 className: "btn-primary",
-                                callback: function () 
+                                callback: function ()
                                 {
-                                    if($('#add-game-to-group-form').valid()) 
+                                    if($('#add-game-to-group-form').valid())
                                     {
                                         $("#add-game-to-group-form").submit(function(e){
                                             var formData = {
@@ -4124,13 +4136,13 @@ var handleBootboxAddEquipoToJugador = function () {
                                             };
                                             $.ajax({
                                                 type: 'POST',
-                                                url: $('#add-new-game-to-group').attr('href'), 
+                                                url: $('#add-new-game-to-group').attr('href'),
                                                 data: formData,
                                                 async: true,
                                                 cache: false,
                                                 dataType: "JSON",
                                                 success: function(responseServer) {
-                                                    if(responseServer.success) 
+                                                    if(responseServer.success)
                                                     {
                                                         // Muestro otro dialog con información de éxito
                                                         bootbox.dialog({
@@ -4193,7 +4205,7 @@ var handleBootboxAddEquipoToJugador = function () {
                                             });
                                             e.preventDefault(); //Prevent Default action.
                                             $(this).unbind('submit');
-                                        }); 
+                                        });
                                         $("#add-game-to-group-form").submit();
                                     }else{
                                         return false;
@@ -4230,7 +4242,7 @@ var handleBootboxAddEquipoToJugador = function () {
                     url: url,
                     /*data: {
                         'group_id': $('button#add-game').attr('data-group-id'),
-                        'local_team_id': $("#local-team-for-game").val(), 
+                        'local_team_id': $("#local-team-for-game").val(),
                         'away_team_id': $("#away-team-for-game").val()
                     },*/
                     dataType:'json',
@@ -4302,16 +4314,16 @@ var handleBootboxAddEquipoToJugador = function () {
                 },
             });
 
-                
+
             bootbox.dialog({
                         message: $('#add-phase-to-competition-form-div'),
                         buttons: {
                             success: {
                                 label: "Agregar",
                                 className: "btn-primary",
-                                callback: function () 
+                                callback: function ()
                                 {
-                                    if($('#add-phase-to-competition-form').valid()) 
+                                    if($('#add-phase-to-competition-form').valid())
                                     {
                                         $("#add-phase-to-competition-form").submit(function(e){
                                             var checkboxLast = $("input[name='last']");
@@ -4328,12 +4340,12 @@ var handleBootboxAddEquipoToJugador = function () {
                                             //console.log(formData);
                                             $.ajax({
                                                 type: 'POST',
-                                                url: $('#add-new-phase-competition').attr('href'), 
+                                                url: $('#add-new-phase-competition').attr('href'),
                                                 data: formData,
                                                 dataType: "JSON",
                                                 success: function(responseServer) {
                                                     console.log(responseServer);
-                                                    if(responseServer.success) 
+                                                    if(responseServer.success)
                                                     {
                                                         // Muestro otro dialog con información de éxito
                                                         bootbox.dialog({
@@ -4393,7 +4405,7 @@ var handleBootboxAddEquipoToJugador = function () {
                                             });
                                             e.preventDefault(); //Prevent Default action.
                                             $(this).unbind('submit');
-                                        }); 
+                                        });
                                         $("#add-phase-to-competition-form").submit();
                                     }else{
                                         return false;
@@ -4420,9 +4432,9 @@ var handleBootboxAddEquipoToJugador = function () {
 
 
 
-    var deletePhase = function(idPhase) 
+    var deletePhase = function(idPhase)
     {
-        bootbox.confirm("¿Esta seguro de eliminar la fase?", function(result) 
+        bootbox.confirm("¿Esta seguro de eliminar la fase?", function(result)
         {
             //console.log("Confirm result: "+result);
             if (result == true)
@@ -4458,13 +4470,13 @@ var handleBootboxAddEquipoToJugador = function () {
     var loadDataForEditPhase = function (idPhase) {
         $.ajax({
             type: 'GET',
-            url: $('#data-phase').attr('href'),    
+            url: $('#data-phase').attr('href'),
             data: {'phaseId': idPhase},
             dataType: "JSON",
-            success: function(response) 
+            success: function(response)
             {
                 //console.log(response);
-                 if (response != null) 
+                 if (response != null)
                  {
                     if (response.success)
                      {
@@ -4481,7 +4493,7 @@ var handleBootboxAddEquipoToJugador = function () {
                         phase.html(html);
                         //console.log(html)
                         handleDatePicker();
-                        
+
                         bootboxEditPhase(response.phase.id);
                         $("input[name='last_phase_edit']").prop('checked', response.phase.last);
                     }
@@ -4514,16 +4526,16 @@ var handleBootboxAddEquipoToJugador = function () {
                 element.addClass('valid').closest('.form-group').removeClass('has-error').addClass('has-success');
             },
         });
-                
+
             bootbox.dialog({
                         message: $('#edit-phase-form-div-box'),
                         buttons: {
                             success: {
                                 label: "Guardar",
                                 className: "btn-primary",
-                                callback: function () 
+                                callback: function ()
                                 {
-                                    if($('#edit-phase-form').valid()) 
+                                    if($('#edit-phase-form').valid())
                                     {
                                         $("#edit-phase-form").submit(function(e){
                                             var checkboxLast = $("input[name='last_phase_edit']");
@@ -4539,12 +4551,12 @@ var handleBootboxAddEquipoToJugador = function () {
                                             //console.log(formData);
                                             $.ajax({
                                                 type: 'POST',
-                                                url: $('#update-phase').attr('href'), 
+                                                url: $('#update-phase').attr('href'),
                                                 data: formData,
                                                 dataType: "JSON",
                                                 success: function(responseServer) {
                                                     console.log(responseServer);
-                                                    if(responseServer.success) 
+                                                    if(responseServer.success)
                                                     {
                                                         // Muestro otro dialog con información de éxito
                                                         bootbox.dialog({
@@ -4603,7 +4615,7 @@ var handleBootboxAddEquipoToJugador = function () {
                                             });
                                             e.preventDefault(); //Prevent Default action.
                                             $(this).unbind('submit');
-                                        }); 
+                                        });
                                         $("#edit-phase-form").submit();
                                     }else{
                                         return false;
@@ -4627,7 +4639,7 @@ var handleBootboxAddEquipoToJugador = function () {
                     .modal('show');
     }
 
-    var implementActionsToPhase= function() 
+    var implementActionsToPhase= function()
     {
         $('button.delete-phase').click(function () {
             var phaseId = $(this).attr('data-phase-id');
@@ -4643,7 +4655,7 @@ var handleBootboxAddEquipoToJugador = function () {
     }
 
 
-     var getTeamsForGames = function (idField, url) 
+     var getTeamsForGames = function (idField, url)
      {
         /*console.log(url);
         console.log(idField);*/
@@ -4780,16 +4792,16 @@ var handleBootboxAddEquipoToJugador = function () {
                 },
             });
 
-                
+
             bootbox.dialog({
                         message: $('#add-goals-to-game-form-div-box'),
                         buttons: {
                             success: {
                                 label: "Agregar",
                                 className: "btn-primary",
-                                callback: function () 
+                                callback: function ()
                                 {
-                                    if($('#add-goals-to-game-form').valid()) 
+                                    if($('#add-goals-to-game-form').valid())
                                     {
                                         $("#add-goals-to-game-form").submit(function(e){
                                             var formData = {
@@ -4804,12 +4816,12 @@ var handleBootboxAddEquipoToJugador = function () {
                                             };
                                             $.ajax({
                                                 type: 'POST',
-                                                url: $('#add-new-goal-for-game').attr('href'), 
+                                                url: $('#add-new-goal-for-game').attr('href'),
                                                 data: formData,
                                                 dataType: "JSON",
                                                 success: function(responseServer) {
                                                     //console.log(responseServer);
-                                                    if(responseServer.success) 
+                                                    if(responseServer.success)
                                                     {
                                                         // Muestro otro dialog con información de éxito
                                                         bootbox.dialog({
@@ -4868,7 +4880,7 @@ var handleBootboxAddEquipoToJugador = function () {
                                             });
                                             e.preventDefault(); //Prevent Default action.
                                             $(this).unbind('submit');
-                                        }); 
+                                        });
                                         $("#add-goals-to-game-form").submit();
                                     }else{
                                         return false;
@@ -4900,7 +4912,7 @@ var handleBootboxAddEquipoToJugador = function () {
             console.log($(this).attr('id').split('-')[2]);*/
             var gameId = $(this).attr('id').split('-')[2];
             bootboxAddGoal(gameId);
-            
+
         });
 
         $('button.add-goal').click(function () {
@@ -4938,7 +4950,7 @@ var handleBootboxAddEquipoToJugador = function () {
         });
      }
 
-     var getTeamsForGamesSanction = function (url) 
+     var getTeamsForGamesSanction = function (url)
      {
         //console.log(url);
          $.ajax({
@@ -4947,7 +4959,7 @@ var handleBootboxAddEquipoToJugador = function () {
             dataType:'json',
             success: function(response) {
                  //console.log(response);
-                    if (response.success == true) 
+                    if (response.success == true)
                     {
                         $('select#teams-for-game-sanction-id').html('');
                         $('select#teams-for-game-sanction-id').append('<option value=\"\"></option>');
@@ -5037,16 +5049,16 @@ var handleBootboxAddEquipoToJugador = function () {
                 },
             });
 
-                
+
             bootbox.dialog({
                         message: $('#add-sanction-to-game-form-div-box'),
                         buttons: {
                             success: {
                                 label: "Agregar",
                                 className: "btn-primary",
-                                callback: function () 
+                                callback: function ()
                                 {
-                                    if($('#add-sanction-to-game-form').valid()) 
+                                    if($('#add-sanction-to-game-form').valid())
                                     {
                                         $("#add-sanction-to-game-form").submit(function(e){
                                             var formData = {
@@ -5061,12 +5073,12 @@ var handleBootboxAddEquipoToJugador = function () {
                                             //console.log(formData);
                                             $.ajax({
                                                 type: 'POST',
-                                                url: $('#add-new-sanction').attr('href'), 
+                                                url: $('#add-new-sanction').attr('href'),
                                                 data: formData,
                                                 dataType: "JSON",
                                                 success: function(responseServer) {
                                                     //console.log(responseServer);
-                                                    if(responseServer.success) 
+                                                    if(responseServer.success)
                                                     {
                                                         bootbox.dialog({
                                                             message:"Sanción agregada correctamente!",
@@ -5121,7 +5133,7 @@ var handleBootboxAddEquipoToJugador = function () {
                                             });
                                             e.preventDefault(); //Prevent Default action.
                                             $(this).unbind('submit');
-                                        }); 
+                                        });
                                         $("#add-sanction-to-game-form").submit();
                                     }else{
                                         return false;
@@ -5201,7 +5213,7 @@ var handleBootboxAddEquipoToJugador = function () {
             var gameId = $(this).attr('id').split('-')[2];
             bootboxAddChange(gameId);
         });
-     
+
      }
 
 
@@ -5280,16 +5292,16 @@ var handleBootboxAddEquipoToJugador = function () {
                 },
             });
 
-                
+
             bootbox.dialog({
                         message: $('#add-change-to-game-form-div-box'),
                         buttons: {
                             success: {
                                 label: "Agregar",
                                 className: "btn-primary",
-                                callback: function () 
+                                callback: function ()
                                 {
-                                    if($('#add-change-to-game-form').valid()) 
+                                    if($('#add-change-to-game-form').valid())
                                     {
                                         $("#add-change-to-game-form").submit(function(e){
                                             var formData = {
@@ -5303,12 +5315,12 @@ var handleBootboxAddEquipoToJugador = function () {
                                             };
                                             $.ajax({
                                                 type: 'POST',
-                                                url: $('#add-new-change').attr('href'), 
+                                                url: $('#add-new-change').attr('href'),
                                                 data: formData,
                                                 dataType: "JSON",
                                                 success: function(responseServer) {
                                                     console.log(responseServer);
-                                                    if(responseServer.success) 
+                                                    if(responseServer.success)
                                                     {
                                                         // Muestro otro dialog con información de éxito
                                                         bootbox.dialog({
@@ -5367,7 +5379,7 @@ var handleBootboxAddEquipoToJugador = function () {
                                             });
                                             e.preventDefault(); //Prevent Default action.
                                             $(this).unbind('submit');
-                                        }); 
+                                        });
                                         $("#add-change-to-game-form").submit();
                                     }else{
                                         return false;
@@ -5391,10 +5403,10 @@ var handleBootboxAddEquipoToJugador = function () {
                     .modal('show');
      }
 
-    
-    var deleteGoal = function(idGoal) 
+
+    var deleteGoal = function(idGoal)
     {
-        bootbox.confirm("¿Esta seguro de eliminar el Gol?", function(result) 
+        bootbox.confirm("¿Esta seguro de eliminar el Gol?", function(result)
         {
             //console.log("Confirm result: "+result);
             if (result == true)
@@ -5430,12 +5442,12 @@ var handleBootboxAddEquipoToJugador = function () {
     var loadDataForEditGoal = function(idGoal) {
         $.ajax({
             type: 'GET',
-            url: $('#data-goal').attr('href'),    
+            url: $('#data-goal').attr('href'),
             data: {'goalId': idGoal},
             dataType: "JSON",
             success: function(response) {
                 //console.log(response);
-                 if (response != null) 
+                 if (response != null)
                  {
                     if (response.success) {
                         var gameId = response.goal.game_id;
@@ -5482,7 +5494,7 @@ var handleBootboxAddEquipoToJugador = function () {
                         $('select#assistance-for-game-id-edit').html('<option value=\"'+response.goal.assistance.id+'\">'+response.goal.assistance.nombre+'</option>');
                         $('select#assistance-for-game-id-edit').trigger("chosen:updated");*/
                     }
-                } 
+                }
             }
         });
     }
@@ -5519,7 +5531,7 @@ var handleBootboxAddEquipoToJugador = function () {
      }
 
 
-     var getTeamsForGoalGame = function (url, indexTeam) 
+     var getTeamsForGoalGame = function (url, indexTeam)
      {
         //console.log(url);
          $.ajax({
@@ -5528,7 +5540,7 @@ var handleBootboxAddEquipoToJugador = function () {
             dataType:'json',
             success: function(response) {
                  //console.log(response);
-                    if (response.success == true) 
+                    if (response.success == true)
                     {
                         $('select#team-for-game-edit').html('');
                         $('select#team-for-game-edit').append('<option value=\"\"></option>');
@@ -5625,7 +5637,7 @@ var handleBootboxAddEquipoToJugador = function () {
                     element.addClass('valid').closest('.form-group').removeClass('has-error').addClass('has-success');
                 },
             });
-    
+
 
             bootbox.dialog({
                         message: $('#edit-goals-to-game-form-div-box'),
@@ -5633,9 +5645,9 @@ var handleBootboxAddEquipoToJugador = function () {
                             success: {
                                 label: "Guardar",
                                 className: "btn-primary",
-                                callback: function () 
+                                callback: function ()
                                 {
-                                    if($('#edit-goals-to-game-form').valid()) 
+                                    if($('#edit-goals-to-game-form').valid())
                                     {
                                         $("#edit-goals-to-game-form").submit(function(e){
                                             var formData = {
@@ -5652,12 +5664,12 @@ var handleBootboxAddEquipoToJugador = function () {
                                             //console.log(formData);
                                             $.ajax({
                                                 type: 'POST',
-                                                url: $('#update-data-goal').attr('href'), 
+                                                url: $('#update-data-goal').attr('href'),
                                                 data: formData,
                                                 dataType: "JSON",
                                                 success: function(responseServer) {
                                                     //console.log(responseServer);
-                                                    if(responseServer.success) 
+                                                    if(responseServer.success)
                                                     {
                                                         $('#observations-game-edit').val(responseServer.goal.observations);
                                                         $('#minute-game-edit').val(responseServer.goal.minute);
@@ -5719,7 +5731,7 @@ var handleBootboxAddEquipoToJugador = function () {
                                             });
                                             e.preventDefault(); //Prevent Default action.
                                             $(this).unbind('submit');
-                                        }); 
+                                        });
                                         $("#edit-goals-to-game-form").submit();
                                     }else{
                                         return false;
@@ -5743,7 +5755,7 @@ var handleBootboxAddEquipoToJugador = function () {
                     .modal('show');
      }
 
-    var implementActionsToGoal = function() 
+    var implementActionsToGoal = function()
     {
         $(".table").delegate(".delete-goal", "click", function() {
              action = getAttributeIdActionSelect($(this).attr('id'));
@@ -5761,9 +5773,9 @@ var handleBootboxAddEquipoToJugador = function () {
     }
 
 
-    var deleteSanction = function(idSanction) 
+    var deleteSanction = function(idSanction)
     {
-        bootbox.confirm("¿Esta seguro de eliminar la sanción?", function(result) 
+        bootbox.confirm("¿Esta seguro de eliminar la sanción?", function(result)
         {
             //console.log("Confirm result: "+result);
             if (result == true)
@@ -5800,18 +5812,18 @@ var handleBootboxAddEquipoToJugador = function () {
      var loadDataForEditSanction = function(idSanction) {
         $.ajax({
             type: 'GET',
-            url: $('#data-sanction').attr('href'),    
+            url: $('#data-sanction').attr('href'),
             data: {'sanctionId': idSanction},
             dataType: "JSON",
-            success: function(response) 
+            success: function(response)
             {
                 //console.log(response);
-                 if (response != null) 
+                 if (response != null)
                  {
                     if (response.success) {
                         var gameId = response.sanction.game_id;
                         var url = $('#teams-for-games').attr('href').split('%')[0]+gameId;
-                    
+
                         var sanction = $('#edit-sanction-to-game-form-div-box');
                         var data = {
                             title: "Editar Sanción",
@@ -5845,13 +5857,13 @@ var handleBootboxAddEquipoToJugador = function () {
                             $('select#sanction-type-for-game-id-edit').val(response.sanction.type_id);
                         });
                     }
-                } 
+                }
             }
         });
     }
 
 
-     var getTeamsForGamesEditSanction = function (url, index) 
+     var getTeamsForGamesEditSanction = function (url, index)
      {
         //console.log(url);
          $.ajax({
@@ -5860,7 +5872,7 @@ var handleBootboxAddEquipoToJugador = function () {
             dataType:'json',
             success: function(response) {
                  //console.log(response);
-                    if (response.success == true) 
+                    if (response.success == true)
                     {
                         $('select#team-for-sanction-edit').html('');
                         $('select#team-for-sanction-edit').append('<option value=\"\"></option>');
@@ -5976,16 +5988,16 @@ var handleBootboxAddEquipoToJugador = function () {
                 },
             });
 
-                
+
             bootbox.dialog({
                         message: $('#edit-sanction-to-game-form-div-box'),
                         buttons: {
                             success: {
                                 label: "Guardar",
                                 className: "btn-primary",
-                                callback: function () 
+                                callback: function ()
                                 {
-                                    if($('#edit-sanction-to-game-form').valid()) 
+                                    if($('#edit-sanction-to-game-form').valid())
                                     {
                                         $("#edit-sanction-to-game-form").submit(function(e){
                                             var formData = {
@@ -6001,12 +6013,12 @@ var handleBootboxAddEquipoToJugador = function () {
                                             //console.log(formData);
                                             $.ajax({
                                                 type: 'POST',
-                                                url: $('#update-sanction').attr('href'), 
+                                                url: $('#update-sanction').attr('href'),
                                                 data: formData,
                                                 dataType: "JSON",
                                                 success: function(responseServer) {
                                                     //console.log(responseServer);
-                                                    if(responseServer.success) 
+                                                    if(responseServer.success)
                                                     {
                                                         bootbox.dialog({
                                                             message:"Sanción actualizada correctamente!",
@@ -6061,7 +6073,7 @@ var handleBootboxAddEquipoToJugador = function () {
                                             });
                                             e.preventDefault(); //Prevent Default action.
                                             $(this).unbind('submit');
-                                        }); 
+                                        });
                                         $("#edit-sanction-to-game-form").submit();
                                     }else{
                                         return false;
@@ -6085,7 +6097,7 @@ var handleBootboxAddEquipoToJugador = function () {
                     .modal('show');
      }
 
-    var implementActionsToSanction = function() 
+    var implementActionsToSanction = function()
     {
         $(".table").delegate(".delete-sanction", "click", function() {
              action = getAttributeIdActionSelect($(this).attr('id'));
@@ -6104,9 +6116,9 @@ var handleBootboxAddEquipoToJugador = function () {
     }
 
 
-    var deleteChange = function(idChange) 
+    var deleteChange = function(idChange)
     {
-        bootbox.confirm("¿Esta seguro de eliminar el cambio?", function(result) 
+        bootbox.confirm("¿Esta seguro de eliminar el cambio?", function(result)
         {
             //console.log("Confirm result: "+result);
             if (result == true)
@@ -6172,7 +6184,7 @@ var handleBootboxAddEquipoToJugador = function () {
 
 
 
-      var getTeamsForGamesEditChange = function (url, indexTeam) 
+      var getTeamsForGamesEditChange = function (url, indexTeam)
      {
         //console.log(url);
          $.ajax({
@@ -6181,7 +6193,7 @@ var handleBootboxAddEquipoToJugador = function () {
             dataType:'json',
             success: function(response) {
                  //console.log(response);
-                    if (response.success == true) 
+                    if (response.success == true)
                     {
                         $('select#team-for-change-edit').html('');
                         $('select#team-for-change-edit').append('<option value=\"\"></option>');
@@ -6206,18 +6218,18 @@ var handleBootboxAddEquipoToJugador = function () {
      var loadDataForEditChange = function(idChange) {
         $.ajax({
             type: 'GET',
-            url: $('#data-change').attr('href'),    
+            url: $('#data-change').attr('href'),
             data: {'changeId': idChange},
             dataType: "JSON",
-            success: function(response) 
+            success: function(response)
             {
                 //console.log(response);
-                 if (response != null) 
+                 if (response != null)
                  {
                     if (response.success) {
                         var gameId = response.change.game_id;
                         var url = $('#teams-for-games').attr('href').split('%')[0]+gameId;
-                    
+
                         var change = $('#edit-change-to-game-form-div-box');
                         var data = {
                             title: "Editar Cambio",
@@ -6321,16 +6333,16 @@ var handleBootboxAddEquipoToJugador = function () {
                 },
             });
 
-                
+
             bootbox.dialog({
                         message: $('#edit-change-to-game-form-div-box'),
                         buttons: {
                             success: {
                                 label: "Guardar",
                                 className: "btn-primary",
-                                callback: function () 
+                                callback: function ()
                                 {
-                                    if($('#edit-change-to-game-form').valid()) 
+                                    if($('#edit-change-to-game-form').valid())
                                     {
                                         $("#edit-change-to-game-form").submit(function(e){
                                             var formData = {
@@ -6345,12 +6357,12 @@ var handleBootboxAddEquipoToJugador = function () {
                                             };
                                             $.ajax({
                                                 type: 'POST',
-                                                url: $('#update-change').attr('href'), 
+                                                url: $('#update-change').attr('href'),
                                                 data: formData,
                                                 dataType: "JSON",
                                                 success: function(responseServer) {
                                                     //console.log(responseServer);
-                                                    if(responseServer.success) 
+                                                    if(responseServer.success)
                                                     {
                                                         // Muestro otro dialog con información de éxito
                                                         bootbox.dialog({
@@ -6409,7 +6421,7 @@ var handleBootboxAddEquipoToJugador = function () {
                                             });
                                             e.preventDefault(); //Prevent Default action.
                                             $(this).unbind('submit');
-                                        }); 
+                                        });
                                         $("#edit-change-to-game-form").submit();
                                     }else{
                                         return false;
@@ -6433,7 +6445,7 @@ var handleBootboxAddEquipoToJugador = function () {
                     .modal('show');
      }
 
-    var implementActionsToChange = function() 
+    var implementActionsToChange = function()
     {
         $(".table").delegate(".delete-change", "click", function() {
              action = getAttributeIdActionSelect($(this).attr('id'));
@@ -6547,16 +6559,16 @@ var handleBootboxAddEquipoToJugador = function () {
                 },
             });
 
-                
+
             bootbox.dialog({
                         message: $('#add-alignment-to-game-form-div-box'),
                         buttons: {
                             success: {
                                 label: "Agregar",
                                 className: "btn-primary",
-                                callback: function () 
+                                callback: function ()
                                 {
-                                    if($('#add-alignment-to-game-form').valid()) 
+                                    if($('#add-alignment-to-game-form').valid())
                                     {
                                         $("#add-alignment-to-game-form").submit(function(e){
                                             var formData = {
@@ -6570,12 +6582,12 @@ var handleBootboxAddEquipoToJugador = function () {
                                            // console.log(formData);
                                             $.ajax({
                                                 type: 'POST',
-                                                url: $('#add-new-alignment-for-game').attr('href'), 
+                                                url: $('#add-new-alignment-for-game').attr('href'),
                                                 data: formData,
                                                 dataType: "JSON",
                                                 success: function(responseServer) {
                                                     //console.log(responseServer);
-                                                    if(responseServer.success) 
+                                                    if(responseServer.success)
                                                     {
                                                         // Muestro otro dialog con información de éxito
                                                         bootbox.dialog({
@@ -6635,7 +6647,7 @@ var handleBootboxAddEquipoToJugador = function () {
                                             });
                                             e.preventDefault(); //Prevent Default action.
                                             $(this).unbind('submit');
-                                        }); 
+                                        });
                                         $("#add-alignment-to-game-form").submit();
                                     }else{
                                         return false;
@@ -6676,9 +6688,9 @@ var handleBootboxAddEquipoToJugador = function () {
         });
      }
 
-    var deleteAlignment = function(idAlignment ) 
+    var deleteAlignment = function(idAlignment )
     {
-        bootbox.confirm("¿Esta seguro de eliminar la alineación?", function(result) 
+        bootbox.confirm("¿Esta seguro de eliminar la alineación?", function(result)
         {
             //console.log("Confirm result: "+result);
             if (result == true)
@@ -6713,7 +6725,7 @@ var handleBootboxAddEquipoToJugador = function () {
     }
 
 
-    var getTeamsForGameIndex = function (idField, url,index) 
+    var getTeamsForGameIndex = function (idField, url,index)
      {
         /*console.log(url);
         console.log(idField);*/
@@ -6744,19 +6756,19 @@ var handleBootboxAddEquipoToJugador = function () {
     var loadDataForEditAlignment = function(idAlignment) {
         $.ajax({
             type: 'GET',
-            url: $('#data-alignment').attr('href'),    
+            url: $('#data-alignment').attr('href'),
             data: {'alignmentId': idAlignment},
             dataType: "JSON",
-            success: function(response) 
+            success: function(response)
             {
                 //console.log(response);
-                 if (response != null) 
+                 if (response != null)
                  {
                     if (response.success)
                      {
                         var gameId = response.alignment.game_id;
                         var url = $('#teams-for-games').attr('href').split('%')[0]+gameId;
-                    
+
                         var alignment = $('#edit-alignment-to-game-form-div-box');
                         var data = {
                             title: "Editar Alineación",
@@ -6779,7 +6791,7 @@ var handleBootboxAddEquipoToJugador = function () {
                         getAvailablePlayersForAlignmentGame('select#team-for-alignment-edit','select#player-alignment-id-edit',gameId)
                         loadFieldSelect($('#lista-posiciones').attr('href'),'select#position-alignment-id-edit');
                         loadFieldSelect($('#list-of-alignment-types').attr('href'),'select#type-alignment-id-edit');
-                        
+
                         $('select#position-alignment-id-edit').val(response.alignment.position_id);
                         $('select#position-alignment-id-edit').trigger("chosen:updated");
                         $('select#position-alignment-id-edit').on('chosen:updated', function(event){
@@ -6855,16 +6867,16 @@ var handleBootboxAddEquipoToJugador = function () {
                 },
             });
 
-                
+
             bootbox.dialog({
                         message: $('#edit-alignment-to-game-form-div-box'),
                         buttons: {
                             success: {
                                 label: "Guardar",
                                 className: "btn-primary",
-                                callback: function () 
+                                callback: function ()
                                 {
-                                    if($('#edit-alignment-to-game-form').valid()) 
+                                    if($('#edit-alignment-to-game-form').valid())
                                     {
                                         $("#edit-alignment-to-game-form").submit(function(e){
                                             var formData = {
@@ -6879,12 +6891,12 @@ var handleBootboxAddEquipoToJugador = function () {
                                             //console.log(formData);
                                             $.ajax({
                                                 type: 'POST',
-                                                url: $('#update-alignment').attr('href'), 
+                                                url: $('#update-alignment').attr('href'),
                                                 data: formData,
                                                 dataType: "JSON",
                                                 success: function(responseServer) {
                                                     //console.log(responseServer);
-                                                    if(responseServer.success) 
+                                                    if(responseServer.success)
                                                     {
                                                         // Muestro otro dialog con información de éxito
                                                         bootbox.dialog({
@@ -6944,7 +6956,7 @@ var handleBootboxAddEquipoToJugador = function () {
                                             });
                                             e.preventDefault(); //Prevent Default action.
                                             $(this).unbind('submit');
-                                        }); 
+                                        });
                                         $("#edit-alignment-to-game-form").submit();
                                     }else{
                                         return false;
@@ -6968,7 +6980,7 @@ var handleBootboxAddEquipoToJugador = function () {
                     .modal('show');
      }
 
-    var implementActionsToAlignment = function() 
+    var implementActionsToAlignment = function()
     {
         $(".table").delegate(".delete-alignment", "click", function() {
              action = getAttributeIdActionSelect($(this).attr('id'));
@@ -7074,20 +7086,20 @@ var handleBootboxAddEquipoToJugador = function () {
         });
 
         // Mostrar formulario para agregar nuevo jugador
-        $('#new-competition-format').on('click', function() 
+        $('#new-competition-format').on('click', function()
         {
             $("#new-competition-format-form").trigger("reset");
             bootbox
                 .dialog(
                 {
                     message: $('#add-competition-format-form-div'),
-                    buttons: 
+                    buttons:
                     {
-                        success: 
+                        success:
                         {
                             label: "Guardar",
                             className: "btn-primary",
-                            callback: function () 
+                            callback: function ()
                             {
                                 // Si quieres usar aquí jqueryForm, es lo mismo, lo agregas y ya. Creo que es buena idea!
 
@@ -7101,14 +7113,14 @@ var handleBootboxAddEquipoToJugador = function () {
                                         var formData = new FormData(this);
                                         $.ajax({
                                             type: 'POST',
-                                            url: $('#add-new-competition-format').attr('href'), 
+                                            url: $('#add-new-competition-format').attr('href'),
                                             data: formData,
                                             contentType: false,
                                             processData: false,
                                             dataType: "JSON",
                                             success: function(responseServer) {
                                                 console.log(responseServer);
-                                                if(responseServer.success == true) 
+                                                if(responseServer.success == true)
                                                 {
                                                     // Muestro otro dialog con información de éxito
                                                     bootbox.dialog({
@@ -7167,9 +7179,9 @@ var handleBootboxAddEquipoToJugador = function () {
                                                     //Reinicio el formulario
                                             }
                                         });
-                                        e.preventDefault(); //Prevent Default action. 
+                                        e.preventDefault(); //Prevent Default action.
                                         $(this).unbind('submit');
-                                    }); 
+                                    });
                                     $("#new-competition-format-form").submit();
                                 } else {
                                     return false;
@@ -7188,16 +7200,16 @@ var handleBootboxAddEquipoToJugador = function () {
                 // Bootbox will remove the modal (including the body which contains the form)
                 // after hiding the modal
                 // Therefor, we need to backup the form
-                
+
                 $('#add-competition-format-form-div').hide().appendTo('#new-competition-format-form-div');
             })
             .modal('show');
-        });               
+        });
     }
 
-    var deleteCompetitionFormat = function(idCompetitionFormat) 
+    var deleteCompetitionFormat = function(idCompetitionFormat)
     {
-        bootbox.confirm("¿Esta seguro de eliminar el formato de competencia?", function(result) 
+        bootbox.confirm("¿Esta seguro de eliminar el formato de competencia?", function(result)
         {
             //console.log("Confirm result: "+result);
             if (result == true)
@@ -7318,13 +7330,13 @@ var handleBootboxAddEquipoToJugador = function () {
                 .dialog(
                 {
                     message: $('#edit-competition-format-form-div-box'),
-                    buttons: 
+                    buttons:
                     {
-                        success: 
+                        success:
                         {
                             label: "Guardar",
                             className: "btn-primary",
-                            callback: function () 
+                            callback: function ()
                             {
                                 // Si quieres usar aquí jqueryForm, es lo mismo, lo agregas y ya. Creo que es buena idea!
 
@@ -7360,12 +7372,12 @@ var handleBootboxAddEquipoToJugador = function () {
                                         //console.log(formData);
                                         $.ajax({
                                             type: 'POST',
-                                            url: $('#update-competition-format').attr('href'), 
+                                            url: $('#update-competition-format').attr('href'),
                                             data: formData,
                                             dataType: "JSON",
                                             success: function(responseServer) {
                                                 //console.log(responseServer);
-                                                if(responseServer.success == true) 
+                                                if(responseServer.success == true)
                                                 {
                                                     // Muestro otro dialog con información de éxito
                                                     bootbox.dialog({
@@ -7423,9 +7435,9 @@ var handleBootboxAddEquipoToJugador = function () {
                                                     //Reinicio el formulario
                                             }
                                         });
-                                        e.preventDefault(); //Prevent Default action. 
+                                        e.preventDefault(); //Prevent Default action.
                                         $(this).unbind('submit');
-                                    }); 
+                                    });
                                     $("#edit-competition-format-form").submit();
                                 } else {
                                     return false;
@@ -7444,7 +7456,7 @@ var handleBootboxAddEquipoToJugador = function () {
                 // Bootbox will remove the modal (including the body which contains the form)
                 // after hiding the modal
                 // Therefor, we need to backup the form
-                
+
                 $('#edit-competition-format-form-div-box').hide().appendTo('#edit-competition-format-div');
             })
             .modal('show');
@@ -7453,17 +7465,17 @@ var handleBootboxAddEquipoToJugador = function () {
     var loadDataForEditCompetitionFormat = function (competitionFormatId) {
         $.ajax({
             type: 'GET',
-            url: $('#data-competition-format').attr('href'),    
+            url: $('#data-competition-format').attr('href'),
             data: {'competitionFormatId': competitionFormatId},
             dataType: "JSON",
-            success: function(response) 
+            success: function(response)
             {
                 //console.log(response);
-                 if (response != null) 
+                 if (response != null)
                  {
                     if (response.success)
                      {
-                       
+
                         var competitionFormat = $('#edit-competition-format-form-div-box');
                         var data = {
                             title: "Editar Formato de competencia",
@@ -7491,7 +7503,7 @@ var handleBootboxAddEquipoToJugador = function () {
         });
     }
 
-    var transformToBoolean = function (value) 
+    var transformToBoolean = function (value)
     {
         if (value == 'Si') {
             return 1;
@@ -7500,7 +7512,7 @@ var handleBootboxAddEquipoToJugador = function () {
         }
     }
 
-    var implementActionsToCompetitionFormat = function() 
+    var implementActionsToCompetitionFormat = function()
     {
         $(".table").delegate(".delete-competition-format", "click", function() {
              action = getAttributeIdActionSelect($(this).attr('id'));
@@ -7544,18 +7556,18 @@ var handleBootboxAddEquipoToJugador = function () {
     var loadDataForEditGame = function (gameId) {
         $.ajax({
             type: 'GET',
-            url: $('#data-game').attr('href'),    
+            url: $('#data-game').attr('href'),
             data: {'gameId': gameId},
             dataType: "JSON",
-            success: function(response) 
+            success: function(response)
             {
                 //console.log(response);
-                 if (response != null) 
+                 if (response != null)
                  {
                     if (response.success)
                      {
                         var gameId = response.game.id;
-                        var groupId = response.game.group_id; 
+                        var groupId = response.game.group_id;
 
                         var game = $('#edit-game-to-phase-form-div-box');
                         var data = {
@@ -7613,13 +7625,13 @@ var handleBootboxAddEquipoToJugador = function () {
                 .dialog(
                 {
                     message: $('#edit-game-to-phase-form-div-box'),
-                    buttons: 
+                    buttons:
                     {
-                        success: 
+                        success:
                         {
                             label: "Guardar",
                             className: "btn-primary",
-                            callback: function () 
+                            callback: function ()
                             {
                                 // Si quieres usar aquí jqueryForm, es lo mismo, lo agregas y ya. Creo que es buena idea!
 
@@ -7639,12 +7651,12 @@ var handleBootboxAddEquipoToJugador = function () {
                                         //console.log(formData);
                                         $.ajax({
                                             type: 'POST',
-                                            url: $('#update-game').attr('href'), 
+                                            url: $('#update-game').attr('href'),
                                             data: formData,
                                             dataType: "JSON",
                                             success: function(responseServer) {
                                                 //console.log(responseServer);
-                                                if(responseServer.success == true) 
+                                                if(responseServer.success == true)
                                                 {
                                                     // Muestro otro dialog con información de éxito
                                                     bootbox.dialog({
@@ -7702,9 +7714,9 @@ var handleBootboxAddEquipoToJugador = function () {
                                                     //Reinicio el formulario
                                             }
                                         });
-                                        e.preventDefault(); //Prevent Default action. 
+                                        e.preventDefault(); //Prevent Default action.
                                         $(this).unbind('submit');
-                                    }); 
+                                    });
                                     $("#edit-game-form").submit();
                                 } else {
                                     return false;
@@ -7723,13 +7735,13 @@ var handleBootboxAddEquipoToJugador = function () {
                 // Bootbox will remove the modal (including the body which contains the form)
                 // after hiding the modal
                 // Therefor, we need to backup the form
-                
+
                 $('#edit-game-to-phase-form-div-box').hide().appendTo('#edit-game-to-phase');
             })
             .modal('show');
     }
 
-    var implementActionsToGame = function() 
+    var implementActionsToGame = function()
     {
         /*$(".table").delegate(".delete-competition-format", "click", function() {
              action = getAttributeIdActionSelect($(this).attr('id'));
@@ -7792,7 +7804,7 @@ var handleBootboxAddEquipoToJugador = function () {
                         success: {
                             label: "Guardar",
                             className: "btn-primary",
-                            callback: function () 
+                            callback: function ()
                             {
                                 // Si quieres usar aquí jqueryForm, es lo mismo, lo agregas y ya. Creo que es buena idea!
 
@@ -7806,14 +7818,14 @@ var handleBootboxAddEquipoToJugador = function () {
                                         var formData = new FormData(this);
                                         $.ajax({
                                             type: 'POST',
-                                            url: $('#add-new-alignment-type').attr('href'), 
+                                            url: $('#add-new-alignment-type').attr('href'),
                                             data: formData,
                                             contentType: false,
                                             processData: false,
                                             dataType: "JSON",
                                             success: function(responseServer) {
                                                 //console.log(responseServer);
-                                                if(responseServer.success == true) 
+                                                if(responseServer.success == true)
                                                 {
                                                     // Muestro otro dialog con información de éxito
                                                     bootbox.dialog({
@@ -7875,8 +7887,8 @@ var handleBootboxAddEquipoToJugador = function () {
                                             }
                                         });
                                         e.preventDefault(); //Prevent Default action.
-                                        $(this).unbind('submit'); 
-                                    }); 
+                                        $(this).unbind('submit');
+                                    });
                                     $("#add-alignment-type-form").submit();
                                 } else {
                                     return false;
@@ -7898,11 +7910,11 @@ var handleBootboxAddEquipoToJugador = function () {
                 $('#alignment-type-form-div').hide().appendTo('#new-alignment-type-form');
             })
             .modal('show');
-        });               
+        });
     }
 
     var bootboxEditAlignmentType = function (alignmentTypeId) {
-        
+
         $('#edit-alignmet-type-form').validate({
             rules:{
                 name:{
@@ -7931,13 +7943,13 @@ var handleBootboxAddEquipoToJugador = function () {
                 .dialog(
                 {
                     message: $('#edit-alignmet-type-form-div-box'),
-                    buttons: 
+                    buttons:
                     {
-                        success: 
+                        success:
                         {
                             label: "Guardar",
                             className: "btn-primary",
-                            callback: function () 
+                            callback: function ()
                             {
                                 // Si quieres usar aquí jqueryForm, es lo mismo, lo agregas y ya. Creo que es buena idea!
 
@@ -7956,12 +7968,12 @@ var handleBootboxAddEquipoToJugador = function () {
                                         //console.log(formData);
                                         $.ajax({
                                             type: 'POST',
-                                            url: $('#update-alignmet-type').attr('href'), 
+                                            url: $('#update-alignmet-type').attr('href'),
                                             data: formData,
                                             dataType: "JSON",
                                             success: function(responseServer) {
                                                 //console.log(responseServer);
-                                                if(responseServer.success == true) 
+                                                if(responseServer.success == true)
                                                 {
                                                     // Muestro otro dialog con información de éxito
                                                     bootbox.dialog({
@@ -8019,9 +8031,9 @@ var handleBootboxAddEquipoToJugador = function () {
                                                     //Reinicio el formulario
                                             }
                                         });
-                                        e.preventDefault(); //Prevent Default action. 
+                                        e.preventDefault(); //Prevent Default action.
                                         $(this).unbind('submit');
-                                    }); 
+                                    });
                                     $("#edit-alignmet-type-form").submit();
                                 } else {
                                     return false;
@@ -8040,7 +8052,7 @@ var handleBootboxAddEquipoToJugador = function () {
                 // Bootbox will remove the modal (including the body which contains the form)
                 // after hiding the modal
                 // Therefor, we need to backup the form
-                
+
                 $('#edit-alignmet-type-form-div-box').hide().appendTo('#edit-alignment-type-format-div');
             })
             .modal('show');
@@ -8049,13 +8061,13 @@ var handleBootboxAddEquipoToJugador = function () {
     var loadDataForEditAlignmentType = function (alignmentTypeId) {
         $.ajax({
             type: 'GET',
-            url: $('#data-alignment-type').attr('href'),    
+            url: $('#data-alignment-type').attr('href'),
             data: {'alignmentTypeId': alignmentTypeId},
             dataType: "JSON",
-            success: function(response) 
+            success: function(response)
             {
                 //console.log(response);
-                 if (response != null) 
+                 if (response != null)
                  {
                     if (response.success)
                      {
@@ -8077,7 +8089,7 @@ var handleBootboxAddEquipoToJugador = function () {
     }
 
       var deleteAlignmentType = function (alignmentTypeId) {
-        
+
         bootbox.confirm("¿Esta seguro de eliminar el tipo de alineación?", function(result) {
             //console.log("Confirm result: "+result);
             if (result == true){
@@ -8109,7 +8121,7 @@ var handleBootboxAddEquipoToJugador = function () {
        });
     }
 
-    var implementActionsToAlignmentType = function() 
+    var implementActionsToAlignmentType = function()
     {
         $(".table").delegate(".delete-alignment-type", "click", function() {
              action = getAttributeIdActionSelect($(this).attr('id'));
@@ -8156,22 +8168,22 @@ var handleBootboxAddEquipoToJugador = function () {
                             success: {
                                 label: "Agregar",
                                 className: "btn-primary",
-                                callback: function () 
+                                callback: function ()
                                 {
-                                    if($('#new-sanction-type-form').valid()) 
+                                    if($('#new-sanction-type-form').valid())
                                     {
                                         $("#new-sanction-type-form").submit(function(e){
                                             var formData = new FormData(this);
                                             $.ajax({
                                                 type: 'POST',
-                                                url: $('#add-new-sanction-type').attr('href'), 
+                                                url: $('#add-new-sanction-type').attr('href'),
                                                 data: formData,
                                                 contentType: false,
                                                 processData: false,
                                                 dataType: "JSON",
                                                 success: function(responseServer) {
                                                     //console.log(responseServer);
-                                                    if(responseServer.success) 
+                                                    if(responseServer.success)
                                                     {
                                                         // Muestro otro dialog con información de éxito
                                                         bootbox.dialog({
@@ -8230,7 +8242,7 @@ var handleBootboxAddEquipoToJugador = function () {
                                             });
                                             e.preventDefault(); //Prevent Default action.
                                             $(this).unbind('submit');
-                                        }); 
+                                        });
                                         $("#new-sanction-type-form").submit();
                                     }else{
                                         return false;
@@ -8265,7 +8277,7 @@ var handleBootboxAddEquipoToJugador = function () {
      }
 
      var bootboxEditSanctionType = function (sanctionTypeId) {
-        
+
         $('#edit-sanction-type-form').validate({
             rules:{
                 name:{
@@ -8294,13 +8306,13 @@ var handleBootboxAddEquipoToJugador = function () {
                 .dialog(
                 {
                     message: $('#edit-sanction-type-form-div-box'),
-                    buttons: 
+                    buttons:
                     {
-                        success: 
+                        success:
                         {
                             label: "Guardar",
                             className: "btn-primary",
-                            callback: function () 
+                            callback: function ()
                             {
                                 // Si quieres usar aquí jqueryForm, es lo mismo, lo agregas y ya. Creo que es buena idea!
 
@@ -8318,12 +8330,12 @@ var handleBootboxAddEquipoToJugador = function () {
                                         //console.log(formData);
                                         $.ajax({
                                             type: 'POST',
-                                            url: $('#update-sanction-type').attr('href'), 
+                                            url: $('#update-sanction-type').attr('href'),
                                             data: formData,
                                             dataType: "JSON",
                                             success: function(responseServer) {
                                                 //console.log(responseServer);
-                                                if(responseServer.success == true) 
+                                                if(responseServer.success == true)
                                                 {
                                                     // Muestro otro dialog con información de éxito
                                                     bootbox.dialog({
@@ -8381,9 +8393,9 @@ var handleBootboxAddEquipoToJugador = function () {
                                                     //Reinicio el formulario
                                             }
                                         });
-                                        e.preventDefault(); //Prevent Default action. 
+                                        e.preventDefault(); //Prevent Default action.
                                         $(this).unbind('submit');
-                                    }); 
+                                    });
                                     $("#edit-sanction-type-form").submit();
                                 } else {
                                     return false;
@@ -8402,7 +8414,7 @@ var handleBootboxAddEquipoToJugador = function () {
                 // Bootbox will remove the modal (including the body which contains the form)
                 // after hiding the modal
                 // Therefor, we need to backup the form
-                
+
                 $('#edit-sanction-type-form-div-box').hide().appendTo('#edit-sanction-type-div');
             })
             .modal('show');
@@ -8411,13 +8423,13 @@ var handleBootboxAddEquipoToJugador = function () {
     var loadDataForEditSanctionType = function (sanctionTypeId) {
         $.ajax({
             type: 'GET',
-            url: $('#data-sanction-type').attr('href'),    
+            url: $('#data-sanction-type').attr('href'),
             data: {'sanctionTypeId': sanctionTypeId},
             dataType: "JSON",
-            success: function(response) 
+            success: function(response)
             {
                 //console.log(response);
-                 if (response != null) 
+                 if (response != null)
                  {
                     if (response.success)
                      {
@@ -8439,7 +8451,7 @@ var handleBootboxAddEquipoToJugador = function () {
     }
 
     var deleteSanctionType= function (sanctionTypeId) {
-        
+
         bootbox.confirm("¿Esta seguro de eliminar el tipo de sanción?", function(result) {
             //console.log("Confirm result: "+result);
             if (result == true){
@@ -8471,7 +8483,7 @@ var handleBootboxAddEquipoToJugador = function () {
        });
     }
 
-    var implementActionsToSanctionType = function() 
+    var implementActionsToSanctionType = function()
     {
         $(".table").delegate(".delete-sanction-type", "click", function() {
              action = getAttributeIdActionSelect($(this).attr('id'));
@@ -8518,22 +8530,22 @@ var handleBootboxAddEquipoToJugador = function () {
                             success: {
                                 label: "Agregar",
                                 className: "btn-primary",
-                                callback: function () 
+                                callback: function ()
                                 {
-                                    if($('#new-goal-type-form').valid()) 
+                                    if($('#new-goal-type-form').valid())
                                     {
                                         $("#new-goal-type-form").submit(function(e){
                                             var formData = new FormData(this);
                                             $.ajax({
                                                 type: 'POST',
-                                                url: $('#add-new-goal-type').attr('href'), 
+                                                url: $('#add-new-goal-type').attr('href'),
                                                 data: formData,
                                                 contentType: false,
                                                 processData: false,
                                                 dataType: "JSON",
                                                 success: function(responseServer) {
                                                     //console.log(responseServer);
-                                                    if(responseServer.success) 
+                                                    if(responseServer.success)
                                                     {
                                                         // Muestro otro dialog con información de éxito
                                                         bootbox.dialog({
@@ -8592,7 +8604,7 @@ var handleBootboxAddEquipoToJugador = function () {
                                             });
                                             e.preventDefault(); //Prevent Default action.
                                             $(this).unbind('submit');
-                                        }); 
+                                        });
                                         $("#new-goal-type-form").submit();
                                     }else{
                                         return false;
@@ -8629,7 +8641,7 @@ var handleBootboxAddEquipoToJugador = function () {
 
 
      var bootboxEditGoalType = function (goalTypeId) {
-        
+
         $('#edit-goal-type-form').validate({
             rules:{
                 name:{
@@ -8658,13 +8670,13 @@ var handleBootboxAddEquipoToJugador = function () {
                 .dialog(
                 {
                     message: $('#edit-goal-type-form-div-box'),
-                    buttons: 
+                    buttons:
                     {
-                        success: 
+                        success:
                         {
                             label: "Guardar",
                             className: "btn-primary",
-                            callback: function () 
+                            callback: function ()
                             {
                                 // Si quieres usar aquí jqueryForm, es lo mismo, lo agregas y ya. Creo que es buena idea!
 
@@ -8682,12 +8694,12 @@ var handleBootboxAddEquipoToJugador = function () {
                                         //console.log(formData);
                                         $.ajax({
                                             type: 'POST',
-                                            url: $('#update-goal-type').attr('href'), 
+                                            url: $('#update-goal-type').attr('href'),
                                             data: formData,
                                             dataType: "JSON",
                                             success: function(responseServer) {
                                                 //console.log(responseServer);
-                                                if(responseServer.success == true) 
+                                                if(responseServer.success == true)
                                                 {
                                                     // Muestro otro dialog con información de éxito
                                                     bootbox.dialog({
@@ -8745,9 +8757,9 @@ var handleBootboxAddEquipoToJugador = function () {
                                                     //Reinicio el formulario
                                             }
                                         });
-                                        e.preventDefault(); //Prevent Default action. 
+                                        e.preventDefault(); //Prevent Default action.
                                         $(this).unbind('submit');
-                                    }); 
+                                    });
                                     $("#edit-goal-type-form").submit();
                                 } else {
                                     return false;
@@ -8766,7 +8778,7 @@ var handleBootboxAddEquipoToJugador = function () {
                 // Bootbox will remove the modal (including the body which contains the form)
                 // after hiding the modal
                 // Therefor, we need to backup the form
-                
+
                 $('#edit-goal-type-form-div-box').hide().appendTo('#edit-goal-type-div');
             })
             .modal('show');
@@ -8775,13 +8787,13 @@ var handleBootboxAddEquipoToJugador = function () {
     var loadDataForEditGoalType = function (goalTypeId) {
         $.ajax({
             type: 'GET',
-            url: $('#data-goal-type').attr('href'),    
+            url: $('#data-goal-type').attr('href'),
             data: {'goalTypeId': goalTypeId},
             dataType: "JSON",
-            success: function(response) 
+            success: function(response)
             {
                 //console.log(response);
-                 if (response != null) 
+                 if (response != null)
                  {
                     if (response.success)
                      {
@@ -8803,7 +8815,7 @@ var handleBootboxAddEquipoToJugador = function () {
     }
 
     var deleteGoalType = function (goalTypeId) {
-        
+
         bootbox.confirm("¿Esta seguro de eliminar el tipo de gol?", function(result) {
             //console.log("Confirm result: "+result);
             if (result == true){
@@ -8835,7 +8847,7 @@ var handleBootboxAddEquipoToJugador = function () {
        });
     }
 
-    var implementActionsToGoalType = function() 
+    var implementActionsToGoalType = function()
     {
         $(".table").delegate(".delete-goal-type", "click", function() {
              action = getAttributeIdActionSelect($(this).attr('id'));
@@ -8912,7 +8924,7 @@ var handleBootboxAddEquipoToJugador = function () {
 
 
     var loadFieldSelectCountry= function(url, idField,index) {
-        
+
         $.ajax({
             type: 'GET',
             url: url,
@@ -8939,12 +8951,12 @@ var handleBootboxAddEquipoToJugador = function () {
       var loadDataBladeForPlayer = function(idPlayer) {
         $.ajax({
             type: 'GET',
-            url: $('#data-player').attr('href'),    
+            url: $('#data-player').attr('href'),
             data: {'jugadorId': idPlayer},
             dataType: "JSON",
             success: function(response) {
                 //console.log(response);
-                if (response.success) 
+                if (response.success)
                 {
                     loadFieldSelectPositionsPlayer($('#lista-posiciones').attr('href'),'#posiciones_id_jugador_edit', response.posiciones);
                     loadFieldSelectCountry($('#lista-paises').attr('href'),'#pais_id_jugador_edit',response.jugador.pais_id);
@@ -8966,10 +8978,10 @@ var handleBootboxAddEquipoToJugador = function () {
      loadDataForBladeEditTeam = function(idTeam) {
          $.ajax({
             type: 'GET',
-            url: $('#ver-equipo').attr('href'),    
+            url: $('#ver-equipo').attr('href'),
             data: {'equipoId': idTeam},
             dataType: "JSON",
-            success: function(response) 
+            success: function(response)
             {
                 //console.log(response);
                 if (response.success == true)
@@ -8997,7 +9009,7 @@ var handleBootboxAddEquipoToJugador = function () {
             if($('#equipo_id_edit').val() != null){
                 loadDataForBladeEditTeam($('#equipo_id_edit').val());
             }
-                
+
             /*loadFieldSelect($('#lista-equipos').attr('href'),'#equipo_id');
             loadFieldSelect($('#lista-equipos').attr('href'),'#equipo_id_jugador');
 
@@ -9007,7 +9019,7 @@ var handleBootboxAddEquipoToJugador = function () {
             loadFieldSelect($('#lista-paises').attr('href'),'#pais-competencias');*/
 
             //initDataPicker();
-            
+
             handleBootstrapFileInput();
             handleBootboxNewPlayer();
             handleBootboxNewTeam();
@@ -9062,7 +9074,7 @@ var handleBootboxAddEquipoToJugador = function () {
             loadTypeComptetitionInfo();
 
             checkFixtureTypeSelected();
-            
+
             //checkIfGameExist();
         }
     }

@@ -29,7 +29,7 @@ class PlayerController extends \BaseController {
 	 * @return Response
 	 */
 	public function index()
-	{		
+	{
 		$this->breadcrumbs->addCrumb('Jugadores', route('players.index'));
 		$table = $this->repository->getAllTable();
 		return View::make('players.index', compact('jugadoresTable','table'));
@@ -43,7 +43,7 @@ class PlayerController extends \BaseController {
 	 */
 	public function create()
 	{
-		
+
 	}
 
 
@@ -57,7 +57,7 @@ class PlayerController extends \BaseController {
 		$items = $this->repository->filterListName(Input::get('term'));
 		$this->setSuccess(true);
 		$this->addToResponseArray('items', $items);
-		return $this->getResponseArrayJson();	
+		return $this->getResponseArrayJson();
 	}
 
 	/**
@@ -78,7 +78,7 @@ class PlayerController extends \BaseController {
 				$this->addToResponseArray('jugador', $jugador->toArray());
 				$this->addToResponseArray('urlFoto', $jugador->foto->url());
 				$this->addToResponseArray('data', $input);
-				return $this->getResponseArrayJson();				
+				return $this->getResponseArrayJson();
 			}
 			catch (FormValidationException $e)
 			{
@@ -147,7 +147,7 @@ class PlayerController extends \BaseController {
 		}
 		catch (FormValidationException $e)
 		{
-			return Redirect::back()->withInput()->withErrors($e->getErrors());			
+			return Redirect::back()->withInput()->withErrors($e->getErrors());
 		}
 	}
 
@@ -165,7 +165,7 @@ class PlayerController extends \BaseController {
 				$this->addToResponseArray('jugador', $jugador);
 				//$this->addToResponseArray('equipo', $jugador->getEquipoAttribute()->toArray());
 				$this->addToResponseArray('datos', $input);
-				return $this->getResponseArrayJson();					
+				return $this->getResponseArrayJson();
 			}
 			catch (FormValidationException $e)
 			{
@@ -204,7 +204,7 @@ class PlayerController extends \BaseController {
 	public function teamsApi($id)
 	{
 		return $this->repository->getTableForTeams($id);
-	}	
+	}
 
 	public function showApi()
 	{
@@ -236,7 +236,7 @@ class PlayerController extends \BaseController {
 
 	public function changeTeamApi($id)
 	{
-		
+
 	}
 
 	public function addTeamApi()
@@ -248,9 +248,14 @@ class PlayerController extends \BaseController {
 		return $this->getResponseArrayJson();
 	}
 
-	public function existApi()
+	public function availableApi()
 	{
-		return false;
+		$status = false;
+		if(Request::ajax()) {
+			extract(Input::all());
+			$status = $this->repository->availableInDate($id, $from, $to);
+		}
+		return Response::json($status);
 	}
 
 	public function getAllValue()

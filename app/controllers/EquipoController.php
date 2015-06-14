@@ -17,8 +17,8 @@ class EquipoController extends \BaseController {
 	protected $editarEquipoForm;
 
 	public function __construct(EquipoRepository $repository,
-								PlayerRepository $jugadorRepository, 
-								PaisRepository $paisRepository, 
+								PlayerRepository $jugadorRepository,
+								PaisRepository $paisRepository,
 								EquipoForm $equipoForm,
 								EditarEquipoForm $editarEquipoForm){
 		$this->repository = $repository;
@@ -26,7 +26,7 @@ class EquipoController extends \BaseController {
 		$this->paisRepository = $paisRepository;
 		$this->equipoForm = $equipoForm;
 		$this->editarEquipoForm = $editarEquipoForm;
-	}	
+	}
 
 	/**
 	 * Display a listing of the resource.
@@ -34,10 +34,10 @@ class EquipoController extends \BaseController {
 	 * @return Response
 	 */
 	public function index()
-	{		
+	{
 		$table = $this->repository->getAllTable();
 		return View::make('equipos.index', compact('table'));
-	}	
+	}
 
 
 	/**
@@ -74,7 +74,7 @@ class EquipoController extends \BaseController {
 			{
 				$this->setSuccess(false);
 				$this->addToResponseArray('errors', $e->getErrors()->all());
-				return $this->getResponseArrayJson();				
+				return $this->getResponseArrayJson();
 			}
 		}
 	}
@@ -87,7 +87,7 @@ class EquipoController extends \BaseController {
 	 * @return Response
 	 */
 	public function show($id)
-	{	
+	{
 		$paises = $this->paisRepository->getAllForSelect();
 		$equipo = $this->repository->get($id);
 		$jugadores = $this->jugadorRepository->getAllForSelect();
@@ -127,7 +127,7 @@ class EquipoController extends \BaseController {
 		}
 		catch (FormValidationException $e)
 		{
-			return Redirect::back()->withInput()->withErrors($e->getErrors());			
+			return Redirect::back()->withInput()->withErrors($e->getErrors());
 		}
 	}
 
@@ -158,7 +158,7 @@ class EquipoController extends \BaseController {
 	/*
 	************************** API METHODS *****************************
 	*/
-	
+
 	/**
 	 * Remove the specified resource from storage.
 	 *
@@ -166,7 +166,7 @@ class EquipoController extends \BaseController {
 	 * @return Response
 	 */
 	public function destroyApi()
-	{		
+	{
 		if(Request::ajax()){
 
 		}
@@ -221,13 +221,8 @@ class EquipoController extends \BaseController {
 		if (Request::ajax()) {
 			$id = Input::get('id');
 			$numero = Input::get('numero');
-			return Response::json(!$this->repository->existeNumero($id, $numero));	
+			return Response::json(!$this->repository->existeNumero($id, $numero));
 		}
-		return false;
-	}
-
-	public function existsApi()
-	{
 		return false;
 	}
 
@@ -242,7 +237,7 @@ class EquipoController extends \BaseController {
 
 	public function confirmExistsPlayerTeam()
 	{
-		if (Request::ajax()) 
+		if (Request::ajax())
 		{
 			$input = Input::all();
 			//$this->repository->existsPlayerTeam($input);

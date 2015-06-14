@@ -13,10 +13,10 @@ use Datatable;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Support\Facades\File;
 /**
-* 
+*
 */
 class EquipoRepository extends BaseRepository
-{		
+{
 
 	function __construct() {
 		$this->columns = [
@@ -30,7 +30,7 @@ class EquipoRepository extends BaseRepository
 
 		$this->setModel(new Equipo);
 		$this->setListAllRoute('equipos.api.lista');
-	}	
+	}
 
 	public function listForType($type='club')
 	{
@@ -61,7 +61,7 @@ class EquipoRepository extends BaseRepository
 		} catch(Exception $e) {
 			return false;
 		}
-	}	
+	}
 
 	public function getTeamsByCompetition($idsTeamsSelected = array(), Competition $competition)
 	{
@@ -79,16 +79,9 @@ class EquipoRepository extends BaseRepository
 		return $country->teams;
 	}
 
-	public function  getAll($exclude = null)
-	{
-		if($exclude)
-			return $this->getModel()->whereNotIn('id', $exclude)->get();
-		return $this->getModel()->all();
-	}
-
 	/*
 	*********************** METHODS FOR GROUPS ******************************
-	*/		
+	*/
 
 	public function getLocalGamesByGroup($id, $groupId)
 	{
@@ -98,7 +91,7 @@ class EquipoRepository extends BaseRepository
 	public function getAwayGamesByGroup($id, $groupId)
 	{
 		return Game::whereAwayTeamId($id)->whereGroupId($groupId)->get();
-	}	
+	}
 
 	public function getSortByPointsByGroup($groupId, $type = 'DESC')
 	{
@@ -120,37 +113,37 @@ class EquipoRepository extends BaseRepository
 			  ->orWhere('games.away_team_id', '=', $id)
 			  ->where('games.group_id', '=', $groupId)
 			  ->where('games.date', '<', Carbon::now()->addMinutes(120)->format('Y-m-d h:i:00'));
-		return $query->count();	
+		return $query->count();
 	}
 
 	public function getWinGamesByGroup($id, $groupId, $localGames = null, $awayGames = null)
 	{
 		$winGames = 0;
-		
+
 		$localGames = ($localGames ? $localGames : $this->getLocalGamesByGroup($id, $groupId));
-		foreach ($localGames as $game) 
+		foreach ($localGames as $game)
 			$winGames += ($game->localGoals > $game->awayGoals ? 1 : 0);
-		
+
 		$awayGames = ($awayGames ? $awayGames : $this->getAwayGamesByGroup($id, $groupId));
-		foreach ($awayGames as $game) 
-				$winGames += ($game->localGoals < $game->awayGoals ? 1 : 0);				
-		
+		foreach ($awayGames as $game)
+				$winGames += ($game->localGoals < $game->awayGoals ? 1 : 0);
+
 		return $winGames;
 	}
 
 	public function getLostGamesByGroup($id, $groupId, $localGames = null, $awayGames = null)
 	{
 		$lostGames = 0;
-		
-		$localGames = ($localGames ? $localGames : $this->getLocalGamesByGroup($id, $groupId));
-		foreach ($localGames as $game) 
-			$lostGames += ($game->localGoals < $game->awayGoals ? 1 : 0);
-		
-		$awayGames = ($awayGames ? $awayGames : $this->getAwayGamesByGroup($id, $groupId));
-		foreach ($awayGames as $game) 
-			$lostGames += ($game->localGoals > $game->awayGoals ? 1 : 0);		
 
-		return $lostGames;	
+		$localGames = ($localGames ? $localGames : $this->getLocalGamesByGroup($id, $groupId));
+		foreach ($localGames as $game)
+			$lostGames += ($game->localGoals < $game->awayGoals ? 1 : 0);
+
+		$awayGames = ($awayGames ? $awayGames : $this->getAwayGamesByGroup($id, $groupId));
+		foreach ($awayGames as $game)
+			$lostGames += ($game->localGoals > $game->awayGoals ? 1 : 0);
+
+		return $lostGames;
 	}
 
 	public function getTieGamesByGroup($id, $groupId, $localGames = null, $awayGames = null)
@@ -158,14 +151,14 @@ class EquipoRepository extends BaseRepository
 		$tieGames = 0;
 
 		$localGames = ($localGames ? $localGames : $this->getLocalGamesByGroup($id, $groupId));
-		foreach ($localGames as $game) 
+		foreach ($localGames as $game)
 			$tieGames += ($game->localGoals == $game->awayGoals ? 1 : 0);
-		
-		$awayGames = ($awayGames ? $awayGames : $this->getAwayGamesByGroup($id, $groupId));
-		foreach ($awayGames as $game) 
-			$tieGames += ($game->localGoals == $game->awayGoals ? 1 : 0);		
 
-		return $tieGames;		
+		$awayGames = ($awayGames ? $awayGames : $this->getAwayGamesByGroup($id, $groupId));
+		foreach ($awayGames as $game)
+			$tieGames += ($game->localGoals == $game->awayGoals ? 1 : 0);
+
+		return $tieGames;
 	}
 
 	public function getScoredGoalsByGroup($id, $groupId)
@@ -175,7 +168,7 @@ class EquipoRepository extends BaseRepository
 		$goals += $team->localGoals()->whereGroupId($groupId)->whereTeamId($id)->count();
 		$goals += $team->awayGoals()->whereGroupId($groupId)->whereTeamId($id)->count();
 
-		return $goals;		
+		return $goals;
 	}
 
 	public function getAgainstGoalsByGroup($id, $groupId, $localGames = null, $awayGames = null)
@@ -183,34 +176,34 @@ class EquipoRepository extends BaseRepository
 		$goals = 0;
 
 		$localGames = ($localGames ? $localGames : $this->getLocalGamesByGroup($id, $groupId));
-		foreach ($localGames as $game) 
+		foreach ($localGames as $game)
 			$goals += $game->awayGoals;
-		
+
 		$awayGames = ($awayGames ? $awayGames : $this->getAwayGamesByGroup($id, $groupId));
-		foreach ($awayGames as $game) 
-			$goals += $game->localGoals;		
+		foreach ($awayGames as $game)
+			$goals += $game->localGoals;
 
 		return $goals;
 	}
 
 	public function getGoalsDifferenceByGroup($id, $groupId)
-	{		
-		return $this->getScoredGoalsByGroup($id, $groupId) - $this->getAgainstGoalsByGroup($id, $groupId);		
+	{
+		return $this->getScoredGoalsByGroup($id, $groupId) - $this->getAgainstGoalsByGroup($id, $groupId);
 	}
 
 	public function getPointsByGroup($id, $groupId)
 	{
-		return ($this->getWinGamesByGroup($id, $groupId) * 2) + $this->getTieGamesByGroup($id, $groupId);		
+		return ($this->getWinGamesByGroup($id, $groupId) * 2) + $this->getTieGamesByGroup($id, $groupId);
 	}
 
 	public function getPositionForTeamInGroup($id, $groupId)
 	{
 		return 0;
-	}					
+	}
 
 	/*
 	*********************** DATATABLE SETTINGS ******************************
-	*/		
+	*/
 
 	public function setDefaultActionColumn() {
 		$this->addColumnToCollection('Acciones', function($model)
@@ -252,10 +245,10 @@ class EquipoRepository extends BaseRepository
 		{
 			 return $model->apodo;
 		});
-	}	
+	}
 
 	public function getJugadoresTable($id)
-	{		
+	{
 		$playerRepository = new PlayerRepository;
 		$playerRepository->columns = [
 			'Nombre',
@@ -264,7 +257,7 @@ class EquipoRepository extends BaseRepository
 			'Fecha Fin',
 			'Número',
 			'Acciones'
-		];		
+		];
 		return $playerRepository->getAllTable('equipos.api.jugadores', [$id]);
 	}
 
@@ -291,13 +284,13 @@ class EquipoRepository extends BaseRepository
 		$playerRepository->collection->addColumn('Fecha Fin', function($model)
 		{
 			 return $model->pivot->fecha_fin;
-		});		
+		});
 
 		$playerRepository->collection->addColumn('Número', function($model)
 		{
 			 return $model->pivot->numero;
 		});
-	}	
+	}
 
 	public function getTableForPlayers($id)
 	{
@@ -309,15 +302,15 @@ class EquipoRepository extends BaseRepository
 		{
 			$playerRepository->cleanActionColumn();
 			$playerRepository->addActionColumn("<a class='ver-jugador' href='" . route('players.show', $model->id) . "' id='ver_jugador'>Ver</a><br />");
-			$playerRepository->addActionColumn("<a  class='editar-jugador' href='#new-player-form' id='editar_".$model->id."'>Editar</a><br />");
-			$playerRepository->addActionColumn("<a class='eliminar-jugador' href='" . route('jugadores.api.eliminar', $model->id) . "' id='eliminar-jugador'>Eliminar</a><br />");
-			$playerRepository->addActionColumn("<a class='cambiar-equipo' href='" . route('jugadores.api.cambiar-equipo', $model->id) . "' id='eliminar-jugador'>Cambiar</a>");
+			//$playerRepository->addActionColumn("<a  class='editar-jugador' href='#new-player-form' id='editar_".$model->id."'>Editar</a><br />");
+			$playerRepository->addActionColumn("<a class='eliminar-jugador' href='" . route('players.api.delete', $model->id) . "' id='eliminar-jugador'>Eliminar</a><br />");
+			//$playerRepository->addActionColumn("<a class='cambiar-equipo' href='" . route('players.api.change-team', $model->id) . "' id='eliminar-jugador'>Cambiar</a>");
 			$playerRepository->addActionColumn("<a  class='editar-jugador' href='#new-jugador-form' id='sacar_".$model->id."'>Sacar</a><br />");
-			$playerRepository->addActionColumn("<a  class='editar-jugador' href='#new-jugador-form' id='estadisticas_".$model->id."'>Estadísticas</a><br />");			
+			//$playerRepository->addActionColumn("<a  class='editar-jugador' href='#new-jugador-form' id='estadisticas_".$model->id."'>Estadísticas</a><br />");
 			return implode(" ", $playerRepository->getActionColumn());
 		});
 		return $playerRepository->getTableCollectionForRender();
-	}	
+	}
 
 	public function existsPlayerTeam($data = array())
 	{

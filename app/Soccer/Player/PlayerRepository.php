@@ -8,10 +8,10 @@ use Carbon\Carbon;
 use Datatable;
 use Illuminate\Support\Facades\File;
 /**
-* 
+*
 */
 class PlayerRepository extends BaseRepository
-{		
+{
 
 	function __construct() {
 		$this->columns = [
@@ -33,7 +33,7 @@ class PlayerRepository extends BaseRepository
 
 	public function create($data = array())
 	{
-		$jugador = $this->model->create($data); 
+		$jugador = $this->model->create($data);
 
 		if(!empty($data['posiciones_id']))
 			$jugador->posiciones()->attach($data['posiciones_id']);
@@ -62,7 +62,7 @@ class PlayerRepository extends BaseRepository
 	public function getEquipos($id)
 	{
 		return $this->get($id)->equipos;
-	}	
+	}
 
 	public function getClubes($id)
 	{
@@ -84,9 +84,18 @@ class PlayerRepository extends BaseRepository
 		}
 	}
 
+	public function availableInDate($id, $from, $to)
+	{
+		$player = $this->get($id);
+		return !$player->equipos()
+					   ->whereRaw("'$from' BETWEEN fecha_inicio AND fecha_fin")
+					   ->orWhereRaw("'$to' BETWEEN fecha_inicio AND fecha_fin")
+					   ->count();
+	}
+
 	/*
 	*********************** DATATABLE SETTINGS ******************************
-	*/		
+	*/
 
 	public function setDefaultActionColumn() {
 		$this->addColumnToCollection('Acciones', function($model)
@@ -116,12 +125,12 @@ class PlayerRepository extends BaseRepository
 
 		$this->collection->addColumn('Equipo', function($model)
 		{
-			$equipo = $model->equipoActual;	
-			if($equipo)				
+			$equipo = $model->equipoActual;
+			if($equipo)
 				return "<a href='" . route('equipos.show', $equipo->id) . "''>" . $equipo->nombre . "</a>";
 			return '<p>Sin Club</p>';
 
-		});		
+		});
 
 		$this->collection->addColumn('Posición', function($model)
 		{
@@ -137,7 +146,7 @@ class PlayerRepository extends BaseRepository
 
 	public function getEquiposTable($id)
 	{
-		$equipoRepository = new EquipoRepository;		
+		$equipoRepository = new EquipoRepository;
 		$equipoRepository->columns = [
 			'Nombre',
 			'País',
@@ -173,7 +182,7 @@ class PlayerRepository extends BaseRepository
 		$equipoRepository->collection->addColumn('Fecha Fin', function($model)
 		{
 			 return $model->fechaFin;
-		});		
+		});
 
 		$equipoRepository->collection->addColumn('Número', function($model)
 		{
@@ -198,7 +207,7 @@ class PlayerRepository extends BaseRepository
 			return implode(" ", $equipoRepository->getActionColumn());
 		});
 		return $equipoRepository->getTableCollectionForRender();
-	}		
+	}
 
 	public function deleteImageDirectory($id){
 		$jugador = $this->get($id);

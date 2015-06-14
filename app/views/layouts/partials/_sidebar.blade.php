@@ -7,7 +7,7 @@
 			<input class="search" type="text" placeholder="Search"><i class="fa fa-search search-icon"></i>
 		</div>
 		<!-- /SEARCH BAR -->
-		
+
 		<!-- SIDEBAR MENU -->
 		<ul>
 			<li>
@@ -34,7 +34,7 @@
 					<li><a class="" href="{{ URL::route('equipos.index') }}"><span class="sub-menu-text">Lista</span></a></li>
 					<li><a id="new-team" class="" href="#new-team-form"><span class="sub-menu-text">Crear</span></a></li>
 				</ul>
-			</li>	
+			</li>
 			{{--<li class="has-sub">
 				<a href="javascript:;" class="">
 					<i class="fa fa-bookmark-o fa-fw"></i> <span class="menu-text">Tipos de Competencia</span>
@@ -64,7 +64,7 @@
 					<li><a class="" href="{{ URL::route('competencias.index') }}"><span class="sub-menu-text">Lista</span></a></li>
 					<li><a id="new-competition" class="" href="#new-competition-form"><span class="sub-menu-text">Crear</span></a></li>
 				</ul>
-			</li>					
+			</li>
 			<li class="has-sub">
 				<a href="javascript:;" class="">
 					<i class="fa fa-bookmark-o fa-fw"></i> <span class="menu-text">Paises</span>
@@ -74,8 +74,8 @@
 					<li><a class="" href="{{ URL::route('paises.index') }}"><span class="sub-menu-text">Lista</span></a></li>
 					<li><a id="new-country" class="" href="#new-country-form"><span class="sub-menu-text">Crear</span></a></li>
 				</ul>
-			</li>	
-			
+			</li>
+
 			<li class="has-sub">
 				<a href="javascript:;" class="">
 					<i class="fa fa-bookmark-o fa-fw"></i> <span class="menu-text">Posiciones</span>
@@ -124,7 +124,7 @@
 							<li><a class="" href="{{ URL::route('goal-types.index') }}"><span class="sub-menu-text">Lista</span></a></li>
 							<li><a id="new-goal-type" class="" href="#new-goal-type-form-div-box"><span class="sub-menu-text">Crear</span></a></li>
 						</ul>
-					</li>				
+					</li>
 				</ul>
 			</li>
 
@@ -141,19 +141,21 @@
 		<a id="lista-posiciones" href="{{ URL::route('posiciones.api.select.list') }}"></a>
 		<a id="ver-posicion" href="{{ URL::route('posiciones.api.show') }}"></a>
 		<a id="editar-posicion" href="{{ URL::route('posiciones.api.update') }}"></a>
-		<a id="eliminar-posicion" href="{{ URL::route('posiciones.api.eliminar') }}"></a>	
+		<a id="eliminar-posicion" href="{{ URL::route('posiciones.api.eliminar') }}"></a>
 		<!--Routes Jugadores-->
 		<a id="add-player" href="{{ URL::route('players.store') }}"></a>
 		<a id="data-player" href="{{ URL::route('players.api.show') }}"></a>
 		<a id="update-player" href="{{ URL::route('players.api.update') }}"></a>
 		<a id="delete-player" href="{{ URL::route('players.api.delete') }}"></a>
 		<a id="list-players" href="{{ URL::route('players.api.select.list') }}"></a>
+		<a id="available-player" href="{{ URL::route('players.api.available') }}"></a>
 		<!--Routes Equipos-->
 		<a id="lista-equipos" href="{{ URL::route('equipos.api.select.list') }}"></a>
 		<a id="agregar-equipo" href="{{ URL::route('equipos.store') }}"></a>
-		<a id="ver-equipo" href="{{ URL::route('equipos.api.show') }}"></a>	
+		<a id="ver-equipo" href="{{ URL::route('equipos.api.show') }}"></a>
 		<a id="editar-equipo" href="{{ URL::route('equipos.api.update') }}"></a>
 		<a id="eliminar-equipo" href="{{ URL::route('equipos.api.eliminar') }}"></a>
+		<a id="number-exists" href="{{ URL::route('equipos.api.number.exist') }}"></a>
 		<a id="verificar-jugador-equipo" href="{{ URL::route('equipos.api.verificar-jugador') }}"></a>
 		<!--Route Tipo Compentencia-->
 		<a id="agregar-tipo-competencia" href="{{ URL::route('tipos-competencia.store') }}"></a>
@@ -208,7 +210,7 @@
 		<a id="data-sanction-type" href="{{ URL::route('sanction-types.api.show') }}"></a>
 		<a id="update-sanction-type" href="{{ URL::route('sanction-types.api.update') }}"></a>
 		<a id="delete-sanction-type" href="{{ URL::route('sanction-types.api.delete') }}"></a>
-		
+
 		<!--Sanctions-->
 		<a id="add-new-sanction" href="{{ URL::route('games.api.add.sanction') }}"></a>
 		<a id="data-sanction" href="{{ URL::route('sanctions.api.show') }}"></a>
