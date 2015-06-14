@@ -1977,6 +1977,24 @@ var handleBootboxAddJugadorToEquipo = function () {
                         }
                     }
                 },
+                desde:{
+                    required:false,
+                    remote: {
+                        url: $('#available-player').attr('href'),
+                        type: "post",
+                        data: {
+                            id: function() {
+                                return $("#equipo-add-jugador-form .chosen-select").val();
+                            },
+                            from: function() {
+                                return $("#equipo-add-jugador-form #desde").val();
+                            },
+                            to: function() {
+                                return $("#equipo-add-jugador-form #hasta").val();
+                            }
+                        }
+                    }
+                },
                 hasta:{
                     required:false,
                     remote: {
@@ -1999,6 +2017,9 @@ var handleBootboxAddJugadorToEquipo = function () {
             messages:{
                 numero:{
                     remote: 'Este numero ya esta en uso!'
+                },
+                desde:{
+                   remote: 'Este jugador ya esta registrado para este equipo, para la fecha seleccionada!'
                 },
                 hasta:{
                    remote: 'Este jugador ya esta registrado para este equipo, para la fecha seleccionada!'
@@ -2163,6 +2184,24 @@ var handleBootboxAddEquipoToJugador = function () {
                         }
                     }
                 },
+                desde:{
+                    required:false,
+                    remote: {
+                        url: $('#available-player').attr('href'),
+                        type: "post",
+                        data: {
+                            id: function() {
+                                return $("#id").val();
+                            },
+                            from: function() {
+                                return $("#jugador-add-equipo-form #desde").val();
+                            },
+                            to: function() {
+                                return $("#jugador-add-equipo-form #hasta").val();
+                            }
+                        }
+                    }
+                },
                 hasta:{
                     required:false,
                     remote: {
@@ -2185,6 +2224,9 @@ var handleBootboxAddEquipoToJugador = function () {
             messages:{
                 numero:{
                     remote: 'Este numero ya esta en uso!'
+                },
+                desde:{
+                   remote: 'Este jugador ya esta registrado para este equipo, para la fecha seleccionada!'
                 },
                 hasta:{
                    remote: 'Este jugador ya esta registrado para este equipo, para la fecha seleccionada!'
