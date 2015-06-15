@@ -90,6 +90,11 @@ class Equipo extends Eloquent implements StaplerableInterface{
 	***************** CUSTOM SETTINGS FOR ATTRIBUTES *************************
 	*/
 
+	public function getHasPlayersAttribute()
+    {
+        return $this->jugadores->count() > 0;
+    }
+
 	public function getAgeAttribute()
 	{
 		//return Carbon::createFromFormat('Y-m-d H:i:s', $date)->format('d-m-Y');
