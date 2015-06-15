@@ -298,14 +298,14 @@ class EquipoRepository extends BaseRepository
 		$playerRepository = new PlayerRepository;
 		$playerRepository->setDatatableCollection($players);
 		$this->setTablePlayerContent($playerRepository);
-		$playerRepository->addColumnToCollection('Acciones', function($model) use ($playerRepository)
+		$playerRepository->addColumnToCollection('Acciones', function($model) use ($playerRepository, $id)
 		{
 			$playerRepository->cleanActionColumn();
 			$playerRepository->addActionColumn("<a class='ver-jugador' href='" . route('players.show', $model->id) . "' id='ver_jugador'>Ver</a><br />");
 			//$playerRepository->addActionColumn("<a  class='editar-jugador' href='#new-player-form' id='editar_".$model->id."'>Editar</a><br />");
-			$playerRepository->addActionColumn("<a class='eliminar-jugador' href='" . route('players.api.delete', $model->id) . "' id='eliminar-jugador'>Eliminar</a><br />");
+			//$playerRepository->addActionColumn("<a class='eliminar-jugador' href='" . route('players.api.delete', $model->id) . "' id='eliminar-jugador'>Eliminar</a><br />");
 			//$playerRepository->addActionColumn("<a class='cambiar-equipo' href='" . route('players.api.change-team', $model->id) . "' id='eliminar-jugador'>Cambiar</a>");
-			$playerRepository->addActionColumn("<a  class='editar-jugador' href='#new-jugador-form' id='sacar_".$model->id."'>Sacar</a><br />");
+			$playerRepository->addActionColumn("<a  class='remove-player-team' href='" . route('teams.api.remove.player', [$id, $model->id]) . "' id='remove_player-team_".$model->id."'>Sacar</a><br />");
 			//$playerRepository->addActionColumn("<a  class='editar-jugador' href='#new-jugador-form' id='estadisticas_".$model->id."'>Estadísticas</a><br />");
 			return implode(" ", $playerRepository->getActionColumn());
 		});
@@ -324,6 +324,13 @@ class EquipoRepository extends BaseRepository
 			}
 		}
 
+	}
+
+	public function removePlayer($id, $playerId){
+		$team = $this->get($id);
+		if($team && $team->hasPlayers)
+			return $team->jugadores()->detach($playerId);
+		return false;
 	}
 
 	public function existsPlayer($data = array())
