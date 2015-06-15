@@ -250,4 +250,11 @@ class EquipoController extends \BaseController {
 		}
 	}
 
+	public function removePlayerApi($id, $playerId)
+	{
+		if(Request::ajax())
+			$this->setSuccess($this->repository->removePlayer($id, $playerId));
+		return $this->getResponseArrayJson();
+	}
+
 }
