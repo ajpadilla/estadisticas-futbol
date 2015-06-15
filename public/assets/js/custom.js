@@ -1050,6 +1050,38 @@ var CustomApp = function () {
        });
     }
 
+    var removePlayerTeam = function (url, playerId) {
+        bootbox.confirm("¿Esta seguro de sacar al jugador del equipo?", function(result) {
+            //console.log("Confirm result: "+result);
+            if (result == true){
+               $.ajax({
+                type: 'GET',
+                url: url,
+                data: {},
+                dataType: "JSON",
+                success: function(response) {
+                    if (response.success == true) {
+                        $('#remove_player-team_'+playerId).parent().parent().remove();
+                        bootbox.dialog({
+                            message:" ¡Jugador Eliminado!",
+                            title: "Éxito",
+                            buttons: {
+                                success: {
+                                    label: "Success!",
+                                    className: "btn-success",
+                                    callback: function () {
+                                        reloadDatatable('#datatable');
+                                    }
+                                }
+                            }
+                        });
+                    };
+                }
+            });
+           };
+       });
+    }
+
 
     //Metodo para cargar vista seleccionada en lista de equipos
     var implementActionsToTeam = function()
@@ -1062,6 +1094,13 @@ var CustomApp = function () {
         $(".table").delegate(".delete-team", "click", function() {
            action = getAttributeIdActionSelect($(this).attr('id'));
            deleteTeam(action.number);
+        });
+
+        $(".table").delegate(".remove-player-team", "click", function() {
+            event.preventDefault();
+            action = getAttributeIdActionSelect($(this).attr('id'));
+            var url = $(this).attr('href');
+            removePlayerTeam(url, action.number);
         });
     }
 
