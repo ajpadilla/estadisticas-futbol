@@ -70,6 +70,7 @@ Route::get('admin/equipos/api-seleccionar-lista',  ['as' => 'equipos.api.select.
 Route::get('admin/equipos/api-verificar-jugador',  ['as' => 'equipos.api.verificar-jugador','uses' => 'EquipoController@confirmExistsPlayerTeam' ] );
 Route::post('admin/equipos/api-existe-numero',  ['as' => 'equipos.api.number.exist','uses' => 'EquipoController@existeNumeroApi' ] );
 Route::post('admin/equipos/api-add-jugador',  ['as' => 'equipos.api.add.jugador','uses' => 'EquipoController@addJugadorApi' ] );
+Route::get('admin/equipos/api-sacar-jugador/{id}/{playerId}', ['as' => 'teams.api.remove.player', 'uses' => 'EquipoController@removePlayerApi']);
 
 /*
 ********************************* RUTAS PARA PAISES ********************************
