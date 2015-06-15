@@ -30,12 +30,12 @@
 								<span class="hidden-inline-mobile"> Partidos</span>
 							</a>
 						</li>
-						{{--<li>
-							<a href="#pro_edit" data-toggle="tab" id="editar-equipo">
+						<li>
+							<a href="#pro_edit" data-toggle="tab">
 								<i class="fa fa-edit"></i> 
 								<span class="hidden-inline-mobile"> Editar Cuenta</span>
 							</a>
-						</li>--}}
+						</li>
 						<li class="active">
 							<a href="#pro_details" data-toggle="tab">
 								<i class="fa fa-dot-circle-o"></i> 
