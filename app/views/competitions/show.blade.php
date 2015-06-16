@@ -20,25 +20,25 @@
 					<ul class="nav nav-tabs">
 						<li>
 							<a href="#pro_teams" data-toggle="tab">
-								<i class="fa fa-question"></i> 
+								<i class="fa fa-question"></i>
 								<span class="hidden-inline-mobile"> Fases </span>
 							</a>
 						</li>
 						<li>
 							<a href="#pro_games" data-toggle="tab">
-								<i class="fa fa-question"></i> 
+								<i class="fa fa-question"></i>
 								<span class="hidden-inline-mobile"> Partidos</span>
 							</a>
 						</li>
-						{{--<li>
-							<a href="#pro_edit" data-toggle="tab" id="editar-equipo">
-								<i class="fa fa-edit"></i> 
-								<span class="hidden-inline-mobile"> Editar Cuenta</span>
+						<li>
+							<a href="#pro_edit" data-toggle="tab" id="competition-edit">
+								<i class="fa fa-edit"></i>
+								<span class="hidden-inline-mobile"> Editar</span>
 							</a>
-						</li>--}}
+						</li>
 						<li class="active">
 							<a href="#pro_details" data-toggle="tab">
-								<i class="fa fa-dot-circle-o"></i> 
+								<i class="fa fa-dot-circle-o"></i>
 								<span class="hidden-inline-mobile">Detalles</span>
 							</a>
 						</li>
@@ -49,15 +49,15 @@
 					   		@include('competitions.profile-overview')
 					   </div>
 					   <!-- /OVERVIEW -->
-					   
+
 					   <!-- EDIT ACCOUNT -->
 					   <div class="tab-pane fade" id="pro_edit">
 							@include('competitions.edit')
 					   </div>
 					   <!-- /EDIT ACCOUNT -->
-					   
+
 					   <!-- EQUIPOS TAB -->
-					   <div class="tab-pane fade" id="pro_teams">						  
+					   <div class="tab-pane fade" id="pro_teams">
 					   		@include('competitions.teams')
 					   </div>
 					   <!-- /JUGADORES -->
@@ -66,12 +66,12 @@
 					   <div class="tab-pane fade" id="pro_games">
 						  @include('competitions.games')
 					   </div>
-					   <!-- /PARTIDOS -->					   
+					   <!-- /PARTIDOS -->
 					</div>
 				</div>
 				<!-- /USER PROFILE -->
 			</div>
 		</div>
-		<!-- /BOX -->					
+		<!-- /BOX -->
 	</div>
-@stop	
+@stop
