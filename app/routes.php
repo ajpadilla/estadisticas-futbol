@@ -70,6 +70,7 @@ Route::get('admin/equipos/api-seleccionar-lista',  ['as' => 'equipos.api.select.
 Route::get('admin/equipos/api-verificar-jugador',  ['as' => 'equipos.api.verificar-jugador','uses' => 'EquipoController@confirmExistsPlayerTeam' ] );
 Route::post('admin/equipos/api-existe-numero',  ['as' => 'equipos.api.number.exist','uses' => 'EquipoController@existeNumeroApi' ] );
 Route::post('admin/equipos/api-add-jugador',  ['as' => 'equipos.api.add.jugador','uses' => 'EquipoController@addJugadorApi' ] );
+Route::get('admin/equipos/api-sacar-jugador/{id}/{playerId}', ['as' => 'teams.api.remove.player', 'uses' => 'EquipoController@removePlayerApi']);
 
 /*
 ********************************* RUTAS PARA PAISES ********************************
@@ -124,7 +125,7 @@ Route::get('admin/competencias/nuevo', ['as' => 'competencias.create', 'uses' =>
 Route::post('admin/competencias/guardar', ['as' => 'competencias.store', 'uses' => 'CompetitionController@store' ] );
 Route::get('admin/competencias/ver/{id}', ['as' => 'competitions.show', 'uses' => 'CompetitionController@show' ] );
 Route::get('admin/competencias/editar/{id}',  ['as' => 'competencias.edit','uses' => 'CompetitionController@edit' ] );
-Route::post('admin/competencias/actualizar/{id}',  ['as' => 'competencias.update','uses' => 'CompetitionController@update' ] );
+Route::post('admin/competencias/actualizar/{id}',  ['as' => 'competitions.update','uses' => 'CompetitionController@update' ] );
 Route::get('admin/competencias/eliminar/{id}',  ['as' => 'competencias.delete','uses' => 'CompetitionController@destroy' ] );
 Route::get('admin/competencias/ver/{id}', ['as' => 'competencias.show', 'uses' => 'CompetitionController@show' ] );
 

@@ -41,6 +41,22 @@ class CompetitionRepository extends BaseRepository
 		return $competition;
 	}
 
+	public function update($data = array())
+	{
+		if (empty($data['country_id'])) {
+			$data['country_id'] = NULL;
+		}
+
+		if (empty($data['international'])) {
+			$data['international'] = 0;
+		}
+
+		$competition = $this->get($data['competition_id']);
+		$competition->update($data);
+		return $competition;
+	}
+
+
 	public function addGroup($id, $group, $teams = null)
 	{
 		$competition = $this->get($id);

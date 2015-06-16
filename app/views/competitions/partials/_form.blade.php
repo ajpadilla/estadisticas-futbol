@@ -42,7 +42,7 @@
 						<div class="col-sm-6">
 							<div class="checkbox">
 								<label> 
-									{{ Form::checkbox('international', '1')}}
+									{{ Form::checkbox('international', '1',false,['id' => 'competition-international'])}}
 									<i></i> Internacional	
 								</label>
 							</div>

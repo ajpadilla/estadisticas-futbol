@@ -1050,6 +1050,38 @@ var CustomApp = function () {
        });
     }
 
+    var removePlayerTeam = function (url, playerId) {
+        bootbox.confirm("¿Esta seguro de sacar al jugador del equipo?", function(result) {
+            //console.log("Confirm result: "+result);
+            if (result == true){
+               $.ajax({
+                type: 'GET',
+                url: url,
+                data: {},
+                dataType: "JSON",
+                success: function(response) {
+                    if (response.success == true) {
+                        $('#remove_player-team_'+playerId).parent().parent().remove();
+                        bootbox.dialog({
+                            message:" ¡Jugador Eliminado!",
+                            title: "Éxito",
+                            buttons: {
+                                success: {
+                                    label: "Success!",
+                                    className: "btn-success",
+                                    callback: function () {
+                                        reloadDatatable('#datatable');
+                                    }
+                                }
+                            }
+                        });
+                    };
+                }
+            });
+           };
+       });
+    }
+
 
     //Metodo para cargar vista seleccionada en lista de equipos
     var implementActionsToTeam = function()
@@ -1062,6 +1094,13 @@ var CustomApp = function () {
         $(".table").delegate(".delete-team", "click", function() {
            action = getAttributeIdActionSelect($(this).attr('id'));
            deleteTeam(action.number);
+        });
+
+        $(".table").delegate(".remove-player-team", "click", function() {
+            event.preventDefault();
+            action = getAttributeIdActionSelect($(this).attr('id'));
+            var url = $(this).attr('href');
+            removePlayerTeam(url, action.number);
         });
     }
 
@@ -3248,17 +3287,41 @@ var handleBootboxAddEquipoToJugador = function () {
      var enableCountryToCompetition = function () {
         $("select#pais-competencias").prop('disabled', false);
         $('select#pais-competencias').trigger("chosen:updated");
-        $('input[name="international"]').click(function() {
-            if($('input[name="international"]').is(':checked')) {
-                console.log('entro');
+        $('#competition-international').click(function() {
+            if($('#competition-international').is(':checked')) {
+                //console.log('entro');
                 $("select#pais-competencias").prop('disabled', true);
                 $('select#pais-competencias').trigger("chosen:updated");
             } else {
-                console.log('salio');
+                //console.log('salio');
                 $("select#pais-competencias").prop('disabled', false);
                 $('select#pais-competencias').trigger("chosen:updated");
             }
         });
+
+        if($('#competition-international-edit').is(':checked')) {
+            $("select#country-competition-edit").prop('disabled', true);
+            $('select#country-competition-edit').trigger("chosen:updated");
+        }else{
+            $("select#country-competition-edit").prop('disabled', false);
+            $('select#country-competition-edit').trigger("chosen:updated");
+        }
+
+        $('#competition-international-edit').click(function() {
+            if($('#competition-international-edit').is(':checked')) {
+                //console.log('entro');
+                $("select#country-competition-edit").prop('disabled', true);
+                $('select#country-competition-edit').trigger("chosen:updated");
+            } else {
+                //console.log('salio');
+                $("select#country-competition-edit").prop('disabled', false);
+                $('select#country-competition-edit').trigger("chosen:updated");
+            }
+        });
+
+
+        //console.log($('#competition-international-edit').is(':checked'));
+
      }
 
 
@@ -9046,6 +9109,10 @@ var handleBootboxAddEquipoToJugador = function () {
 
             if ($('#jugador_id_edit').val() != null) {
                 loadDataBladeForPlayer($('#jugador_id_edit').val());
+            }
+
+            if($('#equipo_id_edit').val() != null){
+                loadDataForBladeEditTeam($('#equipo_id_edit').val());
             }
 
             if($('#equipo_id_edit').val() != null){

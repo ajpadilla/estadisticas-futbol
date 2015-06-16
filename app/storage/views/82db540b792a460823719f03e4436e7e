@@ -1,0 +1,105 @@
+
+
+<?php $__env->startSection("page-title"); ?>
+	<?php /*Datos <?php echo $equipo->nombre; ?> */ ?>
+<?php $__env->stopSection(); ?>
+
+<?php $__env->startSection("page-description"); ?>
+	Partido
+<?php $__env->stopSection(); ?>
+
+<?php $__env->startSection('content'); ?>
+	<div class="col-md-12">
+		<!-- BOX -->
+		<div class="box border">
+			<div class="box-title">
+				<h4><i class="fa fa-user"></i><span class="hidden-inline-mobile"><?php echo $game->localTeam->nombre; ?> vs <?php echo $game->awayTeam->nombre; ?></span></h4>
+			</div>
+			<div class="box-body">
+				<div class="tabbable header-tabs user-profile">
+					<ul class="nav nav-tabs">
+						<li>
+							<a href="#pro_alignments" data-toggle="tab" id="game-alignments">
+								<i class="fa fa-edit"></i> 
+								<span class="hidden-inline-mobile"> Alineaciones</span>
+							</a>
+						</li>
+						<li>
+							<a href="#pro_sanctions" data-toggle="tab" id="game-sanctions">
+								<i class="fa fa-edit"></i> 
+								<span class="hidden-inline-mobile"> Sanciones</span>
+							</a>
+						</li>
+						<li>
+							<a href="#pro_goals" data-toggle="tab" id="game-goals">
+								<i class="fa fa-edit"></i> 
+								<span class="hidden-inline-mobile"> Goles</span>
+							</a>
+						</li>
+						<li>
+							<a href="#pro_changes" data-toggle="tab" id="game-changes">
+								<i class="fa fa-edit"></i> 
+								<span class="hidden-inline-mobile"> Cambios</span>
+							</a>
+						</li>						
+						<li class="active">
+							<a href="#pro_resume" data-toggle="tab" id="game-resume">
+								<i class="fa fa-dot-circle-o"></i> 
+								<span class="hidden-inline-mobile">Resumen</span>
+							</a>
+						</li>
+					</ul>
+					<div class="tab-content">
+					   <!-- OVERVIEW -->
+					   <div class="tab-pane fade in active" id="pro_resume">
+					   		<?php echo $__env->make('games.profile-overview', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
+					   </div>
+					   <!-- /OVERVIEW -->
+					   
+					   <!-- EDIT ACCOUNT -->
+					   <div class="tab-pane fade" id="pro_changes">
+							<?php echo $__env->make('games.changes', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
+					   </div>
+					   <!-- /EDIT ACCOUNT -->
+					   
+					   <!-- JUGADORES TAB -->
+					   <div class="tab-pane fade" id="pro_goals">						  
+					   		<?php echo $__env->make('games.goals', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
+					   </div>
+					   <!-- /JUGADORES -->
+
+					   <!-- PARTIDOS TAB -->
+					   <div class="tab-pane fade" id="pro_sanctions">
+							<?php echo $__env->make('games.sanctions', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
+					   </div>
+					   <!-- /PARTIDOS -->			
+
+   					   <!-- PARTIDOS TAB -->
+					   <div class="tab-pane fade" id="pro_alignments">
+							<?php echo $__env->make('games.alignments', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
+					   </div>
+					   <!-- /PARTIDOS -->	
+					</div>
+				</div>
+				<!-- /USER PROFILE -->
+			</div>
+		</div>
+		<!-- /BOX -->					
+	</div>
+<?php $__env->stopSection(); ?>
+
+<?php $__env->startSection('scripts'); ?>
+	<script type="text/javascript">
+	    <?php echo $goalsTable->script($scriptTableTemplate); ?>
+
+	    <?php echo $changesTable->script($scriptTableTemplate); ?>
+
+	    <?php echo $sanctionsTable->script($scriptTableTemplate); ?>
+
+	    <?php echo $localAlignmentTable->script($scriptTableTemplate); ?>
+
+	    <?php echo $awayAlignmentTable->script($scriptTableTemplate); ?>
+
+	</script>	
+<?php $__env->stopSection(); ?>
+<?php echo $__env->make("layouts.main", array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>

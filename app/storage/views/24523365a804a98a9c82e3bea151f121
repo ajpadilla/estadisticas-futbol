@@ -1,0 +1,87 @@
+<div class="col-md-12 box-container ui-sortable">
+	<!-- BOX -->
+	<div class="box">
+		<div class="box-title">
+			<h4><i class="fa fa-bars"></i><span class="hidden-inline-mobile">Fases</span></h4>
+		</div>
+		<div class="box-body">
+			<div class="tabbable header-tabs">
+				<ul class="nav nav-tabs">
+					<?php foreach($competition->phases as $phaseTableIndex => $phase): ?>
+						<li id="li-phase-<?php echo $phase->id; ?>">
+							<a href="#tab-phase-<?php echo $phase->id; ?>" data-toggle="tab"><span class="hidden-inline-mobile"><?php echo $phase->name; ?></span></a>
+						</li>
+					<?php endforeach; ?>
+				</ul>
+				<div class="tab-content">
+					<?php foreach($competition->phases as $phaseTableIndex => $phase): ?>
+						<div class="tab-pane" id="tab-phase-<?php echo $phase->id; ?>">
+							<div class="row">
+								<div class="col-md-12">
+									<button class="edit-phase pull-right btn btn-lg btn-primary" id="edit-phase" href="<?php echo URL::route('phases.api.update', $phase->id); ?>" data-phase-id="<?php echo $phase->id; ?>">Editar Fase</button>
+									<button class="delete-phase pull-right btn btn-lg btn-primary" id="delete-phase" href="<?php echo URL::route('phases.api.delete', $phase->id); ?>" data-phase-id="<?php echo $phase->id; ?>">Eliminar Fase</button>						
+									<?php if(!$phase->isFull): ?>
+										<button class="group pull-right btn btn-lg btn-primary" id="add-group" data-phase-id="<?php echo $phase->id; ?>" href="#">Agregar grupo</button>
+									<?php endif; ?>	
+								</div>
+							</div>
+							<div class="separator"></div>
+							<div class="row">
+								<?php foreach($phase->groups as $groupTableIndex => $group): ?> 
+										<?php if($phase->twoMoreGroups): ?>
+											<div id="div-group-<?php echo $group->id; ?>" class="col-md-6">
+										<?php else: ?>
+											<div id="div-group-<?php echo $group->id; ?>" class="col-md-12">
+										<?php endif; ?>
+											<div class="box">
+												<div class="box-title">
+													<h4><i class="fa fa-bars"></i><?php echo $group->name; ?></h4>
+												</div>
+												<div class="box-body">
+													<div class="row">
+														<div class="col-md-12">
+															<button class="edit-group pull-right btn btn-lg btn-primary" id="edit-group" href="<?php echo URL::route('groups.api.update', $group->id); ?>" data-group-id="<?php echo $group->id; ?>">Editar Grupo</button>
+															<button class="delete-group pull-right btn btn-lg btn-primary" id="delete-group" href="<?php echo URL::route('groups.api.delete', $group->id); ?>" data-group-id="<?php echo $group->id; ?>">Eliminar Grupo</button>	
+															<?php if(!$group->isFullGames): ?>
+																<button class="games pull-right btn btn-lg btn-primary" id="add-game" href="#" data-refresh="1" data-group-id="<?php echo $group->id; ?>">Agregar partido</button>
+															<?php endif; ?>
+															<?php if(!$group->isFull): ?>
+																<button class="teams pull-right btn btn-lg btn-primary" id="add-team" href="<?php echo URL::route('groups.api.add.team'); ?>" competition-id="<?php echo $competition->id; ?>" data-group-id="<?php echo $group->id; ?>" data-phase-id="<?php echo $phase->id; ?>">Agregar equipo</button>
+															<?php endif; ?>		
+														</div>
+													</div>
+													<div class="separator"></div>					
+													<div class="row">
+														<div class="col-md-12">
+															<?php $table = $tables[$phase->id]['tables'][$groupTableIndex]; ?>
+															<?php echo $__env->make('partials._index-table', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
+														</div>
+													</div>											
+												</div>
+											</div>
+										</div>
+								<?php endforeach; ?>
+							</div>
+						</div>
+					<?php endforeach; ?>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- /BOX -->
+</div>
+
+<?php $__env->startSection('scripts'); ?>
+	<script type="text/javascript">
+	    jQuery(document).ready(function(){	    	
+			<?php foreach($tables as $phase): ?>
+				<?php foreach($phase['tables'] as $table): ?>
+					<?php if($scriptTableTemplate): ?>
+						<?php echo $table->script($scriptTableTemplate); ?>
+
+					<?php endif; ?>
+				<?php endforeach; ?>
+			<?php endforeach; ?>
+	    });
+	</script>	
+<?php $__env->stopSection(); ?>

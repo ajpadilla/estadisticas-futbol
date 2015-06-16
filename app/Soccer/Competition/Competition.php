@@ -150,11 +150,11 @@ class Competition extends Eloquent implements StaplerableInterface{
 
     public function getFromAttribute()
     {
-        return $this->desde->format('d-m-Y');
+        return $this->desde->format('Y-m-d');
     } 
 
     public function getToAttribute()
     {
-        return $this->hasta->format('d-m-Y');
+        return $this->hasta->format('Y-m-d');
     }     
 }

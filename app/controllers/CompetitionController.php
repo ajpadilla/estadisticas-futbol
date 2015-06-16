@@ -1,7 +1,10 @@
 <?php
 
 use soccer\Competition\CompetitionRepository;
+use soccer\TipoCompetencia\TipoCompetenciaRepository;
+use soccer\Pais\PaisRepository;
 use soccer\Competition\CompetitionFormat\CompetitionFormatRepository;
+use soccer\Forms\EditCompetitionForm;
 use soccer\Forms\RegisterCompetition;
 use soccer\Forms\RegisterGroupForm;
 use soccer\Forms\RegisterPhaseForm;
@@ -20,6 +23,9 @@ class CompetitionController extends \BaseController {
 	protected $gameTypeRepository;
 	protected $registerPhaseForm;
 	protected $phaseRepository;
+	protected $competitionTypeRepository;
+	protected $countryRepository;
+	protected $editCompetitionForm;
 
 	public function __construct(CompetitionRepository $repository,
 			CompetitionFormatRepository $competitionFormatRepository,
@@ -28,7 +34,10 @@ class CompetitionController extends \BaseController {
 			RegisterPhaseForm $registerPhaseForm,
 			GroupRepository $groupRepository,
 			GameTypeRepository $gameTypeRepository,
-			PhaseRepository $phaseRepository
+			PhaseRepository $phaseRepository,
+			TipoCompetenciaRepository $competitionTypeRepository,
+			PaisRepository $countryRepository,
+			EditCompetitionForm $editCompetitionForm
 		){
 		$this->repository = $repository;
 		$this->competitionFormatRepository = $competitionFormatRepository;
@@ -38,6 +47,9 @@ class CompetitionController extends \BaseController {
 		$this->registerGroupForm = $registerGroupForm;
 		$this->registerPhaseForm = $registerPhaseForm;
 		$this->phaseRepository = $phaseRepository;
+		$this->competitionTypeRepository = $competitionTypeRepository;
+		$this->countryRepository = $countryRepository;
+		$this->editCompetitionForm = $editCompetitionForm;
 	}
 
 	/**
@@ -102,6 +114,8 @@ class CompetitionController extends \BaseController {
 	public function show($id)
 	{
 		$competition = $this->repository->get($id);
+		$competitionsType = $this->competitionTypeRepository->getAllForSelect();
+		$countries = $this->countryRepository->getAllForSelect();
 		$gameTypes = $this->gameTypeRepository->getAll();
 		$tables = $this->repository->getGroupTables($id);
 		$gamesTables = $this->repository->getGamesTables($id);
@@ -109,7 +123,7 @@ class CompetitionController extends \BaseController {
 		$formats = $this->competitionFormatRepository->getAll();
 		//$tableTemplate = 'groups.partials._table-template';
 		$scriptTableTemplate = 'partials._script-table-template';
-		return View::make('competitions.show', compact('competition', 'tables', 'gamesTables', 'tableTemplate', 'scriptTableTemplate', 'gameTypes', 'currentPhase', 'formats'));
+		return View::make('competitions.show', compact('competition','competitionsType','countries','tables', 'gamesTables', 'tableTemplate', 'scriptTableTemplate', 'gameTypes', 'currentPhase', 'formats'));
 	}
 
 	/**
@@ -133,7 +147,19 @@ class CompetitionController extends \BaseController {
 	 */
 	public function update($id)
 	{
-		//
+		$input = Input::all();
+		$input['competition_id'] = $id;
+		//var_dump($input);
+		try
+		{
+			$this->editCompetitionForm->validate($input);
+			$competition = $this->repository->update($input);
+			return Redirect::route('competitions.show', $id);
+		}
+		catch (FormValidationException $e)
+		{
+			return Redirect::back()->withInput()->withErrors($e->getErrors());
+		}
 	}
 
 	/**
