@@ -19,7 +19,6 @@
 		"zizaco/entrust": "1.2.*@dev",
 		"barryvdh/laravel-dompdf": "0.4.*",
 		"bkwld/croppa": "~3.0",
-		"fzaninotto/faker" : "dev-master",
 		"nesbot/carbon": "~1.14",
 		"creitive/laravel4-breadcrumbs": "~1.0"
 	},
