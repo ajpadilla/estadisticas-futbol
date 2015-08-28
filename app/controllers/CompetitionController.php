@@ -23,7 +23,6 @@ class CompetitionController extends \BaseController {
 	protected $gameTypeRepository;
 	protected $registerPhaseForm;
 	protected $phaseRepository;
-	protected $competitionTypeRepository;
 	protected $countryRepository;
 	protected $editCompetitionForm;
 
@@ -35,7 +34,6 @@ class CompetitionController extends \BaseController {
 			GroupRepository $groupRepository,
 			GameTypeRepository $gameTypeRepository,
 			PhaseRepository $phaseRepository,
-			TipoCompetenciaRepository $competitionTypeRepository,
 			PaisRepository $countryRepository,
 			EditCompetitionForm $editCompetitionForm
 		){
@@ -47,7 +45,6 @@ class CompetitionController extends \BaseController {
 		$this->registerGroupForm = $registerGroupForm;
 		$this->registerPhaseForm = $registerPhaseForm;
 		$this->phaseRepository = $phaseRepository;
-		$this->competitionTypeRepository = $competitionTypeRepository;
 		$this->countryRepository = $countryRepository;
 		$this->editCompetitionForm = $editCompetitionForm;
 	}
@@ -93,7 +90,7 @@ class CompetitionController extends \BaseController {
 				$this->setSuccess(true);
 				$this->addToResponseArray('competencia', $competition->toArray());
 				$this->addToResponseArray('data', $input);
-				return $this->getResponseArrayJson();				
+				return $this->getResponseArrayJson();
 			}
 			catch (FormValidationException $e)
 			{
@@ -114,7 +111,6 @@ class CompetitionController extends \BaseController {
 	public function show($id)
 	{
 		$competition = $this->repository->get($id);
-		$competitionsType = $this->competitionTypeRepository->getAllForSelect();
 		$countries = $this->countryRepository->getAllForSelect();
 		$gameTypes = $this->gameTypeRepository->getAll();
 		$tables = $this->repository->getGroupTables($id);
@@ -123,7 +119,7 @@ class CompetitionController extends \BaseController {
 		$formats = $this->competitionFormatRepository->getAll();
 		//$tableTemplate = 'groups.partials._table-template';
 		$scriptTableTemplate = 'partials._script-table-template';
-		return View::make('competitions.show', compact('competition','competitionsType','countries','tables', 'gamesTables', 'tableTemplate', 'scriptTableTemplate', 'gameTypes', 'currentPhase', 'formats'));
+		return View::make('competitions.show', compact('competition','countries','tables', 'gamesTables', 'tableTemplate', 'scriptTableTemplate', 'gameTypes', 'currentPhase', 'formats'));
 	}
 
 	/**
@@ -193,7 +189,7 @@ class CompetitionController extends \BaseController {
 	{
 		return $this->repository->getDefaultTableForAll();
 	}
-	
+
 
 	public function addGroupApi()
 	{
@@ -207,7 +203,7 @@ class CompetitionController extends \BaseController {
 				$this->setSuccess(true);
 				$this->addToResponseArray('group', $group);
 				$this->addToResponseArray('data', $input);
-				return $this->getResponseArrayJson();					
+				return $this->getResponseArrayJson();
 			}
 			catch (FormValidationException $e)
 			{
@@ -232,7 +228,7 @@ class CompetitionController extends \BaseController {
 			$this->setSuccess(false);
 		}
 		return $this->getResponseArrayJson();
-	}	
+	}
 
 	public function getAllValue()
 	{

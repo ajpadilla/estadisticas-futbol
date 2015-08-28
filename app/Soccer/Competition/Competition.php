@@ -5,7 +5,7 @@ use Codesleeve\Stapler\ORM\StaplerableInterface;
 use Codesleeve\Stapler\ORM\EloquentTrait;
 use Carbon\Carbon;
 /**
-* 
+*
 */
 
 class Competition extends Eloquent implements StaplerableInterface{
@@ -29,15 +29,11 @@ class Competition extends Eloquent implements StaplerableInterface{
     {
         /* substitute your list of fields you want to be auto-converted to timestamps here: */
         return array('created_at', 'updated_at', 'desde', 'hasta');
-    }    
+    }
 
     /*
 	********************* Relations ***********************
-    */	
-    public function tipoCompetencia()
-    {
-    	return $this->belongsTo('soccer\TipoCompetencia\TipoCompetencia');
-    }
+    */
 
     public function country()
     {
@@ -64,24 +60,24 @@ class Competition extends Eloquent implements StaplerableInterface{
     }*/
 
     public function getTeamsAttribute()
-    {        
+    {
         $teams = new \Illuminate\Database\Eloquent\Collection;
-        foreach ($this->groups as $group) 
+        foreach ($this->groups as $group)
             foreach($group->teams as $team)
                 $teams->add($team);
         return $teams;
        //return $this->hasManyThrough('soccer\GroupTeam\GroupTeam', 'soccer\Group\Group');
        //return $this->hasManyThrough('soccer\Group\Group', 'soccer\Equipo\Equipo', 'team_id', 'group_id');
-    }   
+    }
 
     /* public function games()
     {
        return $this->belongsTo('soccer\Game\Game');
-    } */           
+    } */
 
     /*
     ********************* Custom Methods ***********************
-    */  
+    */
 
     public function getHasGamesAttribute()
     {
@@ -91,26 +87,16 @@ class Competition extends Eloquent implements StaplerableInterface{
     public function getPhasesWithGamesAttribute()
     {
         return $this->phases()->has('games')->get();
-    }    
+    }
 
     public function getFinishedAttribute()
     {
         return $this->hasta->diffInDays(null, false) > 0;
-    }    
-
-    public function getHasGroupsAttribute()
-    {
-        return $this->tipoCompetencia->grupos > 0;
     }
 
     public function getHasPhasesAttribute()
     {
         return $this->phases->count() > 0;
-    }    
-
-    public function getIsLeagueAttribute()
-    {
-        return $this->tipoCompetencia->grupos <= 1;
     }
 
     public function getIsCleanAttribute()
@@ -126,35 +112,35 @@ class Competition extends Eloquent implements StaplerableInterface{
     public function getIsFullTeamsAttribute()
     {
         if(!$this->tipoCompetencia->isTournament) {
-            $team = $this->groups()->first();        
+            $team = $this->groups()->first();
             return (!$this->hasGroups && ($team && $team->count() >= $this->tipoCompetencia->equipos_por_grupo));
         }
         return false;
-    }   
+    }
 
     public function getIsFullAllGroupsAttribute()
     {
-        foreach ($this->groups as $group) 
+        foreach ($this->groups as $group)
             if(!$group->isFull)
                 return false;
         return true;
-    } 
+    }
 
     public function getIsFullAllGamesAttribute()
     {
-        foreach ($this->groups as $group) 
+        foreach ($this->groups as $group)
             if(!$group->isFullGames)
                 return false;
         return true;
-    }   
+    }
 
     public function getFromAttribute()
     {
         return $this->desde->format('Y-m-d');
-    } 
+    }
 
     public function getToAttribute()
     {
         return $this->hasta->format('Y-m-d');
-    }     
+    }
 }

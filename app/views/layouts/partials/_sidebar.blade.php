@@ -35,16 +35,6 @@
 					<li><a id="new-team" class="" href="#new-team-form"><span class="sub-menu-text">Crear</span></a></li>
 				</ul>
 			</li>
-			{{--<li class="has-sub">
-				<a href="javascript:;" class="">
-					<i class="fa fa-bookmark-o fa-fw"></i> <span class="menu-text">Tipos de Competencia</span>
-					<span class="arrow"></span>
-				</a>
-				<ul class="sub">
-					<li><a class="" href="{{ URL::route('tipos-competencia.index') }}"><span class="sub-menu-text">Lista</span></a></li>
-					<li><a id="new-type-of-competition" class="" href="#new-type-of-competition-form"><span class="sub-menu-text">Crear</span></a></li>
-				</ul>
-			</li>--}}
 			<li class="has-sub">
 				<a href="javascript:;" class="">
 					<i class="fa fa-bookmark-o fa-fw"></i> <span class="menu-text">Formatos De Competencia</span>

@@ -20,21 +20,17 @@ class CreateCompetitionsTable extends Migration {
 			$table->date('desde');
 			$table->date('hasta');
 			$table->boolean('international')->default(false);
-			$table->integer('tipo_competencia_id')->unsigned();
-			$table->foreign('tipo_competencia_id')
-				->references('id')->on('tipo_competencias')
-				->onUpdate('cascade')->onDelete('cascade');
 			$table->timestamps();
 		});
 
 		Schema::table('competitions', function(Blueprint $table)
 		{
-				$table->integer('country_id')->unsigned()->nullable()->after('tipo_competencia_id');	
+				$table->integer('country_id')->unsigned()->nullable()->after('tipo_competencia_id');
 				$table->foreign('country_id')
-						->references('id')	
+						->references('id')
 						->on('paises')
 						->onDelete('no action')
-						->onUpdate('cascade');	
+						->onUpdate('cascade');
 		});
 	}
 
