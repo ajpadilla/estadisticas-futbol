@@ -131,7 +131,7 @@ return array(
 		'Chumper\Datatable\DatatableServiceProvider',
 		//'Laracasts\Flash\FlashServiceProvider',
 		//'Intervention\Image\ImageServiceProvider',
-	    'Codesleeve\LaravelStapler\LaravelStaplerServiceProvider',
+	    'Codesleeve\LaravelStapler\Providers\L4ServiceProvider',
         'Creitive\Breadcrumbs\BreadcrumbsServiceProvider'
 	),
 
