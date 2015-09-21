@@ -9,7 +9,7 @@ class RegisterCompetition extends FormValidator{
           'hasta' =>'required|date_format:Y-m-d',
           'internacional' => 'boolean',
           'country_id' =>'numeric|exists:paises,id',
-          'tipo_competencia_id' => 'required|exists:tipo_competencias,id',
+          'competition-format-id' => 'required|exists:competition_formats,id',
           'imagen' =>'image'
      ];
 }

@@ -90,15 +90,13 @@ class CompetitionController extends \BaseController {
 				$this->setSuccess(true);
 				$this->addToResponseArray('competencia', $competition->toArray());
 				$this->addToResponseArray('data', $input);
-				return $this->getResponseArrayJson();
 			}
 			catch (FormValidationException $e)
 			{
-				$this->setSuccess(false);
 				$this->addToResponseArray('errores', $e->getErrors()->all());
-				return $this->getResponseArrayJson();
 			}
 		}
+		return $this->getResponseArrayJson();
 	}
 
 	/**

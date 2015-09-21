@@ -174,23 +174,4 @@ class TipoCompetenciaController extends \BaseController {
 		}
 	}
 
-	public function getAllValue()
-	{
-		if(Request::ajax())
-		{
-			$tipoCompetencias = $this->repository->getAllForSelect();
-			if (count($tipoCompetencias) > 0) {
-				$this->setSuccess(true);
-				$this->addToResponseArray('data', $tipoCompetencias);
-				return $this->getResponseArrayJson();
-			}else{
-				$this->setSuccess(false);
-				return $this->getResponseArrayJson();
-			}
-		}else{
-				$this->setSuccess(false);
-				return $this->getResponseArrayJson();
-		}
-	}
-
 }

@@ -147,12 +147,12 @@
 		<a id="eliminar-equipo" href="{{ URL::route('equipos.api.eliminar') }}"></a>
 		<a id="number-exists" href="{{ URL::route('equipos.api.number.exist') }}"></a>
 		<a id="verificar-jugador-equipo" href="{{ URL::route('equipos.api.verificar-jugador') }}"></a>
-		<!--Route Tipo Compentencia-->
-		<a id="agregar-tipo-competencia" href="{{ URL::route('tipos-competencia.store') }}"></a>
-		<a id="editar-tipo-competencia" href="{{ URL::route('tipos-competencia.api.update') }}"></a>
-		<a id="ver-tipo-competencia" href="{{ URL::route('tipos-competencia.api.show') }}"></a>
-		<a id="eliminar-tipo-competencia" href="{{ URL::route('tipos-competencia.api.eliminar') }}"></a>
-		<a id="lista-tipos-competencias" href="{{ URL::route('tipos-competencia.api.select.list') }}"></a>
+		<!--Route Formato Compentencia-->
+		<a id="agregar-tipo-competencia" href="{{-- URL::route('tipos-competencia.store') --}}"></a>
+		<a id="editar-tipo-competencia" href="{{-- URL::route('tipos-competencia.api.update') --}}"></a>
+		<a id="ver-tipo-competencia" href="{{-- URL::route('tipos-competencia.api.show') --}}"></a>
+		<a id="eliminar-tipo-competencia" href="{{-- URL::route('tipos-competencia.api.eliminar') --}}"></a>
+		<a id="competition-format-list" href="{{ URL::route('competitionFormats.api.select.list') }}"></a>
 		<!--Route Competencía-->
 		<a id="agregar-competencia" href="{{ URL::route('competencias.store') }}"></a>
 		<a id="eliminar-competencia" href="{{ URL::route('competencias.api.eliminar') }}"></a>

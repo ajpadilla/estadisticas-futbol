@@ -2957,7 +2957,7 @@ var handleBootboxAddEquipoToJugador = function () {
 
         var updateCompetitionForm = function() {
             $("#competition-form").trigger("reset");
-            loadFieldSelect($('#lista-tipos-competencias').attr('href'),'#tipos-competencias');
+            loadFieldSelect($('#competition-format-list').attr('href'),'#competition-format');
             loadFieldSelect($('#lista-paises').attr('href'),'#pais-competencias');
         }
 

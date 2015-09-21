@@ -147,12 +147,12 @@
 		<a id="eliminar-equipo" href="<?php echo URL::route('equipos.api.eliminar'); ?>"></a>
 		<a id="number-exists" href="<?php echo URL::route('equipos.api.number.exist'); ?>"></a>
 		<a id="verificar-jugador-equipo" href="<?php echo URL::route('equipos.api.verificar-jugador'); ?>"></a>
-		<!--Route Tipo Compentencia-->
-		<a id="agregar-tipo-competencia" href="<?php echo URL::route('tipos-competencia.store'); ?>"></a>
-		<a id="editar-tipo-competencia" href="<?php echo URL::route('tipos-competencia.api.update'); ?>"></a>
-		<a id="ver-tipo-competencia" href="<?php echo URL::route('tipos-competencia.api.show'); ?>"></a>
-		<a id="eliminar-tipo-competencia" href="<?php echo URL::route('tipos-competencia.api.eliminar'); ?>"></a>
-		<a id="lista-tipos-competencias" href="<?php echo URL::route('tipos-competencia.api.select.list'); ?>"></a>
+		<!--Route Formato Compentencia-->
+		<a id="agregar-tipo-competencia" href="<?php /* URL::route('tipos-competencia.store') */ ?>"></a>
+		<a id="editar-tipo-competencia" href="<?php /* URL::route('tipos-competencia.api.update') */ ?>"></a>
+		<a id="ver-tipo-competencia" href="<?php /* URL::route('tipos-competencia.api.show') */ ?>"></a>
+		<a id="eliminar-tipo-competencia" href="<?php /* URL::route('tipos-competencia.api.eliminar') */ ?>"></a>
+		<a id="competition-format-list" href="<?php echo URL::route('competitionFormats.api.select.list'); ?>"></a>
 		<!--Route Competencía-->
 		<a id="agregar-competencia" href="<?php echo URL::route('competencias.store'); ?>"></a>
 		<a id="eliminar-competencia" href="<?php echo URL::route('competencias.api.eliminar'); ?>"></a>

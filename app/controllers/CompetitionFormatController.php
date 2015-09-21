@@ -119,6 +119,19 @@ class CompetitionFormatController extends \BaseController {
 		return $this->repository->getDefaultTableForAll();
 	}
 
+	public function listSelectApi()
+	{
+		if(Request::ajax())
+		{
+			$competitionFormats = $this->repository->getAllForSelect();
+			if (count($competitionFormats) > 0) {
+				$this->setSuccess(true);
+				$this->addToResponseArray('data', $competitionFormats);
+			}
+		}
+		return $this->getResponseArrayJson();
+	}
+
 	public function destroyApi()
 	{
 		if(Request::ajax())

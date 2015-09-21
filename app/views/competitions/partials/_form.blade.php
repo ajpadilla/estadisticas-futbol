@@ -33,9 +33,9 @@
 						<div class="col-md-6">{{ Form::text('hasta', null, ['class' => 'form-control datepicker', 'id'=>'hasta-competencia']) }}</div>
 					</div>
 					<div class="form-group">
-						{{ Form::label('tipo_competencia_id','Tipo De Competencía',['class'=>'col-sm-2 control-label']) }}
+						{{ Form::label('competition-format-id','Formato de competencía',['class'=>'col-sm-2 control-label']) }}
 						<div class="col-sm-6">
-							{{ Form::select('tipo_competencia_id',array(),null,['class' => 'form-control chosen-select','data-placeholder' => 'Escoge Tipo...','id'=> 'tipos-competencias']) }}
+							{{ Form::select('competition-format-id',array(),null,['class' => 'form-control chosen-select','data-placeholder' => 'Escoge formato...','id'=> 'competition-format']) }}
 						</div>
 					</div>
 					<div class="form-group">

@@ -103,6 +103,7 @@ Route::get('admin/posiciones/api-eliminar',  ['as' => 'posiciones.api.eliminar',
 /*
 ********************************* RUTAS PARA TIPOS DE COMPETENCIAS ********************************
 */
+/*
 Route::get('admin/tipos-competencia', ['as' => 'tipos-competencia.index', 'uses' => 'TipoCompetenciaController@index']);
 Route::get('admin/tipos-competencia/nuevo', ['as' => 'tipos-competencia.create', 'uses' => 'TipoCompetenciaController@create'] );
 Route::post('admin/tipos-competencia/guardar', ['as' => 'tipos-competencia.store', 'uses' => 'TipoCompetenciaController@store' ] );
@@ -110,13 +111,33 @@ Route::post('admin/tipos-competencia/guardar', ['as' => 'tipos-competencia.store
 Route::get('admin/tipos-competencia/editar/{id}',  ['as' => 'tipos-competencia.edit','uses' => 'TipoCompetenciaController@edit' ] );
 Route::post('admin/tipos-competencia/actualizar/{id}',  ['as' => 'tipos-competencia.update','uses' => 'TipoCompetenciaController@update' ] );
 Route::get('admin/tipos-competencia/eliminar/{id}',  ['as' => 'tipos-competencia.delete','uses' => 'TipoCompetenciaController@destroy' ] );
-
 Route::get('admin/tipos-competencia/api-eliminar',  ['as' => 'tipos-competencia.api.eliminar','uses' => 'TipoCompetenciaController@destroyApi' ] );
 Route::get('admin/tipos-competencia/api-lista', array('as'=>'tipos-competencia.api.lista', 'uses'=>'TipoCompetenciaController@listaApi'));
 Route::post('admin/tipos-competencia/api-actualizar',  ['as' => 'tipos-competencia.api.update','uses' => 'TipoCompetenciaController@updateApi' ] );
 //Route::get('admin/tipos-competencia/api-jugadores/{id}', array('as'=>'tipos-competencia.api.jugadores', 'uses'=>'TipoCompetenciaController@jugadoresApi'));
 Route::get('admin/tipos-competencia/api-ver',  ['as' => 'tipos-competencia.api.show','uses' => 'TipoCompetenciaController@showApi' ] );
 Route::get('admin/tipos-competencia/api-seleccionar-lista',  ['as' => 'tipos-competencia.api.select.list','uses' => 'TipoCompetenciaController@getAllValue' ] );
+*/
+
+
+/*
+********************************* Competition Formats ********************************
+*/
+
+Route::get('admin/formatos-competicia', ['as' => 'competitionFormats.index', 'uses' => 'CompetitionFormatController@index']);
+Route::get('admin/formatos-competicia/nuevo', ['as' => 'competitionFormats.create', 'uses' => 'CompetitionFormatController@create'] );
+Route::post('admin/formatos-competicia/guardar', ['as' => 'competitionFormats.store', 'uses' => 'CompetitionFormatController@store' ] );
+Route::get('admin/formatos-competicia/ver/{id}', ['as' => 'competitionFormats.show', 'uses' => 'CompetitionFormatController@show' ] );
+Route::get('admin/formatos-competicia/editar/{id}',  ['as' => 'competitionFormats.edit','uses' => 'CompetitionFormatController@edit' ] );
+Route::post('admin/formatos-competicia/actualizar/{id}',  ['as' => 'competitionFormats.update','uses' => 'CompetitionFormatController@update' ] );
+Route::get('admin/formatos-competicia/eliminar/{id}',  ['as' => 'competitionFormats.destroy','uses' => 'CompetitionFormatController@destroy' ] );
+
+Route::get('admin/formatos-competicia/api-lista', array('as'=>'competitionFormats.api.list', 'uses'=>'CompetitionFormatController@listApi'));
+Route::get('admin/formatos-competicia/api-seleccionar-lista',  ['as' => 'competitionFormats.api.select.list','uses' => 'CompetitionFormatController@listSelectApi' ] );
+Route::get('admin/formatos-competicia/api-eliminar', array('as'=>'competitionFormats.api.delete', 'uses'=>'CompetitionFormatController@destroyApi'));
+Route::get('admin/formatos-competicia/api-ver', array('as'=>'competitionFormats.api.show', 'uses'=>'CompetitionFormatController@showApi'));
+Route::post('admin/formatos-competicia/api-actualizar',  ['as' => 'competitionFormats.api.update','uses' => 'CompetitionFormatController@updateApi' ] );
+
 /*
 ********************************* RUTAS PARA COMPETENCIAS ********************************
 */
@@ -253,24 +274,6 @@ Route::get('admin/tipo-goles/api-lista', array('as'=>'goal-types.api.list', 'use
 Route::get('admin/tipo-goles/api-ver', array('as'=>'goal-types.api.show', 'uses'=>'GoalTypeController@showApi'));
 Route::post('admin/tipo-goles/api-actualizar',  ['as' => 'goal-types.api.update','uses' => 'GoalTypeController@updateApi' ] );
 Route::get('admin/tipo-goles/api-eliminar', array('as'=>'goal-types.api.delete', 'uses'=>'GoalTypeController@destroyApi'));
-
-
-/*
-********************************* Competition Formats ********************************
-*/
-
-Route::get('admin/formatos-competicia', ['as' => 'competitionFormats.index', 'uses' => 'CompetitionFormatController@index']);
-Route::get('admin/formatos-competicia/nuevo', ['as' => 'competitionFormats.create', 'uses' => 'CompetitionFormatController@create'] );
-Route::post('admin/formatos-competicia/guardar', ['as' => 'competitionFormats.store', 'uses' => 'CompetitionFormatController@store' ] );
-Route::get('admin/formatos-competicia/ver/{id}', ['as' => 'competitionFormats.show', 'uses' => 'CompetitionFormatController@show' ] );
-Route::get('admin/formatos-competicia/editar/{id}',  ['as' => 'competitionFormats.edit','uses' => 'CompetitionFormatController@edit' ] );
-Route::post('admin/formatos-competicia/actualizar/{id}',  ['as' => 'competitionFormats.update','uses' => 'CompetitionFormatController@update' ] );
-Route::get('admin/formatos-competicia/eliminar/{id}',  ['as' => 'competitionFormats.destroy','uses' => 'CompetitionFormatController@destroy' ] );
-
-Route::get('admin/formatos-competicia/api-lista', array('as'=>'competitionFormats.api.list', 'uses'=>'CompetitionFormatController@listApi'));
-Route::get('admin/formatos-competicia/api-eliminar', array('as'=>'competitionFormats.api.delete', 'uses'=>'CompetitionFormatController@destroyApi'));
-Route::get('admin/formatos-competicia/api-ver', array('as'=>'competitionFormats.api.show', 'uses'=>'CompetitionFormatController@showApi'));
-Route::post('admin/formatos-competicia/api-actualizar',  ['as' => 'competitionFormats.api.update','uses' => 'CompetitionFormatController@updateApi' ] );
 
 /*
 ********************************* Public page routes ********************************
