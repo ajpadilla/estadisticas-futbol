@@ -90,6 +90,7 @@ class PlayerRepository extends BaseRepository
 		return !$player->equipos()
 					   ->whereRaw("'$from' BETWEEN fecha_inicio AND fecha_fin")
 					   ->orWhereRaw("'$to' BETWEEN fecha_inicio AND fecha_fin")
+					   ->where('tipo', '!=', 'seleccion')
 					   ->count();
 	}
 

@@ -78,14 +78,12 @@ class PlayerController extends \BaseController {
 				$this->addToResponseArray('jugador', $jugador->toArray());
 				$this->addToResponseArray('urlFoto', $jugador->foto->url());
 				$this->addToResponseArray('data', $input);
-				return $this->getResponseArrayJson();
 			}
 			catch (FormValidationException $e)
 			{
-				$this->setSuccess(false);
 				$this->addToResponseArray('errors', $e->getErrors()->all());
-				return $this->getResponseArrayJson();
 			}
+			return $this->getResponseArrayJson();
 		}
 	}
 
@@ -244,7 +242,7 @@ class PlayerController extends \BaseController {
 		if(Request::ajax()) {
 			$id = Input::get('id');
 			$this->setSuccess($this->repository->addEquipo($id, Input::all()));
-		}
+		} 
 		return $this->getResponseArrayJson();
 	}
 
