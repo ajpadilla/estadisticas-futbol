@@ -16,7 +16,7 @@ class AddPhaseIdToGroupsTable extends Migration {
 		{
 			$table->integer('phase_id')->unsigned()->nullable()->after('name');
 			$table->foreign('phase_id')->references('id')->on('phases')->onDelete('cascade');
-			$table->unique('name', 'phase_id');
+			$table->unique(['name', 'phase_id']);
 		});
 	}
 

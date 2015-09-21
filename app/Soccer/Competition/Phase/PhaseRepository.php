@@ -3,6 +3,7 @@
 use soccer\Base\BaseRepository;
 use soccer\Group\GroupRepository;
 use soccer\Competition\Phase\Phase;
+use soccer\Equipo\EquipoRepository;
 use Carbon\Carbon;
 
 /**
@@ -37,9 +38,9 @@ class PhaseRepository extends BaseRepository
 	public function getAvailableTeamsForGroup($id, $forList = true)
 	{
 		$phase = $this->get($id);
+		$teams = array();
 		if($phase->groups->count()) {
 			$groupRepository = new GroupRepository;
-			$teams = array();
 			foreach ($phase->groups as $group)
 			{
 			    $availableTeams = $groupRepository->getAvailableTeams($group->id, $forList);
@@ -48,7 +49,14 @@ class PhaseRepository extends BaseRepository
 			    		$teams[] = $team;
 			}
 			return empty($teams) ? false : array_unique($teams, SORT_REGULAR);
+		} else {
+			$equipoRepository = new EquipoRepository;
+			return $phase
+					->competition
+					->country
+					->teams()
+					->clubes()
+					->lists('nombre', 'id');
 		}
-		return false;
 	}	
 }
