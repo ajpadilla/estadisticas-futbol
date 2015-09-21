@@ -2012,6 +2012,12 @@ var handleBootboxAddJugadorToEquipo = function () {
                             },
                             numero: function() {
                                 return $( "#numero" ).val();
+                            }, 
+                            from: function() {
+                                return $( "#desde" ).val();
+                            }, 
+                            to: function() {
+                                return $( "#hasta" ).val();
                             }
                         }
                     }
