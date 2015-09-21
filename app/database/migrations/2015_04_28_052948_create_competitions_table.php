@@ -25,7 +25,7 @@ class CreateCompetitionsTable extends Migration {
 
 		Schema::table('competitions', function(Blueprint $table)
 		{
-				$table->integer('country_id')->unsigned()->nullable()->after('tipo_competencia_id');
+				$table->integer('country_id')->unsigned()->nullable()->after('international');
 				$table->foreign('country_id')
 						->references('id')
 						->on('paises')
