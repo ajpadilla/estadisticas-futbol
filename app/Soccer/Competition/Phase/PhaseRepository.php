@@ -37,31 +37,37 @@ class PhaseRepository extends BaseRepository
 
 	public function getAvailableTeamsForGroup($id, $forList = true)
 	{
+		$equipoRepository = new EquipoRepository;
 		$phase = $this->get($id);
-		$teams = array();
+		$teams = [];
 		if($phase->groups->count()) {
 			$groupRepository = new GroupRepository;
+			$excludeTeams = [];
 			foreach ($phase->groups as $group)
-			{
-			    $availableTeams = $groupRepository->getAvailableTeams($group->id, $forList);
-			    if(count($availableTeams))
-			    	foreach ($availableTeams as $team) 
-			    		$teams[] = $team;
-			}
-			return empty($teams) ? false : array_unique($teams, SORT_REGULAR);
+				foreach ($group->teams as $team) 
+					$excludeTeams[] = $team->id;
+
+			if($phase->competition->international) 
+				$availableTeams = $equipoRepository->getAll($excludeTeams);
+			else
+				$availableTeams = $equipoRepository->getByCountry($phase->competition->country, $excludeTeams);				
+
+		    if(count($availableTeams))
+		    	foreach ($availableTeams as $team) 
+		    		$teams[] = $team;
 		} else {
-			$equipoRepository = new EquipoRepository;
-			$teamsLst = $phase
+			$teams = $phase
 					->competition
 					->country
 					->teams()
 					->clubes()
-					->lists('nombre', 'id');
-			$teams = [];
-			foreach ($teamsLst as $id => $name) {
-				$teams[] = ['id' => $id, 'name' => $name];
-			}
-			return $teams;
+					->get();
 		}
+		if($teams && count($teams)) {
+			$tmpTeams = [];
+			foreach ($teams as $team) 
+				$tmpTeams[] = ['id' => $team->id, 'name' => $team->nombre];
+		}
+		return empty($tmpTeams) ? false : array_unique($tmpTeams, SORT_REGULAR);
 	}	
 }
