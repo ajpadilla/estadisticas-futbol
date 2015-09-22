@@ -51,12 +51,17 @@ class PhaseRepository extends BaseRepository
 			return empty($teams) ? false : array_unique($teams, SORT_REGULAR);
 		} else {
 			$equipoRepository = new EquipoRepository;
-			return $phase
+			$teamsLst = $phase
 					->competition
 					->country
 					->teams()
 					->clubes()
 					->lists('nombre', 'id');
+			$teams = [];
+			foreach ($teamsLst as $id => $name) {
+				$teams[] = ['id' => $id, 'name' => $name];
+			}
+			return $teams;
 		}
 	}	
 }

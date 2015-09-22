@@ -3500,8 +3500,8 @@ var handleBootboxAddEquipoToJugador = function () {
                     {
                         $(id).html('');
                         $(id).append('<option value=\"\"></option>');
-                        $.each(data, function (teamId, teamName){
-                            $(id).append('<option value=\"'+teamId+'\">'+teamName+'</option>');
+                        $.each(data, function (i, team){
+                            $(id).append('<option value=\"'+team.id+'\">'+team.name+'</option>');
                             $(id).trigger("chosen:updated");
                         });
                     }else{
