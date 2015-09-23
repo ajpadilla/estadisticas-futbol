@@ -21,6 +21,7 @@ class CompetitionFormat extends Eloquent {
     {
         return ($value ? 'Si' : 'No');
     }
+
     public function getLocalAwayGameFinalAttribute($value)
     {
         return ($value ? 'Si' : 'No');
@@ -28,6 +29,19 @@ class CompetitionFormat extends Eloquent {
     public function getAwayGoalAttribute($value)
     {
         return ($value ? 'Si' : 'No');
+    }
+
+    public function getIsLocalAwayGameAttribute()
+    {
+        return ($this->local_away_game == 'Si' ? true : false);
+    }
+    public function getIsLocalAwayGameFinalAttribute()
+    {
+        return ($this->local_away_game_final == 'Si' ? true : false);
+    }
+    public function getIsAwayGoalAttribute()
+    {
+        return ($this->away_goal_game == 'Si' ? true : false);
     }
 
 }
