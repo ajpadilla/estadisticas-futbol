@@ -149,7 +149,6 @@ class GroupController extends \BaseController {
 				$this->setSuccess(($game ? true : false));
 				$this->addToResponseArray('data', ($game ? $game : $input));
 			} catch (FormValidationException $e) {
-				$this->setSuccess(false);
 				$this->addToResponseArray('data', $input);
 				$this->addToResponseArray('errors', $e->getErrors()->all());
 			}		
@@ -163,7 +162,7 @@ class GroupController extends \BaseController {
 		{
 			$teams = $this->repository->getTeamsWithoutFullGames($id);
 			$this->setSuccess(($teams ? true : false));
-			$this->addToResponseArray('data', ($teams ? $teams : $input));
+			$this->addToResponseArray('data', ($teams ? $teams : $id));
 		}
 		return $this->getResponseArrayJson();		
 	}

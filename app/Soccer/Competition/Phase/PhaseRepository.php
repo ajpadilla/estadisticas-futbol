@@ -56,12 +56,11 @@ class PhaseRepository extends BaseRepository
 		    	foreach ($availableTeams as $team) 
 		    		$teams[] = $team;
 		} else {
-			$teams = $phase
-					->competition
-					->country
-					->teams()
-					->clubes()
-					->get();
+			$teams = $phase->competition
+						   ->country
+						   ->teams()
+						   ->clubes()
+						   ->get();
 		}
 		if($teams && count($teams)) {
 			$tmpTeams = [];
