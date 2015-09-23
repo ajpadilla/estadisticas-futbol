@@ -104,7 +104,7 @@ class GroupRepository extends BaseRepository
 	{
 		$group = $this->get($id);
 		if($group && !empty($game)) {
-			if(!$this->gameAlreadyExists($group->id, $game['local_team_id'], $game['away_team_id'])){
+			if(!$group->isFullGames && !$this->gameAlreadyExists($group->id, $game['local_team_id'], $game['away_team_id'])){
 				$gameRepository = new GameRepository;
 				$game = $gameRepository->create($game);
 				return $game;
