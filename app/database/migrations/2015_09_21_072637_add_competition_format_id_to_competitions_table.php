@@ -33,6 +33,7 @@ class AddCompetitionFormatIdToCompetitionsTable extends Migration {
 	{
 		Schema::table('competitions', function(Blueprint $table)
 		{
+			$table->dropForeign('competitions_competition_format_id_foreign');
 			$table->dropColumn('competition_format_id');
 		});
 	}
