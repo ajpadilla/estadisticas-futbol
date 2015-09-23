@@ -168,6 +168,7 @@
 		<a id="teams-available-for-games" href="{{ URL::route('groups.api.teams.availables.game') }}"></a>
 		<a id="add-new-alignment-for-game" href="{{ URL::route('games.api.add.alignment') }}"></a>
 		<a id="delete-group" href="{{ URL::route('groups.api.delete') }}"></a>
+		<a id="delete-game" href="{{ URL::route('games.api.delete') }}"></a>
 		<!--Phases-->
 		<a id="add-new-phase-competition" href="{{ URL::route('competitions.api.add.phase') }}"></a>
 		<a id="list-teams-phase-competition" href="{{ URL::route('phases.api.teams.availables.group') }}"></a>

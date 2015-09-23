@@ -4178,6 +4178,40 @@ var handleBootboxAddEquipoToJugador = function () {
         });
     }
 
+    //Metodo para eliminar juego de la BD.
+    var deleteGame = function (idGame) {
+        bootbox.confirm("¿Esta seguro de eliminar el Juego?", function(result) {
+            //console.log("Confirm result: "+result);
+            if (result == true){
+                $.ajax({
+                    type: 'GET',
+                    url: $('#delete-game').attr('href'),
+                    data: {'idGame': idGame},
+                    dataType: "JSON",
+                    success: function(response) {
+                        if (response.success == true) {
+                            $('#delete_game' + idGame).parent().parent().remove();
+                            bootbox.dialog({
+                                message:" ¡Juego Eliminado!",
+                                title: "Éxito",
+                                buttons: {
+                                    success: {
+                                        label: "Success!",
+                                        className: "btn-success",
+                                        callback: function () {
+                                            reloadDatatable('#datatable');
+                                        }
+                                    }
+                                }
+                            });
+                        };
+                    }
+                });
+            };
+        });
+    }
+
+
 
     var handleBootboxAddGameToGroupCompetition = function () {
         $("button.games").on("click", function() {
@@ -7852,11 +7886,11 @@ var handleBootboxAddEquipoToJugador = function () {
 
     var implementActionsToGame = function()
     {
-        /*$(".table").delegate(".delete-competition-format", "click", function() {
-             action = getAttributeIdActionSelect($(this).attr('id'));
-             //console.log(action);
-             deleteCompetitionFormat(action.number);
-        });*/
+        $(".table").delegate(".delete-game", "click", function() {
+            action = getAttributeIdActionSelect($(this).attr('id'));
+            //console.log(action);
+            deleteGame(action.number);
+        });
 
         $(".table").delegate(".edit-game", "click", function() {
              action = getAttributeIdActionSelect($(this).attr('id'));

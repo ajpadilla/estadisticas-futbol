@@ -192,6 +192,7 @@ Route::post('admin/juegos/api-agregar-alineacion', ['as' => 'games.api.add.align
 Route::post('admin/juegos/api-agregar-cambio', ['as' => 'games.api.add.change', 'uses' => 'GameController@addChangeApi']);
 Route::post('admin/juegos/api-agregar-gol', ['as' => 'games.api.add.goal', 'uses' => 'GameController@addGoalApi']);
 Route::post('admin/juegos/api-agregar-sancion', ['as' => 'games.api.add.sanction', 'uses' => 'GameController@addSantionApi']);
+Route::get('admin/juegos/api-eliminar', ['as' => 'games.api.delete', 'uses' => 'GameController@destroyApi']);
 
 Route::get('admin/juegos/api-equipos-disponibles-juego/{id}', ['as' => 'games.api.teams.availables.game', 'uses' => 'GameController@getAvailableTeams']);
 Route::get('admin/juegos/api-jugadores-disponible-equipo/{id}/{teamId}', ['as' => 'games.api.available.players.team', 'uses' => 'GameController@getAvailablePlayersForTeam']);
