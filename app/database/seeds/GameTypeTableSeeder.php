@@ -29,7 +29,7 @@ class GameTypeTableSeeder extends DatabaseSeeder{
         	'name' => 'Eliminatorio',
             'created_at' => $date->format('Y-m-d h:m:s'),
             'updated_at' => $date->format('Y-m-d h:m:s')            
-        );        
+        );
 
         DB::table('game_types')->insert($groups);
 	}
