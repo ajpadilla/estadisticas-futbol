@@ -16,8 +16,8 @@
 								<table class="table table-hover">
 									<tbody>
 										<tr>
-											<td>Tipo de Competencia</td>
-											<td id="card-name"><strong><a id="show-competition-type" href="{{ route('tipos-competencia.api.show', $competition->tipoCompetencia->id) }}">{{ $competition->tipoCompetencia->nombre }}</a></strong></td>
+											<td>Formato de Competencia</td>
+											<td id="card-name"><strong><a id="show-competition-type" href="{{ route('competitionFormats.api.show', $competition->competitionFormat->id) }}">{{ $competition->competitionFormat->name }}</a></strong></td>
 										</tr>
 										<tr>
 											<td>Inicia</td>

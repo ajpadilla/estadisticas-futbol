@@ -15,7 +15,6 @@ class CompetitionRepository extends BaseRepository
 			'Nombre',
 			'Inicia',
 			'Finaliza',
-			'Tipo de competencia',
 			'Acciones'
 		];
 
@@ -103,8 +102,8 @@ class CompetitionRepository extends BaseRepository
 
 	public function setBodyTableSettings()
 	{
-		$this->collection->searchColumns('Nombre', 'Inicia', 'Finaliza', 'Tipo de competencia');
-		$this->collection->orderColumns('Nombre', 'Inicia', 'Finaliza', 'Tipo de competencia');
+		$this->collection->searchColumns('Nombre', 'Inicia', 'Finaliza');
+		$this->collection->orderColumns('Nombre', 'Inicia', 'Finaliza');
 
 		$this->collection->addColumn('Nombre', function($model)
 		{
@@ -121,10 +120,10 @@ class CompetitionRepository extends BaseRepository
 			 return $model->to;
 		});
 
-		$this->collection->addColumn('Tipo de competencia', function($model)
+		/*$this->collection->addColumn('Tipo de competencia', function($model)
 		{
 			 return $model->tipoCompetencia->nombre;
-		});
+		});*/
 	}		
 
 	public function getGroupTables($id)

@@ -11,7 +11,7 @@ use Carbon\Carbon;
 class Competition extends Eloquent implements StaplerableInterface{
 	use EloquentTrait;
 
-	protected $fillable = ['nombre','imagen','desde','hasta','international','tipo_competencia_id','country_id'];
+	protected $fillable = ['nombre','imagen','desde','hasta','international','competition_format_id','country_id'];
 
  	public function __construct(array $attributes = array()) {
         $this->hasAttachedFile('imagen', [
@@ -39,6 +39,11 @@ class Competition extends Eloquent implements StaplerableInterface{
     {
         return $this->belongsTo('soccer\Pais\Pais');
     }
+
+    public function competitionFormat()
+    {
+        return $this->belongsTo('soccer\CompetitionFormats\CompetitionFormat');
+    }    
 
     public function phases()
     {

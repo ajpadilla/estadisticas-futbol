@@ -168,25 +168,20 @@ class PhaseController extends \BaseController {
 			}
 			catch (FormValidationException $e)
 			{
-				$this->setSuccess(false);
 				$this->addToResponseArray('data', $input);
 				$this->addToResponseArray('errors', $e->getErrors()->all());
 			}
-			return $this->getResponseArrayJson();
-
 		}
+		return $this->getResponseArrayJson();
 	}
 
 	public function getAvailableTeams($id)
 	{
 		if(Request::ajax())
 		{
-			//$teams = [];
 			$teams = $this->repository->getAvailableTeamsForGroup($id);
 			$this->setSuccess(true);
 			$this->addToResponseArray('data', ($teams ? $teams : array()));
-		}else{
-			$this->setSuccess(false);
 		}
 		return $this->getResponseArrayJson();
 	}	

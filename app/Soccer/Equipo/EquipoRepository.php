@@ -74,8 +74,9 @@ class EquipoRepository extends BaseRepository
 
 	public	function getByCountry($country, $exclude = null)
 	{
-		if($exclude)
-			return $country->teams()->whereNotIn('id', $exclude)->get();
+		if($exclude) {
+			return $country->teams()->clubes()->whereNotIn('id', $exclude)->get();
+		}
 		return $country->teams;
 	}
 
@@ -351,9 +352,22 @@ class EquipoRepository extends BaseRepository
 		})->count();
 	}
 
-	public function existeNumero($id, $numero)
+	public function existeNumero($id, $numero, $from, $to)
 	{
-		return ($this->get($id)->jugadores()->whereNumero($numero)->whereFechaFin(null)->count() ? true : false);
+		return (
+				$this->get($id)
+					 ->jugadores()
+					 ->whereNumero($numero)
+					 ->whereRaw("
+							(
+							    (
+							        '$from' BETWEEN fecha_inicio AND fecha_fin or 
+								 	'$to' BETWEEN fecha_inicio AND fecha_fin
+							    ) or 
+							 	( '$from' >= fecha_inicio AND (fecha_fin IS NULL OR fecha_fin = '0000-00-00') )
+							)
+					 	")
+					 ->count() ? true : false);
 	}
 
 	public function deleteImageDirectory($id)

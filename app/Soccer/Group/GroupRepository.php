@@ -104,15 +104,11 @@ class GroupRepository extends BaseRepository
 	{
 		$group = $this->get($id);
 		if($group && !empty($game)) {
-			if(!$this->gameAlreadyExists($group->id, $game['local_team_id'], $game['away_team_id'])){
+			if(!$group->isFullGames && !$this->gameAlreadyExists($group->id, $game['local_team_id'], $game['away_team_id'])){
 				$gameRepository = new GameRepository;
 				$game = $gameRepository->create($game);
 				return $game;
-			} else {
-				return false;
 			}
-		} else {
-			return false;
 		}
 	}
 
@@ -136,7 +132,7 @@ class GroupRepository extends BaseRepository
 		if(!empty($teams) && $forList) {
 			$listTeams = array();
 			foreach ($teams as $team) 
-				$listTeams[] = array('name' => $team->nombre, 'id' => $team->id);
+				$listTeams[] = array('id' => $team->id, 'name' => $team->nombre);
 			$teams = $listTeams;
 		}
 		return $teams;
@@ -152,30 +148,26 @@ class GroupRepository extends BaseRepository
 	public function getTeamsWithoutFullGames($id)
 	{
 		$group = $this->get($id);
-		if(!$group->isFullGames)
-		{
-			$unavailableTeams = array();
-			$teams = $group->teams;
-			for ($i=0; $i < count($teams); $i++) { 
-				$allLocalGames = true;
-				$allAwayGames = true;
-				$localTeam = $teams[$i];
-				for ($j=0; $j < count($teams); $j++) { 
-					if($j != $i) {
-						$awayTeam = $teams[$j];
-						$allLocalGames = $this->gameAlreadyExists($id, $localTeam->id, $awayTeam->id); 
-						$allAwayGames = $this->gameAlreadyExists($id, $awayTeam->id, $localTeam->id);
+		if($group && !$group->isFullGames) {
+			$availableTeams = new Collection();
+			$teams  =  $group->teams;
+			$teams2 =  $teams;
 
-						if(!$allLocalGames || !$allAwayGames)
+			foreach ($teams as $key => $team) {
+				foreach ($teams2 as $key2 => $team2) {
+					if ($team->id != $team2->id) {
+						$localGameExists = $this->gameAlreadyExists($id, $team->id, $team2->id);
+						$awayGameExists  = $this->gameAlreadyExists($id, $team2->id, $team->id);
+
+						if (!$localGameExists || !$awayGameExists) {
+							$availableTeams->add($team);
 							break;
+						}
 					}
 				}
-				if($allLocalGames || $allAwayGames)
-					$unavailableTeams[] = $i;
 			}
-			foreach ($unavailableTeams as $index) 
-				unset($teams[$index]);
-			return $teams;
+			//dd($availableTeams->lists('nombre'));
+			return $availableTeams;
 		}
 		return false;
 	}

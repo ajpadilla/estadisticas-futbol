@@ -54,7 +54,17 @@ class GroupTeamTableSeeder extends DatabaseSeeder{
             'team_id' => 7,
             'created_at' => $date->format('Y-m-d h:m:s'),
             'updated_at' => $date->format('Y-m-d h:m:s')            
-        );                
+        );
+
+
+        $competition = \soccer\Competition\Competition::find(4);
+        $groups = $competition->phases()->find(4)->groups;
+        $teams = array_chunk($competition->country->teams()->whereTipo('club')->lists('id'), 4);
+        $i = 0;
+        foreach ($groups as $group) {
+            $group->teams()->attach($teams[$i]);
+            $i++;
+        }
 
         DB::table('group_team')->insert($groupTeam);
 	}

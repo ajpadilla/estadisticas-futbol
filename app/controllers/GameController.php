@@ -174,7 +174,14 @@ class GameController extends \BaseController {
 
 	/*
 	************************** API METHODS *****************************
-	*/	
+	*/
+
+	public function destroyApi()
+	{
+		if(Request::ajax())
+			$this->setSuccess($this->repository->delete(Input::get('idGame')));
+		return $this->getResponseArrayJson();
+	}
 
 	public function getAvailableTeams($id)
 	{

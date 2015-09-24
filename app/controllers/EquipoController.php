@@ -220,8 +220,8 @@ class EquipoController extends \BaseController {
 	{
 		if (Request::ajax()) {
 			$id = Input::get('id');
-			$numero = Input::get('numero');
-			return Response::json(!$this->repository->existeNumero($id, $numero));
+			extract(Input::all());
+			return Response::json(!$this->repository->existeNumero($id, $numero, $from, $to));
 		}
 		return false;
 	}

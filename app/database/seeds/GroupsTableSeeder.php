@@ -32,7 +32,19 @@ class GroupsTableSeeder extends DatabaseSeeder{
         	'phase_id' => 2,
             'created_at' => $date->format('Y-m-d h:m:s'),
             'updated_at' => $date->format('Y-m-d h:m:s')            
-        );        
+        );
+
+        $groupsNames = str_split('ABCD');
+
+        foreach ($groupsNames as $groupName) {
+            $groups[] = array(
+                'name' => $groupName,
+                'phase_id' => 4,
+                'created_at' => $date->format('Y-m-d h:m:s'),
+                'updated_at' => $date->format('Y-m-d h:m:s')
+            );
+        }
+
 
         DB::table('groups')->insert($groups);
 	}

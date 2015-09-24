@@ -2012,6 +2012,12 @@ var handleBootboxAddJugadorToEquipo = function () {
                             },
                             numero: function() {
                                 return $( "#numero" ).val();
+                            }, 
+                            from: function() {
+                                return $( "#desde" ).val();
+                            }, 
+                            to: function() {
+                                return $( "#hasta" ).val();
                             }
                         }
                     }
@@ -2951,7 +2957,7 @@ var handleBootboxAddEquipoToJugador = function () {
 
         var updateCompetitionForm = function() {
             $("#competition-form").trigger("reset");
-            loadFieldSelect($('#lista-tipos-competencias').attr('href'),'#tipos-competencias');
+            loadFieldSelect($('#competition-format-list').attr('href'),'#competition_format_id');
             loadFieldSelect($('#lista-paises').attr('href'),'#pais-competencias');
         }
 
@@ -3030,7 +3036,7 @@ var handleBootboxAddEquipoToJugador = function () {
                                                 }
                                             },
                                             error: function(jqXHR, textStatus, errorThrown) {
-                                               console.log(errorThrown);
+                                               //console.log(errorThrown);
                                                bootbox.dialog({
                                                         message:" ¡Error al enviar datos al servidor!",
                                                         title: "Error",
@@ -3482,20 +3488,19 @@ var handleBootboxAddEquipoToJugador = function () {
     }
 
     var selectTeamsForGroupToPhase = function(id,url) {
-        //console.log(url);
         $.ajax({
             type: 'GET',
             url: url,
             dataType:'json',
             success: function(response) {
-                //console.log(response);
                 if(response.success == true)
                 {
-                    if (response.data.length > 0)
+                    var data = $.map(response.data, function(el) { return el; });
+                    if (data.length > 0)
                     {
                         $(id).html('');
                         $(id).append('<option value=\"\"></option>');
-                        $.each(response.data, function (k, team){
+                        $.each(data, function (i, team){
                             $(id).append('<option value=\"'+team.id+'\">'+team.name+'</option>');
                             $(id).trigger("chosen:updated");
                         });
@@ -3515,7 +3520,6 @@ var handleBootboxAddEquipoToJugador = function () {
 
     var handleBootboxAddNewGroupToPhase = function () {
         $('button.group').click(function () {
-
             var phaseId = $(this).attr('data-phase-id');
             //console.log(phaseId);
             var url = $('#list-teams-phase-competition').attr('href').split('%')[0]+phaseId;
@@ -3532,7 +3536,7 @@ var handleBootboxAddEquipoToJugador = function () {
                     }
                 },
                 messages:{
-                    nombre:{
+                    name:{
                         required:'Este campo es obligatorio.',
                         rangelength: 'Por favor ingrese entre [1, 128] caracteres',
                     },
@@ -4173,6 +4177,40 @@ var handleBootboxAddEquipoToJugador = function () {
             deleteTeamGroup(url, teamId, groupId);
         });
     }
+
+    //Metodo para eliminar juego de la BD.
+    var deleteGame = function (idGame) {
+        bootbox.confirm("¿Esta seguro de eliminar el Juego?", function(result) {
+            //console.log("Confirm result: "+result);
+            if (result == true){
+                $.ajax({
+                    type: 'GET',
+                    url: $('#delete-game').attr('href'),
+                    data: {'idGame': idGame},
+                    dataType: "JSON",
+                    success: function(response) {
+                        if (response.success == true) {
+                            $('#delete_game' + idGame).parent().parent().remove();
+                            bootbox.dialog({
+                                message:" ¡Juego Eliminado!",
+                                title: "Éxito",
+                                buttons: {
+                                    success: {
+                                        label: "Success!",
+                                        className: "btn-success",
+                                        callback: function () {
+                                            reloadDatatable('#datatable');
+                                        }
+                                    }
+                                }
+                            });
+                        };
+                    }
+                });
+            };
+        });
+    }
+
 
 
     var handleBootboxAddGameToGroupCompetition = function () {
@@ -7848,11 +7886,11 @@ var handleBootboxAddEquipoToJugador = function () {
 
     var implementActionsToGame = function()
     {
-        /*$(".table").delegate(".delete-competition-format", "click", function() {
-             action = getAttributeIdActionSelect($(this).attr('id'));
-             //console.log(action);
-             deleteCompetitionFormat(action.number);
-        });*/
+        $(".table").delegate(".delete-game", "click", function() {
+            action = getAttributeIdActionSelect($(this).attr('id'));
+            //console.log(action);
+            deleteGame(action.number);
+        });
 
         $(".table").delegate(".edit-game", "click", function() {
              action = getAttributeIdActionSelect($(this).attr('id'));

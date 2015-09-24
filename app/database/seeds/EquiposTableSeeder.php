@@ -218,16 +218,33 @@ class EquiposTableSeeder extends DatabaseSeeder {
             'historia' => 'Estudiantes de Mérida Fútbol Club, conocido comúnmente como Estudiantes, es un equipo de fútbol profesional de Venezuela. Es uno de los conjuntos más antiguos dentro del balompié profesional de ese país y miembro de la Federación Venezolana de Fútbol y establecido en la ciudad andina de Mérida. El mismo es de reconocida trayectoria nacional e internacional, habiendo participado en eventos internacionales como la Copa Libertadores de América, Copa Sudamericana, Copa Simón Bolívar, Copa Conmebol y Copa Merconorte, así como también ha ganado varios campeonatos de ámbito regional y nacional durante su historia. Fue considerado el mejor equipo venezolano del siglo XX según la IFFHS.,1 jugando un partido amistoso contra el "Real Madrid" empatando a 2 goles',
             'info_url' => 'http://es.wikipedia.org/wiki/Estudiantes_de_M%C3%A9rida_F%C3%BAtbol_Club',
             'pais_id' => 4         
-        );   
- 
+        );
+
+        for($i = 1; $i <= 32; $i++) {
+            $equipos[] = array('nombre' => 'Equipo ' . $i, //'escudo' => 'public/system/soccer/Equipo/Equipo/escudos/000/000/016/original/merida.jpg',
+                //'foto' => 'public/system/soccer/Equipo/Equipo/fotos/000/000/016/original/merida.jpg',
+                'tipo' => 'club', 'fecha_fundacion' => $faker->date($format = 'Y-m-d', $max = 'now'),
+                'apodo' => 'El Rojiblanco',
+                'ubicacion' => 'Venezuela',
+                'historia' => 'Estudiantes de Mérida Fútbol Club, conocido comúnmente como Estudiantes, es un equipo de fútbol profesional de Venezuela. Es uno de los conjuntos más antiguos dentro del balompié profesional de ese país y miembro de la Federación Venezolana de Fútbol y establecido en la ciudad andina de Mérida. El mismo es de reconocida trayectoria nacional e internacional, habiendo participado en eventos internacionales como la Copa Libertadores de América, Copa Sudamericana, Copa Simón Bolívar, Copa Conmebol y Copa Merconorte, así como también ha ganado varios campeonatos de ámbito regional y nacional durante su historia. Fue considerado el mejor equipo venezolano del siglo XX según la IFFHS.,1 jugando un partido amistoso contra el "Real Madrid" empatando a 2 goles',
+                'info_url' => 'http://es.wikipedia.org/wiki/Estudiantes_de_M%C3%A9rida_F%C3%BAtbol_Club',
+                'pais_id' => 4);
+        }
+
         foreach ($equipos as $equipo) {
             Equipo::create($equipo);
         }
 
-        $players = Player::all();
-        $equipos = Equipo::all()->toArray();
+        $players = array_chunk(Player::all()->lists('id'), 15);
+        $equipos = Equipo::all();
 
-        foreach($players as $player)
+        $i = 0;
+        foreach ($equipos as $equipo) {
+            $equipo->jugadores()->attach($players[$i]);
+            $i++;
+        }
+
+        /* foreach($players as $player)
         {
             $equipo = $faker->randomElement($equipos);
             $equipo = Equipo::find($equipo['id']);
@@ -238,7 +255,7 @@ class EquiposTableSeeder extends DatabaseSeeder {
                 'fecha_inicio' => $faker->dateTime(),
                 'fecha_fin' => null]
             );
-        }        
+        }  */
 	}
 
 }
