@@ -25,7 +25,7 @@ class DatabaseSeeder extends Seeder {
 	{
 		Eloquent::unguard();
 
-		$this->call('PosicionesTableSeeder');
+		/*$this->call('PosicionesTableSeeder');
 		$this->call('PaisesTableSeeder');
 		$this->call('PlayersTableSeeder');
 		$this->call('EquiposTableSeeder');
@@ -39,7 +39,8 @@ class DatabaseSeeder extends Seeder {
 		$this->call('GamesTableSeeder');
 		$this->call('GoalTypesTableSeeder');
 		$this->call('SanctionsTypesTableSeeder');
-		$this->call('AlignmentsTypeTableSeeder');
+		$this->call('AlignmentsTypeTableSeeder');*/
+		$this->call('AlignmentsTableSeeder');
 		$this->call('FixtureTypesTableSeeder');
 	}
 
