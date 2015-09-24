@@ -59,10 +59,10 @@ class GroupTeamTableSeeder extends DatabaseSeeder{
 
         $competition = \soccer\Competition\Competition::find(4);
         $groups = $competition->phases()->find(4)->groups;
-        $teams = array_chunk($competition->country()->teams->lists('id'), 4);
+        $teams = array_chunk($competition->country->teams()->whereTipo('club')->lists('id'), 4);
         $i = 0;
         foreach ($groups as $group) {
-            $group->teams()->saveMany($teams[$i]);
+            $group->teams()->attach($teams[$i]);
             $i++;
         }
 

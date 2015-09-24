@@ -34,7 +34,7 @@ class GroupsTableSeeder extends DatabaseSeeder{
             'updated_at' => $date->format('Y-m-d h:m:s')            
         );
 
-        $groupsNames = 'ABCD';
+        $groupsNames = str_split('ABCD');
 
         foreach ($groupsNames as $groupName) {
             $groups[] = array(
