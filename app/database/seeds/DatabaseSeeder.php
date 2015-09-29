@@ -37,11 +37,12 @@ class DatabaseSeeder extends Seeder {
 		$this->call('GroupTeamTableSeeder');
 		$this->call('GameTypeTableSeeder');
 		$this->call('GamesTableSeeder');
-		$this->call('GoalTypesTableSeeder');
-		$this->call('SanctionsTypesTableSeeder');
-		$this->call('AlignmentsTypeTableSeeder');*/
+		$this->call('GoalTypesTableSeeder');*/
+		$this->call('GoalsTableSeeder');
+		/*$this->call('SanctionsTypesTableSeeder');
+		$this->call('AlignmentsTypeTableSeeder');
 		$this->call('AlignmentsTableSeeder');
-		$this->call('FixtureTypesTableSeeder');
+		$this->call('FixtureTypesTableSeeder');*/
 	}
 
 }
