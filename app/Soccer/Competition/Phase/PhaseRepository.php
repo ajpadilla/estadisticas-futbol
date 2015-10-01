@@ -1,6 +1,7 @@
 <?php namespace soccer\Competition\Phase;
 
 use soccer\Base\BaseRepository;
+use soccer\Competition\CompetitionRepository;
 use soccer\Group\GroupRepository;
 use soccer\Competition\Phase\Phase;
 use soccer\Equipo\EquipoRepository;
@@ -30,8 +31,10 @@ class PhaseRepository extends BaseRepository
 		if (empty($data['to'])) {
 			$data['to'] = 0000-00-00;
 		}
-
-		$phase = $this->model->create($data); 
+		$competitionRepository = new CompetitionRepository;
+		if(!$competitionRepository->isEmpty($data['competition_id']))
+			$data['previous_id'] = $competitionRepository->lastPhase($data['competition_id'])->id;
+		$phase = $this->model->create($data);
 		return $phase;
 	}
 
