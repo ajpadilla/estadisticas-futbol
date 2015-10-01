@@ -62,7 +62,12 @@ class Phase extends Eloquent {
 
     /*
     ********************* Custom Methods ***********************
-    */  
+    */
+
+    public function getFinishedAttribute()
+    {
+        return $this->to->diffInDays(null, false) > 0;
+    }
 
     public function getHasGamesAttribute()
     {

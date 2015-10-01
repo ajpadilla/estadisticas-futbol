@@ -202,9 +202,10 @@ class GroupRepository extends BaseRepository
 		});
 	}
 
-	public function getOrderedFixturesArrayByGroup($id, $teamRepository)
+	public function getOrderedFixturesArrayByGroup($id)
 	{
 		$fixtures = array();
+		$teamRepository = new EquipoRepository;
 		foreach ($teamRepository->getSortByPointsByGroup($id) as $team) {
 			$localGames = $teamRepository->getLocalGamesByGroup($team->id, $id);
 			$awayGames = $teamRepository->getAwayGamesByGroup($team->id, $id);
@@ -251,7 +252,7 @@ class GroupRepository extends BaseRepository
 		$teamRepository->collection->searchColumns('Pos', 'Equipo', 'JJ', 'JG', 'JP', 'JE', 'GF', 'GC', 'DG', 'PTS');
 		$teamRepository->collection->orderColumns('Pos', 'Equipo', 'JJ', 'JG', 'JP', 'JE', 'GF', 'GC', 'DG', 'PTS');
 
-		$fixtures = $this->getOrderedFixturesArrayByGroup($id, $teamRepository);
+		$fixtures = $this->getOrderedFixturesArrayByGroup($id);
 
 		$teamRepository->collection->addColumn('Pos', function($model) use ($teamRepository, $id, $fixtures)
 		{
