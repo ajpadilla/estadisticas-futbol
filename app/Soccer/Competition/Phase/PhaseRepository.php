@@ -32,8 +32,12 @@ class PhaseRepository extends BaseRepository
 			$data['to'] = 0000-00-00;
 		}
 		$competitionRepository = new CompetitionRepository;
-		if(!$competitionRepository->isEmpty($data['competition_id']))
+		if(!$competitionRepository->isEmpty($data['competition_id'])) {
+			$lastPhase = $competitionRepository->get($competitionRepository->lastPhase($data['competition_id'])->id);
+			if($lastPhase->last)
+				return false;
 			$data['previous_id'] = $competitionRepository->lastPhase($data['competition_id'])->id;
+		}
 		$phase = $this->model->create($data);
 		return $phase;
 	}
@@ -43,6 +47,25 @@ class PhaseRepository extends BaseRepository
 		$equipoRepository = new EquipoRepository;
 		$phase = $this->get($id);
 		$teams = [];
+
+		if($phase->previous) {
+			$previousPhase = $phase->previous;
+			if ($previousPhase->finished) {
+				$phaseRepository = new PhaseRepository;
+				$teams = $phaseRepository->classifieds;
+			}
+		} else {
+			if ($phase->competition->internationl) {
+				$teams = $equipoRepository->getAll();
+			} else {
+				$teams = $phase->competition
+					->country
+					->teams()
+					->clubes()
+					->get();
+			}
+		}
+
 		if($phase->groups->count()) {
 			$groupRepository = new GroupRepository;
 			$excludeTeams = [];
@@ -50,21 +73,15 @@ class PhaseRepository extends BaseRepository
 				foreach ($group->teams as $team) 
 					$excludeTeams[] = $team->id;
 
-			if($phase->competition->international) 
-				$availableTeams = $equipoRepository->getAll($excludeTeams);
-			else
-				$availableTeams = $equipoRepository->getByCountry($phase->competition->country, $excludeTeams);				
-
-		    if(count($availableTeams))
-		    	foreach ($availableTeams as $team) 
-		    		$teams[] = $team;
-		} else {
-			$teams = $phase->competition
-						   ->country
-						   ->teams()
-						   ->clubes()
-						   ->get();
+			if (count($excludeTeams)) {
+				$excludeTeamsKeys = [];
+				foreach ($teams as $k => $team)
+					if(array_search($team->id, $excludeTeams))
+						$excludeTeamsKeys[] = $k;
+				$teams =  array_diff_key($teams, $excludeTeamsKeys);
+			}
 		}
+
 		if($teams && count($teams)) {
 			$tmpTeams = [];
 			foreach ($teams as $team) 
