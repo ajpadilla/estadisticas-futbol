@@ -8,7 +8,7 @@ use Carbon\Carbon;
 
 class Phase extends Eloquent {
 
-	protected $fillable = ['name', 'from', 'to', 'competition_id', 'format_id','last'];
+	protected $fillable = ['name', 'from', 'to', 'previous_id', 'competition_id', 'format_id','last'];
 
     public function getDates()
     {
@@ -27,7 +27,12 @@ class Phase extends Eloquent {
     public function format()
     {
         return $this->belongsTo('soccer\Competition\CompetitionFormat\CompetitionFormat');
-    }    
+    }
+
+    public function previous()
+    {
+        return $this->belongsTo('soccer\Competition\Phase\Phase');
+    }
 
     public function country()
     {
@@ -57,7 +62,12 @@ class Phase extends Eloquent {
 
     /*
     ********************* Custom Methods ***********************
-    */  
+    */
+
+    public function getFinishedAttribute()
+    {
+        return $this->to->diffInDays(null, false) > 0;
+    }
 
     public function getHasGamesAttribute()
     {
@@ -76,6 +86,7 @@ class Phase extends Eloquent {
 
     public function getIsFirstAttribute()
     {
+        return $this->competition->phases()->wherePreviousId(NULL)->first()->id == $this->id;
         return $this->competition->phases()->orderBy('from', 'ASC')->first()->id == $this->id;
     }
 

@@ -77,11 +77,26 @@ class CompetitionRepository extends BaseRepository
 
 	public function getCurrentPhase($id)
 	{
-		$competition = $this->get($id);
-		if($competition->phases->count()) {
-			foreach ($competition->phases as $phase) 
+		if($this->isEmpty($id)) {
+			$competition = $this->get($id);
+			foreach ($competition->phases as $phase)
 				if($phase->isCurrent)
 					return $phase;
+			return $competition->phases()->orderBy('from', 'DESC')->first();
+		}
+		return false;
+	}
+
+	public function isEmpty($id)
+	{
+		$competition = $this->get($id);
+		return !$competition->phases->count();
+	}
+
+	public function lastPhase($id)
+	{
+		if(!$this->isEmpty($id)) {
+			$competition = $this->get($id);
 			return $competition->phases()->orderBy('from', 'DESC')->first();
 		}
 		return false;
