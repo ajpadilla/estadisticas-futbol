@@ -70,6 +70,11 @@ class PhaseRepository extends BaseRepository
 		return $teams;
 	}
 
+	public function winner($id)
+	{
+		return $this->classifieds($id)->first();
+	}
+
 	public function getAvailableTeamsForGroup($id, $forList = true)
 	{
 		$phase = $this->get($id);

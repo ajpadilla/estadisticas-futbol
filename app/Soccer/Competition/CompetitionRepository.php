@@ -1,6 +1,7 @@
 <?php namespace soccer\Competition;
 
 use soccer\Base\BaseRepository;
+use soccer\Competition\Phase\PhaseRepository;
 use soccer\Group\GroupRepository;
 use soccer\Game\GameRepository;
 use soccer\Competition\Competition;
@@ -98,6 +99,19 @@ class CompetitionRepository extends BaseRepository
 		if(!$this->isEmpty($id)) {
 			$competition = $this->get($id);
 			return $competition->phases()->orderBy('from', 'DESC')->first();
+		}
+		return false;
+	}
+
+	public function winner($id)
+	{
+		$competition = $this->get($id);
+		if($competition && !$this->isEmpty($id) && $competition->finished) {
+			$competition = $this->get($id);
+			if ($lasPhase = $competition->phases()->whereLast(true)->first()) {
+				$phaseRepo = new PhaseRepository;
+				return $phaseRepo->winner($lasPhase->id);
+			}
 		}
 		return false;
 	}

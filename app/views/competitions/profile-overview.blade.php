@@ -36,7 +36,14 @@
 												<td>País</td>
 												<td id="card-name"><strong>{{ $competition->country->nombre }}</strong></td>
 											</tr>										
-										@endif										
+										@endif	
+										
+										@if($winner)
+											<tr>
+												<td>Ganador</td>
+												<td id="card-name"><strong><a href="{{ route('equipos.show', $winner->id)  }}">{{ $winner->nombre  }}</a></strong></td>
+											</tr>	
+										@endif
 									</tbody>
 								</table>
 							</div>
