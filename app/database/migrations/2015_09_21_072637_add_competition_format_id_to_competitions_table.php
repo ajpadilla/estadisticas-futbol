@@ -37,5 +37,4 @@ class AddCompetitionFormatIdToCompetitionsTable extends Migration {
 			$table->dropColumn('competition_format_id');
 		});
 	}
-
 }

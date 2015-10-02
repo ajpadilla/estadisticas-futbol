@@ -43,13 +43,11 @@ class CompetitionRepository extends BaseRepository
 
 	public function update($data = array())
 	{
-		if (empty($data['country_id'])) {
+		if (empty($data['country_id']))
 			$data['country_id'] = NULL;
-		}
 
-		if (empty($data['international'])) {
+		if (empty($data['international']))
 			$data['international'] = 0;
-		}
 
 		$competition = $this->get($data['competition_id']);
 		$competition->update($data);

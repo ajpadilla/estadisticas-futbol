@@ -144,7 +144,6 @@ class CompetitionController extends \BaseController {
 	{
 		$input = Input::all();
 		$input['competition_id'] = $id;
-		//var_dump($input);
 		try
 		{
 			$this->editCompetitionForm->validate($input);
