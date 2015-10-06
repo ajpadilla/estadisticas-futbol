@@ -8,4 +8,4 @@ composer.lock
 .DS_Store
 Thumbs.db
 /.idea
-robots.txt
+/public/robots.txt
