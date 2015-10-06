@@ -1,0 +1,15 @@
+
+ <?php /*
+<?php $__env->startSection("page-title"); ?>
+	INICIO
+<?php $__env->stopSection(); ?>
+
+<?php $__env->startSection("page-description"); ?>
+	Página Inicial
+<?php $__env->stopSection(); ?>
+*/ ?>
+<?php $__env->startSection("content"); ?>
+	<h1>HOLA</h1>
+<?php $__env->stopSection(); ?>
+
+<?php echo $__env->make("public.layouts.main", array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>

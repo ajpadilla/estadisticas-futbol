@@ -11,6 +11,20 @@
 |
 */
 
+/*
+********************************* RUTAS PUBLICAS ********************************
+*/
+Route::get('/', [
+	//'before' => 'auth',
+	'as' => 'public.home',
+	'uses' => 'PublicController@index'
+]);
+
+/*
+********************************* FIN RUTAS PUBLICAS ********************************
+*/
+
+
 Route::get('admin/test', function() {
 	$gR = new soccer\Game\GameRepository;
 	dd($gR->getFixtures(6, true)->toArray());
@@ -20,7 +34,7 @@ Route::get('admin/prueba-ruta/{id}',  ['as' => 'prueba','uses' => 'PlayerControl
 Route::get('admin/selctAjax',  ['as' => 'selctAjax','uses' => 'PlayerController@selctAjax' ] );
 Route::get('admin/filterAjax',  ['as' => 'filterAjax.api','uses' => 'PlayerController@filter' ] );
 
-Route::get('/', [
+Route::get('/admin', [
 	//'before' => 'auth',
 	'as' => 'pages.home',
 	'uses' => 'PageController@adminIndex'

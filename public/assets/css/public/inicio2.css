@@ -1,0 +1,14 @@
+#fixturein { width: 440px;margin: auto;background: #85a094;color: #111;font-family: verdana;font-size: 12px;font-weight: bold;}
+.tituloin {background: #222;    color: white;text-align: center}
+.tituloin a {  color: white;}
+#abajo {width: 440px;background: #092B1D; color: white;margin:auto;text-align: center}
+#abajo a {color:white;font-size:11px;text-decoration: none}
+#cuadros, #cuadros2, #cuadros3 {float: left;width:150px; background: #144;margin-left:5px;font-size:10px; cursor: pointer}
+#cuadros a, #cuadros2 a, #cuadros3 a {   color: white; text-decoration: none; display: block}
+#tablacost {color: black;float: left;font-family: verdana;font-size: 12px;width: 400px;}
+#cuadros2 {width:200px;float: none;  margin: auto}
+.resu {background: white;width:6%;text-align: center; font-size:14px;}
+#somediv {background: black;color: white;font-family: verdana;font-size: 12px;width:400px;position: fixed}
+.ui-button-text, .ui-button, .ui-dialog-titlebar {display: none}
+#cerrar {width:90px; background: #144;font-size:12px; cursor: pointer; text-align: center;padding:4px}
+#sonido {background:  #092B1D;margin: auto;padding: 2px;cursor: pointer;font-size:11px;color:white;text-align:center;width:110px   }
