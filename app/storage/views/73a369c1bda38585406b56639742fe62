@@ -1,0 +1,2 @@
+<?php echo $__env->make('public.layouts.partials._banner', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
+<?php echo $__env->make('public.layouts.partials._menu', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
