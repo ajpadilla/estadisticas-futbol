@@ -16,19 +16,16 @@
 <body>
 	<div id="somediv" style="display: none;"></div>
 	<div id="contenido">		
-		@include('public.layouts.partials._banner')
-		@include('public.layouts.partials._menu')
-		<div style="clear: both;"></div>
-		<br/>
-		<div style="clear: both;"></div>
-		@include('public.layouts.partials._google-syndication')
-		<div style="clear: both;"></div>
-		@include('public.layouts.partials._games-control')
-		<div style="clear: both;"></div>
-		<br/>
+		@include('public.layouts.partials._header')		
 		@yield('content')
+		<div style="clear: both;"><br/></div>
+		<br/>
+		<br/>
+		@include('public.layouts.partials._info-footer')
+		<br/>
+		<div style="clear: both;"><br/></div>
 	</div>
-
+	@include('public.layouts.partials._footer')
 	{{-- JAVASCRIPT --}}
 	@include('public.layouts.partials._js')	
 </body>

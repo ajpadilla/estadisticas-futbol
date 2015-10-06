@@ -16,19 +16,16 @@
 <body>
 	<div id="somediv" style="display: none;"></div>
 	<div id="contenido">		
-		<?php echo $__env->make('public.layouts.partials._banner', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
-		<?php echo $__env->make('public.layouts.partials._menu', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
-		<div style="clear: both;"></div>
-		<br/>
-		<div style="clear: both;"></div>
-		<?php echo $__env->make('public.layouts.partials._google-syndication', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
-		<div style="clear: both;"></div>
-		<?php echo $__env->make('public.layouts.partials._games-control', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
-		<div style="clear: both;"></div>
-		<br/>
+		<?php echo $__env->make('public.layouts.partials._header', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>		
 		<?php echo $__env->yieldContent('content'); ?>
+		<div style="clear: both;"><br/></div>
+		<br/>
+		<br/>
+		<?php echo $__env->make('public.layouts.partials._info-footer', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
+		<br/>
+		<div style="clear: both;"><br/></div>
 	</div>
-
+	<?php echo $__env->make('public.layouts.partials._footer', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
 	<?php /* JAVASCRIPT */ ?>
 	<?php echo $__env->make('public.layouts.partials._js', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>	
 </body>
