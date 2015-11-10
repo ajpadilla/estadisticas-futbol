@@ -148,4 +148,13 @@ class Competition extends Eloquent implements StaplerableInterface{
     {
         return $this->hasta->format('Y-m-d');
     }
+
+    /*
+    ********************* Scopes ***********************
+    */    
+    public function scopePlaying($query)
+    {
+        return $query->where('desde', '<=', Carbon::now()->addMinutes(60)->format('Y-m-d h:i:00'))
+                     ->where('hasta', '>=', Carbon::now()->addMinutes(60)->format('Y-m-d h:i:00'));
+    }    
 }

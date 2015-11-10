@@ -114,6 +114,11 @@ class CompetitionRepository extends BaseRepository
 		return false;
 	}
 
+    public function playingCompetitions()
+	{
+		return Competition::playing()->has('phases.groups.games')->get();
+	}	
+
     /*
 	********************* Datatable Methods ***********************
     */

@@ -26,8 +26,9 @@ Route::get('/', [
 
 
 Route::get('admin/test', function() {
-	$gR = new soccer\Game\GameRepository;
-	dd($gR->getFixtures(6, true)->toArray());
+	$data = new soccer\Competition\CompetitionRepository;
+	$data = $data->playingCompetitions()->toArray();
+	return View::make('test', compact('data'));
 });
 
 Route::get('admin/prueba-ruta/{id}',  ['as' => 'prueba','uses' => 'PlayerController@prueba' ] );

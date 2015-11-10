@@ -53,7 +53,7 @@ function canal(elcanal) {
 function loadJSON()
 {  
      
-$.getJSON("scores.json",function(jso){ 
+ /*$.getJSON("scores.json",function(jso){ 
 
     $.each(jso.pa, function( uno ) {
       
@@ -135,6 +135,6 @@ $.getJSON("scores.json",function(jso){
      });
 
   
-    }); 
+    }); */
         
 }   

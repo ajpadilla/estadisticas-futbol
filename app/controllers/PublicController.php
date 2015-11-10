@@ -1,5 +1,7 @@
 <?php
 
+use soccer\Competition\CompetitionRepository;
+
 class PublicController extends \BaseController {
 
 	/**
@@ -9,7 +11,9 @@ class PublicController extends \BaseController {
 	 */
 	public function index()
 	{
-		return View::make('public.home');
+		$competitionRepository = new CompetitionRepository;
+		$competitions = $competitionRepository->playingCompetitions();
+		return View::make('public.home', compact('competitions'));
 	}
 
 
