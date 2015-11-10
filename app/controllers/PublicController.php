@@ -1,6 +1,7 @@
 <?php
 
 use soccer\Competition\CompetitionRepository;
+use Carbon\Carbon;
 
 class PublicController extends \BaseController {
 
@@ -13,7 +14,10 @@ class PublicController extends \BaseController {
 	{
 		$competitionRepository = new CompetitionRepository;
 		$competitions = $competitionRepository->playingCompetitions();
-		return View::make('public.home', compact('competitions'));
+		$date = new Carbon('tomorrow');   
+		$tomorrow = ucwords ($date->formatLocalized('%A %d %B %Y'));
+		$today = ucwords ($date->now()->formatLocalized('%A %d %B %Y'));
+		return View::make('public.home', compact('competitions', 'tomorrow', 'today'));
 	}
 
 

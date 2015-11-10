@@ -1,5 +1,5 @@
 <?php
-
+setlocale(LC_ALL, 'es_ES.UTF-8');
 /*
 |--------------------------------------------------------------------------
 | Application & Route Filters

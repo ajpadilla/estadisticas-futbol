@@ -3,11 +3,11 @@
     @if (isset($competitions) AND !empty($competitions))
         @foreach($competitions as $competition)
         <div id="fixturein">
-            <div class="tituloin"><a href="primerad">PRIMERA D</a></div>
+            <div class="tituloin"><a href="primerad">{{ $competition->name }}</a></div>
             <table style="width:440px">
                 <tbody>
                     <tr style="background:#092B1D;text-align: center">
-                        <td colspan="6"><span class="horariopartido"> Miercoles 7 de Octubre</span></td>
+                        <td colspan="6"><span class="horariopartido"> {{ $tomorrow }}</span></td>
                     </tr>
                     @forelse($competition->todayGames as $game)
                         <tr style="background: #e5e5e5">
