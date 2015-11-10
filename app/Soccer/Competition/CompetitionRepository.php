@@ -116,7 +116,7 @@ class CompetitionRepository extends BaseRepository
 
     public function playingCompetitions()
 	{
-		return Competition::playing()->has('phases.groups.games')->get();
+		return Competition::playing()->has('phases.groups')->get();
 	}	
 
     /*

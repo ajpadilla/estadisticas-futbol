@@ -18,7 +18,7 @@
 	@include('public.layouts.partials._shout-goal')
 	@include('public.layouts.partials._today-games')
 	@include('public.layouts.partials._google-syndication')
-	<div style="clear: both;"><br/></div>		
+	{{-- <div style="clear: both;"><br/></div>		
 	<span class="verdegrande">PROXIMOS PARTIDOS</span>
-	@include('public.layouts.partials._next-games')		
+	@include('public.layouts.partials._next-games') --}}		
 @stop

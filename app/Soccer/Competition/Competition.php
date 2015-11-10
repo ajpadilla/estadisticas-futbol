@@ -4,6 +4,7 @@ use Eloquent;
 use Codesleeve\Stapler\ORM\StaplerableInterface;
 use Codesleeve\Stapler\ORM\EloquentTrait;
 use Carbon\Carbon;
+use \DB;
 /**
 *
 */
@@ -75,19 +76,57 @@ class Competition extends Eloquent implements StaplerableInterface{
        //return $this->hasManyThrough('soccer\Group\Group', 'soccer\Equipo\Equipo', 'team_id', 'group_id');
     }
 
-    /* public function games()
+    public function games()
     {
-       return $this->belongsTo('soccer\Game\Game');
-    } */
+        $games = new \Illuminate\Database\Eloquent\Collection;
+        foreach ($this->groups as $group)
+            foreach($group->games as $game)
+                $games->add($game);
+        return $games;
+    }
 
     /*
     ********************* Custom Methods ***********************
     */
 
+    public function getTodayGamesAttribute()
+    {
+        /*$games = new \Illuminate\Database\Eloquent\Collection;
+        foreach ($this->groups as $group)
+            $todayGames = $group
+            foreach($group->games as $game)
+                $games->add($game);
+        return $games;
+
+        JOIN groups gr ON (g.group_id = gr.id)
+        JOIN phases p ON (gr.phase_id = p.id)
+        JOIN competition c ON (p.competition_id = c.id)*/
+
+        return DB::table('games')
+        ->join('groups', 'games.group_id', '=', 'groups.id')
+        ->join('phases', 'groups.phase_id', '=', 'phases.id')
+        ->join('competitions', 'phases.competition_id', '=', 'competitions.id')
+        ->where('competitions.id', '=', $this->id)
+        ->whereRaw('DATE_FORMAT(games.date, "%Y-%m-%d") = ' . Carbon::now()->format('Y-m-d'))
+        ->select('games.*')
+        ->get();        
+    }
+
     public function getHasGamesAttribute()
     {
         return $this->groups()->with('games')->count() > 0;
     }
+
+    public function getHasTodayGamesAttribute()
+    {
+        return DB::table('games')
+        ->join('groups', 'games.group_id', '=', 'groups.id')
+        ->join('phases', 'groups.phase_id', '=', 'phases.id')
+        ->join('competitions', 'phases.competition_id', '=', 'competitions.id')
+        ->where('competitions.id', '=', $this->id)
+        ->whereRaw('DATE_FORMAT(games.date, "%Y-%m-%d") = ' . Carbon::now()->format('Y-m-d'))
+        ->count() > 0;
+    }    
 
     public function getPhasesWithGamesAttribute()
     {

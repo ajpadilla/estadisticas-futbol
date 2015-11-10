@@ -17,9 +17,9 @@
 	<?php echo $__env->make('public.layouts.partials._shout-goal', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
 	<?php echo $__env->make('public.layouts.partials._today-games', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
 	<?php echo $__env->make('public.layouts.partials._google-syndication', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
-	<div style="clear: both;"><br/></div>		
+	<?php /* <div style="clear: both;"><br/></div>		
 	<span class="verdegrande">PROXIMOS PARTIDOS</span>
-	<?php echo $__env->make('public.layouts.partials._next-games', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>		
+	<?php echo $__env->make('public.layouts.partials._next-games', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?> */ ?>		
 <?php $__env->stopSection(); ?>
 
 <?php echo $__env->make("public.layouts.main", array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
