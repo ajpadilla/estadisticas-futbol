@@ -33,8 +33,8 @@ class AddPreviousIdToPhasesTable extends Migration {
 	{
 		Schema::table('phases', function(Blueprint $table)
 		{
-			$table->dropForeign('phases_phases_id_foreign');
-			$table->dropColumn('phases_id');
+			$table->dropForeign('phases_previous_id_foreign');
+			$table->dropColumn('previous_id');
 		});
 	}
 
