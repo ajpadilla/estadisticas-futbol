@@ -1,0 +1,44 @@
+<h4>Información Básica</h4>
+<div class="form-group" style="display:none">
+	<?php echo Form::label('equipo_id', 'Id', ['class' => 'col-md-4 control-label']); ?>	
+	<div class="col-md-8"><?php echo Form::text('equipo_id', $equipo->id, ['class' => 'form-control','id' => 'equipo_id_edit']); ?>
+
+	</div>
+</div>
+<div class="form-group">
+	<?php echo Form::label('nombre', 'Nombre', ['class' => 'col-md-4 control-label']); ?>	
+	<div class="col-md-8"><?php echo Form::text('nombre', null, ['class' => 'form-control','id' =>'nombre_equipo_edit' ]); ?></div>
+</div>
+<div class="form-group">
+	<?php echo Form::label('apodo', 'Apodo', ['class' => 'col-md-4 control-label']); ?>	
+	<div class="col-md-8"><?php echo Form::text('apodo', null, ['class' => 'form-control','id' => 'apodo_equipo_edit']); ?></div>
+</div>
+<div class="form-group">
+	<?php echo Form::label('fecha_fundacion', 'Fecha de Fundación', ['class' => 'col-md-4 control-label']); ?>	
+	<div class="col-md-8"><?php echo Form::text('fecha_fundacion', null, ['class' => 'form-control datepicker','id' => 'fecha_fundacion_edit']); ?></div>
+</div>
+<div class="form-group">
+	<?php echo Form::label('tipo','Tipo',['class'=>'col-md-4 control-label']); ?>
+
+	<div class="col-md-8">
+		<?php echo Form::select('tipo', ['selección' => 'Selección','club' => 'Club'], $equipo->tipo, ['class' => 'form-control chosen-select','data-placeholder' => 'Selecciona el tipo','id'=> 'tipo_equipo_edit']); ?>
+
+	</div>
+</div>
+
+<h4>Imágenes</h4>
+<?php /*<div class="form-group">
+	<?php echo Form::label('bandera','Bandera',['class'=>'col-md-4 control-label']); ?>
+
+	<div class="col-md-8"><?php echo Form::file('bandera', ['class' => 'file-upload']); ?></div>
+</div>*/ ?>
+<div class="form-group">
+	<?php echo Form::label('escudo','Escudo',['class'=>'col-md-4 control-label']); ?>
+
+	<div class="col-md-8"><?php echo Form::file('escudo', ['class' => 'file-upload']); ?></div>
+</div>
+<div class="form-group">
+	<?php echo Form::label('foto','Foto',['class'=>'col-md-4 control-label']); ?>
+
+	<div class="col-md-8"><?php echo Form::file('foto', ['class' => 'file-upload']); ?></div>
+</div>

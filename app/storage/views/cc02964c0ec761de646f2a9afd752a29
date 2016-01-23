@@ -1,0 +1,7 @@
+<?php $__env->startSection('title-modal'); ?>
+	Crear Formatos De Competencia
+<?php $__env->stopSection(); ?>
+
+<div id="new-competition-format-form-div" style="display:none">
+	<?php echo $__env->make('competition-formats.partials._form', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
+</div>

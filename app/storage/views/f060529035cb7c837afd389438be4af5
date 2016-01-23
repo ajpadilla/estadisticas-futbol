@@ -1,0 +1,9 @@
+<?php echo $__env->make('players.new', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
+<?php echo $__env->make('equipos.new', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
+<?php echo $__env->make('paises.new', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
+<?php echo $__env->make('posiciones.new', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
+<?php echo $__env->make('competitions.new', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
+<?php echo $__env->make('competition-formats.new', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
+<?php echo $__env->make('alignment-types.new', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
+<?php echo $__env->make('sanction-types.new', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
+<?php echo $__env->make('goal-types.new', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>

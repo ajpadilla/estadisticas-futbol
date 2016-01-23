@@ -1,0 +1,7 @@
+<?php $__env->startSection('title-modal'); ?>
+	Crear Tipo De Gol
+<?php $__env->stopSection(); ?>
+
+<div id="new-goal-type-form-div-box" style="display:none">
+	<?php echo $__env->make('goal-types.partials._form', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
+</div>
