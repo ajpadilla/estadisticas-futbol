@@ -115,6 +115,32 @@ class Competition extends Eloquent implements StaplerableInterface{
         ->get();        
     }
 
+    public function getTodayGames($daye)
+    {
+        /*$games = new \Illuminate\Database\Eloquent\Collection;
+        foreach ($this->groups as $group)
+            $todayGames = $group
+            foreach($group->games as $game)
+                $games->add($game);
+        return $games;
+
+        JOIN groups gr ON (g.group_id = gr.id)
+        JOIN phases p ON (gr.phase_id = p.id)
+        JOIN competition c ON (p.competition_id = c.id)*/
+
+        return DB::table('games')
+        ->select('*')
+        ->join('groups', 'games.group_id', '=', 'groups.id')
+        ->join('phases', 'groups.phase_id', '=', 'phases.id')
+        ->join('competitions', 'phases.competition_id', '=', 'competitions.id')
+        ->where('competitions.id', '=', $this->id)
+        //->whereRaw('DATE_FORMAT(games.date, "%Y-%m-%d") = ' . Carbon::now()->format('Y-m-d'))
+        ->whereRaw('DATE_FORMAT(games.date, "%Y-%m-%d") = ?', [$daye])
+        ->select('games.*')
+        ->get();        
+    }
+
+
     public function getHasGamesAttribute()
     {
         return $this->groups()->with('games')->count() > 0;
@@ -132,6 +158,19 @@ class Competition extends Eloquent implements StaplerableInterface{
         ->whereRaw('DATE_FORMAT(games.date, "%Y-%m-%d") = ?', [Carbon::now()->format('Y-m-d')])
         ->count() > 0;
     }    
+
+     public function getHasTodayGames($date)
+    {
+        return DB::table('games')
+        ->select('*')
+        ->join('groups', 'games.group_id', '=', 'groups.id')
+        ->join('phases', 'groups.phase_id', '=', 'phases.id')
+        ->join('competitions', 'phases.competition_id', '=', 'competitions.id')
+        ->where('competitions.id', '=', $this->id)
+        //->whereRaw('DATE_FORMAT(games.date, "%Y-%m-%d") = ' . Carbon::now()->format('Y-m-d'))
+        ->whereRaw('DATE_FORMAT(games.date, "%Y-%m-%d") = ?', [$date])
+        ->count() > 0;
+    } 
 
     public function getPhasesWithGamesAttribute()
     {
