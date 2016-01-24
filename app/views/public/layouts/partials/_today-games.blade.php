@@ -3,7 +3,7 @@
     @if (isset($competitions) AND !empty($competitions))
         @foreach($competitions as $competition)
         <div id="fixturein">
-            <div class="tituloin"><a href="primerad">{{ $competition->name }}</a></div>
+            <div class="tituloin"><a href="primerad">{{ $competition->nombre }}</a></div>
             <table style="width:440px">
                 <tbody>
                     <tr style="background:#092B1D;text-align: center">
@@ -13,13 +13,12 @@
                     @if ($competition->HasTodayGames)
                         @foreach($competition->todayGames as $game)
                             <tr style="background: #e5e5e5">
-                                <td class="falta" id="ti_6_222">{{ $game->time }}</td>
-                                <td style="width: 35%;"><img src="{{ $game->localTeam->shield }}" width="18px"><span
-                                            class="datoequipo">{{ $game->localTeam }}</span></td>
+                                <td class="falta" id="ti_6_222">{{ $competition->makeGameObject($game->id)->time}}</td>
+                                <td style="width: 35%;"><img src="{{ $competition->makeGameObject($game->id)->localTeam->escudo->url('thumb') }}" width="18px"><span
+                                            class="datoequipo">{{ $competition->makeGameObject($game->id)->localTeam->nombre}}</span></td>
                                 <td class="resu" id="r1_6_222"></td>
                                 <td class="resu" id="r2_6_222"></td>
-                                <td style="width: 35%;"><img src="{{ $game->awayTeam->shield }}"
-                                                     width="18px"><span class="datoequipo">{{ $game->awayTeam }}</span></td>
+                                <td style="width: 35%;"><img src="{{ $competition->makeGameObject($game->id)->awayTeam->escudo->url('thumb') }}" width="18px"><span class="datoequipo">{{$competition->makeGameObject($game->id)->awayTeam->nombre }}</span></td>
                             </tr>
                         @endforeach
                     @else
