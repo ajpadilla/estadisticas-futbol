@@ -5,6 +5,7 @@ use Codesleeve\Stapler\ORM\StaplerableInterface;
 use Codesleeve\Stapler\ORM\EloquentTrait;
 use Carbon\Carbon;
 use \DB;
+use soccer\Game\Game;
 /**
 *
 */
@@ -103,11 +104,13 @@ class Competition extends Eloquent implements StaplerableInterface{
         JOIN competition c ON (p.competition_id = c.id)*/
 
         return DB::table('games')
+        ->select('*')
         ->join('groups', 'games.group_id', '=', 'groups.id')
         ->join('phases', 'groups.phase_id', '=', 'phases.id')
         ->join('competitions', 'phases.competition_id', '=', 'competitions.id')
         ->where('competitions.id', '=', $this->id)
-        ->whereRaw('DATE_FORMAT(games.date, "%Y-%m-%d") = ' . Carbon::now()->format('Y-m-d'))
+        //->whereRaw('DATE_FORMAT(games.date, "%Y-%m-%d") = ' . Carbon::now()->format('Y-m-d'))
+        ->whereRaw('DATE_FORMAT(games.date, "%Y-%m-%d") = ?', [Carbon::now()->format('Y-m-d')])
         ->select('games.*')
         ->get();        
     }
@@ -120,11 +123,13 @@ class Competition extends Eloquent implements StaplerableInterface{
     public function getHasTodayGamesAttribute()
     {
         return DB::table('games')
+        ->select('*')
         ->join('groups', 'games.group_id', '=', 'groups.id')
         ->join('phases', 'groups.phase_id', '=', 'phases.id')
         ->join('competitions', 'phases.competition_id', '=', 'competitions.id')
         ->where('competitions.id', '=', $this->id)
-        ->whereRaw('DATE_FORMAT(games.date, "%Y-%m-%d") = ' . Carbon::now()->format('Y-m-d'))
+        //->whereRaw('DATE_FORMAT(games.date, "%Y-%m-%d") = ' . Carbon::now()->format('Y-m-d'))
+        ->whereRaw('DATE_FORMAT(games.date, "%Y-%m-%d") = ?', [Carbon::now()->format('Y-m-d')])
         ->count() > 0;
     }    
 
@@ -196,4 +201,9 @@ class Competition extends Eloquent implements StaplerableInterface{
         return $query->where('desde', '<=', Carbon::now()->addMinutes(60)->format('Y-m-d h:i:00'))
                      ->where('hasta', '>=', Carbon::now()->addMinutes(60)->format('Y-m-d h:i:00'));
     }    
+
+    public function makeGameObject($id)
+    {
+        return Game::find($id);
+    }
 }
