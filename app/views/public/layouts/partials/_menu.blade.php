@@ -3,7 +3,7 @@
 		<div class="itemmenu">
 			PRIMERA
 			<br><span class="subitem">
-				<a href="primera" style="font-size: 14px;">Principal</a>
+				<a href="{{ route('FirstDivision') }}" style="font-size: 14px;">Principal</a>
 				<a href="calculadores.php">Calculador</a>
 				<a href="estadisticas.php">Estadísticas</a>
 				<a href="foro.php?seccion=Primera">Debate</a>
