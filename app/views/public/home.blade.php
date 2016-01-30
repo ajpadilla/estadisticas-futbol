@@ -16,7 +16,11 @@
 	<div style="clear: both;"></div>
 	@include('public.layouts.partials._games-control')
 	@include('public.layouts.partials._shout-goal')
-	@include('public.layouts.partials._today-games')
+	@if(!empty($today))
+		@include('public.layouts.partials._today-games')
+	@else
+		@include('public.layouts.partials._next-games')
+	@endif
 	@include('public.layouts.partials._google-syndication')
 	{{-- <div style="clear: both;"><br/></div>		
 	<span class="verdegrande">PROXIMOS PARTIDOS</span>
