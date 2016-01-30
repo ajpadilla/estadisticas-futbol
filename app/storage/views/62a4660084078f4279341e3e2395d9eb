@@ -21,8 +21,6 @@
 		<div style="clear: both;"><br/></div>
 		<br/>
 		<br/>
-		<?php echo $__env->make('public.layouts.partials._info-footer', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
-		<br/>
 		<div style="clear: both;"><br/></div>
 	</div>
 	<?php echo $__env->make('public.layouts.partials._footer', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>

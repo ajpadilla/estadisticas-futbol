@@ -17,7 +17,6 @@
 	<div style="clear: both;"></div>
 	<div style="clear: both;"></div>
 	<br>
-	<?php echo $__env->make('public.layouts.partials._google-syndication', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
 	<?php echo $__env->make('public.primera.partials._info-league', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
 	<div style="clear: both;"></div>
 	<br>
@@ -26,7 +25,16 @@
 	<br>
 	<br>
 	<?php echo $__env->make('public.primera.partials._positions', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
-			
+	<div style="clear: both;"></div>
+	<br>
+	<?php echo $__env->make('public.primera.partials._averages', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
+	<?php echo $__env->make('public.primera.partials._scorers', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
+	<br>
+	<div style="clear: both;"></div>
+	<br>
+	<br>
+	<div style="clear: both;"></div>
+	<br>
 <?php $__env->stopSection(); ?>
 
 <?php echo $__env->make("public.layouts.main", array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
