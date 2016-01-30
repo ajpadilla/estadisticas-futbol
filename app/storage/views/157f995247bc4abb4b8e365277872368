@@ -1,14 +1,41 @@
 <span class="verdegrande">
-	<div style="float: left;width:225px;color: white;font-size:12px">
-		<br>
-		<a href="ayer" style="font-size: 14px;">Ayer</a>
-	</div>
-	<div style="float: left;width:500px;text-align: center;margin: auto">
-		PARTIDOS DE HOY<br><span style="font-size: 10px;">Los partidos se actualizan automaticamente!</span><br style="clear: both;">
-	</div>
-	<div style="float: left;width:225px;color: white;font-size:12px">
-		<br>
-		<a href="man" style="font-size: 14px;">Mañana</a>
-	</div>
+
+	<?php if(!empty($showTomorrow) && $showTomorrow): ?>
+		<div style="float: left;width:225px;color: white;font-size:12px">
+			<br>
+			<a href="<?php echo route('public.home'); ?>" style="font-size: 14px;">Hoy</a>
+		</div>
+		<div style="float: left;width:500px;text-align: center;margin: auto">
+		PARTIDOS DE MAÑANA<br><span style="font-size: 10px;">Los partidos se actualizan automaticamente!</span><br style="clear: both;">
+		</div>
+	<?php endif; ?>
+	
+	<?php if(!empty($showToday) && $showToday): ?>
+		<div style="float: left;width:225px;color: white;font-size:12px">
+			<br>
+			<a href="<?php echo route('gamesforday','yesterday'); ?>" style="font-size: 14px;">Ayer</a>
+		</div>
+		<div style="float: left;width:500px;text-align: center;margin: auto">
+			PARTIDOS DE HOY<br><span style="font-size: 10px;">Los partidos se actualizan automaticamente!</span><br style="clear: both;">
+		</div>
+		<div style="float: left;width:225px;color: white;font-size:12px">
+			<br>
+			<a href="<?php echo route('gamesforday','tomorrow'); ?>" style="font-size: 14px;">Mañana</a>
+		</div>
+	<?php endif; ?>
+	
+	<?php if(!empty($showYesterday) && $showYesterday): ?>
+		<div style="float: left;width:225px;color: white;font-size:12px">
+			<br>
+		</div>
+		<div style="float: left;width:500px;text-align: center;margin: auto">
+		PARTIDOS DE AYER<br><span style="font-size: 10px;">Los partidos se actualizan automaticamente!</span><br style="clear: both;">
+		</div>
+		<div style="float: left;width:225px;color: white;font-size:12px">
+			<br>
+			<a href="<?php echo route('public.home'); ?>" style="font-size: 14px;">Hoy</a>
+		</div>
+	<?php endif; ?>
+
 	<div style="clear: both;"></div>
 </span>
