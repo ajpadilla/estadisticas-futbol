@@ -102,6 +102,15 @@ class EquipoRepository extends BaseRepository
 		return Game::whereAwayTeamId($id)->whereGroupId($groupId)->get();
 	}
 
+	//Metodo el cual obtendra todos los juegos como visitante en toda la comepetencia
+	public function getAwayGamesByCompetition($id, $startDateCompetition, $endDateCompetition)
+	{
+		return Game::whereAwayTeamId($id)
+		->where('date', '>=', $startDateCompetition)
+		->where('date', '<=',  $endDateCompetition)
+		->get();
+	}
+
 	public function getSortByPointsByGroup($groupId, $type = 'DESC')
 	{
 		$groupRepository = new GroupRepository;
