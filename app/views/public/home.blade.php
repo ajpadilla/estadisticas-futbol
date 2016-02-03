@@ -22,6 +22,9 @@
 		@include('public.layouts.partials._next-games')
 	@endif
 	@include('public.layouts.partials._google-syndication')
+	<br/>
+	@include('public.layouts.partials._info-footer')
+
 	{{-- <div style="clear: both;"><br/></div>		
 	<span class="verdegrande">PROXIMOS PARTIDOS</span>
 	@include('public.layouts.partials._next-games') --}}		
