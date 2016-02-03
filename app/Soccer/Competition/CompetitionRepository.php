@@ -5,12 +5,16 @@ use soccer\Competition\Phase\PhaseRepository;
 use soccer\Group\GroupRepository;
 use soccer\Game\GameRepository;
 use soccer\Competition\Competition;
+use soccer\Equipo\EquipoRepository;
+use Illuminate\Database\Eloquent\Collection;
 /**
 * 
 */
 class CompetitionRepository extends BaseRepository
 {		
 	
+	protected $teams;
+
 	function __construct() {
 		$this->columns = [
 			'Nombre',
@@ -21,6 +25,7 @@ class CompetitionRepository extends BaseRepository
 
 		$this->setModel(new Competition);
 		$this->setListAllRoute('competitions.api.list');
+		$this->teams = new Collection;
 	}
     /*
 	********************* Methods ***********************
@@ -158,6 +163,7 @@ class CompetitionRepository extends BaseRepository
 		});*/
 	}		
 
+	//Obtiene los equipos para una competencia( competencia-phases-groups-equipos-fixture)
 	public function getGroupTables($id)
 	{		
 		$competition = $this->get($id);
@@ -195,4 +201,39 @@ class CompetitionRepository extends BaseRepository
 		}
 		return $tables;
 	}	
+
+	public function getGroupTablesPublic($id)
+	{
+		$teamRepository = new EquipoRepository;
+		$groupRepository = new GroupRepository;	
+
+		$competition = $this->get($id);
+		$tables = array();		
+		if($competition->hasGames) {
+			$gameRepository = new GameRepository;			
+			foreach ($competition->phasesWithGames as $phase) {
+				if($phase->hasAssociateGroups && $phase->hasGames) {
+					$tables[$phase->id]['name'] = $phase->name;
+					foreach ($phase->groupsWithGames as $group) 
+						if($group->hasGames) 
+							$tables[$phase->id]['tables']['groups'] = $teamRepository->getSortByPointsByGroup($group->id);
+							$tables[$phase->id]['tables']['fixture'] =  $groupRepository->getOrderedFixturesArrayByGroup($group->id);
+				}
+			}
+		}
+		return $tables;
+	}
+
+	public function getAllTeams($id)
+	{
+		$competition = $this->get($id);
+		if($competition->hasPhases) 
+		{
+			$firstPhase = $competition->phases->first();
+			foreach ($firstPhase->teams as $team) {
+				$this->teams->add($team);
+			}
+		}
+		return $this->teams;
+	}
 }
