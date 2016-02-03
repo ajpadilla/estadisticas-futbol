@@ -25,6 +25,12 @@
 						</div>
 					</div>
 					<div class="form-group">
+						{{ Form::label('type','Tipo',['class'=>'col-sm-2 control-label']) }}
+						<div class="col-sm-6">
+							{{ Form::select('type',['primera' => 'primera'],null,['class' => 'form-control chosen-select','data-placeholder' => 'Escoge Tipo...','id'=> 'type_competition']) }}
+						</div>
+					</div>
+					<div class="form-group">
 						{{ Form::label('desde', 'Desde', ['class' => 'col-md-2 control-label']) }}	
 						<div class="col-md-6">{{ Form::text('desde', null, ['class' => 'form-control datepicker', 'id'=>'desde-competencia']) }}</div>
 					</div>
