@@ -202,11 +202,13 @@ class GroupRepository extends BaseRepository
 		});
 	}
 
+	// Obtiene los fixtures de cada equipo para cada grupo 
 	public function getOrderedFixturesArrayByGroup($id)
 	{
 		$fixtures = array();
 		$teamRepository = new EquipoRepository;
-		foreach ($teamRepository->getSortByPointsByGroup($id) as $team) {
+		foreach ($teamRepository->getSortByPointsByGroup($id) as $team) 
+		{
 			$localGames = $teamRepository->getLocalGamesByGroup($team->id, $id);
 			$awayGames = $teamRepository->getAwayGamesByGroup($team->id, $id);
 			$winGames = $teamRepository->getWinGamesByGroup($team->id, $id, $localGames, $awayGames);
@@ -319,9 +321,12 @@ class GroupRepository extends BaseRepository
 	public function getDefaultTableForGroupTeams($id)
 	{
 		$teamRepository = new EquipoRepository;
+		//retorna los equipos por de un grupo de una phase, el metodo se encuentra en EquipoRepository
 		$teams = $teamRepository->getSortByPointsByGroup($id);
 		if($teams) {
+			//crea un collection para el datatable
 			$teamRepository->setDatatableCollection($teams);
+			// obtiene los fixtures por cada equipo de cada grupo, pasandole el id del grupo
 			$this->setTableGroupContent($id, $teamRepository);
 			$teamRepository->addColumnToCollection('Acciones', function($model) use ($teamRepository, $id) 
 			{
@@ -346,4 +351,12 @@ class GroupRepository extends BaseRepository
 		}
 		return null;
 	}	
+
+	public function getTableForGroupTeams($idGroup)
+	{
+		$teamRepository = new EquipoRepository;
+		$teams = $teamRepository->getSortByPointsByGroup($idGroup);
+		$fixtures = $this->getOrderedFixturesArrayByGroup($id);
+
+	}
 }
