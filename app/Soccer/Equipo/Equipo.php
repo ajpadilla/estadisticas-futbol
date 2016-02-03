@@ -4,6 +4,7 @@ use Eloquent;
 use Codesleeve\Stapler\ORM\StaplerableInterface;
 use Codesleeve\Stapler\ORM\EloquentTrait;
 use Carbon\Carbon;
+use soccer\Base\BaseModel;
 /**
 * 
 */
