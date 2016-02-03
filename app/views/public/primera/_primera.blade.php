@@ -18,7 +18,6 @@
 	<div style="clear: both;"></div>
 	<div style="clear: both;"></div>
 	<br>
-	@include('public.layouts.partials._google-syndication')
 	@include('public.primera.partials._info-league')
 	<div style="clear: both;"></div>
 	<br>
@@ -27,5 +26,16 @@
 	<br>
 	<br>
 	@include('public.primera.partials._positions')
-			
+	@include('public.primera.partials._phases');
+	<br>
+	<div style="clear: both;"></div>
+	<br>
+	@include('public.primera.partials._averages')
+	@include('public.primera.partials._scorers')
+	<br>
+	<div style="clear: both;"></div>
+	<br>
+	<br>
+	<div style="clear: both;"></div>
+	<br>
 @stop
