@@ -51,11 +51,17 @@ class BaseRepository
 
 	public function getAllForSelect()
 	{
-		if (!empty($this->model)) {
-			if($this->getModel()->first()->nombre)
-				return $this->getAll()->lists('nombre', 'id');
-			return $this->getAll()->lists('name', 'id');
+		if (!empty($this->model)) 
+		{
+			if (count($this->model->first())) 
+			{
+				$colums = $this->model->first()->toArray();
+				if(array_key_exists('nombre', $colums))
+					return $this->getAll()->lists('nombre', 'id');
+				return $this->getAll()->lists('name', 'id');
+			}
 		}
+		return $this->getAll()->lists('name', 'id');
 	}	
 	
 	public function delete($id)
@@ -139,6 +145,11 @@ class BaseRepository
 		$this->setBodyTableSettings();
 		$this->setDefaultActionColumn();
 	}	
+
+	public function hasAttribute($attr)
+{
+    return array_key_exists($attr, $this->model->attributes);
+}
 
 	public function setDefaultActionColumn(){}
 	public function setBodyTableSettings(){}
