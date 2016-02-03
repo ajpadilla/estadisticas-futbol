@@ -88,6 +88,14 @@ class EquipoRepository extends BaseRepository
 	{
 		return Game::whereLocalTeamId($id)->whereGroupId($groupId)->get();
 	}
+	//Metodo el cual obtendra todos los juegos como local en toda la comepetencia
+	public function getLocalGamesByCompetition($id, $startDateCompetition, $endDateCompetition)
+	{
+		return Game::whereLocalTeamId($id)
+		->where('date', '>=', $startDateCompetition)
+		->where('date', '<=',  $endDateCompetition)
+		->get();
+	}
 
 	public function getAwayGamesByGroup($id, $groupId)
 	{
