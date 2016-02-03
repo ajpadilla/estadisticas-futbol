@@ -6,6 +6,7 @@ use soccer\Pais\PaisRepository;
 use soccer\Forms\EquipoForm;
 use soccer\Forms\EditarEquipoForm;
 use Laracasts\Validation\FormValidationException;
+use soccer\Equipo\Equipo;
 //use Datatable;
 
 class EquipoController extends \BaseController {
@@ -255,6 +256,11 @@ class EquipoController extends \BaseController {
 		if(Request::ajax())
 			$this->setSuccess($this->repository->removePlayer($id, $playerId));
 		return $this->getResponseArrayJson();
+	}
+
+	public function get()
+	{
+		return $this->repository->getModel()->first()->toArray();
 	}
 
 }
