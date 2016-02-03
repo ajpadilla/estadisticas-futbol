@@ -1,3 +1,8 @@
+<div style="display:none" id="competition-id">
+     @foreach($competitions as $competition)
+        <a id="teamsFormCompetition" data-id="{{ $competition->id }}" href="{{ route('getTeamsFomCompetition') }}"></a>
+     @endforeach 
+</div>
 <div id="tablaptsactual">
 <span class="datosequipo" style="display: block; text-align: center"><strong>Posiciones Campeonato 2015</strong> </span>  
 <div id="tabla">
@@ -6,7 +11,7 @@
         <tr style="background: black; color: white">
         <th class="header">#</th>
         <th style="width:140px" class="header">Equipo</th>
-        <th class="pts header" style="background: #408080">Pts<div class="tooltip fixed" style="display: none;">Puntos obtenidos. <br><span class="ordenar">Click para ordenar con este criterio.</span></div></th>
+        <th class="pts header" style="background: #408080">Pts</th>
         <th class="pj header">PJ<div class="tooltip fixed" style="display: none;">Partidos jugados. <br><span class="ordenar">Click para ordenar con este criterio.</span></div></th>
         <th class="pg header">PG<div class="tooltip fixed" style="display: none;">Partidos ganados. <br><span class="ordenar">Click para ordenar con este criterio.</span></div></th>
         <th class="pe header">PE<div class="tooltip fixed" style="display: none;">Partidos empatados. <br><span class="ordenar">Click para ordenar con este criterio.</span></div></th>
