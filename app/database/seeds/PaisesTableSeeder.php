@@ -47,7 +47,7 @@ class PaisesTableSeeder extends DatabaseSeeder{
         );
 
         $paises[] = array(
-            'nombre' => 'España',
+            'nombre' => 'Espana',
             'bandera' => null,
             'code' => 'ES',
             'created_at' => $date->format('Y-m-d h:m:s'),
