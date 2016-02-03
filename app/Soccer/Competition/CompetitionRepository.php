@@ -236,4 +236,52 @@ class CompetitionRepository extends BaseRepository
 		}
 		return $this->teams;
 	}
+
+	public function getOrderedFixturesArrayByCompetition($id)
+	{
+		$this->getAllTeams($id);
+		$competition = $this->get($id);
+		$fixtures = array();
+		$teamRepository = new EquipoRepository;
+		foreach ($this->teams as $team) {
+			$localGames = $teamRepository->getLocalGamesByCompetition(7, $competition->from, $competition->to);
+			$awayGames = $teamRepository->getAwayGamesByCompetition(7, $competition->from, $competition->to);
+			$winGames = $teamRepository->getWinGamesByCompetition(7, $localGames, $awayGames, $competition->from, $competition->to);
+			$lostGames = $teamRepository->getLostGamesByCompetition(7, $localGames, $awayGames, $competition->from, $competition->to);
+			$tieGames = $teamRepository->getTieGamesByCompetition(7, $localGames, $awayGames, $competition->from, $competition->to);
+			$scoredGoals = $teamRepository->getScoredGoalsByCompetition(7, $localGames, $awayGames, $competition->from, $competition->to);
+			$againstGoals = $teamRepository->getAgainstGoalsByCompetition(7, $localGames, $awayGames, $competition->from, $competition->to);
+			$gamesPlayed = $teamRepository->getPlayedGamesByCompetition(7, $competition->from, $competition->to);
+
+			$teamFixtures = array(
+				'id' => $team->id,
+				'pos' => 0,
+				'gamesPlayed' => $gamesPlayed,
+				'winGames' => $winGames,
+				'lostGames' => $lostGames,
+				'tieGames' => $tieGames,
+				'scoredGoals' => $scoredGoals,
+				'againstGoals' => $againstGoals,
+				'goalsDiff' => $scoredGoals - $againstGoals,
+				'points' => ($winGames * 3) + $tieGames
+			);
+			$fixtures[$team->id] = $teamFixtures;
+		}
+
+		usort($fixtures, function($a, $b) {
+    		return $a['points'] <= $b['points'];
+		});
+
+		$i = 1;
+
+		$orderedFixtures = array();
+		foreach ($fixtures as $index => $fixture) {
+			$fixture['pos'] = $i;
+			unset($fixtures[$index]);
+			$orderedFixtures[$fixture['id']] = $fixture;
+			$i++;
+		}
+		unset($fixtures);
+		return $orderedFixtures;
+	}
 }
