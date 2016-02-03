@@ -14,7 +14,7 @@ class CompetitionFormatsTableSeeder extends DatabaseSeeder{
 		$date = new DateTime;
 
         $formats[] = array(
-            'name' => 'Liga Española',
+            'name' => 'Formato Liga Española',
             'local_away_game' => true, 
             'teams_by_group' => 20,
             'descent' => 2,
@@ -23,17 +23,21 @@ class CompetitionFormatsTableSeeder extends DatabaseSeeder{
         ); 
 
         $formats[] = array(
-            'name' => '32 equipos grupos de 4',
-            'groups' => 8,
-            'teams_by_group' => 4,
-            'clasificated_by_group' => 2,
-            'away_goal' => true,
+            'name' => 'Formato Liga Argentina',
+            'groups' => 1,
+            'teams_by_group' => 20,
+            'clasificated_by_group' => 20,
+            'local_away_game' => false,
+            'local_away_game_final' => false, 
+            'promotion' => 0, 
+            'descent' => 3, 
+            'away_goal' => false,
             'created_at' => $date->format('Y-m-d h:m:s'),
             'updated_at' => $date->format('Y-m-d h:m:s')            
         );  
 
         $formats[] = array(
-            'name' => 'Octavos de final eliminación directa',
+            'name' => 'Formato Liga Inglesa',
             'groups' => 8,
             'teams_by_group' => 2,
             'clasificated_by_group' => 1,
