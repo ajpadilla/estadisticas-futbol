@@ -168,5 +168,4 @@ class PaisController extends \BaseController {
 		}
 	}
 
-
 }
