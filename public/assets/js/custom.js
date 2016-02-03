@@ -2922,7 +2922,7 @@ var handleBootboxAddEquipoToJugador = function () {
                     required:true,
                     customDateValidator:true,
                 },
-                tipo_competencia_id:{
+                type_competition:{
                     required:true
                 }
             },
@@ -2937,7 +2937,7 @@ var handleBootboxAddEquipoToJugador = function () {
                 hasta:{
                      required: 'Este campo es obligatorio',
                 },
-                tipo_competencia_id:{
+                type_competition:{
                      required: 'Este campo es obligatorio',
                 }
             },
@@ -3492,7 +3492,9 @@ var handleBootboxAddEquipoToJugador = function () {
             type: 'GET',
             url: url,
             dataType:'json',
-            success: function(response) {
+            success: function(response) 
+            {
+                console.log(response);
                 if(response.success == true)
                 {
                     var data = $.map(response.data, function(el) { return el; });
