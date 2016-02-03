@@ -1,7 +1,9 @@
 <?php
+use soccer\Competition\CompetitionRepository;
 
 class PageController extends \BaseController {
 
+	protected $competitionRepository;
 	/**
 	 * Display a listing of the resource.
 	 *
@@ -9,7 +11,8 @@ class PageController extends \BaseController {
 	 */
 	public function index()
 	{		
-		return View::make('pages.home');
+		$competitions = $this->competitionRepository-getAll();
+		return View::make('pages.home', compact('competitions'));
 	}
 
 	public function adminIndex()
