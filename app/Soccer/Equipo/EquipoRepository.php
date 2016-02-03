@@ -139,9 +139,8 @@ class EquipoRepository extends BaseRepository
 		$query = Game::select();
 		$query->where('games.local_team_id', '=', $id)
 			  ->orWhere('games.away_team_id', '=', $id)
-			  ->where('games.group_id', '=', $groupId)
 			  ->where('date', '>=', $startDateCompetition)
-			  ->where('date', '<=',  $endDateCompetition)
+			  ->where('date', '<=',  $endDateCompetition);
 		return $query->count();
 	}
 
