@@ -21,8 +21,6 @@
 		<div style="clear: both;"><br/></div>
 		<br/>
 		<br/>
-		@include('public.layouts.partials._info-footer')
-		<br/>
 		<div style="clear: both;"><br/></div>
 	</div>
 	@include('public.layouts.partials._footer')
