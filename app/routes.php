@@ -20,15 +20,21 @@ Route::get('/', [
 	'uses' => 'PublicController@index'
 ]);
 
+Route::get('gamesforday/{day}', ['as' => 'gamesforday', 'uses' => 'PublicController@gamesIndex']);
+Route::get('gamesFirstDivision', ['as' => 'FirstDivision', 'uses' => 'PublicController@gamesFirstDivision']);
+Route::get('getTeamsFomCompetition', ['as' => 'getTeamsFomCompetition', 'uses' => 'PublicController@teamsForCompetitions']);
+
 /*
 ********************************* FIN RUTAS PUBLICAS ********************************
 */
 
 
 Route::get('admin/test', function() {
-	$data = new soccer\Competition\CompetitionRepository;
-	$data = $data->playingCompetitions()->toArray();
-	return View::make('test', compact('data'));
+	/*$data = new soccer\Competition\CompetitionRepository;
+	return $data->playingCompetitions();*/
+	//$data = $data->playingCompetitions()->toArray();
+	//return View::make('test', compact('data'));
+	
 });
 
 Route::get('admin/prueba-ruta/{id}',  ['as' => 'prueba','uses' => 'PlayerController@prueba' ] );
@@ -67,6 +73,9 @@ Route::post('admin/jugadores/api-disponible',  ['as' => 'players.api.available',
 /*
 ********************************* RUTAS PARA EQUIPOS ********************************
 */
+
+Route::get('admin/equipos/prueba', ['as' => 'equipos.prueba', 'uses' => 'EquipoController@get']);
+
 
 Route::get('admin/equipos', ['as' => 'equipos.index', 'uses' => 'EquipoController@index']);
 Route::get('admin/equipos/nuevo', ['as' => 'equipos.create', 'uses' => 'EquipoController@create'] );
