@@ -25,24 +25,24 @@ class DatabaseSeeder extends Seeder {
 	{
 		Eloquent::unguard();
 
-		/*$this->call('PosicionesTableSeeder');
+		$this->call('PosicionesTableSeeder');
 		$this->call('PaisesTableSeeder');
 		$this->call('PlayersTableSeeder');
 		$this->call('EquiposTableSeeder');
-		$this->call('PosicionJugadorTableSeeder');
+		//$this->call('PosicionJugadorTableSeeder');
 		$this->call('CompetitionFormatsTableSeeder');
-		$this->call('CompetitionsTableSeeder');
-		$this->call('PhasesTableSeeder');
-		$this->call('GroupsTableSeeder');
-		$this->call('GroupTeamTableSeeder');
+		//$this->call('CompetitionsTableSeeder');
+		//$this->call('PhasesTableSeeder');
+		//$this->call('GroupsTableSeeder');
+		//$this->call('GroupTeamTableSeeder');
 		$this->call('GameTypeTableSeeder');
-		$this->call('GamesTableSeeder');
-		$this->call('GoalTypesTableSeeder');*/
-		$this->call('GoalsTableSeeder');
-		/*$this->call('SanctionsTypesTableSeeder');
+		//$this->call('GamesTableSeeder');
+		$this->call('GoalTypesTableSeeder');
+		//$this->call('GoalsTableSeeder');
+		$this->call('SanctionsTypesTableSeeder');
 		$this->call('AlignmentsTypeTableSeeder');
 		$this->call('AlignmentsTableSeeder');
-		$this->call('FixtureTypesTableSeeder');*/
+		//$this->call('FixtureTypesTableSeeder');
 	}
 
 }
