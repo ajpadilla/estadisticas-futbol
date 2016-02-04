@@ -2,7 +2,7 @@ var CustomPublicApp = function () {
 	
 	$("#positionsForTeams").tablesorter();
 
-	var teamsFormCompetition = function() 
+	var groupsFixturesForCompetition = function() 
 	{
 		var competitionId = $('#teamsFormCompetition').attr('data-id');
 		var url = $('#teamsFormCompetition').attr('href');
@@ -48,9 +48,10 @@ var CustomPublicApp = function () {
 		});
 	};
 
+
 	return {
 		init: function () {
-			teamsFormCompetition();
+			groupsFixturesForCompetition();
 		}
 	}
 }();
