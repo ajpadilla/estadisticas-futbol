@@ -152,4 +152,12 @@ class PublicController extends \BaseController {
 		return $this->getResponseArrayJson();
 	}
 
+	public function gamesForPhase()
+	{
+		$gamesFixtures = $this->competitionRepository->getGamesForPhase(Input::get('phaseId'));
+		$this->setSuccess(true);
+		$this->addToResponseArray('gamesFixtures', $gamesFixtures);
+		return $this->getResponseArrayJson();
+	}
+
 }
