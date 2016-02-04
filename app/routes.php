@@ -21,8 +21,8 @@ Route::get('/', [
 ]);
 
 Route::get('gamesforday/{day}', ['as' => 'gamesforday', 'uses' => 'PublicController@gamesIndex']);
-Route::get('gamesFirstDivision', ['as' => 'FirstDivision', 'uses' => 'PublicController@gamesFirstDivision']);
-Route::get('getTeamsFomCompetition', ['as' => 'getTeamsFomCompetition', 'uses' => 'PublicController@teamsForCompetitions']);
+Route::get('primera', ['as' => 'FirstDivision', 'uses' => 'PublicController@gamesFirstDivision']);
+Route::get('getPositionsteamsForCompetitions', ['as' => 'getPositionsteamsForCompetitions', 'uses' => 'PublicController@positionsteamsForCompetitions']);
 
 /*
 ********************************* FIN RUTAS PUBLICAS ********************************
@@ -30,10 +30,9 @@ Route::get('getTeamsFomCompetition', ['as' => 'getTeamsFomCompetition', 'uses' =
 
 
 Route::get('admin/test', function() {
-	/*$data = new soccer\Competition\CompetitionRepository;
-	return $data->playingCompetitions();*/
-	//$data = $data->playingCompetitions()->toArray();
-	//return View::make('test', compact('data'));
+	$data = new soccer\Competition\CompetitionRepository;
+	//$data->playingCompetitions();
+	print_r($data->positionsTeamsForTournament(1));
 	
 });
 
