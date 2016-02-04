@@ -2,7 +2,7 @@
 	<div style="width:480px;margin-left:15px">
 		@foreach($competitions as $competition)
 			@foreach ($competition->phasesWithGames as $phase) 
-				<div id="irfecha" onclick="irfecha('1_1');">{{ $phase->name }}</div>
+				<a id="irfecha" href="{{ route('getGamesForPhase') }}" class="phasesWithGames" data-phase-id="{{ $phase->id }}">{{ $phase->name }}</a>
 			@endforeach
 		@endforeach
 	</div>
