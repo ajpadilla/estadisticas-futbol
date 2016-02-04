@@ -71,6 +71,36 @@ class GameRepository extends BaseRepository
 		return new Collection;
 	}
 
+	public function getGoalsFixtures($id, $teamId)
+	{
+		$game = $this->get($id);
+		$goals = $game->goals()->whereTeamId($teamId)->get();
+
+		$fixturesCollection = new Collection;
+
+		$orderFixtures = array();
+
+		if($goals)
+			foreach ($goals as $goal) 
+				$orderFixtures[] = array('id' => $goal->id, 'time' => $goal->time, 'type' => 'goal');	
+
+	
+		usort($orderFixtures, function($a, $b) {
+			return $a['time'] >= $b['time'];
+		});
+
+		foreach ($orderFixtures as $fixture) 
+		{
+			$goal = $goals->filter(function($goal) use ($fixture) {
+				if ($goal->id == $fixture['id']) return true;
+			})->first();
+			$goal = '(' . $goal->time . ') ' . $goal->player->nombre;
+			$fixturesCollection->add($goal);
+		}
+
+		return ($fixturesCollection->isEmpty() ? false : $fixturesCollection);
+	}
+
 	public function getFixtures($id, $formatedToView = false)
 	{
 		$game = $this->get($id);
