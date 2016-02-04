@@ -202,59 +202,40 @@ class CompetitionRepository extends BaseRepository
 		return $tables;
 	}	
 
-	public function getGroupTablesPublic($id)
-	{
-		$teamRepository = new EquipoRepository;
-		$groupRepository = new GroupRepository;	
-
-		$competition = $this->get($id);
-		$tables = array();		
-		if($competition->hasGames) {
-			$gameRepository = new GameRepository;			
-			foreach ($competition->phasesWithGames as $phase) {
-				if($phase->hasAssociateGroups && $phase->hasGames) {
-					$tables[$phase->id]['name'] = $phase->name;
-					foreach ($phase->groupsWithGames as $group) 
-						if($group->hasGames) 
-							$tables[$phase->id]['tables']['groups'] = $teamRepository->getSortByPointsByGroup($group->id);
-							$tables[$phase->id]['tables']['fixture'] =  $groupRepository->getOrderedFixturesArrayByGroup($group->id);
-				}
-			}
-		}
-		return $tables;
-	}
-
-	public function getAllTeams($id)
+	public function positionsTeamsForTournament($id)
 	{
 		$competition = $this->get($id);
+		$groupsFixtures = array();
 		if($competition->hasPhases) 
 		{
+			$indexGroup = 1;
 			$firstPhase = $competition->phases->first();
-			foreach ($firstPhase->teams as $team) {
-				$this->teams->add($team);
+			foreach ($firstPhase->groups as $group) {
+				$groupsFixtures[$indexGroup] = $this->getOrderedFixturesArrayByCompetition($competition, $group->teams);
+				$indexGroup++;
 			}
+			return $groupsFixtures;
 		}
-		return $this->teams;
 	}
 
-	public function getOrderedFixturesArrayByCompetition($id)
+	public function getOrderedFixturesArrayByCompetition(Competition $competition, $teams)
 	{
-		$this->getAllTeams($id);
-		$competition = $this->get($id);
+		$competition = $competition;
 		$fixtures = array();
 		$teamRepository = new EquipoRepository;
-		foreach ($this->teams as $team) {
-			$localGames = $teamRepository->getLocalGamesByCompetition(7, $competition->from, $competition->to);
-			$awayGames = $teamRepository->getAwayGamesByCompetition(7, $competition->from, $competition->to);
-			$winGames = $teamRepository->getWinGamesByCompetition(7, $localGames, $awayGames, $competition->from, $competition->to);
-			$lostGames = $teamRepository->getLostGamesByCompetition(7, $localGames, $awayGames, $competition->from, $competition->to);
-			$tieGames = $teamRepository->getTieGamesByCompetition(7, $localGames, $awayGames, $competition->from, $competition->to);
-			$scoredGoals = $teamRepository->getScoredGoalsByCompetition(7, $localGames, $awayGames, $competition->from, $competition->to);
-			$againstGoals = $teamRepository->getAgainstGoalsByCompetition(7, $localGames, $awayGames, $competition->from, $competition->to);
-			$gamesPlayed = $teamRepository->getPlayedGamesByCompetition(7, $competition->from, $competition->to);
+		foreach ($teams as $team) {
+			$localGames = $teamRepository->getLocalGamesByCompetition($team->id, $competition->from, $competition->to);
+			$awayGames = $teamRepository->getAwayGamesByCompetition($team->id, $competition->from, $competition->to);
+			$winGames = $teamRepository->getWinGamesByCompetition($team->id, $localGames, $awayGames, $competition->from, $competition->to);
+			$lostGames = $teamRepository->getLostGamesByCompetition($team->id, $localGames, $awayGames, $competition->from, $competition->to);
+			$tieGames = $teamRepository->getTieGamesByCompetition($team->id, $localGames, $awayGames, $competition->from, $competition->to);
+			$scoredGoals = $teamRepository->getScoredGoalsByCompetition($team->id, $localGames, $awayGames, $competition->from, $competition->to);
+			$againstGoals = $teamRepository->getAgainstGoalsByCompetition($team->id, $localGames, $awayGames, $competition->from, $competition->to);
+			$gamesPlayed = $teamRepository->getPlayedGamesByCompetition($team->id, $competition->from, $competition->to);
 
 			$teamFixtures = array(
 				'id' => $team->id,
+				'team' => $team,
 				'pos' => 0,
 				'gamesPlayed' => $gamesPlayed,
 				'winGames' => $winGames,
@@ -278,7 +259,7 @@ class CompetitionRepository extends BaseRepository
 		foreach ($fixtures as $index => $fixture) {
 			$fixture['pos'] = $i;
 			unset($fixtures[$index]);
-			$orderedFixtures[$fixture['id']] = $fixture;
+			$orderedFixtures[$i] = $fixture;
 			$i++;
 		}
 		unset($fixtures);
