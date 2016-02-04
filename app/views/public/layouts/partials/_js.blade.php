@@ -8,6 +8,10 @@
 <!-- JQUERY TABLESORTER-->
 {{ HTML::script('assets/js/tablesorter/dist/js/jquery.tablesorter.min.js') }}
 {{ HTML::script('assets/js/tablesorter/dist/js/jquery.tablesorter.widgets.min.js') }}
+
+<!-- Mustache -->
+{{ HTML::script('assets/js/mustache.min.js'); }}
+
 <!-- CUSTOM -->
 {{ HTML::script('assets/js/public/inicio4.js') }}
 
