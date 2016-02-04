@@ -5,6 +5,9 @@
 <!-- JQUERY UI-->
 {{ HTML::script('assets/js/jquery-ui-1.10.3.custom/js/jquery-ui-1.10.3.custom.min.js') }}
 
+<!-- JQUERY TABLESORTER-->
+{{ HTML::script('assets/js/tablesorter/dist/js/jquery.tablesorter.min.js') }}
+{{ HTML::script('assets/js/tablesorter/dist/js/jquery.tablesorter.widgets.min.js') }}
 <!-- CUSTOM -->
 {{ HTML::script('assets/js/public/inicio4.js') }}
 
