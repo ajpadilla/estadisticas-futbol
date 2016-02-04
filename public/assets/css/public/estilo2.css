@@ -127,3 +127,6 @@ th{cursor:pointer}
 .resu {background: white;width:7%;text-align: center; font-size:14px;}
 a img { border: 0 }
 @media screen\0 {   #ficha,#vivo{text-shadow:none;width:33px;font-size:9px} }
+.pagination{ margin: 20px 0; list-style: none; text-align: center; }
+.pagination li { display:inline-block; margin-right:10px;}
+.pagination li a {display:block;padding:10px 20px;text-decoration: none;}
