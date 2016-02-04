@@ -139,7 +139,7 @@ class PublicController extends \BaseController {
 
 	public function gamesFirstDivision()
 	{
-		$competitions = $this->competitionRepository->getModel()->orderBy('hasta', 'asc')->paginate(1);
+		$competitions = $this->competitionRepository->getModel()->orderBy('hasta', 'desc')->paginate(1);
 	 	return View::make('public.primera._primera', compact('competitions'));
 	}
 
