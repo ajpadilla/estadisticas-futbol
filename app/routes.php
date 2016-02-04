@@ -23,6 +23,7 @@ Route::get('/', [
 Route::get('gamesforday/{day}', ['as' => 'gamesforday', 'uses' => 'PublicController@gamesIndex']);
 Route::get('primera', ['as' => 'FirstDivision', 'uses' => 'PublicController@gamesFirstDivision']);
 Route::get('getPositionsteamsForCompetitions', ['as' => 'getPositionsteamsForCompetitions', 'uses' => 'PublicController@positionsteamsForCompetitions']);
+Route::get('getGamesForPhase', ['as' => 'getGamesForPhase', 'uses' => 'PublicController@gamesForPhase']);
 
 /*
 ********************************* FIN RUTAS PUBLICAS ********************************
