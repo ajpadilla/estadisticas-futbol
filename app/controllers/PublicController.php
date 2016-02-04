@@ -143,11 +143,12 @@ class PublicController extends \BaseController {
 	 	return View::make('public.primera._primera', compact('competitions'));
 	}
 
-	public function teamsForCompetitios()
+	public function positionsteamsForCompetitions()
 	{
-		$competition = $this->competitionRepository->getAllTeams(Input::get('id'));
+		$groupsFixtures = $this->competitionRepository->positionsTeamsForTournament(Input::get('id'));
 		$this->setSuccess(true);
-		$this->addToResponseArray('competencia', $competition);
+		$this->addToResponseArray('groupsFixtures', $groupsFixtures);
+		$this->addToResponseArray('numberGroups', count($groupsFixtures));
 		return $this->getResponseArrayJson();
 	}
 
