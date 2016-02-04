@@ -265,4 +265,35 @@ class CompetitionRepository extends BaseRepository
 		unset($fixtures);
 		return $orderedFixtures;
 	}
+
+	public function getGamesForPhase($phaseId)
+	{
+		$gamesFixtures = array();
+		$gameRepository = new GameRepository;
+		$phaseRepository = new PhaseRepository;
+		$phase = $phaseRepository->get($phaseId);
+		if ($phase->hasAssociateGroups && $phase->hasGames) {
+			foreach ($phase->groupsWithGames as $indexGroup => $group) {
+				if($group->hasGames){
+					foreach ($group->games as $indexGame => $game) {
+						$fixturesLocalGoals = $gameRepository->getGoalsFixtures($game->id, $game->localTeam->id);
+						$fixturesAwayGoals = $gameRepository->getGoalsFixtures($game->id, $game->awayTeam->id);
+						$gameFixtures = array(
+							'game' => $game,
+							'localTeam' => $game->localTeam,
+							'awayTeam' => $game->awayTeam,
+							'localGoals' => $game->localGoals,
+							'awayGoals' => $game->awayGoals,
+							'date' => $game->date,
+							'time' => $game->time,
+							'fixturesLocalGoals' => $fixturesLocalGoals,
+							'fixturesAwayGoals' => $fixturesAwayGoals
+						);
+						$gamesFixtures[$indexGroup][$indexGame]['game'] = $gameFixtures;
+					}
+				}
+			}
+			return $gamesFixtures;
+		}
+	}
 }
