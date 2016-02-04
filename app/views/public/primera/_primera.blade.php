@@ -38,4 +38,5 @@
 	<br>
 	<div style="clear: both;"></div>
 	<br>
+	@include('public.primera.partials._table-games-phase-tpl')
 @stop
