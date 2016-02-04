@@ -1,6 +1,7 @@
 <div style="float: left;width:480px">
 	<div style="width:480px;margin-left:15px">
 		@foreach($competitions as $competition)
+			<a id="firstPhase" data-phase-id="{{ $competition->phases->first()->id }}" href=""></a>
 			@foreach ($competition->phasesWithGames as $phase) 
 				<a id="irfecha" href="{{ route('getGamesForPhase') }}" class="phasesWithGames" data-phase-id="{{ $phase->id }}">{{ $phase->name }}</a>
 			@endforeach
@@ -20,28 +21,28 @@
 			<div id="flechaad" class="2_1"></div>
 		</div>
 		<br>
-		<table style="width:480px">
-			<tbody>
-			<tr style="background:#092B1D;text-align: center">
-				<td colspan="6"><span class="horariopartido"> Viernes 5 de Febrero</span></td>
-			</tr>
-			<tr style="background: #e5e5e5">
-				<td class="falta" id="ti_1_10">19:00</td>
-				<td style="min-width:153px"><img src="http://www.promiedos.com.ar/images/s18/huracan.png" width="18px">
-					<span class="datoequipo">Huracan</span>
-				</td>
-				<td class="resu" id="r1_1_10"></td>
-				<td class="resu" id="r2_1_10"></td>
-				<td style="min-width:153px">
-					<img src="http://www.promiedos.com.ar/images/s18/atlrafaela.png" width="18px">
-					<span class="datoequipo">Atl Rafaela</span>
-				</td>
-				<td>
-					<div id="ficha" onclick="previa('10','primera');">Ficha<br><img src="http://www.promiedos.com.ar/images/nota.png">
-					</div>
-				</td>
-			</tr>
-			</tbody>
+		<table id="tableGamesForPhase" style="width:480px">
+			<!--<tbody>
+				<tr style="background:#092B1D;text-align: center">
+					<td colspan="6"><span class="horariopartido"></span></td>
+				</tr>
+				<tr style="background: #e5e5e5">
+					<td class="falta" id="ti_1_10">19:00</td>
+					<td style="min-width:153px"><img src="http://www.promiedos.com.ar/images/s18/huracan.png" width="18px">
+						<span class="datoequipo"></span>
+					</td>
+					<td class="resu" id="r1_1_10"></td>
+					<td class="resu" id="r2_1_10"></td>
+					<td style="min-width:153px">
+						<img src="http://www.promiedos.com.ar/images/s18/atlrafaela.png" width="18px">
+						<span class="datoequipo"></span>
+					</td>
+					<td>
+						<div id="ficha" onclick="previa('10','primera');">Ficha<br><img src="http://www.promiedos.com.ar/images/nota.png">
+						</div>
+					</td>
+				</tr>
+			</tbody>-->
 		</table>
 		<br>
 		<div style="float: left;"><img src="images/canales/tvpublica.png">TV Publica</div>
