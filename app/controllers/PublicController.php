@@ -139,7 +139,11 @@ class PublicController extends \BaseController {
 
 	public function gamesFirstDivision()
 	{
-		$competitions = $this->competitionRepository->getModel()->orderBy('hasta', 'desc')->paginate(1);
+		$competitions = $this->competitionRepository
+		->getModel()
+		->whereType('primera')
+		->orderBy('hasta', 'desc')
+		->paginate(1);
 	 	return View::make('public.primera._primera', compact('competitions'));
 	}
 
@@ -154,8 +158,14 @@ class PublicController extends \BaseController {
 
 	public function gamesForPhase()
 	{
-		$gamesFixtures = $this->competitionRepository->getGamesForPhase(Input::get('phaseId'));
+		$gamesFixtures = $this->competitionRepository
+		->getGamesForPhase(Input::get('phaseId'));
+
+		$infoCompetition = $this->competitionRepository
+		->getNameForCompetitionAndPhase(Input::get('phaseId'), Input::get('competitionId'));
+
 		$this->setSuccess(true);
+		$this->addToResponseArray('infoCompetition', $infoCompetition);
 		$this->addToResponseArray('gamesFixtures', $gamesFixtures);
 		return $this->getResponseArrayJson();
 	}
