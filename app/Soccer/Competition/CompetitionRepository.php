@@ -7,6 +7,7 @@ use soccer\Game\GameRepository;
 use soccer\Competition\Competition;
 use soccer\Equipo\EquipoRepository;
 use Illuminate\Database\Eloquent\Collection;
+use Carbon\Carbon;
 /**
 * 
 */
@@ -236,6 +237,7 @@ class CompetitionRepository extends BaseRepository
 			$teamFixtures = array(
 				'id' => $team->id,
 				'team' => $team,
+				'img' => $team->escudo->url('thumb'),
 				'pos' => 0,
 				'gamesPlayed' => $gamesPlayed,
 				'winGames' => $winGames,
@@ -266,29 +268,46 @@ class CompetitionRepository extends BaseRepository
 		return $orderedFixtures;
 	}
 
+	public function getNameForCompetitionAndPhase($phaseId, $competitionId)
+	{
+		$competition = $this->get($competitionId);
+		$phaseRepository = new PhaseRepository;
+		$phase = $phaseRepository->get($phaseId);
+		$info = array(
+			'competition' => $competition->nombre,
+			'phase' => $phase->name
+		);
+		return $info;
+	}
+
 	public function getGamesForPhase($phaseId)
 	{
 		$gamesFixtures = array();
 		$gameRepository = new GameRepository;
 		$phaseRepository = new PhaseRepository;
 		$phase = $phaseRepository->get($phaseId);
-		if ($phase->hasAssociateGroups && $phase->hasGames) {
+		if ($phase->hasAssociateGroups && $phase->hasGames) 
+		{
 			foreach ($phase->groupsWithGames as $indexGroup => $group) {
 				if($group->hasGames){
 					foreach ($group->games as $indexGame => $game) {
 						$fixturesLocalGoals = $gameRepository->getGoalsFixtures($game->id, $game->localTeam->id);
 						$fixturesAwayGoals = $gameRepository->getGoalsFixtures($game->id, $game->awayTeam->id);
+						$date = (Carbon::parse($game->date)->formatLocalized('%A %d %B %Y'));
 						$gameFixtures = array(
 							'game' => $game,
 							'localTeam' => $game->localTeam,
 							'awayTeam' => $game->awayTeam,
 							'localGoals' => $game->localGoals,
 							'awayGoals' => $game->awayGoals,
-							'date' => $game->date,
+							'date' => $date,
 							'time' => $game->time,
 							'fixturesLocalGoals' => $fixturesLocalGoals,
-							'fixturesAwayGoals' => $fixturesAwayGoals
+							'fixturesAwayGoals' => $fixturesAwayGoals,
+							'imgLocalTeam' => $game->localTeam->escudo->url('thumb'),
+							'imgAwayTeam' =>  $game->awayTeam->escudo->url('thumb')
 						);
+
 						$gamesFixtures[$indexGroup][$indexGame]['game'] = $gameFixtures;
 					}
 				}
