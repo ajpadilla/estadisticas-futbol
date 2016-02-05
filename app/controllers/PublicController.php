@@ -173,4 +173,12 @@ class PublicController extends \BaseController {
 		return $this->getResponseArrayJson();
 	}
 
+	public function getScorersGoalsFormCompetition()
+	{
+		$scoredGoals = $this->competitionRepository->scorersInCompetition(Input::get('id'));
+		$this->setSuccess(true);
+		$this->addToResponseArray('scoredGoals', $scoredGoals);
+		return $this->getResponseArrayJson();
+	}
+
 }
