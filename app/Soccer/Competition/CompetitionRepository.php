@@ -356,4 +356,74 @@ class CompetitionRepository extends BaseRepository
 		}
 		return $statistics;
 	}
+
+	public function scorersInCompetition($id)
+	{
+		$competition = $this->get($id);
+		$goalsCollection = new Collection;
+		$idsPlayers = array();
+		$scoredGoals = array();
+		if($competition->hasGames) 
+		{
+			foreach ($competition->phasesWithGames as $phase) {
+				if($phase->hasAssociateGroups && $phase->hasGames) {
+					foreach ($phase->groupsWithGames as $group){
+						if($group->hasGames){
+							foreach ($group->games as $game) {
+								foreach ($game->goals as $goal) {
+
+									if(!in_array($goal->player_id, $idsPlayers))
+										$idsPlayers[] = $goal->player_id;
+									$goalsCollection->add($goal);
+								}
+							}
+						} 
+					}
+				}
+			}
+		}
+
+		$goalsCollection->sort(function($a, $b){
+			$a = $a->player_id;
+			$b = $b->player_id;
+
+			if($a === $b){
+				return 0;
+			}
+
+			return ($a > $b) ? 1 : -1;
+		});
+
+		usort($idsPlayers, function($a, $b) {
+			if ($a == $b) {
+				return 0;
+			}
+			return ($a > $b) ? 1 : -1;
+		});
+
+		foreach ($idsPlayers as $key => $value) 
+		{
+			$totalsGoals = $goalsCollection->filter(function($goal) use ($value){
+				if ($goal->player_id == $value) return true;
+			})->count();
+			
+			$goal = $goalsCollection->filter(function($goal) use ($value){
+				if ($goal->player_id == $value) return true;
+			})->first();
+
+			$scoredGoals[] = array('totalsGoals' => $totalsGoals , 'team' => $goal->team, 'img' => $goal->team->escudo->url('thumb'), 'player' => $goal->player);
+		}
+
+		usort($scoredGoals, function($a, $b) {
+			return $a['totalsGoals'] <= $b['totalsGoals'];
+		});
+
+		/*foreach ($scoredGoals as $key => $value) {
+			echo $key." ".$value['totalsGoals']."</br>";
+			echo $key." ".$value['team']->nombre."</br>";
+			echo $key." ".$value['player']->nombre."</br>";
+		}*/
+
+		return $scoredGoals;
+	}
 }
