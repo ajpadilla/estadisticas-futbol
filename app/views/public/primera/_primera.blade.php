@@ -40,4 +40,5 @@
 	<br>
 	@include('public.primera.partials._table-games-phase-tpl')
 	@include('public.primera.partials._name-phases-for-competition-tpl')
+	@include('public.primera.partials._stats-phase-tpl')
 @stop
