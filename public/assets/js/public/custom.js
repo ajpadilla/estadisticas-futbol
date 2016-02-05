@@ -67,7 +67,7 @@ var CustomPublicApp = function () {
 			data: data,
 			dataType:'json',
 			success: function(response) {
-					console.log(response);
+					//console.log(response);
 					if (response.success) 
 					{
 						$.each(response.gamesFixtures, function(groupIndex, games) 
@@ -211,12 +211,48 @@ var CustomPublicApp = function () {
 		});
 	};
 
+	var scoredGoals = function() 
+	{
+		var competitionId = $('#teamsFormCompetition').attr('data-id');
+		url = $('#scoredGoalsUrl').attr('href')
+		var data = {
+			id: competitionId
+		};
+		$.ajax({
+			type: 'GET',
+			url: url,
+			data: data,
+			dataType:'json',
+			success: function(response) {
+				console.log(response);
+				var scoredGoals = jQuery('#colScorers');
+				$.each(response.scoredGoals, function(index , scorer) {
+					var data = {
+						img: scorer.img,
+						player: scorer.player.nombre,
+						team: scorer.team.nombre,
+						goals: scorer.totalsGoals
+					};
+					var template = jQuery('#scorers-tpl').html();
+					var html = Mustache.to_html(template, data);
+					scoredGoals.append(html);
+				});
+				
+			},
+			error: function(objeto, quepaso, otroobj){
+				console.log(objeto);
+				console.log(quepaso);
+				console.log(otroobj);
+			}
+		});
+	};
 
 	return {
 		init: function () {
 			groupsFixturesForCompetition();
 			gamesForFirtsPhase();
 			gameForPhases();
+			scoredGoals();
 		}
 	}
 }();
