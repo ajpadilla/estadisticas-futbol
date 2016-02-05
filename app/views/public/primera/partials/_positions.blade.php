@@ -5,10 +5,13 @@
 </div>
 @foreach($competitions as $competition)
 @if($competition->hasPhases)
-@foreach($competition->phases->first()->groups as $index => $group)
 <div id="tablaptsactual">
 <span class="datosequipo" style="display: block; text-align: center"><strong>Posiciones {{ $competition->nombre }}</strong> </span>  
 <div id="tabla">
+@foreach($competition->phases->first()->groups as $index => $group)
+@if(count($competition->phases->first()->groups) > 1 )
+<div style="display:block;text-align:center;font-size:18px;color:white;background:black">Zona {{ $index + 1 }}</div>
+@endif
 <table id="positionsForTeams-{{$index + 1}}" class="tablesorter3" style="width:100%;text-align: center">
     <thead>
         <tr style="background: black; color: white">
@@ -25,9 +28,9 @@
         </tr>
     </thead>
     <tbody>
-
     </tbody>
 </table>
+@endforeach 
 </div>
 <div class="infotabla">
 <span style="background: #AAF597;color:black">*El campeón y el subcampeón clasifican a la Copa Libertadores 2016.</span><br>
@@ -37,6 +40,5 @@ Nota: Al estar River Plate clasificado a la Copa Libertadores 2016 como actual c
 Nota: Rosario Central esta entrando a la Copa Libertadores 2016 por la Copa Argentina, el lugar lo ocupará el siguiente equipo de la tabla.
 </div>
 </div>
-@endforeach 
 @endif
 @endforeach 
