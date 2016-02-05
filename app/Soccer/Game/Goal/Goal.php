@@ -19,6 +19,17 @@ class Goal extends FixtureBaseModel {
        return $this->belongsTo('soccer\Player\Player', 'assistance_id');
     }  
 
+    public function player()
+    {
+       return $this->belongsTo('soccer\Player\Player', 'player_id');
+    }  
+
+    public function team()
+    {
+       return $this->belongsTo('soccer\Equipo\Equipo', 'team_id');
+    }  
+
+
     /*
     ********************* Custom Methods ***********************
     */  
