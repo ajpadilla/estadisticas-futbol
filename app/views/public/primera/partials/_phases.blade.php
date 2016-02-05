@@ -4,6 +4,7 @@
 			<a id="firstPhase" data-phase-id="{{ $competition->phases->first()->id }}" href=""></a>
 			@foreach ($competition->phasesWithGames as $phase) 
 				<a id="irfecha" href="{{ route('getGamesForPhase') }}" class="phasesWithGames" data-phase-id="{{ $phase->id }}">{{ $phase->name }}</a>
+				<a id="scoredGoalsUrl" href="{{ route('getScorersGoalsFormCompetition') }}"></a>
 			@endforeach
 		@endforeach
 	</div>
