@@ -1,7 +1,15 @@
 <div id="estadisticastorneo" style="width: 310px;color:black;margin-left:20px;margin-top:20px;font-size:11px">
-
-<span class="datosequipo" style="display: block; text-align: center"><strong>Goleadores</strong> </span><br>
-<div id="goleadoresb">
-<table style="width: 100%; font-weight: bold;"><tbody><tr style="background: black;color: white"><th>Jugador</th><th>Goles</th></tr><tr style="background: #e5e5e5"><td style="text-align: left"><img src="http://www.promiedos.com.ar/images/s18/juventudunidag.png" width="15px">F. Zampedri (Juventud Unida (G))</td><td>25</td></tr><tr style="background: #d5d5d5"><td style="text-align: left"><img src="http://www.promiedos.com.ar/images/s18/santamarinat.png" width="15px">F. Telechea (Santamarina)</td><td>20</td></tr><tr style="background: #e5e5e5"><td style="text-align: left"><img src="http://www.promiedos.com.ar/images/s18/ferro.png" width="15px">L. Salmeron (Ferro)</td><td>18</td></tr><tr style="background: #d5d5d5"><td style="text-align: left"><img src="http://www.promiedos.com.ar/images/s18/atltucuman.png" width="15px">L.M. Rodriguez (Atl Tucuman)</td><td>17</td></tr><tr style="background: #e5e5e5"><td style="text-align: left"><img src="http://www.promiedos.com.ar/images/s18/douglashaig.png" width="15px">J. Martin (Douglas Haig)</td><td>15</td></tr><tr style="background: #d5d5d5"><td style="text-align: left"><img src="http://www.promiedos.com.ar/images/s18/losandes.png" width="15px">A. Noriega (Los Andes)</td><td>15</td></tr><tr style="background: #e5e5e5"><td style="text-align: left"><img src="http://www.promiedos.com.ar/images/s18/estudiantessl.png" width="15px">R. Moreira Aldana (Estudiantes (SL))</td><td>14</td></tr><tr style="background: #d5d5d5"><td style="text-align: left"><img src="http://www.promiedos.com.ar/images/s18/spbelgranosf.png" width="15px">J. Arostegui (Sp. Belgrano (SF))</td><td>14</td></tr><tr style="background: #e5e5e5"><td style="text-align: left"><img src="http://www.promiedos.com.ar/images/s18/brownpm.png" width="15px">F. Ciampichetti (Brown (PM))</td><td>13</td></tr><tr style="background: #d5d5d5"><td style="text-align: left"><img src="http://www.promiedos.com.ar/images/s18/ferro.png" width="15px">J. Vizcarra (Ferro)</td><td>12</td></tr><tr style="background: #e5e5e5"><td style="text-align: left"><img src="http://www.promiedos.com.ar/images/s18/patronato.png" width="15px">D. Jara (Patronato)</td><td>11</td></tr><tr style="background: #d5d5d5"><td style="text-align: left"><img src="http://www.promiedos.com.ar/images/s18/chacarita.png" width="15px">R. Aliendro (Chacarita)</td><td>10</td></tr><tr style="background: #e5e5e5"><td style="text-align: left"><img src="http://www.promiedos.com.ar/images/s18/paranaer.png" width="15px">E. Noir (Atl. Parana)</td><td>10</td></tr><tr style="background: #d5d5d5"><td style="text-align: left"><img src="http://www.promiedos.com.ar/images/s18/instituto.png" width="15px">P. Magnin (Instituto)</td><td>10</td></tr><tr style="background: #e5e5e5"><td style="text-align: left"><img src="http://www.promiedos.com.ar/images/s18/atltucuman.png" width="15px">C. Menendez (Atl Tucuman)</td><td>10</td></tr></tbody></table>
-</div>
+	<span class="datosequipo" style="display: block; text-align: center"><strong>Goleadores</strong> </span><br>
+	<div id="goleadoresb">
+		<table style="width: 100%; font-weight: bold;">
+			<thead>
+				<tr style="background: black;color: white">
+					<th>Jugador</th>
+					<th>Goles</th>
+				</tr>
+			</thead>
+			<tbody id="colScorers">
+			</tbody>
+		</table>
+	</div>
 </div>
