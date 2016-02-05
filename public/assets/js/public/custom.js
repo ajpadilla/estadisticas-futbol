@@ -20,7 +20,7 @@ var CustomPublicApp = function () {
 			dataType:'json',
 			success: function(response) {
 				var html;
-				console.log(response);
+				//console.log(response);
 				$.each(response.groupsFixtures, function(groupIndex, teams) 
 				{
 					$("#positionsForTeams"+groupIndex).tablesorter();
@@ -67,7 +67,7 @@ var CustomPublicApp = function () {
 			data: data,
 			dataType:'json',
 			success: function(response) {
-					//console.log(response);
+					console.log(response);
 					if (response.success) 
 					{
 						$.each(response.gamesFixtures, function(groupIndex, games) 
@@ -102,6 +102,21 @@ var CustomPublicApp = function () {
 						var template = jQuery('#phaseForCompetition-tpl').html();
 						var html = Mustache.to_html(template, data);
 						currentPhase.html(html);
+
+						var statsPhase = jQuery('#statsPhase');
+						var data = {
+							average: response.statsPhase.average,
+							tieGames: response.statsPhase.tieGames,
+							totalGames: response.statsPhase.totalGames,
+							totalGoalsAway: response.statsPhase.totalGoalsAway,
+							totalGoalsLocal: response.statsPhase.totalGoalsLocal,
+							totalsGolas: response.statsPhase.totalsGolas,
+							winGamesAway: response.statsPhase.winGamesAway,
+							winGamesLocal: response.statsPhase.winGamesLocal
+						};
+						var template = jQuery('#statsPhase-tpl').html();
+						var html = Mustache.to_html(template, data);
+						statsPhase.html(html);
 					}
 				},
 				error: function(objeto, quepaso, otroobj){
@@ -110,6 +125,7 @@ var CustomPublicApp = function () {
 					console.log(otroobj);
 				}
 			});
+
 	}
 
 	var gameForPhases = function() 
@@ -120,6 +136,7 @@ var CustomPublicApp = function () {
 
 			jQuery('#tableGamesForPhase').html('')
 			jQuery('#phaseForCompetition').html('');
+			jQuery('#statsPhase').html('');
 
 			var phaseId = $(this).attr('data-phase-id');
 			var url = $(this).attr('href');
@@ -133,7 +150,7 @@ var CustomPublicApp = function () {
 				data: data,
 				dataType:'json',
 				success: function(response) {
-					//console.log(response);
+					console.log(response);
 					if (response.success) 
 					{
 						$.each(response.gamesFixtures, function(groupIndex, games) 
@@ -168,6 +185,21 @@ var CustomPublicApp = function () {
 						var template = jQuery('#phaseForCompetition-tpl').html();
 						var html = Mustache.to_html(template, data);
 						currentPhase.html(html);
+
+						var statsPhase = jQuery('#statsPhase');
+						var data = {
+							average: response.statsPhase.average,
+							tieGames: response.statsPhase.tieGames,
+							totalGames: response.statsPhase.totalGames,
+							totalGoalsAway: response.statsPhase.totalGoalsAway,
+							totalGoalsLocal: response.statsPhase.totalGoalsLocal,
+							totalsGolas: response.statsPhase.totalsGolas,
+							winGamesAway: response.statsPhase.winGamesAway,
+							winGamesLocal: response.statsPhase.winGamesLocal
+						};
+						var template = jQuery('#statsPhase-tpl').html();
+						var html = Mustache.to_html(template, data);
+						statsPhase.html(html);
 					}
 				},
 				error: function(objeto, quepaso, otroobj){
