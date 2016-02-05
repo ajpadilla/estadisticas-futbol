@@ -44,13 +44,9 @@
 				</tr>
 			</tbody>-->
 		</table>
-		<br>
-		<div style="float: left;"><img src="images/canales/tvpublica.png">TV Publica</div>
-		<div style="float: left;margin-left: 20px;"><img src="images/canales/canal13.png">Canal 13</div>
-		<div style="float: left;margin-left:20px"><img src="images/canales/canal9.png">Canal 9</div>
-		<div style="float: left;margin-left:20px"><img src="images/canales/americatv.png">America TV</div>
-		<div style="float: left;margin-left:20px"><img src="images/canales/telefe.png">Telefe</div>
-		<div style="float: left;margin-left:20px"><img src="images/canales/deportv.png" width="15px">DeporTV</div>
-		<br style="clear: both;"><br>
+		<br style="clear: both;">
+		<div id="statsPhase" style="text-align: center; color: white; font-weight: normal; font-size:11px; background: #092b1d">
+	        <strong>Estadisticas Fecha</strong>:<br> <strong>29</strong> goles en <strong>15</strong> partidos (1.93 de media)<br>Goles locales: <strong>16</strong> - Goles visitantes: <strong>13</strong> <br>Vict. locales: <strong>7</strong>  - Vict. visitantes: <strong>4</strong> - Empates: <strong>4</strong><br>
+        </div>
 	</div>
 </div>
