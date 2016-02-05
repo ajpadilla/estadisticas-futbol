@@ -20,7 +20,7 @@ var CustomPublicApp = function () {
 			dataType:'json',
 			success: function(response) {
 				var html;
-				//console.log(response);
+				console.log(response);
 				$.each(response.groupsFixtures, function(groupIndex, teams) 
 				{
 					$("#positionsForTeams"+groupIndex).tablesorter();
@@ -28,7 +28,10 @@ var CustomPublicApp = function () {
 					{
 						html = "<tr style='background: #d5d5d5'>"+
 									"<td>"+teamIndex+"</td>"+
-									"<td align='left'>"+"<strong>"+team.team.nombre+"</strong>"+"</td>"+
+									"<td align='left'>"+
+										"<img width='18px' src="+team.img+">"+
+										"<strong>"+team.team.nombre+"</strong>"
+									+"</td>"+
 									"<td>"+team.points+"</td>"+
 									"<td>"+team.gamesPlayed+"</td>"+
 									"<td>"+team.winGames+"</td>"+
@@ -55,7 +58,8 @@ var CustomPublicApp = function () {
 	{
 		var url = $('.phasesWithGames').attr('href');
 		var data = {
-			phaseId: $("#firstPhase").attr('data-phase-id')
+			phaseId: $("#firstPhase").attr('data-phase-id'),
+			competitionId : $('#teamsFormCompetition').attr('data-id')
 		}
 		$.ajax({
 			type: 'GET',
@@ -70,7 +74,7 @@ var CustomPublicApp = function () {
 						{
 							$.each(games, function(gameIndex, game)
 							{
-								console.log(game);
+								//console.log(game);
 								var tableGames = jQuery('#tableGamesForPhase');
 								var data = {
 									time: game.game.date,
@@ -90,6 +94,14 @@ var CustomPublicApp = function () {
 							});
 						});
 						
+						var currentPhase = jQuery('#phaseForCompetition');
+						var data = {
+							competition: response.infoCompetition.competition,
+							phase: response.infoCompetition.phase
+						};
+						var template = jQuery('#phaseForCompetition-tpl').html();
+						var html = Mustache.to_html(template, data);
+						currentPhase.html(html);
 					}
 				},
 				error: function(objeto, quepaso, otroobj){
@@ -105,12 +117,16 @@ var CustomPublicApp = function () {
 		$(".phasesWithGames").click(function(event) 
 		{
 			event.preventDefault();
+
 			jQuery('#tableGamesForPhase').html('')
+			jQuery('#phaseForCompetition').html('');
+
 			var phaseId = $(this).attr('data-phase-id');
 			var url = $(this).attr('href');
 			var data = {
-				phaseId: phaseId
-			}
+				phaseId: phaseId,
+				competitionId : $('#teamsFormCompetition').attr('data-id')
+			};
 			$.ajax({
 				type: 'GET',
 				url: url,
@@ -124,7 +140,7 @@ var CustomPublicApp = function () {
 						{
 							$.each(games, function(gameIndex, game)
 							{
-								console.log(game);
+								//console.log(game);
 								var tableGames = jQuery('#tableGamesForPhase');
 								var data = {
 									time: game.game.date,
@@ -143,7 +159,15 @@ var CustomPublicApp = function () {
 								tableGames.append(html);
 							});
 						});
-						
+
+						var currentPhase = jQuery('#phaseForCompetition');
+						var data = {
+							competition: response.infoCompetition.competition,
+							phase: response.infoCompetition.phase
+						};
+						var template = jQuery('#phaseForCompetition-tpl').html();
+						var html = Mustache.to_html(template, data);
+						currentPhase.html(html);
 					}
 				},
 				error: function(objeto, quepaso, otroobj){
