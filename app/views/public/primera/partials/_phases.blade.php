@@ -9,16 +9,16 @@
 	</div>
 	<br>
 	<div id="fixtureactual">
-		<div style="background: #092b1d; height:50px">
+		<div id="phaseForCompetition" style="background: #092b1d; height:50px">
 			<div id="flechaatrno"></div>
 			<div style="float: left; width:380px; font-size: 14px; color: #c2e213; text-align: center;">
-				Torneo 2016<br>
-				Fecha 1<br>
-				<span class="datosequipo2b" style="font-weight: normal">
+				<br>
+				<br>
+				<!--<span class="datosequipo2b" style="font-weight: normal">
 					(use las flechas para mirar otras fechas)
-				</span>
+				</span>-->
 			</div>
-			<div id="flechaad" class="2_1"></div>
+			<!--<div id="flechaad" class="2_1"></div>-->
 		</div>
 		<br>
 		<table id="tableGamesForPhase" style="width:480px">
