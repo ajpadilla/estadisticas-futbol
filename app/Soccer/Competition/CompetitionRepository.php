@@ -31,8 +31,7 @@ class CompetitionRepository extends BaseRepository
     /*
 	********************* Methods ***********************
     */
-    	
-
+    
 	public function create($data = array())
 	{
 		if (empty($data['pais_id'])) {

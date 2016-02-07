@@ -85,7 +85,7 @@ class PhaseRepository extends BaseRepository
 			if ($this->finished($previousPhase->id))
 				$teams = $this->classifieds($previousPhase->id);
 		} else {
-			if ($phase->competition->internationl) {
+			if ($phase->competition->international) {
 				$equipoRepository = new EquipoRepository;
 				$teams = $equipoRepository->getAll();
 			} else {
