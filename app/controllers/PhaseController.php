@@ -77,7 +77,7 @@ class PhaseController extends \BaseController {
 			catch (FormValidationException $e)
 			{
 				$this->setSuccess(false);
-				$this->addToResponseArray('errores', $e->getErrors()->all());
+				$this->addToResponseArray('errors', $e->getErrors()->all());
 				return $this->getResponseArrayJson();
 			}
 		}
