@@ -14,7 +14,44 @@ class AddTypeCompetitionsTable extends Migration {
 	{
 		Schema::table('competitions', function(Blueprint $table)
 		{
-			$table->enum('type', array('primera'))->after('nombre');;
+			$table->enum('type', 
+				array(
+						'primera',
+						'liguilla primera',
+						'desempate descenso primera',
+						'b nacional',
+						'desempate ascenso b nacional',
+						'desempate descenso b nacional',
+						'reducido b nacional',
+						'b metro',
+						'desempate ascenso b metro',
+						'desempate descenso b metro',
+						'reducido b metro',
+						'federal a',
+						'desempate ascenso federal a',
+						'desempate descenso federal a',
+						'reducido federal a',
+						'primera c',
+						'desempate ascenso primera c',
+						'desempate descenso primera c',
+						'reducido primera c',
+						'primera d',
+						'desempate ascenso primera d',
+						'desempate descenso primera d',
+						'reducido primera d',
+						'federal b',
+						'desempate ascenso federal b',
+						'desempate descenso federal b',
+						'reducido federal b',
+						'copa mundial',
+						'copa america',
+						'copa libertadores',
+						'champion L',
+						'copa argentina',
+						'sudamericana',
+						'mundial de clubes'
+				))
+			->after('nombre');;
 		});
 	}
 
