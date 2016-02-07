@@ -4406,6 +4406,7 @@ var handleBootboxAddEquipoToJugador = function () {
             url: url,
             dataType:'json',
             success: function(response) {
+                console.log(response);
                 var option = '<option value=\"\"></option>';
                 if (response.success == true) {
                     $(id).html('');
@@ -4420,7 +4421,13 @@ var handleBootboxAddEquipoToJugador = function () {
                     $(id).html('');
                     $(id).append(option);
                 }
-            }
+            },
+             error: function(jqXHR, textStatus, errorThrown) 
+             {
+                console.log(jqXHR);
+                console.log(textStatus);
+                console.log(errorThrown);
+             }
         });
      }
 
@@ -4476,6 +4483,7 @@ var handleBootboxAddEquipoToJugador = function () {
 
                                             var formData = {
                                                 name: $('#name-new-phase-to-competition').val(),
+                                                type: $('#type_phase').val(),
                                                 from: $('#from-new-phase-to-competition').val(),
                                                 to: $('#to-new-phase-to-competition').val(),
                                                 competition_id: $('button#add-phase').attr('data-competition-id'),
