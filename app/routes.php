@@ -25,22 +25,20 @@ Route::get('primera', ['as' => 'FirstDivision', 'uses' => 'PublicController@game
 Route::get('getPositionsteamsForCompetitions', ['as' => 'getPositionsteamsForCompetitions', 'uses' => 'PublicController@positionsteamsForCompetitions']);
 Route::get('getGamesForPhase', ['as' => 'getGamesForPhase', 'uses' => 'PublicController@gamesForPhase']);
 Route::get('getScorersGoalsFormCompetition', ['as' => 'getScorersGoalsFormCompetition', 'uses' => 'PublicController@getScorersGoalsFormCompetition']);
-
+Route::get('gamesForWorldCup', ['as' => 'worldCup', 'uses' => 'PublicController@gamesForWorldCup']);
 /*
 ********************************* FIN RUTAS PUBLICAS ********************************
 */
 
 
 Route::get('admin/test', function() {
-	$data = new soccer\Competition\CompetitionRepository;
-	//$data->playingCompetitions();
-	/*foreach ($data->scorersInCompetition(1) as $key => $goal) {
-		echo $goal->game_id." ". $goal->team_id." ".$goal->player_id."</br>";
-	}*/
+	$data = new  soccer\Group\GroupRepository;
 
-	$collection = $data->scorersInCompetition(3);
+	$teams = $data->getTeamsWithoutFullGames(2);
 
-	// var_dump($collection);
+	foreach ($teams as $key => $value) {
+		echo $value->nombre;
+	}
 
 });
 
