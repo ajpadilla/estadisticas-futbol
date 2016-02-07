@@ -1,0 +1,139 @@
+li {
+    font-size: 11px;
+    font-weight:bold;
+    color:white;
+    margin-left:8px;
+    width:100px;
+    height:130px;
+}
+.datosequipo11 {
+    color: #C2E213;
+    font-size:14px;
+}
+.expand-down, .expand-down2 {
+     height:100%; 
+     border:1px solid black;
+     background: #17573d;
+     text-shadow: black 0.1em 0.2em 0.2em;
+     margin-top: 0;
+     
+}
+.letras {
+       font-size: 11px;
+    font-weight:bold;
+    color:white; 
+}
+#grupom {
+    width: 230px; height:570px; float: left;color: white; background: #17573d;text-align: center;border: 1px solid black;margin-left:10px; margin-top:10px;font-size: 11px;
+}
+.grupom {
+    color: #C2E213; font-size:18px;text-shadow: black 0.1em 0.2em 0.2em;
+}
+#paism {
+    width:57px;margin:auto;float:left;text-align: center;color: white;font-size:9px;font-weight: bold
+}
+#contenedorm {
+    height:80px
+}
+.resulm {
+    background:white;
+    color:black;
+    font-size:12px;
+    font-weight: bold;
+    width:5px;
+}
+#titulom {
+    background: #333;color: white; font-size:11px; display:block; text-align: center;
+}
+.partidom {
+    background: #e5e5e5;color: black; font-size:11px; display:block; text-align: center; font-weight: bold
+}
+#fixture {
+    width:980px;
+    font-size:11px;
+    color: white;
+}
+
+#columna {
+    float: left;
+    width: 140px;
+    min-height: 500px;
+    text-align: center;
+}
+
+#columna2 {
+    float: left;
+    width: 2px;
+    min-height: 500px;
+}
+
+#partido, #partido2 {
+    width: 135px;
+    padding: 2px;
+    text-align: center;
+    background: #17573d;
+    height:110px;
+      margin-top:7px;
+  margin-bottom:7px;
+}
+
+#partido2 {
+  margin-bottom:25px;  
+}
+
+#partidono, #partidono2{
+  width: 90px;  
+  height:40px;
+  padding: 2px;
+  margin-top:7px;
+  margin-bottom:7px;
+}
+#partidono2 {
+  margin-bottom:25px;  
+}
+
+.fecha {
+    font-size:10px
+}
+
+#linea {
+    width:2px;
+    height:25px;
+}
+#linea2 {
+    width:2px;
+    height:25px;
+    background:green;
+}
+.cuadrores3 {
+    float: left;
+    text-align: center;
+    background:#04270c;
+    color:white;
+    border:1px solid green;
+    padding:2px;
+    margin-top:3px;
+    font-size:14px;
+    margin-left:3px
+}
+#fixtureactual {
+    background:  #092b1d;
+}
+.falta {
+    font-size:12px
+}
+.nombreyclub {
+    color: black
+}
+.datoequipo {
+   font-size:11px 
+}
+#irfecha2 {
+color: greenyellow;
+float: left;
+margin-left:20px;
+padding: 10px;
+background: #092b1d;
+font-size: 16px;
+cursor: pointer;
+}
