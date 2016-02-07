@@ -404,6 +404,45 @@ class EquiposTableSeeder extends DatabaseSeeder {
             'pais_id' => 3         
         );
 
+         $equipos[] = array(
+            'nombre' => 'Villa Dalmine',
+            //'escudo' => 'public/system/soccer/Equipo/Equipo/escudos/000/000/016/original/merida.jpg',
+            //'foto' => 'public/system/soccer/Equipo/Equipo/fotos/000/000/016/original/merida.jpg', 
+            'tipo' => 'club',
+            'fecha_fundacion' => $faker->date($format = 'Y-m-d', $max = 'now'),
+            'apodo' => '',
+            'ubicacion' => 'Argentina',
+            'historia' => '',
+            'info_url' => '',
+            'pais_id' => 3         
+        );
+
+           $equipos[] = array(
+            'nombre' => 'Ctral Cordoba',
+            //'escudo' => 'public/system/soccer/Equipo/Equipo/escudos/000/000/016/original/merida.jpg',
+            //'foto' => 'public/system/soccer/Equipo/Equipo/fotos/000/000/016/original/merida.jpg', 
+            'tipo' => 'club',
+            'fecha_fundacion' => $faker->date($format = 'Y-m-d', $max = 'now'),
+            'apodo' => '',
+            'ubicacion' => 'Argentina',
+            'historia' => '',
+            'info_url' => '',
+            'pais_id' => 3         
+        );
+
+        $equipos[] = array(
+            'nombre' => 'Los Andes',
+            //'escudo' => 'public/system/soccer/Equipo/Equipo/escudos/000/000/016/original/merida.jpg',
+            //'foto' => 'public/system/soccer/Equipo/Equipo/fotos/000/000/016/original/merida.jpg', 
+            'tipo' => 'club',
+            'fecha_fundacion' => $faker->date($format = 'Y-m-d', $max = 'now'),
+            'apodo' => '',
+            'ubicacion' => 'Argentina',
+            'historia' => '',
+            'info_url' => '',
+            'pais_id' => 3         
+        );
+
         foreach ($equipos as $equipo) {
             Equipo::create($equipo);
         }
