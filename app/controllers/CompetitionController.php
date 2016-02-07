@@ -93,7 +93,7 @@ class CompetitionController extends \BaseController {
 			}
 			catch (FormValidationException $e)
 			{
-				$this->addToResponseArray('errores', $e->getErrors()->all());
+				$this->addToResponseArray('errors', $e->getErrors()->all());
 			}
 		}
 		return $this->getResponseArrayJson();
