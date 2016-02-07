@@ -17,6 +17,7 @@
 									{{ Form::text('name',null, ['class' => 'form-control','id' => 'name-competition-format']) }}
 								</div>
 							</div>
+							
 							<div class="form-group">
 								{{ Form::label('groups','Grupos',['class'=>'col-sm-2 control-label']) }}
 								<div class="col-sm-6">
