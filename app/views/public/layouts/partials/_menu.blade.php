@@ -37,7 +37,7 @@
 		<div class="itemmenu">
 			<span style="font-size: 11px;">SELECCION</span>
 			<br><span class="subitem">
-				<a href="mundial2018.php">Rusia 2018</a>
+				<a href="{{ route('worldCup') }}">Mundiales</a>
 				<a href="copaamerica.php">Copa America</a>
 			</span>
 		</div>
