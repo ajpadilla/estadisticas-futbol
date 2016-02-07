@@ -1,0 +1,15 @@
+<div style="width: 500px;float: left">
+<meta http-equiv="content-type" content="text/html; charset=iso-8859-1"><div id="fixtureactual" style="font-size:0.75em"><div style="width:100%; margin: auto; font-size: 1.2em; color: #c2e213; text-align: center;"><br> Domingo 13 de Julio<br><span style="color:white;font-size:9px">Click en las flechas para ver los partidos de cada día</span></div><div style="background: #092b1d;"><div id="flechaatr" class="23"></div><div id="flechaadno"></div></div><table style="width:100%"><tbody><tr style="background:#155219;text-align: center"><td colspan="5"><span class="horariopartido">Río de Janeiro - Final</span></td></tr> <tr style="background: #e5e5e5;text-align: center;width:10%"><td class="finaliza">Final</td><td style="width:30%"><img src="http://lh3.googleusercontent.com/-jIsJddX0U5A/Ul_vVAODsDI/AAAAAAAAAes/ACOMLDn54iY/s82/alemania.png" width="35px" height="35px"><span class="datoequipo"><br>Alemania</span></td><td style="background: white;width:15%"><span style="font-size:2em;">1</span></td><td style="background: white;width:15%"><span style="font-size:2em;">0</span></td><td style="width:30%"><img src="http://lh3.googleusercontent.com/-arxPZXZ2L7A/Ul_vVBs7hbI/AAAAAAAAAeo/3gRnwOVIZ94/s93/argentina.png" width="35px" height="35px"><span class="datoequipo"><br>Argentina</span></td></tr><tr style="background: white; font-size:13px"><td colspan="3"><span style="color: green">113'</span> M. Goetze; </td><td colspan="3"></td></tr><tr><td colspan="5"><br></td></tr></tbody></table>
+         <br><div style="color: white;font-size:10px;font-weight: normal"><div style="float: left;"><img src="images/canales/tvpublica.png">TV Publica</div><div style="float: left;margin-left:20px"><img src="images/canales/tycsports.png">TyC Sports</div><div style="float: left;margin-left:20px"><img src="images/canales/deportv.png" height="15px">DeporTV</div><div style="float: left;margin-left:20px"><img src="images/canales/directv.png">DirecTV</div></div>
+       
+       </div><br style="clear: both;">
+<div id="irfecha" onclick="irfecha('3')" style="margin-left: 15px;">Arg vs Bos</div><div id="irfecha" onclick="irfecha('9')">Arg vs Ira</div><div id="irfecha" onclick="irfecha('13')">Arg vs Nig</div><div id="irfecha" onclick="irfecha('18')">Arg vs Sui</div><div id="irfecha" onclick="irfecha('20')">Arg vs Bel</div><div id="irfecha" onclick="irfecha('22')">Arg vs Hol</div>
+</div>
+<div id="p300x250" style="margin-left: 80px;">
+	<script async="" src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+	<!-- 970x90 -->
+	<ins class="adsbygoogle"style="display:inline-table;border:none;height:250px;margin:0;padding:0;position:relative;visibility:visible;width:300px;background-color:transparent"></ins>
+	<script>
+	(adsbygoogle = window.adsbygoogle || []).push({});
+	</script>
+</div>

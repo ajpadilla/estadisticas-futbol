@@ -2,6 +2,7 @@
 
 <?php echo HTML::style('assets/css/public/inicio2.css');; ?>
 
+<?php echo HTML::style('assets/css/public/mundial.css');; ?>
 
 
 <style>
