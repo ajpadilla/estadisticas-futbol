@@ -1,6 +1,6 @@
 {{ HTML::style('assets/css/public/estilo2.css'); }}
 {{ HTML::style('assets/css/public/inicio2.css'); }}
-
+{{ HTML::style('assets/css/public/mundial.css'); }}
 
 <style>
 	.titulo a {
