@@ -155,8 +155,4 @@ class Equipo extends Eloquent implements StaplerableInterface{
 	{
 		return $query->whereTipo('selección');
 	}    	
-
-	public function __toString() {
-        return $this->id;
-    }	
 }
