@@ -11,8 +11,24 @@
 				{{ Form::label('name', 'Nombre', ['class' => 'col-md-2 control-label']) }}	
 				<div class="col-md-6">{{ Form::text('name', null, ['class' => 'form-control','id' =>'name-new-phase-to-competition' ]) }}</div>
 			</div>
-
+	
 			<div class="form-group">
+				{{ Form::label('type','Tipo',['class'=>'col-sm-2 control-label']) }}
+				<div class="col-sm-6">
+					{{ Form::select('type',
+						[
+						'' => '',
+						'fase de grupos'=> 'fase de grupos',
+						'octavos' => 'octavos',
+						'cuartos' => 'cuartos',
+						'semifinal' => 'semifinal',
+						'final' => 'final'
+						]
+						,null,['class' => 'form-control chosen-select','data-placeholder' => 'Escoge Tipo...','id'=> 'type_phase']) }}
+					</div>
+			</div>
+
+				<div class="form-group">
 				{{ Form::label('from', 'Desde', ['class' => 'col-md-2 control-label']) }}	
 				<div class="col-md-6">{{ Form::text('from', null, ['class' => 'form-control datepicker','id' =>'from-new-phase-to-competition' ]) }}</div>
 			</div>			
