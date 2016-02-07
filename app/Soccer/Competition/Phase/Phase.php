@@ -8,7 +8,7 @@ use Carbon\Carbon;
 
 class Phase extends Eloquent {
 
-	protected $fillable = ['name', 'from', 'to', 'previous_id', 'competition_id', 'format_id','last'];
+	protected $fillable = ['name','type', 'from', 'to', 'previous_id', 'competition_id', 'format_id','last'];
 
     public function getDates()
     {
