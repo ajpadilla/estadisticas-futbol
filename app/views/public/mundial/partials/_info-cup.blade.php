@@ -8,6 +8,7 @@
 			<div style="width: 280px;float: left">
 			<img src="{{ $cup->imagen->url('medium') }}">
 		</div>
+
 		<div style="width: 300px;float: left;font-size:12px">
 			<br>
 			Partido Inaugural: {{ $cup->formatFrom }}<br>
