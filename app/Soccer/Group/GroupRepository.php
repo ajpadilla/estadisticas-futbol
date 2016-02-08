@@ -219,6 +219,7 @@ class GroupRepository extends BaseRepository
 
 			$teamFixtures = array(
 				'id' => $team->id,
+				'team' => $team,
 				'pos' => 0,
 				'gamesPlayed' => $teamRepository->getPlayedGamesByGroup($team->id, $id),
 				'winGames' => $winGames,
