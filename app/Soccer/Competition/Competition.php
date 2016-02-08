@@ -242,7 +242,6 @@ class Competition extends Eloquent implements StaplerableInterface{
         return Carbon::parse($this->hasta)->formatLocalized('%A %d %B %Y');
     }
 
-
     /*
     ********************* Scopes ***********************
     */    
