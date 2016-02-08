@@ -294,14 +294,17 @@ class CompetitionRepository extends BaseRepository
 					foreach ($group->games as $indexGame => $game) {
 						$fixturesLocalGoals = $gameRepository->getGoalsFixtures($game->id, $game->localTeam->id);
 						$fixturesAwayGoals = $gameRepository->getGoalsFixtures($game->id, $game->awayTeam->id);
-						$date = (Carbon::parse($game->date)->formatLocalized('%A %d %B %Y'));
+						$date = Carbon::parse($game->date);
+						$dateObject = Carbon::parse($game->date);
 						$gameFixtures = array(
+							'group_id' => $group->id,
 							'game' => $game,
 							'localTeam' => $game->localTeam,
 							'awayTeam' => $game->awayTeam,
 							'localGoals' => $game->localGoals,
 							'awayGoals' => $game->awayGoals,
-							'date' => $date,
+							'date' => $date->formatLocalized('%A %d %B %Y'),
+							'dateObject' => $date, 
 							'time' => $game->time,
 							'fixturesLocalGoals' => $fixturesLocalGoals,
 							'fixturesAwayGoals' => $fixturesAwayGoals,
@@ -424,5 +427,21 @@ class CompetitionRepository extends BaseRepository
 		}*/
 
 		return $scoredGoals;
+	}
+
+	public function getPostTeamsForGruop($id)
+	{
+		$groupRepository = new GroupRepository;
+		return $groupRepository->getOrderedFixturesArrayByGroup($id);
+	}
+
+	public function getGamesForTypePhase($type, $startCompetition, $endCompetition)
+	{
+		$phaseRepository = new PhaseRepository;
+		$phase = $phaseRepository->getModel()->whereType($type)
+											 ->where('from','>=', $startCompetition)
+											 ->where('to','<=', $endCompetition)->first();
+		//dd($phase->id);
+		return $this->getGamesForPhase($phase->id);
 	}
 }
