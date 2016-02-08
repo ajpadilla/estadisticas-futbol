@@ -21,8 +21,7 @@
 <?php echo HTML::script('assets/js/public/inicio4.js'); ?>
 
 
-<?php echo HTML::script('assets/js/public/custom.js'); ?>
-
+<?php /* <?php echo HTML::script('assets/js/public/custom.js'); ?> */ ?>
 
 <script>
 	jQuery(document).ready(function() {		

@@ -1,4 +1,4 @@
-<?php if(!$competition->finished): ?> 
+<?php /*<?php if(!$competition->finished): ?> */ ?>
 	<div class="row">
 		<div class="col-md-2">
 			<button class="pull-left btn btn-lg btn-primary" id="add-phase" data-competition-id="<?php echo $competition->id; ?>" href="#">Agregar fase</button>
@@ -12,7 +12,7 @@
 		<?php echo $__env->make('phases.edit-tpl', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
 	</div>
 	<br />
-<?php endif; ?>
+<?php /*<?php endif; ?>*/ ?>
 <div class="row">
 	<?php if($competition->hasPhases): ?>
 		<?php echo $__env->make('groups.partials._tables', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
