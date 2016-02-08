@@ -181,4 +181,16 @@ class PublicController extends \BaseController {
 		return $this->getResponseArrayJson();
 	}
 
+	public function gamesForWorldCup()
+	{
+		$cups = $this->competitionRepository
+		->getModel()
+		->whereType('copa mundial')
+		->orderBy('desde', 'desc')
+		->orderBy('hasta', 'desc')
+		->paginate(1);
+		$competitionRepository =  $this->competitionRepository;
+	 	return View::make('public.mundial._mundial', compact('cups','competitionRepository'));
+	}
+
 }
