@@ -32,13 +32,9 @@ Route::get('gamesForWorldCup', ['as' => 'worldCup', 'uses' => 'PublicController@
 
 
 Route::get('admin/test', function() {
-	$data = new  soccer\Group\GroupRepository;
+	$data = new soccer\Competition\CompetitionRepository;
 
-	$teams = $data->getTeamsWithoutFullGames(2);
-
-	foreach ($teams as $key => $value) {
-		echo $value->nombre;
-	}
+	$teams = $data->getGamesForTypePhase('fase de grupos', '2016-01-01', '2016-02-01');
 
 });
 
