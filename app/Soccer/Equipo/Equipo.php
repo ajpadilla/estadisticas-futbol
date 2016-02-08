@@ -140,6 +140,11 @@ class Equipo extends Eloquent implements StaplerableInterface{
 		return $fecha;
 	}
 
+	public function getSubNameAttribute()
+    {
+        return substr($this->nombre, 0, 3);
+    }
+
  	public function scopeJugadoresActuales($query)
     {
     	//dd($query);
