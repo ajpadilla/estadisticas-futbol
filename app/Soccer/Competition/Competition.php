@@ -182,6 +182,14 @@ class Competition extends Eloquent implements StaplerableInterface{
         return $this->hasta->diffInDays(null, false) > 0;
     }
 
+    public function getPhasesByOrderAttribute()
+    {
+        return $this->phases()
+        ->orderBy('from', 'desc')
+        ->orderBy('to', 'desc')
+        ->get();
+    }
+
     public function getHasPhasesAttribute()
     {
         return $this->phases->count() > 0;
