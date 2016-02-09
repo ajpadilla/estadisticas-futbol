@@ -38,7 +38,7 @@
 			<span style="font-size: 11px;">SELECCION</span>
 			<br><span class="subitem">
 				<a href="<?php echo route('worldCup'); ?>">Mundiales</a>
-				<a href="copaamerica.php">Copa America</a>
+				<a href="<?php echo route('americaCup'); ?>">Copa America</a>
 			</span>
 		</div>
 		<div class="itemmenu">
