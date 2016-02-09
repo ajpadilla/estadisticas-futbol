@@ -44,6 +44,7 @@ class AddTypeCompetitionsTable extends Migration {
 						'desempate descenso federal b',
 						'reducido federal b',
 						'copa mundial',
+						'eliminatorias copa mundial',
 						'copa america',
 						'copa libertadores',
 						'champion L',
