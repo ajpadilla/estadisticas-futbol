@@ -1,3 +1,4 @@
+@if(!empty($americaCups))
 <div style="width: 980px;height: auto;background: #17573d;font-size:12px;color:white;text-align: center;">
 	{{ $americaCups->links() }}
 </div>
@@ -37,3 +38,4 @@
 @endif
 <br/>
 @endforeach
+@endif

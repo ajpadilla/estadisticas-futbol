@@ -122,7 +122,7 @@
             @endforeach
         </div>
         @endif
-        
+
         @if($gamesCuartos)
         <?php $countGamesCuartos = 0; ?>
         <div id="columna">
@@ -151,8 +151,7 @@
             @endforeach
         </div>
         @endif
-
-        </div>
+    </div>
     </div>
     @endforeach
 @endif
