@@ -1,4 +1,4 @@
-
+<?php if(!empty($cups)): ?>
 <?php foreach($cups as $cup): ?>
 <div id="infoequipo">FASE FINAL</div>
 <div id="fixture">
@@ -209,6 +209,7 @@
 	<br style="clear: both;">
 	<br>
 	<br>
+	<?php if($cup->hasGames): ?>
 	<?php $firstPhase = $cup->phases->first() ?>
 	<div id="infoequipo"><?php echo $firstPhase->name; ?></div>
 		<?php foreach($firstPhase->groups as $group): ?>
@@ -325,5 +326,7 @@
 			</div> 
 		</div>
 	<div style="clear: both;"></div>
+	<?php endif; ?>
 </div>
 <?php endforeach; ?>
+<?php endif; ?>

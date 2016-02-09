@@ -1,0 +1,106 @@
+<?php if(!empty($libertadoresCups)): ?>
+    <?php foreach($libertadoresCups as $libertadoresCup): ?>
+    <?php if($libertadoresCup->hasGames): ?>
+    <?php $firstPhase = $libertadoresCup->phases->first() ?>
+    <div id="infoequipo"><?php echo $firstPhase->name; ?></div>
+    <br>
+        <?php foreach($firstPhase->groups as $group): ?>
+        <div id="grupos">
+            <span class="datosequipo" style="display: block; background: #092B1D; text-align: center; width: 964px; font-size: 14px; font-weight: bold"><?php echo $group->name; ?></span>
+                <div style="float: left; width: 450px">
+                    <?php $tablePosTeams = $competitionRepository->getPostTeamsForGruop($group->id); ?>
+                    <table id="posiciones" class="tablesorter1" width="440">
+                        <thead>
+                            <tr style="background: black; color: white">
+                                <th>#</th>
+                                <th>Equipo</th>
+                                <th>Pts</th>
+                                <th>PJ</th>
+                                <th>PG</th>
+                                <th>PE</th>
+                                <th>PP</th>
+                                <th>GF</th>
+                                <th>GC</th>
+                                <th>DIF</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <?php foreach($tablePosTeams as $index => $team): ?>
+                            <tr style="background: #ace39e">
+                                <td><?php echo $index; ?></td>
+                                <td align="left">
+                                    <img src="<?php echo $team['team']->escudo->url('thumb'); ?>" width="15px"><strong> <?php echo $team['team']->subName; ?></strong>
+                                </td>
+                                <td><?php echo $team['points']; ?></td>
+                                <td><?php echo $team['gamesPlayed']; ?></td>
+                                <td><?php echo $team['winGames']; ?></td>
+                                <td><?php echo $team['tieGames']; ?></td>
+                                <td><?php echo $team['lostGames']; ?></td>
+                                <td><?php echo $team['scoredGoals']; ?></td>
+                                <td><?php echo $team['againstGoals']; ?></td>
+                                <td><?php echo $team['goalsDiff']; ?></td>
+                            </tr>
+                            <?php endforeach; ?>
+                        </tbody>
+                    </table>
+                </div>
+                    <div style="width: 400px; float: left; margin-left:20px">
+                        <?php foreach($tablePosTeams as $index => $team): ?>
+                            <img src="<?php echo $team['team']->escudo->url('thumb'); ?>" border="0" title="<?php echo $team['team']->nombre; ?>" width="64px" height="64px">
+                        <?php endforeach; ?>
+                    </div>
+                <div style="clear: both"><br></div>
+
+                <div id="fixgrupo">
+                    <?php $gamesForGroups = $competitionRepository->getGamesForPhase($firstPhase->id) ?>
+                    <div style="float:left; width: 320px">
+                        <table>
+                            <tbody>
+                                <tr>
+                                    <td>
+                                        <span class="datosequipo" style="display: block; background: url(images/caja.png); text-align: center; width: 316px">Juegos</span>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <?php foreach($gamesForGroups as $index => $groups): ?>
+                        <?php foreach($groups as $index2 => $games): ?>
+                        <?php foreach($games as $index2 => $game): ?>
+                        <?php if($game['group_id'] == $group->id): ?>
+                            <table>
+                                <tbody>
+
+                                    <tr style="background:#155219">
+                                        <td colspan="4">
+                                            <span class="horariopartido2"><?php echo $game['dateObject']->toFormattedDateString(); ?>-<?php echo $game['time']; ?>
+
+                                            </span>
+                                            <span style="float: right">
+                                                <span class="statuspartido2">Final</span>
+                                            </span>
+                                        </td>
+                                    </tr>
+                                    <tr id="188" style="background: url(assets/img/public/caja2b.png)"><td width="150">
+                                        <span class="datoequipo"> <?php echo $game['localTeam']->nombre; ?></span></td>
+                                        <td width="20" style="background: white">
+                                            <span class="datoequipo" style="margin-left: 5px"><?php echo $game['localGoals']; ?></span>
+                                        </td>
+                                        <td width="20" style="background: white">
+                                            <span class="datoequipo" style="margin-left: 5px"><?php echo $game['awayGoals']; ?> </span>
+                                        </td>
+                                        <td width="150"><span class="datoequipo"><?php echo $game['awayTeam']->nombre; ?></span></td>
+                                    </tr>
+
+                                </tbody>
+                            </table>
+                        <?php endif; ?>
+                        <?php endforeach; ?>
+                        <?php endforeach; ?>
+                        <?php endforeach; ?>
+                    </div>
+            </div>
+        </div>
+        <?php endforeach; ?>
+     <?php endif; ?>
+    <?php endforeach; ?>
+<?php endif; ?>

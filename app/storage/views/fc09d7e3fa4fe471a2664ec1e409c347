@@ -1,22 +1,21 @@
-<?php if(!empty($americaCups)): ?>
+<?php if(!empty($libertadoresCups)): ?>
 <div style="width: 980px;height: auto;background: #17573d;font-size:12px;color:white;text-align: center;">
-	<?php echo $americaCups->links(); ?>
+	<?php echo $libertadoresCups->links(); ?>
 
 </div>
-<?php foreach($americaCups as $americaCup): ?>
+<?php foreach($libertadoresCups as $libertadoresCup): ?>
 <span class="verdegrande">
 	<div style="width: 300px;float: left;padding-top: 10px;">
-	<span style="color:#b70c13;font-size:24px;font-weight: bold">COPA AMERICA</span><br>
-	<span style="color:#054388;font-size:30px;font-weight: bold"><?php echo $americaCup->nombre; ?></span><br>
+	<span style="color:#fff;font-size:24px;font-weight: bold">COPA LIBERTADORES <?php echo $libertadoresCup->year; ?></span><br>
 
 	</div>
 	<div style="width: 280px;float: left">
-	<img src="http://lh3.googleusercontent.com/-R7rOnMxHr1k/VOebBHJXFTI/AAAAAAAADnE/1XyefVsoRAM/w100-h99-no/pelota2015.png">
+	<img src="http://upload.wikimedia.org/wikipedia/en/3/3a/Copa_Bridgestone_Libertadores_logo.png" width="140px">
 	</div>
 	<div style="width: 300px;float: left;font-size:12px">
 	<br>
-	Partido Inaugural: <?php echo $americaCup->formatFrom; ?><br>
-	Partido Final: <?php echo $americaCup->formatTo; ?><br>
+	Partido Inaugural: <?php echo $libertadoresCup->formatFrom; ?><br>
+	Partido Final: <?php echo $libertadoresCup->formatTo; ?><br>
 	Equipos participantes: 12 selecciones<br>
 	</div>
 
@@ -24,11 +23,11 @@
 </span>
 <div style="clear: both;"></div>
 <br/>
-<?php $winner = $competitionRepository->winner($americaCup->id) ?>
+<?php $winner = $competitionRepository->winner($libertadoresCup->id) ?>
 <?php if(!empty($winner)): ?>
 <div style="width: 980px;height: auto;background: #17573d;font-size:12px;color:white;text-align: center;">
 	<br>
-	Campeón de América <?php echo $americaCup->year;; ?><br>
+	Campeón de América <?php echo $libertadoresCup->year; ?><br>
 	<img src="<?php echo $winner->escudo->url('thumb'); ?>" width="50" height="50"><br>
 	<img src="<?php echo $winner->escudo->url('thumb'); ?>"> <?php echo $winner->nombre; ?>
 

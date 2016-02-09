@@ -1,5 +1,5 @@
+<?php if(!empty($cups)): ?>
 <span class="verdegrande">
-
 	<div style="padding-top: 10px;">
 		<?php echo $cups->links(); ?>
 
@@ -20,3 +20,4 @@
 	</div>
 	<div style="clear: both;"></div>
 </span>
+<?php endif; ?>

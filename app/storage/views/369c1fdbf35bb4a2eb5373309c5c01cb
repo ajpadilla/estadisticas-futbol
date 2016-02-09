@@ -53,7 +53,7 @@
 		<div class="itemmenu">
 			COPAS
 			<br><span class="subitem">
-				<a href="copalibertadores">Libertadores</a>
+				<a href="<?php echo route('libertadoresCup'); ?>">Libertadores</a>
 				<a href="championsleague">Champions L.</a>
 				<a href="copaargentina">Copa Argentina</a>
 				<a href="copasudamericana">Sudamericana</a>
