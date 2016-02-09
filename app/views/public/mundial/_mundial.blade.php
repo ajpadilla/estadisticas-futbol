@@ -1,18 +1,41 @@
 @extends("public.layouts.main")
 
 @section("content")
-	<div style="clear: both;"></div>
-	<br/>
-	@include('public.mundial.partials._google-syndication')
-	@include('public.mundial.partials._info-cup')
-	<div style="clear: both;"></div>
-	<br>
-	<br>
-	@include('public.mundial.partials._games-for-day')
-	<div style="clear: both;"></div>
-	<br>
-	@include('public.mundial.partials._final-phase')
-	@include('public.mundial.partials._table-games-phase-tpl')
+	@foreach ($cups as $cup)
+		<?php $hasGames  = $cup->hasGames ?>
+	@endforeach
+	@if($hasGames)
+		<div style="clear: both;"></div>
+		<br/>
+		@include('public.mundial.partials._google-syndication')
+		@include('public.mundial.partials._info-cup')
+		<div style="clear: both;"></div>
+		<br>
+		<br>
+		@include('public.mundial.partials._games-for-day')
+		<div style="clear: both;"></div>
+		<br>
+		{{-- @include('public.mundial.partials._final-phase') --}}
+		@include('public.mundial.partials._table-games-phase-tpl')
+	@else
+		<div style="clear: both;"></div>
+		<br/>
+		<div style="clear: both;"></div>
+		<br/>
+		@include('public.mundial.partials._info-cup')
+		<div style="clear: both;"></div>
+		<br/>
+		@include('public.mundial.partials._google-syndication')
+		<div style="clear: both;"></div>
+		<br>
+		@include('public.mundial.partials._competition-eliminatory')
+		<div style="clear: both;"></div>
+		<br/>
+		<br>
+		@include('public.mundial.partials._ranked-teams')
+		<div style="clear: both;"></div>
+		<br/>
+	@endif
 @stop
 
 @section('scripts')
