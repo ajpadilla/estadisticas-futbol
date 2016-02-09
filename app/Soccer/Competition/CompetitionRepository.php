@@ -442,6 +442,8 @@ class CompetitionRepository extends BaseRepository
 											 ->where('from','>=', $startCompetition)
 											 ->where('to','<=', $endCompetition)->first();
 		//dd($phase->id);
-		return $this->getGamesForPhase($phase->id);
+		if(!empty($phase ))
+			return $this->getGamesForPhase($phase->id);
+		return false;
 	}
 }
