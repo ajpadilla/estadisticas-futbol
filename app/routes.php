@@ -27,6 +27,7 @@ Route::get('getGamesForPhase', ['as' => 'getGamesForPhase', 'uses' => 'PublicCon
 Route::get('getScorersGoalsFormCompetition', ['as' => 'getScorersGoalsFormCompetition', 'uses' => 'PublicController@getScorersGoalsFormCompetition']);
 Route::get('gamesForWorldCup', ['as' => 'worldCup', 'uses' => 'PublicController@gamesForWorldCup']);
 Route::get('gamesForAmericaCup', ['as' => 'americaCup', 'uses' => 'PublicController@gamesForAmericaCup']);
+Route::get('gamesForLibertadoresCup', ['as' => 'libertadoresCup', 'uses' => 'PublicController@gamesForLibertadoresCup']);
 
 /*
 ********************************* FIN RUTAS PUBLICAS ********************************
