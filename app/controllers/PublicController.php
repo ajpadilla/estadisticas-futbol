@@ -193,4 +193,9 @@ class PublicController extends \BaseController {
 	 	return View::make('public.mundial._mundial', compact('cups','competitionRepository'));
 	}
 
+	public function gamesForAmericaCup()
+	{
+	 	return View::make('public.copa_america._copa_america', compact(''));
+	}
+
 }
