@@ -1,4 +1,4 @@
-
+@if(!empty($cups))
 @foreach($cups as $cup)
 <div id="infoequipo">FASE FINAL</div>
 <div id="fixture">
@@ -209,6 +209,7 @@
 	<br style="clear: both;">
 	<br>
 	<br>
+	@if($cup->hasGames)
 	<?php $firstPhase = $cup->phases->first() ?>
 	<div id="infoequipo">{{ $firstPhase->name }}</div>
 		@foreach($firstPhase->groups as $group)
@@ -320,5 +321,7 @@
 			</div> 
 		</div>
 	<div style="clear: both;"></div>
+	@endif
 </div>
 @endforeach
+@endif
