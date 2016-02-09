@@ -15,14 +15,16 @@
 <!-- CUSTOM -->
 {{ HTML::script('assets/js/public/inicio4.js') }}
 
-{{ HTML::script('assets/js/public/custom.js') }}
+{{-- {{ HTML::script('assets/js/public/custom.js') }} --}}
 
-<script>
+<!--<script>
 	jQuery(document).ready(function() {		
     	CustomPublicApp.init();
 	});
-</script>
+</script>-->
 
 <script type="text/javascript" src="assets/js/apis.google.com/plusone.js">
   {lang: 'es-419'}
 </script>
+
+@yield('scripts')
