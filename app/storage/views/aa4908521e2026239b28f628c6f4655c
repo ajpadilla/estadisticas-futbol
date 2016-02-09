@@ -1,3 +1,4 @@
+
 <?php foreach($cups as $cup): ?>
 <div id="infoequipo">FASE FINAL</div>
 <div id="fixture">
