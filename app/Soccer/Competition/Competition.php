@@ -232,6 +232,12 @@ class Competition extends Eloquent implements StaplerableInterface{
         return $this->hasta->format('Y-m-d');
     }
 
+    public function getYearAttribute()
+    {
+        return Carbon::parse($this->desde)->year;
+    }
+
+
     public function getFormatFromAttribute()
     {
         return Carbon::parse($this->desde)->formatLocalized('%A %d %B %Y');
