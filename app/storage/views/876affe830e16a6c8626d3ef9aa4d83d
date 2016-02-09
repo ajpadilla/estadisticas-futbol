@@ -1,16 +1,39 @@
 <?php $__env->startSection("content"); ?>
-	<div style="clear: both;"></div>
-	<br/>
-	<?php echo $__env->make('public.mundial.partials._google-syndication', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
-	<?php echo $__env->make('public.mundial.partials._info-cup', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
-	<div style="clear: both;"></div>
-	<br>
-	<br>
-	<?php echo $__env->make('public.mundial.partials._games-for-day', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
-	<div style="clear: both;"></div>
-	<br>
-	<?php /*<?php echo $__env->make('public.mundial.partials._final-phase', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>*/ ?>
-	<?php echo $__env->make('public.mundial.partials._table-games-phase-tpl', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
+	<?php foreach($cups as $cup): ?>
+		<?php $hasGames  = $cup->hasGames ?>
+	<?php endforeach; ?>
+	<?php if($hasGames): ?>
+		<div style="clear: both;"></div>
+		<br/>
+		<?php echo $__env->make('public.mundial.partials._google-syndication', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
+		<?php echo $__env->make('public.mundial.partials._info-cup', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
+		<div style="clear: both;"></div>
+		<br>
+		<br>
+		<?php echo $__env->make('public.mundial.partials._games-for-day', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
+		<div style="clear: both;"></div>
+		<br>
+		<?php /* <?php echo $__env->make('public.mundial.partials._final-phase', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?> */ ?>
+		<?php echo $__env->make('public.mundial.partials._table-games-phase-tpl', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
+	<?php else: ?>
+		<div style="clear: both;"></div>
+		<br/>
+		<div style="clear: both;"></div>
+		<br/>
+		<?php echo $__env->make('public.mundial.partials._info-cup', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
+		<div style="clear: both;"></div>
+		<br/>
+		<?php echo $__env->make('public.mundial.partials._google-syndication', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
+		<div style="clear: both;"></div>
+		<br>
+		<?php echo $__env->make('public.mundial.partials._competition-eliminatory', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
+		<div style="clear: both;"></div>
+		<br/>
+		<br>
+		<?php echo $__env->make('public.mundial.partials._ranked-teams', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
+		<div style="clear: both;"></div>
+		<br/>
+	<?php endif; ?>
 <?php $__env->stopSection(); ?>
 
 <?php $__env->startSection('scripts'); ?>
