@@ -1,11 +1,14 @@
+@if(!empty($cups))
 <div style="float: left;width:480px">
 	<div style="width:480px;margin-left:15px">
 		@foreach($cups as $cup)
+			@if(count($cup->phasesWithGames) > 0)
 			<a id="firstPhase" data-phase-id="{{ $cup->phases->first()->id }}" href=""></a>
 			@foreach ($cup->phasesWithGames as $phase) 
 				<a id="irfecha" href="{{ route('getGamesForPhase') }}" class="phasesWithGames" data-phase-id="{{ $phase->id }}" data-competition-id = "{{ $cup->id }}">{{ $phase->name }}</a>
 				<a id="scoredGoalsUrl" href="{{ route('getScorersGoalsFormCompetition') }}"></a>
 			@endforeach
+			@endif
 		@endforeach
 	</div>
 	<br>
@@ -29,3 +32,4 @@
 		<br style="clear: both;">
 	</div>
 </div>
+@endif
