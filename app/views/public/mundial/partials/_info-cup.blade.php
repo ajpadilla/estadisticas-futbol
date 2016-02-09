@@ -1,5 +1,5 @@
+@if(!empty($cups))
 <span class="verdegrande">
-
 	<div style="padding-top: 10px;">
 		{{ $cups->links() }}
 	</div>
@@ -19,3 +19,4 @@
 	</div>
 	<div style="clear: both;"></div>
 </span>
+@endif
