@@ -9,7 +9,7 @@
 				@foreach($gamesToPhase as $index => $groups)
                 	@foreach($groups as $index2 => $games)
                         @foreach($games as $index2 => $game)
-							<table style="width:420px;float: left" id="fixturein">
+							<table style="width:420px;" id="fixturein">
 								<tbody>
 									<tr style="background:#092B1D;text-align: center">
 										<td colspan="6">
