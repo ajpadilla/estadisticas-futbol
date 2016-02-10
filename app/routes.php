@@ -30,6 +30,7 @@ Route::get('gamesForAmericaCup', ['as' => 'americaCup', 'uses' => 'PublicControl
 Route::get('gamesForLibertadoresCup', ['as' => 'libertadoresCup', 'uses' => 'PublicController@gamesForLibertadoresCup']);
 Route::get('gamesForChampionsCup', ['as' => 'championsCup', 'uses' => 'PublicController@gamesForChampionsCup']);
 Route::get('gamesForArgentinaCup', ['as' => 'argentinaCup', 'uses' => 'PublicController@gamesForArgentinaCup']);
+Route::get('gamesForSudamericanaCup', ['as' => 'sudamericanaCup', 'uses' => 'PublicController@gamesForSudamericanaCup']);
 
 /*
 ********************************* FIN RUTAS PUBLICAS ********************************
