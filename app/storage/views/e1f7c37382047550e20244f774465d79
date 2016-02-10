@@ -1,0 +1,28 @@
+<?php if(!empty($sudamericanaCups)): ?>
+<div style="width: 980px;height: auto;background: #17573d;font-size:12px;color:white;text-align: center;">
+	<?php echo $sudamericanaCups->links(); ?>
+
+</div>
+<?php foreach($sudamericanaCups as $sudamericanaCups): ?>
+<span class="verdegrande">
+	CHAMPIONS LEAGUE 2015/16
+</span>
+<div style="clear: both;"></div>
+<br/>
+<?php $winner = $competitionRepository->winner($sudamericanaCups->id) ?>
+<?php if(!empty($winner)): ?>
+<div style="width: 980px;height: auto;background: #17573d;font-size:12px;color:white;text-align: center;">
+	<br>
+	Campeón <?php echo $sudamericanaCups->year; ?><br>
+	<img src="<?php echo $winner->escudo->url('thumb'); ?>" width="50" height="50"><br>
+	<img src="<?php echo $winner->escudo->url('thumb'); ?>"> <?php echo $winner->nombre; ?>
+
+	<br>
+
+	<div style="clear: both;"></div>
+	<br>
+</div>
+<?php endif; ?>
+<br/>
+<?php endforeach; ?>
+<?php endif; ?>
