@@ -2,6 +2,7 @@
 	@foreach($libertadoresCups as $libertadoresCup)
 		@if($libertadoresCup->hasPhases)
 			@foreach ($libertadoresCup->phasesByOrder as $phase)
+				@if($phase->type != 'fase de grupos')
 				<?php $gamesToPhase  = $competitionRepository->getGamesForPhase($phase->id); ?>
 				<span class="verdegrande">{{$phase->name }}</span>
 				<br>
@@ -36,6 +37,7 @@
 						@endforeach
 					@endforeach
 				@endforeach
+				@endif
 			@endforeach
 		@endif
 	@endforeach
