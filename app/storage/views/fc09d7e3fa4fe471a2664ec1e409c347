@@ -27,7 +27,7 @@
 <?php if(!empty($winner)): ?>
 <div style="width: 980px;height: auto;background: #17573d;font-size:12px;color:white;text-align: center;">
 	<br>
-	Campeón de América <?php echo $libertadoresCup->year; ?><br>
+	Campeón <?php echo $libertadoresCup->year; ?><br>
 	<img src="<?php echo $winner->escudo->url('thumb'); ?>" width="50" height="50"><br>
 	<img src="<?php echo $winner->escudo->url('thumb'); ?>"> <?php echo $winner->nombre; ?>
 

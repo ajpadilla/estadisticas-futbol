@@ -54,7 +54,7 @@
 			COPAS
 			<br><span class="subitem">
 				<a href="<?php echo route('libertadoresCup'); ?>">Libertadores</a>
-				<a href="championsleague">Champions L.</a>
+				<a href="<?php echo route('championsCup'); ?>">Champions L.</a>
 				<a href="copaargentina">Copa Argentina</a>
 				<a href="copasudamericana">Sudamericana</a>
 				<a href="mundialdeclubes">Mundial Clubes</a>
