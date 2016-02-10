@@ -245,6 +245,10 @@ class Competition extends Eloquent implements StaplerableInterface{
         return Carbon::parse($this->desde)->year;
     }
 
+    public function getYearEndAttribute()
+    {
+        return Carbon::parse($this->hasta)->year;
+    }
 
     public function getFormatFromAttribute()
     {
