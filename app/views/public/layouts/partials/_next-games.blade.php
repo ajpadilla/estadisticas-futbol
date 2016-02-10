@@ -2,12 +2,13 @@
     
     @if (isset($competitions) AND !empty($competitions))
         @foreach($competitions as $competition)
+        @if ($competition->getHasTodayGames($date->formatLocalized('%Y-%m-%d')))
         <div id="fixturein">
-            <div class="tituloin"><a href="primerad">{{ $competition->nombre }}</a></div>
+            <div class="tituloin"><a href="primerad">{{ $competition->nombre }} Anterior Siguiente</a></div>
             <table style="width:440px">
                 <tbody>
                     <tr style="background:#092B1D;text-align: center">
-                        <td colspan="6"><span class="horariopartido"> {{ $today }}</span></td>
+                        <td colspan="6"><span class="horariopartido"> {{ $date->formatLocalized('%A %d %B %Y') }} </span></td>
                     </tr>
                     {{-- @if (isset($competition->todayGames) AND !empty($competition->todayGames)) --}}
                     @if ($competition->getHasTodayGames($date->formatLocalized('%Y-%m-%d')))
@@ -31,13 +32,14 @@
                 </tbody>
             </table>
         </div>
-        <div id="abajo">
+        @endif
+        <!--<div id="abajo">
             <div id="cuadros"><a href="primerad">Ir a Sección<br>Prim. D</a></div>
             <div id="cuadros3" onclick="popup(6,1);">Ver Tabla<br>Puntos</div>
             <div id="cuadros3" onclick="popup(6,2);">Ver Tabla<br>Promedios</div>
             <div id="cuadros3"><a href="foro.php?seccion=PrimeraD">Ir a Foro<br>{{ $competition->name }}</a></div>
             <div style="clear: both"></div>
-        </div>
+        </div>-->
         @endforeach
     @else
         <p>No hay competencias</p>
