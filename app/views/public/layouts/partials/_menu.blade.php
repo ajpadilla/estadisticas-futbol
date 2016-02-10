@@ -56,7 +56,7 @@
 				<a href="{{ route('libertadoresCup') }}">Libertadores</a>
 				<a href="{{ route('championsCup') }}">Champions L.</a>
 				<a href="{{ route('argentinaCup') }}">Copa Argentina</a>
-				<a href="copasudamericana">Sudamericana</a>
+				<a href="{{ route('sudamericanaCup') }}">Sudamericana</a>
 				<a href="mundialdeclubes">Mundial Clubes</a>
 				<a href="mascopas">Mas Copas</a>
 			</span>
