@@ -1,0 +1,29 @@
+<?php if(!empty($argentinaCups)): ?>
+<div style="width: 980px;height: auto;background: #17573d;font-size:12px;color:white;text-align: center;">
+	<?php echo $argentinaCups->links(); ?>
+
+</div>
+<?php foreach($argentinaCups as $argentinaCup): ?>
+<span class="verdegrande">
+	COPA ARGENTINA <?php echo $argentinaCup->year; ?>
+
+</span>
+<div style="clear: both;"></div>
+<br/>
+<?php $winner = $competitionRepository->winner($argentinaCup->id) ?>
+<?php if(!empty($winner)): ?>
+<div style="width: 980px;height: auto;background: #17573d;font-size:12px;color:white;text-align: center;">
+	<br>
+	Campeón <?php echo $argentinaCup->year; ?><br>
+	<img src="<?php echo $winner->escudo->url('thumb'); ?>" width="50" height="50"><br>
+	<img src="<?php echo $winner->escudo->url('thumb'); ?>"> <?php echo $winner->nombre; ?>
+
+	<br>
+
+	<div style="clear: both;"></div>
+	<br>
+</div>
+<?php endif; ?>
+<br/>
+<?php endforeach; ?>
+<?php endif; ?>
