@@ -26,7 +26,7 @@
 @if(!empty($winner))
 <div style="width: 980px;height: auto;background: #17573d;font-size:12px;color:white;text-align: center;">
 	<br>
-	Campeón de América {{ $libertadoresCup->year }}<br>
+	Campeón {{ $libertadoresCup->year }}<br>
 	<img src="{{ $winner->escudo->url('thumb') }}" width="50" height="50"><br>
 	<img src="{{ $winner->escudo->url('thumb') }}"> {{ $winner->nombre }}
 	<br>
