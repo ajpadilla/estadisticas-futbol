@@ -217,4 +217,16 @@ class PublicController extends \BaseController {
 	 	return View::make('public.libertadores._libertadores', compact('libertadoresCups','competitionRepository'));
 	}
 
+	public function gamesForChampionsCup()
+	{
+		$championsCups = $this->competitionRepository
+		->getModel()
+		->whereType('champion L')
+		->orderBy('desde', 'desc')
+		->orderBy('hasta', 'desc')
+		->paginate(1);
+		$competitionRepository =  $this->competitionRepository;
+	 	return View::make('public.champions._champions', compact('championsCups','competitionRepository'));
+	}
+
 }
