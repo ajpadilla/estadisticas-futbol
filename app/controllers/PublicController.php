@@ -241,4 +241,16 @@ class PublicController extends \BaseController {
 	 	return View::make('public.copa_argentina._copa_argentina', compact('argentinaCups','competitionRepository'));
 	}
 
+	public function gamesForSudamericanaCup()
+	{
+		$sudamericanaCups = $this->competitionRepository
+		->getModel()
+		->whereType('sudamericana')
+		->orderBy('desde', 'desc')
+		->orderBy('hasta', 'desc')
+		->paginate(1);
+		$competitionRepository =  $this->competitionRepository;
+	 	return View::make('public.sudamericana._sudamericana', compact('sudamericanaCups','competitionRepository'));
+	}
+
 }
