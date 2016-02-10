@@ -128,5 +128,14 @@ th{cursor:pointer}
 a img { border: 0 }
 @media screen\0 {   #ficha,#vivo{text-shadow:none;width:33px;font-size:9px} }
 .pagination{ margin: 20px 0; list-style: none; text-align: center; }
-.pagination li { display:inline-block; margin-right:10px;}
-.pagination li a {display:block;padding:10px 20px;text-decoration: none;}
+.pagination li { display:inline-block; margin-right:10px; height: 20%;}
+.pagination li a { 
+	background: none repeat scroll 0 0 #0E3A26;
+    color: #C2E213;
+    font-size: 12px;
+    font-weight: 700;
+    line-height: 20px;
+    padding: 1px 5px;
+    text-align: center;
+    text-decoration: none;
+}
