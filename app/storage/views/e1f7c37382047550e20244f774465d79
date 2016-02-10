@@ -5,7 +5,8 @@
 </div>
 <?php foreach($sudamericanaCups as $sudamericanaCups): ?>
 <span class="verdegrande">
-	CHAMPIONS LEAGUE 2015/16
+	COPA SUDAMERICANA <?php echo $sudamericanaCups->year; ?>
+
 </span>
 <div style="clear: both;"></div>
 <br/>

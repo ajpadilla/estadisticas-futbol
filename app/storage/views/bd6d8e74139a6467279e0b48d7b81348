@@ -5,7 +5,8 @@
 </div>
 <?php foreach($championsCups as $champion): ?>
 <span class="verdegrande">
-	CHAMPIONS LEAGUE 2015/16
+	CHAMPIONS LEAGUE <?php echo $champion->year; ?> / <?php echo $champion->yearEnd; ?>
+
 </span>
 <div style="clear: both;"></div>
 <br/>
