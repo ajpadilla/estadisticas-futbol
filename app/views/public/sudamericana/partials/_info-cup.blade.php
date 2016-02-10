@@ -4,7 +4,7 @@
 </div>
 @foreach($sudamericanaCups as $sudamericanaCups)
 <span class="verdegrande">
-	CHAMPIONS LEAGUE 2015/16
+	COPA SUDAMERICANA {{ $sudamericanaCups->year }}
 </span>
 <div style="clear: both;"></div>
 <br/>
