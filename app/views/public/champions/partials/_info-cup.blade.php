@@ -4,7 +4,7 @@
 </div>
 @foreach($championsCups as $champion)
 <span class="verdegrande">
-	CHAMPIONS LEAGUE 2015/16
+	CHAMPIONS LEAGUE {{ $champion->year / $champion->yearEnd }}
 </span>
 <div style="clear: both;"></div>
 <br/>
