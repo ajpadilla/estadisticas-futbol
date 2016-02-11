@@ -8,16 +8,17 @@ use Carbon\Carbon;
 
 class CompetitionFormat extends Eloquent {
 
-	protected $fillable = [
+	protected $fillable = array(
                             'name', 
                             'groups', 
                             'clasificated_by_group', 
                             'local_away_game', 
                             'local_away_game_final', 
-                            'away_goal', 
+                            'away_goal',
+                            'all_teams', 
                             'teams_by_group', 
                             'promotion', 
-                            'descent'];
+                            'descent');
 
     /*
 	********************* Relations ***********************

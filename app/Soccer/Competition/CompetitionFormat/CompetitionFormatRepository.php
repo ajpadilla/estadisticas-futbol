@@ -38,7 +38,12 @@ class CompetitionFormatRepository extends BaseRepository
 
 		if (empty($data['away_goal'])) {
 			$data['away_goal'] = 0;
+		}
+
+		if (empty($data['all_teams'])) {
+			$data['all_teams'] = 0;
 		}		
+		
 
 		$competitionFormat = $this->get($data['competition_format_id']);
 		$competitionFormat->update($data);
