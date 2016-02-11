@@ -64,6 +64,17 @@
 								</div>
 							</div>
 							<div class="form-group">
+								{{--{{ Form::label('pre_clasificacion', 'Pre Clasificacion',['class'=>'col-sm-2 control-label']) }}--}}
+								<div class="col-sm-6">
+									<div class="checkbox">
+										<label> 
+											{{ Form::checkbox('all_teams', '1', null)}}
+											<i></i> Todos los equipos
+										</label>
+									</div>
+								</div>
+							</div>
+							<div class="form-group">
 								{{ Form::label('teams_by_group','Equipos Por Grupo',['class'=>'col-sm-2 control-label']) }}
 								<div class="col-sm-6">
 									{{ Form::text('teams_by_group',0, ['class' => 'form-control','placeholder' => 0,'id' => 'teams_by_group-competition-format']) }}
@@ -81,6 +92,7 @@
 									{{ Form::text('descent',0, ['class' => 'form-control','placeholder' => 0,'id' => 'descent-competition-format']) }}
 								</div>
 							</div>
+							
 						</div>
 					{{ Form::close() }}
 				</div>
