@@ -10,6 +10,7 @@ class RegisterCompetitionFormatForm extends FormValidator{
           'local_away_game' => 'boolean',
           'local_away_game_final' =>'boolean' ,
           'away_goal' => 'boolean',
+          'all_teams' => 'boolean',
           'teams_by_group' => 'numeric|digits_between:1,6',
           'promotion' => 'numeric|digits_between:1,6',
           'descent' => 'numeric|digits_between:1,6',
