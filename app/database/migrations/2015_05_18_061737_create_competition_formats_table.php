@@ -20,7 +20,8 @@ class CreateCompetitionFormatsTable extends Migration {
 			$table->smallInteger('clasificated_by_group')->default(0);
 			$table->boolean('local_away_game')->default(false);
 			$table->boolean('local_away_game_final')->default(false);
-			$table->boolean('away_goal')->default(false);			
+			$table->boolean('away_goal')->default(false);
+			$table->boolean('all_teams')->default(false);				
 			$table->smallInteger('teams_by_group')->default(0);
 			$table->smallInteger('promotion')->default(0);			
 			$table->smallInteger('descent')->default(0);	
