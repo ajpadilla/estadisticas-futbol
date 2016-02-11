@@ -7510,6 +7510,9 @@ var handleBootboxAddEquipoToJugador = function () {
                                         var checkboxAwayGoal= $("#away-goal-edit");
                                         checkboxAwayGoal.val(checkboxAwayGoal[0].checked ? 1 : 0);
 
+                                        var checkboxAllTeamsEdit= $("#all-teams-edit");
+                                        checkboxAllTeamsEdit.val(checkboxAllTeamsEdit[0].checked ? 1 : 0);
+
                                         var formData = {
                                             competition_format_id: competitionFormatId ,
                                             name: $('#name-competition-format-edit').val() ,
@@ -7518,6 +7521,7 @@ var handleBootboxAddEquipoToJugador = function () {
                                             local_away_game: checkboxlocalAwayGame.val(),
                                             local_away_game_final: checkboxlocalAwayGameFinal.val(),
                                             away_goal: checkboxAwayGoal.val(),
+                                            all_teams: checkboxAllTeamsEdit.val(),
                                             teams_by_group: $('#teams-by-group-competition-format-edit').val(),
                                             promotion: $('#promotion-competition-format-edit').val(),
                                             descent: $('#descent-competition-format-edit').val()
@@ -7529,7 +7533,7 @@ var handleBootboxAddEquipoToJugador = function () {
                                             data: formData,
                                             dataType: "JSON",
                                             success: function(responseServer) {
-                                                //console.log(responseServer);
+                                                console.log(responseServer);
                                                 if(responseServer.success == true)
                                                 {
                                                     // Muestro otro dialog con información de éxito
@@ -7623,7 +7627,7 @@ var handleBootboxAddEquipoToJugador = function () {
             dataType: "JSON",
             success: function(response)
             {
-                //console.log(response);
+                console.log(response);
                  if (response != null)
                  {
                     if (response.success)
@@ -7638,6 +7642,7 @@ var handleBootboxAddEquipoToJugador = function () {
                             local_away_game: response.competitionFormat.local_away_game,
                             local_away_game_final: response.competitionFormat.local_away_game_final,
                             away_goal: response.competitionFormat.away_goal,
+                            all_teams: response.competitionFormat.all_teams,
                             teams_by_group: response.competitionFormat.teams_by_group,
                             promotion: response.competitionFormat.promotion,
                             descent: response.competitionFormat.descent,
@@ -7649,6 +7654,7 @@ var handleBootboxAddEquipoToJugador = function () {
                         $('input[name="local_away_game"]').prop('checked', transformToBoolean(response.competitionFormat.local_away_game));
                         $('input[name="local_away_game_final"]').prop('checked', transformToBoolean(response.competitionFormat.local_away_game_final));
                         $('input[name="away_goal"]').prop('checked', transformToBoolean(response.competitionFormat.away_goal));
+                        $('input[name="all_teams"]').prop('checked', transformToBoolean(response.competitionFormat.all_teams));
                         bootboxEditCompetitionFormat(response.competitionFormat.id);
                     }
                 }
