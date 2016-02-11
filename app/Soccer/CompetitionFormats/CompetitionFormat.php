@@ -7,7 +7,7 @@ use Carbon\Carbon;
 */
 
 class CompetitionFormat extends Eloquent {
-	protected $fillable = ['name', 'groups', 'clasificated_by_group' ,'local_away_game','local_away_game_final' ,'away_goal','teams_by_group' ,'promotion' ,'descent'  ,
+	protected $fillable = ['name', 'groups', 'clasificated_by_group' ,'local_away_game','local_away_game_final' ,'away_goal','all_teams','teams_by_group' ,'promotion' ,'descent'  ,
      ];
 
 	/*
@@ -27,6 +27,11 @@ class CompetitionFormat extends Eloquent {
         return ($value ? 'Si' : 'No');
     }
     public function getAwayGoalAttribute($value)
+    {
+        return ($value ? 'Si' : 'No');
+    }
+
+    public function getAllTeamsAttribute($value)
     {
         return ($value ? 'Si' : 'No');
     }
