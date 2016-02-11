@@ -36,12 +36,10 @@ class PublicController extends \BaseController {
 	{
 		$showTomorrow = false;
 		$showYesterday = false;
-		$showToday = false;
 		$view = null;
 		$date = null;
 
 		$tomorrow = Carbon::tomorrow()->formatLocalized('%Y-%m-%d');
-		$today = ucwords (Carbon::today()->formatLocalized('%A %d %B %Y'));
 		$yesterday = Carbon::yesterday()->formatLocalized('%Y-%m-%d');
 
 		$competitions = $this->competitionRepository->getAll();
@@ -50,18 +48,12 @@ class PublicController extends \BaseController {
 	 		case "tomorrow":
 	 			$showTomorrow = true;
 	 			$date = Carbon::tomorrow();
-	 			$today = ucwords (Carbon::tomorrow()->formatLocalized('%A %d %B %Y'));
-	 			$view = View::make('public.home', compact('competitions','date','today','showTomorrow','showYesterday'));
+	 			$view = View::make('public.home', compact('competitions','date','showTomorrow','showYesterday'));
 	 			break;
 	 		case "yesterday":
 	 			$showYesterday = true;
 	 			$date = Carbon::yesterday();
-	 			$today = ucwords (Carbon::yesterday()->formatLocalized('%A %d %B %Y'));
-	 			$view = View::make('public.home', compact('competitions','date','today','showTomorrow','showYesterday'));
-	 			break;
-	 		case "today":
-	 			$showToday = true;
-	 			$view = View::make('public.home', compact('competitions','today','showToday'));
+	 			$view = View::make('public.home', compact('competitions','date','showTomorrow','showYesterday'));
 	 			break;
 	 	}
 	 	return $view;
