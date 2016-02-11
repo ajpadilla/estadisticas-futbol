@@ -80,7 +80,7 @@ class PhaseRepository extends BaseRepository
 		$phase = $this->get($id);
 		$teams = [];
 
-		if($phase->previous) {
+		if($phase->previous && !$phase->format->all_teams) {
 			$previousPhase = $phase->previous;
 			if ($this->finished($previousPhase->id))
 				$teams = $this->classifieds($previousPhase->id);
