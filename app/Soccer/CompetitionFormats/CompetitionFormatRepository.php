@@ -16,6 +16,7 @@ class CompetitionFormatRepository extends BaseRepository
 			'¿Partido de ida local?',
 			'¿Último partido fuera de casa local?',
 			'¿Gol fuera de casa?',
+			'¿Todos los equipos?',
 			'# Equipos por grupo',
 			'# Promoción',
 			'# Descensos',
@@ -73,6 +74,11 @@ class CompetitionFormatRepository extends BaseRepository
 		$this->collection->addColumn('¿Gol fuera de casa?', function($model)
 		{
 			 return $model->away_goal;
+		});
+
+		$this->collection->addColumn('¿Todos los equipos?', function($model)
+		{
+			 return $model->all_teams;
 		});
 
 		$this->collection->addColumn('# Equipos por grupo', function($model)
