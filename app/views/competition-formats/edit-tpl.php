@@ -50,6 +50,15 @@
 				</div>
 			</div>
 			<div class="form-group">
+				<div class="col-md-6">
+					<div class="checkbox">
+						<label> 
+							<input type="checkbox" name="all_teams" value="{{all_teams}}" id="all-teams-edit"> Todos los equipos
+						</label>
+					</div>
+				</div>
+			</div>
+			<div class="form-group">
 				<label for="teams_by_group" class = "col-sm-2 control-label" >Equipos Por Grupo</label>
 				<div class="col-sm-6">
 					<input type="text" name="teams_by_group" class = "form-control" id="teams-by-group-competition-format-edit" value="{{teams_by_group}}" />
