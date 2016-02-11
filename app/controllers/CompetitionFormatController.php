@@ -52,6 +52,9 @@ class CompetitionFormatController extends \BaseController {
 			{
 				$this->registerCompetitionFormatForm->validate($input);
 				$competitionFormat = $this->repository->create($input);
+				/*if(!empty($input['all_teams']))
+					$competitionFormat->all_teams = $input['all_teams'] ;
+					$competitionFormat->save();*/
 				$this->setSuccess(true);
 				$this->addToResponseArray('competitionFormat', $competitionFormat);
 				$this->addToResponseArray('data', $input);
