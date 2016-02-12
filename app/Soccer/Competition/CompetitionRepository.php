@@ -232,6 +232,7 @@ class CompetitionRepository extends BaseRepository
 			$scoredGoals = $teamRepository->getScoredGoalsByCompetition($team->id, $localGames, $awayGames, $competition->from, $competition->to);
 			$againstGoals = $teamRepository->getAgainstGoalsByCompetition($team->id, $localGames, $awayGames, $competition->from, $competition->to);
 			$gamesPlayed = $teamRepository->getPlayedGamesByCompetition($team->id, $competition->from, $competition->to);
+		
 
 			$teamFixtures = array(
 				'id' => $team->id,
@@ -445,5 +446,133 @@ class CompetitionRepository extends BaseRepository
 		if(!empty($phase ))
 			return $this->getGamesForPhase($phase->id);
 		return false;
+	}
+
+	public function getAverage(Collection $competitions, Competition $currentCompetition)
+	{
+		$teams = new Collection;
+		$featuresForTeamsCompetition = [];
+		
+		foreach ($competitions as $competition) 
+		{
+			if($competition->hasPhases) 
+			{
+				$firstPhase = $competition->phases->first();
+				$featuresForTeamsCompetition[] = $this->getOrderedFixturesArrayByCompetition($competition, $firstPhase->teams);
+				$datesForCompetitions[] = $competition->year;
+			}
+		}
+		if($currentCompetition->hasPhases) 
+		{
+			$firstPhaseForCurrentCompetition = $currentCompetition->phases->first();
+
+			foreach ($firstPhaseForCurrentCompetition->teams as $currentTeamForCompetition) 
+			{
+				$totalPoints = 0;
+				$totalGamesPlayed = 0;
+				$average = 0;
+				$averageSeason1 = 0;
+				$averageSeason2 = 0;
+				$averageSeason3 = 0;
+				$season1 = [];
+				$season2 = [];
+				$season3 = [];
+				//Average total de los (6) ultimos torneos competidos
+				foreach ($featuresForTeamsCompetition as $teams) {
+					foreach ($teams as $team) {
+						if($currentTeamForCompetition->id == $team['id']){
+							$totalPoints += $team['points'];
+							$totalGamesPlayed += $team['gamesPlayed'];
+							break;
+						}
+					}
+				}
+
+				if(!empty($featuresForTeamsCompetition[0]) && !empty($featuresForTeamsCompetition[1]))
+				{
+					for($i=0; $i<= 1; $i++)
+					{
+						$teams = $featuresForTeamsCompetition[$i];
+						foreach ($teams  as $team) 
+						{
+							if($currentTeamForCompetition->id == $team['id']){
+								$totalPointsSeason3 += $team['points'];
+								$totalGamesPlayedSeason3 += $team['gamesPlayed'];
+								break;
+							}
+						}
+					}
+					$date = $datesForCompetitions[0]." ".$datesForCompetitions[1];
+					$averageSeason3 = ($totalPointsSeason3 / $totalGamesPlayedSeason3);
+					$season3[] = array('average' => $averageSeason3, 'season' => $date);
+				}
+
+
+				if(!empty($featuresForTeamsCompetition[2]) && !empty($featuresForTeamsCompetition[3]))
+				{
+					for($i=2; $i<= 3; $i++)
+					{
+						$teams = $featuresForTeamsCompetition[$i];
+						foreach ($teams  as $team) 
+						{
+							if($currentTeamForCompetition->id == $team['id']){
+								$totalPointsSeason2 += $team['points'];
+								$totalGamesPlayedSeason2 += $team['gamesPlayed'];
+								break;
+							}
+						}
+					}
+					$date = $datesForCompetitions[2]." ".$datesForCompetitions[3];
+					$averageSeason2 = ($totalPointsSeason2 / $totalGamesPlayedSeason2);
+					$season2[] = array('average' => $averageSeason2, 'season' => $date);
+				}
+
+				if(!empty($featuresForTeamsCompetition[4]) && !empty($featuresForTeamsCompetition[5]))
+				{
+					for($i=4; $i<= 5; $i++)
+					{
+						$teams = $featuresForTeamsCompetition[$i];
+						foreach ($teams  as $team) 
+						{
+							if($currentTeamForCompetition->id == $team['id']){
+								$totalPointsSeason1 += $team['points'];
+								$totalGamesPlayedSeason1 += $team['gamesPlayed'];
+								break;
+							}
+						}
+					}
+					$date = $datesForCompetitions[4]." ".$datesForCompetitions[5];
+					$averageSeason1 = ($totalPointsSeason1 / $totalGamesPlayedSeason1);
+					$season1[] = array('average' => $averageSeason1, 'season' => $date);
+				}
+
+				$average = ($totalPoints / $totalGamesPlayed);
+				$averageForTeams[] = array(
+						'average' => $average,
+						'totalPoints'=> $totalPoints,
+						'gamesPlayed' => $totalGamesPlayed, 
+						'team' => $currentTeamForCompetition, 
+						'season3' => $season3, 
+						'season2' => $season2,
+						'season1' => $season1,
+					);
+			}
+
+			usort($averageForTeams, function($a, $b) {
+	    		return $a['average'] <= $b['average'];
+			});
+
+			$i = 1;
+
+			$orderedAverageForTeams = array();
+			foreach ($averageForTeams as $index => $fixture) {
+				$fixture['pos'] = $i;
+				unset($averageForTeams[$index]);
+				$orderedAverageForTeams[$i] = $fixture;
+				$i++;
+			}
+			unset($averageForTeams);
+			return $orderedAverageForTeams;
+		}
 	}
 }
