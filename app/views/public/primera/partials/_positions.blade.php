@@ -32,13 +32,13 @@
 </table>
 @endforeach 
 </div>
-<div class="infotabla">
-<span style="background: #AAF597;color:black">*El campeón y el subcampeón clasifican a la Copa Libertadores 2016.</span><br>
-<span style="background: #7dbc6d;color:black">*Del 3° al 6° jugarán un reducido por otro cupo a la Copa Libertadores 2016.</span><br>
-<span style="background: #fcf912;color:black">*Del 7° al 18° jugarán una liguilla para la clasificación a la Copa Sudamericana 2016.</span><br>
-Nota: Al estar River Plate clasificado a la Copa Libertadores 2016 como actual campeón, el lugar lo ocupará el siguiente equipo de la tabla.<br>
-Nota: Rosario Central esta entrando a la Copa Libertadores 2016 por la Copa Argentina, el lugar lo ocupará el siguiente equipo de la tabla.
-</div>
+    <!--<div class="infotabla">
+    <span style="background: #AAF597;color:black">*El campeón y el subcampeón clasifican a la Copa Libertadores 2016.</span><br>
+    <span style="background: #7dbc6d;color:black">*Del 3° al 6° jugarán un reducido por otro cupo a la Copa Libertadores 2016.</span><br>
+    <span style="background: #fcf912;color:black">*Del 7° al 18° jugarán una liguilla para la clasificación a la Copa Sudamericana 2016.</span><br>
+    Nota: Al estar River Plate clasificado a la Copa Libertadores 2016 como actual campeón, el lugar lo ocupará el siguiente equipo de la tabla.<br>
+    Nota: Rosario Central esta entrando a la Copa Libertadores 2016 por la Copa Argentina, el lugar lo ocupará el siguiente equipo de la tabla.
+    </div>-->
 </div>
 @endif
 @endforeach 
