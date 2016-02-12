@@ -92,8 +92,8 @@ class EquipoRepository extends BaseRepository
 	public function getLocalGamesByCompetition($id, $startDateCompetition, $endDateCompetition)
 	{
 		return Game::whereLocalTeamId($id)
-		->where('date', '>=', $startDateCompetition)
-		->where('date', '<=',  $endDateCompetition)
+		->whereRaw('DATE_FORMAT(games.date, "%Y-%m-%d") >= ?', [$startDateCompetition])
+		->whereRaw('DATE_FORMAT(games.date, "%Y-%m-%d") <= ?', [$endDateCompetition])
 		->get();
 	}
 
@@ -106,8 +106,8 @@ class EquipoRepository extends BaseRepository
 	public function getAwayGamesByCompetition($id, $startDateCompetition, $endDateCompetition)
 	{
 		return Game::whereAwayTeamId($id)
-		->where('date', '>=', $startDateCompetition)
-		->where('date', '<=',  $endDateCompetition)
+		->whereRaw('DATE_FORMAT(games.date, "%Y-%m-%d") >= ?', [$startDateCompetition])
+		->whereRaw('DATE_FORMAT(games.date, "%Y-%m-%d") <= ?', [$endDateCompetition])
 		->get();
 	}
 
@@ -139,8 +139,8 @@ class EquipoRepository extends BaseRepository
 		$query = Game::select();
 		$query->where('games.local_team_id', '=', $id)
 			  ->orWhere('games.away_team_id', '=', $id)
-			  ->where('date', '>=', $startDateCompetition)
-			  ->where('date', '<=',  $endDateCompetition);
+			  ->whereRaw('DATE_FORMAT(games.date, "%Y-%m-%d") >= ?', [$startDateCompetition])
+			  ->whereRaw('DATE_FORMAT(games.date, "%Y-%m-%d") <= ?', [$endDateCompetition]);
 		return $query->count();
 	}
 
