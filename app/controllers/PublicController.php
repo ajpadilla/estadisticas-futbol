@@ -134,15 +134,17 @@ class PublicController extends \BaseController {
 		$competitions = $this->competitionRepository
 		->getModel()
 		->whereType('primera')
-		->orderBy('hasta', 'desc')
+		->orderBy('desde', 'desc')
+		->orderBy('hasta', 'desc') 
 		->paginate(1);
-	 	return View::make('public.primera._primera', compact('competitions'));
+		$competitionRepository =  $this->competitionRepository;
+	 	return View::make('public.primera._primera', compact('competitions', 'competitionRepository'));
 	}
 
 	public function positionsteamsForCompetitions()
 	{
 		$groupsFixtures = $this->competitionRepository->positionsTeamsForTournament(Input::get('id'));
-		$this->setSuccess(true);
+		$this->setSuccess(($groupsFixtures ? true : false));
 		$this->addToResponseArray('groupsFixtures', $groupsFixtures);
 		$this->addToResponseArray('numberGroups', count($groupsFixtures));
 		return $this->getResponseArrayJson();
@@ -243,6 +245,31 @@ class PublicController extends \BaseController {
 		->paginate(1);
 		$competitionRepository =  $this->competitionRepository;
 	 	return View::make('public.sudamericana._sudamericana', compact('sudamericanaCups','competitionRepository'));
+	}
+
+	public function getCompetitionsForCurrentAverage()
+	{
+		if (Request::ajax())
+		{
+			$competition = $this->competitionRepository->get(Input::get('competitionId'));
+
+			$competitions = $this->competitionRepository
+			->getModel()
+			->whereType($competition->type)
+			->orderBy('desde', 'desc')
+			->orderBy('hasta', 'desc') 
+			->where('desde','<=', $competition->desde)
+			->where('hasta','<=', $competition->hasta)
+			->take(6)
+			->get();
+
+			if(count($competitions) > 0)
+				$averages = $this->competitionRepository->getAverage($competitions, $competition);
+
+			$this->setSuccess(($averages ? true : false));
+			$this->addToResponseArray('averages', $averages);
+			return $this->getResponseArrayJson();
+		}
 	}
 
 }
