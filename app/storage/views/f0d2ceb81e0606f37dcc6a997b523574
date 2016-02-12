@@ -1,11 +1,13 @@
 <div style="float: left;width:480px">
 	<div style="width:480px;margin-left:15px">
 		<?php foreach($competitions as $competition): ?>
-			<a id="firstPhase" data-phase-id="<?php echo $competition->phases->first()->id; ?>" href=""></a>
-			<?php foreach($competition->phasesWithGames as $phase): ?> 
-				<a id="irfecha" href="<?php echo route('getGamesForPhase'); ?>" class="phasesWithGames" data-phase-id="<?php echo $phase->id; ?>"><?php echo $phase->name; ?></a>
-				<a id="scoredGoalsUrl" href="<?php echo route('getScorersGoalsFormCompetition'); ?>"></a>
-			<?php endforeach; ?>
+			<?php if($competition->hasPhases): ?>
+				<a id="firstPhase" data-phase-id="<?php echo $competition->phases->first()->id; ?>" href=""></a>
+				<?php foreach($competition->phasesWithGames as $phase): ?> 
+					<a id="irfecha" href="<?php echo route('getGamesForPhase'); ?>" class="phasesWithGames" data-phase-id="<?php echo $phase->id; ?>"><?php echo $phase->name; ?></a>
+					<a id="scoredGoalsUrl" href="<?php echo route('getScorersGoalsFormCompetition'); ?>"></a>
+				<?php endforeach; ?>
+			<?php endif; ?>
 		<?php endforeach; ?>
 	</div>
 	<br>

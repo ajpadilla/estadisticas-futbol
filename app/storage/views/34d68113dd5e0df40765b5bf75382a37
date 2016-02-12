@@ -1,6 +1,22 @@
-<div class="expand-down" align="center" style="width: 920px;">
-<span class="datosequipo2">Click en el escudo para ver info <span class="elequipo"></span></span><br>
-<ul>
-	<li><a href="aldosivi.html"><img src="images/s30/aldosivi.png" onmouseover="equipo('Aldosivi (Mar del Plata)');" onmouseout="noequipo();"></a></li>
-</ul>
+<div class="expand-down-liga" align="center" style="width: 900px;">
+	<!--<span class="datosequipo2">Click en el escudo para ver info <span class="elequipo"></span></span><br>-->
+	<?php foreach($competitions as $competition): ?>
+		<?php 
+			if(!empty($competition->hasPhases))
+				$firstPhase = $competition->phases->first();
+				if(!empty($firstPhase))
+					$groupsForfirstPhase = $firstPhase->groups;
+		?>
+		<ul>
+			<?php if(!empty($groupsForfirstPhase)): ?>
+				<?php foreach($groupsForfirstPhase as $group): ?>
+					<?php foreach($group->teams as $team): ?>
+					<li>
+						<a href=""><img src="<?php echo $team->escudo->url('thumb'); ?>"></a>
+					</li>
+					<?php endforeach; ?>
+				<?php endforeach; ?>
+			<?php endif; ?>
+		</ul>
+	<?php endforeach; ?>
 </div>

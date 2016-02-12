@@ -20,9 +20,9 @@
 	<?php echo $__env->make('public.primera.partials._info-league', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
 	<div style="clear: both;"></div>
 	<br>
-	<?php echo $__env->make('public.primera.partials._leagues', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
-	<div style="clear: both;"></div>
-	<br>
+	<?php /* <?php echo $__env->make('public.primera.partials._leagues', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?> */ ?>
+	<!--<div style="clear: both;"></div>
+	<br>-->
 	<br>
 	<?php echo $__env->make('public.primera.partials._positions', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
 	<?php echo $__env->make('public.primera.partials._phases', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>;
@@ -43,4 +43,284 @@
 	<?php echo $__env->make('public.primera.partials._scorers-tpl', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
 <?php $__env->stopSection(); ?>
 
+<?php $__env->startSection('scripts'); ?>
+<script type="text/javascript">
+	$(document).ready(function () 
+	{
+		var groupsFixturesForCompetition = function() 
+		{
+			var competitionId = $('#teamsFormCompetition').attr('data-id');
+			var url = $('#teamsFormCompetition').attr('href');
+
+			var data = {
+				id: competitionId
+			}
+			$.ajax({
+				type: 'GET',
+				url: url,
+				data: data,
+				dataType:'json',
+				success: function(response) {
+					if(response.success)
+					{
+						var html;
+						//console.log(response);
+						$.each(response.groupsFixtures, function(groupIndex, teams) 
+						{
+							$("#positionsForTeams"+groupIndex).tablesorter();
+							$.each(teams, function(teamIndex, team)
+							{
+								html = "<tr style='background: #d5d5d5'>"+
+								"<td>"+teamIndex+"</td>"+
+								"<td align='left'>"+
+								"<img width='18px' src="+team.img+">"+
+								"<strong>"+team.team.nombre+"</strong>"
+								+"</td>"+
+								"<td>"+team.points+"</td>"+
+								"<td>"+team.gamesPlayed+"</td>"+
+								"<td>"+team.winGames+"</td>"+
+								"<td>"+team.tieGames+"</td>"+
+								"<td>"+team.lostGames+"</td>"+
+								"<td>"+team.scoredGoals+"</td>"+
+								"<td>"+team.againstGoals+"</td>"+
+								"<td>"+team.goalsDiff+"</td>"
+								+"</tr>";
+								$("#positionsForTeams-"+groupIndex+" tbody").append(html);
+								$("#positionsForTeams-"+groupIndex+" tbody").trigger("update");
+							})
+						});	
+					}
+			},
+			error: function(objeto, quepaso, otroobj){
+				console.log(objeto);
+				console.log(quepaso);
+				console.log(otroobj);
+			}
+		});
+		};
+
+		var gamesForFirtsPhase = function() 
+		{
+			var url = $('.phasesWithGames').attr('href');
+			var data = {
+				phaseId: $("#firstPhase").attr('data-phase-id'),
+				competitionId : $('#teamsFormCompetition').attr('data-id')
+			}
+			$.ajax({
+				type: 'GET',
+				url: url,
+				data: data,
+				dataType:'json',
+				success: function(response) {
+					//console.log(response);
+					if(response.success) 
+					{
+						$.each(response.gamesFixtures, function(groupIndex, games) 
+						{
+							$.each(games, function(gameIndex, game)
+							{
+								//console.log(game);
+								var tableGames = jQuery('#tableGamesForPhase');
+								var data = {
+									time: game.game.date,
+									imgLocalTeam: game.game.imgLocalTeam,
+									imgAwayTeam: game.game.imgAwayTeam,
+									hour: game.game.time,
+									localTema: game.game.localTeam.nombre,
+									awayTema: game.game.awayTeam.nombre,
+									localGoals: game.game.localGoals,
+									awayGoals: game.game.awayGoals,
+									fixturesLocalGoals: game.game.fixturesLocalGoals ? game.game.fixturesLocalGoals : "",
+									fixturesAwayGoals: game.game.fixturesAwayGoals ? game.game.fixturesAwayGoals : ""
+								};
+								var template = jQuery('#tableGamesForPhase-tpl').html();
+								var html = Mustache.to_html(template, data);
+								tableGames.append(html);
+							});
+						});
+						
+						var currentPhase = jQuery('#phaseForCompetition');
+						var data = {
+							competition: response.infoCompetition.competition,
+							phase: response.infoCompetition.phase
+						};
+						var template = jQuery('#phaseForCompetition-tpl').html();
+						var html = Mustache.to_html(template, data);
+						currentPhase.html(html);
+
+						var statsPhase = jQuery('#statsPhase');
+						var data = {
+							average: response.statsPhase.average,
+							tieGames: response.statsPhase.tieGames,
+							totalGames: response.statsPhase.totalGames,
+							totalGoalsAway: response.statsPhase.totalGoalsAway,
+							totalGoalsLocal: response.statsPhase.totalGoalsLocal,
+							totalsGolas: response.statsPhase.totalsGolas,
+							winGamesAway: response.statsPhase.winGamesAway,
+							winGamesLocal: response.statsPhase.winGamesLocal
+						};
+						var template = jQuery('#statsPhase-tpl').html();
+						var html = Mustache.to_html(template, data);
+						statsPhase.html(html);
+					}
+				},
+				error: function(objeto, quepaso, otroobj){
+					console.log(objeto);
+					console.log(quepaso);
+					console.log(otroobj);
+				}
+			});
+
+		}
+
+		var gameForPhases = function() 
+		{
+			$(".phasesWithGames").click(function(event) 
+			{
+				event.preventDefault();
+
+				jQuery('#tableGamesForPhase').html('')
+				jQuery('#phaseForCompetition').html('');
+				jQuery('#statsPhase').html('');
+
+				var phaseId = $(this).attr('data-phase-id');
+				var url = $(this).attr('href');
+				var data = {
+					phaseId: phaseId,
+					competitionId : $('#teamsFormCompetition').attr('data-id')
+				};
+				$.ajax({
+					type: 'GET',
+					url: url,
+					data: data,
+					dataType:'json',
+					success: function(response) {
+						//console.log(response);
+						if (response.success) 
+						{
+							$.each(response.gamesFixtures, function(groupIndex, games) 
+							{
+								$.each(games, function(gameIndex, game)
+								{
+								//console.log(game);
+								var tableGames = jQuery('#tableGamesForPhase');
+								var data = {
+									time: game.game.date,
+									imgLocalTeam: game.game.imgLocalTeam,
+									imgAwayTeam: game.game.imgAwayTeam,
+									hour: game.game.time,
+									localTema: game.game.localTeam.nombre,
+									awayTema: game.game.awayTeam.nombre,
+									localGoals: game.game.localGoals,
+									awayGoals: game.game.awayGoals,
+									fixturesLocalGoals: game.game.fixturesLocalGoals ? game.game.fixturesLocalGoals : "",
+									fixturesAwayGoals: game.game.fixturesAwayGoals ? game.game.fixturesAwayGoals : ""
+								};
+								var template = jQuery('#tableGamesForPhase-tpl').html();
+								var html = Mustache.to_html(template, data);
+								tableGames.append(html);
+							});
+							});
+
+							var currentPhase = jQuery('#phaseForCompetition');
+							var data = {
+								competition: response.infoCompetition.competition,
+								phase: response.infoCompetition.phase
+							};
+							var template = jQuery('#phaseForCompetition-tpl').html();
+							var html = Mustache.to_html(template, data);
+							currentPhase.html(html);
+
+							var statsPhase = jQuery('#statsPhase');
+							var data = {
+								average: response.statsPhase.average,
+								tieGames: response.statsPhase.tieGames,
+								totalGames: response.statsPhase.totalGames,
+								totalGoalsAway: response.statsPhase.totalGoalsAway,
+								totalGoalsLocal: response.statsPhase.totalGoalsLocal,
+								totalsGolas: response.statsPhase.totalsGolas,
+								winGamesAway: response.statsPhase.winGamesAway,
+								winGamesLocal: response.statsPhase.winGamesLocal
+							};
+							var template = jQuery('#statsPhase-tpl').html();
+							var html = Mustache.to_html(template, data);
+							statsPhase.html(html);
+						}
+					},
+					error: function(objeto, quepaso, otroobj){
+						console.log(objeto);
+						console.log(quepaso);
+						console.log(otroobj);
+					}
+				});
+			});
+		};
+
+		var scoredGoals = function() 
+		{
+			var competitionId = $('#teamsFormCompetition').attr('data-id');
+			url = $('#scoredGoalsUrl').attr('href')
+			var data = {
+				id: competitionId
+			};
+			$.ajax({
+				type: 'GET',
+				url: url,
+				data: data,
+				dataType:'json',
+				success: function(response) {
+					//console.log(response);
+					var scoredGoals = jQuery('#colScorers');
+					$.each(response.scoredGoals, function(index , scorer) {
+						var data = {
+							img: scorer.img,
+							player: scorer.player.nombre,
+							team: scorer.team.nombre,
+							goals: scorer.totalsGoals
+						};
+						var template = jQuery('#scorers-tpl').html();
+						var html = Mustache.to_html(template, data);
+						scoredGoals.append(html);
+					});
+
+				},
+				error: function(objeto, quepaso, otroobj){
+					console.log(objeto);
+					console.log(quepaso);
+					console.log(otroobj);
+				}
+			});
+		};
+
+		function getAveragesForCompetition() 
+		{
+			var competitionId = $('#teamsFormCompetition').attr('data-id');
+			var data = {
+				competitionId: competitionId
+			};
+
+			$.ajax({
+				type: 'GET',
+				url: '<?php echo route('currentAverage'); ?>',
+				data: data,
+				dataType:'json',
+				success: function(response) {
+					console.log(response);
+				},
+				error: function(objeto, quepaso, otroobj){
+					console.log(objeto);
+					console.log(quepaso);
+					console.log(otroobj);
+				}
+			});
+		};
+
+		groupsFixturesForCompetition();
+		gamesForFirtsPhase();
+		gameForPhases();
+		scoredGoals();
+		getAveragesForCompetition();
+	});
+</script>
+<?php $__env->stopSection(); ?>
 <?php echo $__env->make("public.layouts.main", array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
