@@ -1,11 +1,13 @@
 <div style="float: left;width:480px">
 	<div style="width:480px;margin-left:15px">
 		@foreach($competitions as $competition)
-			<a id="firstPhase" data-phase-id="{{ $competition->phases->first()->id }}" href=""></a>
-			@foreach ($competition->phasesWithGames as $phase) 
-				<a id="irfecha" href="{{ route('getGamesForPhase') }}" class="phasesWithGames" data-phase-id="{{ $phase->id }}">{{ $phase->name }}</a>
-				<a id="scoredGoalsUrl" href="{{ route('getScorersGoalsFormCompetition') }}"></a>
-			@endforeach
+			@if($competition->hasPhases)
+				<a id="firstPhase" data-phase-id="{{ $competition->phases->first()->id }}" href=""></a>
+				@foreach ($competition->phasesWithGames as $phase) 
+					<a id="irfecha" href="{{ route('getGamesForPhase') }}" class="phasesWithGames" data-phase-id="{{ $phase->id }}">{{ $phase->name }}</a>
+					<a id="scoredGoalsUrl" href="{{ route('getScorersGoalsFormCompetition') }}"></a>
+				@endforeach
+			@endif
 		@endforeach
 	</div>
 	<br>
