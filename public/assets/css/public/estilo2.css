@@ -4,6 +4,7 @@ a{color:#000}
 #contenido{background:url(../../img/public/fondo.jpg);margin:5px auto auto;min-height:600px;padding-bottom:100px;width:980px}
 #banner{height:50px;padding-left:10px;width:970px}
 .red{background-image:url(images/red.png)}
+
 .verdegrande{background:#17573d;border-bottom:1px outset silver;border-top:1px outset silver;color:#FFF;display:block;font-size:24px;padding:3px;text-align:center;text-shadow:#000 .1em .1em .1em}
 #menu{width:980px}
 .jugandose,.finaliza,.falta{background:#155219;color:#FFF;font-family:Arial;padding-left:2px;text-align:center;text-shadow:#000 .1em .1em .1em;width:52px}
@@ -109,15 +110,15 @@ td{height:21px;padding:0 2px}
 #irfecha{background:#092b1d;color:#FFF;cursor:pointer;display:block;float:left;font-size:12px;margin:2px;padding:2px}
 .diasemana{background:#17573D;border:1px outset silver;color:#FFF;float:left;font-size:16px;font-weight:700;margin-left:10px;margin-top:10px;text-align:center;width:127px}
 .eldia{background:#81a209;border:1px outset silver;color:#FFF;display:block;font-size:20px;font-weight:700;text-align:center}
-.expand-down,.expand-down2{font-family:Arial, Helvetica, sans-serif;height:65px;line-height:normal;margin:10px auto auto;width:830px}
-.expand-down ul,.expand-down2 ul{padding-top:10px}
-.expand-down ul li,.expand-down2 ul li{float:left;list-style-type:none}
-.expand-down ul li a,.expand-down2 ul li a{text-decoration:none}
-.expand-down ul li a img{border:none;height:40px;width:40px}
-.expand-down2 ul li a img{border:none;height:38px;width:38px}
-.expand-down ul li span,.expand-down2 ul li span{display:none}
-.expand-down ul li:hover span,.expand-down2 ul li:hover span{color:#000;display:block;font-size:14px;text-align:center}
-.expand-down ul li:hover a img,.expand-down2 ul li:hover a img{height:50px;width:50px}
+.expand-down-liga,.expand-down-liga2{font-family:Arial, Helvetica, sans-serif;height:65px;line-height:normal;margin:10px auto auto;width:830px}
+.expand-down-liga ul,.expand-down-liga2 ul{padding-top:10px}
+.expand-down-liga ul li,.expand-down-liga2 ul li{float:left;list-style-type:none; width: 50px;}
+.expand-down-liga ul li a,.expand-down-liga2 ul li a{text-decoration:none}
+.expand-down-liga ul li a img{border:none;height:40px;width:40px}
+.expand-down-liga2 ul li a img{border:none;height:38px;width:38px}
+.expand-down-liga ul li span,.expand-down-liga2 ul li span{display:none}
+.expand-down-liga ul li:hover span,.expand-down-liga2 ul li:hover span{color:#000;display:block;font-size:14px;text-align:center}
+.expand-down-liga ul li:hover a img,.expand-down-liga2 ul li:hover a img{height:50px;width:50px}
 th{cursor:pointer}
 #tablaptsactual,#tablacopas{color:#000;float:left;font-family:verdana;font-size:12px;margin-left:10px;width:390px}
 #fixtureactual td,#fixtureactualb td,#fixtureactualbm td,#fixtureactualsel td,#fixtureactualarg1 td,#fixtureactualarg2 td,#formcalcular td,#formcalcularb td,#formcalcularbm td,#formcalcular3 td,#formcalcular3b td,#formcalcular8 td,#formcalcular3bm td{padding:0}
@@ -129,8 +130,7 @@ a img { border: 0 }
 @media screen\0 {   #ficha,#vivo{text-shadow:none;width:33px;font-size:9px} }
 .pagination{ margin: 20px 0; list-style: none; text-align: center; }
 .pagination li { display:inline-block; margin-right:10px; height: 20%;}
-.pagination li a { 
-	background: none repeat scroll 0 0 #0E3A26;
+.pagination li a {background: none repeat scroll 0 0 #0E3A26;
     color: #C2E213;
     font-size: 12px;
     font-weight: 700;
