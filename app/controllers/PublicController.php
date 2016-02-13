@@ -249,27 +249,34 @@ class PublicController extends \BaseController {
 
 	public function getCompetitionsForCurrentAverage()
 	{
-		if (Request::ajax())
-		{
-			$competition = $this->competitionRepository->get(Input::get('competitionId'));
+		
+		$competition = $this->competitionRepository->get(Input::get('competitionId'));
+		$dates  = [];
+		$dateSeason3 = 0;
+		$dateSeason2 = 0;
+		$dateSeason1 = 0;
 
-			$competitions = $this->competitionRepository
-			->getModel()
-			->whereType($competition->type)
-			->orderBy('desde', 'desc')
-			->orderBy('hasta', 'desc') 
-			->where('desde','<=', $competition->desde)
-			->where('hasta','<=', $competition->hasta)
-			->take(6)
-			->get();
+		$competitions = $this->competitionRepository
+		->getModel()
+		->whereType($competition->type)
+		->orderBy('desde', 'desc')
+		->orderBy('hasta', 'desc') 
+		->where('desde','<=', $competition->desde)
+		->where('hasta','<=', $competition->hasta)
+		->take(6)
+		->get();
 
-			if(count($competitions) > 0)
-				$averages = $this->competitionRepository->getAverage($competitions, $competition);
-
-			$this->setSuccess(($averages ? true : false));
-			$this->addToResponseArray('averages', $averages);
-			return $this->getResponseArrayJson();
+		foreach ($competitions as $competition) {
+			$dates[] = $competition->year;
 		}
+
+		if(count($competitions) > 0)
+			$averages = $this->competitionRepository->getAverage($competitions, $competition);
+
+		$this->setSuccess(($averages ? true : false));
+		$this->addToResponseArray('averages', $averages);
+		$this->addToResponseArray('dates', $dates);
+		return $this->getResponseArrayJson();
 	}
 
 }
