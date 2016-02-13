@@ -41,6 +41,7 @@
 	<?php echo $__env->make('public.primera.partials._name-phases-for-competition-tpl', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
 	<?php echo $__env->make('public.primera.partials._stats-phase-tpl', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
 	<?php echo $__env->make('public.primera.partials._scorers-tpl', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
+	<?php echo $__env->make('public.primera.partials._average-head-tpl', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
 <?php $__env->stopSection(); ?>
 
 <?php $__env->startSection('scripts'); ?>
@@ -292,34 +293,10 @@
 			});
 		};
 
-		function getAveragesForCompetition() 
-		{
-			var competitionId = $('#teamsFormCompetition').attr('data-id');
-			var data = {
-				competitionId: competitionId
-			};
-
-			$.ajax({
-				type: 'GET',
-				url: '<?php echo route('currentAverage'); ?>',
-				data: data,
-				dataType:'json',
-				success: function(response) {
-					console.log(response);
-				},
-				error: function(objeto, quepaso, otroobj){
-					console.log(objeto);
-					console.log(quepaso);
-					console.log(otroobj);
-				}
-			});
-		};
-
 		groupsFixturesForCompetition();
 		gamesForFirtsPhase();
 		gameForPhases();
 		scoredGoals();
-		getAveragesForCompetition();
 	});
 </script>
 <?php $__env->stopSection(); ?>
