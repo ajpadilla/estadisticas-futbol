@@ -131,6 +131,8 @@ class PublicController extends \BaseController {
 
 	public function gamesFirstDivision()
 	{
+
+
 		$competitions = $this->competitionRepository
 		->getModel()
 		->whereType('primera')
@@ -138,6 +140,7 @@ class PublicController extends \BaseController {
 		->orderBy('hasta', 'desc') 
 		->paginate(1);
 		$competitionRepository =  $this->competitionRepository;
+
 	 	return View::make('public.primera._primera', compact('competitions', 'competitionRepository'));
 	}
 
@@ -175,16 +178,64 @@ class PublicController extends \BaseController {
 		return $this->getResponseArrayJson();
 	}
 
+	public function getCurrentCompetition()
+	{
+		Session::put('currentCompetitionId', Input::get('competitionId'));
+		$currentCompetitionId =  Session::get('currentCompetitionId');
+		$this->setSuccess(true);
+		$this->addToResponseArray('currentCompetitionId', $currentCompetitionId);
+		return $this->getResponseArrayJson();
+	}
+
 	public function gamesForWorldCup()
 	{
+		$currentCup = null;
+		$gamesForPhases = [];
+		$scoredGoals = null;
+		$tablePosTeams = null;
+		$firstPhase = null;
+		$hasGamesCurrentCup = null;
+
 		$cups = $this->competitionRepository
 		->getModel()
 		->whereType('copa mundial')
 		->orderBy('desde', 'desc')
 		->orderBy('hasta', 'desc')
 		->paginate(1);
-		$competitionRepository =  $this->competitionRepository;
-	 	return View::make('public.mundial._mundial', compact('cups','competitionRepository'));
+
+		if(count($cups) >0 )
+			foreach ($cups as $cup)
+				$currentCup = $this->competitionRepository->get($cup->id);
+
+		if(!empty($currentCup))
+		{
+			$hasGamesCurrentCup = $currentCup->hasGames;
+			foreach ($currentCup->phases as $phase) {
+				$gamesForPhases[] = $this->competitionRepository->getGamesForPhase($phase->id);
+			}
+
+			if($currentCup->hasPhases)
+			{
+				$firstPhase = $currentCup->phases->first();
+				if(!empty($firstPhase) && !empty($firstPhase->hasGroups)){
+					$gamesForGroups = $this->competitionRepository->getGamesForPhase($firstPhase->id);
+					foreach ($firstPhase->groups as $group) {
+						$tablePosTeams = $this->competitionRepository->getPostTeamsForGruop($group->id);
+					}
+				}
+			}
+			$scoredGoals = $this->competitionRepository->scorersInCompetition($currentCup->id);
+		}
+	 	return View::make('public.mundial._mundial', compact(
+	 													'cups',
+	 													'currentCup',
+	 													'gamesForPhases',
+	 													'tablePosTeams',
+	 													'gamesForGroups',
+	 													'scoredGoals'
+	 												)
+	 	);
+
 	}
 
 	public function gamesForAmericaCup()
