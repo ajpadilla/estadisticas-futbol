@@ -1,15 +1,13 @@
-<?php if(!empty($cups)): ?>
+<?php if(!empty($currentCup)): ?>
 <div style="float: left;width:480px">
 	<div style="width:480px;margin-left:15px">
-		<?php foreach($cups as $cup): ?>
-			<?php if(count($cup->phasesWithGames) > 0): ?>
-			<a id="firstPhase" data-phase-id="<?php echo $cup->phases->first()->id; ?>" href=""></a>
-			<?php foreach($cup->phasesWithGames as $phase): ?> 
-				<a id="irfecha" href="<?php echo route('getGamesForPhase'); ?>" class="phasesWithGames" data-phase-id="<?php echo $phase->id; ?>" data-competition-id = "<?php echo $cup->id; ?>"><?php echo $phase->name; ?></a>
+			<?php if(count($currentCup->phasesWithGames) > 0): ?>
+			<a id="firstPhase" data-phase-id="<?php echo $currentCup->phases->first()->id; ?>" href=""></a>
+			<?php foreach($currentCup->phasesWithGames as $phase): ?> 
+				<a id="irfecha" href="<?php echo route('getGamesForPhase'); ?>" class="phasesWithGames" data-phase-id="<?php echo $phase->id; ?>" data-competition-id = "<?php echo $currentCup->id; ?>"><?php echo $phase->name; ?></a>
 				<a id="scoredGoalsUrl" href="<?php echo route('getScorersGoalsFormCompetition'); ?>"></a>
 			<?php endforeach; ?>
 			<?php endif; ?>
-		<?php endforeach; ?>
 	</div>
 	<br>
 	<div id="fixtureactual">
