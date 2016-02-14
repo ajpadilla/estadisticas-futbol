@@ -16,7 +16,7 @@ class PlayersTableSeeder extends DatabaseSeeder{
 	public function run()
 	{
 		$faker = $this->getFaker();
-        for ($i=0; $i <= 950; $i++) {
+        for ($i=0; $i <= 1500; $i++) {
             $player = Player::create(
                 [
                     'nombre' => $faker->firstName . ' ' . $faker->lastName,
