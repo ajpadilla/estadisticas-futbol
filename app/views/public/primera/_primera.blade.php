@@ -42,6 +42,7 @@
 	@include('public.primera.partials._name-phases-for-competition-tpl')
 	@include('public.primera.partials._stats-phase-tpl')
 	@include('public.primera.partials._scorers-tpl')
+	@include('public.primera.partials._average-head-tpl')
 @stop
 
 @section('scripts')
@@ -293,34 +294,10 @@
 			});
 		};
 
-		function getAveragesForCompetition() 
-		{
-			var competitionId = $('#teamsFormCompetition').attr('data-id');
-			var data = {
-				competitionId: competitionId
-			};
-
-			$.ajax({
-				type: 'GET',
-				url: '{{ route('currentAverage') }}',
-				data: data,
-				dataType:'json',
-				success: function(response) {
-					console.log(response);
-				},
-				error: function(objeto, quepaso, otroobj){
-					console.log(objeto);
-					console.log(quepaso);
-					console.log(otroobj);
-				}
-			});
-		};
-
 		groupsFixturesForCompetition();
 		gamesForFirtsPhase();
 		gameForPhases();
 		scoredGoals();
-		getAveragesForCompetition();
 	});
 </script>
 @stop
