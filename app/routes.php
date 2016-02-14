@@ -32,6 +32,7 @@ Route::get('gamesForChampionsCup', ['as' => 'championsCup', 'uses' => 'PublicCon
 Route::get('gamesForArgentinaCup', ['as' => 'argentinaCup', 'uses' => 'PublicController@gamesForArgentinaCup']);
 Route::get('gamesForSudamericanaCup', ['as' => 'sudamericanaCup', 'uses' => 'PublicController@gamesForSudamericanaCup']);
 Route::get('getCompetitionsForCurrentAverage', ['as' => 'currentAverage', 'uses' => 'PublicController@getCompetitionsForCurrentAverage']);
+Route::get('getCurrentCompetition', ['as' => 'currentCompetition', 'uses' => 'PublicController@getCurrentCompetition']);
 
 /*
 ********************************* FIN RUTAS PUBLICAS ********************************
