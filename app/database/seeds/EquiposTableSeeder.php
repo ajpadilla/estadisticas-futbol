@@ -443,6 +443,425 @@ class EquiposTableSeeder extends DatabaseSeeder {
             'pais_id' => 3         
         );
 
+        $equipos[] = array(
+            'nombre' => 'Brasil',
+            //'escudo' => 'public/system/soccer/Equipo/Equipo/escudos/000/000/016/original/merida.jpg',
+            //'foto' => 'public/system/soccer/Equipo/Equipo/fotos/000/000/016/original/merida.jpg', 
+            'tipo' => 'club',
+            'fecha_fundacion' => $faker->date($format = 'Y-m-d', $max = 'now'),
+            'apodo' => '',
+            'ubicacion' => 'Brasil',
+            'historia' => '',
+            'info_url' => '',
+            'pais_id' => 3         
+        );
+
+        $equipos[] = array(
+            'nombre' => 'Croacia',
+            //'escudo' => 'public/system/soccer/Equipo/Equipo/escudos/000/000/016/original/merida.jpg',
+            //'foto' => 'public/system/soccer/Equipo/Equipo/fotos/000/000/016/original/merida.jpg', 
+            'tipo' => 'club',
+            'fecha_fundacion' => $faker->date($format = 'Y-m-d', $max = 'now'),
+            'apodo' => '',
+            'ubicacion' => 'Croacia',
+            'historia' => '',
+            'info_url' => '',
+            'pais_id' => 3         
+        );
+
+        $equipos[] = array(
+            'nombre' => 'Mexico',
+            //'escudo' => 'public/system/soccer/Equipo/Equipo/escudos/000/000/016/original/merida.jpg',
+            //'foto' => 'public/system/soccer/Equipo/Equipo/fotos/000/000/016/original/merida.jpg', 
+            'tipo' => 'club',
+            'fecha_fundacion' => $faker->date($format = 'Y-m-d', $max = 'now'),
+            'apodo' => '',
+            'ubicacion' => 'Mexico',
+            'historia' => '',
+            'info_url' => '',
+            'pais_id' => 3         
+        );
+
+        $equipos[] = array(
+            'nombre' => 'Camerun',
+            //'escudo' => 'public/system/soccer/Equipo/Equipo/escudos/000/000/016/original/merida.jpg',
+            //'foto' => 'public/system/soccer/Equipo/Equipo/fotos/000/000/016/original/merida.jpg', 
+            'tipo' => 'club',
+            'fecha_fundacion' => $faker->date($format = 'Y-m-d', $max = 'now'),
+            'apodo' => '',
+            'ubicacion' => 'Camerun',
+            'historia' => '',
+            'info_url' => '',
+            'pais_id' => 3         
+        );
+
+         $equipos[] = array(
+            'nombre' => 'Espana',
+            //'escudo' => 'public/system/soccer/Equipo/Equipo/escudos/000/000/016/original/merida.jpg',
+            //'foto' => 'public/system/soccer/Equipo/Equipo/fotos/000/000/016/original/merida.jpg', 
+            'tipo' => 'club',
+            'fecha_fundacion' => $faker->date($format = 'Y-m-d', $max = 'now'),
+            'apodo' => '',
+            'ubicacion' => 'Espana',
+            'historia' => '',
+            'info_url' => '',
+            'pais_id' => 3         
+        );
+
+         $equipos[] = array(
+            'nombre' => 'Holanda',
+            //'escudo' => 'public/system/soccer/Equipo/Equipo/escudos/000/000/016/original/merida.jpg',
+            //'foto' => 'public/system/soccer/Equipo/Equipo/fotos/000/000/016/original/merida.jpg', 
+            'tipo' => 'club',
+            'fecha_fundacion' => $faker->date($format = 'Y-m-d', $max = 'now'),
+            'apodo' => '',
+            'ubicacion' => 'Holanda',
+            'historia' => '',
+            'info_url' => '',
+            'pais_id' => 3         
+        );
+
+         $equipos[] = array(
+            'nombre' => 'Chile',
+            //'escudo' => 'public/system/soccer/Equipo/Equipo/escudos/000/000/016/original/merida.jpg',
+            //'foto' => 'public/system/soccer/Equipo/Equipo/fotos/000/000/016/original/merida.jpg', 
+            'tipo' => 'club',
+            'fecha_fundacion' => $faker->date($format = 'Y-m-d', $max = 'now'),
+            'apodo' => '',
+            'ubicacion' => 'Chile',
+            'historia' => '',
+            'info_url' => '',
+            'pais_id' => 3         
+        );
+
+         $equipos[] = array(
+            'nombre' => 'Australia',
+            //'escudo' => 'public/system/soccer/Equipo/Equipo/escudos/000/000/016/original/merida.jpg',
+            //'foto' => 'public/system/soccer/Equipo/Equipo/fotos/000/000/016/original/merida.jpg', 
+            'tipo' => 'club',
+            'fecha_fundacion' => $faker->date($format = 'Y-m-d', $max = 'now'),
+            'apodo' => '',
+            'ubicacion' => 'Australia',
+            'historia' => '',
+            'info_url' => '',
+            'pais_id' => 3         
+        );
+
+        $equipos[] = array(
+            'nombre' => 'Colombia',
+            //'escudo' => 'public/system/soccer/Equipo/Equipo/escudos/000/000/016/original/merida.jpg',
+            //'foto' => 'public/system/soccer/Equipo/Equipo/fotos/000/000/016/original/merida.jpg', 
+            'tipo' => 'club',
+            'fecha_fundacion' => $faker->date($format = 'Y-m-d', $max = 'now'),
+            'apodo' => '',
+            'ubicacion' => 'Colombia',
+            'historia' => '',
+            'info_url' => '',
+            'pais_id' => 3         
+        );
+
+        $equipos[] = array(
+            'nombre' => 'Grecia',
+            //'escudo' => 'public/system/soccer/Equipo/Equipo/escudos/000/000/016/original/merida.jpg',
+            //'foto' => 'public/system/soccer/Equipo/Equipo/fotos/000/000/016/original/merida.jpg', 
+            'tipo' => 'club',
+            'fecha_fundacion' => $faker->date($format = 'Y-m-d', $max = 'now'),
+            'apodo' => '',
+            'ubicacion' => 'Grecia',
+            'historia' => '',
+            'info_url' => '',
+            'pais_id' => 3         
+        );
+
+        $equipos[] = array(
+            'nombre' => 'Costa de marfil',
+            //'escudo' => 'public/system/soccer/Equipo/Equipo/escudos/000/000/016/original/merida.jpg',
+            //'foto' => 'public/system/soccer/Equipo/Equipo/fotos/000/000/016/original/merida.jpg', 
+            'tipo' => 'club',
+            'fecha_fundacion' => $faker->date($format = 'Y-m-d', $max = 'now'),
+            'apodo' => '',
+            'ubicacion' => 'Costa de marfil',
+            'historia' => '',
+            'info_url' => '',
+            'pais_id' => 3         
+        );
+
+        $equipos[] = array(
+            'nombre' => 'Japon',
+            //'escudo' => 'public/system/soccer/Equipo/Equipo/escudos/000/000/016/original/merida.jpg',
+            //'foto' => 'public/system/soccer/Equipo/Equipo/fotos/000/000/016/original/merida.jpg', 
+            'tipo' => 'club',
+            'fecha_fundacion' => $faker->date($format = 'Y-m-d', $max = 'now'),
+            'apodo' => '',
+            'ubicacion' => 'Japon',
+            'historia' => '',
+            'info_url' => '',
+            'pais_id' => 3         
+        );
+
+        $equipos[] = array(
+            'nombre' => 'Uruguai',
+            //'escudo' => 'public/system/soccer/Equipo/Equipo/escudos/000/000/016/original/merida.jpg',
+            //'foto' => 'public/system/soccer/Equipo/Equipo/fotos/000/000/016/original/merida.jpg', 
+            'tipo' => 'club',
+            'fecha_fundacion' => $faker->date($format = 'Y-m-d', $max = 'now'),
+            'apodo' => '',
+            'ubicacion' => 'Uruguai',
+            'historia' => '',
+            'info_url' => '',
+            'pais_id' => 3         
+        );
+
+        $equipos[] = array(
+            'nombre' => 'Costa rica',
+            //'escudo' => 'public/system/soccer/Equipo/Equipo/escudos/000/000/016/original/merida.jpg',
+            //'foto' => 'public/system/soccer/Equipo/Equipo/fotos/000/000/016/original/merida.jpg', 
+            'tipo' => 'club',
+            'fecha_fundacion' => $faker->date($format = 'Y-m-d', $max = 'now'),
+            'apodo' => '',
+            'ubicacion' => 'Costa rica',
+            'historia' => '',
+            'info_url' => '',
+            'pais_id' => 3         
+        );
+
+
+        $equipos[] = array(
+            'nombre' => 'Inglaterra',
+            //'escudo' => 'public/system/soccer/Equipo/Equipo/escudos/000/000/016/original/merida.jpg',
+            //'foto' => 'public/system/soccer/Equipo/Equipo/fotos/000/000/016/original/merida.jpg', 
+            'tipo' => 'club',
+            'fecha_fundacion' => $faker->date($format = 'Y-m-d', $max = 'now'),
+            'apodo' => '',
+            'ubicacion' => 'Inglaterra',
+            'historia' => '',
+            'info_url' => '',
+            'pais_id' => 3         
+        );
+
+        $equipos[] = array(
+            'nombre' => 'Italia',
+            //'escudo' => 'public/system/soccer/Equipo/Equipo/escudos/000/000/016/original/merida.jpg',
+            //'foto' => 'public/system/soccer/Equipo/Equipo/fotos/000/000/016/original/merida.jpg', 
+            'tipo' => 'club',
+            'fecha_fundacion' => $faker->date($format = 'Y-m-d', $max = 'now'),
+            'apodo' => '',
+            'ubicacion' => 'Italia',
+            'historia' => '',
+            'info_url' => '',
+            'pais_id' => 3         
+        );
+
+        $equipos[] = array(
+            'nombre' => 'Suiza',
+            //'escudo' => 'public/system/soccer/Equipo/Equipo/escudos/000/000/016/original/merida.jpg',
+            //'foto' => 'public/system/soccer/Equipo/Equipo/fotos/000/000/016/original/merida.jpg', 
+            'tipo' => 'club',
+            'fecha_fundacion' => $faker->date($format = 'Y-m-d', $max = 'now'),
+            'apodo' => '',
+            'ubicacion' => 'Suiza',
+            'historia' => '',
+            'info_url' => '',
+            'pais_id' => 3         
+        );
+
+        $equipos[] = array(
+            'nombre' => 'Ecuador',
+            //'escudo' => 'public/system/soccer/Equipo/Equipo/escudos/000/000/016/original/merida.jpg',
+            //'foto' => 'public/system/soccer/Equipo/Equipo/fotos/000/000/016/original/merida.jpg', 
+            'tipo' => 'club',
+            'fecha_fundacion' => $faker->date($format = 'Y-m-d', $max = 'now'),
+            'apodo' => '',
+            'ubicacion' => 'Ecuador',
+            'historia' => '',
+            'info_url' => '',
+            'pais_id' => 3         
+        );
+
+
+        $equipos[] = array(
+            'nombre' => 'Francia',
+            //'escudo' => 'public/system/soccer/Equipo/Equipo/escudos/000/000/016/original/merida.jpg',
+            //'foto' => 'public/system/soccer/Equipo/Equipo/fotos/000/000/016/original/merida.jpg', 
+            'tipo' => 'club',
+            'fecha_fundacion' => $faker->date($format = 'Y-m-d', $max = 'now'),
+            'apodo' => '',
+            'ubicacion' => 'Francia',
+            'historia' => '',
+            'info_url' => '',
+            'pais_id' => 3         
+        );
+
+        $equipos[] = array(
+            'nombre' => 'Honduras',
+            //'escudo' => 'public/system/soccer/Equipo/Equipo/escudos/000/000/016/original/merida.jpg',
+            //'foto' => 'public/system/soccer/Equipo/Equipo/fotos/000/000/016/original/merida.jpg', 
+            'tipo' => 'club',
+            'fecha_fundacion' => $faker->date($format = 'Y-m-d', $max = 'now'),
+            'apodo' => '',
+            'ubicacion' => 'Honduras',
+            'historia' => '',
+            'info_url' => '',
+            'pais_id' => 3         
+        );
+
+        $equipos[] = array(
+            'nombre' => 'Argentina',
+            //'escudo' => 'public/system/soccer/Equipo/Equipo/escudos/000/000/016/original/merida.jpg',
+            //'foto' => 'public/system/soccer/Equipo/Equipo/fotos/000/000/016/original/merida.jpg', 
+            'tipo' => 'club',
+            'fecha_fundacion' => $faker->date($format = 'Y-m-d', $max = 'now'),
+            'apodo' => '',
+            'ubicacion' => 'Argentina',
+            'historia' => '',
+            'info_url' => '',
+            'pais_id' => 3         
+        );
+
+        $equipos[] = array(
+            'nombre' => 'Bosnia',
+            //'escudo' => 'public/system/soccer/Equipo/Equipo/escudos/000/000/016/original/merida.jpg',
+            //'foto' => 'public/system/soccer/Equipo/Equipo/fotos/000/000/016/original/merida.jpg', 
+            'tipo' => 'club',
+            'fecha_fundacion' => $faker->date($format = 'Y-m-d', $max = 'now'),
+            'apodo' => '',
+            'ubicacion' => 'Bosnia',
+            'historia' => '',
+            'info_url' => '',
+            'pais_id' => 3         
+        );
+
+        $equipos[] = array(
+            'nombre' => 'Iran',
+            //'escudo' => 'public/system/soccer/Equipo/Equipo/escudos/000/000/016/original/merida.jpg',
+            //'foto' => 'public/system/soccer/Equipo/Equipo/fotos/000/000/016/original/merida.jpg', 
+            'tipo' => 'club',
+            'fecha_fundacion' => $faker->date($format = 'Y-m-d', $max = 'now'),
+            'apodo' => '',
+            'ubicacion' => 'Iran',
+            'historia' => '',
+            'info_url' => '',
+            'pais_id' => 3         
+        );
+
+        $equipos[] = array(
+            'nombre' => 'Nigeria',
+            //'escudo' => 'public/system/soccer/Equipo/Equipo/escudos/000/000/016/original/merida.jpg',
+            //'foto' => 'public/system/soccer/Equipo/Equipo/fotos/000/000/016/original/merida.jpg', 
+            'tipo' => 'club',
+            'fecha_fundacion' => $faker->date($format = 'Y-m-d', $max = 'now'),
+            'apodo' => '',
+            'ubicacion' => 'Nigeria',
+            'historia' => '',
+            'info_url' => '',
+            'pais_id' => 3         
+        );
+
+        $equipos[] = array(
+            'nombre' => 'Alemania',
+            //'escudo' => 'public/system/soccer/Equipo/Equipo/escudos/000/000/016/original/merida.jpg',
+            //'foto' => 'public/system/soccer/Equipo/Equipo/fotos/000/000/016/original/merida.jpg', 
+            'tipo' => 'club',
+            'fecha_fundacion' => $faker->date($format = 'Y-m-d', $max = 'now'),
+            'apodo' => '',
+            'ubicacion' => 'Alemania',
+            'historia' => '',
+            'info_url' => '',
+            'pais_id' => 3         
+        );
+
+        $equipos[] = array(
+            'nombre' => 'Portugal',
+            //'escudo' => 'public/system/soccer/Equipo/Equipo/escudos/000/000/016/original/merida.jpg',
+            //'foto' => 'public/system/soccer/Equipo/Equipo/fotos/000/000/016/original/merida.jpg', 
+            'tipo' => 'club',
+            'fecha_fundacion' => $faker->date($format = 'Y-m-d', $max = 'now'),
+            'apodo' => '',
+            'ubicacion' => 'Portugal',
+            'historia' => '',
+            'info_url' => '',
+            'pais_id' => 3         
+        );
+
+        $equipos[] = array(
+            'nombre' => 'Ghana',
+            //'escudo' => 'public/system/soccer/Equipo/Equipo/escudos/000/000/016/original/merida.jpg',
+            //'foto' => 'public/system/soccer/Equipo/Equipo/fotos/000/000/016/original/merida.jpg', 
+            'tipo' => 'club',
+            'fecha_fundacion' => $faker->date($format = 'Y-m-d', $max = 'now'),
+            'apodo' => '',
+            'ubicacion' => 'Ghana',
+            'historia' => '',
+            'info_url' => '',
+            'pais_id' => 3         
+        );
+
+        $equipos[] = array(
+            'nombre' => 'USA',
+            //'escudo' => 'public/system/soccer/Equipo/Equipo/escudos/000/000/016/original/merida.jpg',
+            //'foto' => 'public/system/soccer/Equipo/Equipo/fotos/000/000/016/original/merida.jpg', 
+            'tipo' => 'club',
+            'fecha_fundacion' => $faker->date($format = 'Y-m-d', $max = 'now'),
+            'apodo' => '',
+            'ubicacion' => 'USA',
+            'historia' => '',
+            'info_url' => '',
+            'pais_id' => 3         
+        );
+
+        $equipos[] = array(
+            'nombre' => 'Belgica',
+            //'escudo' => 'public/system/soccer/Equipo/Equipo/escudos/000/000/016/original/merida.jpg',
+            //'foto' => 'public/system/soccer/Equipo/Equipo/fotos/000/000/016/original/merida.jpg', 
+            'tipo' => 'club',
+            'fecha_fundacion' => $faker->date($format = 'Y-m-d', $max = 'now'),
+            'apodo' => '',
+            'ubicacion' => 'Belgica',
+            'historia' => '',
+            'info_url' => '',
+            'pais_id' => 3         
+        );
+
+        $equipos[] = array(
+            'nombre' => 'Argelia',
+            //'escudo' => 'public/system/soccer/Equipo/Equipo/escudos/000/000/016/original/merida.jpg',
+            //'foto' => 'public/system/soccer/Equipo/Equipo/fotos/000/000/016/original/merida.jpg', 
+            'tipo' => 'club',
+            'fecha_fundacion' => $faker->date($format = 'Y-m-d', $max = 'now'),
+            'apodo' => '',
+            'ubicacion' => 'Argelia',
+            'historia' => '',
+            'info_url' => '',
+            'pais_id' => 3         
+        );
+
+         $equipos[] = array(
+            'nombre' => 'Rusia',
+            //'escudo' => 'public/system/soccer/Equipo/Equipo/escudos/000/000/016/original/merida.jpg',
+            //'foto' => 'public/system/soccer/Equipo/Equipo/fotos/000/000/016/original/merida.jpg', 
+            'tipo' => 'club',
+            'fecha_fundacion' => $faker->date($format = 'Y-m-d', $max = 'now'),
+            'apodo' => '',
+            'ubicacion' => 'Rusia',
+            'historia' => '',
+            'info_url' => '',
+            'pais_id' => 3         
+        );
+
+         $equipos[] = array(
+            'nombre' => 'Corea del sur',
+            //'escudo' => 'public/system/soccer/Equipo/Equipo/escudos/000/000/016/original/merida.jpg',
+            //'foto' => 'public/system/soccer/Equipo/Equipo/fotos/000/000/016/original/merida.jpg', 
+            'tipo' => 'club',
+            'fecha_fundacion' => $faker->date($format = 'Y-m-d', $max = 'now'),
+            'apodo' => '',
+            'ubicacion' => 'Corea del sur',
+            'historia' => '',
+            'info_url' => '',
+            'pais_id' => 3         
+        );
+
+
         foreach ($equipos as $equipo) {
             Equipo::create($equipo);
         }
