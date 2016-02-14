@@ -1,216 +1,62 @@
 @if(!empty($cups))
-@foreach($cups as $cup)
+@if($currentCup->hasGames)
 <div id="infoequipo">FASE FINAL</div>
 <div id="fixture">
-	<?php $gamesOctavos = $competitionRepository->getGamesForTypePhase('octavos', $cup->from, $cup->to); ?>
-	<?php $gamesCuartos = $competitionRepository->getGamesForTypePhase('cuartos', $cup->from, $cup->to);  ?>
-	<?php $gamesSemiFinal = $competitionRepository->getGamesForTypePhase('semifinal', $cup->from, $cup->to);  ?>
-	<?php $gamesFinal = $competitionRepository->getGamesForTypePhase('final', $cup->from, $cup->to);  ?>
-	
-	@if($gamesOctavos)
-	<?php $countGamesOctavos = 0; ?>
-	<div id="columna">
-		<span class="grupom">Octavos</span><br>
-		@foreach($gamesOctavos as $indexGroup => $groups)
-			@foreach($groups as $indexGames => $games)
-				@foreach($games as $index => $game)
-					@if(($countGamesOctavos+1) <= 4)
-					<div id="partido" num="109">
-						<span class="fecha">{{ $game['dateObject']->toFormattedDateString() }}-{{ $game['time'] }}-{{ $game['game']->stadium }}</span><br>
-						<div style="float: left;">
-							<img src="{{ $game['imgLocalTeam'] }}" width="45px" height="45px">
-						</div>
-						<div class="cuadrores3">{{ $game['localGoals'] }} - {{ $game['awayGoals'] }}<br><span style="font-size:12px">(3-2)</span></div>
-						<div style="float: right;"><img src="{{ $game['imgAwayTeam'] }}" width="45px" height="45px"></div>
-						<br style="clear: both;">
-						<div style="float:left"><span style="font-size:10px;margin-left:5px"><strong>{{ $game['localTeam']->nombre }}</strong></span></div>
-						<div style="float:right"><span style="font-size:10px;margin-right:5px"><strong>{{ $game['awayTeam']->nombre }}</strong></span></div>
-						<?php $countGamesOctavos++ ?>
-					</div>
-					@endif
+	<?php $countPhases = 0; ?>
+	@foreach ($currentCup->phases as $IndexPhase => $phase)
+	<?php $countGames = 0; ?>
+	@if($countPhases > 0)
+		<div id="columna">
+			<span class="grupom">{{ $phase->name }}</span><br>
+			<?php $gamesForPhase = $gamesForPhases[$IndexPhase]; ?>
+			<?php $mediaGamesPlayed = $phase->mediaGamesPlayed; ?>
+			@if($gamesForPhase)
+				@foreach($gamesForPhase as $groups)
+					@foreach($groups as $games)
+						@foreach($games as $game)
+							@if(($countGames+1) <= $mediaGamesPlayed)
+								@if($countPhases == 1)
+									<div id="partido">
+										<span class="fecha">{{ $game['dateObject']->toFormattedDateString() }}-{{ $game['time'] }}-{{ $game['game']->stadium }}</span><br>
+										<div style="float: left;">
+											<img src="{{ $game['imgLocalTeam'] }}" width="45px" height="45px">
+										</div>
+										<div class="cuadrores3">{{ $game['localGoals'] }} - {{ $game['awayGoals'] }}<br><span style="font-size:12px"></span></div>
+										<div style="float: right;"><img src="{{ $game['imgAwayTeam'] }}" width="45px" height="45px"></div>
+										<br style="clear: both;">
+										<div style="float:left"><span style="font-size:10px;margin-left:5px"><strong>{{ $game['localTeam']->nombre }}</strong></span></div>
+										<div style="float:right"><span style="font-size:10px;margin-right:5px"><strong>{{ $game['awayTeam']->nombre }}</strong></span></div>
+									</div>
+								@elseif($countPhases == 2)
+									<div id="partidono" style="margin-top:4px">
+									</div>
+									<div id="partido" style="margin-top:2px; margin-bottom: 100px;">
+										<span class="fecha">{{ $game['dateObject']->toFormattedDateString() }}-{{ $game['time'] }}-{{ $game['game']->stadium }}</span><br>
+										<div style="float: left;">
+											<img src="{{ $game['imgLocalTeam'] }}" width="45px" height="45px">
+										</div>
+										<div class="cuadrores3">{{ $game['localGoals'] }} - {{ $game['awayGoals'] }}<br><span style="font-size:12px"></span></div>
+										<div style="float: right;"><img src="{{ $game['imgAwayTeam'] }}" width="45px" height="45px"></div>
+										<br style="clear: both;">
+										<div style="float:left"><span style="font-size:10px;margin-left:5px"><strong>{{ $game['localTeam']->nombre }}</strong></span></div>
+										<div style="float:right"><span style="font-size:10px;margin-right:5px"><strong>{{ $game['awayTeam']->nombre }}</strong></span></div>
+									</div>
+									
+								@endif
+							@endif
+							<?php $countGames++ ?>
+						@endforeach
+					@endforeach
 				@endforeach
-			@endforeach
-		@endforeach
-	</div>
+			@endif
+		</div>
 	@endif
-
-	@if($gamesCuartos)
-	<?php $countGamesCuartos = 0; ?>
-	<div id="columna">
-		<span class="grupom">Cuartos</span><br>
-		<div id="partidono" style="margin-top:2px"></div>
-		@foreach($gamesCuartos as $indexGroup => $groups)
-			@foreach($groups as $indexGames => $games)
-				@foreach($games as $index => $game)
-					@if(($countGamesCuartos + 1) <= 2)
-					<div id="partido">
-						<span class="fecha">{{ $game['dateObject']->toFormattedDateString() }}-{{ $game['time'] }}-{{ $game['game']->stadium }}</span><br>
-						<div style="float: left;">
-							<img src="{{ $game['imgLocalTeam'] }}" width="45px" height="45px">
-						</div>
-						<div class="cuadrores3">{{ $game['localGoals'] }} - {{ $game['awayGoals'] }}<br><span style="font-size:12px">(3-2)</span></div>
-						<div style="float: right;"><img src="{{ $game['imgAwayTeam'] }}" width="45px" height="45px"></div>
-						<br style="clear: both;">
-						<div style="float:left"><span style="font-size:10px;margin-left:5px"><strong>{{ $game['localTeam']->nombre }}</strong></span></div>
-						<div style="float:right"><span style="font-size:10px;margin-right:5px"><strong>{{ $game['awayTeam']->nombre }}</strong></span></div>
-						<?php $countGamesCuartos++ ?>
-					</div>
-					<div id="partidono" style="margin-top:4px"></div>
-					@endif
-				@endforeach
-			@endforeach
-		@endforeach
-	</div>
-	@endif
-
-	@if($gamesSemiFinal)
-	<?php $countGamesSemiFinal = 0; ?>
-	<div id="columna">
-		<span class="grupom">Semifinal</span><br>
-		<div id="partidono" style="margin-top:80px"></div>
-		@foreach($gamesSemiFinal as $indexGroup => $groups)
-			@foreach($groups as $indexGames => $games)
-				@foreach($games as $index => $game)
-					@if(($countGamesSemiFinal + 1) <= 1)
-					<div id="partido">
-						<span class="fecha">{{ $game['dateObject']->toFormattedDateString() }}-{{ $game['time'] }}-{{ $game['game']->stadium }}</span><br>
-						<div style="float: left;">
-							<img src="{{ $game['imgLocalTeam'] }}" width="45px" height="45px">
-						</div>
-						<div class="cuadrores3">{{ $game['localGoals'] }} - {{ $game['awayGoals'] }}<br><span style="font-size:12px">(3-2)</span></div>
-						<div style="float: right;"><img src="{{ $game['imgAwayTeam'] }}" width="45px" height="45px"></div>
-						<br style="clear: both;">
-						<div style="float:left"><span style="font-size:10px;margin-left:5px"><strong>{{ $game['localTeam']->nombre }}</strong></span></div>
-						<div style="float:right"><span style="font-size:10px;margin-right:5px"><strong>{{ $game['awayTeam']->nombre }}</strong></span></div>
-						<?php $countGamesSemiFinal++ ?>
-					</div>
-					@endif
-				@endforeach
-			@endforeach
-		@endforeach
-	</div>
-	@endif
-
-	@if($gamesFinal)
-	<?php $countGamesFinal = 0; ?>
-	<div id="columna">
-		<span class="grupom">Final</span><br><br><br>
-		<div id="partidono" style="margin-top:-55px"></div>
-		@foreach($gamesFinal as $indexGroup => $groups)
-			@foreach($groups as $indexGames => $games)
-				@foreach($games as $index => $game)
-					@if(($countGamesFinal + 1) <=1)
-					<div>
-						<img src="http://lh4.googleusercontent.com/-HsyrWZpfT-U/UplECp5gcCI/AAAAAAAAAks/M4xJMpBtCuA/s136/worldcup.png" height="100px"><br>
-						<div id="partido" style="margin-top:15px"> 
-							<span class="fecha">{{ $game['dateObject']->toFormattedDateString() }}-{{ $game['time'] }}-{{ $game['game']->stadium }}</span><br>
-							<div style="float: left;">
-								<img src="{{ $game['imgLocalTeam'] }}" width="45px" height="45px">
-							</div>
-							<div class="cuadrores3">{{ $game['localGoals'] }} - {{ $game['awayGoals'] }}<br><span style="font-size:12px">(3-2)</span></div>
-							<div style="float: right;"><img src="{{ $game['imgAwayTeam'] }}" width="45px" height="45px"></div>
-							<br style="clear: both;">
-							<div style="float:left"><span style="font-size:10px;margin-left:5px"><strong>{{ $game['localTeam']->nombre }}</strong></span></div>
-							<div style="float:right"><span style="font-size:10px;margin-right:5px"><strong>{{ $game['awayTeam']->nombre }}</strong></span></div>
-							<?php $countGamesFinal++ ?>
-						</div>
-					</div>
-					@endif
-				@endforeach
-			@endforeach
-		@endforeach
-	</div>
-	@endif
-	
-	@if($gamesSemiFinal)
-	<?php $countGamesSemiFinal = 0; ?>
-	<div id="columna">
-		<span class="grupom">Semifinal</span><br>
-		<div id="partidono" style="margin-top:80px"></div>
-		@foreach($gamesSemiFinal as $indexGroup => $groups)
-			@foreach($groups as $indexGames => $games)
-				@foreach($games as $index => $game)
-					@if(($countGamesSemiFinal + 1) > 1)
-					<div id="partido">
-						<span class="fecha">{{ $game['dateObject']->toFormattedDateString() }}-{{ $game['time'] }}-{{ $game['game']->stadium }}</span><br>
-						<div style="float: left;">
-							<img src="{{ $game['imgLocalTeam'] }}" width="45px" height="45px">
-						</div>
-						<div class="cuadrores3">{{ $game['localGoals'] }} - {{ $game['awayGoals'] }}<br><span style="font-size:12px">(3-2)</span></div>
-						<div style="float: right;"><img src="{{ $game['imgAwayTeam'] }}" width="45px" height="45px"></div>
-						<br style="clear: both;">
-						<div style="float:left"><span style="font-size:10px;margin-left:5px"><strong>{{ $game['localTeam']->nombre }}</strong></span></div>
-						<div style="float:right"><span style="font-size:10px;margin-right:5px"><strong>{{ $game['awayTeam']->nombre }}</strong></span></div>
-					</div>
-					@endif
-					<?php $countGamesSemiFinal++ ?>
-				@endforeach
-			@endforeach
-		@endforeach
-	</div>
-	@endif
-	
-	@if($gamesCuartos)
-	<?php $countGamesCuartos = 0; ?>
-	<div id="columna">
-		<span class="grupom">Cuartos</span><br>
-		<div id="partidono" style="margin-top:2px"></div>
-		@foreach($gamesCuartos as $indexGroup => $groups)
-			@foreach($groups as $indexGames => $games)
-				@foreach($games as $index => $game)
-					@if(($countGamesCuartos + 1) > 2)
-					<div id="partido">
-						<span class="fecha">{{ $game['dateObject']->toFormattedDateString() }}-{{ $game['time'] }}-{{ $game['game']->stadium }}</span><br>
-						<div style="float: left;">
-							<img src="{{ $game['imgLocalTeam'] }}" width="45px" height="45px">
-						</div>
-						<div class="cuadrores3">{{ $game['localGoals'] }} - {{ $game['awayGoals'] }}<br><span style="font-size:12px">(3-2)</span></div>
-						<div style="float: right;"><img src="{{ $game['imgAwayTeam'] }}" width="45px" height="45px"></div>
-						<br style="clear: both;">
-						<div style="float:left"><span style="font-size:10px;margin-left:5px"><strong>{{ $game['localTeam']->nombre }}</strong></span></div>
-						<div style="float:right"><span style="font-size:10px;margin-right:5px"><strong>{{ $game['awayTeam']->nombre }}</strong></span></div>
-					</div>
-					<div id="partidono" style="margin-top:4px"></div>
-					@endif
-					<?php $countGamesCuartos++ ?>
-				@endforeach
-			@endforeach
-		@endforeach
-	</div>
-	@endif
-	
-	@if($gamesOctavos)
-	<?php $countGamesOctavos = 0; ?>
-	<div id="columna">
-		<span class="grupom">Octavos</span><br>
-		@foreach($gamesOctavos as $indexGroup => $groups)
-			@foreach($groups as $indexGames => $games)
-				@foreach($games as $index => $game)
-					@if(($countGamesOctavos+1) > 4)
-					<div id="partido" num="109">
-						<span class="fecha">{{ $game['dateObject']->toFormattedDateString() }}-{{ $game['time'] }}-{{ $game['game']->stadium }}</span><br>
-						<div style="float: left;">
-							<img src="{{ $game['imgLocalTeam'] }}" width="45px" height="45px">
-						</div>
-						<div class="cuadrores3">{{ $game['localGoals'] }} - {{ $game['awayGoals'] }}<br><span style="font-size:12px"></span></div>
-						<div style="float: right;"><img src="{{ $game['imgAwayTeam'] }}" width="45px" height="45px"></div>
-						<br style="clear: both;">
-						<div style="float:left"><span style="font-size:10px;margin-left:5px"><strong>{{ $game['localTeam']->nombre }}</strong></span></div>
-						<div style="float:right"><span style="font-size:10px;margin-right:5px"><strong>{{ $game['awayTeam']->nombre }}</strong></span></div>
-					</div>
-					@endif
-					<?php $countGamesOctavos++ ?>
-				@endforeach
-			@endforeach
-		@endforeach
-	</div>
-	@endif
-
+	<?php $countPhases++; ?>
+	@endforeach
 	<br style="clear: both;">
 	<br>
 	<br>
-	@if($cup->hasGames)
-	<?php $firstPhase = $cup->phases->first() ?>
+	<?php $firstPhase = $currentCup->phases->first(); ?>
 	<div id="infoequipo">{{ $firstPhase->name }}</div>
 		@foreach($firstPhase->groups as $group)
 		<div id="grupom">
@@ -222,7 +68,6 @@
 		        </div>
 	        	@endforeach
 	        </div>
-	        <?php $tablePosTeams = $competitionRepository->getPostTeamsForGruop($group->id); ?>
 	        <table id="posiciones" class="tablesorter3" style="width:100%;text-align: center;color:black">
 		        <thead>
 		        <tr style="background: black; color: white">
@@ -241,7 +86,7 @@
 		        <tbody>
 		        	@foreach($tablePosTeams as $index => $team)
 			        <tr style="background: #ace39e">
-				        <td>{{ $index }}</td>
+				        <td>{{ $team['pos']}}</td>
 				        <td align="left">
 				        	<img src="{{ $team['team']->escudo->url('thumb')  }}" width="15px"><strong> {{ $team['team']->subName }}</strong>
 				        </td>
@@ -257,8 +102,6 @@
 			        @endforeach
 		        </tbody>
 	        </table>
-	        <?php $gamesForGroups = $competitionRepository->getGamesForPhase($firstPhase->id) ?>
-	        
 	        <table width="100%">
 	        	<tbody>
 	        		@foreach($gamesForGroups as $index => $groups)
@@ -301,11 +144,11 @@
         <br>
         <br style="clear: both;">
         <br>
+        @if(!empty($scoredGoals))
         <div id="lugar" style="width: 980px;text-align: center;margin: auto">
 			<span class="datosequipo" style="display: block; text-align: center"><strong>Goleadores</strong> </span><br>
 			<div id="golprim" style="margin: auto;width: 600px;font-size:12px">
 				<table style="width: 100%; font-weight: bold;color: black">
-					<?php $scoredGoals = $competitionRepository->scorersInCompetition($cup->id) ?>
 					<tbody>
 						<tr style="background: black;color: white"><th>Jugador</th><th>Goles</th></tr>
 						@foreach($scoredGoals as $goal)
@@ -320,8 +163,8 @@
 				</table>  
 			</div> 
 		</div>
+		@endif
 	<div style="clear: both;"></div>
-	@endif
 </div>
-@endforeach
+@endif
 @endif
