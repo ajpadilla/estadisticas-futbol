@@ -2,23 +2,7 @@
 
 @section("content")
 	@if(count($cups)> 0)
-		@foreach ($cups as $cup)
-			<?php $hasGames  = $cup->hasGames ?>
-		@endforeach
-		@if(isset($hasGames) && $hasGames)
-			<div style="clear: both;"></div>
-			<br/>
-			@include('public.mundial.partials._google-syndication')
-			@include('public.mundial.partials._info-cup')
-			<div style="clear: both;"></div>
-			<br>
-			<br>
-			@include('public.mundial.partials._games-for-day')
-			<div style="clear: both;"></div>
-			<br>
-			@include('public.mundial.partials._final-phase')
-			@include('public.mundial.partials._table-games-phase-tpl')
-		@else
+		@if($currentCup->isClean)
 			<div style="clear: both;"></div>
 			<br/>
 			<div style="clear: both;"></div>
@@ -35,6 +19,18 @@
 			<br>
 			@include('public.mundial.partials._ranked-teams')
 			<div style="clear: both;"></div>
+		@else
+			<br/>
+			@include('public.mundial.partials._google-syndication')
+			@include('public.mundial.partials._info-cup')
+			<div style="clear: both;"></div>
+			<br>
+			<br>
+			@include('public.mundial.partials._games-for-day')
+			<div style="clear: both;"></div>
+			<br>
+			@include('public.mundial.partials._final-phase')
+			@include('public.mundial.partials._table-games-phase-tpl')
 			<br/>
 		@endif
 	@endif
@@ -44,6 +40,27 @@
 	<script type="text/javascript">
 		$(document).ready(function () 
 		{
+
+			var dataForCompetition = function() {
+				var data = {
+						competitionId : $('#currentCompetitionId').attr('data-competition-id')
+				};
+				$.ajax({
+					type: 'GET',
+					url: '{{ route('currentCompetition') }}' ,
+					data: data,
+					dataType:'json',
+					success: function(response) {
+						console.log(response);
+					},
+					error: function(objeto, quepaso, otroobj){
+						console.log(objeto);
+						console.log(quepaso);
+						console.log(otroobj);
+					}
+				});
+			}
+
 			var gameForPhases = function() 
 			{
 				$(".phasesWithGames").click(function(event) 
@@ -101,6 +118,7 @@
 					});
 				});
 			};
+			dataForCompetition();
 			gameForPhases();
 		});
 	</script>
