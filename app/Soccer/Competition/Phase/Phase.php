@@ -155,5 +155,14 @@ class Phase extends Eloquent {
         return $this->games()
                     ->where('date', '>', Carbon::now()->addMinutes(120)->format('Y-m-d h:i'))
                     ->count();
-    }    
+    }
+
+    public function getMediaGamesPlayedAttribute()
+    {
+        $totalGames = $this->games()->count();
+        if(($totalGames % 2 == 0) && !$this->last)
+            return ($totalGames / 2);
+        else
+            return $totalGames;
+    }
 }
