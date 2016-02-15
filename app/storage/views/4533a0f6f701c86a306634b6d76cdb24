@@ -1,14 +1,13 @@
 <?php if(!empty($championsCups)): ?>
-    <?php foreach($championsCups as $champion): ?>
-    <?php if($champion->hasGames): ?>
-    <?php $firstPhase = $champion->phases->first() ?>
+    <?php foreach($championsCups as $championCup): ?>
+    <?php if($championCup->hasGames): ?>
+    <?php $firstPhase = $championCup->phases->first() ?>
     <div id="infoequipo"><?php echo $firstPhase->name; ?></div>
     <br>
         <?php foreach($firstPhase->groups as $group): ?>
         <div id="grupos">
             <span class="datosequipo" style="display: block; background: #092B1D; text-align: center; width: 964px; font-size: 14px; font-weight: bold"><?php echo $group->name; ?></span>
                 <div style="float: left; width: 450px">
-                    <?php $tablePosTeams = $competitionRepository->getPostTeamsForGruop($group->id); ?>
                     <table id="posiciones" class="tablesorter1" width="440">
                         <thead>
                             <tr style="background: black; color: white">
@@ -52,7 +51,6 @@
                 <div style="clear: both"><br></div>
 
                 <div id="fixgrupo">
-                    <?php $gamesForGroups = $competitionRepository->getGamesForPhase($firstPhase->id) ?>
                     <div style="float:left; width: 320px">
                         <table>
                             <tbody>
