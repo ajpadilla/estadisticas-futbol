@@ -211,7 +211,7 @@ class PublicController extends \BaseController {
 		{
 			$hasGamesCurrentCup = $currentCup->hasGames;
 			foreach ($currentCup->phases as $phase) {
-				$gamesForPhases[] = $this->competitionRepository->getGamesForPhase($phase->id);
+				$gamesForPhases[$phase->id] = $this->competitionRepository->getGamesForPhase($phase->id);
 			}
 
 			if($currentCup->hasPhases)
