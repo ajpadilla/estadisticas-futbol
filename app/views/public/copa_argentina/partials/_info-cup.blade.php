@@ -4,11 +4,10 @@
 </div>
 @foreach($argentinaCups as $argentinaCup)
 <span class="verdegrande">
-	COPA ARGENTINA {{ $argentinaCup->year }}
+	COPA ARGENTINA  {{$argentinaCup->year}}
 </span>
 <div style="clear: both;"></div>
 <br/>
-<?php $winner = $competitionRepository->winner($argentinaCup->id) ?>
 @if(!empty($winner))
 <div style="width: 980px;height: auto;background: #17573d;font-size:12px;color:white;text-align: center;">
 	<br>
