@@ -22,7 +22,8 @@
 						'octavos' => 'octavos',
 						'cuartos' => 'cuartos',
 						'semifinal' => 'semifinal',
-						'final' => 'final'
+						'final' => 'final',
+						'repechaje' => 'repechaje'
 						]
 						,null,['class' => 'form-control chosen-select','data-placeholder' => 'Escoge Tipo...','id'=> 'type_phase']) }}
 					</div>
