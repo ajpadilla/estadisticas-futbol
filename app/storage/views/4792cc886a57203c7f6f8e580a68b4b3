@@ -12,12 +12,12 @@
 	<?php echo $__env->make('public.libertadores.partials._phases', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
 	<div style="clear: both;"></div>
 	<br/>
-	<?php /*<?php echo $__env->make('public.libertadores.partials._games-for-phase', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
+	<?php echo $__env->make('public.libertadores.partials._games-for-phase', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
 	<div style="clear: both;"></div>
 	<br/>
 	<br>
 	<?php echo $__env->make('public.libertadores.partials._group-stage', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
 	<div style="clear: both;"></div>
-	<br/>*/ ?>
+	<br/>
 <?php $__env->stopSection(); ?>
 <?php echo $__env->make("public.layouts.main", array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
