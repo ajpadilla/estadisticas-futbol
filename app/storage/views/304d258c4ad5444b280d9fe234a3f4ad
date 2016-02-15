@@ -103,7 +103,7 @@
             <?php $countGames = 0; ?>
             <div id="columna">
                 <span class="grupom">Final</span><br>
-                <div id="partidono" style="margin-top:1px"></div>
+                <div id="partidono" style="margin-top:2px"></div>
                 <div>
                     <img src="http://lh3.googleusercontent.com/-uRf0s42LF84/VOeZ_PjBwnI/AAAAAAAADmo/GKXTZNnBc9Y/w80/copaamerica.png" height="100px"><br>
                     <?php foreach($gamesFinal['games'] as $groups): ?>

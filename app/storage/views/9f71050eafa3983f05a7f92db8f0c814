@@ -3,16 +3,16 @@
 		<?php if($libertadoresCup->hasPhases): ?>
 			<?php foreach($libertadoresCup->phasesByOrder as $phase): ?>
 				<?php if($phase->type != 'fase de grupos'): ?>
-				<?php $gamesToPhase  = $competitionRepository->getGamesForPhase($phase->id); ?>
+				<?php $gamesForPhase = $gamesForPhases[$phase->id]; ?>
 				<span class="verdegrande"><?php echo $phase->name; ?></span>
 				<br>
 				<?php foreach($phase->groups as $group): ?>
 					<div style="margin:auto; width: 420px;height: auto;background: #17573d;font-size:12px;color:white;text-align: center;">
 						<span style="text-align: center"><?php echo $group->name; ?></span>		
 					</div>
-					<?php foreach($gamesToPhase as $index => $groups): ?>
-	                	<?php foreach($groups as $index2 => $games): ?>
-	                        <?php foreach($games as $index2 => $game): ?>
+					<?php foreach($gamesForPhase as $groups): ?>
+	                	<?php foreach($groups as $games): ?>
+	                        <?php foreach($games as $game): ?>
 	                         	<?php if($game['group_id'] == $group->id): ?>
 								<table style="width:420px;" id="fixturein">
 									<tbody>
