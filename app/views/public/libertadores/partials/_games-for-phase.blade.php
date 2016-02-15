@@ -3,16 +3,16 @@
 		@if($libertadoresCup->hasPhases)
 			@foreach ($libertadoresCup->phasesByOrder as $phase)
 				@if($phase->type != 'fase de grupos')
-				<?php $gamesToPhase  = $competitionRepository->getGamesForPhase($phase->id); ?>
+				<?php $gamesForPhase = $gamesForPhases[$phase->id]; ?>
 				<span class="verdegrande">{{$phase->name }}</span>
 				<br>
 				@foreach($phase->groups as $group)
 					<div style="margin:auto; width: 420px;height: auto;background: #17573d;font-size:12px;color:white;text-align: center;">
 						<span style="text-align: center">{{ $group->name }}</span>		
 					</div>
-					@foreach($gamesToPhase as $index => $groups)
-	                	@foreach($groups as $index2 => $games)
-	                        @foreach($games as $index2 => $game)
+					@foreach($gamesForPhase as $groups)
+	                	@foreach($groups as $games)
+	                        @foreach($games as $game)
 	                         	@if($game['group_id'] == $group->id)
 								<table style="width:420px;" id="fixturein">
 									<tbody>
