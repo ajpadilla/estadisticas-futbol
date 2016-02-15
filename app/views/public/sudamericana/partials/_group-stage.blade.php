@@ -1,5 +1,5 @@
 @if(!empty($sudamericanaCups))
-    @foreach($sudamericanaCups as $sudamericanaCup)
+    @foreach($argentinaCups as $sudamericanaCup)
     @if($sudamericanaCup->hasGames)
     <?php $firstPhase = $sudamericanaCup->phases->first() ?>
     <div id="infoequipo">{{ $firstPhase->name }}</div>
@@ -8,7 +8,6 @@
         <div id="grupos">
             <span class="datosequipo" style="display: block; background: #092B1D; text-align: center; width: 964px; font-size: 14px; font-weight: bold">{{ $group->name }}</span>
                 <div style="float: left; width: 450px">
-                    <?php $tablePosTeams = $competitionRepository->getPostTeamsForGruop($group->id); ?>
                     <table id="posiciones" class="tablesorter1" width="440">
                         <thead>
                             <tr style="background: black; color: white">
@@ -52,7 +51,6 @@
                 <div style="clear: both"><br></div>
 
                 <div id="fixgrupo">
-                    <?php $gamesForGroups = $competitionRepository->getGamesForPhase($firstPhase->id) ?>
                     <div style="float:left; width: 320px">
                         <table>
                             <tbody>
