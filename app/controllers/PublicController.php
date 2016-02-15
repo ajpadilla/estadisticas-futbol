@@ -484,14 +484,124 @@ class PublicController extends \BaseController {
 
 	public function gamesForSudamericanaCup()
 	{
+		$currentCup = null;
+		$gamesForPhases = [];
+		$scoredGoals = null;
+		$tablePosTeams = null;
+		$firstPhase = null;
+		$winner = null;
+		$gamesOctavos = null;
+		$gamesCuartos = null;
+		$gamesSemiFinal = null;
+		$gamesFinal = null;
+		
 		$sudamericanaCups = $this->competitionRepository
 		->getModel()
 		->whereType('sudamericana')
 		->orderBy('desde', 'desc')
 		->orderBy('hasta', 'desc')
 		->paginate(1);
-		$competitionRepository =  $this->competitionRepository;
-	 	return View::make('public.sudamericana._sudamericana', compact('sudamericanaCups','competitionRepository'));
+
+		if(count($sudamericanaCups) >0 )
+			foreach ($sudamericanaCups as $cup)
+				$currentCup = $this->competitionRepository->get($cup->id);
+
+		if(!empty($currentCup))
+		{
+			foreach ($currentCup->phases as $phase) {
+				$gamesForPhases[$phase->id] = $this->competitionRepository->getGamesForPhase($phase->id);
+			}
+
+			if($currentCup->hasPhases)
+			{
+				$firstPhase = $currentCup->phases->first();
+				if(!empty($firstPhase) && !empty($firstPhase->hasGroups)){
+					$gamesForGroups = $this->competitionRepository->getGamesForPhase($firstPhase->id);
+					foreach ($firstPhase->groups as $group) {
+						$tablePosTeams = $this->competitionRepository->getPostTeamsForGruop($group->id);
+					}
+				}
+			}
+			$winner= $this->competitionRepository->winner($currentCup->id);
+			$gamesOctavos = $this->competitionRepository->getGamesForTypePhase('octavos', $currentCup->from, $currentCup->to);
+			$gamesCuartos = $this->competitionRepository->getGamesForTypePhase('cuartos', $currentCup->from, $currentCup->to);
+			$gamesSemiFinal = $this->competitionRepository->getGamesForTypePhase('semifinal', $currentCup->from, $currentCup->to);
+			$gamesFinal = $this->competitionRepository->getGamesForTypePhase('final', $currentCup->from, $currentCup->to);
+		}
+	 	return View::make('public.sudamericana._sudamericana', compact(
+	 													'sudamericanaCups',
+	 													'currentCup',
+	 													'gamesForPhases',
+	 													'tablePosTeams',
+	 													'gamesForGroups',
+	 													'winner',
+	 													'gamesOctavos',
+	 													'gamesCuartos',
+	 													'gamesSemiFinal',
+	 													'gamesFinal'
+	 												)
+	 	);
+	}
+
+	public function gamesForMundialClubes()
+	{
+		$currentCup = null;
+		$gamesForPhases = [];
+		$scoredGoals = null;
+		$tablePosTeams = null;
+		$firstPhase = null;
+		$winner = null;
+		$gamesOctavos = null;
+		$gamesCuartos = null;
+		$gamesSemiFinal = null;
+		$gamesFinal = null;
+		
+		$mundialClubesCups = $this->competitionRepository
+		->getModel()
+		->whereType('mundial de clubes')
+		->orderBy('desde', 'desc')
+		->orderBy('hasta', 'desc')
+		->paginate(1);
+
+		if(count($mundialClubesCups) >0 )
+			foreach ($mundialClubesCups as $cup)
+				$currentCup = $this->competitionRepository->get($cup->id);
+
+		if(!empty($currentCup))
+		{
+			foreach ($currentCup->phases as $phase) {
+				$gamesForPhases[$phase->id] = $this->competitionRepository->getGamesForPhase($phase->id);
+			}
+
+			if($currentCup->hasPhases)
+			{
+				$firstPhase = $currentCup->phases->first();
+				if(!empty($firstPhase) && !empty($firstPhase->hasGroups)){
+					$gamesForGroups = $this->competitionRepository->getGamesForPhase($firstPhase->id);
+					foreach ($firstPhase->groups as $group) {
+						$tablePosTeams = $this->competitionRepository->getPostTeamsForGruop($group->id);
+					}
+				}
+			}
+			$winner= $this->competitionRepository->winner($currentCup->id);
+			$gamesOctavos = $this->competitionRepository->getGamesForTypePhase('octavos', $currentCup->from, $currentCup->to);
+			$gamesCuartos = $this->competitionRepository->getGamesForTypePhase('cuartos', $currentCup->from, $currentCup->to);
+			$gamesSemiFinal = $this->competitionRepository->getGamesForTypePhase('semifinal', $currentCup->from, $currentCup->to);
+			$gamesFinal = $this->competitionRepository->getGamesForTypePhase('final', $currentCup->from, $currentCup->to);
+		}
+	 	return View::make('public.mundial_clubes.mundial_clubes', compact(
+	 													'mundialClubesCups',
+	 													'currentCup',
+	 													'gamesForPhases',
+	 													'tablePosTeams',
+	 													'gamesForGroups',
+	 													'winner',
+	 													'gamesOctavos',
+	 													'gamesCuartos',
+	 													'gamesSemiFinal',
+	 													'gamesFinal'
+	 												)
+	 	);
 	}
 
 	public function getCompetitionsForCurrentAverage()
