@@ -555,6 +555,7 @@ class PublicController extends \BaseController {
 		$gamesCuartos = null;
 		$gamesSemiFinal = null;
 		$gamesFinal = null;
+		$gamesRepechage = null;
 		
 		$mundialClubesCups = $this->competitionRepository
 		->getModel()
@@ -584,7 +585,7 @@ class PublicController extends \BaseController {
 				}
 			}
 			$winner= $this->competitionRepository->winner($currentCup->id);
-			$gamesOctavos = $this->competitionRepository->getGamesForTypePhase('octavos', $currentCup->from, $currentCup->to);
+			$gamesRepechage = $this->competitionRepository->getGamesForTypePhase('repechaje', $currentCup->from, $currentCup->to);
 			$gamesCuartos = $this->competitionRepository->getGamesForTypePhase('cuartos', $currentCup->from, $currentCup->to);
 			$gamesSemiFinal = $this->competitionRepository->getGamesForTypePhase('semifinal', $currentCup->from, $currentCup->to);
 			$gamesFinal = $this->competitionRepository->getGamesForTypePhase('final', $currentCup->from, $currentCup->to);
@@ -596,7 +597,7 @@ class PublicController extends \BaseController {
 	 													'tablePosTeams',
 	 													'gamesForGroups',
 	 													'winner',
-	 													'gamesOctavos',
+	 													'gamesRepechage',
 	 													'gamesCuartos',
 	 													'gamesSemiFinal',
 	 													'gamesFinal'
