@@ -8,7 +8,6 @@
 </span>
 <div style="clear: both;"></div>
 <br/>
-<?php $winner = $competitionRepository->winner($champion->id) ?>
 @if(!empty($winner))
 <div style="width: 980px;height: auto;background: #17573d;font-size:12px;color:white;text-align: center;">
 	<br>
