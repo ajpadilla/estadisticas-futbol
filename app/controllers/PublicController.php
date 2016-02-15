@@ -423,14 +423,63 @@ class PublicController extends \BaseController {
 
 	public function gamesForArgentinaCup()
 	{
+		$currentCup = null;
+		$gamesForPhases = [];
+		$scoredGoals = null;
+		$tablePosTeams = null;
+		$firstPhase = null;
+		$winner = null;
+		$gamesOctavos = null;
+		$gamesCuartos = null;
+		$gamesSemiFinal = null;
+		$gamesFinal = null;
+		
 		$argentinaCups = $this->competitionRepository
 		->getModel()
 		->whereType('copa argentina')
 		->orderBy('desde', 'desc')
 		->orderBy('hasta', 'desc')
 		->paginate(1);
-		$competitionRepository =  $this->competitionRepository;
-	 	return View::make('public.copa_argentina._copa_argentina', compact('argentinaCups','competitionRepository'));
+
+		if(count($argentinaCups) >0 )
+			foreach ($argentinaCups as $cup)
+				$currentCup = $this->competitionRepository->get($cup->id);
+
+		if(!empty($currentCup))
+		{
+			foreach ($currentCup->phases as $phase) {
+				$gamesForPhases[$phase->id] = $this->competitionRepository->getGamesForPhase($phase->id);
+			}
+
+			if($currentCup->hasPhases)
+			{
+				$firstPhase = $currentCup->phases->first();
+				if(!empty($firstPhase) && !empty($firstPhase->hasGroups)){
+					$gamesForGroups = $this->competitionRepository->getGamesForPhase($firstPhase->id);
+					foreach ($firstPhase->groups as $group) {
+						$tablePosTeams = $this->competitionRepository->getPostTeamsForGruop($group->id);
+					}
+				}
+			}
+			$winner= $this->competitionRepository->winner($currentCup->id);
+			$gamesOctavos = $this->competitionRepository->getGamesForTypePhase('octavos', $currentCup->from, $currentCup->to);
+			$gamesCuartos = $this->competitionRepository->getGamesForTypePhase('cuartos', $currentCup->from, $currentCup->to);
+			$gamesSemiFinal = $this->competitionRepository->getGamesForTypePhase('semifinal', $currentCup->from, $currentCup->to);
+			$gamesFinal = $this->competitionRepository->getGamesForTypePhase('final', $currentCup->from, $currentCup->to);
+		}
+	 	return View::make('public.copa_argentina._copa_argentina', compact(
+	 													'argentinaCups',
+	 													'currentCup',
+	 													'gamesForPhases',
+	 													'tablePosTeams',
+	 													'gamesForGroups',
+	 													'winner',
+	 													'gamesOctavos',
+	 													'gamesCuartos',
+	 													'gamesSemiFinal',
+	 													'gamesFinal'
+	 												)
+	 	);
 	}
 
 	public function gamesForSudamericanaCup()
