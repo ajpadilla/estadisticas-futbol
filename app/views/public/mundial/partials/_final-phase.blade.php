@@ -8,7 +8,7 @@
 	@if($countPhases > 0)
 		<div id="columna">
 			<span class="grupom">{{ $phase->name }}</span><br>
-			<?php $gamesForPhase = $gamesForPhases[$IndexPhase]; ?>
+			<?php $gamesForPhase = $gamesForPhases[$phase->id]; ?>
 			<?php $mediaGamesPlayed = $phase->mediaGamesPlayed; ?>
 			@if($gamesForPhase)
 				@foreach($gamesForPhase as $groups)
@@ -30,7 +30,7 @@
 								@elseif($countPhases == 2)
 									<div id="partidono" style="margin-top:4px">
 									</div>
-									<div id="partido" style="margin-top:2px; margin-bottom: 100px;">
+									<div id="partido" style="margin-top:2px; margin-bottom: 80px;">
 										<span class="fecha">{{ $game['dateObject']->toFormattedDateString() }}-{{ $game['time'] }}-{{ $game['game']->stadium }}</span><br>
 										<div style="float: left;">
 											<img src="{{ $game['imgLocalTeam'] }}" width="45px" height="45px">
@@ -41,7 +41,36 @@
 										<div style="float:left"><span style="font-size:10px;margin-left:5px"><strong>{{ $game['localTeam']->nombre }}</strong></span></div>
 										<div style="float:right"><span style="font-size:10px;margin-right:5px"><strong>{{ $game['awayTeam']->nombre }}</strong></span></div>
 									</div>
-									
+								@elseif($countPhases == 3)
+									<div id="partidono" style="margin-top:4px">
+									</div>
+									<div id="partido" style="margin-top:130px;">
+										<span class="fecha">{{ $game['dateObject']->toFormattedDateString() }}-{{ $game['time'] }}-{{ $game['game']->stadium }}</span><br>
+										<div style="float: left;">
+											<img src="{{ $game['imgLocalTeam'] }}" width="45px" height="45px">
+										</div>
+										<div class="cuadrores3">{{ $game['localGoals'] }} - {{ $game['awayGoals'] }}<br><span style="font-size:12px"></span></div>
+										<div style="float: right;"><img src="{{ $game['imgAwayTeam'] }}" width="45px" height="45px"></div>
+										<br style="clear: both;">
+										<div style="float:left"><span style="font-size:10px;margin-left:5px"><strong>{{ $game['localTeam']->nombre }}</strong></span></div>
+										<div style="float:right"><span style="font-size:10px;margin-right:5px"><strong>{{ $game['awayTeam']->nombre }}</strong></span></div>
+									</div>
+								@elseif($countPhases == 4)
+									<div id="partidono" style="margin-top:2px">
+									</div>
+									<img src="http://lh4.googleusercontent.com/-HsyrWZpfT-U/UplECp5gcCI/AAAAAAAAAks/M4xJMpBtCuA/s136/worldcup.png">
+									<br/>
+									<div id="partido" style="margin-top:10px;">
+										<span class="fecha">{{ $game['dateObject']->toFormattedDateString() }}-{{ $game['time'] }}-{{ $game['game']->stadium }}</span><br>
+										<div style="float: left;">
+											<img src="{{ $game['imgLocalTeam'] }}" width="45px" height="45px">
+										</div>
+										<div class="cuadrores3">{{ $game['localGoals'] }} - {{ $game['awayGoals'] }}<br><span style="font-size:12px"></span></div>
+										<div style="float: right;"><img src="{{ $game['imgAwayTeam'] }}" width="45px" height="45px"></div>
+										<br style="clear: both;">
+										<div style="float:left"><span style="font-size:10px;margin-left:5px"><strong>{{ $game['localTeam']->nombre }}</strong></span></div>
+										<div style="float:right"><span style="font-size:10px;margin-right:5px"><strong>{{ $game['awayTeam']->nombre }}</strong></span></div>
+									</div>
 								@endif
 							@endif
 							<?php $countGames++ ?>
@@ -53,6 +82,104 @@
 	@endif
 	<?php $countPhases++; ?>
 	@endforeach
+
+	<?php $countGames = 0; ?>
+	<?php $lastPhase = $currentCup->phases()->whereLast(true)->first() ?>
+	<?php $semiFinalPhase = $lastPhase->previous ?>
+	<?php $cuartosPhase = $semiFinalPhase->previous ?>
+	<?php $octavosPhase = $cuartosPhase->previous ?>
+	<div id="columna">
+		<span class="grupom">{{ $semiFinalPhase->name }}</span><br>
+		<?php $gamesForPhase = $gamesForPhases[$semiFinalPhase->id]; ?>
+		<?php $mediaGamesPlayed = $semiFinalPhase->mediaGamesPlayed; ?>
+		@if($gamesForPhase)
+			@foreach($gamesForPhase as $groups)
+				@foreach($groups as $games)
+					@foreach($games as $game)
+						@if(($countGames+1) > $mediaGamesPlayed)
+							<div id="partidono" style="margin-top:4px">
+							</div>
+							<div id="partido" style="margin-top:135px">
+								<span class="fecha">{{ $game['dateObject']->toFormattedDateString() }}-{{ $game['time'] }}-{{ $game['game']->stadium }}</span><br>
+								<div style="float: left;">
+									<img src="{{ $game['imgLocalTeam'] }}" width="45px" height="45px">
+								</div>
+								<div class="cuadrores3">{{ $game['localGoals'] }} - {{ $game['awayGoals'] }}<br><span style="font-size:12px"></span></div>
+								<div style="float: right;"><img src="{{ $game['imgAwayTeam'] }}" width="45px" height="45px"></div>
+								<br style="clear: both;">
+								<div style="float:left"><span style="font-size:10px;margin-left:5px"><strong>{{ $game['localTeam']->nombre }}</strong></span></div>
+								<div style="float:right"><span style="font-size:10px;margin-right:5px"><strong>{{ $game['awayTeam']->nombre }}</strong></span></div>
+							</div>
+						@endif
+					<?php $countGames++ ?>
+					@endforeach
+				@endforeach
+			@endforeach
+		@endif
+	</div>
+
+	<?php $countGames = 0; ?>
+	<div id="columna">
+		<span class="grupom">{{ $cuartosPhase->name }}</span><br>
+		<?php $gamesForPhase = $gamesForPhases[$cuartosPhase->id]; ?>
+		<?php $mediaGamesPlayed = $cuartosPhase->mediaGamesPlayed; ?>
+		@if($gamesForPhase)
+			@foreach($gamesForPhase as $groups)
+				@foreach($groups as $games)
+					@foreach($games as $game)
+						@if(($countGames+1) > $mediaGamesPlayed)
+						<div id="partidono" style="margin-top:4px">
+						</div>
+						<div id="partido" style="margin-top:2px; margin-bottom: 80px;">
+							<span class="fecha">{{ $game['dateObject']->toFormattedDateString() }}-{{ $game['time'] }}-{{ $game['game']->stadium }}</span><br>
+							<div style="float: left;">
+								<img src="{{ $game['imgLocalTeam'] }}" width="45px" height="45px">
+							</div>
+							<div class="cuadrores3">{{ $game['localGoals'] }} - {{ $game['awayGoals'] }}<br><span style="font-size:12px"></span></div>
+							<div style="float: right;"><img src="{{ $game['imgAwayTeam'] }}" width="45px" height="45px"></div>
+							<br style="clear: both;">
+							<div style="float:left"><span style="font-size:10px;margin-left:5px"><strong>{{ $game['localTeam']->nombre }}</strong></span></div>
+							<div style="float:right"><span style="font-size:10px;margin-right:5px"><strong>{{ $game['awayTeam']->nombre }}</strong></span></div>
+						</div>
+						@endif
+						<?php $countGames++ ?>
+					@endforeach
+				@endforeach
+			@endforeach
+		@endif
+	</div>
+	
+
+	<?php $countGames = 0; ?>
+	<div id="columna">
+		<span class="grupom">{{ $octavosPhase->name }}</span><br>
+		<?php $gamesForPhase = $gamesForPhases[$octavosPhase->id]; ?>
+		<?php $mediaGamesPlayed = $octavosPhase->mediaGamesPlayed; ?>
+		@if($gamesForPhase)
+			@foreach($gamesForPhase as $groups)
+				@foreach($groups as $games)
+					@foreach($games as $game)
+					@if(($countGames+1) > $mediaGamesPlayed)
+					<div id="partido">
+						<span class="fecha">{{ $game['dateObject']->toFormattedDateString() }}-{{ $game['time'] }}-{{ $game['game']->stadium }}</span><br>
+						<div style="float: left;">
+							<img src="{{ $game['imgLocalTeam'] }}" width="45px" height="45px">
+						</div>
+						<div class="cuadrores3">{{ $game['localGoals'] }} - {{ $game['awayGoals'] }}<br><span style="font-size:12px"></span></div>
+						<div style="float: right;"><img src="{{ $game['imgAwayTeam'] }}" width="45px" height="45px"></div>
+						<br style="clear: both;">
+						<div style="float:left"><span style="font-size:10px;margin-left:5px"><strong>{{ $game['localTeam']->nombre }}</strong></span></div>
+						<div style="float:right"><span style="font-size:10px;margin-right:5px"><strong>{{ $game['awayTeam']->nombre }}</strong></span></div>
+					</div>
+					@endif
+						<?php $countGames++ ?>
+					@endforeach
+				@endforeach
+			@endforeach
+		@endif
+	</div>
+
+
 	<br style="clear: both;">
 	<br>
 	<br>
