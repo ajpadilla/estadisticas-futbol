@@ -449,13 +449,14 @@ class CompetitionRepository extends BaseRepository
 
 	public function getGamesForTypePhase($type, $startCompetition, $endCompetition)
 	{
+		$infoGames = [];
 		$phaseRepository = new PhaseRepository;
 		$phase = $phaseRepository->getModel()->whereType($type)
 											 ->where('from','>=', $startCompetition)
 											 ->where('to','<=', $endCompetition)->first();
-		//dd($phase->id);
-		if(!empty($phase ))
-			return $this->getGamesForPhase($phase->id);
+
+		if(!empty($phase))
+			return $infoGames = ['games' => $this->getGamesForPhase($phase->id),'media' => $phase->mediaGamesPlayed];
 		return false;
 	}
 
