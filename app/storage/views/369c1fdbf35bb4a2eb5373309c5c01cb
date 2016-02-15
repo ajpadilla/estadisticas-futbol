@@ -57,7 +57,7 @@
 				<a href="<?php echo route('championsCup'); ?>">Champions L.</a>
 				<a href="<?php echo route('argentinaCup'); ?>">Copa Argentina</a>
 				<a href="<?php echo route('sudamericanaCup'); ?>">Sudamericana</a>
-				<a href="mundialdeclubes">Mundial Clubes</a>
+				<a href="<?php echo route('mundialClubes'); ?>">Mundial Clubes</a>
 				<a href="mascopas">Mas Copas</a>
 			</span>
 		</div>
