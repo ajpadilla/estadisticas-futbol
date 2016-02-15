@@ -83,11 +83,15 @@
 	<?php $countPhases++; ?>
 	@endforeach
 
-	<?php $countGames = 0; ?>
 	<?php $lastPhase = $currentCup->phases()->whereLast(true)->first() ?>
-	<?php $semiFinalPhase = $lastPhase->previous ?>
-	<?php $cuartosPhase = $semiFinalPhase->previous ?>
-	<?php $octavosPhase = $cuartosPhase->previous ?>
+	@if(!empty($lastPhase))
+		<?php $semiFinalPhase = $lastPhase->previous ?>
+		<?php $cuartosPhase = $semiFinalPhase->previous ?>
+		<?php $octavosPhase = $cuartosPhase->previous ?>
+	@endif
+
+	@if(!empty($semiFinalPhase))
+	<?php $countGames = 0; ?>
 	<div id="columna">
 		<span class="grupom">{{ $semiFinalPhase->name }}</span><br>
 		<?php $gamesForPhase = $gamesForPhases[$semiFinalPhase->id]; ?>
@@ -117,7 +121,9 @@
 			@endforeach
 		@endif
 	</div>
+	@endif
 
+	@if(!empty($cuartosPhase))
 	<?php $countGames = 0; ?>
 	<div id="columna">
 		<span class="grupom">{{ $cuartosPhase->name }}</span><br>
@@ -148,8 +154,9 @@
 			@endforeach
 		@endif
 	</div>
+	@endif
 	
-
+	@if(!empty($octavosPhase))
 	<?php $countGames = 0; ?>
 	<div id="columna">
 		<span class="grupom">{{ $octavosPhase->name }}</span><br>
@@ -178,7 +185,7 @@
 			@endforeach
 		@endif
 	</div>
-
+	@endif
 
 	<br style="clear: both;">
 	<br>
