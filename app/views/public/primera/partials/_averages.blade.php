@@ -1,12 +1,4 @@
 @foreach ($competitions as $competition)
-    <?php 
-        $competitionsForAverage = $competitionRepository->getCompetitionsForCurrentAverage($competition->id);
-        foreach ($competitionsForAverage as $competitionForAverage) {
-            $dates[] = $competitionForAverage->year;
-        }
-        $dates_reverse = array_reverse($dates, true);
-        $averages = $competitionRepository->getAverage($competitionsForAverage, $competition)
-    ?>
 <div id="tablapromactualprim">
     <span class="datosequipo" style="display: block; text-align: center"><strong>Promedios Campeonato {{ $competition->year }} </strong> </span> 
     <div id="prom1b">
