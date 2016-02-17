@@ -1,10 +1,5 @@
 var CustomPublicApp = function () {
 	
-	//console.log($("#firstPhase").attr('data-phase-id'))
-
-	var base_url = window.location.origin;
-	console.log(base_url);
-
 	var groupsFixturesForCompetition = function() 
 	{
 		var competitionId = $('#teamsFormCompetition').attr('data-id');
