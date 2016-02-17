@@ -49,7 +49,7 @@
 		</table>
 		<br style="clear: both;">
 		<div id="statsPhase" style="text-align: center; color: white; font-weight: normal; font-size:11px; background: #092b1d">
-	        <strong>Estadisticas Fecha</strong>:<br> <strong>29</strong> goles en <strong>15</strong> partidos (1.93 de media)<br>Goles locales: <strong>16</strong> - Goles visitantes: <strong>13</strong> <br>Vict. locales: <strong>7</strong>  - Vict. visitantes: <strong>4</strong> - Empates: <strong>4</strong><br>
+	        <strong>Estadisticas Fecha</strong>:<br> <strong>0</strong> goles en <strong>0</strong> partidos (0 de media)<br>Goles locales: <strong>0</strong> - Goles visitantes: <strong>0</strong> <br>Vict. locales: <strong>0</strong>  - Vict. visitantes: <strong>0</strong> - Empates: <strong>0</strong><br>
         </div>
 	</div>
 </div>
