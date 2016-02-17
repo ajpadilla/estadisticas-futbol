@@ -36,6 +36,8 @@ Route::get('gamesForMundialClubes', ['as' => 'mundialClubes', 'uses' => 'PublicC
 Route::get('getCompetitionsForCurrentAverage', ['as' => 'currentAverage', 'uses' => 'PublicController@getCompetitionsForCurrentAverage']);
 Route::get('getCurrentCompetition', ['as' => 'currentCompetition', 'uses' => 'PublicController@getCurrentCompetition']);
 
+
+
 /*
 ********************************* FIN RUTAS PUBLICAS ********************************
 */
@@ -194,7 +196,7 @@ Route::post('admin/competencias/api-actualizar',  ['as' => 'competencias.api.upd
 Route::post('admin/competencias/api-agregar-fase',  ['as' => 'competitions.api.add.phase','uses' => 'CompetitionController@addPhaseApi' ] );
 Route::get('admin/competencias/api-seleccionar-lista',  ['as' => 'competitions.api.select.list','uses' => 'CompetitionController@getAllValue' ] );
 Route::get('admin/competencias/api-equipos-disponibles/{id}', ['as' => 'competitions.api.available.teams', 'uses' => 'CompetitionController@getAvailableTeams']);
-
+Route::get('getAllCompetitios/{competition}', ['as' => 'allCompetitios.api.select', 'uses' => 'CompetitionController@getAllCompetitios']);
 /*
 ********************************* RUTAS PARA FASES ********************************
 */
