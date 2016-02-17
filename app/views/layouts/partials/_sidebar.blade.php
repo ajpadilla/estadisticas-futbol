@@ -227,6 +227,7 @@
 		<a id="update-competition-format" href="{{ URL::route('competitionFormats.api.update') }}"></a>
 		<!--Game types-->
 		<a id="list-game-type" href="{{ URL::route('game-types.api.select.list') }}"></a>
+		<a id="list-competitions-previous" href="{{ URL::route('allCompetitios.api.select') }}"></a>
 	</div>
 </div>
 <!-- /SIDEBAR -->
