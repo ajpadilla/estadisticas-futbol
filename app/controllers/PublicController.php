@@ -131,7 +131,8 @@ class PublicController extends \BaseController {
 
 	public function gamesFirstDivision()
 	{
-
+		$currentCompetition = null;
+		$winner = null;
 
 		$competitions = $this->competitionRepository
 		->getModel()
@@ -139,9 +140,19 @@ class PublicController extends \BaseController {
 		->orderBy('desde', 'desc')
 		->orderBy('hasta', 'desc') 
 		->paginate(1);
-		$competitionRepository =  $this->competitionRepository;
 
-	 	return View::make('public.primera._primera', compact('competitions', 'competitionRepository'));
+		if(count($competitions) > 0)
+			foreach ($competitions as $competition)
+				$currentCompetition = $competition;
+				$competitionsForAverage  = $this->competitionRepository->getCompetitionsForCurrentAverage($currentCompetition->id);
+
+			foreach ($competitionsForAverage as $competitionForAverage) {
+            	$dates[] = $competitionForAverage->year;
+        	}
+        	$dates_reverse = array_reverse($dates, true);
+       		$averages = $this->competitionRepository->getAverage($competitionsForAverage, $competition);
+       		$winner = $this->competitionRepository->winner($competition->id);
+	 	return View::make('public.primera._primera', compact('competitions','currentCompetition','dates_reverse', 'averages', 'winner'));
 	}
 
 	public function positionsteamsForCompetitions()
