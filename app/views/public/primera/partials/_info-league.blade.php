@@ -1,9 +1,7 @@
-@foreach($competitions as $competition)
-<?php $winner = $competitionRepository->winner($competition->id) ?>
 <div style="width: 980px;height: auto;background: #17573d;font-size:12px;color:white;text-align: center;">
 	<div style="width: 250px;float: left">
-		<strong>{{ $competition->nombre }}</strong><br>
-		@if($winner)
+		<strong>{{ $currentCompetition->nombre }}</strong><br>
+		@if(!empty($winner))
 			<img src="{{  $winner->foto->url('thumb') }}" width="64px"><br>
 			{{ $winner->nombre }}
 		@endif
@@ -24,4 +22,3 @@
 	<div style="clear: both;"></div>
 	<br>
 </div>
-@endforeach
