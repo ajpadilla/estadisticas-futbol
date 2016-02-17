@@ -528,8 +528,9 @@ class CompetitionRepository extends BaseRepository
 					}
 					
 				}
+				if($totalGamesPlayed > 0)
+					$average = ($totalPoints / $totalGamesPlayed);
 
-				$average = ($totalPoints / $totalGamesPlayed);
 				$averageForTeams[] = array(
 						'dateCurrent' => $dateCurrent,
 						'average' => number_format($average, 3),
