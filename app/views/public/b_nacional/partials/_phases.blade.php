@@ -1,0 +1,55 @@
+<div style="float: left;width:480px">
+	<div style="width:480px;margin-left:15px">
+		@foreach($competitions as $competition)
+			@if($competition->hasPhases)
+				<a id="firstPhase" data-phase-id="{{ $competition->phases->first()->id }}" href=""></a>
+				@foreach ($competition->phasesWithGames as $phase) 
+					<a id="irfecha" href="{{ route('getGamesForPhase') }}" class="phasesWithGames" data-phase-id="{{ $phase->id }}">{{ $phase->name }}</a>
+					<a id="scoredGoalsUrl" href="{{ route('getScorersGoalsFormCompetition') }}"></a>
+				@endforeach
+			@endif
+		@endforeach
+	</div>
+	<br>
+	<div id="fixtureactual">
+		<div id="phaseForCompetition" style="background: #092b1d; height:50px">
+			<div id="flechaatrno"></div>
+			<div style="float: left; width:380px; font-size: 14px; color: #c2e213; text-align: center;">
+				<br>
+				<br>
+				<!--<span class="datosequipo2b" style="font-weight: normal">
+					(use las flechas para mirar otras fechas)
+				</span>-->
+			</div>
+			<!--<div id="flechaad" class="2_1"></div>-->
+		</div>
+		<br>
+		<table id="tableGamesForPhase" style="width:480px">
+			<!--<tbody>
+				<tr style="background:#092B1D;text-align: center">
+					<td colspan="6"><span class="horariopartido"></span></td>
+				</tr>
+				<tr style="background: #e5e5e5">
+					<td class="falta" id="ti_1_10">19:00</td>
+					<td style="min-width:153px"><img src="http://www.promiedos.com.ar/images/s18/huracan.png" width="18px">
+						<span class="datoequipo"></span>
+					</td>
+					<td class="resu" id="r1_1_10"></td>
+					<td class="resu" id="r2_1_10"></td>
+					<td style="min-width:153px">
+						<img src="http://www.promiedos.com.ar/images/s18/atlrafaela.png" width="18px">
+						<span class="datoequipo"></span>
+					</td>
+					<td>
+						<div id="ficha" onclick="previa('10','primera');">Ficha<br><img src="http://www.promiedos.com.ar/images/nota.png">
+						</div>
+					</td>
+				</tr>
+			</tbody>-->
+		</table>
+		<br style="clear: both;">
+		<div id="statsPhase" style="text-align: center; color: white; font-weight: normal; font-size:11px; background: #092b1d">
+	        <strong>Estadisticas Fecha</strong>:<br> <strong>0</strong> goles en <strong>0</strong> partidos (0 de media)<br>Goles locales: <strong>0</strong> - Goles visitantes: <strong>0</strong> <br>Vict. locales: <strong>0</strong>  - Vict. visitantes: <strong>0</strong> - Empates: <strong>0</strong><br>
+        </div>
+	</div>
+</div>
