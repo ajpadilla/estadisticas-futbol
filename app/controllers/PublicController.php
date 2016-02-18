@@ -133,6 +133,8 @@ class PublicController extends \BaseController {
 	{
 		$currentCompetition = null;
 		$winner = null;
+		$liguillas = null;
+		$gamesForLiguillas = [];
 
 		$competitions = $this->competitionRepository
 		->getModel()
@@ -152,7 +154,23 @@ class PublicController extends \BaseController {
         	$dates_reverse = array_reverse($dates, true);
        		$averages = $this->competitionRepository->getAverage($competitionsForAverage, $competition);
        		$winner = $this->competitionRepository->winner($competition->id);
-	 	return View::make('public.primera._primera', compact('competitions','currentCompetition','dates_reverse', 'averages', 'winner'));
+
+	       	$liguillas = $this->competitionRepository
+			->getModel()
+			->whereType('liguilla')
+			->wherePreviousId($currentCompetition->id)
+			->get();
+
+			foreach ($liguillas as $liguilla) {
+				$gamesForLiguillas[] = array(
+											'liguilla' => $liguilla, 
+											'semifinal' => $this->competitionRepository
+																	->getGamesForTypePhase('semifinal', $liguilla->id), 
+											'final' => $this->competitionRepository
+																	->getGamesForTypePhase('final', $liguilla->id)
+									    );
+			}
+	 	return View::make('public.primera._primera', compact('competitions','currentCompetition','dates_reverse', 'averages', 'winner', 'gamesForLiguillas'));
 	}
 
 	public function positionsteamsForCompetitions()
