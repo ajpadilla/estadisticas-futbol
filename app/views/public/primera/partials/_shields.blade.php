@@ -1,3 +1,4 @@
+@if($competitions)
 <div class="expand-down-liga" align="center" style="width: 900px;">
 	<!--<span class="datosequipo2">Click en el escudo para ver info <span class="elequipo"></span></span><br>-->
 	@foreach($competitions as $competition)
@@ -20,3 +21,4 @@
 		</ul>
 	@endforeach
 </div>
+@endif

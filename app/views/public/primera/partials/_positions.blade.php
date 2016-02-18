@@ -1,3 +1,4 @@
+@if(!empty($competitions))
 <div style="display:none" id="competition-id">
      @foreach($competitions as $competition)
         <a id="teamsFormCompetition" data-id="{{ $competition->id }}" href="{{ route('getPositionsteamsForCompetitions') }}"></a>
@@ -42,3 +43,4 @@
 </div>
 @endif
 @endforeach 
+@endif

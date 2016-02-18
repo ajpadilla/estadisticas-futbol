@@ -1,3 +1,4 @@
+@if(!empty($competitions))
 <div style="float: left;width:480px">
 	<div style="width:480px;margin-left:15px">
 		@foreach($competitions as $competition)
@@ -53,3 +54,4 @@
         </div>
 	</div>
 </div>
+@endif
