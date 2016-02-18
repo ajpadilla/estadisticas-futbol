@@ -21,9 +21,10 @@
 	@include('public.primera.partials._info-league')
 	<div style="clear: both;"></div>
 	<br>
-	{{-- @include('public.primera.partials._leagues') --}}
-	<!--<div style="clear: both;"></div>
-	<br>-->
+	<div style="clear: both;"></div>
+	<br>
+	@include('public.primera.partials._liguilla')
+	<div style="clear: both;"></div>
 	<br>
 	@include('public.primera.partials._positions')
 	@include('public.primera.partials._phases');
