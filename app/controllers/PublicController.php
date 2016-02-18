@@ -384,10 +384,10 @@ class PublicController extends \BaseController {
 				}
 			}
 			$winner= $this->competitionRepository->winner($currentCup->id);
-			$gamesOctavos = $this->competitionRepository->getGamesForTypePhase('octavos', $currentCup->from, $currentCup->to);
-			$gamesCuartos = $this->competitionRepository->getGamesForTypePhase('cuartos', $currentCup->from, $currentCup->to);
-			$gamesSemiFinal = $this->competitionRepository->getGamesForTypePhase('semifinal', $currentCup->from, $currentCup->to);
-			$gamesFinal = $this->competitionRepository->getGamesForTypePhase('final', $currentCup->from, $currentCup->to);
+			$gamesOctavos = $this->competitionRepository->getGamesForTypePhase('octavos', $currentCup->id);
+			$gamesCuartos = $this->competitionRepository->getGamesForTypePhase('cuartos', $currentCup->id);
+			$gamesSemiFinal = $this->competitionRepository->getGamesForTypePhase('semifinal', $currentCup->id);
+			$gamesFinal = $this->competitionRepository->getGamesForTypePhase('final', $currentCup->id);
 		}
 		return View::make('public.copa_america._copa_america', compact(
 			'americaCups',
@@ -445,10 +445,10 @@ class PublicController extends \BaseController {
 				}
 			}
 			$winner= $this->competitionRepository->winner($currentCup->id);
-			$gamesOctavos = $this->competitionRepository->getGamesForTypePhase('octavos', $currentCup->from, $currentCup->to);
-			$gamesCuartos = $this->competitionRepository->getGamesForTypePhase('cuartos', $currentCup->from, $currentCup->to);
-			$gamesSemiFinal = $this->competitionRepository->getGamesForTypePhase('semifinal', $currentCup->from, $currentCup->to);
-			$gamesFinal = $this->competitionRepository->getGamesForTypePhase('final', $currentCup->from, $currentCup->to);
+			$gamesOctavos = $this->competitionRepository->getGamesForTypePhase('octavos', $currentCup->id);
+			$gamesCuartos = $this->competitionRepository->getGamesForTypePhase('cuartos', $currentCup->id);
+			$gamesSemiFinal = $this->competitionRepository->getGamesForTypePhase('semifinal', $currentCup->id);
+			$gamesFinal = $this->competitionRepository->getGamesForTypePhase('final', $currentCup->id);
 		}
 	 	return View::make('public.libertadores._libertadores', compact(
 	 													'libertadoresCups',
@@ -506,10 +506,10 @@ class PublicController extends \BaseController {
 				}
 			}
 			$winner= $this->competitionRepository->winner($currentCup->id);
-			$gamesOctavos = $this->competitionRepository->getGamesForTypePhase('octavos', $currentCup->from, $currentCup->to);
-			$gamesCuartos = $this->competitionRepository->getGamesForTypePhase('cuartos', $currentCup->from, $currentCup->to);
-			$gamesSemiFinal = $this->competitionRepository->getGamesForTypePhase('semifinal', $currentCup->from, $currentCup->to);
-			$gamesFinal = $this->competitionRepository->getGamesForTypePhase('final', $currentCup->from, $currentCup->to);
+			$gamesOctavos = $this->competitionRepository->getGamesForTypePhase('octavos', $currentCup->id);
+			$gamesCuartos = $this->competitionRepository->getGamesForTypePhase('cuartos', $currentCup->id);
+			$gamesSemiFinal = $this->competitionRepository->getGamesForTypePhase('semifinal', $currentCup->id);
+			$gamesFinal = $this->competitionRepository->getGamesForTypePhase('final', $currentCup->id);
 		}
 	 	return View::make('public.champions._champions', compact(
 	 													'championsCups',
@@ -567,10 +567,10 @@ class PublicController extends \BaseController {
 				}
 			}
 			$winner= $this->competitionRepository->winner($currentCup->id);
-			$gamesOctavos = $this->competitionRepository->getGamesForTypePhase('octavos', $currentCup->from, $currentCup->to);
-			$gamesCuartos = $this->competitionRepository->getGamesForTypePhase('cuartos', $currentCup->from, $currentCup->to);
-			$gamesSemiFinal = $this->competitionRepository->getGamesForTypePhase('semifinal', $currentCup->from, $currentCup->to);
-			$gamesFinal = $this->competitionRepository->getGamesForTypePhase('final', $currentCup->from, $currentCup->to);
+			$gamesOctavos = $this->competitionRepository->getGamesForTypePhase('octavos', $currentCup->id);
+			$gamesCuartos = $this->competitionRepository->getGamesForTypePhase('cuartos', $currentCup->id);
+			$gamesSemiFinal = $this->competitionRepository->getGamesForTypePhase('semifinal', $currentCup->id);
+			$gamesFinal = $this->competitionRepository->getGamesForTypePhase('final', $currentCup->id);
 		}
 	 	return View::make('public.copa_argentina._copa_argentina', compact(
 	 													'argentinaCups',
@@ -628,10 +628,10 @@ class PublicController extends \BaseController {
 				}
 			}
 			$winner= $this->competitionRepository->winner($currentCup->id);
-			$gamesOctavos = $this->competitionRepository->getGamesForTypePhase('octavos', $currentCup->from, $currentCup->to);
-			$gamesCuartos = $this->competitionRepository->getGamesForTypePhase('cuartos', $currentCup->from, $currentCup->to);
-			$gamesSemiFinal = $this->competitionRepository->getGamesForTypePhase('semifinal', $currentCup->from, $currentCup->to);
-			$gamesFinal = $this->competitionRepository->getGamesForTypePhase('final', $currentCup->from, $currentCup->to);
+			$gamesOctavos = $this->competitionRepository->getGamesForTypePhase('octavos', $currentCup->id);
+			$gamesCuartos = $this->competitionRepository->getGamesForTypePhase('cuartos', $currentCup->id);
+			$gamesSemiFinal = $this->competitionRepository->getGamesForTypePhase('semifinal', $currentCup->id);
+			$gamesFinal = $this->competitionRepository->getGamesForTypePhase('final', $currentCup->id);
 		}
 	 	return View::make('public.sudamericana._sudamericana', compact(
 	 													'sudamericanaCups',
@@ -690,10 +690,10 @@ class PublicController extends \BaseController {
 				}
 			}
 			$winner= $this->competitionRepository->winner($currentCup->id);
-			$gamesRepechage = $this->competitionRepository->getGamesForTypePhase('repechaje', $currentCup->from, $currentCup->to);
-			$gamesCuartos = $this->competitionRepository->getGamesForTypePhase('cuartos', $currentCup->from, $currentCup->to);
-			$gamesSemiFinal = $this->competitionRepository->getGamesForTypePhase('semifinal', $currentCup->from, $currentCup->to);
-			$gamesFinal = $this->competitionRepository->getGamesForTypePhase('final', $currentCup->from, $currentCup->to);
+			$gamesRepechage = $this->competitionRepository->getGamesForTypePhase('repechaje', $currentCup->id);
+			$gamesCuartos = $this->competitionRepository->getGamesForTypePhase('cuartos', $currentCup->id);
+			$gamesSemiFinal = $this->competitionRepository->getGamesForTypePhase('semifinal', $currentCup->id);
+			$gamesFinal = $this->competitionRepository->getGamesForTypePhase('final', $currentCup->id);
 		}
 	 	return View::make('public.mundial_clubes.mundial_clubes', compact(
 	 													'mundialClubesCups',
