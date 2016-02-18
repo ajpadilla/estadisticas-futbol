@@ -163,12 +163,12 @@ class PublicController extends \BaseController {
 
 			foreach ($liguillas as $liguilla) {
 				$gamesForLiguillas[] = array(
-											'liguilla' => $liguilla, 
-											'semifinal' => $this->competitionRepository
-																	->getGamesForTypePhase('semifinal', $liguilla->id), 
-											'final' => $this->competitionRepository
-																	->getGamesForTypePhase('final', $liguilla->id)
-									    );
+					'liguilla' => $liguilla, 
+					'semifinal' => $this->competitionRepository
+					->getGamesForTypePhase('semifinal', $liguilla->id), 
+					'final' => $this->competitionRepository
+					->getGamesForTypePhase('final', $liguilla->id)
+					);
 			}
 	 	return View::make('public.primera._primera', compact('competitions','currentCompetition','dates_reverse', 'averages', 'winner', 'gamesForLiguillas'));
 	}
@@ -255,15 +255,15 @@ class PublicController extends \BaseController {
 			}
 			$scoredGoals = $this->competitionRepository->scorersInCompetition($currentCup->id);
 		}
-	 	return View::make('public.mundial._mundial', compact(
-	 													'cups',
-	 													'currentCup',
-	 													'gamesForPhases',
-	 													'tablePosTeams',
-	 													'gamesForGroups',
-	 													'scoredGoals'
-	 												)
-	 	);
+		return View::make('public.mundial._mundial', compact(
+			'cups',
+			'currentCup',
+			'gamesForPhases',
+			'tablePosTeams',
+			'gamesForGroups',
+			'scoredGoals'
+			)
+		);
 
 	}
 
@@ -313,19 +313,19 @@ class PublicController extends \BaseController {
 			$gamesSemiFinal = $this->competitionRepository->getGamesForTypePhase('semifinal', $currentCup->from, $currentCup->to);
 			$gamesFinal = $this->competitionRepository->getGamesForTypePhase('final', $currentCup->from, $currentCup->to);
 		}
-	 	return View::make('public.copa_america._copa_america', compact(
-	 													'americaCups',
-	 													'currentCup',
-	 													'gamesForPhases',
-	 													'tablePosTeams',
-	 													'gamesForGroups',
-	 													'winner',
-	 													'gamesOctavos',
-	 													'gamesCuartos',
-	 													'gamesSemiFinal',
-	 													'gamesFinal'
-	 												)
-	 	);
+		return View::make('public.copa_america._copa_america', compact(
+			'americaCups',
+			'currentCup',
+			'gamesForPhases',
+			'tablePosTeams',
+			'gamesForGroups',
+			'winner',
+			'gamesOctavos',
+			'gamesCuartos',
+			'gamesSemiFinal',
+			'gamesFinal'
+			)
+		);
 	}
 
 	public function gamesForLibertadoresCup()
