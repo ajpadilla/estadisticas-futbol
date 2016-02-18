@@ -1,4 +1,3 @@
-<?php if(!empty($competitions)): ?>
 <div style="display:none" id="competition-id">
      <?php foreach($competitions as $competition): ?>
         <a id="teamsFormCompetition" data-id="<?php echo $competition->id; ?>" href="<?php echo route('getPositionsteamsForCompetitions'); ?>"></a>
@@ -43,4 +42,3 @@
 </div>
 <?php endif; ?>
 <?php endforeach; ?> 
-<?php endif; ?>

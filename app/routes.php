@@ -36,6 +36,7 @@ Route::get('gamesForMundialClubes', ['as' => 'mundialClubes', 'uses' => 'PublicC
 Route::get('getCompetitionsForCurrentAverage', ['as' => 'currentAverage', 'uses' => 'PublicController@getCompetitionsForCurrentAverage']);
 Route::get('getCurrentCompetition', ['as' => 'currentCompetition', 'uses' => 'PublicController@getCurrentCompetition']);
 
+Route::get('bnacional', ['as' => 'bNacional', 'uses' => 'PublicController@gamesBNacional']);
 
 
 /*

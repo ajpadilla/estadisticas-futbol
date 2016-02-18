@@ -1,4 +1,3 @@
-<?php if(!empty($competitions)): ?>
 <?php foreach($competitions as $competition): ?>
 <div id="tablapromactualprim">
     <span class="datosequipo" style="display: block; text-align: center"><strong>Promedios Campeonato <?php echo $competition->year; ?> </strong> </span> 
@@ -43,4 +42,3 @@
 </div>-->
 </div>
 <?php endforeach; ?>
-<?php endif; ?>
