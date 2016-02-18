@@ -1,3 +1,4 @@
+@if(!empty($competitions))
 @foreach ($competitions as $competition)
 <div id="tablapromactualprim">
     <span class="datosequipo" style="display: block; text-align: center"><strong>Promedios Campeonato {{ $competition->year }} </strong> </span> 
@@ -42,3 +43,4 @@
 </div>-->
 </div>
 @endforeach
+@endif
