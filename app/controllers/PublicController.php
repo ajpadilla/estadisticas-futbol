@@ -159,8 +159,8 @@ class PublicController extends \BaseController {
 				$dates[] = $competitionForAverage->year;
 			}
 			$dates_reverse = array_reverse($dates, true);
-			$averages = $this->competitionRepository->getAverage($competitionsForAverage, $competition);
-			$winner = $this->competitionRepository->winner($competition->id);
+			$averages = $this->competitionRepository->getAverage($competitionsForAverage, $currentCompetition);
+			$winner = $this->competitionRepository->winner($currentCompetition->id);
 
 			$liguillas = $this->competitionRepository
 			->getModel()
@@ -220,8 +220,8 @@ class PublicController extends \BaseController {
 				$dates[] = $competitionForAverage->year;
 			}
 			$dates_reverse = array_reverse($dates, true);
-			$averages = $this->competitionRepository->getAverage($competitionsForAverage, $competition);
-			$winner = $this->competitionRepository->winner($competition->id);
+			$averages = $this->competitionRepository->getAverage($competitionsForAverage, $currentCompetition);
+			$winner = $this->competitionRepository->winner($currentCompetition->id);
 
 			$associatedCompetitions = $this->competitionRepository
 			->getModel()
