@@ -20,9 +20,10 @@
 	<?php echo $__env->make('public.primera.partials._info-league', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
 	<div style="clear: both;"></div>
 	<br>
-	<?php /* <?php echo $__env->make('public.primera.partials._leagues', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?> */ ?>
-	<!--<div style="clear: both;"></div>
-	<br>-->
+	<div style="clear: both;"></div>
+	<br>
+	<?php echo $__env->make('public.primera.partials._liguilla', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
+	<div style="clear: both;"></div>
 	<br>
 	<?php echo $__env->make('public.primera.partials._positions', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
 	<?php echo $__env->make('public.primera.partials._phases', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>;
