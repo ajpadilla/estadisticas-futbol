@@ -135,6 +135,11 @@ class PublicController extends \BaseController {
 		$winner = null;
 		$liguillas = null;
 		$gamesForLiguillas = [];
+		$competitionsForAverage = null;
+		$competitions = null;
+		$dates = [] ;
+		$dates_reverse = [];
+		$averages = null;
 
 		$competitions = $this->competitionRepository
 		->getModel()
@@ -144,18 +149,20 @@ class PublicController extends \BaseController {
 		->paginate(1);
 
 		if(count($competitions) > 0)
-			foreach ($competitions as $competition)
+		{
+			foreach ($competitions as $competition){
 				$currentCompetition = $competition;
 				$competitionsForAverage  = $this->competitionRepository->getCompetitionsForCurrentAverage($currentCompetition->id);
+			}
 
 			foreach ($competitionsForAverage as $competitionForAverage) {
-            	$dates[] = $competitionForAverage->year;
-        	}
-        	$dates_reverse = array_reverse($dates, true);
-       		$averages = $this->competitionRepository->getAverage($competitionsForAverage, $competition);
-       		$winner = $this->competitionRepository->winner($competition->id);
+				$dates[] = $competitionForAverage->year;
+			}
+			$dates_reverse = array_reverse($dates, true);
+			$averages = $this->competitionRepository->getAverage($competitionsForAverage, $competition);
+			$winner = $this->competitionRepository->winner($competition->id);
 
-	       	$liguillas = $this->competitionRepository
+			$liguillas = $this->competitionRepository
 			->getModel()
 			->whereType('liguilla')
 			->wherePreviousId($currentCompetition->id)
@@ -170,7 +177,76 @@ class PublicController extends \BaseController {
 					->getGamesForTypePhase('final', $liguilla->id)
 					);
 			}
-	 	return View::make('public.primera._primera', compact('competitions','currentCompetition','dates_reverse', 'averages', 'winner', 'gamesForLiguillas'));
+		}
+			
+		return View::make('public.primera._primera', 
+			compact('competitions',
+				'currentCompetition',
+				'dates_reverse',
+				'averages', 
+				'winner',
+				'gamesForLiguillas'
+			)
+		);
+	}
+
+	public function gamesBNacional()
+	{
+		$currentCompetition = null;
+		$winner = null;
+		$liguillas = null;
+		$gamesForAssociateCompetitions = [];
+		$competitionsForAverage = null;
+		$competitions = null;
+		$dates = [];
+		$dates_reverse = [];
+		$averages = null;
+
+		$competitions = $this->competitionRepository
+		->getModel()
+		->whereType('b nacional')
+		->orderBy('desde', 'desc')
+		->orderBy('hasta', 'desc') 
+		->paginate(1);
+
+		if(count($competitions) > 0)
+		{
+			foreach ($competitions as $competition)
+				$currentCompetition = $competition;
+
+			$competitionsForAverage  = $this->competitionRepository->getCompetitionsForCurrentAverage($currentCompetition->id);
+
+			foreach ($competitionsForAverage as $competitionForAverage) {
+				$dates[] = $competitionForAverage->year;
+			}
+			$dates_reverse = array_reverse($dates, true);
+			$averages = $this->competitionRepository->getAverage($competitionsForAverage, $competition);
+			$winner = $this->competitionRepository->winner($competition->id);
+
+			$associatedCompetitions = $this->competitionRepository
+			->getModel()
+			->wherePreviousId($currentCompetition->id)
+			->orderBy('desde', 'desc')
+			->orderBy('hasta', 'desc') 
+			->get();
+
+			foreach ($associatedCompetitions as $indexCompetition => $associatedCompetition) {
+				foreach ($associatedCompetition->phases as $indexPhase => $phase) {
+					$gamesForAssociateCompetitions[$phase->id] = $this->competitionRepository->getGamesForPhase($phase->id);
+				}
+			}
+		}
+			
+		return View::make('public.b_nacional._b_nacional', 
+			compact('competitions',
+				'currentCompetition',
+				'dates_reverse', 
+				'averages', 
+				'winner', 
+				'associatedCompetitions',
+				'gamesForAssociateCompetitions'
+			)
+		);
 	}
 
 	public function positionsteamsForCompetitions()
