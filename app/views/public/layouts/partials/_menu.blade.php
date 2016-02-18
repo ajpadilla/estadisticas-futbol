@@ -14,7 +14,7 @@
 		<div class="itemmenu">
 			B NACIONAL
 			<br><span class="subitem">
-				<a href="bnacional" style="font-size: 14px;">Principal</a>
+				<a href="{{ route('bNacional') }}" style="font-size: 14px;">Principal</a>
 				<a href="calculadoresb.php">Calculador</a>
 				<a href="estadisticasb.php">Estadísticas</a>
 				<a href="foro.php?seccion=BNacional">Debate</a>
