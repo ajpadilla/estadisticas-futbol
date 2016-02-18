@@ -447,18 +447,20 @@ class CompetitionRepository extends BaseRepository
 		return $groupRepository->getOrderedFixturesArrayByGroup($id);
 	}
 
-	public function getGamesForTypePhase($type, $startCompetition, $endCompetition)
+	public function getGamesForTypePhase($type, $competitionId)
 	{
 		$infoGames = [];
 		$phaseRepository = new PhaseRepository;
 		$phase = $phaseRepository->getModel()->whereType($type)
-											 ->where('from','>=', $startCompetition)
-											 ->where('to','<=', $endCompetition)->first();
+											 ->whereCompetitionId($competitionId)
+											 ->first();
 
 		if(!empty($phase))
 			return $infoGames = ['games' => $this->getGamesForPhase($phase->id),'media' => $phase->mediaGamesPlayed];
 		return false;
 	}
+
+
 
 	public function getCompetitionsForCurrentAverage($id)
 	{
