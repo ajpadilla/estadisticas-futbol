@@ -375,15 +375,20 @@ class CompetitionRepository extends BaseRepository
 	{
 		$statistics = array(
 			'totalGames' => 0,
-			'totalsGolas' => 0,
+			'totalsGoals' => 0,
 			'totalGoalsLocal' => 0,
 			'totalGoalsAway' => 0,
 			'winGamesLocal' => 0,
 			'winGamesAway' => 0,
 			'tieGames' => 0,
+			'percentGoalsLocal' => 0,
+			'percentGoalsAway' => 0,
+			'percentWinsGamesLocal' => 0,
+			'percentWinsGamesAway' => 0,
+			'percentTieGames' => 0,
 			'average' => 0
 		);
-		$competition = $this->get($id);
+		$competition = $this->get($competitionId);
 
 		if ($competition->hasGames) 
 		{
@@ -398,7 +403,7 @@ class CompetitionRepository extends BaseRepository
 							$statistics['totalGames'] += $group->totalGames;
 							foreach ($group->games as $game) 
 							{
-								$statistics['totalsGolas'] += $game->goals()->count(); 
+								$statistics['totalsGoals'] += $game->goals()->count(); 
 								$statistics['totalGoalsLocal'] += $game->localGoals;
 								$statistics['totalGoalsAway'] += $game->awayGoals;
 								$statistics['winGamesLocal'] += ($game->localGoals > $game->awayGoals ? 1 : 0);
@@ -409,7 +414,19 @@ class CompetitionRepository extends BaseRepository
 					}
 				}
 			}
-			$statistics['average'] = ($statistics['totalsGolas'] / $statistics['totalGames']);
+			
+			if($statistics['totalsGoals'] > 0){
+				$statistics['percentGoalsLocal'] = (($statistics['totalGoalsLocal'] * 100) / $statistics['totalsGoals']);
+				$statistics['percentGoalsAway'] = (($statistics['totalGoalsAway'] * 100) / $statistics['totalsGoals']);
+			}
+
+			if($statistics['totalGames'] > 0){
+				$statistics['percentWinsGamesLocal'] = (($statistics['winGamesLocal'] * 100) / $statistics['totalGames']);
+				$statistics['percentWinsGamesAway'] = (($statistics['winGamesAway'] * 100) / $statistics['totalGames']);
+				$statistics['percentTieGames'] = (($statistics['tieGames'] * 100) / $statistics['totalGames']);
+				$statistics['average'] = ($statistics['totalsGoals'] / $statistics['totalGames']);
+			}
+				
 		}
 		return $statistics;
 	}
