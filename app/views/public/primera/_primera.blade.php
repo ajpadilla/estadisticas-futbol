@@ -23,7 +23,7 @@
 	<br>
 	<div style="clear: both;"></div>
 	<br>
-	@include('public.primera.partials._liguilla')
+	@include('public.primera.partials._associated_skills')
 	<div style="clear: both;"></div>
 	<br>
 	@include('public.primera.partials._positions')
