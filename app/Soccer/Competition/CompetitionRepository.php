@@ -371,6 +371,49 @@ class CompetitionRepository extends BaseRepository
 		return $statistics;
 	}
 
+	public function statisticsTournament($competitionId)
+	{
+		$statistics = array(
+			'totalGames' => 0,
+			'totalsGolas' => 0,
+			'totalGoalsLocal' => 0,
+			'totalGoalsAway' => 0,
+			'winGamesLocal' => 0,
+			'winGamesAway' => 0,
+			'tieGames' => 0,
+			'average' => 0
+		);
+		$competition = $this->get($id);
+
+		if ($competition->hasGames) 
+		{
+			foreach ($competition->phasesWithGames as $phase) 
+			{
+				if($phase->hasAssociateGroups && $phase->hasGames)
+				{
+					foreach ($phase->groupsWithGames as $group) 
+					{
+						if($group->hasGames)
+						{
+							$statistics['totalGames'] += $group->totalGames;
+							foreach ($group->games as $game) 
+							{
+								$statistics['totalsGolas'] += $game->goals()->count(); 
+								$statistics['totalGoalsLocal'] += $game->localGoals;
+								$statistics['totalGoalsAway'] += $game->awayGoals;
+								$statistics['winGamesLocal'] += ($game->localGoals > $game->awayGoals ? 1 : 0);
+								$statistics['winGamesAway'] += ($game->localGoals < $game->awayGoals ? 1 : 0);
+								$statistics['tieGames'] += ($game->localGoals == $game->awayGoals ? 1 : 0);
+							}
+						}
+					}
+				}
+			}
+			$statistics['average'] = ($statistics['totalsGolas'] / $statistics['totalGames']);
+		}
+		return $statistics;
+	}
+
 	public function scorersInCompetition($id)
 	{
 		$competition = $this->get($id);
