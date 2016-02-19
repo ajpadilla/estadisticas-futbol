@@ -162,20 +162,17 @@ class PublicController extends \BaseController {
 			$averages = $this->competitionRepository->getAverage($competitionsForAverage, $currentCompetition);
 			$winner = $this->competitionRepository->winner($currentCompetition->id);
 
-			$liguillas = $this->competitionRepository
+			$associatedCompetitions = $this->competitionRepository
 			->getModel()
-			->whereType('liguilla')
 			->wherePreviousId($currentCompetition->id)
+			->orderBy('desde', 'desc')
+			->orderBy('hasta', 'desc') 
 			->get();
 
-			foreach ($liguillas as $liguilla) {
-				$gamesForLiguillas[] = array(
-					'liguilla' => $liguilla, 
-					'semifinal' => $this->competitionRepository
-					->getGamesForTypePhase('semifinal', $liguilla->id), 
-					'final' => $this->competitionRepository
-					->getGamesForTypePhase('final', $liguilla->id)
-					);
+			foreach ($associatedCompetitions as $indexCompetition => $associatedCompetition) {
+				foreach ($associatedCompetition->phases as $indexPhase => $phase) {
+					$gamesForAssociateCompetitions[$phase->id] = $this->competitionRepository->getGamesForPhase($phase->id);
+				}
 			}
 		}
 			
@@ -185,7 +182,8 @@ class PublicController extends \BaseController {
 				'dates_reverse',
 				'averages', 
 				'winner',
-				'gamesForLiguillas'
+				'associatedCompetitions',
+				'gamesForAssociateCompetitions'
 			)
 		);
 	}
