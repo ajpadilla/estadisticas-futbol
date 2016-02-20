@@ -22,7 +22,8 @@ class AddTypeToPhase extends Migration {
 					'cuartos',
 					'semifinal',
 					'final',
-					'repechaje'
+					'repechaje',
+					'tercer lugar'
 				))
 			->default(null)
 			->after('name');
