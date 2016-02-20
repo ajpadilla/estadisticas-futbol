@@ -140,6 +140,7 @@ class PublicController extends \BaseController {
 		$dates = [] ;
 		$dates_reverse = [];
 		$averages = null;
+		$statisticsTournament = [];
 
 		$competitions = $this->competitionRepository
 		->getModel()
@@ -174,8 +175,10 @@ class PublicController extends \BaseController {
 					$gamesForAssociateCompetitions[$phase->id] = $this->competitionRepository->getGamesForPhase($phase->id);
 				}
 			}
+
+			$statisticsTournament = $this->competitionRepository->statisticsTournament($currentCompetition->id);
 		}
-			
+		//dd($statisticsTournament);
 		return View::make('public.primera._primera', 
 			compact('competitions',
 				'currentCompetition',
@@ -183,7 +186,8 @@ class PublicController extends \BaseController {
 				'averages', 
 				'winner',
 				'associatedCompetitions',
-				'gamesForAssociateCompetitions'
+				'gamesForAssociateCompetitions',
+				'statisticsTournament'
 			)
 		);
 	}
