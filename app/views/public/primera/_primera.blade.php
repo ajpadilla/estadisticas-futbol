@@ -33,9 +33,9 @@
 	<br>
 	@include('public.primera.partials._averages')
 	@include('public.primera.partials._scorers')
+	@include('public.primera.partials._statistics_tournament')
 	<br>
 	<div style="clear: both;"></div>
-	<br>
 	<br>
 	<div style="clear: both;"></div>
 	<br>
