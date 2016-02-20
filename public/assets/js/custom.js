@@ -88,9 +88,15 @@ var CustomApp = function () {
         $('.chosen-select').trigger("chosen:updated");
     }
 
+    var competitionPrevious = function() 
+    {
+
+    }
+
 
     var handleBootboxNewPlayer = function () {
 
+        loadCompetitiosPrevious();
         addValidationRulesForms();
 
         $('#player-form').validate({
@@ -3341,7 +3347,7 @@ var handleBootboxAddEquipoToJugador = function () {
             language: "en",
             //multiple: true,
             ajax: {
-                url: "filterAjax",
+                url: "admin/filterAjax",
                 dataType: 'json',
                 delay: 250,
                 data: function (params) {
@@ -3377,10 +3383,10 @@ var handleBootboxAddEquipoToJugador = function () {
             }
         });
 
-        $( "#select-autocomplete" ).autocomplete({
+        $("#select-autocomplete" ).autocomplete({
             source: function( request, response ) {
                 $.ajax({
-                    url: "filterAjax/"+request.term+"/",
+                    url: "admin/filterAjax/"+request.term+"/",
                     dataType: "json",
                     beforeSend: function(){$('ul.chzn-results').empty();},
                     success: function( data ) {
@@ -9155,7 +9161,66 @@ var handleBootboxAddEquipoToJugador = function () {
     }
 
 
-
+    var loadCompetitiosPrevious = function () 
+    {
+        var competition = 'primera';
+        var url = $('#list-competitions-previous').attr('href').split('%')[0]+competition;
+        $.ajax({
+                type: 'GET',
+                url: url,
+                dataType:'json',
+                success: function(response) {
+                    //console.log(response);
+                    var option = '<option value=\"\"></option>';
+                    var chosenUpdate = 'chosen:updated';
+                    if (response.success == true) {
+                        $('#competition_previous_id').html('');
+                        $('#competition_previous_id').append(option);
+                        $.each(response.competitions,function (index,competition){
+                            option = '<option value=\"'+competition.id+'\">'+competition.nombre+'</option>';
+                            $('#competition_previous_id').append(option);
+                            $('#competition_previous_id').trigger(chosenUpdate);
+                        });
+                    }else{
+                        $('#competition_previous_id').html('');
+                        $('#competition_previous_id').append(option);
+                        $('#competition_previous_id').trigger(chosenUpdate);
+                    }
+                }
+        });
+       $('#type_competition').change(function () 
+       {
+            var competition = $(this).val();
+            var url = $('#list-competitions-previous').attr('href').split('%')[0]+competition;
+            $('#competition_previous_id').html('');
+            $('#competition_previous_id').trigger('chosen:updated');
+            $.ajax({
+                type: 'GET',
+                url: url,
+                dataType:'json',
+                success: function(response) 
+                {
+                   //console.log(response);
+                    var option = '<option value=\"\"></option>';
+                    var chosenUpdate = 'chosen:updated';
+                    if (response.success == true) {
+                        $('#competition_previous_id').html('');
+                        $('#competition_previous_id').append(option);
+                        $.each(response.competitions,function (index,competition){
+                            option = '<option value=\"'+competition.id+'\">'+competition.nombre+'</option>';
+                            $('#competition_previous_id').append(option);
+                            $('#competition_previous_id').trigger(chosenUpdate);
+                        });
+                    }else{
+                        $('#competition_previous_id').html('');
+                        $('#competition_previous_id').append(option);
+                        $('#competition_previous_id').trigger(chosenUpdate);
+                    }
+                }
+            });
+            //console.log(competition);
+        });
+    }
 
     return {
         init: function() {
@@ -9233,7 +9298,7 @@ var handleBootboxAddEquipoToJugador = function () {
 
             enableCountryToCompetition();
 
-            loadFilter();
+            //loadFilter();
             loadTypeComptetitionInfo();
 
             checkFixtureTypeSelected();
