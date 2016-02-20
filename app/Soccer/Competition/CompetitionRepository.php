@@ -354,7 +354,7 @@ class CompetitionRepository extends BaseRepository
 			{
 				if($group->hasGames)
 				{
-					$statistics['totalGames'] += $group->totalGames;
+					$statistics['totalGames'] = $group->totalGames;
 					foreach ($group->games as $game) 
 					{
 						$statistics['totalsGolas'] += $game->goals()->count(); 
@@ -366,7 +366,7 @@ class CompetitionRepository extends BaseRepository
 					}
 				}
 			}
-			$statistics['average'] = ($statistics['totalsGolas'] / $statistics['totalGames']);
+			$statistics['average'] = number_format(($statistics['totalsGolas'] / $statistics['totalGames']), 2);
 		}
 		return $statistics;
 	}
@@ -414,17 +414,17 @@ class CompetitionRepository extends BaseRepository
 					}
 				}
 			}
-			
+
 			if($statistics['totalsGoals'] > 0){
-				$statistics['percentGoalsLocal'] = (($statistics['totalGoalsLocal'] * 100) / $statistics['totalsGoals']);
-				$statistics['percentGoalsAway'] = (($statistics['totalGoalsAway'] * 100) / $statistics['totalsGoals']);
+				$statistics['percentGoalsLocal'] = number_format((($statistics['totalGoalsLocal'] * 100) / $statistics['totalsGoals']),2);
+				$statistics['percentGoalsAway'] = number_format((($statistics['totalGoalsAway'] * 100) / $statistics['totalsGoals']),2);
 			}
 
 			if($statistics['totalGames'] > 0){
-				$statistics['percentWinsGamesLocal'] = (($statistics['winGamesLocal'] * 100) / $statistics['totalGames']);
-				$statistics['percentWinsGamesAway'] = (($statistics['winGamesAway'] * 100) / $statistics['totalGames']);
-				$statistics['percentTieGames'] = (($statistics['tieGames'] * 100) / $statistics['totalGames']);
-				$statistics['average'] = ($statistics['totalsGoals'] / $statistics['totalGames']);
+				$statistics['percentWinsGamesLocal'] = number_format((($statistics['winGamesLocal'] * 100) / $statistics['totalGames']),2);
+				$statistics['percentWinsGamesAway'] = number_format((($statistics['winGamesAway'] * 100) / $statistics['totalGames']),2);
+				$statistics['percentTieGames'] = number_format((($statistics['tieGames'] * 100) / $statistics['totalGames']),2);
+				$statistics['average'] = number_format(($statistics['totalsGoals'] / $statistics['totalGames']),2);
 			}
 				
 		}
