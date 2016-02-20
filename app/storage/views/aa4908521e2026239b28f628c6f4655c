@@ -2,6 +2,7 @@
 <?php if($currentCup->hasGames): ?>
 <div id="infoequipo">FASE FINAL</div>
 <div id="fixture">
+	<?php if(!empty($gamesForGroups)): ?>
 	<?php $countPhases = 0; ?>
 	<?php foreach($currentCup->phases as $IndexPhase => $phase): ?>
 	<?php $countGames = 0; ?>
@@ -83,11 +84,15 @@
 	<?php $countPhases++; ?>
 	<?php endforeach; ?>
 
-	<?php $countGames = 0; ?>
 	<?php $lastPhase = $currentCup->phases()->whereLast(true)->first() ?>
-	<?php $semiFinalPhase = $lastPhase->previous ?>
-	<?php $cuartosPhase = $semiFinalPhase->previous ?>
-	<?php $octavosPhase = $cuartosPhase->previous ?>
+	<?php if(!empty($lastPhase)): ?>
+		<?php $semiFinalPhase = $lastPhase->previous ?>
+		<?php $cuartosPhase = $semiFinalPhase->previous ?>
+		<?php $octavosPhase = $cuartosPhase->previous ?>
+	<?php endif; ?>
+
+	<?php if(!empty($semiFinalPhase)): ?>
+	<?php $countGames = 0; ?>
 	<div id="columna">
 		<span class="grupom"><?php echo $semiFinalPhase->name; ?></span><br>
 		<?php $gamesForPhase = $gamesForPhases[$semiFinalPhase->id]; ?>
@@ -117,7 +122,9 @@
 			<?php endforeach; ?>
 		<?php endif; ?>
 	</div>
+	<?php endif; ?>
 
+	<?php if(!empty($cuartosPhase)): ?>
 	<?php $countGames = 0; ?>
 	<div id="columna">
 		<span class="grupom"><?php echo $cuartosPhase->name; ?></span><br>
@@ -148,8 +155,9 @@
 			<?php endforeach; ?>
 		<?php endif; ?>
 	</div>
+	<?php endif; ?>
 	
-
+	<?php if(!empty($octavosPhase)): ?>
 	<?php $countGames = 0; ?>
 	<div id="columna">
 		<span class="grupom"><?php echo $octavosPhase->name; ?></span><br>
@@ -178,7 +186,7 @@
 			<?php endforeach; ?>
 		<?php endif; ?>
 	</div>
-
+	<?php endif; ?>
 
 	<br style="clear: both;">
 	<br>
@@ -231,9 +239,9 @@
 	        </table>
 	        <table width="100%">
 	        	<tbody>
-	        		<?php foreach($gamesForGroups as $index => $groups): ?>
-		        		<?php foreach($groups as $index2 => $games): ?>
-			        		<?php foreach($games as $index2 => $game): ?>
+	        		<?php foreach($gamesForGroups as  $groups): ?>
+		        		<?php foreach($groups as $games): ?>
+			        		<?php foreach($games as  $game): ?>
 				        		<?php if($game['group_id'] == $group->id): ?>
 				        		<tr>
 				        			<td colspan="4">
@@ -297,6 +305,7 @@
 		</div>
 		<?php endif; ?>
 	<div style="clear: both;"></div>
+	<?php endif; ?>
 </div>
 <?php endif; ?>
 <?php endif; ?>
