@@ -190,8 +190,13 @@
 	<br style="clear: both;">
 	<br>
 	<br>
-	<?php $firstPhase = $currentCup->phases->first(); ?>
-	<div id="infoequipo">{{ $firstPhase->name }}</div>
+	<?php 
+		$firstPhase = null;
+		if($currentCup->hasPhases)
+			$firstPhase = $currentCup->phases->first(); 
+	?>
+		@if(!empty($firstPhase))
+		<div id="infoequipo">{{ $firstPhase->name }}</div>
 		@foreach($firstPhase->groups as $group)
 		<div id="grupom">
 	        <span class="grupom">{{ $group->name }}</span><br>
@@ -236,11 +241,12 @@
 			        @endforeach
 		        </tbody>
 	        </table>
-	        <table width="100%">
+	        @if (!empty($gamesForGroups))
+	        	  <table width="100%">
 	        	<tbody>
-	        		@foreach($gamesForGroups as $index => $groups)
-		        		@foreach($groups as $index2 => $games)
-			        		@foreach($games as $index2 => $game)
+	        		@foreach($gamesForGroups as  $groups)
+		        		@foreach($groups as $games)
+			        		@foreach($games as  $game)
 				        		@if($game['group_id'] == $group->id)
 				        		<tr>
 				        			<td colspan="4">
@@ -266,11 +272,11 @@
 		        		@endforeach
 	        		@endforeach
 	        	</tbody>
-	        	
 	        </table>
-			     
+	        @endif
         </div>
         @endforeach
+        @endif
         <div style="clear: both;"></div>
         <br>
         <br>
