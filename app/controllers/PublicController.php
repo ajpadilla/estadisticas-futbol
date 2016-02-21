@@ -302,6 +302,11 @@ class PublicController extends \BaseController {
 		$tablePosTeams = null;
 		$firstPhase = null;
 		$hasGamesCurrentCup = null;
+		$gamesForGroups = null;
+		$gamesOctavos = null;
+		$gamesCuartos = [];
+		$gamesSemiFinal = null;
+		$gamesFinal = null;
 
 		$cups = $this->competitionRepository
 		->getModel()
@@ -327,10 +332,15 @@ class PublicController extends \BaseController {
 				if(!empty($firstPhase) && !empty($firstPhase->hasGroups)){
 					$gamesForGroups = $this->competitionRepository->getGamesForPhase($firstPhase->id);
 					foreach ($firstPhase->groups as $group) {
-						$tablePosTeams = $this->competitionRepository->getPostTeamsForGruop($group->id);
+						$tablePosTeams[$group->id] = $this->competitionRepository->getPostTeamsForGruop($group->id);
 					}
 				}
 			}
+			$gamesOctavos = $this->competitionRepository->getGamesForTypePhase('octavos', $currentCup->id);
+			$gamesCuartos = $this->competitionRepository->getGamesForTypePhase('cuartos', $currentCup->id);
+			$gamesSemiFinal = $this->competitionRepository->getGamesForTypePhase('semifinal', $currentCup->id);
+			$gamesFinal = $this->competitionRepository->getGamesForTypePhase('final', $currentCup->id);
+			$thirdPlace = $this->competitionRepository->getGamesForTypePhase('tercer lugar', $currentCup->id);
 			$scoredGoals = $this->competitionRepository->scorersInCompetition($currentCup->id);
 		}
 		return View::make('public.mundial._mundial', compact(
@@ -339,7 +349,12 @@ class PublicController extends \BaseController {
 			'gamesForPhases',
 			'tablePosTeams',
 			'gamesForGroups',
-			'scoredGoals'
+			'scoredGoals',
+			'gamesOctavos',
+			'gamesCuartos',
+			'gamesSemiFinal',
+			'gamesFinal',
+			'thirdPlace'
 			)
 		);
 
@@ -418,7 +433,8 @@ class PublicController extends \BaseController {
 		$gamesCuartos = null;
 		$gamesSemiFinal = null;
 		$gamesFinal = null;
-		
+		$thirdPlace = null;
+
 		$libertadoresCups = $this->competitionRepository
 		->getModel()
 		->whereType('copa libertadores')
@@ -451,6 +467,7 @@ class PublicController extends \BaseController {
 			$gamesCuartos = $this->competitionRepository->getGamesForTypePhase('cuartos', $currentCup->id);
 			$gamesSemiFinal = $this->competitionRepository->getGamesForTypePhase('semifinal', $currentCup->id);
 			$gamesFinal = $this->competitionRepository->getGamesForTypePhase('final', $currentCup->id);
+			$thirdPlace = $this->competitionRepository->getGamesForTypePhase('tercer lugar', $currentCup->id);
 		}
 	 	return View::make('public.libertadores._libertadores', compact(
 	 													'libertadoresCups',
