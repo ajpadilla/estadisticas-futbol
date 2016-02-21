@@ -14,10 +14,10 @@
 				<img src="{{ imgAwayTeam }}" width="18px">
 				<span class="datoequipo">{{ awayTema }}</span>
 			</td>
-			<td>
+			<!--<td>
 				<div id="ficha" onclick="previa('10','primera');">Ficha<br><img src="http://www.promiedos.com.ar/images/nota.png">
 				</div>
-			</td>
+			</td>-->
 		</tr>
 		<tr style="background: white; font-size:10px">
 		<td colspan="3"><span style="color: green"></span>{{ fixturesLocalGoals }}</td>
