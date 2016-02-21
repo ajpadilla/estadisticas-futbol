@@ -14,6 +14,11 @@ class Equipo extends Eloquent implements StaplerableInterface{
 	protected $fillable = ['nombre', 'escudo','foto', 'tipo','fecha_fundacion','apodo','ubicacion','historia','info_url',
 	'facebook_url','twitter_url','pais_id'];
 
+	 protected $hidden = array(
+        'deleted_at',
+        'created_at',
+        'updated_at'
+    );
 	 public function __construct(array $attributes = array()) {
         $this->hasAttachedFile('foto', [
             'styles' => [
@@ -105,7 +110,9 @@ class Equipo extends Eloquent implements StaplerableInterface{
 
 	public function getNombreAttribute($value)
 	{
-		return ucfirst(strtolower($value));
+		//Ocurre un error con los nombres
+		//return ucfirst(strtolower($value));
+        return utf8_encode($value);
 	}
 
 	public function getApodoAttribute($value)
@@ -159,5 +166,5 @@ class Equipo extends Eloquent implements StaplerableInterface{
 	public function scopeSelecciones($query)
 	{
 		return $query->whereTipo('selección');
-	}    	
+	}  
 }
