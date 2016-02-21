@@ -516,7 +516,7 @@ class CompetitionRepository extends BaseRepository
 											 ->first();
 
 		if(!empty($phase))
-			return $infoGames = ['games' => $this->getGamesForPhase($phase->id),'media' => $phase->mediaGamesPlayed];
+			return  ['games' => $this->getGamesForPhase($phase->id),'media' => $phase->mediaGamesPlayed];
 		return false;
 	}
 
