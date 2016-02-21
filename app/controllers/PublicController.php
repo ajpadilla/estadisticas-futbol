@@ -372,6 +372,7 @@ class PublicController extends \BaseController {
 		$gamesCuartos = null;
 		$gamesSemiFinal = null;
 		$gamesFinal = null;
+		$thirdPlace = null;
 
 		$americaCups = $this->competitionRepository
 		->getModel()
@@ -396,7 +397,7 @@ class PublicController extends \BaseController {
 				if(!empty($firstPhase) && !empty($firstPhase->hasGroups)){
 					$gamesForGroups = $this->competitionRepository->getGamesForPhase($firstPhase->id);
 					foreach ($firstPhase->groups as $group) {
-						$tablePosTeams = $this->competitionRepository->getPostTeamsForGruop($group->id);
+						$tablePosTeams[$group->id] = $this->competitionRepository->getPostTeamsForGruop($group->id);
 					}
 				}
 			}
@@ -405,6 +406,7 @@ class PublicController extends \BaseController {
 			$gamesCuartos = $this->competitionRepository->getGamesForTypePhase('cuartos', $currentCup->id);
 			$gamesSemiFinal = $this->competitionRepository->getGamesForTypePhase('semifinal', $currentCup->id);
 			$gamesFinal = $this->competitionRepository->getGamesForTypePhase('final', $currentCup->id);
+			$thirdPlace = $this->competitionRepository->getGamesForTypePhase('tercer lugar', $currentCup->id);
 		}
 		return View::make('public.copa_america._copa_america', compact(
 			'americaCups',
@@ -416,7 +418,8 @@ class PublicController extends \BaseController {
 			'gamesOctavos',
 			'gamesCuartos',
 			'gamesSemiFinal',
-			'gamesFinal'
+			'gamesFinal',
+			'thirdPlace'
 			)
 		);
 	}
