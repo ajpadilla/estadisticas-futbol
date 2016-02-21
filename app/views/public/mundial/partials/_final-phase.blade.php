@@ -257,6 +257,7 @@
 				</table>
 				<table width="100%">
 					<tbody>
+						@if(!empty($gamesForGroups))
 						@foreach($gamesForGroups as $index => $groups)
 						@foreach($groups as $index2 => $games)
 						@foreach($games as $index2 => $game)
@@ -284,6 +285,7 @@
 						@endforeach
 						@endforeach
 						@endforeach
+						@endif
 					</tbody>
 				</table>
 			</div>
