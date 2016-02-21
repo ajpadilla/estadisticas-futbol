@@ -24,9 +24,9 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <?php foreach($tablePosTeams as $index => $team): ?>
+                            <?php foreach($tablePosTeams[$group->id] as $index => $team): ?>
                             <tr style="background: #ace39e">
-                                <td><?php echo $index; ?></td>
+                                <td><?php echo $team['pos']; ?></td>
                                 <td align="left">
                                     <img src="<?php echo $team['team']->escudo->url('thumb'); ?>" width="15px"><strong> <?php echo $team['team']->subName; ?></strong>
                                 </td>
@@ -44,12 +44,13 @@
                     </table>
                 </div>
                     <div style="width: 400px; float: left; margin-left:20px">
-                        <?php foreach($tablePosTeams as $index => $team): ?>
+                        <?php foreach($tablePosTeams[$group->id] as $index => $team): ?>
                             <img src="<?php echo $team['team']->escudo->url('thumb'); ?>" border="0" title="<?php echo $team['team']->nombre; ?>" width="64px" height="64px">
                         <?php endforeach; ?>
                     </div>
                 <div style="clear: both"><br></div>
 
+        
                 <div id="fixgrupo">
                     <div style="float:left; width: 320px">
                         <table>
@@ -61,6 +62,7 @@
                                 </tr>
                             </tbody>
                         </table>
+                        <?php if(!empty($gamesForGroups)): ?>
                         <?php foreach($gamesForGroups as $index => $groups): ?>
                         <?php foreach($groups as $index2 => $games): ?>
                         <?php foreach($games as $index2 => $game): ?>
@@ -73,9 +75,9 @@
                                             <span class="horariopartido2"><?php echo $game['dateObject']->toFormattedDateString(); ?>-<?php echo $game['time']; ?>
 
                                             </span>
-                                            <span style="float: right">
+                                            <!--<span style="float: right">
                                                 <span class="statuspartido2">Final</span>
-                                            </span>
+                                            </span>-->
                                         </td>
                                     </tr>
                                     <tr id="188" style="background: url(assets/img/public/caja2b.png)"><td width="150">
@@ -95,6 +97,7 @@
                         <?php endforeach; ?>
                         <?php endforeach; ?>
                         <?php endforeach; ?>
+                        <?php endif; ?>
                     </div>
             </div>
         </div>
