@@ -36,8 +36,8 @@ class PhaseRepository extends BaseRepository
 		$competitionRepository = new CompetitionRepository;
 		if(!$competitionRepository->isEmpty($data['competition_id'])) {
 			$lastPhase = $this->get($competitionRepository->lastPhase($data['competition_id'])->id);
-			if($lastPhase->last)
-				return false;
+			/*if($lastPhase->last)
+				return false;*/
 			$data['previous_id'] = $lastPhase->id;
 		}
 		$phase = $this->model->create($data);
