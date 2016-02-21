@@ -23,7 +23,8 @@
 						'cuartos' => 'cuartos',
 						'semifinal' => 'semifinal',
 						'final' => 'final',
-						'repechaje' => 'repechaje'
+						'repechaje' => 'repechaje',
+						'tercer lugar' => 'tercer lugar'
 						]
 						,null,['class' => 'form-control chosen-select','data-placeholder' => 'Escoge Tipo...','id'=> 'type_phase']) }}
 					</div>
