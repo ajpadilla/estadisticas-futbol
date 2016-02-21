@@ -1,143 +1,186 @@
 <?php if(!empty($cups)): ?>
-<?php if($currentCup->hasGames): ?>
-<div id="infoequipo">FASE FINAL</div>
-<div id="fixture">
-	<?php if(!empty($gamesForGroups)): ?>
-	<?php $countPhases = 0; ?>
-	<?php foreach($currentCup->phases as $IndexPhase => $phase): ?>
-	<?php $countGames = 0; ?>
-	<?php if($countPhases > 0): ?>
-		<div id="columna">
-			<span class="grupom"><?php echo $phase->name; ?></span><br>
-			<?php $gamesForPhase = $gamesForPhases[$phase->id]; ?>
-			<?php $mediaGamesPlayed = $phase->mediaGamesPlayed; ?>
-			<?php if($gamesForPhase): ?>
-				<?php foreach($gamesForPhase as $groups): ?>
+	<?php if($currentCup->hasGames): ?>
+		<div id="infoequipo">FASE FINAL</div>
+		<div id="fixture">
+			<?php $countPhases = 0; ?>
+			<?php foreach($currentCup->phases as $IndexPhase => $phase): ?>
+			<?php $countGames = 0; ?>
+			<?php if($countPhases > 0): ?>
+				<?php if($phase->type!='tercer lugar'): ?>
+				<div id="columna">
+					<span class="grupom"><?php echo $phase->name; ?></span><br>
+					<?php $gamesForPhase = $gamesForPhases[$phase->id]; ?>
+					<?php $mediaGamesPlayed = $phase->mediaGamesPlayed; ?>
+					<?php if(!empty($gamesForPhase)): ?>
+					<?php foreach($gamesForPhase as $groups): ?>
 					<?php foreach($groups as $games): ?>
-						<?php foreach($games as $game): ?>
-							<?php if(($countGames+1) <= $mediaGamesPlayed): ?>
-								<?php if($countPhases == 1): ?>
-									<div id="partido">
-										<span class="fecha"><?php echo $game['dateObject']->toFormattedDateString(); ?>-<?php echo $game['time']; ?>-<?php echo $game['game']->stadium; ?></span><br>
-										<div style="float: left;">
-											<img src="<?php echo $game['imgLocalTeam']; ?>" width="45px" height="45px">
-										</div>
-										<div class="cuadrores3"><?php echo $game['localGoals']; ?> - <?php echo $game['awayGoals']; ?><br><span style="font-size:12px"></span></div>
-										<div style="float: right;"><img src="<?php echo $game['imgAwayTeam']; ?>" width="45px" height="45px"></div>
-										<br style="clear: both;">
-										<div style="float:left"><span style="font-size:10px;margin-left:5px"><strong><?php echo $game['localTeam']->nombre; ?></strong></span></div>
-										<div style="float:right"><span style="font-size:10px;margin-right:5px"><strong><?php echo $game['awayTeam']->nombre; ?></strong></span></div>
-									</div>
-								<?php elseif($countPhases == 2): ?>
-									<div id="partidono" style="margin-top:4px">
-									</div>
-									<div id="partido" style="margin-top:2px; margin-bottom: 80px;">
-										<span class="fecha"><?php echo $game['dateObject']->toFormattedDateString(); ?>-<?php echo $game['time']; ?>-<?php echo $game['game']->stadium; ?></span><br>
-										<div style="float: left;">
-											<img src="<?php echo $game['imgLocalTeam']; ?>" width="45px" height="45px">
-										</div>
-										<div class="cuadrores3"><?php echo $game['localGoals']; ?> - <?php echo $game['awayGoals']; ?><br><span style="font-size:12px"></span></div>
-										<div style="float: right;"><img src="<?php echo $game['imgAwayTeam']; ?>" width="45px" height="45px"></div>
-										<br style="clear: both;">
-										<div style="float:left"><span style="font-size:10px;margin-left:5px"><strong><?php echo $game['localTeam']->nombre; ?></strong></span></div>
-										<div style="float:right"><span style="font-size:10px;margin-right:5px"><strong><?php echo $game['awayTeam']->nombre; ?></strong></span></div>
-									</div>
-								<?php elseif($countPhases == 3): ?>
-									<div id="partidono" style="margin-top:4px">
-									</div>
-									<div id="partido" style="margin-top:130px;">
-										<span class="fecha"><?php echo $game['dateObject']->toFormattedDateString(); ?>-<?php echo $game['time']; ?>-<?php echo $game['game']->stadium; ?></span><br>
-										<div style="float: left;">
-											<img src="<?php echo $game['imgLocalTeam']; ?>" width="45px" height="45px">
-										</div>
-										<div class="cuadrores3"><?php echo $game['localGoals']; ?> - <?php echo $game['awayGoals']; ?><br><span style="font-size:12px"></span></div>
-										<div style="float: right;"><img src="<?php echo $game['imgAwayTeam']; ?>" width="45px" height="45px"></div>
-										<br style="clear: both;">
-										<div style="float:left"><span style="font-size:10px;margin-left:5px"><strong><?php echo $game['localTeam']->nombre; ?></strong></span></div>
-										<div style="float:right"><span style="font-size:10px;margin-right:5px"><strong><?php echo $game['awayTeam']->nombre; ?></strong></span></div>
-									</div>
-								<?php elseif($countPhases == 4): ?>
-									<div id="partidono" style="margin-top:2px">
-									</div>
-									<img src="http://lh4.googleusercontent.com/-HsyrWZpfT-U/UplECp5gcCI/AAAAAAAAAks/M4xJMpBtCuA/s136/worldcup.png">
-									<br/>
-									<div id="partido" style="margin-top:10px;">
-										<span class="fecha"><?php echo $game['dateObject']->toFormattedDateString(); ?>-<?php echo $game['time']; ?>-<?php echo $game['game']->stadium; ?></span><br>
-										<div style="float: left;">
-											<img src="<?php echo $game['imgLocalTeam']; ?>" width="45px" height="45px">
-										</div>
-										<div class="cuadrores3"><?php echo $game['localGoals']; ?> - <?php echo $game['awayGoals']; ?><br><span style="font-size:12px"></span></div>
-										<div style="float: right;"><img src="<?php echo $game['imgAwayTeam']; ?>" width="45px" height="45px"></div>
-										<br style="clear: both;">
-										<div style="float:left"><span style="font-size:10px;margin-left:5px"><strong><?php echo $game['localTeam']->nombre; ?></strong></span></div>
-										<div style="float:right"><span style="font-size:10px;margin-right:5px"><strong><?php echo $game['awayTeam']->nombre; ?></strong></span></div>
-									</div>
-								<?php endif; ?>
-							<?php endif; ?>
-							<?php $countGames++ ?>
-						<?php endforeach; ?>
-					<?php endforeach; ?>
-				<?php endforeach; ?>
-			<?php endif; ?>
-		</div>
-	<?php endif; ?>
-	<?php $countPhases++; ?>
-	<?php endforeach; ?>
-
-	<?php $lastPhase = $currentCup->phases()->whereLast(true)->first() ?>
-	<?php if(!empty($lastPhase)): ?>
-		<?php $semiFinalPhase = $lastPhase->previous ?>
-		<?php $cuartosPhase = $semiFinalPhase->previous ?>
-		<?php $octavosPhase = $cuartosPhase->previous ?>
-	<?php endif; ?>
-
-	<?php if(!empty($semiFinalPhase)): ?>
-	<?php $countGames = 0; ?>
-	<div id="columna">
-		<span class="grupom"><?php echo $semiFinalPhase->name; ?></span><br>
-		<?php $gamesForPhase = $gamesForPhases[$semiFinalPhase->id]; ?>
-		<?php $mediaGamesPlayed = $semiFinalPhase->mediaGamesPlayed; ?>
-		<?php if($gamesForPhase): ?>
-			<?php foreach($gamesForPhase as $groups): ?>
-				<?php foreach($groups as $games): ?>
 					<?php foreach($games as $game): ?>
-						<?php if(($countGames+1) > $mediaGamesPlayed): ?>
-							<div id="partidono" style="margin-top:4px">
-							</div>
-							<div id="partido" style="margin-top:135px">
-								<span class="fecha"><?php echo $game['dateObject']->toFormattedDateString(); ?>-<?php echo $game['time']; ?>-<?php echo $game['game']->stadium; ?></span><br>
-								<div style="float: left;">
-									<img src="<?php echo $game['imgLocalTeam']; ?>" width="45px" height="45px">
-								</div>
-								<div class="cuadrores3"><?php echo $game['localGoals']; ?> - <?php echo $game['awayGoals']; ?><br><span style="font-size:12px"></span></div>
-								<div style="float: right;"><img src="<?php echo $game['imgAwayTeam']; ?>" width="45px" height="45px"></div>
-								<br style="clear: both;">
-								<div style="float:left"><span style="font-size:10px;margin-left:5px"><strong><?php echo $game['localTeam']->nombre; ?></strong></span></div>
-								<div style="float:right"><span style="font-size:10px;margin-right:5px"><strong><?php echo $game['awayTeam']->nombre; ?></strong></span></div>
-							</div>
-						<?php endif; ?>
+					<?php if(($countGames+1) <= $mediaGamesPlayed): ?>
+					<?php if($countPhases == 1): ?>
+					<div id="partido">
+						<span class="fecha"><?php echo $game['dateObject']->toFormattedDateString(); ?>-<?php echo $game['time']; ?>-<?php echo $game['game']->stadium; ?></span><br>
+						<div style="float: left;">
+							<img src="<?php echo $game['imgLocalTeam']; ?>" width="45px" height="45px">
+						</div>
+						<div class="cuadrores3"><?php echo $game['localGoals']; ?> - <?php echo $game['awayGoals']; ?><br><span style="font-size:12px"></span></div>
+						<div style="float: right;"><img src="<?php echo $game['imgAwayTeam']; ?>" width="45px" height="45px"></div>
+						<br style="clear: both;">
+						<div style="float:left"><span style="font-size:10px;margin-left:5px"><strong><?php echo $game['localTeam']->nombre; ?></strong></span></div>
+						<div style="float:right"><span style="font-size:10px;margin-right:5px"><strong><?php echo $game['awayTeam']->nombre; ?></strong></span></div>
+					</div>
+					<?php elseif($countPhases == 2): ?>
+					<div id="partidono" style="margin-top:4px">
+					</div>
+					<div id="partido" style="margin-top:2px; margin-bottom: 80px;">
+						<span class="fecha"><?php echo $game['dateObject']->toFormattedDateString(); ?>-<?php echo $game['time']; ?>-<?php echo $game['game']->stadium; ?></span><br>
+						<div style="float: left;">
+							<img src="<?php echo $game['imgLocalTeam']; ?>" width="45px" height="45px">
+						</div>
+						<div class="cuadrores3"><?php echo $game['localGoals']; ?> - <?php echo $game['awayGoals']; ?><br><span style="font-size:12px"></span></div>
+						<div style="float: right;"><img src="<?php echo $game['imgAwayTeam']; ?>" width="45px" height="45px"></div>
+						<br style="clear: both;">
+						<div style="float:left"><span style="font-size:10px;margin-left:5px"><strong><?php echo $game['localTeam']->nombre; ?></strong></span></div>
+						<div style="float:right"><span style="font-size:10px;margin-right:5px"><strong><?php echo $game['awayTeam']->nombre; ?></strong></span></div>
+					</div>
+					<?php elseif($countPhases == 3): ?>
+					<div id="partidono" style="margin-top:4px">
+					</div>
+					<div id="partido" style="margin-top:130px;">
+						<span class="fecha"><?php echo $game['dateObject']->toFormattedDateString(); ?>-<?php echo $game['time']; ?>-<?php echo $game['game']->stadium; ?></span><br>
+						<div style="float: left;">
+							<img src="<?php echo $game['imgLocalTeam']; ?>" width="45px" height="45px">
+						</div>
+						<div class="cuadrores3"><?php echo $game['localGoals']; ?> - <?php echo $game['awayGoals']; ?><br><span style="font-size:12px"></span></div>
+						<div style="float: right;"><img src="<?php echo $game['imgAwayTeam']; ?>" width="45px" height="45px"></div>
+						<br style="clear: both;">
+						<div style="float:left"><span style="font-size:10px;margin-left:5px"><strong><?php echo $game['localTeam']->nombre; ?></strong></span></div>
+						<div style="float:right"><span style="font-size:10px;margin-right:5px"><strong><?php echo $game['awayTeam']->nombre; ?></strong></span></div>
+					</div>
+					<?php elseif($countPhases == 4): ?>
+					<div id="partidono" style="margin-top:2px">
+					</div>
+					<img src="http://lh4.googleusercontent.com/-HsyrWZpfT-U/UplECp5gcCI/AAAAAAAAAks/M4xJMpBtCuA/s136/worldcup.png">
+					<br/>
+					<div id="partido" style="margin-top:10px;">
+						<span class="fecha"><?php echo $game['dateObject']->toFormattedDateString(); ?>-<?php echo $game['time']; ?>-<?php echo $game['game']->stadium; ?></span><br>
+						<div style="float: left;">
+							<img src="<?php echo $game['imgLocalTeam']; ?>" width="45px" height="45px">
+						</div>
+						<div class="cuadrores3"><?php echo $game['localGoals']; ?> - <?php echo $game['awayGoals']; ?><br><span style="font-size:12px"></span></div>
+						<div style="float: right;"><img src="<?php echo $game['imgAwayTeam']; ?>" width="45px" height="45px"></div>
+						<br style="clear: both;">
+						<div style="float:left"><span style="font-size:10px;margin-left:5px"><strong><?php echo $game['localTeam']->nombre; ?></strong></span></div>
+						<div style="float:right"><span style="font-size:10px;margin-right:5px"><strong><?php echo $game['awayTeam']->nombre; ?></strong></span></div>
+					</div>
+					<br>
+					<br>
+					<span class="grupom">3°Puesto</span>
+					<?php if(!empty($thirdPlace)): ?>
+					<?php if(!empty($thirdPlace['games'])): ?>
+					<?php foreach($thirdPlace['games'] as $groups): ?>
+					<?php foreach($groups as $games): ?>
+					<?php foreach($games as $game): ?>
+					<div id="partido" style="margin-top:15px">
+						<span class="fecha"><?php echo $game['dateObject']->toFormattedDateString(); ?>-<?php echo $game['time']; ?>-<?php echo $game['game']->stadium; ?></span><br>
+						<div style="float: left;">
+							<img src="<?php echo $game['imgLocalTeam']; ?>" width="45px" height="45px">
+						</div>
+						<div class="cuadrores3"><?php echo $game['localGoals']; ?> - <?php echo $game['awayGoals']; ?><br><span style="font-size:12px"></span></div>
+						<div style="float: right;"><img src="<?php echo $game['imgAwayTeam']; ?>" width="45px" height="45px"></div>
+						<br style="clear: both;">
+						<div style="float:left"><span style="font-size:10px;margin-left:5px"><strong><?php echo $game['localTeam']->nombre; ?></strong></span></div>
+						<div style="float:right"><span style="font-size:10px;margin-right:5px"><strong><?php echo $game['awayTeam']->nombre; ?></strong></span></div>
+					</div>
+					<?php endforeach; ?>
+					<?php endforeach; ?>
+					<?php endforeach; ?>
+					<?php endif; ?>
+					<?php endif; ?>
+					<?php endif; ?>
+					<?php endif; ?>
 					<?php $countGames++ ?>
 					<?php endforeach; ?>
-				<?php endforeach; ?>
+					<?php endforeach; ?>
+					<?php endforeach; ?>
+					<?php endif; ?>
+				</div>
+				<?php endif; ?>
+			<?php endif; ?>
+			<?php $countPhases++; ?>
 			<?php endforeach; ?>
-		<?php endif; ?>
-	</div>
-	<?php endif; ?>
 
-	<?php if(!empty($cuartosPhase)): ?>
-	<?php $countGames = 0; ?>
-	<div id="columna">
-		<span class="grupom"><?php echo $cuartosPhase->name; ?></span><br>
-		<?php $gamesForPhase = $gamesForPhases[$cuartosPhase->id]; ?>
-		<?php $mediaGamesPlayed = $cuartosPhase->mediaGamesPlayed; ?>
-		<?php if($gamesForPhase): ?>
-			<?php foreach($gamesForPhase as $groups): ?>
-				<?php foreach($groups as $games): ?>
+			<?php if(!empty($gamesSemiFinal)): ?>
+				<?php $countGames = 0; ?>
+				<div id="columna">
+					<span class="grupom">Semifinal</span><br>
+					<?php if(!empty($gamesSemiFinal['games'])): ?>
+					<?php foreach($gamesSemiFinal['games'] as $groups): ?>
+					<?php foreach($groups as $games): ?>
 					<?php foreach($games as $game): ?>
-						<?php if(($countGames+1) > $mediaGamesPlayed): ?>
-						<div id="partidono" style="margin-top:4px">
+					<?php if(($countGames+1) > $gamesSemiFinal['media']): ?>
+					<div id="partidono" style="margin-top:4px">
+					</div>
+					<div id="partido" style="margin-top:130px">
+						<span class="fecha"><?php echo $game['dateObject']->toFormattedDateString(); ?>-<?php echo $game['time']; ?>-<?php echo $game['game']->stadium; ?></span><br>
+						<div style="float: left;">
+							<img src="<?php echo $game['imgLocalTeam']; ?>" width="45px" height="45px">
 						</div>
-						<div id="partido" style="margin-top:2px; margin-bottom: 80px;">
+						<div class="cuadrores3"><?php echo $game['localGoals']; ?> - <?php echo $game['awayGoals']; ?><br><span style="font-size:12px"></span></div>
+						<div style="float: right;"><img src="<?php echo $game['imgAwayTeam']; ?>" width="45px" height="45px"></div>
+						<br style="clear: both;">
+						<div style="float:left"><span style="font-size:10px;margin-left:5px"><strong><?php echo $game['localTeam']->nombre; ?></strong></span></div>
+						<div style="float:right"><span style="font-size:10px;margin-right:5px"><strong><?php echo $game['awayTeam']->nombre; ?></strong></span></div>
+					</div>
+					<?php endif; ?>
+					<?php $countGames++ ?>
+					<?php endforeach; ?>
+					<?php endforeach; ?>
+					<?php endforeach; ?>
+					<?php endif; ?>
+				</div>
+			<?php endif; ?>
+			<?php if(!empty($gamesCuartos)): ?>
+				<?php $countGames = 0; ?>
+				<div id="columna">
+					<span class="grupom">Cuartos</span><br>
+					<?php if(!empty($gamesCuartos['games'])): ?>
+					<?php foreach($gamesCuartos['games'] as $groups): ?>
+					<?php foreach($groups as $games): ?>
+					<?php foreach($games as $game): ?>
+					<?php if(($countGames+1) > $gamesCuartos['media']): ?>
+					<div id="partidono" style="margin-top:4px">
+					</div>
+					<div id="partido" style="margin-top:2px; margin-bottom: 80px;">
+						<span class="fecha"><?php echo $game['dateObject']->toFormattedDateString(); ?>-<?php echo $game['time']; ?>-<?php echo $game['game']->stadium; ?></span><br>
+						<div style="float: left;">
+							<img src="<?php echo $game['imgLocalTeam']; ?>" width="45px" height="45px">
+						</div>
+						<div class="cuadrores3"><?php echo $game['localGoals']; ?> - <?php echo $game['awayGoals']; ?><br><span style="font-size:12px"></span></div>
+						<div style="float: right;"><img src="<?php echo $game['imgAwayTeam']; ?>" width="45px" height="45px"></div>
+						<br style="clear: both;">
+						<div style="float:left"><span style="font-size:10px;margin-left:5px"><strong><?php echo $game['localTeam']->nombre; ?></strong></span></div>
+						<div style="float:right"><span style="font-size:10px;margin-right:5px"><strong><?php echo $game['awayTeam']->nombre; ?></strong></span></div>
+					</div>
+					<?php endif; ?>
+					<?php $countGames++ ?>
+					<?php endforeach; ?>
+					<?php endforeach; ?>
+					<?php endforeach; ?>
+					<?php endif; ?>
+				</div>
+			<?php endif; ?>
+			<?php if(!empty($gamesOctavos)): ?>
+			<div style="margin-left:100px">
+				<div id="fixture">
+					<?php $countGames = 0; ?>
+					<div id="columna">
+						<span class="grupom">Octavos</span><br>
+						<?php if(!empty($gamesOctavos['games'])): ?>
+						<?php foreach($gamesOctavos['games'] as $groups): ?>
+						<?php foreach($groups as  $games): ?>
+						<?php foreach($games as $game): ?>
+						<?php if(($countGames + 1) > $gamesOctavos['media']): ?>
+						<div id="partido">
 							<span class="fecha"><?php echo $game['dateObject']->toFormattedDateString(); ?>-<?php echo $game['time']; ?>-<?php echo $game['game']->stadium; ?></span><br>
 							<div style="float: left;">
 								<img src="<?php echo $game['imgLocalTeam']; ?>" width="45px" height="45px">
@@ -150,147 +193,121 @@
 						</div>
 						<?php endif; ?>
 						<?php $countGames++ ?>
-					<?php endforeach; ?>
-				<?php endforeach; ?>
-			<?php endforeach; ?>
-		<?php endif; ?>
-	</div>
-	<?php endif; ?>
-	
-	<?php if(!empty($octavosPhase)): ?>
-	<?php $countGames = 0; ?>
-	<div id="columna">
-		<span class="grupom"><?php echo $octavosPhase->name; ?></span><br>
-		<?php $gamesForPhase = $gamesForPhases[$octavosPhase->id]; ?>
-		<?php $mediaGamesPlayed = $octavosPhase->mediaGamesPlayed; ?>
-		<?php if($gamesForPhase): ?>
-			<?php foreach($gamesForPhase as $groups): ?>
-				<?php foreach($groups as $games): ?>
-					<?php foreach($games as $game): ?>
-					<?php if(($countGames+1) > $mediaGamesPlayed): ?>
-					<div id="partido">
-						<span class="fecha"><?php echo $game['dateObject']->toFormattedDateString(); ?>-<?php echo $game['time']; ?>-<?php echo $game['game']->stadium; ?></span><br>
-						<div style="float: left;">
-							<img src="<?php echo $game['imgLocalTeam']; ?>" width="45px" height="45px">
-						</div>
-						<div class="cuadrores3"><?php echo $game['localGoals']; ?> - <?php echo $game['awayGoals']; ?><br><span style="font-size:12px"></span></div>
-						<div style="float: right;"><img src="<?php echo $game['imgAwayTeam']; ?>" width="45px" height="45px"></div>
-						<br style="clear: both;">
-						<div style="float:left"><span style="font-size:10px;margin-left:5px"><strong><?php echo $game['localTeam']->nombre; ?></strong></span></div>
-						<div style="float:right"><span style="font-size:10px;margin-right:5px"><strong><?php echo $game['awayTeam']->nombre; ?></strong></span></div>
+						<?php endforeach; ?>
+						<?php endforeach; ?>
+						<?php endforeach; ?>
+						<?php endif; ?>
 					</div>
-					<?php endif; ?>
-						<?php $countGames++ ?>
+				</div>
+			</div>
+			<?php endif; ?>
+			<br style="clear: both;">
+			<br>
+			<br>
+			<?php 
+				$firstPhase = null;
+				if($currentCup->hasPhases)
+					$firstPhase = $currentCup->phases->first(); 
+			?>
+			<?php if(!empty($firstPhase)): ?>
+			<div id="infoequipo"><?php echo $firstPhase->name; ?></div>
+			<?php foreach($firstPhase->groups as $group): ?>
+			<div id="grupom">
+				<span class="grupom"><?php echo $group->name; ?></span><br>
+				<div id="contenedorm">
+					<?php foreach($group->teams as $team): ?>
+					<div id="paism">
+						<img src="<?php echo $team->escudo->url('small'); ?>" width="40px" height="50px"> <br>
+					</div>
 					<?php endforeach; ?>
-				<?php endforeach; ?>
-			<?php endforeach; ?>
-		<?php endif; ?>
-	</div>
-	<?php endif; ?>
-
-	<br style="clear: both;">
-	<br>
-	<br>
-	<?php $firstPhase = $currentCup->phases->first(); ?>
-	<div id="infoequipo"><?php echo $firstPhase->name; ?></div>
-		<?php foreach($firstPhase->groups as $group): ?>
-		<div id="grupom">
-	        <span class="grupom"><?php echo $group->name; ?></span><br>
-	        <div id="contenedorm">
-	        	<?php foreach($group->teams as $team): ?>
-		    	<div id="paism">
-		        	<img src="<?php echo $team->escudo->url('small'); ?>" width="40px" height="50px"> <br>
-		        </div>
-	        	<?php endforeach; ?>
-	        </div>
-	        <table id="posiciones" class="tablesorter3" style="width:100%;text-align: center;color:black">
-		        <thead>
-		        <tr style="background: black; color: white">
-			        <th>#</th>
-			        <th style="width:155px">Equipo</th>
-			        <th class="pts" style="background: #408080;width: 30px">Pts</th>
-			        <th class="pj">PJ</th>
-			        <th class="pg">PG</th>
-			        <th class="pe">PE</th>
-			        <th class="pp">PP</th>
-			        <th class="gf">GF</th>
-			        <th class="gc">GC</th>
-			        <th class="dg">DIF</th>
-		        </tr>
-		        </thead>
-		        <tbody>
-		        	<?php foreach($tablePosTeams as $index => $team): ?>
-			        <tr style="background: #ace39e">
-				        <td><?php echo $team['pos']; ?></td>
-				        <td align="left">
-				        	<img src="<?php echo $team['team']->escudo->url('thumb'); ?>" width="15px"><strong> <?php echo $team['team']->subName; ?></strong>
-				        </td>
-				        <td><?php echo $team['points']; ?></td>
-				        <td><?php echo $team['gamesPlayed']; ?></td>
-				        <td><?php echo $team['winGames']; ?></td>
-				        <td><?php echo $team['tieGames']; ?></td>
-				        <td><?php echo $team['lostGames']; ?></td>
-				        <td><?php echo $team['scoredGoals']; ?></td>
-				        <td><?php echo $team['againstGoals']; ?></td>
-				        <td><?php echo $team['goalsDiff']; ?></td>
-			        </tr>
-			        <?php endforeach; ?>
-		        </tbody>
-	        </table>
-	        <table width="100%">
-	        	<tbody>
-	        		<?php foreach($gamesForGroups as  $groups): ?>
-		        		<?php foreach($groups as $games): ?>
-			        		<?php foreach($games as  $game): ?>
-				        		<?php if($game['group_id'] == $group->id): ?>
-				        		<tr>
-				        			<td colspan="4">
-				        				<div id="titulom"> <?php echo $game['dateObject']->toFormattedDateString(); ?>-<?php echo $game['time']; ?>-<?php echo $game['game']->stadium; ?> </div>
-				        			</td>
-				        		</tr>
-				        		<tr>
-				        			<td style="width: 45%">
-				        				<img src="<?php echo $game['imgLocalTeam']; ?>"> <?php echo $game['localTeam']->nombre; ?>
-
-				        			</td>
-				        			<td class="resulm">
-				        				<?php echo $game['localGoals']; ?>
-
-				        			</td>
-				        			<td class="resulm">
-				        				<?php echo $game['awayGoals']; ?>
-
-				        			</td>
-				        			<td style="width: 45%">
-				        				<img src="<?php echo $game['imgAwayTeam']; ?>"> <?php echo $game['awayTeam']->nombre; ?>
-
-				        			</td>
-				        		</tr> 
-				        		<?php endif; ?>
-							<?php endforeach; ?>
-		        		<?php endforeach; ?>
-	        		<?php endforeach; ?>
-	        	</tbody>
-	        	
-	        </table>
-			     
-        </div>
-        <?php endforeach; ?>
-        <div style="clear: both;"></div>
-        <br>
-        <br>
-        <br style="clear: both;">
-        <br>
-        <br style="clear: both;">
-        <br>
-        <?php if(!empty($scoredGoals)): ?>
-        <div id="lugar" style="width: 980px;text-align: center;margin: auto">
-			<span class="datosequipo" style="display: block; text-align: center"><strong>Goleadores</strong> </span><br>
-			<div id="golprim" style="margin: auto;width: 600px;font-size:12px">
-				<table style="width: 100%; font-weight: bold;color: black">
+				</div>
+				<table id="posiciones" class="tablesorter3" style="width:100%;text-align: center;color:black">
+					<thead>
+						<tr style="background: black; color: white">
+							<th>#</th>
+							<th style="width:155px">Equipo</th>
+							<th class="pts" style="background: #408080;width: 30px">Pts</th>
+							<th class="pj">PJ</th>
+							<th class="pg">PG</th>
+							<th class="pe">PE</th>
+							<th class="pp">PP</th>
+							<th class="gf">GF</th>
+							<th class="gc">GC</th>
+							<th class="dg">DIF</th>
+						</tr>
+					</thead>
 					<tbody>
-						<tr style="background: black;color: white"><th>Jugador</th><th>Goles</th></tr>
-						<?php foreach($scoredGoals as $goal): ?>
+						<?php foreach($tablePosTeams[$group->id] as $team): ?>
+						<tr style="background: #ace39e">
+							<td><?php echo $team['pos']; ?></td>
+							<td align="left">
+								<img src="<?php echo $team['team']->escudo->url('thumb'); ?>" width="15px"><strong> <?php echo $team['team']->subName; ?></strong>
+							</td>
+							<td><?php echo $team['points']; ?></td>
+							<td><?php echo $team['gamesPlayed']; ?></td>
+							<td><?php echo $team['winGames']; ?></td>
+							<td><?php echo $team['tieGames']; ?></td>
+							<td><?php echo $team['lostGames']; ?></td>
+							<td><?php echo $team['scoredGoals']; ?></td>
+							<td><?php echo $team['againstGoals']; ?></td>
+							<td><?php echo $team['goalsDiff']; ?></td>
+						</tr>
+						<?php endforeach; ?>
+					</tbody>
+				</table>
+				<table width="100%">
+					<tbody>
+						<?php foreach($gamesForGroups as $index => $groups): ?>
+						<?php foreach($groups as $index2 => $games): ?>
+						<?php foreach($games as $index2 => $game): ?>
+						<?php if($game['group_id'] == $group->id): ?>
+						<tr>
+							<td colspan="4">
+								<div id="titulom"> <?php echo $game['dateObject']->toFormattedDateString(); ?>-<?php echo $game['time']; ?>-<?php echo $game['game']->stadium; ?> </div>
+							</td>
+						</tr>
+						<tr>
+							<td style="width: 45%">
+								<img src="<?php echo $game['imgLocalTeam']; ?>"> <?php echo $game['localTeam']->nombre; ?>
+
+							</td>
+							<td class="resulm">
+								<?php echo $game['localGoals']; ?>
+
+							</td>
+							<td class="resulm">
+								<?php echo $game['awayGoals']; ?>
+
+							</td>
+							<td style="width: 45%">
+								<img src="<?php echo $game['imgAwayTeam']; ?>"> <?php echo $game['awayTeam']->nombre; ?>
+
+							</td>
+						</tr> 
+						<?php endif; ?>
+						<?php endforeach; ?>
+						<?php endforeach; ?>
+						<?php endforeach; ?>
+					</tbody>
+				</table>
+			</div>
+			<?php endforeach; ?>
+			<?php endif; ?>
+			<div style="clear: both;"></div>
+			<br>
+			<br>
+			<br style="clear: both;">
+			<br>
+			<br style="clear: both;">
+			<br>
+			<?php if(!empty($scoredGoals)): ?>
+			<div id="lugar" style="width: 980px;text-align: center;margin: auto">
+				<span class="datosequipo" style="display: block; text-align: center"><strong>Goleadores</strong> </span><br>
+				<div id="golprim" style="margin: auto;width: 600px;font-size:12px">
+					<table style="width: 100%; font-weight: bold;color: black">
+						<tbody>
+							<tr style="background: black;color: white"><th>Jugador</th><th>Goles</th></tr>
+							<?php foreach($scoredGoals as $goal): ?>
 							<tr style="background: #d5d5d5;">
 								<td style="text-align: left">
 									<img src="<?php echo $goal['img']; ?>" width="15px"> <?php echo $goal['player']->nombre; ?>
@@ -298,14 +315,13 @@
 								</td>
 								<td style="text-align: center"><?php echo $goal['totalsGoals']; ?></td>
 							</tr>
-						<?php endforeach; ?>
-					</tbody>
-				</table>  
-			</div> 
+							<?php endforeach; ?>
+						</tbody>
+					</table>  
+				</div> 
+			</div>
+			<?php endif; ?>
+			<div style="clear: both;"></div>
 		</div>
-		<?php endif; ?>
-	<div style="clear: both;"></div>
 	<?php endif; ?>
-</div>
-<?php endif; ?>
 <?php endif; ?>
