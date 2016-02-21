@@ -18,7 +18,7 @@
 	@include('public.copa_america.partials._group-stage')
 	<div style="clear: both;"></div>
 	<br/>
-	@include('public.copa_america.partials._group-stage')
+	{{--@include('public.copa_america.partials._historical')
 	<div style="clear: both;"></div>
-	<br/>
+	<br/>--}}
 @stop

@@ -24,9 +24,9 @@
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach($tablePosTeams as $index => $team)
+                            @foreach($tablePosTeams[$group->id] as $index => $team)
                             <tr style="background: #ace39e">
-                                <td>{{ $index }}</td>
+                                <td>{{ $team['pos']}}</td>
                                 <td align="left">
                                     <img src="{{ $team['team']->escudo->url('thumb')  }}" width="15px"><strong> {{ $team['team']->subName }}</strong>
                                 </td>
@@ -44,12 +44,13 @@
                     </table>
                 </div>
                     <div style="width: 400px; float: left; margin-left:20px">
-                        @foreach($tablePosTeams as $index => $team)
+                        @foreach($tablePosTeams[$group->id] as $index => $team)
                             <img src="{{ $team['team']->escudo->url('thumb')  }}" border="0" title="{{ $team['team']->nombre }}" width="64px" height="64px">
                         @endforeach
                     </div>
                 <div style="clear: both"><br></div>
 
+        
                 <div id="fixgrupo">
                     <div style="float:left; width: 320px">
                         <table>
@@ -61,6 +62,7 @@
                                 </tr>
                             </tbody>
                         </table>
+                        @if(!empty($gamesForGroups))
                         @foreach($gamesForGroups as $index => $groups)
                         @foreach($groups as $index2 => $games)
                         @foreach($games as $index2 => $game)
@@ -72,9 +74,9 @@
                                         <td colspan="4">
                                             <span class="horariopartido2">{{ $game['dateObject']->toFormattedDateString() }}-{{ $game['time'] }}
                                             </span>
-                                            <span style="float: right">
+                                            <!--<span style="float: right">
                                                 <span class="statuspartido2">Final</span>
-                                            </span>
+                                            </span>-->
                                         </td>
                                     </tr>
                                     <tr id="188" style="background: url(assets/img/public/caja2b.png)"><td width="150">
@@ -94,6 +96,7 @@
                         @endforeach
                         @endforeach
                         @endforeach
+                        @endif
                     </div>
             </div>
         </div>
