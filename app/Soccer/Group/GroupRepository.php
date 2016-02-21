@@ -234,7 +234,13 @@ class GroupRepository extends BaseRepository
 		}
 
 		usort($fixtures, function($a, $b) {
-    		return $a['points'] <= $b['points'];
+			if($a['points'] == $b['points']){
+    			return $a['goalsDiff'] <= $b['goalsDiff'];
+    		}else{
+    			return $a['points'] <= $b['points'];
+    		}
+
+    		//return $a['points'] <= $b['points'];
 		});
 
 		$i = 1;
