@@ -62,9 +62,10 @@
 									'champion L'  => 'champion L',
 									'copa argentina'  => 'copa argentina',
 									'sudamericana'  => 'sudamericana',
-									'mundial de clubes' => 'mundial de clubes'
+									'mundial de clubes' => 'mundial de clubes',
+									'repechaje' => 'repechaje'
 								]
-							,null,['class' => 'form-control chosen-select','data-placeholder' => 'Escoge Tipo...','id'=> 'type_competition']) }}
+							,null,['class' => 'form-control chosen-select','data-placeholder' => 'Escoge Tipo...','id'=> 'type_competition_load']) }}
 						</div>
 					</div>
 					<div class="form-group">
