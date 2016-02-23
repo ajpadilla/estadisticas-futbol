@@ -1,6 +1,6 @@
 @if(!empty($cups))
 	@if($currentCup->hasGames)
-		<div id="infoequipo">FASE FINAL</div>
+		<!--<div id="infoequipo">FASE FINAL</div>-->
 		<div id="fixture">
 			<?php $countPhases = 0; ?>
 			@foreach ($currentCup->phases as $IndexPhase => $phase)
