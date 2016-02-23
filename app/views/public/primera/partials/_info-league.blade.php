@@ -1,4 +1,4 @@
-@if (!empty($currentCompetition))
+@if(!empty($currentCompetition))
 <div style="width: 980px;height: auto;background: #17573d;font-size:12px;color:white;text-align: center;">
 	<div style="width: 250px;float: left">
 		<strong>{{ $currentCompetition->nombre }}</strong><br>
