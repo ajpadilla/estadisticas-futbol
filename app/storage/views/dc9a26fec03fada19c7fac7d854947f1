@@ -127,7 +127,7 @@
             <div>
                 <img src="https://upload.wikimedia.org/wikipedia/commons/a/ad/Trofeo_Champions_League.jpg" width="140px">
                 <br>
-                <div style="margin:auto;text-align:center;color: white;font-weight: bold">FINAL COPA LIBERTADORES <?php echo $currentCup->year; ?></div>
+                <div style="margin:auto;text-align:center;color: white;font-weight: bold">FINAL COPA CHAMPION <?php echo $currentCup->year; ?></div>
                 <?php foreach($gamesFinal['games'] as $groups): ?>
                 <?php foreach($groups as  $games): ?>
                 <?php foreach($games as $game): ?>
