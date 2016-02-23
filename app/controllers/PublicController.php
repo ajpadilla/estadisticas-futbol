@@ -541,7 +541,7 @@ class PublicController extends \BaseController {
 				if(!empty($firstPhase) && !empty($firstPhase->hasGroups)){
 					$gamesForGroups = $this->competitionRepository->getGamesForPhase($firstPhase->id);
 					foreach ($firstPhase->groups as $group) {
-						$tablePosTeams = $this->competitionRepository->getPostTeamsForGruop($group->id);
+						$tablePosTeams[$group->id] = $this->competitionRepository->getPostTeamsForGruop($group->id);
 					}
 				}
 			}
