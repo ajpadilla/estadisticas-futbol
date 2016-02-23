@@ -1,5 +1,5 @@
 <?php if(!empty($championsCups)): ?>
-<div id="infoequipo">FASE FINAL</div>
+<!--<div id="infoequipo">FASE FINAL</div>-->
 <div id="fixture">
     <?php if($gamesOctavos): ?>
     <?php $countGames = 0; ?>
@@ -36,6 +36,10 @@
         </div>
         <div id="partidono" style="margin-top:15px">
         </div>
+        <div id="partidono">
+        </div>
+        <div id="partidono">
+        </div>
         <?php foreach($gamesCuartos['games'] as $groups): ?>
         <?php foreach($groups as  $games): ?>
         <?php foreach($games as $game): ?>
@@ -52,7 +56,7 @@
             <div style="float:right"><span style="font-size:10px;margin-right:5px"><strong><?php echo $game['awayTeam']->nombre; ?></strong></span></div>
         </div>
         <?php endif; ?>
-        <?php if($countGames == 2): ?>
+        <?php /* <?php if($countGames == 2): ?>
         <div id="partidono">
             </div>
             <div id="partidono">
@@ -61,7 +65,7 @@
             </div>
             <div id="partidono">
             </div>
-        <?php endif; ?>
+        <?php endif; ?> */ ?>
         <?php $countGames++ ?>
         <?php endforeach; ?>
         <?php endforeach; ?>
@@ -72,6 +76,7 @@
      <?php if($gamesSemiFinal): ?>
             <?php $countGames = 0; ?>
             <div id="columna">
+                <span class="grupom">Semifinal</span><br>
                 <div id="partidono">
                 </div>
                 <div id="partidono">
@@ -148,6 +153,7 @@
         <?php if($gamesSemiFinal): ?>
             <?php $countGames = 0; ?>
             <div id="columna">
+                <span class="grupom">Semifinal</span><br>
                 <div id="partidono">
                 </div>
                 <div id="partidono">
@@ -194,10 +200,14 @@
         </div>
         <div id="partidono" style="margin-top:15px">
         </div>
+        <div id="partidono">
+        </div>
+        <div id="partidono">
+        </div>
         <?php foreach($gamesCuartos['games'] as $groups): ?>
         <?php foreach($groups as  $games): ?>
         <?php foreach($games as $game): ?>
-        <?php if(($countGames + 1) <= $gamesCuartos['media']): ?>
+        <?php if(($countGames + 1) > $gamesCuartos['media']): ?>
         <div id="partido">
             <span class="fecha"><?php echo $game['dateObject']->toFormattedDateString(); ?>-<?php echo $game['time']; ?>-<?php echo $game['game']->stadium; ?></span><br>
             <div style="float: left;">
@@ -210,7 +220,7 @@
             <div style="float:right"><span style="font-size:10px;margin-right:5px"><strong><?php echo $game['awayTeam']->nombre; ?></strong></span></div>
         </div>
         <?php endif; ?>
-        <?php if($countGames == 2): ?>
+        <?php /*  <?php if($countGames == 2): ?>
         <div id="partidono">
             </div>
             <div id="partidono">
@@ -219,7 +229,7 @@
             </div>
             <div id="partidono">
             </div>
-        <?php endif; ?>
+        <?php endif; ?>*/ ?>
         <?php $countGames++ ?>
         <?php endforeach; ?>
         <?php endforeach; ?>
@@ -235,7 +245,7 @@
         <?php foreach($gamesOctavos['games'] as $groups): ?>
         <?php foreach($groups as  $games): ?>
         <?php foreach($games as $game): ?>
-        <?php if(($countGames + 1) <= $gamesOctavos['media']): ?>
+        <?php if(($countGames + 1) > $gamesOctavos['media']): ?>
         <div id="partido">
             <span class="fecha"><?php echo $game['dateObject']->toFormattedDateString(); ?>-<?php echo $game['time']; ?>-<?php echo $game['game']->stadium; ?></span><br>
             <div style="float: left;">

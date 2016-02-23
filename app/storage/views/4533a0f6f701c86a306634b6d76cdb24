@@ -24,11 +24,11 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <?php foreach($tablePosTeams as $index => $team): ?>
+                            <?php foreach($tablePosTeams[$group->id] as $index => $team): ?>
                             <tr style="background: #ace39e">
                                 <td><?php echo $index; ?></td>
                                 <td align="left">
-                                    <img src="<?php echo $team['team']->escudo->url('thumb'); ?>" width="15px"><strong> <?php echo $team['team']->subName; ?></strong>
+                                    <img src="<?php echo $team['team']->escudo->url('thumb'); ?>" width="15px"><strong> <?php echo $team['team']->nombre; ?></strong>
                                 </td>
                                 <td><?php echo $team['points']; ?></td>
                                 <td><?php echo $team['gamesPlayed']; ?></td>
@@ -44,7 +44,7 @@
                     </table>
                 </div>
                     <div style="width: 400px; float: left; margin-left:20px">
-                        <?php foreach($tablePosTeams as $index => $team): ?>
+                        <?php foreach($tablePosTeams[$group->id] as $index => $team): ?>
                             <img src="<?php echo $team['team']->escudo->url('thumb'); ?>" border="0" title="<?php echo $team['team']->nombre; ?>" width="64px" height="64px">
                         <?php endforeach; ?>
                     </div>
