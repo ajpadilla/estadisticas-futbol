@@ -43,7 +43,8 @@
 						'champion L',
 						'copa argentina',
 						'sudamericana',
-						'mundial de clubes'
+						'mundial de clubes',
+						'repechaje' => 'repechaje'
 			]
 			,$competition->type,['class' => 'form-control chosen-select','data-placeholder' => 'Escoge Tipo...','id'=> 'type_competition']); ?>
 

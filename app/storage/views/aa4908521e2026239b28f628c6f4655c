@@ -257,6 +257,7 @@
 				</table>
 				<table width="100%">
 					<tbody>
+						<?php if(!empty($gamesForGroups)): ?>
 						<?php foreach($gamesForGroups as $index => $groups): ?>
 						<?php foreach($groups as $index2 => $games): ?>
 						<?php foreach($games as $index2 => $game): ?>
@@ -288,6 +289,7 @@
 						<?php endforeach; ?>
 						<?php endforeach; ?>
 						<?php endforeach; ?>
+						<?php endif; ?>
 					</tbody>
 				</table>
 			</div>
