@@ -1,10 +1,11 @@
 @if(!empty($libertadoresCups))
-<div id="infoequipo">FASE FINAL</div>
+<!--<div id="infoequipo">FASE FINAL</div>-->
 <div id="fixture">
     @if($gamesOctavos)
     <?php $countGames = 0; ?>
     <div id="columna">
         <span class="grupom">Octavos</span><br>
+        @if(!empty($gamesOctavos['games']))
         @foreach($gamesOctavos['games'] as $groups)
         @foreach($groups as  $games)
         @foreach($games as $game)
@@ -14,7 +15,7 @@
             <div style="float: left;">
                 <img src="{{ $game['imgLocalTeam'] }}" width="45px" height="45px">
             </div>
-            <div class="cuadrores3">{{ $game['localGoals'] }} - {{ $game['awayGoals'] }}<br><span style="font-size:12px">(3-2)</span></div>
+            <div class="cuadrores3">{{ $game['localGoals'] }} - {{ $game['awayGoals'] }}<br><span style="font-size:12px"></span></div>
             <div style="float: right;"><img src="{{ $game['imgAwayTeam'] }}" width="45px" height="45px"></div>
             <br style="clear: both;">
             <div style="float:left"><span style="font-size:10px;margin-left:5px"><strong>{{ $game['localTeam']->nombre }}</strong></span></div>
@@ -25,6 +26,7 @@
         @endforeach
         @endforeach
         @endforeach
+        @endif
     </div>
     @endif
 
@@ -36,6 +38,11 @@
         </div>
         <div id="partidono" style="margin-top:15px">
         </div>
+        <div id="partidono">
+        </div>
+        <div id="partidono">
+        </div>
+        @if(!empty($gamesCuartos['games']))
         @foreach($gamesCuartos['games'] as $groups)
         @foreach($groups as  $games)
         @foreach($games as $game)
@@ -45,14 +52,14 @@
             <div style="float: left;">
                 <img src="{{ $game['imgLocalTeam'] }}" width="45px" height="45px">
             </div>
-            <div class="cuadrores3">{{ $game['localGoals'] }} - {{ $game['awayGoals'] }}<br><span style="font-size:12px">(3-2)</span></div>
+            <div class="cuadrores3">{{ $game['localGoals'] }} - {{ $game['awayGoals'] }}<br><span style="font-size:12px"></span></div>
             <div style="float: right;"><img src="{{ $game['imgAwayTeam'] }}" width="45px" height="45px"></div>
             <br style="clear: both;">
             <div style="float:left"><span style="font-size:10px;margin-left:5px"><strong>{{ $game['localTeam']->nombre }}</strong></span></div>
             <div style="float:right"><span style="font-size:10px;margin-right:5px"><strong>{{ $game['awayTeam']->nombre }}</strong></span></div>
         </div>
         @endif
-        @if($countGames == 2)
+        {{-- @if($countGames == 2)
         <div id="partidono">
             </div>
             <div id="partidono">
@@ -61,17 +68,19 @@
             </div>
             <div id="partidono">
             </div>
-        @endif
+        @endif --}}
         <?php $countGames++ ?>
         @endforeach
         @endforeach
         @endforeach
+        @endif
     </div>
     @endif
 
      @if($gamesSemiFinal)
             <?php $countGames = 0; ?>
             <div id="columna">
+            <span class="grupom">Semifinal</span><br>
                 <div id="partidono">
                 </div>
                 <div id="partidono">
@@ -86,6 +95,7 @@
                 </div>
                 <div id="partidono">
                 </div>
+                @if(!empty($gamesSemiFinal['games']))
                 @foreach($gamesSemiFinal['games'] as $groups)
                 @foreach($groups as  $games)
                 @foreach($games as $game)
@@ -95,7 +105,7 @@
                     <div style="float: left;">
                         <img src="{{ $game['imgLocalTeam'] }}" width="45px" height="45px">
                     </div>
-                    <div class="cuadrores3">{{ $game['localGoals'] }} - {{ $game['awayGoals'] }}<br><span style="font-size:12px">(3-2)</span></div>
+                    <div class="cuadrores3">{{ $game['localGoals'] }} - {{ $game['awayGoals'] }}<br><span style="font-size:12px"></span></div>
                     <div style="float: right;"><img src="{{ $game['imgAwayTeam'] }}" width="45px" height="45px"></div>
                     <br style="clear: both;">
                     <div style="float:left"><span style="font-size:10px;margin-left:5px"><strong>{{ $game['localTeam']->nombre }}</strong></span></div>
@@ -106,6 +116,7 @@
                 @endforeach
                 @endforeach
                 @endforeach
+                @endif
             </div>
         @endif
 
@@ -120,6 +131,7 @@
                 <img src="http://lh4.googleusercontent.com/-NrIKdC8xpao/UXAC7AcH9rI/AAAAAAAAATk/maDST54eaNg/s200/libertadores.png">
                 <br>
                 <div style="margin:auto;text-align:center;color: white;font-weight: bold">FINAL COPA LIBERTADORES {{ $currentCup->year }}</div>
+                @if(!empty($gamesFinal['games']))
                 @foreach($gamesFinal['games'] as $groups)
                 @foreach($groups as  $games)
                 @foreach($games as $game)
@@ -128,7 +140,7 @@
                     <div style="float: left;">
                         <img src="{{ $game['imgLocalTeam'] }}" width="45px" height="45px">
                     </div>
-                    <div class="cuadrores3">{{ $game['localGoals'] }} - {{ $game['awayGoals'] }}<br><span style="font-size:12px">(3-2)</span></div>
+                    <div class="cuadrores3">{{ $game['localGoals'] }} - {{ $game['awayGoals'] }}<br><span style="font-size:12px"></span></div>
                     <div style="float: right;"><img src="{{ $game['imgAwayTeam'] }}" width="45px" height="45px"></div>
                     <br style="clear: both;">
                     <div style="float:left"><span style="font-size:10px;margin-left:5px"><strong>{{ $game['localTeam']->nombre }}</strong></span></div>
@@ -138,6 +150,7 @@
                 @endforeach
                 @endforeach
                 @endforeach
+                @endif
             </div>
         </div>
         @endif
@@ -145,6 +158,7 @@
         @if($gamesSemiFinal)
             <?php $countGames = 0; ?>
             <div id="columna">
+                <span class="grupom">Semifinal</span><br>
                 <div id="partidono">
                 </div>
                 <div id="partidono">
@@ -159,6 +173,7 @@
                 </div>
                 <div id="partidono">
                 </div>
+                @if(!empty($gamesSemiFinal['games']))
                 @foreach($gamesSemiFinal['games'] as $groups)
                 @foreach($groups as  $games)
                 @foreach($games as $game)
@@ -168,7 +183,7 @@
                     <div style="float: left;">
                         <img src="{{ $game['imgLocalTeam'] }}" width="45px" height="45px">
                     </div>
-                    <div class="cuadrores3">{{ $game['localGoals'] }} - {{ $game['awayGoals'] }}<br><span style="font-size:12px">(3-2)</span></div>
+                    <div class="cuadrores3">{{ $game['localGoals'] }} - {{ $game['awayGoals'] }}<br><span style="font-size:12px"></span></div>
                     <div style="float: right;"><img src="{{ $game['imgAwayTeam'] }}" width="45px" height="45px"></div>
                     <br style="clear: both;">
                     <div style="float:left"><span style="font-size:10px;margin-left:5px"><strong>{{ $game['localTeam']->nombre }}</strong></span></div>
@@ -179,6 +194,7 @@
                 @endforeach
                 @endforeach
                 @endforeach
+                @endif
             </div>
         @endif
 
@@ -191,23 +207,28 @@
         </div>
         <div id="partidono" style="margin-top:15px">
         </div>
+        <div id="partidono">
+        </div>
+        <div id="partidono">
+        </div>
+        @if(!empty($gamesCuartos['games']))
         @foreach($gamesCuartos['games'] as $groups)
         @foreach($groups as  $games)
         @foreach($games as $game)
-        @if(($countGames + 1) <= $gamesCuartos['media'])
+        @if(($countGames + 1) > $gamesCuartos['media'])
         <div id="partido">
             <span class="fecha">{{ $game['dateObject']->toFormattedDateString() }}-{{ $game['time'] }}-{{ $game['game']->stadium }}</span><br>
             <div style="float: left;">
                 <img src="{{ $game['imgLocalTeam'] }}" width="45px" height="45px">
             </div>
-            <div class="cuadrores3">{{ $game['localGoals'] }} - {{ $game['awayGoals'] }}<br><span style="font-size:12px">(3-2)</span></div>
+            <div class="cuadrores3">{{ $game['localGoals'] }} - {{ $game['awayGoals'] }}<br><span style="font-size:12px"></span></div>
             <div style="float: right;"><img src="{{ $game['imgAwayTeam'] }}" width="45px" height="45px"></div>
             <br style="clear: both;">
             <div style="float:left"><span style="font-size:10px;margin-left:5px"><strong>{{ $game['localTeam']->nombre }}</strong></span></div>
             <div style="float:right"><span style="font-size:10px;margin-right:5px"><strong>{{ $game['awayTeam']->nombre }}</strong></span></div>
         </div>
         @endif
-        @if($countGames == 2)
+       {{-- @if($countGames == 2)
         <div id="partidono">
             </div>
             <div id="partidono">
@@ -216,11 +237,12 @@
             </div>
             <div id="partidono">
             </div>
-        @endif
+        @endif --}} 
         <?php $countGames++ ?>
         @endforeach
         @endforeach
         @endforeach
+        @endif
     </div>
     @endif
 
@@ -229,16 +251,17 @@
     <?php $countGames = 0; ?>
     <div id="columna">
         <span class="grupom">Octavos</span><br>
+        @if(!empty($gamesOctavos['games']))
         @foreach($gamesOctavos['games'] as $groups)
         @foreach($groups as  $games)
         @foreach($games as $game)
-        @if(($countGames + 1) <= $gamesOctavos['media'])
+        @if(($countGames + 1) > $gamesOctavos['media'])
         <div id="partido">
             <span class="fecha">{{ $game['dateObject']->toFormattedDateString() }}-{{ $game['time'] }}-{{ $game['game']->stadium }}</span><br>
             <div style="float: left;">
                 <img src="{{ $game['imgLocalTeam'] }}" width="45px" height="45px">
             </div>
-            <div class="cuadrores3">{{ $game['localGoals'] }} - {{ $game['awayGoals'] }}<br><span style="font-size:12px">(3-2)</span></div>
+            <div class="cuadrores3">{{ $game['localGoals'] }} - {{ $game['awayGoals'] }}<br><span style="font-size:12px"></span></div>
             <div style="float: right;"><img src="{{ $game['imgAwayTeam'] }}" width="45px" height="45px"></div>
             <br style="clear: both;">
             <div style="float:left"><span style="font-size:10px;margin-left:5px"><strong>{{ $game['localTeam']->nombre }}</strong></span></div>
@@ -249,6 +272,7 @@
         @endforeach
         @endforeach
         @endforeach
+        @endif
     </div>
     @endif
 
