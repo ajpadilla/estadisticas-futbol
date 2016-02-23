@@ -1,6 +1,8 @@
 <div style="width: 980px;height: auto;background: #17573d;font-size:12px;color:white;text-align: center;">
 	<div style="width: 250px;float: left">
-		<strong>{{ $currentCompetition->nombre }}</strong><br>
+		@if (!empty($currentCompetition))
+			<strong>{{ $currentCompetition->nombre }}</strong><br>
+		@endif
 		@if(!empty($winner))
 			<img src="{{  $winner->foto->url('thumb') }}" width="64px"><br>
 			{{ $winner->nombre }}
