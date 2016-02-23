@@ -39,6 +39,9 @@ Route::get('getCurrentCompetition', ['as' => 'currentCompetition', 'uses' => 'Pu
 Route::get('bnacional', ['as' => 'bNacional', 'uses' => 'PublicController@gamesBNacional']);
 Route::get('bmetro', ['as' => 'bMetro', 'uses' => 'PublicController@gamesBMetro']);
 Route::get('federala', ['as' => 'federalA', 'uses' => 'PublicController@gamesFederalA']);
+Route::get('primerac', ['as' => 'primeraC', 'uses' => 'PublicController@gamesPrimeraC']);
+Route::get('primerad', ['as' => 'primeraD', 'uses' => 'PublicController@gamesPrimeraD']);
+Route::get('federalb', ['as' => 'federalB', 'uses' => 'PublicController@gamesFederalB']);
 /*
 ********************************* FIN RUTAS PUBLICAS ********************************
 */
