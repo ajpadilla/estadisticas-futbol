@@ -1,5 +1,5 @@
 @if(!empty($sudamericanaCups))
-<div id="infoequipo">FASE FINAL</div>
+<!--<div id="infoequipo">FASE FINAL</div>-->
 <div id="fixture">
     @if($gamesOctavos)
     <?php $countGames = 0; ?>
@@ -36,6 +36,11 @@
         </div>
         <div id="partidono" style="margin-top:15px">
         </div>
+        <div id="partidono">
+        </div>
+        <div id="partidono" style="margin-top:15px">
+        </div>
+        @if(!empty($gamesCuartos['games']))
         @foreach($gamesCuartos['games'] as $groups)
         @foreach($groups as  $games)
         @foreach($games as $game)
@@ -52,7 +57,7 @@
             <div style="float:right"><span style="font-size:10px;margin-right:5px"><strong>{{ $game['awayTeam']->nombre }}</strong></span></div>
         </div>
         @endif
-        @if($countGames == 2)
+        {{--  @if($countGames == 2)
         <div id="partidono">
             </div>
             <div id="partidono">
@@ -61,11 +66,12 @@
             </div>
             <div id="partidono">
             </div>
-        @endif
+        @endif--}}
         <?php $countGames++ ?>
         @endforeach
         @endforeach
         @endforeach
+        @endif
     </div>
     @endif
 
@@ -121,6 +127,7 @@
                 <strong>FINAL COPA SUDAMERICANA {{ $currentCup->year }}</strong><br>
             </div>
             <div id="partidono" style="margin-top:8px"></div>
+                @if($gamesFinal['games'])
                 @foreach($gamesFinal['games'] as $groups)
                 @foreach($groups as  $games)
                 @foreach($games as $game)
@@ -139,6 +146,7 @@
                 @endforeach
                 @endforeach
                 @endforeach
+                @endif
         </div>
         @endif
 
@@ -191,6 +199,11 @@
         </div>
         <div id="partidono" style="margin-top:15px">
         </div>
+        <div id="partidono">
+        </div>
+        <div id="partidono" style="margin-top:15px">
+        </div>
+        @if(!empty($gamesCuartos['games']))
         @foreach($gamesCuartos['games'] as $groups)
         @foreach($groups as  $games)
         @foreach($games as $game)
@@ -207,7 +220,7 @@
             <div style="float:right"><span style="font-size:10px;margin-right:5px"><strong>{{ $game['awayTeam']->nombre }}</strong></span></div>
         </div>
         @endif
-        @if($countGames == 2)
+        {{--  @if($countGames == 2)
         <div id="partidono">
             </div>
             <div id="partidono">
@@ -216,11 +229,12 @@
             </div>
             <div id="partidono">
             </div>
-        @endif
+        @endif--}}
         <?php $countGames++ ?>
         @endforeach
         @endforeach
         @endforeach
+        @endif
     </div>
     @endif
 
