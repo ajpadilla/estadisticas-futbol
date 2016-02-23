@@ -39,11 +39,11 @@
 	<br>
 	<div style="clear: both;"></div>
 	<br>
-	@include('public.b_metro.partials._table-games-phase-tpl')
-	@include('public.b_metro.partials._name-phases-for-competition-tpl')
-	@include('public.b_metro.partials._stats-phase-tpl')
-	@include('public.b_metro.partials._scorers-tpl')
-	@include('public.b_metro.partials._average-head-tpl')
+	@include('public.federal_a.partials._table-games-phase-tpl')
+	@include('public.federal_a.partials._name-phases-for-competition-tpl')
+	@include('public.federal_a.partials._stats-phase-tpl')
+	@include('public.federal_a.partials._scorers-tpl')
+	@include('public.federal_a.partials._average-head-tpl')
 @stop
 
 @section('scripts')
