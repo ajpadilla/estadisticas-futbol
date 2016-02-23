@@ -12,3 +12,4 @@
 .ui-button-text, .ui-button, .ui-dialog-titlebar {display: none}
 #cerrar {width:90px; background: #144;font-size:12px; cursor: pointer; text-align: center;padding:4px}
 #sonido {background:  #092B1D;margin: auto;padding: 2px;cursor: pointer;font-size:11px;color:white;text-align:center;width:110px   }
+#fixturein2 { width: 420px;margin: auto;background: #85a094;color: #111;font-family: verdana;font-size: 12px;font-weight: bold;}
