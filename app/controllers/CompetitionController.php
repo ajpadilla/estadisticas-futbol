@@ -262,15 +262,11 @@ class CompetitionController extends \BaseController {
 		return $this->getResponseArrayJson();
 	}
 
-	public function getAllCompetitios($competition)
+	public function getAllCompetitios()
 	{
 		if(Request::ajax())
 		{
-			$competitions = $this->repository->getModel()
-			->whereType($competition)
-			->orderBy('desde', 'desc')
-			->orderBy('hasta', 'desc')
-			->get();
+			$competitions = $this->repository->getAll();
 			$this->setSuccess(true);
 			$this->addToResponseArray('competitions', $competitions);
 		}
