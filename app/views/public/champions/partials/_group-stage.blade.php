@@ -24,11 +24,11 @@
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach($tablePosTeams as $index => $team)
+                            @foreach($tablePosTeams[$group->id] as $index => $team)
                             <tr style="background: #ace39e">
                                 <td>{{ $index }}</td>
                                 <td align="left">
-                                    <img src="{{ $team['team']->escudo->url('thumb')  }}" width="15px"><strong> {{ $team['team']->subName }}</strong>
+                                    <img src="{{ $team['team']->escudo->url('thumb')  }}" width="15px"><strong> {{ $team['team']->nombre }}</strong>
                                 </td>
                                 <td>{{ $team['points'] }}</td>
                                 <td>{{ $team['gamesPlayed'] }}</td>
@@ -44,7 +44,7 @@
                     </table>
                 </div>
                     <div style="width: 400px; float: left; margin-left:20px">
-                        @foreach($tablePosTeams as $index => $team)
+                        @foreach($tablePosTeams[$group->id] as $index => $team)
                             <img src="{{ $team['team']->escudo->url('thumb')  }}" border="0" title="{{ $team['team']->nombre }}" width="64px" height="64px">
                         @endforeach
                     </div>
