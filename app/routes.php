@@ -37,7 +37,7 @@ Route::get('getCompetitionsForCurrentAverage', ['as' => 'currentAverage', 'uses'
 Route::get('getCurrentCompetition', ['as' => 'currentCompetition', 'uses' => 'PublicController@getCurrentCompetition']);
 
 Route::get('bnacional', ['as' => 'bNacional', 'uses' => 'PublicController@gamesBNacional']);
-
+Route::get('bmetro', ['as' => 'bMetro', 'uses' => 'PublicController@gamesBMetro']);
 
 /*
 ********************************* FIN RUTAS PUBLICAS ********************************
