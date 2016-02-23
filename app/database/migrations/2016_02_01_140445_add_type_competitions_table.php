@@ -50,7 +50,8 @@ class AddTypeCompetitionsTable extends Migration {
 						'champion L',
 						'copa argentina',
 						'sudamericana',
-						'mundial de clubes'
+						'mundial de clubes',
+						'repechaje'
 				))
 			->after('nombre');;
 		});
