@@ -1,4 +1,4 @@
-@if (!$competition->finished) 
+{{--@if(!$competition->finished) --}}
 	<div class="row">
 		<div class="col-md-2">
 			<button class="pull-left btn btn-lg btn-primary" id="add-phase" data-competition-id="{{ $competition->id }}" href="#">Agregar fase</button>
@@ -12,7 +12,7 @@
 		@include('phases.edit-tpl')
 	</div>
 	<br />
-@endif
+{{--@endif--}}
 <div class="row">
 	@if ($competition->hasPhases)
 		@include('groups.partials._tables')
