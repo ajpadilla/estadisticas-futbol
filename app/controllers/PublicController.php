@@ -437,6 +437,7 @@ class PublicController extends \BaseController {
 		$gamesSemiFinal = null;
 		$gamesFinal = null;
 		$thirdPlace = null;
+		$gamesForGroupsRepechaje = null;
 
 		$libertadoresCups = $this->competitionRepository
 		->getModel()
@@ -457,32 +458,49 @@ class PublicController extends \BaseController {
 
 			if($currentCup->hasPhases)
 			{
-				$firstPhase = $currentCup->phases->first();
+				$firstPhase = $currentCup->phases()->whereType('fase de grupos')->first();;
 				if(!empty($firstPhase) && !empty($firstPhase->hasGroups)){
 					$gamesForGroups = $this->competitionRepository->getGamesForPhase($firstPhase->id);
 					foreach ($firstPhase->groups as $group) {
-						$tablePosTeams = $this->competitionRepository->getPostTeamsForGruop($group->id);
+						$tablePosTeams[$group->id] = $this->competitionRepository->getPostTeamsForGruop($group->id);
 					}
 				}
 			}
+
 			$winner= $this->competitionRepository->winner($currentCup->id);
 			$gamesOctavos = $this->competitionRepository->getGamesForTypePhase('octavos', $currentCup->id);
 			$gamesCuartos = $this->competitionRepository->getGamesForTypePhase('cuartos', $currentCup->id);
 			$gamesSemiFinal = $this->competitionRepository->getGamesForTypePhase('semifinal', $currentCup->id);
 			$gamesFinal = $this->competitionRepository->getGamesForTypePhase('final', $currentCup->id);
-			$thirdPlace = $this->competitionRepository->getGamesForTypePhase('tercer lugar', $currentCup->id);
+
+			$associatedCompetitions = $this->competitionRepository
+			->getModel()
+			->wherePreviousId($currentCup->id)
+			->orderBy('desde', 'desc')
+			->orderBy('hasta', 'desc') 
+			->get();
+
+			foreach ($associatedCompetitions as $indexCompetition => $associatedCompetition) {
+				foreach ($associatedCompetition->phases as $indexPhase => $phase) {
+					$gamesForAssociateCompetitions[$phase->id] = $this->competitionRepository->getGamesForPhase($phase->id);
+				}
+			}
+
 		}
 	 	return View::make('public.libertadores._libertadores', compact(
 	 													'libertadoresCups',
 	 													'currentCup',
 	 													'gamesForPhases',
+	 													'gamesForGroupsRepechaje',
 	 													'tablePosTeams',
 	 													'gamesForGroups',
 	 													'winner',
 	 													'gamesOctavos',
 	 													'gamesCuartos',
 	 													'gamesSemiFinal',
-	 													'gamesFinal'
+	 													'gamesFinal',
+	 													'associatedCompetitions',
+	 													'gamesForAssociateCompetitions'
 	 												)
 	 	);
 	}
