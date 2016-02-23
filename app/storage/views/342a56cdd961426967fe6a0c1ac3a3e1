@@ -11,38 +11,38 @@
 	<div style="clear: both;"></div>
 	<br/>
 	<div style="clear: both;"></div>
-	<?php echo $__env->make('public.federal_a.partials._paginator-games', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
+	<?php echo $__env->make('public.primera_c.partials._paginator-games', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
 	<div style="clear: both;"></div>
-	<?php echo $__env->make('public.federal_a.partials._shields', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
+	<?php echo $__env->make('public.primera_c.partials._shields', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
 	<div style="clear: both;"></div>
-	<div style="clear: both;"></div>
-	<br>
-	<?php echo $__env->make('public.federal_a.partials._info-league', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
 	<div style="clear: both;"></div>
 	<br>
-	<div style="clear: both;"></div>
-	<br>
-	<?php echo $__env->make('public.federal_a.partials._associated_skills', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
-	<div style="clear: both;"></div>
-	<br>
-	<?php echo $__env->make('public.federal_a.partials._positions', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
-	<?php echo $__env->make('public.federal_a.partials._phases', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>;
-	<br>
-	<div style="clear: both;"></div>
-	<br>
-	<?php echo $__env->make('public.federal_a.partials._averages', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
-	<?php echo $__env->make('public.federal_a.partials._scorers', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
-	<?php echo $__env->make('public.federal_a.partials._statistics_tournament', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
-	<br>
+	<?php echo $__env->make('public.primera_c.partials._info-league', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
 	<div style="clear: both;"></div>
 	<br>
 	<div style="clear: both;"></div>
 	<br>
-	<?php echo $__env->make('public.federal_a.partials._table-games-phase-tpl', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
-	<?php echo $__env->make('public.federal_a.partials._name-phases-for-competition-tpl', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
-	<?php echo $__env->make('public.federal_a.partials._stats-phase-tpl', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
-	<?php echo $__env->make('public.federal_a.partials._scorers-tpl', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
-	<?php echo $__env->make('public.federal_a.partials._average-head-tpl', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
+	<?php echo $__env->make('public.primera_c.partials._associated_skills', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
+	<div style="clear: both;"></div>
+	<br>
+	<?php echo $__env->make('public.primera_c.partials._positions', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
+	<?php echo $__env->make('public.primera_c.partials._phases', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>;
+	<br>
+	<div style="clear: both;"></div>
+	<br>
+	<?php echo $__env->make('public.primera_c.partials._averages', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
+	<?php echo $__env->make('public.primera_c.partials._scorers', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
+	<?php echo $__env->make('public.primera_c.partials._statistics_tournament', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
+	<br>
+	<div style="clear: both;"></div>
+	<br>
+	<div style="clear: both;"></div>
+	<br>
+	<?php echo $__env->make('public.primera_c.partials._table-games-phase-tpl', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
+	<?php echo $__env->make('public.primera_c.partials._name-phases-for-competition-tpl', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
+	<?php echo $__env->make('public.primera_c.partials._stats-phase-tpl', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
+	<?php echo $__env->make('public.primera_c.partials._scorers-tpl', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
+	<?php echo $__env->make('public.primera_c.partials._average-head-tpl', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
 <?php $__env->stopSection(); ?>
 
 <?php $__env->startSection('scripts'); ?>

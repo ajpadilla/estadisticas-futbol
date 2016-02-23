@@ -26,10 +26,10 @@
 			+ CATEGORÍAS
 			<br><span class="subitem">
 				<a href="<?php echo route('bMetro'); ?>">B Metro</a>
-				<a href=<?php echo route('federalA'); ?>>Federal A</a>
-				<a href="primerac">Primera C</a>
-				<a href="primerad">Primera D</a>
-				<a href="federalb">Federal B</a>
+				<a href="<?php echo route('federalA'); ?>">Federal A</a>
+				<a href="<?php echo route('primeraC'); ?>">Primera C</a>
+				<a href="<?php echo route('primeraD'); ?>">Primera D</a>
+				<a href="<?php echo route('federalB'); ?>">Federal B</a>
 			</span>
 		</div>
 	</div>
