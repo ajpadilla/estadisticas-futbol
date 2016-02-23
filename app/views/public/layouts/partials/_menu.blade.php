@@ -25,11 +25,11 @@
 		<div class="itemmenu">
 			+ CATEGORÍAS
 			<br><span class="subitem">
-				<a href="bmetro">B Metro</a>
-				<a href="federala">Federal A</a>
-				<a href="primerac">Primera C</a>
-				<a href="primerad">Primera D</a>
-				<a href="federalb">Federal B</a>
+				<a href="{{ route('bMetro') }}">B Metro</a>
+				<a href="{{ route('federalA') }}">Federal A</a>
+				<a href="{{ route('primeraC') }}">Primera C</a>
+				<a href="{{ route('primeraD') }}">Primera D</a>
+				<a href="{{ route('federalB') }}">Federal B</a>
 			</span>
 		</div>
 	</div>
