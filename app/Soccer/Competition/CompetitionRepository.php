@@ -310,6 +310,7 @@ class CompetitionRepository extends BaseRepository
 						$dateObject = Carbon::parse($game->date);
 						$gameFixtures = array(
 							'group_id' => $group->id,
+							'group' => $group,
 							'game' => $game,
 							'localTeam' => $game->localTeam,
 							'awayTeam' => $game->awayTeam,
