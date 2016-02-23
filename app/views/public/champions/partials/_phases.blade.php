@@ -14,7 +14,7 @@
             <div style="float: left;">
                 <img src="{{ $game['imgLocalTeam'] }}" width="45px" height="45px">
             </div>
-            <div class="cuadrores3">{{ $game['localGoals'] }} - {{ $game['awayGoals'] }}<br><span style="font-size:12px">(3-2)</span></div>
+            <div class="cuadrores3">{{ $game['localGoals'] }} - {{ $game['awayGoals'] }}<br><span style="font-size:12px"></span></div>
             <div style="float: right;"><img src="{{ $game['imgAwayTeam'] }}" width="45px" height="45px"></div>
             <br style="clear: both;">
             <div style="float:left"><span style="font-size:10px;margin-left:5px"><strong>{{ $game['localTeam']->nombre }}</strong></span></div>
@@ -49,7 +49,7 @@
             <div style="float: left;">
                 <img src="{{ $game['imgLocalTeam'] }}" width="45px" height="45px">
             </div>
-            <div class="cuadrores3">{{ $game['localGoals'] }} - {{ $game['awayGoals'] }}<br><span style="font-size:12px">(3-2)</span></div>
+            <div class="cuadrores3">{{ $game['localGoals'] }} - {{ $game['awayGoals'] }}<br><span style="font-size:12px"></span></div>
             <div style="float: right;"><img src="{{ $game['imgAwayTeam'] }}" width="45px" height="45px"></div>
             <br style="clear: both;">
             <div style="float:left"><span style="font-size:10px;margin-left:5px"><strong>{{ $game['localTeam']->nombre }}</strong></span></div>
@@ -100,7 +100,7 @@
                     <div style="float: left;">
                         <img src="{{ $game['imgLocalTeam'] }}" width="45px" height="45px">
                     </div>
-                    <div class="cuadrores3">{{ $game['localGoals'] }} - {{ $game['awayGoals'] }}<br><span style="font-size:12px">(3-2)</span></div>
+                    <div class="cuadrores3">{{ $game['localGoals'] }} - {{ $game['awayGoals'] }}<br><span style="font-size:12px"></span></div>
                     <div style="float: right;"><img src="{{ $game['imgAwayTeam'] }}" width="45px" height="45px"></div>
                     <br style="clear: both;">
                     <div style="float:left"><span style="font-size:10px;margin-left:5px"><strong>{{ $game['localTeam']->nombre }}</strong></span></div>
@@ -127,7 +127,7 @@
             <div>
                 <img src="https://upload.wikimedia.org/wikipedia/commons/a/ad/Trofeo_Champions_League.jpg" width="140px">
                 <br>
-                <div style="margin:auto;text-align:center;color: white;font-weight: bold">FINAL COPA LIBERTADORES {{ $currentCup->year }}</div>
+                <div style="margin:auto;text-align:center;color: white;font-weight: bold">FINAL COPA CHAMPION {{ $currentCup->year }}</div>
                 @foreach($gamesFinal['games'] as $groups)
                 @foreach($groups as  $games)
                 @foreach($games as $game)
@@ -136,7 +136,7 @@
                     <div style="float: left;">
                         <img src="{{ $game['imgLocalTeam'] }}" width="45px" height="45px">
                     </div>
-                    <div class="cuadrores3">{{ $game['localGoals'] }} - {{ $game['awayGoals'] }}<br><span style="font-size:12px">(3-2)</span></div>
+                    <div class="cuadrores3">{{ $game['localGoals'] }} - {{ $game['awayGoals'] }}<br><span style="font-size:12px"></span></div>
                     <div style="float: right;"><img src="{{ $game['imgAwayTeam'] }}" width="45px" height="45px"></div>
                     <br style="clear: both;">
                     <div style="float:left"><span style="font-size:10px;margin-left:5px"><strong>{{ $game['localTeam']->nombre }}</strong></span></div>
@@ -177,7 +177,7 @@
                     <div style="float: left;">
                         <img src="{{ $game['imgLocalTeam'] }}" width="45px" height="45px">
                     </div>
-                    <div class="cuadrores3">{{ $game['localGoals'] }} - {{ $game['awayGoals'] }}<br><span style="font-size:12px">(3-2)</span></div>
+                    <div class="cuadrores3">{{ $game['localGoals'] }} - {{ $game['awayGoals'] }}<br><span style="font-size:12px"></span></div>
                     <div style="float: right;"><img src="{{ $game['imgAwayTeam'] }}" width="45px" height="45px"></div>
                     <br style="clear: both;">
                     <div style="float:left"><span style="font-size:10px;margin-left:5px"><strong>{{ $game['localTeam']->nombre }}</strong></span></div>
@@ -213,7 +213,7 @@
             <div style="float: left;">
                 <img src="{{ $game['imgLocalTeam'] }}" width="45px" height="45px">
             </div>
-            <div class="cuadrores3">{{ $game['localGoals'] }} - {{ $game['awayGoals'] }}<br><span style="font-size:12px">(3-2)</span></div>
+            <div class="cuadrores3">{{ $game['localGoals'] }} - {{ $game['awayGoals'] }}<br><span style="font-size:12px"></span></div>
             <div style="float: right;"><img src="{{ $game['imgAwayTeam'] }}" width="45px" height="45px"></div>
             <br style="clear: both;">
             <div style="float:left"><span style="font-size:10px;margin-left:5px"><strong>{{ $game['localTeam']->nombre }}</strong></span></div>
@@ -251,7 +251,7 @@
             <div style="float: left;">
                 <img src="{{ $game['imgLocalTeam'] }}" width="45px" height="45px">
             </div>
-            <div class="cuadrores3">{{ $game['localGoals'] }} - {{ $game['awayGoals'] }}<br><span style="font-size:12px">(3-2)</span></div>
+            <div class="cuadrores3">{{ $game['localGoals'] }} - {{ $game['awayGoals'] }}<br><span style="font-size:12px"></span></div>
             <div style="float: right;"><img src="{{ $game['imgAwayTeam'] }}" width="45px" height="45px"></div>
             <br style="clear: both;">
             <div style="float:left"><span style="font-size:10px;margin-left:5px"><strong>{{ $game['localTeam']->nombre }}</strong></span></div>
