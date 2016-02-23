@@ -1,5 +1,5 @@
 @if(!empty($americaCups))
-    <div id="infoequipo">FASE FINAL</div>
+    <!--<div id="infoequipo">FASE FINAL</div>-->
     @if($gamesOctavos)
     <div style="margin-left:100px">
         <div id="fixture">
