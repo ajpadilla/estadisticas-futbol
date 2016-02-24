@@ -1,3 +1,4 @@
+afasdfasd
 <div class="tab-content">
 	@foreach ($competition->phasesWithGames as $phaseTableIndex => $phase)
 	<div class="tab-pane" id="tab-{{ $phase->id }}">						
@@ -10,7 +11,7 @@
 					@endif
 					<div class="box">
 						<div class="box-title">
-							<h4><i class="fa fa-bars"></i>{{ $group->name }}</h4>
+							<h4><i class="fa fa-bars"></i>{{ $group->name }} asfasdfa</h4>
 						</div>
 						<div class="box-body">
 							@if (!$group->isFullGames)
