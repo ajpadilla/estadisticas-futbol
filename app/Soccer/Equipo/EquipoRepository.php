@@ -97,10 +97,10 @@ class EquipoRepository extends BaseRepository
 		->get();*/
 
 		return Game::select('*')
-		->whereLocalTeamId($id)
         ->join('groups', 'games.group_id', '=', 'groups.id')
         ->join('phases', 'groups.phase_id', '=', 'phases.id')
         ->join('competitions', 'phases.competition_id', '=', 'competitions.id')
+		->whereLocalTeamId($id)
         ->where('competitions.id', '=', $competitionId)
         ->select('games.*')
         ->get(); 
@@ -121,10 +121,10 @@ class EquipoRepository extends BaseRepository
 		->get();*/
 
 		return Game::select('*')
-		->whereAwayTeamId($id)
         ->join('groups', 'games.group_id', '=', 'groups.id')
         ->join('phases', 'groups.phase_id', '=', 'phases.id')
         ->join('competitions', 'phases.competition_id', '=', 'competitions.id')
+        ->whereAwayTeamId($id)
         ->where('competitions.id', '=', $competitionId)
         ->select('games.*')
         ->get(); 
