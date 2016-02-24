@@ -13,7 +13,7 @@ use soccer\Game\Game;
 class Competition extends Eloquent implements StaplerableInterface{
 	use EloquentTrait;
 
-	protected $fillable = ['nombre','type','imagen','desde','hasta','international','competition_format_id','previous_id','country_id'];
+	protected $fillable = ['nombre','type','imagen','desde','hasta','international','previous_id','country_id'];
 
  	public function __construct(array $attributes = array()) {
         $this->hasAttachedFile('imagen', [
