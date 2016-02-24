@@ -13,12 +13,12 @@
                              <tr>
                                 <td colspan="4">
                                     <span class="datosequipo" style="display: block; background: url(assets/img/public/caja.png);width: 386px">
-                                        <span style="margin-left:10px; color: yellow">G{{ $indexGroup+1}}</span>
+                                        <span style="margin-left:10px; color: yellow">G{{$indexGroup+1}}</span>
                                         <span style="margin-left:50px">{{ $group->name }}</span>
                                     </span>
                                 </td>
                             </tr>
-                            @if (!empty($gamesForRepechaje))
+                            @if(!empty($gamesForRepechaje))
                                 @foreach($gamesForRepechaje as $index => $groups)
                                 @foreach($groups as $index2 => $games)
                                 @foreach($games as $index2 => $game)
