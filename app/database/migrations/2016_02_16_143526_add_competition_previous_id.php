@@ -14,7 +14,7 @@ class AddCompetitionPreviousId extends Migration {
 	{
 		Schema::table('competitions', function(Blueprint $table)
 		{
-			$table->integer('previous_id')->unsigned()->nullable()->after('competition_format_id');
+			$table->integer('previous_id')->unsigned()->nullable()->after('type');
 			/*$table->foreign('previous_id')
 				->references('id')
 				->on('competitions')
