@@ -84,7 +84,7 @@ class Group extends Eloquent {
             $totalGames = 0;
             for ($i=$totalTeams-1; $i > 0 ; $i--)  
                 $totalGames += $i;
-            if ($this->phase->format->isLocalAwayGame)
+            if ($this->phase->format->local_away_game)
                 $totalGames *= 2;
             return $totalGames <= $this->totalGames;
         }
