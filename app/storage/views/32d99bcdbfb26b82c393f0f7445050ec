@@ -15,11 +15,11 @@
 							<div class="col-md-8">
 								<table class="table table-hover">
 									<tbody>
-										<tr>
+										<?php /*< --tr>
 											<td>Formato de Competencia</td>
 											<td id="card-name"><strong><a id="show-competition-type" href="<?php echo route('competitionFormats.api.show', $competition->competitionFormat->id); ?>"><?php echo $competition->competitionFormat->name; ?></a></strong></td>
 										</tr>
-										<tr>
+										<tr>*/ ?>
 											<td>Inicia</td>
 											<td id="card-name"><strong><?php echo $competition->from; ?></strong></td>
 										</tr>
