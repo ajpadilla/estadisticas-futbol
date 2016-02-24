@@ -79,7 +79,7 @@
 					{{--< --div class="form-group">
 						{{ Form::label('competition_format_id','Formato de competencía',['class'=>'col-sm-2 control-label']) }}
 						<div class="col-sm-6">
-							{{ Form::select('competition_format_id',array(),null,['class' => 'form-control chosen-select','data-placeholder' => 'Escoge formato...','id'=> 'competition_format_id']) }}
+							{{ Form::select('competition_format_id',array(),null,['class' => 'form-control chosen-select','data-placeholder' => 'Escoge formatooooo...','id'=> 'competition_format_id']) }}
 						</div>
 					</div>--}}
 					<div class="form-group">
