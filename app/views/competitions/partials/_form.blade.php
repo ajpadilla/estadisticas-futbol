@@ -76,12 +76,12 @@
 						{{ Form::label('hasta', 'Hasta', ['class' => 'col-md-2 control-label']) }}	
 						<div class="col-md-6">{{ Form::text('hasta', null, ['class' => 'form-control datepicker', 'id'=>'hasta-competencia']) }}</div>
 					</div>
-					<div class="form-group">
+					{{--< --div class="form-group">
 						{{ Form::label('competition_format_id','Formato de competencía',['class'=>'col-sm-2 control-label']) }}
 						<div class="col-sm-6">
 							{{ Form::select('competition_format_id',array(),null,['class' => 'form-control chosen-select','data-placeholder' => 'Escoge formato...','id'=> 'competition_format_id']) }}
 						</div>
-					</div>
+					</div>--}}
 					<div class="form-group">
 						{{ Form::label('previous_id','Competencia previa',['class'=>'col-sm-2 control-label']) }}
 						<div class="col-sm-6">
