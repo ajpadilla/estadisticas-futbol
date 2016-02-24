@@ -178,15 +178,15 @@ class EquipoRepository extends BaseRepository
 		return $winGames;
 	}
 
-	public function getWinGamesByCompetition($id, $localGames = null, $awayGames = null, $startDateCompetition, $endDateCompetition)
+	public function getWinGamesByCompetition($id, $localGames = null, $awayGames = null, $competitionId)
 	{
 		$winGames = 0;
 
-		$localGames = ($localGames ? $localGames : $this->getLocalGamesByCompetition($id, $startDateCompetition, $endDateCompetition));
+		$localGames = ($localGames ? $localGames : $this->getLocalGamesByCompetition($id, $competitionId));
 		foreach ($localGames as $game)
 			$winGames += ($game->localGoals > $game->awayGoals ? 1 : 0);
 
-		$awayGames = ($awayGames ? $awayGames : $this->getAwayGamesByCompetition($id, $startDateCompetition, $endDateCompetition));
+		$awayGames = ($awayGames ? $awayGames : $this->getAwayGamesByCompetition($id, $competitionId));
 		foreach ($awayGames as $game)
 				$winGames += ($game->localGoals < $game->awayGoals ? 1 : 0);
 
@@ -209,15 +209,15 @@ class EquipoRepository extends BaseRepository
 	}
 
 
-	public function getLostGamesByCompetition($id, $localGames = null, $awayGames = null, $startDateCompetition, $endDateCompetition)
+	public function getLostGamesByCompetition($id, $localGames = null, $awayGames = null, $competitionId)
 	{
 		$lostGames = 0;
 
-		$localGames = ($localGames ? $localGames : $this->getLocalGamesByCompetition($id, $startDateCompetition, $endDateCompetition));
+		$localGames = ($localGames ? $localGames : $this->getLocalGamesByCompetition($id, $competitionId));
 		foreach ($localGames as $game)
 			$lostGames += ($game->localGoals < $game->awayGoals ? 1 : 0);
 
-		$awayGames = ($awayGames ? $awayGames : $this->getAwayGamesByCompetition($id, $startDateCompetition, $endDateCompetition));
+		$awayGames = ($awayGames ? $awayGames : $this->getAwayGamesByCompetition($id, $competitionId));
 		foreach ($awayGames as $game)
 			$lostGames += ($game->localGoals > $game->awayGoals ? 1 : 0);
 
@@ -239,15 +239,15 @@ class EquipoRepository extends BaseRepository
 		return $tieGames;
 	}
 
-	public function getTieGamesByCompetition($id, $localGames = null, $awayGames = null, $startDateCompetition, $endDateCompetition)
+	public function getTieGamesByCompetition($id, $localGames = null, $awayGames = null, $competitionId)
 	{
 		$tieGames = 0;
 
-		$localGames = ($localGames ? $localGames : $this->getLocalGamesByCompetition($id, $startDateCompetition, $endDateCompetition));
+		$localGames = ($localGames ? $localGames : $this->getLocalGamesByCompetition($id, $competitionId));
 		foreach ($localGames as $game)
 			$tieGames += ($game->localGoals == $game->awayGoals ? 1 : 0);
 
-		$awayGames = ($awayGames ? $awayGames : $this->getAwayGamesByCompetition($id, $startDateCompetition, $endDateCompetition));
+		$awayGames = ($awayGames ? $awayGames : $this->getAwayGamesByCompetition($id, $competitionId));
 		foreach ($awayGames as $game)
 			$tieGames += ($game->localGoals == $game->awayGoals ? 1 : 0);
 
@@ -264,15 +264,15 @@ class EquipoRepository extends BaseRepository
 		return $goals;
 	}
 
-	public function getScoredGoalsByCompetition($id, $localGames = null, $awayGames = null, $startDateCompetition, $endDateCompetition)
+	public function getScoredGoalsByCompetition($id, $localGames = null, $awayGames = null, $competitionId)
 	{
 		$goals = 0;
 
-		$localGames = ($localGames ? $localGames : $this->getLocalGamesByCompetition($id, $startDateCompetition, $endDateCompetition));
+		$localGames = ($localGames ? $localGames : $this->getLocalGamesByCompetition($id, $competitionId));
 		foreach ($localGames as $game)
 			$goals += $game->localGoals;
 
-		$awayGames = ($awayGames ? $awayGames : $this->getAwayGamesByCompetition($id, $startDateCompetition, $endDateCompetition));
+		$awayGames = ($awayGames ? $awayGames : $this->getAwayGamesByCompetition($id, $competitionId));
 		foreach ($awayGames as $game)
 			$goals += $game->awayGoals;
 
@@ -294,15 +294,15 @@ class EquipoRepository extends BaseRepository
 		return $goals;
 	}
 
-	public function getAgainstGoalsByCompetition($id, $localGames = null, $awayGames = null, $startDateCompetition, $endDateCompetition)
+	public function getAgainstGoalsByCompetition($id, $localGames = null, $awayGames = null, $competitionId)
 	{
 		$goals = 0;
 
-		$localGames = ($localGames ? $localGames : $this->getLocalGamesByCompetition($id, $startDateCompetition, $endDateCompetition));
+		$localGames = ($localGames ? $localGames : $this->getLocalGamesByCompetition($id, $competitionId));
 		foreach ($localGames as $game)
 			$goals += $game->awayGoals;
 
-		$awayGames = ($awayGames ? $awayGames : $this->getAwayGamesByCompetition($id, $startDateCompetition, $endDateCompetition));
+		$awayGames = ($awayGames ? $awayGames : $this->getAwayGamesByCompetition($id, $competitionId));
 		foreach ($awayGames as $game)
 			$goals += $game->localGoals;
 
