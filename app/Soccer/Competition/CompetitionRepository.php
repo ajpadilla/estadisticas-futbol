@@ -237,12 +237,12 @@ class CompetitionRepository extends BaseRepository
 
 			$localGames = $teamRepository->getLocalGamesByCompetition($team->id, $competition->id);
 			$awayGames = $teamRepository->getAwayGamesByCompetition($team->id, $competition->id);
-			/*$winGames = $teamRepository->getWinGamesByCompetition($team->id, $localGames, $awayGames, $competition->from, $competition->to);
-			$lostGames = $teamRepository->getLostGamesByCompetition($team->id, $localGames, $awayGames, $competition->from, $competition->to);
-			$tieGames = $teamRepository->getTieGamesByCompetition($team->id, $localGames, $awayGames, $competition->from, $competition->to);
-			$scoredGoals = $teamRepository->getScoredGoalsByCompetition($team->id, $localGames, $awayGames, $competition->from, $competition->to);
-			$againstGoals = $teamRepository->getAgainstGoalsByCompetition($team->id, $localGames, $awayGames, $competition->from, $competition->to);
-			$gamesPlayed = $teamRepository->getPlayedGamesByCompetition($team->id, $competition->from, $competition->to);*/
+			$winGames = $teamRepository->getWinGamesByCompetition($team->id, $localGames, $awayGames, $competition->id);
+			$lostGames = $teamRepository->getLostGamesByCompetition($team->id, $localGames, $awayGames, $competition->id);
+			$tieGames = $teamRepository->getTieGamesByCompetition($team->id, $localGames, $awayGames, $competition->id);
+			$scoredGoals = $teamRepository->getScoredGoalsByCompetition($team->id, $localGames, $awayGames, $competition->id);
+			$againstGoals = $teamRepository->getAgainstGoalsByCompetition($team->id, $localGames, $awayGames, $competition->id);
+			/*$gamesPlayed = $teamRepository->getPlayedGamesByCompetition($team->id, $competition->from, $competition->to);*/
 			$gamesPlayed = (count($localGames) + count($awayGames));
 
 			$teamFixtures = array(
