@@ -728,7 +728,9 @@ class PublicController extends \BaseController {
 		$gamesSemiFinal = null;
 		$gamesFinal = null;
 		$thirdPlace = null;
-		$gamesForGroupsRepechaje = null;
+		$repechajeCompetition = null;
+		$firstPhaseRepechaje = null;
+		$gamesForRepechaje = null;
 
 		$libertadoresCups = $this->competitionRepository
 		->getModel()
@@ -764,25 +766,23 @@ class PublicController extends \BaseController {
 			$gamesSemiFinal = $this->competitionRepository->getGamesForTypePhase('semifinal', $currentCup->id);
 			$gamesFinal = $this->competitionRepository->getGamesForTypePhase('final', $currentCup->id);
 
-			$associatedCompetitions = $this->competitionRepository
+			$repechajeCompetition = $this->competitionRepository
 			->getModel()
+			->whereType('repechaje')
 			->wherePreviousId($currentCup->id)
-			->orderBy('desde', 'desc')
-			->orderBy('hasta', 'desc') 
-			->get();
+			->first();
 
-			foreach ($associatedCompetitions as $indexCompetition => $associatedCompetition) {
-				foreach ($associatedCompetition->phases as $indexPhase => $phase) {
-					$gamesForAssociateCompetitions[$phase->id] = $this->competitionRepository->getGamesForPhase($phase->id);
+			if(!empty($repechajeCompetition))
+				$firstPhaseRepechaje = $repechajeCompetition->phases()->first();
+				if(!empty($firstPhaseRepechaje) && !empty($firstPhaseRepechaje->hasGroups)){
+					$gamesForRepechaje = $this->competitionRepository->getGamesForPhase($firstPhaseRepechaje->id);
 				}
-			}
 
 		}
 	 	return View::make('public.libertadores._libertadores', compact(
 	 													'libertadoresCups',
 	 													'currentCup',
 	 													'gamesForPhases',
-	 													'gamesForGroupsRepechaje',
 	 													'tablePosTeams',
 	 													'gamesForGroups',
 	 													'winner',
@@ -790,8 +790,8 @@ class PublicController extends \BaseController {
 	 													'gamesCuartos',
 	 													'gamesSemiFinal',
 	 													'gamesFinal',
-	 													'associatedCompetitions',
-	 													'gamesForAssociateCompetitions'
+	 													'firstPhaseRepechaje',
+	 													'gamesForRepechaje'
 	 												)
 	 	);
 	}
