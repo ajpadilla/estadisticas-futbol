@@ -1,4 +1,3 @@
-afasdfasd
 <div class="tab-content">
 	<?php foreach($competition->phasesWithGames as $phaseTableIndex => $phase): ?>
 	<div class="tab-pane" id="tab-<?php echo $phase->id; ?>">						
@@ -11,11 +10,9 @@ afasdfasd
 					<?php endif; ?>
 					<div class="box">
 						<div class="box-title">
-							<h4><i class="fa fa-bars"></i><?php echo $group->name; ?> asfasdfa</h4>
-							<?php echo $group->isFullGames; ?> aasfasfasfsdfsadf
+							<h4><i class="fa fa-bars"></i><?php echo $group->name; ?></h4>
 						</div>
 						<div class="box-body">
-
 							<?php if(!$group->isFullGames): ?>
 							<div class="row">
 								<div class="col-md-12">
