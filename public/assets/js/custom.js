@@ -4336,6 +4336,8 @@ var handleBootboxAddEquipoToJugador = function () {
                                                     }
                                                 },
                                                 error: function(jqXHR, textStatus, errorThrown) {
+                                                   console.log(jqXHR);
+                                                   console.log(textStatus);
                                                    console.log(errorThrown);
                                                    bootbox.dialog({
                                                             message:" ¡Error al enviar datos al servidor!",
