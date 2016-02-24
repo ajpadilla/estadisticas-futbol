@@ -89,12 +89,22 @@ class EquipoRepository extends BaseRepository
 		return Game::whereLocalTeamId($id)->whereGroupId($groupId)->get();
 	}
 	//Metodo el cual obtendra todos los juegos como local en toda la comepetencia
-	public function getLocalGamesByCompetition($id, $startDateCompetition, $endDateCompetition)
+	public function getLocalGamesByCompetition($id, $competitionId)
 	{
-		return Game::whereLocalTeamId($id)
+		/*return Game::whereLocalTeamId($id)
 		->whereRaw('DATE_FORMAT(games.date, "%Y-%m-%d") >= ?', [$startDateCompetition])
 		->whereRaw('DATE_FORMAT(games.date, "%Y-%m-%d") <= ?', [$endDateCompetition])
-		->get();
+		->get();*/
+
+		return Game::select('*')
+		->whereLocalTeamId($id)
+        ->join('groups', 'games.group_id', '=', 'groups.id')
+        ->join('phases', 'groups.phase_id', '=', 'phases.id')
+        ->join('competitions', 'phases.competition_id', '=', 'competitions.id')
+        ->where('competitions.id', '=', $competitionId)
+        ->select('games.*')
+        ->get(); 
+
 	}
 
 	public function getAwayGamesByGroup($id, $groupId)
@@ -103,12 +113,21 @@ class EquipoRepository extends BaseRepository
 	}
 
 	//Metodo el cual obtendra todos los juegos como visitante en toda la comepetencia
-	public function getAwayGamesByCompetition($id, $startDateCompetition, $endDateCompetition)
+	public function getAwayGamesByCompetition($id, $competitionId)
 	{
-		return Game::whereAwayTeamId($id)
+		/*return Game::whereAwayTeamId($id)
 		->whereRaw('DATE_FORMAT(games.date, "%Y-%m-%d") >= ?', [$startDateCompetition])
 		->whereRaw('DATE_FORMAT(games.date, "%Y-%m-%d") <= ?', [$endDateCompetition])
-		->get();
+		->get();*/
+
+		return Game::select('*')
+		->whereAwayTeamId($id)
+        ->join('groups', 'games.group_id', '=', 'groups.id')
+        ->join('phases', 'groups.phase_id', '=', 'phases.id')
+        ->join('competitions', 'phases.competition_id', '=', 'competitions.id')
+        ->where('competitions.id', '=', $competitionId)
+        ->select('games.*')
+        ->get(); 
 	}
 
 	public function getSortByPointsByGroup($groupId, $type = 'DESC')
