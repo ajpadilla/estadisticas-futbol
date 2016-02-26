@@ -1,7 +1,7 @@
 <script id="tableGamesForPhase-tpl" type="text/x-handlebars-template">
 	<tbody>
 		<tr style="background:#092B1D;text-align: center">
-		<td colspan="6"><span class="horariopartido">{{ time }}</span></td>
+			<td colspan="6"><span class="horariopartido">{{ time }}</span></td>
 		</tr>
 		<tr style="background: #e5e5e5">
 			<td class="falta" id="ti_1_10">{{ hour }}</td>
@@ -14,10 +14,11 @@
 				<img src="{{ imgAwayTeam }}" width="18px">
 				<span class="datoequipo">{{ awayTema }}</span>
 			</td>
-			<!--<td>
-				<div id="ficha" onclick="previa('10','primera');">Ficha<br><img src="http://www.promiedos.com.ar/images/nota.png">
+			<td>
+				<div id="ficha" class="game-file">Ficha<br>
+					<img src="/assets/img/public/nota.png">
 				</div>
-			</td>-->
+			</td>
 		</tr>
 		<tr style="background: white; font-size:10px">
 		<td colspan="3"><span style="color: green"></span>{{ fixturesLocalGoals }}</td>
