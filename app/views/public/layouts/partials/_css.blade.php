@@ -1,7 +1,8 @@
 {{ HTML::style('assets/css/public/estilo2.css'); }}
 {{ HTML::style('assets/css/public/inicio2.css'); }}
 {{ HTML::style('assets/css/public/mundial.css'); }}
-
+<!--JQUERY CUSTOM-->
+{{ HTML::style('assets/js/jquery-ui-1.10.3.custom/css/custom-theme/jquery-ui-1.10.3.custom.min.css'); }}
 <style>
 	.titulo a {
     	color: white;
