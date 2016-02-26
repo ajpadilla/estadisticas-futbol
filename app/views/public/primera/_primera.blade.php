@@ -44,6 +44,7 @@
 	@include('public.primera.partials._stats-phase-tpl')
 	@include('public.primera.partials._scorers-tpl')
 	@include('public.primera.partials._average-head-tpl')
+	@include('public.primera.partials._dialog_widget_game')
 @stop
 
 @section('scripts')
@@ -295,10 +296,32 @@
 			});
 		};
 
+		var openDialogGame = function() {
+			$("table").delegate('.game-file', 'click', function() {
+				$("#game_dialog" ).dialog({
+					buttons: [
+						{
+							text: "Cerrar",
+							icons: {
+								primary: "ui-icon-close"
+							},
+							click: function() {
+								$(this).dialog("close");
+							}
+					  	}
+				  	],
+				  	width: 500,
+					height:"auto"
+				});
+			});
+		}
+
+
 		groupsFixturesForCompetition();
 		gamesForFirtsPhase();
 		gameForPhases();
 		scoredGoals();
+		openDialogGame();
 	});
 </script>
 @stop
