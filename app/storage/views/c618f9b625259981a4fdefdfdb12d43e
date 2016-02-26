@@ -43,6 +43,7 @@
 	<?php echo $__env->make('public.primera.partials._stats-phase-tpl', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
 	<?php echo $__env->make('public.primera.partials._scorers-tpl', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
 	<?php echo $__env->make('public.primera.partials._average-head-tpl', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
+	<?php echo $__env->make('public.primera.partials._dialog_widget_game', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
 <?php $__env->stopSection(); ?>
 
 <?php $__env->startSection('scripts'); ?>
@@ -294,10 +295,32 @@
 			});
 		};
 
+		var openDialogGame = function() {
+			$("table").delegate('.game-file', 'click', function() {
+				$("#game_dialog" ).dialog({
+					buttons: [
+						{
+							text: "Cerrar",
+							icons: {
+								primary: "ui-icon-close"
+							},
+							click: function() {
+								$(this).dialog("close");
+							}
+					  	}
+				  	],
+				  	width: 500,
+					height:"auto"
+				});
+			});
+		}
+
+
 		groupsFixturesForCompetition();
 		gamesForFirtsPhase();
 		gameForPhases();
 		scoredGoals();
+		openDialogGame();
 	});
 </script>
 <?php $__env->stopSection(); ?>

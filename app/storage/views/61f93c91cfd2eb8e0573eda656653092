@@ -8,6 +8,11 @@
 
 <?php echo HTML::style('assets/font-awesome/css/font-awesome.min.css'); ?>
 
+
+<!--JQUERY CUSTOM-->
+<?php echo HTML::style('assets/js/jquery-ui-1.10.3.custom/css/custom-theme/jquery-ui-1.10.3.custom.min.css');; ?>
+
+
 <!-- DATE RANGE PICKER -->
 <?php echo HTML::style('assets/js/bootstrap-daterangepicker/daterangepicker-bs3.css'); ?>
 
@@ -45,6 +50,7 @@
 <?php echo HTML::style('assets/css/select2/css/select2.min.css');; ?>
 
 <?php echo HTML::style('assets/css/select2/css/select2-skins.min.css');; ?>
+
 
 
 <!-- FONTS -->
