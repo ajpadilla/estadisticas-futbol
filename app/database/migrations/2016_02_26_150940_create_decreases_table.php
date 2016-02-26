@@ -15,11 +15,13 @@ class CreateDecreasesTable extends Migration {
 		Schema::create('decreases', function(Blueprint $table)
 		{
 			$table->increments('id');
+			$table->integer('competition_id')->unsigned();
 			$table->foreign('competition_id')
 				->references('id')
 				->on('competitions')
 				->onDelete('no action')
 				->onUpdate('cascade');
+			$table->integer('team_id')->unsigned();
 			$table->foreign('team_id')
 				->references('id')
 				->on('equipos')
