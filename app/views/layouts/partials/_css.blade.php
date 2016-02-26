@@ -4,6 +4,10 @@
 {{ HTML::style('assets/css/responsive.css') }}
 
 {{ HTML::style('assets/font-awesome/css/font-awesome.min.css') }}
+
+<!--JQUERY CUSTOM-->
+{{ HTML::style('assets/js/jquery-ui-1.10.3.custom/css/custom-theme/jquery-ui-1.10.3.custom.min.css'); }}
+
 <!-- DATE RANGE PICKER -->
 {{ HTML::style('assets/js/bootstrap-daterangepicker/daterangepicker-bs3.css') }}
 <!-- BOOTSTRAP FILEUPLOAD -->
@@ -33,6 +37,7 @@
 <!-- JQUERY SELECT2 -->
 {{ HTML::style('assets/css/select2/css/select2.min.css'); }}
 {{ HTML::style('assets/css/select2/css/select2-skins.min.css'); }}
+
 
 <!-- FONTS -->
 <link href="http://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700" rel="stylesheet" type="text/css">
