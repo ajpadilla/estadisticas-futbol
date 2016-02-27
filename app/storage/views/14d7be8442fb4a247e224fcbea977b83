@@ -35,6 +35,12 @@
 								<span class="hidden-inline-mobile"> Editar</span>
 							</a>
 						</li>
+						<li>
+							<a href="#pro_promotions" data-toggle="tab">
+								<i class="fa fa fa-question"></i>
+								<span class="hidden-inline-mobile">Ascensos</span>
+							</a>
+						</li>
 						<li class="active">
 							<a href="#pro_details" data-toggle="tab">
 								<i class="fa fa-dot-circle-o"></i>
@@ -66,6 +72,12 @@
 						  <?php echo $__env->make('competitions.games', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
 					   </div>
 					   <!-- /PARTIDOS -->
+
+					   <!-- ASCENSOS TAB -->
+					   <div class="tab-pane fade" id="pro_promotions">
+						  <?php echo $__env->make('competitions.promotions', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
+					   </div>
+					   <!-- /ASCENSOS -->
 					</div>
 				</div>
 				<!-- /USER PROFILE -->
