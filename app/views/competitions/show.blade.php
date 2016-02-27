@@ -36,6 +36,12 @@
 								<span class="hidden-inline-mobile"> Editar</span>
 							</a>
 						</li>
+						<li>
+							<a href="#pro_promotions" data-toggle="tab">
+								<i class="fa fa fa-question"></i>
+								<span class="hidden-inline-mobile">Ascensos</span>
+							</a>
+						</li>
 						<li class="active">
 							<a href="#pro_details" data-toggle="tab">
 								<i class="fa fa-dot-circle-o"></i>
@@ -67,6 +73,12 @@
 						  @include('competitions.games')
 					   </div>
 					   <!-- /PARTIDOS -->
+
+					   <!-- ASCENSOS TAB -->
+					   <div class="tab-pane fade" id="pro_promotions">
+						  @include('competitions.promotions')
+					   </div>
+					   <!-- /ASCENSOS -->
 					</div>
 				</div>
 				<!-- /USER PROFILE -->
