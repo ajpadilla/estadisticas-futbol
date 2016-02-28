@@ -59,6 +59,12 @@ class Competition extends Eloquent implements StaplerableInterface{
         return $this->hasManyThrough('soccer\Group\Group', 'soccer\Competition\Phase\Phase');
     }
 
+    public function promotions()
+    {
+        return $this->belongsToMany('soccer\Equipo\Equipo','promotions','competition_id','team_id')
+        ->withTimestamps();
+    }
+
     /*public function teams()
     {
        return $this->hasManyThrough('soccer\GroupTeam\GroupTeam', 'soccer\Group\Group');
@@ -193,6 +199,11 @@ class Competition extends Eloquent implements StaplerableInterface{
     public function getHasPhasesAttribute()
     {
         return $this->phases->count() > 0;
+    }
+
+    public function getHasPromotionsAttribute()
+    {
+        return $this->promotions()->count() > 0;
     }
 
     public function getIsCleanAttribute()
