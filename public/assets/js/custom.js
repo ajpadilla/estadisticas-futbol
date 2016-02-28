@@ -9191,20 +9191,50 @@ var handleBootboxAddEquipoToJugador = function () {
         });
     }
 
+    var loadTeamsForPromotions = function () 
+    {
+        var url = $('#list-teams-for-promotions').attr('href');
+        var competitionId = $('#add-promotions-to-competition').attr('data-competition-id');
+        //console.log(competitionId);
+        $.ajax({
+                type: 'GET',
+                url: url,
+                data: {'competitionId': competitionId},
+                dataType:'json',
+                success: function(response) 
+                {
+                    console.log(response);
+                    var option = '<option value=\"\"></option>';
+                    var chosenUpdate = 'chosen:updated';
+                    if (response.success == true) {
+                        $('#teams-promotions').html('');
+                        $('#teams-promotions').append(option);
+                        $.each(response.teams,function (index,team){
+                            option = '<option value=\"'+team.id+'\">'+team.nombre+'</option>';
+                            $('#teams-promotions').append(option);
+                            $('#teams-promotions').trigger(chosenUpdate);
+                        });
+                    }else{
+                        $('#teams-promotions').html('');
+                        $('#teams-promotions').append(option);
+                        $('#teams-promotions').trigger(chosenUpdate);
+                    }
+                }
+        });
+    }
+
      var bootboxAddPromotions = function () 
      {
 
-        /*$('#edit-goal-type-form').validate({
+        $('#add-promotions-to-competition-form').validate({
             rules:{
-                name:{
+                promotions:{
                     required: true,
-                    rangelength : [1,128]
                 }
             },
             messages:{
-                name:{
+                promotions:{
                     required: 'Este campo es obligatorio',
-                    rangelength: 'Por favor ingrese entre [1, 128] caracteres',
                 }
             },
             highlight:function(element){
@@ -9216,7 +9246,7 @@ var handleBootboxAddEquipoToJugador = function () {
             success:function(element){
                 element.addClass('valid').closest('.form-group').removeClass('has-error').addClass('has-success');
             }
-        });*/
+        });
 
          $('#add-promotions-to-competition').on('click', function(){
             bootbox.dialog(
@@ -9233,27 +9263,29 @@ var handleBootboxAddEquipoToJugador = function () {
                                 // Si quieres usar aquí jqueryForm, es lo mismo, lo agregas y ya. Creo que es buena idea!
 
                                 //ajax para el envío del formulario.
-                                if($('#edit-goal-type-form').valid()) {
+                                if($('#add-promotions-to-competition-form').valid()) {
 
                                     var response = false; // Esta variable debería recibir los datos por ajax.
                                     var dataServer = null;
 
-                                    $("#edit-goal-type-form").submit(function(e){
+                                    $("#add-promotions-to-competition-form").submit(function(e){
                                         var formData = {
+                                            teams_ids : $('#teams-promotions').val(),
+                                            competition_id : $('#add-promotions-to-competition').attr('data-competition-id')
                                         };
                                         //console.log(formData);
                                         $.ajax({
                                             type: 'POST',
-                                            url: $('#update-goal-type').attr('href'),
+                                            url: $('#add-teams-for-promotions').attr('href'),
                                             data: formData,
                                             dataType: "JSON",
                                             success: function(responseServer) {
-                                                //console.log(responseServer);
+                                                console.log(responseServer);
                                                 if(responseServer.success == true)
                                                 {
                                                     // Muestro otro dialog con información de éxito
                                                     bootbox.dialog({
-                                                        message: responseServer.goalType.name+" ha sido actualizado correctamente!",
+                                                        message:"¡Lista de ascensos actualizada!",
                                                         title: "Éxito",
                                                         buttons: {
                                                             success: {
@@ -9266,11 +9298,11 @@ var handleBootboxAddEquipoToJugador = function () {
                                                         }
                                                     });
                                                     // Limpio cada elemento de las clases añadidas por el validator
-                                                    $('#edit-goal-type-form div').each(function(){
+                                                    $('#add-promotions-to-competition-form div').each(function(){
                                                         cleanValidatorClasses(this);
                                                     });
                                                     //Reinicio el formulario
-                                                    //$("#edit-goal-type-form")[0].reset();
+                                                    //$("#add-promotions-to-competition-form")[0].reset();
                                                 }else{
                                                      bootbox.dialog({
                                                         message: responseServer.errors,
@@ -9283,7 +9315,7 @@ var handleBootboxAddEquipoToJugador = function () {
                                                         }
                                                     });
                                                     // Limpio cada elemento de las clases añadidas por el validator
-                                                    $('#edit-goal-type-form div').each(function(){
+                                                    $('#add-promotions-to-competition-form div').each(function(){
                                                         cleanValidatorClasses(this);
                                                     });
                                                     //Reinicio el formulario
@@ -9310,7 +9342,7 @@ var handleBootboxAddEquipoToJugador = function () {
                                         e.preventDefault(); //Prevent Default action.
                                         $(this).unbind('submit');
                                     });
-                                    $("#edit-goal-type-form").submit();
+                                    $("#add-promotions-to-competition-form").submit();
                                 } else {
                                     return false;
                                 }
@@ -9418,6 +9450,7 @@ var handleBootboxAddEquipoToJugador = function () {
 
             checkFixtureTypeSelected();
             bootboxAddPromotions();
+            loadTeamsForPromotions();
 
             //checkIfGameExist();
         }
