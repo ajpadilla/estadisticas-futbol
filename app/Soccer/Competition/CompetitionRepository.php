@@ -621,4 +621,36 @@ class CompetitionRepository extends BaseRepository
 			return $orderedAverageForTeams;
 		}
 	}
+
+	public function getAvailableTeamsPromotions($id)
+	{
+		$firstPhase = false;
+		$teams = false;
+		$competition = $this->get($id);
+
+		$firstPhase = $competition->phases->first();
+		if(!empty($firstPhase) && $firstPhase->hasGroups){
+			if($competition->hasPromotions){
+				$listTeams = $competition->promotions()->lists('team_id');
+				$teams = $firstPhase->teams->filter(function($team) use ($listTeams){
+					if(!in_array($team->id,$listTeams))
+						return true;
+				});
+			}else{
+				$teams = $firstPhase->teams;
+			}
+		}
+		return $teams;
+	}
+
+	public function addPromotions($data = array())
+	{
+		$competition = $this->get($data['competition_id']);
+		$teams = ( isset($data['teams_ids']) ? $data['teams_ids'] : array() );
+		if (!empty($teams)) {
+			$competition->promotions()->attach($teams);
+		}
+		return $competition;
+	}
+
 }
