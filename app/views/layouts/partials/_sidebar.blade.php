@@ -228,6 +228,8 @@
 		<!--Game types-->
 		<a id="list-game-type" href="{{ URL::route('game-types.api.select.list') }}"></a>
 		<a id="list-competitions-previous" href="{{ URL::route('allCompetitios.api.select') }}"></a>
+		<a id="list-teams-for-promotions" href="{{ URL::route('teamsForPromotions.api.select') }}"></a>
+		<a id="add-teams-for-promotions" href="{{ URL::route('competitions.api.add.promotions') }}"></a>
 	</div>
 </div>
 <!-- /SIDEBAR -->
