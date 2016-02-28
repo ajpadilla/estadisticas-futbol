@@ -201,6 +201,9 @@ Route::post('admin/competencias/api-agregar-fase',  ['as' => 'competitions.api.a
 Route::get('admin/competencias/api-seleccionar-lista',  ['as' => 'competitions.api.select.list','uses' => 'CompetitionController@getAllValue' ] );
 Route::get('admin/competencias/api-equipos-disponibles/{id}', ['as' => 'competitions.api.available.teams', 'uses' => 'CompetitionController@getAvailableTeams']);
 Route::get('getAllCompetitios', ['as' => 'allCompetitios.api.select', 'uses' => 'CompetitionController@getAllCompetitios']);
+Route::get('getTeamsForPromotions', ['as' => 'teamsForPromotions.api.select', 'uses' => 'CompetitionController@getTeamsForPromotions']);
+Route::post('admin/competencias/api-agregar-ascensos', ['as' => 'competitions.api.add.promotions', 'uses' => 'CompetitionController@addTeamsFormPromotions']);
+
 /*
 ********************************* RUTAS PARA FASES ********************************
 */
