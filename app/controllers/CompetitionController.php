@@ -273,4 +273,28 @@ class CompetitionController extends \BaseController {
 		return $this->getResponseArrayJson();
 	}
 
+	public function getTeamsForPromotions()
+	{
+		if (Request::ajax()) 
+		{
+			$teams = $this->repository->getAvailableTeamsPromotions(Input::get('competitionId'));
+			$this->setSuccess(($teams ? true : false));
+			$this->addToResponseArray('teams', $teams);
+			$this->addToResponseArray('data', Input::all());
+		}
+		return $this->getResponseArrayJson();
+	}
+
+	public function addTeamsFormPromotions()
+	{
+		if (Request::ajax()) 
+		{
+			$competition = $this->repository->addPromotions(Input::all());
+			$this->setSuccess(($competition ? true : false));
+			$this->addToResponseArray('competition', $competition);
+			$this->addToResponseArray('data', Input::all());
+		}
+		return $this->getResponseArrayJson();
+	}
+
 }
