@@ -116,9 +116,11 @@ class CompetitionController extends \BaseController {
 		$currentPhase = $this->repository->getCurrentPhase($id);
 		$formats = $this->competitionFormatRepository->getAll();
 		$winner = $this->repository->winner($id);
+		$teamsTable = $this->repository->getTeamsForPromotionsTable($id);
 		$tableTemplate = 'groups.partials._table-template';
 		$scriptTableTemplate = 'partials._script-table-template';
-		return View::make('competitions.show', compact('competition', 'winner', 'countries', 'tables', 'gamesTables', 'tableTemplate', 'scriptTableTemplate', 'gameTypes', 'currentPhase', 'formats'));
+		return View::make('competitions.show', compact('competition', 'winner', 'countries', 'tables', 'gamesTables', 'tableTemplate', 'scriptTableTemplate', 'gameTypes', 'currentPhase', 'formats', 
+			'teamsTable'));
 	}
 
 	/**
@@ -186,6 +188,11 @@ class CompetitionController extends \BaseController {
 	public function listApi()
 	{
 		return $this->repository->getDefaultTableForAll();
+	}
+
+	public function listPromotionsApi($id)
+	{
+		return $this->repository->getDefaultTableForPromotionTeams($id);
 	}
 
 
