@@ -50,7 +50,10 @@ Route::get('federalb', ['as' => 'federalB', 'uses' => 'PublicController@gamesFed
 Route::get('admin/test', function() {
 	$data = new soccer\Competition\CompetitionRepository;
 
-	$teams = $data->getGamesForTypePhase('fase de grupos', '2016-01-01', '2016-02-01');
+	$teams =  $data->getDefaultTableForPromotionTeams(1);
+	foreach ($teams as $team) {
+		echo $team->nombre;
+	}
 
 });
 
@@ -203,6 +206,9 @@ Route::get('admin/competencias/api-equipos-disponibles/{id}', ['as' => 'competit
 Route::get('getAllCompetitios', ['as' => 'allCompetitios.api.select', 'uses' => 'CompetitionController@getAllCompetitios']);
 Route::get('getTeamsForPromotions', ['as' => 'teamsForPromotions.api.select', 'uses' => 'CompetitionController@getTeamsForPromotions']);
 Route::post('admin/competencias/api-agregar-ascensos', ['as' => 'competitions.api.add.promotions', 'uses' => 'CompetitionController@addTeamsFormPromotions']);
+Route::get('admin/competitions/api-lista-promotions/{id}', 
+	['as' => 'competitions.api.list.promotions', 
+	'uses' => 'CompetitionController@listPromotionsApi']);
 
 /*
 ********************************* RUTAS PARA FASES ********************************
