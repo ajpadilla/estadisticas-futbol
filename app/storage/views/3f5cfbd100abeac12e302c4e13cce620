@@ -3,7 +3,15 @@
 		<button class="pull-left btn btn-lg btn-primary" id="add-promotions-to-competition" data-competition-id="<?php echo $competition->id; ?>" href="#">Agregar Ascensos</button>
 	</div>
 	<div id="add-promotions-to-competition" class="hidden">
-			<?php echo $__env->make('competitions.partials._form_promotions', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
+		<?php echo $__env->make('competitions.partials._form_promotions', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
+	</div>
+
+</div>
+<div class="row">
+	<?php $table = $teamsTable; ?>
+	<div class="col-md-12">
+		<?php echo $__env->make('partials._index-table', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
 	</div>
 </div>
 <br />
+
