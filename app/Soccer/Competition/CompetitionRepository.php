@@ -8,6 +8,7 @@ use soccer\Competition\Competition;
 use soccer\Equipo\EquipoRepository;
 use Illuminate\Database\Eloquent\Collection;
 use Carbon\Carbon;
+use soccer\Player\PlayerRepository;
 /**
 * 
 */
@@ -201,6 +202,50 @@ class CompetitionRepository extends BaseRepository
 		}
 		return $tables;
 	}	
+
+	public function getTeamsForPromotionsTable($id)
+	{
+		$playerRepository = new PlayerRepository;
+		$playerRepository->columns = [
+			'Nombre',
+			
+		];
+		return $playerRepository->getAllTable('equipos.api.jugadores', [$id]);
+	}
+
+	public function setTablePromotionsContent(PlayerRepository $playerRepository)
+	{
+		$playerRepository->collection->searchColumns('Nombre');
+		$playerRepository->collection->orderColumns('Nombre');
+
+		$playerRepository->collection->addColumn('Nombre', function($model)
+		{
+			 return $model->nombre;
+		});
+
+	}
+
+
+	public function getDefaultTableForPromotionTeams($id)
+	{
+		$players = $this->getJugadores($id);
+		$playerRepository = new PlayerRepository;
+		$playerRepository->setDatatableCollection($players);
+		$this->setTablePlayerContent($playerRepository);
+		$playerRepository->addColumnToCollection('Acciones', function($model) use ($playerRepository, $id)
+		{
+			$playerRepository->cleanActionColumn();
+			$playerRepository->addActionColumn("<a class='ver-jugador' href='" . route('players.show', $model->id) . "' id='ver_jugador'>Ver</a><br />");
+			//$playerRepository->addActionColumn("<a  class='editar-jugador' href='#new-player-form' id='editar_".$model->id."'>Editar</a><br />");
+			//$playerRepository->addActionColumn("<a class='eliminar-jugador' href='" . route('players.api.delete', $model->id) . "' id='eliminar-jugador'>Eliminar</a><br />");
+			//$playerRepository->addActionColumn("<a class='cambiar-equipo' href='" . route('players.api.change-team', $model->id) . "' id='eliminar-jugador'>Cambiar</a>");
+			$playerRepository->addActionColumn("<a  class='remove-player-team' href='" . route('teams.api.remove.player', [$id, $model->id]) . "' id='remove_player-team_".$model->id."'>Sacar</a><br />");
+			//$playerRepository->addActionColumn("<a  class='editar-jugador' href='#new-jugador-form' id='estadisticas_".$model->id."'>Estadísticas</a><br />");
+			return implode(" ", $playerRepository->getActionColumn());
+		});
+		return $playerRepository->getTableCollectionForRender();
+	}
+
 
 	public function positionsTeamsForTournament($id)
 	{
