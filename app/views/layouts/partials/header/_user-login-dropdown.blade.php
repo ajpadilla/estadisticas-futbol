@@ -1,5 +1,5 @@
 <!-- BEGIN USER LOGIN DROPDOWN -->
-<li class="dropdown user" id="header-user">
+<li class="dropdown user" id="">
 	<a href="#" class="dropdown-toggle" data-toggle="dropdown">
 		<img alt="" src="{{ asset('assets/img/avatars/avatar3.jpg') }}" />
 		<span class="username">John Doe</span>
